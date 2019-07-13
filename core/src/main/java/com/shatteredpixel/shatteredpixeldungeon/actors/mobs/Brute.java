@@ -36,7 +36,7 @@ public class Brute extends Mob {
 	{
 		spriteClass = BruteSprite.class;
 		
-		HP = HT = 40;
+		HP = HT = 70;
 		defenseSkill = 15;
 		
 		EXP = 8;

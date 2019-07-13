@@ -67,7 +67,7 @@ public class Yog extends Mob {
 	{
 		spriteClass = YogSprite.class;
 		
-		HP = HT = 300;
+		HP = HT = 600;
 		
 		EXP = 50;
 		

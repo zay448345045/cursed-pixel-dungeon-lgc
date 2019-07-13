@@ -41,7 +41,7 @@ public class Shaman extends Mob implements Callback {
 	{
 		spriteClass = ShamanSprite.class;
 		
-		HP = HT = 18;
+		HP = HT = 27;
 		defenseSkill = 8;
 		
 		EXP = 6;

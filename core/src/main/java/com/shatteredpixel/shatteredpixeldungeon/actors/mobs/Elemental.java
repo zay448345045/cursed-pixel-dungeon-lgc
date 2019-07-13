@@ -36,7 +36,7 @@ public class Elemental extends Mob {
 	{
 		spriteClass = ElementalSprite.class;
 		
-		HP = HT = 65;
+		HP = HT = 130;
 		defenseSkill = 20;
 		
 		EXP = 10;

@@ -52,7 +52,7 @@ import com.watabou.utils.Random;
 public class Goo extends Mob {
 
 	{
-		HP = HT = 100;
+		HP = HT = 150;
 		EXP = 10;
 		defenseSkill = 8;
 		spriteClass = GooSprite.class;

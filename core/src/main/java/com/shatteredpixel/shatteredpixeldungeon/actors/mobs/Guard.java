@@ -47,7 +47,7 @@ public class Guard extends Mob {
 	{
 		spriteClass = GuardSprite.class;
 
-		HP = HT = 40;
+		HP = HT = 60;
 		defenseSkill = 10;
 
 		EXP = 6;
