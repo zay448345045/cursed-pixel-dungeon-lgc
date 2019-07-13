@@ -33,6 +33,7 @@ import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
 import com.shatteredpixel.shatteredpixeldungeon.items.TomeOfMastery;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.LloydsBeacon;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfMagicMapping;
+import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.shatteredpixel.shatteredpixeldungeon.levels.PrisonBossLevel;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
@@ -44,6 +45,7 @@ import com.shatteredpixel.shatteredpixeldungeon.sprites.TenguSprite;
 import com.shatteredpixel.shatteredpixeldungeon.ui.BossHealthBar;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
+import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 
 public class Tengu extends Mob {
@@ -154,6 +156,14 @@ public class Tengu extends Mob {
 		super.die( cause );
 		
 		Badges.validateBossSlain();
+		int blobs = Random.chances(new float[]{0, 0, 6, 3, 1});
+		for (int i = 0; i < blobs; i++){
+			int ofs;
+			do {
+				ofs = PathFinder.NEIGHBOURS8[Random.Int(8)];
+			} while (!Dungeon.level.passable[pos + ofs]);
+			Dungeon.level.drop( new ScrollOfUpgrade(), pos + ofs ).sprite.drop( pos );
+		}
 
 		LloydsBeacon beacon = Dungeon.hero.belongings.getItem(LloydsBeacon.class);
 		if (beacon != null) {

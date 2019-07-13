@@ -66,7 +66,9 @@ abstract public class Weapon extends KindOfWeapon {
 	public float    ACC = 1f;	// Accuracy modifier
 	public float	DLY	= 1f;	// Speed modifier
 	public int      RCH = 1;    // Reach modifier (only applies to melee hits)
-
+	public boolean isUpgradable() {
+		return level() <= 24;
+	}
 	public enum Augment {
 		SPEED   (0.7f, 0.6667f),
 		DAMAGE  (1.5f, 1.6667f),

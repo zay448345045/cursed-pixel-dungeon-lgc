@@ -38,6 +38,7 @@ import com.shatteredpixel.shatteredpixeldungeon.effects.particles.ElmoParticle;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.LloydsBeacon;
 import com.shatteredpixel.shatteredpixeldungeon.items.keys.SkeletonKey;
 import com.shatteredpixel.shatteredpixeldungeon.items.quest.MetalShard;
+import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
@@ -146,15 +147,16 @@ public class DM300 extends Mob {
 		Dungeon.level.drop( new SkeletonKey( Dungeon.depth  ), pos ).sprite.drop();
 		
 		//60% chance of 2 shards, 30% chance of 3, 10% chance for 4. Average of 2.5
-		int shards = Random.chances(new float[]{0, 0, 6, 3, 1});
-		for (int i = 0; i < shards; i++){
+		int blobs = Random.chances(new float[]{0, 0, 6, 3, 1});
+		for (int i = 0; i < blobs; i++){
 			int ofs;
 			do {
 				ofs = PathFinder.NEIGHBOURS8[Random.Int(8)];
 			} while (!Dungeon.level.passable[pos + ofs]);
-			Dungeon.level.drop( new MetalShard(), pos + ofs ).sprite.drop( pos );
+			Dungeon.level.drop( new ScrollOfUpgrade(), pos + ofs ).sprite.drop( pos );
 		}
-		
+
+
 		Badges.validateBossSlain();
 
 		LloydsBeacon beacon = Dungeon.hero.belongings.getItem(LloydsBeacon.class);

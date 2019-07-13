@@ -28,6 +28,7 @@ import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.items.BrokenSeal;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.ClothArmor;
+import com.shatteredpixel.shatteredpixeldungeon.items.armor.LeatherArmor;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.CloakOfShadows;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.PotionBandolier;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.ScrollHolder;
@@ -38,11 +39,13 @@ import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfInvisibility;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfLiquidFlame;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfMindVision;
+import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfMight;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfIdentify;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfLullaby;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfMagicMapping;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfRage;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
+import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfDisintegration;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfMagicMissile;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.SpiritBow;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Dagger;
@@ -126,7 +129,9 @@ public enum HeroClass {
 	}
 
 	private static void initWarrior( Hero hero ) {
-		(hero.belongings.weapon = new WornShortsword()).identify();
+		(hero.belongings.weapon = new WornShortsword()).identify().upgrade();
+		(hero.belongings.armor = new LeatherArmor()).identify().upgrade();
+		(hero.belongings.misc1 = new RingOfMight()).identify();
 		ThrowingStone stones = new ThrowingStone();
 		stones.quantity(3).collect();
 		Dungeon.quickslot.setSlot(0, stones);
@@ -145,8 +150,8 @@ public enum HeroClass {
 	private static void initMage( Hero hero ) {
 		MagesStaff staff;
 		
-		staff = new MagesStaff(new WandOfMagicMissile());
-
+		staff = new MagesStaff(new WandOfDisintegration());
+		staff.upgrade();
 		(hero.belongings.weapon = staff).identify();
 		hero.belongings.weapon.activate(hero);
 
@@ -160,7 +165,7 @@ public enum HeroClass {
 	}
 
 	private static void initRogue( Hero hero ) {
-		(hero.belongings.weapon = new Dagger()).identify();
+		(hero.belongings.weapon = new Dagger()).identify().upgrade();
 
 		CloakOfShadows cloak = new CloakOfShadows();
 		(hero.belongings.misc1 = cloak).identify();
@@ -181,9 +186,9 @@ public enum HeroClass {
 
 	private static void initHuntress( Hero hero ) {
 
-		(hero.belongings.weapon = new Gloves()).identify();
+		(hero.belongings.weapon = new Gloves()).identify().upgrade();
 		SpiritBow bow = new SpiritBow();
-		bow.identify().collect();
+		bow.identify().upgrade().collect();
 
 		Dungeon.quickslot.setSlot(0, bow);
 

@@ -60,7 +60,9 @@ public abstract class Wand extends Item {
 	public static final String AC_ZAP	= "ZAP";
 
 	private static final float TIME_TO_ZAP	= 1f;
-	
+	public boolean isUpgradable() {
+		return level() <= 14;
+	}
 	public int maxCharges = initialCharges();
 	public int curCharges = maxCharges;
 	public float partialCharge = 0f;

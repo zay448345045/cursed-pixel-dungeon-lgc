@@ -40,6 +40,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.ArmorKit;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.LloydsBeacon;
 import com.shatteredpixel.shatteredpixeldungeon.items.keys.SkeletonKey;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfTeleportation;
+import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfDisintegration;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Grim;
 import com.shatteredpixel.shatteredpixeldungeon.levels.CityBossLevel;
@@ -155,7 +156,14 @@ public class King extends Mob {
 		super.die( cause );
 		
 		Badges.validateBossSlain();
-
+		int blobs = Random.chances(new float[]{0, 0, 6, 3, 1});
+		for (int i = 0; i < blobs; i++){
+			int ofs;
+			do {
+				ofs = PathFinder.NEIGHBOURS8[Random.Int(8)];
+			} while (!Dungeon.level.passable[pos + ofs]);
+			Dungeon.level.drop( new ScrollOfUpgrade(), pos + ofs ).sprite.drop( pos );
+		}
 		LloydsBeacon beacon = Dungeon.hero.belongings.getItem(LloydsBeacon.class);
 		if (beacon != null) {
 			beacon.upgrade();
