@@ -54,12 +54,43 @@ import java.util.ArrayList;
 public class v0_7_X_Changes {
 	
 	public static void addAllChanges( ArrayList<ChangeInfo> changeInfos ){
+		add_v0_1_0_Changes(changeInfos);
 		add_v0_7_3_Changes(changeInfos);
 		add_v0_7_2_Changes(changeInfos);
 		add_v0_7_1_Changes(changeInfos);
 		add_v0_7_0_Changes(changeInfos);
 	}
-	
+
+	public static void add_v0_1_0_Changes( ArrayList<ChangeInfo> changeInfos ) {
+		ChangeInfo changes = new ChangeInfo("Cursed-v0.1.0", true, "");
+		changes.hardlight(Window.TITLE_COLOR);
+		changeInfos.add(changes);
+
+		changes = new ChangeInfo("v0.1.0-Alpha", false, null);
+		changes.hardlight(Window.TITLE_COLOR);
+		changeInfos.add(changes);
+
+		changes.addButton( new ChangeButton(new Image(Assets.KING, 1, 0, 14, 16), "Bosses changed",
+				"All bosses now drop 2-4 Scrolls of Upgrade, with an average of 2.5\n\n" +
+						"Most bosses have had their HP buffed to compensate for higher upgrade levels.\n" +
+						"More extensive reworks are planned, especially for Dwarf King and Tengu."));
+
+		changes.addButton( new ChangeButton( new Image(Assets.WARRIOR, 0, 90, 12, 15), "Starting Equipment",
+				"Due to surviving the sewers being heavily dependant on RNG, all starting equipment has been buffed:\n\n" +
+						"Huntress starts with +1 gloves and +1 Spirit Bow.\n\n" +
+						"Mage starts with a +1 Staff of Disintegration\n" +
+						"Warrior starts with an equipped Ring of Might and +1 Leather Armour, as well as his trusty Shortsword with a free upgrade\n" +
+						"Rogue simply starts with his Dagger upgraded once"));
+
+		changes.addButton( new ChangeButton(new WandOfTransfusion(),
+				"Wand of Transfusion changed significantly when used on enemies:\n" +
+						"_-_ Self-shield reduced\n" +
+						"_-_ Charm duration scales with upgrades"));
+
+		changes.addButton(new ChangeButton(Icons.get(Icons.WARNING), "Transfusion Buffed",
+				"Enemies have been buffed at all levels. The amount of extra HP that they have been given scales with depth. This is mainly due to more Scrolls Of Upgrade being availible and the player having higher HP.\n\n" +
+						"Sewers enemies are unchanged, Prision enemies have 50% more HP, Caves enemies 75% more and enemies in the Dwarven City and Demon Halls have double HP"));
+	}
 	public static void add_v0_7_3_Changes( ArrayList<ChangeInfo> changeInfos ){
 		ChangeInfo changes = new ChangeInfo("v0.7.3", true, "");
 		changes.hardlight( Window.TITLE_COLOR );
