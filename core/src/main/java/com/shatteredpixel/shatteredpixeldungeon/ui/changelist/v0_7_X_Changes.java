@@ -34,6 +34,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfMirrorImag
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfRetribution;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfTeleportation;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfTerror;
+import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfMagicMissile;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfRegrowth;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfTransfusion;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Gauntlet;
@@ -72,22 +73,23 @@ public class v0_7_X_Changes {
 
 		changes.addButton( new ChangeButton(new Image(Assets.KING, 1, 0, 14, 16), "Bosses changed",
 				"All bosses now drop 2-4 Scrolls of Upgrade, with an average of 2.5\n\n" +
-						"Most bosses have had their HP buffed to compensate for higher upgrade levels.\n" +
+						"Most bosses have had their HP buffed to compensate for higher upgrade levels.\n\n" +
 						"More extensive reworks are planned, especially for Dwarf King and Tengu."));
 
 		changes.addButton( new ChangeButton( new Image(Assets.WARRIOR, 0, 90, 12, 15), "Starting Equipment",
 				"Due to surviving the sewers being heavily dependant on RNG, all starting equipment has been buffed:\n\n" +
 						"Huntress starts with +1 gloves and +1 Spirit Bow.\n\n" +
-						"Mage starts with a +1 Staff of Disintegration\n" +
-						"Warrior starts with an equipped Ring of Might and +1 Leather Armour, as well as his trusty Shortsword with a free upgrade\n" +
+						"Mage starts with a +1 Staff of Disintegration\n\n" +
+						"Warrior starts with an equipped Ring of Might and +1 Leather Armour, as well as his trusty Shortsword with a free upgrade\n\n" +
 						"Rogue simply starts with his Dagger upgraded once"));
 
-		changes.addButton( new ChangeButton(new WandOfTransfusion(),
-				"Wand of Transfusion changed significantly when used on enemies:\n" +
-						"_-_ Self-shield reduced\n" +
-						"_-_ Charm duration scales with upgrades"));
+		changes.addButton( new ChangeButton(new WandOfMagicMissile(),
+				"A few wand balance changes have been made:\n" +
+						"_-_ Magic Missile now has doubled scaling, upgrading by +2/+4 instead of +1/+2\n" +
+						"_-_ Wand of Frost scaling buffed\n" +
+						"_-_ Transfusion self-shielding reduced, now charming scales with upgrades"));
 
-		changes.addButton(new ChangeButton(Icons.get(Icons.WARNING), "Transfusion Buffed",
+		changes.addButton(new ChangeButton(Icons.get(Icons.WARNING), "Enemies Buffed",
 				"Enemies have been buffed at all levels. The amount of extra HP that they have been given scales with depth. This is mainly due to more Scrolls Of Upgrade being availible and the player having higher HP.\n\n" +
 						"Sewers enemies are unchanged, Prision enemies have 50% more HP, Caves enemies 75% more and enemies in the Dwarven City and Demon Halls have double HP"));
 	}
