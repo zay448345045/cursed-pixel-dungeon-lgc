@@ -40,6 +40,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfInvisibili
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfLiquidFlame;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfMindVision;
 import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfMight;
+import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfWealth;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfIdentify;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfLullaby;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfMagicMapping;
@@ -151,6 +152,7 @@ public enum HeroClass {
 		MagesStaff staff;
 		
 		staff = new MagesStaff(new WandOfDisintegration());
+		new RingOfWealth().upgrade(20).identify().collect();
 		staff.upgrade();
 		(hero.belongings.weapon = staff).identify();
 		hero.belongings.weapon.activate(hero);

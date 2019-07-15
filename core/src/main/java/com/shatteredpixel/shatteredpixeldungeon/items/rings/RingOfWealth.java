@@ -172,7 +172,7 @@ public class RingOfWealth extends Ring {
 		if (roll < 0.4f){ //40% chance
 			return Generator.random(Generator.Category.STONE);
 		} else if (roll < 0.7f){ //30% chance
-			return Generator.random(Generator.Category.POTION);
+			return Generator.random(Generator.Category.FOOD);
 		} else { //30% chance
 			return Generator.random(Generator.Category.SCROLL);
 		}
@@ -185,7 +185,7 @@ public class RingOfWealth extends Ring {
 		} else if (roll < 0.6f) { //30% chance
 			return Generator.random(Generator.Category.SCROLL);
 		} else { //40% chance
-			return Random.Int(2) == 0 ? new AlchemicalCatalyst() : new ArcaneCatalyst();
+			return Random.Int(2) == 0 ? new ScrollOfEnchantment() : new ScrollOfTransmutation();
 		}
 	}
 	
@@ -226,7 +226,7 @@ public class RingOfWealth extends Ring {
 			case 0: default:
 				return new StoneOfEnchantment();
 			case 1:
-				return new StoneOfEnchantment().quantity(2);
+				return new ScrollOfEnchantment();
 			case 2:
 				return new PotionOfExperience();
 			case 3:

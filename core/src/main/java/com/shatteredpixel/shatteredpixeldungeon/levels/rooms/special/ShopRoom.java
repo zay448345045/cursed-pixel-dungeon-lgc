@@ -47,6 +47,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.bombs.Bomb;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.SmallRation;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.Potion;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing;
+import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfWealth;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.Scroll;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfIdentify;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfMagicMapping;
@@ -174,6 +175,7 @@ public class ShopRoom extends SpecialRoom {
 					new FishingSpear().quantity(2) :
 					new Shuriken().quantity(2));
 			itemsToSpawn.add( new LeatherArmor().identify() );
+			itemsToSpawn.add(new RingOfWealth().upgrade(5).identify());
 			break;
 			
 		case 11:
