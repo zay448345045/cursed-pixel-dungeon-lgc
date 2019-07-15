@@ -183,7 +183,7 @@ public class RingOfWealth extends Ring {
 		if (roll < 0.3f){ //30% chance
 			return Generator.random(Generator.Category.POTION);
 		} else if (roll < 0.6f) { //30% chance
-			return Generator.random(Generator.Category.SCROLL);
+			return Generator.random(Generator.Category.SCROLL_EXOTIC);
 		} else { //40% chance
 			return Random.Int(2) == 0 ? new ScrollOfEnchantment() : new ScrollOfTransmutation();
 		}

@@ -90,6 +90,13 @@ public class v0_7_X_Changes {
 						"_-_ Wand of Blast Wave now inflicts Vertigo on targets\n" +
 						"_-_ Transfusion self-shielding reduced, now charming scales with upgrades"));
 
+		changes.addButton( new ChangeButton(new RingOfWealth(),
+				"A few changes have been made to the Ring of Wealth:\n" +
+						"_-_ It no longer spawns naturally\n" +
+						"_-_ A +10 ROW spawns in the first shop. Better save up!\n" +
+						"_-_ It can be used to farm for Scrolls of Upgrade\n" +
+						"_-_ Drop rates at higher levels significantly increased"));
+
 		changes.addButton(new ChangeButton(Icons.get(Icons.WARNING), "Enemies Buffed",
 				"Enemies have been buffed at all levels. The amount of extra HP that they have been given scales with depth. This is mainly due to more Scrolls Of Upgrade being availible and the player having higher HP.\n\n" +
 						"Sewers enemies are unchanged, Prision enemies have 50% more HP, Caves enemies 75% more and enemies in the Dwarven City and Demon Halls have double HP"));
