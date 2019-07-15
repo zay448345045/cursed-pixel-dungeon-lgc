@@ -152,7 +152,6 @@ public enum HeroClass {
 		MagesStaff staff;
 		
 		staff = new MagesStaff(new WandOfDisintegration());
-		new RingOfWealth().upgrade(20).identify().collect();
 		staff.upgrade();
 		(hero.belongings.weapon = staff).identify();
 		hero.belongings.weapon.activate(hero);

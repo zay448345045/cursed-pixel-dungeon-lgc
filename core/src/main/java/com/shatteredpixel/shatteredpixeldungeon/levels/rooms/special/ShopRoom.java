@@ -175,7 +175,7 @@ public class ShopRoom extends SpecialRoom {
 					new FishingSpear().quantity(2) :
 					new Shuriken().quantity(2));
 			itemsToSpawn.add( new LeatherArmor().identify() );
-			itemsToSpawn.add(new RingOfWealth().upgrade(5).identify());
+			itemsToSpawn.add(new RingOfWealth().upgrade(10).identify());
 			break;
 			
 		case 11:
