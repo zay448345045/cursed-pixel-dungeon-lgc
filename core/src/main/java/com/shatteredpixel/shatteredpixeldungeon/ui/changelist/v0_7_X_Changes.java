@@ -87,6 +87,7 @@ public class v0_7_X_Changes {
 				"A few wand balance changes have been made:\n" +
 						"_-_ Magic Missile now has doubled scaling, upgrading by +2/+4 instead of +1/+2\n" +
 						"_-_ Wand of Frost scaling buffed\n" +
+						"_-_ Wand of Blast Wave now inflicts Vertigo on targets\n" +
 						"_-_ Transfusion self-shielding reduced, now charming scales with upgrades"));
 
 		changes.addButton(new ChangeButton(Icons.get(Icons.WARNING), "Enemies Buffed",
