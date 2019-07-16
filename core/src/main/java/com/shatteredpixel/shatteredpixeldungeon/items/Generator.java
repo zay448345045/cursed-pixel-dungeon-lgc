@@ -215,7 +215,7 @@ public class Generator {
 		SEED	( 0,    Plant.Seed.class ), //dropped by grass
 		
 		SCROLL	( 20,   Scroll.class ),
-		SCROLL_EXOTIC (20,   Scroll.class),
+		SCROLL_EXOTIC (1,   Scroll.class),
 		STONE   ( 2,    Runestone.class),
 		
 		GOLD	( 18,   Gold.class );

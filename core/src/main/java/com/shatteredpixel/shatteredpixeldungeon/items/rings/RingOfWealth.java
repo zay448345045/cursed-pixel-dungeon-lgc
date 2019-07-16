@@ -28,6 +28,8 @@ import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
 import com.shatteredpixel.shatteredpixeldungeon.items.Gold;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor;
+import com.shatteredpixel.shatteredpixeldungeon.items.food.MysteryMeat;
+import com.shatteredpixel.shatteredpixeldungeon.items.food.SmallRation;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.AlchemicalCatalyst;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfExperience;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfTransmutation;
@@ -188,8 +190,8 @@ public class RingOfWealth extends Ring {
 		float roll = Random.Float();
 		if (roll < 0.4f){ //40% chance
 			return Generator.random(Generator.Category.STONE);
-		} else if (roll < 0.5f){ //10% chance
-			return Generator.random(Generator.Category.FOOD);
+		} else if (roll < 0.5f){ //10% chance to drop a minor food item
+			return Random.Int(2) == 0 ? new SmallRation() : new MysteryMeat();
 		} else { //50% chance
 			return Generator.random(Generator.Category.SCROLL);
 		}
@@ -252,7 +254,7 @@ public class RingOfWealth extends Ring {
 	}
 	
 	private static float dropProgression( Char target, int tries ){
-		return tries * (float)Math.pow(1.2f, getBonus(target, Wealth.class) );
+		return tries * (float)Math.pow(1.4f, getBonus(target, Wealth.class) );
 	}
 
 	public class Wealth extends RingBuff {

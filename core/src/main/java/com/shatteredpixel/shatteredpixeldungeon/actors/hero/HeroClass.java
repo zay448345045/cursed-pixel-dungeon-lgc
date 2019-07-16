@@ -30,6 +30,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.ClothArmor;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.LeatherArmor;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.CloakOfShadows;
+import com.shatteredpixel.shatteredpixeldungeon.items.bags.FoodHolder;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.PotionBandolier;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.ScrollHolder;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.VelvetPouch;
@@ -110,7 +111,8 @@ public enum HeroClass {
 		if (Dungeon.isChallenged(Challenges.NO_FOOD)){
 			new SmallRation().collect();
 		}
-		
+		//new FoodHolder().collect();
+		//Dungeon.LimitedDrops.FOOD_HOLDER.drop();
 		new ScrollOfIdentify().identify();
 
 	}
@@ -194,7 +196,7 @@ public enum HeroClass {
 		Dungeon.quickslot.setSlot(0, bow);
 
 		new VelvetPouch().collect();
-		Dungeon.LimitedDrops.VELVET_POUCH.drop();
+		Dungeon.LimitedDrops.MAGICAL_HOLSTER.drop();
 		
 		new PotionOfMindVision().identify();
 		new ScrollOfLullaby().identify();

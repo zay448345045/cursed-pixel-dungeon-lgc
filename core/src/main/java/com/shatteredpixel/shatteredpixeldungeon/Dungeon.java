@@ -105,6 +105,7 @@ public class Dungeon {
 		//containers
 		DEW_VIAL,
 		VELVET_POUCH,
+		FOOD_HOLDER,
 		SCROLL_HOLDER,
 		POTION_BANDOLIER,
 		MAGICAL_HOLSTER;
