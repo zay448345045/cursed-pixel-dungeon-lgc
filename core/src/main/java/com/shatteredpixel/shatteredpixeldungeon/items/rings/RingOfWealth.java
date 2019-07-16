@@ -171,9 +171,9 @@ public class RingOfWealth extends Ring {
 		float roll = Random.Float();
 		if (roll < 0.4f){ //40% chance
 			return Generator.random(Generator.Category.STONE);
-		} else if (roll < 0.7f){ //30% chance
+		} else if (roll < 0.5f){ //10% chance
 			return Generator.random(Generator.Category.FOOD);
-		} else { //30% chance
+		} else { //50% chance
 			return Generator.random(Generator.Category.SCROLL);
 		}
 	}
@@ -226,11 +226,11 @@ public class RingOfWealth extends Ring {
 			case 0: default:
 				return new StoneOfEnchantment();
 			case 1:
-				return new ScrollOfEnchantment();
+				return new ScrollOfEnchantment().quantity(4);
 			case 2:
 				return new PotionOfExperience();
 			case 3:
-				return new ScrollOfTransmutation();
+				return new ScrollOfTransmutation().quantity(4);
 		}
 	}
 	
