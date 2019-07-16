@@ -42,12 +42,12 @@ public class Vampiric extends Weapon.Enchantment {
 		
 		if (Random.Float() < healChance){
 			
-			//heals for 50% of damage dealt
-			int healAmt = Math.round(damage * 0.5f);
+			//heals for 25% of damage dealt
+			int healAmt = Math.round(damage * 0.25f);
 			healAmt = Math.min( healAmt, attacker.HT - attacker.HP );
-			
+
 			if (healAmt > 0 && attacker.isAlive()) {
-				
+
 				attacker.HP += healAmt;
 				attacker.sprite.emitter().start( Speck.factory( Speck.HEALING ), 0.4f, 1 );
 				attacker.sprite.showStatus( CharSprite.POSITIVE, Integer.toString( healAmt ) );
