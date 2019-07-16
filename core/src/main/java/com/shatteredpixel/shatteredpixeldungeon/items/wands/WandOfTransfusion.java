@@ -110,12 +110,13 @@ public class WandOfTransfusion extends Wand {
 				//harms the undead
 				} else {
 					ch.damage(Random.NormalIntRange(3 + level()/2, 6+level()), this);
+					Buff.affect(ch, Charm.class, 1+1*level()).object = curUser.id();
 					ch.sprite.emitter().start(ShadowParticle.UP, 0.05f, 10 + level());
 					Sample.INSTANCE.play(Assets.SND_BURNING);
 				}
 				
 				//and grants a self shield
-				Buff.affect(curUser, Barrier.class).setShield((5 + 2*level()));
+				Buff.affect(curUser, Barrier.class).setShield((1 + level()));
 
 			}
 			
