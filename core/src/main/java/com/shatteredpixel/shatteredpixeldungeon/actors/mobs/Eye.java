@@ -159,13 +159,9 @@ public class Eye extends Mob {
 
 		for (int pos : beam.subPath(1, beam.dist)) {
 
-			if (Dungeon.level.flamable[pos]) {
-
-				Dungeon.level.destroy( pos );
-				GameScene.updateMap( pos );
-				terrainAffected = true;
-
-			}
+			Dungeon.level.destroy( pos );
+			GameScene.updateMap( pos );
+			terrainAffected = true;
 
 			Char ch = Actor.findChar( pos );
 			if (ch == null) {
