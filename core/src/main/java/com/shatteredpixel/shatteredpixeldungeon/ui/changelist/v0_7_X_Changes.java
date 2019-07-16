@@ -73,7 +73,7 @@ public class v0_7_X_Changes {
 
 		changes.addButton( new ChangeButton(new Image(Assets.KING, 1, 0, 14, 16), "Bosses changed",
 				"All bosses now drop 2-4 Scrolls of Upgrade, with an average of 2.5\n\n" +
-						"Most bosses have had their HP buffed to compensate for higher upgrade levels.\n\n" +
+						"All bosses have had their HP buffed to compensate for higher upgrade levels; Goo has 150 instead of 100, Tengu has 240 instead of 120, DM300 has 400 instead of 200, Dwarf King has 500 instead of 300 and Yog has 1500 instead of 300.\n\n" +
 						"More extensive reworks are planned, especially for Dwarf King and Tengu."));
 
 		changes.addButton( new ChangeButton( new Image(Assets.WARRIOR, 0, 90, 12, 15), "Starting Equipment",

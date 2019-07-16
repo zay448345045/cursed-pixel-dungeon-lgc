@@ -81,8 +81,8 @@ public class Bee extends Mob {
 	public void spawn( int level ) {
 		this.level = level;
 		
-		HT = (2 + level) * 4;
-		defenseSkill = 9 + level;
+		HT = (2 + level) * 5;
+		defenseSkill = 9 + 2*level;
 	}
 
 	public void setPotInfo(int potPos, Char potHolder){

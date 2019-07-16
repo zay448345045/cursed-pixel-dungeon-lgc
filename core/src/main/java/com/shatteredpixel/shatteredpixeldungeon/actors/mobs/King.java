@@ -61,7 +61,7 @@ public class King extends Mob {
 	{
 		spriteClass = KingSprite.class;
 		
-		HP = HT = 500;
+		HP = HT = 600;
 		EXP = 40;
 		defenseSkill = 25;
 		
@@ -90,7 +90,7 @@ public class King extends Mob {
 	
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange( 25, 40 );
+		return Random.NormalIntRange( 25, 80 );
 	}
 	
 	@Override
