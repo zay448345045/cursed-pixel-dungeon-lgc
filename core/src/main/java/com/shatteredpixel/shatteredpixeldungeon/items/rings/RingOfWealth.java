@@ -72,7 +72,7 @@ public class RingOfWealth extends Ring {
 	
 	public String statsInfo() {
 		if (isIdentified()){
-			return Messages.get(this, "stats", new DecimalFormat("#.##").format(100f * (Math.pow(1.4f, soloBonus()) - 1f)));
+			return Messages.get(this, "stats", new DecimalFormat("#.##").format(100f * (Math.pow(1.2f, soloBonus()) - 1f)));
 		} else {
 			return Messages.get(this, "typical_stats", new DecimalFormat("#.##").format(20f));
 		}
@@ -255,7 +255,7 @@ public class RingOfWealth extends Ring {
 	}
 	
 	private static float dropProgression( Char target, int tries ){
-		return tries * (float)Math.pow(1.4f, getBonus(target, Wealth.class) );
+		return tries * (float)Math.pow(1.2f, getBonus(target, Wealth.class) );
 	}
 
 	public class Wealth extends RingBuff {
