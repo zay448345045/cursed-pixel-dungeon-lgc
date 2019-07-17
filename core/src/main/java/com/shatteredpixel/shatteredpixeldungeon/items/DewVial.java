@@ -136,6 +136,9 @@ public class DewVial extends Item {
 				hero.spend( TIME_TO_DRINK );
 				hero.busy();
 				volume -= dropsNeeded;
+				hero.sprite.operate( hero.pos );
+
+				updateQuickslot();
 			}
 			else {
 				GLog.w(Messages.get(this, "empty"));
