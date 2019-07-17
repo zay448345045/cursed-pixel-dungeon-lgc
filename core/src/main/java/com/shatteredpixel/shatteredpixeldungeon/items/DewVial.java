@@ -133,6 +133,8 @@ public class DewVial extends Item {
 			if (volume > 0) {
 				int dropsNeeded = Math.min( volume, 5);
 				GameScene.add( Blob.seed( hero.pos, 20*dropsNeeded, StormCloud.class ) );
+				hero.spend( TIME_TO_DRINK );
+				hero.busy();
 				volume -= dropsNeeded;
 			}
 			else {
