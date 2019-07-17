@@ -22,9 +22,12 @@
 package com.shatteredpixel.shatteredpixeldungeon.items;
 
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
+import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Blob;
+import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.StormCloud;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
+import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
@@ -39,6 +42,8 @@ public class DewVial extends Item {
 	private static final int MAX_VOLUME	= 20;
 
 	private static final String AC_DRINK	= "DRINK";
+
+	private static final String AC_WATER	= "WATER";
 
 	private static final float TIME_TO_DRINK = 1f;
 
@@ -73,9 +78,12 @@ public class DewVial extends Item {
 		ArrayList<String> actions = super.actions( hero );
 		if (volume > 0) {
 			actions.add( AC_DRINK );
+			actions.add( AC_WATER );
 		}
 		return actions;
 	}
+
+
 
 	@Override
 	public void execute( final Hero hero, String action ) {
@@ -113,13 +121,25 @@ public class DewVial extends Item {
 				updateQuickslot();
 
 
-			} else {
-				GLog.w( Messages.get(this, "empty") );
+
+			}
+			else {
+				GLog.w(Messages.get(this, "empty"));
 			}
 
+
+		}
+		if (action.equals(AC_WATER))	{
+			if (volume > 0) {
+				int dropsNeeded = Math.min( volume, 5);
+				GameScene.add( Blob.seed( hero.pos, 20*dropsNeeded, StormCloud.class ) );
+				volume -= dropsNeeded;
+			}
+			else {
+				GLog.w(Messages.get(this, "empty"));
+			}
 		}
 	}
-
 	public void empty() {volume = 0; updateQuickslot();}
 
 	@Override
