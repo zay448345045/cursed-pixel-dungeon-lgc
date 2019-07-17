@@ -24,6 +24,7 @@ package com.shatteredpixel.shatteredpixeldungeon.ui.changelist;
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Badges;
 import com.shatteredpixel.shatteredpixeldungeon.effects.BadgeBanner;
+import com.shatteredpixel.shatteredpixeldungeon.items.DewVial;
 import com.shatteredpixel.shatteredpixeldungeon.items.Honeypot;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AlchemistsToolkit;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.UnstableSpellbook;
@@ -81,7 +82,8 @@ public class v0_7_X_Changes {
 						"Huntress starts with +1 gloves and +1 Spirit Bow.\n\n" +
 						"Mage starts with a +1 Staff of Disintegration\n\n" +
 						"Warrior starts with an equipped Ring of Might and +1 Leather Armour, as well as his trusty Shortsword with a free upgrade\n\n" +
-						"Rogue simply starts with his Dagger upgraded once"));
+						"Rogue simply starts with his Dagger upgraded once\n\n\n"+
+						"Additionally, the player's inventory now has 24 slots, up from 20, and the Seed Pouch stores food as well"));
 
 		changes.addButton( new ChangeButton(new WandOfMagicMissile(),
 				"A few wand balance changes have been made:\n" +
@@ -89,6 +91,9 @@ public class v0_7_X_Changes {
 						"_-_ Wand of Frost scaling buffed\n" +
 						"_-_ Wand of Blast Wave now inflicts Vertigo on targets\n" +
 						"_-_ Transfusion self-shielding reduced, now charming scales with upgrades"));
+
+		changes.addButton( new ChangeButton(new DewVial(),
+				"The Dew Vial now has the 'Water' functionality, which allows the player to turn several surrounding tiles into water. It will consume up to 5 dew drops and will be more powerful the more Dew the player has."));
 
 		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.RING_EMERALD, null), "Ring Of Wealth",
 				"A few changes have been made to the Ring of Wealth:\n" +
