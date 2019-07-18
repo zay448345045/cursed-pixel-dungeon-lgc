@@ -30,6 +30,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.MagicImmune;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Momentum;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
+import com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
 import com.shatteredpixel.shatteredpixeldungeon.items.BrokenSeal;
 import com.shatteredpixel.shatteredpixeldungeon.items.EquipableItem;
@@ -73,7 +74,10 @@ public class Armor extends EquipableItem {
 
 	protected static final String AC_DETACH       = "DETACH";
 	public boolean isUpgradable() {
-		return level() <= 24;
+		if ( seal != null ) {//Armour can be upgraded to +20 when the broken seal is attatched only
+			UpgradeLimit += 5;
+		}
+		return super.isUpgradable();
 	}
 	public enum Augment {
 		EVASION (1.5f , -1f),

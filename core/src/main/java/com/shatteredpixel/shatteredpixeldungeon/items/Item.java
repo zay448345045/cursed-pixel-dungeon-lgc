@@ -63,7 +63,10 @@ public class Item implements Bundlable {
 	
 	public String defaultAction;
 	public boolean usesTargeting;
-	
+	public int UpgradeLimit = 15;//Most items cap at +15
+	public boolean isUpgradable() {
+		return level() <= UpgradeLimit - 1;
+	}
 	protected String name = Messages.get(this, "name");
 	public int image = 0;
 	
@@ -337,10 +340,7 @@ public class Item implements Bundlable {
 	public boolean visiblyCursed() {
 		return cursed && cursedKnown;
 	}
-	
-	public boolean isUpgradable() {
-		return true;
-	}
+
 	
 	public boolean isIdentified() {
 		return levelKnown && cursedKnown;

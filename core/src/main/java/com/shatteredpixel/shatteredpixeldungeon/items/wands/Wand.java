@@ -60,8 +60,12 @@ public abstract class Wand extends Item {
 	public static final String AC_ZAP	= "ZAP";
 
 	private static final float TIME_TO_ZAP	= 1f;
+	@Override
 	public boolean isUpgradable() {
-		return level() <= 14;
+		if ( Dungeon.hero.heroClass == HeroClass.MAGE ) {//Only Mage gets +20 wands
+			UpgradeLimit += 5;
+		}
+		return super.isUpgradable();
 	}
 	public int maxCharges = initialCharges();
 	public int curCharges = maxCharges;

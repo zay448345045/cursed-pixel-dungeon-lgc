@@ -26,6 +26,7 @@ import com.shatteredpixel.shatteredpixeldungeon.Badges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
+import com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroSubClass;
 import com.shatteredpixel.shatteredpixeldungeon.effects.particles.ElmoParticle;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
@@ -58,7 +59,16 @@ public class MagesStaff extends MeleeWeapon {
 
 	public static final String AC_IMBUE = "IMBUE";
 	public static final String AC_ZAP	= "ZAP";
+	public boolean isUpgradable() {
+		if ( Dungeon.hero.heroClass == HeroClass.MAGE ) {//Mage can upgrade 5 more times...
+			UpgradeLimit += 5;
+			if (Dungeon.hero.subClass == HeroSubClass.BATTLEMAGE) {//And Battlemage can reach a grand total of +25
+				UpgradeLimit += 5;
+			}
+		}
 
+		return super.isUpgradable();
+	}
 	private static final float STAFF_SCALE_FACTOR = 0.75f;
 
 	{
@@ -80,7 +90,7 @@ public class MagesStaff extends MeleeWeapon {
 	@Override
 	public int max(int lvl) {
 		return  4*(tier+1) +    //8 base damage, down from 10
-				lvl*(tier+1);   //scaling unaffected
+				lvl*2;   //scaling unaffected [As of Cursed Pixel Dungeon 0.1.0, tier does not affect scaling, only base damage]
 	}
 
 	public MagesStaff(Wand wand){

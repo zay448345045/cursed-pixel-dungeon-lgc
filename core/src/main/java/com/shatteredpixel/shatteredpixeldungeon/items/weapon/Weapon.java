@@ -27,6 +27,7 @@ import com.shatteredpixel.shatteredpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.MagicImmune;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
+import com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.KindOfWeapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfFuror;
@@ -61,14 +62,25 @@ import com.watabou.utils.Random;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static com.shatteredpixel.shatteredpixeldungeon.Dungeon.hero;
+
+
 abstract public class Weapon extends KindOfWeapon {
+
+
 
 	public float    ACC = 1f;	// Accuracy modifier
 	public float	DLY	= 1f;	// Speed modifier
 	public int      RCH = 1;    // Reach modifier (only applies to melee hits)
+
+	@Override
 	public boolean isUpgradable() {
-		return level() <= 24;
+		if ( Dungeon.hero.heroClass == HeroClass.ROGUE ) {//Rogue can upgrade weapons more, as this is a major focus on his class
+			UpgradeLimit += 5;
+		}
+		return super.isUpgradable();
 	}
+
 	public enum Augment {
 		SPEED   (0.7f, 0.6667f),
 		DAMAGE  (1.5f, 1.6667f),
@@ -107,7 +119,7 @@ abstract public class Weapon extends KindOfWeapon {
 			damage = enchantment.proc( this, attacker, defender, damage );
 		}
 		
-		if (!levelKnown && attacker == Dungeon.hero && availableUsesToID >= 1) {
+		if (!levelKnown && attacker == hero && availableUsesToID >= 1) {
 			availableUsesToID--;
 			usesLeftToID--;
 			if (usesLeftToID <= 0) {

@@ -65,6 +65,9 @@ public class RingOfWealth extends Ring {
 		price = price/10;
 		return price;
 	}
+	public boolean isUpgradable() {
+		return level() <= 19;
+	}
 	private float triesToDrop = Float.MIN_VALUE;
 	private int dropsToRare = Integer.MIN_VALUE;
 

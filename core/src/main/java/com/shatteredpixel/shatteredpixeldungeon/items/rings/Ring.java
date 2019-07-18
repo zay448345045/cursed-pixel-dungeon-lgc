@@ -43,9 +43,7 @@ import java.util.HashSet;
 public class Ring extends KindofMisc {
 	
 	protected Buff buff;
-	public boolean isUpgradable() {
-		return level() <= 19;
-	}
+
 	private static final Class<?>[] rings = {
 		RingOfAccuracy.class,
 		RingOfEvasion.class,
