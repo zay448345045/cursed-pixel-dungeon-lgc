@@ -217,7 +217,7 @@ public class DriedRose extends Artifact {
 		else if (level() >= 4)
 			image = ItemSpriteSheet.ARTIFACT_ROSE2;
 
-		//For upgrade transferring via well of transmutation
+		//For upgrade transferring via scroll of transmutation
 		droppedPetals = Math.max( level(), droppedPetals );
 		
 		if (ghost != null){
@@ -423,7 +423,7 @@ public class DriedRose extends Artifact {
 			
 			defenseSkill = (Dungeon.hero.lvl+4)*2;
 			if (rose == null) return;
-			HT = 20 + 4*rose.level();
+			HT = 30 + 8*rose.level();
 		}
 
 		public void saySpawned(){

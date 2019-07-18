@@ -71,6 +71,13 @@ public class v0_7_X_Changes {
 		changes = new ChangeInfo("v0.1.0-Alpha", false, null);
 		changes.hardlight(Window.TITLE_COLOR);
 		changeInfos.add(changes);
+		changes.addButton(new ChangeButton(Icons.get(Icons.WARNING), "Upgrade Limits",
+				"All items in the game have been given upgrade limits:\n" +
+						"_-_Most equipment is capped at +15.\n" +
+						"_-_Wands can be upgraded to +20 by the Mage. Additionally, Battlemage can upgrade his staff to +25, but other wands are still capped at +20.\n" +
+						"_-_Warrior, in turn, can upgrade armour higher. While most armour is capped at the regular level, if the Warrior has his Broken Seal attatched, the limit will be temporarily increased to +20. Warrior also can upgrade his Broken Seal to +5.\n" +
+						"_-_Rogue can upgrade weapons more. They are capped at +20 for him and +15 for others\n" +
+						"_-_Huntress can simply upgrade thrown weapons to +20 instead of +15. I may have to buff this in future, possibly to extend this bonus to the Ring of Sharpshooting as well."));
 
 		changes.addButton( new ChangeButton(new Image(Assets.KING, 1, 0, 14, 16), "Bosses changed",
 				"All bosses now drop 2-4 Scrolls of Upgrade, with an average of 2.5\n\n" +
