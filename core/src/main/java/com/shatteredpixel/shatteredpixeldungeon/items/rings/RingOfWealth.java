@@ -33,11 +33,13 @@ import com.shatteredpixel.shatteredpixeldungeon.items.food.SmallRation;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.AlchemicalCatalyst;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfExperience;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfTransmutation;
+import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfEnchantment;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.ArcaneCatalyst;
 import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfEnchantment;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
+import com.shatteredpixel.shatteredpixeldungeon.plants.Starflower;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
@@ -194,9 +196,9 @@ public class RingOfWealth extends Ring {
 		float roll = Random.Float();
 		if (roll < 0.4f){ //40% chance
 			return Generator.random(Generator.Category.STONE);
-		} else if (roll < 0.5f){ //10% chance to drop a minor food item
+		} else if (roll < 0.6f){ //20% chance to drop a minor food item
 			return Random.Int(2) == 0 ? new SmallRation() : new MysteryMeat();
-		} else { //50% chance
+		} else { //40% chance
 			return Generator.random(Generator.Category.SCROLL);
 		}
 	}
@@ -247,13 +249,13 @@ public class RingOfWealth extends Ring {
 	private static Item genHighValueConsumable(){
 		switch( Random.Int(4) ){ //25% chance each
 			case 0: default:
-				return new StoneOfEnchantment();
+				return new ScrollOfUpgrade();
 			case 1:
-				return new ScrollOfEnchantment().quantity(4);
+				return new ScrollOfEnchantment().quantity(5);
 			case 2:
-				return new PotionOfExperience();
+				return new Starflower.Seed().quantity(2);
 			case 3:
-				return new ScrollOfTransmutation().quantity(4);
+				return new ScrollOfTransmutation().quantity(5);
 		}
 	}
 	
