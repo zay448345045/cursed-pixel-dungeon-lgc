@@ -33,7 +33,7 @@ public class Rat extends Mob {
 		HP = HT = 8;
 		defenseSkill = 2;
 		
-		maxLvl = 5;
+		maxLvl = 10;
 	}
 	
 	@Override

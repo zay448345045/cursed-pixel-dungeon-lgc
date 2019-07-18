@@ -45,7 +45,7 @@ public class Skeleton extends Mob {
 		defenseSkill = 9;
 		
 		EXP = 5;
-		maxLvl = 10;
+		maxLvl = 15;
 
 		loot = Generator.Category.WEAPON;
 		lootChance = 0.125f;

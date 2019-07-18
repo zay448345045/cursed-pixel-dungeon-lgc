@@ -50,7 +50,7 @@ public class Thief extends Mob {
 		defenseSkill = 12;
 		
 		EXP = 5;
-		maxLvl = 10;
+		maxLvl = 15;
 		
 		loot = Random.oneOf(Generator.Category.RING, Generator.Category.ARTIFACT);
 		lootChance = 0.01f;
