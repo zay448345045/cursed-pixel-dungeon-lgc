@@ -131,9 +131,9 @@ public class Guard extends Mob {
 			Armor loot;
 			do{
 				loot = Generator.randomArmor();
-				//50% chance of re-rolling tier 4 or 5 items
-			} while (loot.tier >= 4 && Random.Int(2) == 0);
-			loot.level(0);
+				//33% chance of being upgraded
+			} while (Random.Int(3) == 0);
+			loot.upgrade();
 			return loot;
 		//otherwise, we may drop a health potion. overall chance is 1/8 * (6-potions dropped)/6
 		//with 0 potions dropped that simplifies to 1/8
