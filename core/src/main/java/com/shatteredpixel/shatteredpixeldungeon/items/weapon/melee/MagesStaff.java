@@ -63,7 +63,7 @@ public class MagesStaff extends MeleeWeapon {
 		if ( Dungeon.hero.heroClass == HeroClass.MAGE ) {//Mage can upgrade 5 more times...
 			UpgradeLimit += 5;
 			if (Dungeon.hero.subClass == HeroSubClass.BATTLEMAGE) {//And Battlemage can reach a grand total of +25
-				UpgradeLimit += 5;
+				UpgradeLimit  = 25;
 			}
 		}
 

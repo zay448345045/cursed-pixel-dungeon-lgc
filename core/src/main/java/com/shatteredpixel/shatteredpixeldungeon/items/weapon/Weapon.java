@@ -224,7 +224,7 @@ abstract public class Weapon extends KindOfWeapon {
 	
 	@Override
 	public int level() {
-		return super.level() + (curseInfusionBonus ? 1 : 0);
+		return super.level() + (curseInfusionBonus ? 3 : 0);
 	}
 	
 	@Override

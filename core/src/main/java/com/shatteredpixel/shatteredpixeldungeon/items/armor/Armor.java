@@ -356,7 +356,7 @@ public class Armor extends EquipableItem {
 	
 	@Override
 	public int level() {
-		return super.level() + (curseInfusionBonus ? 1 : 0);
+		return super.level() + (curseInfusionBonus ? 3 : 0);
 	}
 	
 	@Override

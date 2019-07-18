@@ -234,7 +234,7 @@ public abstract class Wand extends Item {
 			curseInfusionBonus = false;
 			updateLevel();
 		}
-		return super.level() + (curseInfusionBonus ? 1 : 0);
+		return super.level() + (curseInfusionBonus ? 3 : 0);
 	}
 	
 	@Override
