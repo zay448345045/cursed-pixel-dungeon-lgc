@@ -31,6 +31,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.armor.ClothArmor;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.LeatherArmor;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.CloakOfShadows;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.FoodHolder;
+import com.shatteredpixel.shatteredpixeldungeon.items.bags.MagicalHolster;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.PotionBandolier;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.ScrollHolder;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.VelvetPouch;
@@ -168,7 +169,7 @@ public enum HeroClass {
 	}
 
 	private static void initRogue( Hero hero ) {
-		(hero.belongings.weapon = new Dagger()).identify().upgrade();
+		(hero.belongings.weapon = new Dagger()).identify().upgrade(2);
 
 		CloakOfShadows cloak = new CloakOfShadows();
 		(hero.belongings.misc1 = cloak).identify();
@@ -191,11 +192,11 @@ public enum HeroClass {
 
 		(hero.belongings.weapon = new Gloves()).identify().upgrade();
 		SpiritBow bow = new SpiritBow();
-		bow.identify().upgrade().collect();
+		bow.identify().collect();
 
 		Dungeon.quickslot.setSlot(0, bow);
 
-		new VelvetPouch().collect();
+		new MagicalHolster().collect();
 		Dungeon.LimitedDrops.MAGICAL_HOLSTER.drop();
 		
 		new PotionOfMindVision().identify();
