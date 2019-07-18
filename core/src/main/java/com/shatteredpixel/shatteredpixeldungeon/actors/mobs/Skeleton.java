@@ -25,6 +25,7 @@ import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
+import com.shatteredpixel.shatteredpixeldungeon.items.Gold;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MeleeWeapon;
 import com.shatteredpixel.shatteredpixeldungeon.levels.features.Chasm;
@@ -90,13 +91,9 @@ public class Skeleton extends Mob {
 	
 	@Override
 	protected Item createLoot() {
-		Item loot;
-		do {
-			loot = Generator.randomWeapon();
-		//50% chance of re-rolling tier 4 or 5 melee weapons
-		} while (((MeleeWeapon) loot).tier >= 4 && Random.Int(2) == 0);
-		loot.level(0);
-		return loot;
+		Item result = new Gold().random();
+		result.quantity(Math.round(result.quantity() * Random.NormalFloat(0.33f, 1f)));
+		return result;
 	}
 	
 	@Override

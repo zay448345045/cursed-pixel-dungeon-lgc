@@ -169,9 +169,9 @@ public class RingOfWealth extends Ring {
 			Item result = new Gold().random();
 			result.quantity(Math.round(result.quantity() * Random.NormalFloat(0.33f, 1f)));
 			return result;
-		} else if (roll < 0.7f){ //40% chance
+		} else if (roll < 0.6f){ //30% chance
 			return genBasicConsumable();
-		} else if (roll < 0.9f){ //20% chance
+		} else if (roll < 0.9f){ //30% chance
 			return genExoticConsumable();
 		} else { //10% chance
 			if (Random.Int(3) != 0){
