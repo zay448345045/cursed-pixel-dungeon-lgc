@@ -76,7 +76,7 @@ abstract public class Weapon extends KindOfWeapon {
 	@Override
 	public boolean isUpgradable() {
 		if ( Dungeon.hero.heroClass == HeroClass.ROGUE ) {//Rogue can upgrade weapons more, as this is a major focus on his class
-			UpgradeLimit += 5;
+			UpgradeLimit = super.UpgradeLimit + 5;
 		}
 		return super.isUpgradable();
 	}

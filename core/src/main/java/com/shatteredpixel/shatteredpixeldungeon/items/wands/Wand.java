@@ -63,7 +63,7 @@ public abstract class Wand extends Item {
 	@Override
 	public boolean isUpgradable() {
 		if ( Dungeon.hero.heroClass == HeroClass.MAGE ) {//Only Mage gets +20 wands
-			UpgradeLimit += 5;
+			UpgradeLimit = super.UpgradeLimit + 5;
 		}
 		return super.isUpgradable();
 	}

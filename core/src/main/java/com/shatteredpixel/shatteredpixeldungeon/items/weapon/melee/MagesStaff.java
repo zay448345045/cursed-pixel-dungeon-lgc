@@ -61,9 +61,9 @@ public class MagesStaff extends MeleeWeapon {
 	public static final String AC_ZAP	= "ZAP";
 	public boolean isUpgradable() {
 		if ( Dungeon.hero.heroClass == HeroClass.MAGE ) {//Mage can upgrade 5 more times...
-			UpgradeLimit += 5;
+			UpgradeLimit = super.UpgradeLimit + 5;
 			if (Dungeon.hero.subClass == HeroSubClass.BATTLEMAGE) {//And Battlemage can reach a grand total of +25
-				UpgradeLimit  = 25;
+				UpgradeLimit = super.UpgradeLimit + 10;
 			}
 		}
 
