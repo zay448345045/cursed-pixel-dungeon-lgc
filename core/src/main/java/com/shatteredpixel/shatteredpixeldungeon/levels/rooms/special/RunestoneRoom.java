@@ -67,7 +67,7 @@ public class RunestoneRoom extends SpecialRoom {
 		
 		Item prize = level.findPrizeItem( Runestone.class );
 		if (prize == null)
-			prize = Generator.random( Generator.Category.STONE );
+			prize = Generator.random( Generator.Category.SPELL );
 		
 		return prize;
 	}

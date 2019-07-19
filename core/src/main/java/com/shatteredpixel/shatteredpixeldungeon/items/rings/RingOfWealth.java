@@ -28,6 +28,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
 import com.shatteredpixel.shatteredpixeldungeon.items.Gold;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor;
+import com.shatteredpixel.shatteredpixeldungeon.items.food.MeatPie;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.MysteryMeat;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.SmallRation;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.AlchemicalCatalyst;
@@ -254,7 +255,7 @@ public class RingOfWealth extends Ring {
 			case 1:
 				return new ScrollOfEnchantment().quantity(5);
 			case 2:
-				return new CurseInfusion().quantity(2);
+				return new MeatPie();
 			case 3:
 				return new ScrollOfTransmutation().quantity(5);
 		}

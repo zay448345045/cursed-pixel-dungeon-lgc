@@ -97,6 +97,17 @@ import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfPet
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfPolymorph;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfPrismaticImage;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfPsionicBlast;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.Alchemize;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.AquaBlast;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.CurseInfusion;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.FeatherFall;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.MagicalInfusion;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.MagicalPorter;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.PhaseShift;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.ReclaimTrap;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.Recycle;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.Spell;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.WildEnergy;
 import com.shatteredpixel.shatteredpixeldungeon.items.stones.Runestone;
 import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfAffection;
 import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfAggression;
@@ -215,6 +226,7 @@ public class Generator {
 		SEED	( 0,    Plant.Seed.class ), //dropped by grass
 		
 		SCROLL	( 20,   Scroll.class ),
+		SPELL ( 0,   Spell.class ),
 		SCROLL_EXOTIC (1,   Scroll.class),
 		STONE   ( 2,    Runestone.class),
 		
@@ -277,7 +289,23 @@ public class Generator {
 					Swiftthistle.Seed.class,
 					Starflower.Seed.class};
 			SEED.probs = new float[]{ 0, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 1 };
-			
+
+
+
+			SPELL.classes = new Class<?>[]{
+					CurseInfusion.class,
+					MagicalInfusion.class,
+					MagicalPorter.class,
+					PhaseShift.class,
+					WildEnergy.class,
+					AquaBlast.class,
+					FeatherFall.class,
+					ReclaimTrap.class,
+					Alchemize.class,
+					Recycle.class
+			};
+			SPELL.probs = new float[]{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+
 			SCROLL.classes = new Class<?>[]{
 					ScrollOfUpgrade.class, //3 drop every chapter, see Dungeon.souNeeded()
 					ScrollOfIdentify.class,
@@ -292,6 +320,7 @@ public class Generator {
 					ScrollOfTerror.class,
 					ScrollOfTransmutation.class
 			};
+
 			SCROLL.probs = new float[]{ 1, 6, 4, 3, 3, 3, 2, 2, 2, 2, 2, 1};
 
 			SCROLL_EXOTIC.classes = new Class<?>[]{
