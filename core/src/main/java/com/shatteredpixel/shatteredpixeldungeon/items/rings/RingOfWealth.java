@@ -207,11 +207,11 @@ public class RingOfWealth extends Ring {
 	
 	private static Item genExoticConsumable(){
 		float roll = Random.Float();
-		if (roll < 0.3f){ //30% chance
+		if (roll < 0.2f){ //20% chance
 			return Generator.random(Generator.Category.POTION);
-		} else if (roll < 0.6f) { //30% chance
+		} else if (roll < 0.5f) { //30% chance
 			return Generator.random(Generator.Category.SCROLL_EXOTIC);
-		} else { //40% chance
+		} else { //50% chance
 			return Random.Int(2) == 0 ? new ScrollOfEnchantment() : new ScrollOfTransmutation();
 		}
 	}
