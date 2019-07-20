@@ -63,7 +63,7 @@ public class InterlevelScene extends PixelScene {
 	private static float fadeTime;
 	
 	public enum Mode {
-		DESCEND, ASCEND, CONTINUE, RESURRECT, RETURN, FALL, RESET, NONE
+		DESCEND, ASCEND, CONTINUE, RESURRECT, RETURN, FALL, RESET, NONE,FLOOR0
 	}
 	public static Mode mode;
 	
@@ -85,7 +85,8 @@ public class InterlevelScene extends PixelScene {
 	private static Thread thread;
 	private static Exception error = null;
 	private float waitingTime;
-	
+
+
 	@Override
 	public void create() {
 		super.create();
@@ -341,6 +342,8 @@ public class InterlevelScene extends PixelScene {
 		}
 		Dungeon.switchLevel( level, level.entrance );
 	}
+
+
 	
 	private void fall() throws IOException {
 

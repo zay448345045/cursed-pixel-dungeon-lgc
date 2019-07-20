@@ -64,9 +64,11 @@ import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.SpecialRoom
 import com.shatteredpixel.shatteredpixeldungeon.mechanics.ShadowCaster;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
+import com.shatteredpixel.shatteredpixeldungeon.ui.GameLog;
 import com.shatteredpixel.shatteredpixeldungeon.ui.QuickSlotButton;
 import com.shatteredpixel.shatteredpixeldungeon.utils.BArray;
 import com.shatteredpixel.shatteredpixeldungeon.utils.DungeonSeed;
+import com.shatteredpixel.shatteredpixeldungeon.windows.WndStory;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
@@ -221,7 +223,114 @@ public class Dungeon {
 	public static boolean isChallenged( int mask ) {
 		return (challenges & mask) != 0;
 	}
-	
+
+	public static Level createStartLevel() {
+		Dungeon.level = null;
+		Actor.clear();
+		depth = 0;
+		Level level;
+		level = new StartLevel();
+		level.create();
+
+		return level;
+	}
+
+	public static Level goToDepth(int depthToAccess) throws IOException {
+		Level level;
+		if (Dungeon.depth >= Statistics.deepestFloor) {
+			level = Dungeon.newLevelWithDepth(depthToAccess);
+		} else {
+			Dungeon.depth = depthToAccess;
+			level = Dungeon.loadLevel( GamesInProgress.curSlot );
+		}
+		Dungeon.switchLevel( level, level.entrance );
+		return level;
+	}
+
+
+	public static Level newLevelWithDepth(int depthToAccess) {
+
+
+
+		depth = depthToAccess;
+		if (depth > Statistics.deepestFloor) {
+			Statistics.deepestFloor = depth;
+
+			if (Statistics.qualifiedForNoKilling) {
+				Statistics.completedWithNoKilling = true;
+			} else {
+				Statistics.completedWithNoKilling = false;
+			}
+		}
+
+		Level level;
+		switch (depth) {
+
+			case 0:
+				level = new StartLevel();
+				break;
+			case 1:
+			case 2:
+			case 3:
+			case 4:
+				level = new SewerLevel();
+				break;
+			case 5:
+				level = new SewerBossLevel();
+				break;
+			case 6:
+			case 7:
+			case 8:
+			case 9:
+				level = new PrisonLevel();
+				break;
+			case 10:
+				level = new PrisonBossLevel();
+				break;
+			case 11:
+			case 12:
+			case 13:
+			case 14:
+				level = new CavesLevel();
+				break;
+			case 15:
+				level = new CavesBossLevel();
+				break;
+			case 16:
+			case 17:
+			case 18:
+			case 19:
+				level = new CityLevel();
+				break;
+			case 20:
+				level = new CityBossLevel();
+				break;
+			case 21:
+				level = new LastShopLevel();
+				break;
+			case 22:
+			case 23:
+			case 24:
+				level = new HallsLevel();
+				break;
+			case 25:
+				level = new HallsBossLevel();
+				break;
+			case 26:
+				level = new LastLevel();
+				break;
+			default:
+				level = new DeadEndLevel();
+				Statistics.deepestFloor--;
+		}
+
+		level.create();
+
+		Statistics.qualifiedForNoKilling = !bossLevel();
+
+		return level;
+	}
+
 	public static Level newLevel() {
 		
 		Dungeon.level = null;
