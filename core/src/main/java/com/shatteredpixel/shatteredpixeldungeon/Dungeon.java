@@ -239,7 +239,7 @@ public class Dungeon {
 		}
 		
 		Level level;
-		switch (depth-1) {
+		switch (depth) {
 
 		case 0:
 			level = new StartLevel();

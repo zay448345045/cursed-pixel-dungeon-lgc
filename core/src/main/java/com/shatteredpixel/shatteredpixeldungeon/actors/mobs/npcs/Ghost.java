@@ -300,11 +300,11 @@ public class Ghost extends NPC {
 				//50%:+0, 30%:+1, 15%:+2, 5%:+3
 				float itemLevelRoll = Random.Float();
 				int itemLevel;
-				if (itemLevelRoll < 0.5f){
+				if (itemLevelRoll < 0.3f){
 					itemLevel = 0;
-				} else if (itemLevelRoll < 0.8f){
+				} else if (itemLevelRoll < 0.6f){
 					itemLevel = 1;
-				} else if (itemLevelRoll < 0.95f){
+				} else if (itemLevelRoll < 0.85f){
 					itemLevel = 2;
 				} else {
 					itemLevel = 3;

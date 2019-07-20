@@ -6,6 +6,7 @@ import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Bones;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Shopkeeper;
 import com.shatteredpixel.shatteredpixeldungeon.items.Heap;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
@@ -50,7 +51,9 @@ public class StartLevel extends Level {
     }
 
     private void placeNpc() {
-
+        Mob shopkeeper = new Shopkeeper();
+        shopkeeper.pos = 10 + 11 * 32;
+        mobs.add( shopkeeper );
     }
 
     @Override
@@ -133,16 +136,16 @@ public class StartLevel extends Level {
                     W, W, e, e, W, m, m, m, m, W, m, m, m, W, e, e, e, e, W, m, m, m, W, m, m, m, m, m, m, m, m, W,
                     W, W, e, e, W, m, m, m, m, W, W, W, D, W, e, e, e, e, W, W, W, W, W, m, m, m, m, m, m, m, m, W,
                     W, W, e, e, W, m, m, m, m, W, e, e, e, e, e, e, e, e, e, e, e, e, W, m, m, m, m, m, m, m, m, W,
-                    W, W, e, e, W, m, m, m, m, W, e, e, e, e, e, e, e, e, e, e, e, e, W, m, m, m, m, m, m, m, m, W,
+                    W, W, e, e, W, m, m, m, m, W, e, e, e, e, e, S, S, e, e, e, e, e, W, m, m, m, m, m, m, m, m, W,
                     W, W, e, e, D, m, m, m, m, D, e, e, e, e, e, e, e, e, e, e, e, e, D, m, m, m, m, m, m, m, m, W,
                     W, W, e, e, W, W, W, W, W, W, e, e, e, e, e, e, e, X, e, e, e, e, W, W, D, W, W, W, W, D, W, W,
                     W, e, e, e, e, e, e, e, e, e, e, e, e, e, m, m, m, m, e, e, e, e, e, e, e, e, e, e, e, e, e, W,
-                    W, e, e, e, e, e, e, e, e, e, e, e, e, e, m, A, A, m, e, e, e, e, e, e, e, e, e, e, e, e, e, W,
-                    W, e, e, e, e, e, e, e, e, e, e, e, e, e, m, A, A, m, e, e, e, e, e, e, e, e, e, e, e, e, e, W,
+                    W, e, e, e, e, e, e, e, e, e, e, S, e, e, m, A, A, m, e, e, S, e, e, e, e, e, e, e, e, e, e, W,
+                    W, e, e, e, e, e, e, e, e, e, e, S, e, e, m, A, A, m, e, e, S, e, e, e, e, e, e, e, e, e, e, W,
                     W, e, e, e, e, e, e, e, e, e, e, e, e, e, m, m, m, m, e, e, e, e, e, e, e, e, e, e, e, e, e, W,
                     W, W, W, D, W, W, W, W, W, W, e, e, e, e, e, e, e, e, e, e, e, e, W, W, W, W, W, W, W, W, W, W,
                     W, e, e, e, W, m, m, m, m, W, e, e, e, e, e, e, e, e, e, e, e, e, W, m, m, m, m, m, m, m, m, W,
-                    W, e, e, e, W, m, m, m, m, W, e, e, e, e, e, e, e, e, e, e, e, e, D, m, m, m, m, m, m, m, m, W,
+                    W, e, e, e, W, m, m, m, m, W, e, e, e, e, e, S, S, e, e, e, e, e, D, m, m, m, m, m, m, m, m, W,
                     W, e, e, e, W, m, m, m, m, W, e, e, e, e, e, e, e, e, e, e, e, e, W, m, m, m, m, m, m, m, m, W,
                     W, W, D, W, W, m, m, m, m, W, W, W, D, W, e, e, e, e, W, D, W, W, W, W, W, W, W, m, m, m, m, W,
                     W, m, m, m, W, m, m, m, m, m, m, m, m, W, e, e, e, e, W, m, m, m, m, W, m, E, W, m, m, m, m, W,
