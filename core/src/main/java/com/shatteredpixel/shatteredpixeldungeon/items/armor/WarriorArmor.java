@@ -45,7 +45,7 @@ public class WarriorArmor extends ClassArmor {
 	{
 		image = ItemSpriteSheet.ARMOR_WARRIOR;
 	}
-
+	
 	@Override
 	public void doSpecial() {
 		GameScene.selectCell( leaper );

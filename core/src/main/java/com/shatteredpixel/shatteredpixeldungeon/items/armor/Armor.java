@@ -180,7 +180,7 @@ public class Armor extends EquipableItem {
 			if (sealBuff != null) sealBuff.setArmor(null);
 
 			if (seal.level() > 0){
-				degrade();
+				degrade(seal.level());
 			}
 			GLog.i( Messages.get(Armor.class, "detach_seal") );
 			hero.sprite.operate(hero.pos);

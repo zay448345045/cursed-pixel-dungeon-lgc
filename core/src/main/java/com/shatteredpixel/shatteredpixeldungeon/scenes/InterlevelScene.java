@@ -207,10 +207,12 @@ public class InterlevelScene extends PixelScene {
 
 						switch (mode) {
 							case DESCEND:
-								goToDepth(Dungeon.depth + 1);//My current lazy attempt at refactoring InterLevelScene.java to allow visiting any depth from the start.
+								//goToDepth(Dungeon.depth + 1);//My current lazy attempt at refactoring InterLevelScene.java to allow visiting any depth from the start.
+								descend();
 								break;
 							case ASCEND:
-								goToDepth(Dungeon.depth - 1);
+								ascend();
+								//goToDepth(Dungeon.depth - 1);
 								break;
 							case CONTINUE:
 								restore();
@@ -335,14 +337,20 @@ public class InterlevelScene extends PixelScene {
 			Dungeon.saveAll();
 		}
 		Level level;
-		Dungeon.depth = depthToAccess;
+
 		if (Dungeon.depth >= Statistics.deepestFloor) {
 			level = Dungeon.newLevelWithDepth(depthToAccess);
 		} else {
 
 			level = Dungeon.loadLevel( GamesInProgress.curSlot );
 		}
-		Dungeon.switchLevel( level, level.entrance );
+
+		if (depthToAccess > Dungeon.depth) {
+			Dungeon.switchLevel( level, level.exit );
+		} else {
+			Dungeon.switchLevel(level, level.entrance);
+		}
+		Dungeon.depth = depthToAccess;
 		return level;
 	}
 
