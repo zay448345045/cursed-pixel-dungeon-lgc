@@ -147,19 +147,19 @@ public class Bestiary {
 				//3x succubus, 3x evil eye
 				return new ArrayList<>(Arrays.asList(
 						Succubus.class, Succubus.class, Succubus.class,
-						Eye.class, Eye.class, Eye.class));
+						Eye.class, Eye.class, Eye.class, NonBossGoo.class));
 			case 23:
 				//2x succubus, 4x evil eye, 2x scorpio
 				return new ArrayList<>(Arrays.asList(
 						Succubus.class, Succubus.class,
 						Eye.class, Eye.class, Eye.class, Eye.class,
-						Scorpio.class, Scorpio.class));
+						Scorpio.class, Scorpio.class, NonBossGoo.class, NonBossGoo.class));
 			case 24: case 25: case 26:
 				//1x succubus, 2x evil eye, 3x scorpio
 				return new ArrayList<>(Arrays.asList(
 						Succubus.class,
 						Eye.class, Eye.class,
-						Scorpio.class, Scorpio.class, Scorpio.class));
+						Scorpio.class, Scorpio.class, Scorpio.class, NonBossGoo.class, NonBossGoo.class, NonBossGoo.class));
 		}
 		
 	}

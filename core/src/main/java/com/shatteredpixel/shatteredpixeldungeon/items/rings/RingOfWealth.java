@@ -251,7 +251,7 @@ public class RingOfWealth extends Ring {
 	private static Item genHighValueConsumable(){
 		switch( Random.Int(4) ){ //25% chance each
 			case 0: default:
-				return new ScrollOfUpgrade();
+				return Generator.random(Generator.Category.SPELL);
 			case 1:
 				return new ScrollOfEnchantment().quantity(5);
 			case 2:
