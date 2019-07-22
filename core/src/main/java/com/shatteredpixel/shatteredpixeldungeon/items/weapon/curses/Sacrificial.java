@@ -36,7 +36,9 @@ public class Sacrificial extends Weapon.Enchantment {
 	public int proc(Weapon weapon, Char attacker, Char defender, int damage ) {
 
 		if (Random.Int(12) == 0){
-			Buff.affect(attacker, Bleeding.class).set(Math.max(1, attacker.HP/6));
+			int duration = Math.max(1, attacker.HP/6);
+			Buff.affect(attacker, Bleeding.class).set(duration);
+			damage = Math.round((duration*2/attacker.HT)*damage);//Increases damage based on HP taken
 		}
 
 		return damage;

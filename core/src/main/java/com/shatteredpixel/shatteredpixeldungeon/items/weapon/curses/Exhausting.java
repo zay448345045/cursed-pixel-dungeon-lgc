@@ -38,6 +38,7 @@ public class Exhausting extends Weapon.Enchantment {
 
 		if (attacker == Dungeon.hero && Random.Int(15) == 0) {
 			Buff.affect(attacker, Weakness.class, Random.NormalIntRange(5, 20));
+			Buff.affect(defender, Weakness.class, Random.NormalIntRange(5, 20));//weakens defender as well
 		}
 
 		return damage;

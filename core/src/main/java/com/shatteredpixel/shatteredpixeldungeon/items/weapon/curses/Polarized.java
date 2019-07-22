@@ -34,7 +34,7 @@ public class Polarized extends Weapon.Enchantment {
 	public int proc( Weapon weapon, Char attacker, Char defender, int damage ) {
 		
 		if (Random.Int(2) == 0){
-			return Math.round(1.5f*damage);
+			return Math.round(2.2f*damage);//Slightly higher DPS
 		} else {
 			return 0;
 		}
