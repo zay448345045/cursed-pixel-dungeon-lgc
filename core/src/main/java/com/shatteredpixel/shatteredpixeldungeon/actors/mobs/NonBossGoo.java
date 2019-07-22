@@ -63,7 +63,7 @@ public class NonBossGoo extends Mob {
 
     @Override
     public int attackSkill( Char target ) {
-        int attack = 40;
+        int attack = 45;
         if (HP*2 <= HT) attack = 15;
         if (pumpedUp > 0) attack *= 2;
         return attack;
