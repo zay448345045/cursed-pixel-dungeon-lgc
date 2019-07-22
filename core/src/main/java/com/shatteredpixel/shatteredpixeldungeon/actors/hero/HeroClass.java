@@ -112,8 +112,8 @@ public enum HeroClass {
 		if (Dungeon.isChallenged(Challenges.NO_FOOD)){
 			new SmallRation().collect();
 		}
-		//new FoodHolder().collect();
-		//Dungeon.LimitedDrops.FOOD_HOLDER.drop();
+		new FoodHolder().collect();
+		Dungeon.LimitedDrops.FOOD_HOLDER.drop();
 		new ScrollOfIdentify().identify();
 
 	}

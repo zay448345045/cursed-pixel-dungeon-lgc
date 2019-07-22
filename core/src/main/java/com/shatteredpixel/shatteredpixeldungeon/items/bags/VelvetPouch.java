@@ -37,7 +37,7 @@ public class VelvetPouch extends Bag {
 	
 	@Override
 	public boolean grab( Item item ) {
-		return item instanceof Plant.Seed || item instanceof Runestone || item instanceof Food;
+		return item instanceof Plant.Seed || item instanceof Runestone;
 	}
 	
 	@Override
