@@ -75,7 +75,7 @@ public class Armor extends EquipableItem {
 	protected static final String AC_DETACH       = "DETACH";
 	public boolean isUpgradable() {
 		if ( seal != null ) {//Armour can be upgraded to +20 when the broken seal is attatched only
-			UpgradeLimit = super.UpgradeLimit + 5;
+			UpgradeLimit = 20;
 		}
 		return super.isUpgradable();
 	}
