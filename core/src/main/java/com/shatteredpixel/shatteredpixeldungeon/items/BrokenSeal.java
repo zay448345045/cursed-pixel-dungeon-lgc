@@ -93,6 +93,9 @@ public class BrokenSeal extends Item {
 					Dungeon.hero.sprite.operate(Dungeon.hero.pos);
 					Sample.INSTANCE.play(Assets.SND_UNLOCK);
 					armor.affixSeal((BrokenSeal)curItem);
+					if (armor.level() > 20) {
+						armor.degrade(armor.level() - 20);
+					}
 					curItem.detach(Dungeon.hero.belongings.backpack);
 				}
 			}
