@@ -24,6 +24,8 @@ package com.shatteredpixel.shatteredpixeldungeon.items.armor.curses;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Blob;
 import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.ToxicGas;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.BlobImmunity;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
@@ -39,7 +41,7 @@ public class Stench extends Armor.Glyph {
 		if ( Random.Int( 8 ) == 0) {
 
 			GameScene.add( Blob.seed( defender.pos, 250, ToxicGas.class ) );
-
+			Buff.prolong( defender, BlobImmunity.class, 4 );//4 turns of gas immunity to escape!
 		}
 
 		return damage;

@@ -23,6 +23,8 @@ package com.shatteredpixel.shatteredpixeldungeon.items.armor.curses;
 
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Invisibility;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfTeleportation;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
@@ -37,6 +39,7 @@ public class Displacement extends Armor.Glyph {
 
 		if (defender == Dungeon.hero && Random.Int(20) == 0){
 			ScrollOfTeleportation.teleportHero(Dungeon.hero);
+			Buff.affect( defender, Invisibility.class, 5 );//5 turns of invisibility
 			return 0;
 		}
 
