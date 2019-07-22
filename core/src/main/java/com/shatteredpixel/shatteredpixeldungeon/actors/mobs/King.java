@@ -30,6 +30,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.ToxicGas;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Blindness;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Burning;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Charm;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.LockedFloor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Paralysis;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Terror;
@@ -74,8 +75,16 @@ public class King extends Mob {
 	private boolean nextPedestal = true;
 	
 	private static final String PEDESTAL = "pedestal";
-	
 	@Override
+	public int attackProc( Char enemy, int damage ) {
+		damage = super.attackProc(enemy, damage);
+		if (Random.Int(MAX_ARMY_SIZE) == 0) {
+			Buff.prolong(enemy, Charm.class, 4);
+		}
+
+		return damage;
+	}
+		@Override
 	public void storeInBundle( Bundle bundle ) {
 		super.storeInBundle( bundle );
 		bundle.put( PEDESTAL, nextPedestal );
