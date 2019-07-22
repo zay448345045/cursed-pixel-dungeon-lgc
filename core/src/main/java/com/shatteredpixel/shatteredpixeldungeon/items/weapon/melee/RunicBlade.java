@@ -28,11 +28,10 @@ public class RunicBlade extends MeleeWeapon {
 	{
 		image = ItemSpriteSheet.RUNIC_BLADE;
 
-		tier = 3;
+		tier = 2;
 	}
 
-	//Essentially it's a tier 4 weapon, with tier 3 base max damage, and tier 5 scaling.
-	//equal to tier 4 in damage at +5
+	//Does 1 - 10 base damage, scales exponentially max dmg (+2, +3, +4...) and not at all min damage
 	@Override
 	public int min(int lvl) {
 		return  1;
@@ -40,8 +39,8 @@ public class RunicBlade extends MeleeWeapon {
 	}
 	@Override
 	public int max(int lvl) {
-		return  5*(tier) +                	//20 base, down from 25
-				Math.round((level()*level())/2);	//+6 per level, up from +5
+		return  6*(tier) +                	//15 base
+				Math.round((level()+1)*(level()+1)/2);	//+level() +1 scaling
 
 	}
 }
