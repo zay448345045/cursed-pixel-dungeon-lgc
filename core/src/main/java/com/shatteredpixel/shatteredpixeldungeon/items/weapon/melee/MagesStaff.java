@@ -185,7 +185,7 @@ public class MagesStaff extends MeleeWeapon {
 		this.wand = null;
 
 		//syncs the level of the two items.
-		int targetLevel = Math.max(this.level() - (curseInfusionBonus ? 1 : 0), wand.level());
+		int targetLevel = Math.max(this.level() - (curseInfusionBonus ? 3 : 0), wand.level());
 
 		//if the staff's level is being overridden by the wand, preserve 1 upgrade
 		if (wand.level() >= this.level() && this.level() > (curseInfusionBonus ? 3 : 0)) targetLevel++;
