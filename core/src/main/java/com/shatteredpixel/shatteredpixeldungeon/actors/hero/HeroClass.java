@@ -155,7 +155,7 @@ public enum HeroClass {
 	private static void initMage( Hero hero ) {
 		MagesStaff staff;
 		
-		staff = new MagesStaff(new WandOfLivingEarth());
+		staff = new MagesStaff(new WandOfDisintegration());
 		staff.upgrade();
 		(hero.belongings.weapon = staff).identify();
 		hero.belongings.weapon.activate(hero);
