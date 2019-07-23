@@ -60,7 +60,11 @@ public class NonBossGoo extends Mob {
             return Random.NormalIntRange( min, max );
         }
     }
-
+    @Override
+    public void damage(int dmg, Object src) {
+        if (pumpedUp > 0) dmg /= 4;
+        super.damage(dmg, src);
+    }
     @Override
     public int attackSkill( Char target ) {
         int attack = 45;
@@ -186,19 +190,7 @@ public class NonBossGoo extends Mob {
         super.move( step );
     }
 
-    @Override
-    public void damage(int dmg, Object src) {
-        boolean bleeding = (HP*2 <= HT);
-        super.damage(dmg, src);
-        if ((HP*2 <= HT) && !bleeding){
-            BossHealthBar.bleed(true);
-            sprite.showStatus(CharSprite.NEGATIVE, Messages.get(this, "enraged"));
-            ((GooSprite)sprite).spray(true);
-            yell(Messages.get(this, "gluuurp"));
-        }
-        LockedFloor lock = Dungeon.hero.buff(LockedFloor.class);
-        if (lock != null) lock.addTime(dmg*2);
-    }
+
 
     @Override
     public void die( Object cause ) {

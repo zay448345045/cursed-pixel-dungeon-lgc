@@ -97,6 +97,7 @@ public class v0_7_X_Changes {
 						"_-_ Magic Missile now has doubled scaling, upgrading by +2/+4 instead of +1/+2\n" +
 						"_-_ Wand of Frost scaling buffed\n" +
 						"_-_ Wand of Blast Wave now inflicts Vertigo on targets\n" +
+						"_-_ Wand of Living Earth has been implemented directly from 0.7.4 with existing sprites. Warding is planned.\n" +
 						"_-_ Transfusion self-shielding reduced, now charming scales with upgrades"));
 
 		changes.addButton( new ChangeButton(new DewVial(),
@@ -111,8 +112,9 @@ public class v0_7_X_Changes {
 
 		changes.addButton(new ChangeButton(Icons.get(Icons.SKULL), "Enemies Buffed",
 				"Enemies have been buffed at all levels. The amount of extra HP that they have been given scales with depth. This is mainly due to more Scrolls Of Upgrade being availible and the player having higher HP.\n\n" +
-						"Sewers enemies are unchanged, Prision enemies have 50% more HP, Caves enemies 75% more and enemies in the Dwarven City and Demon Halls have double HP\n\n"+
-						"Evil Eye's Deathgaze can also now destroy all terrain!"));
+						"_-_Sewers enemies are unchanged, Prision enemies have 50% more HP, Caves enemies 75% more and enemies in the Dwarven City and Demon Halls have double HP\n"+
+						"_-_A new Demon Halls enemy has been added: the Goo. It is a version of the first boss, edited to be challenging. Better watch out!\n"+
+						"_-_Evil Eye's Deathgaze can also now destroy all terrain!"));
 	}
 	public static void add_v0_7_3_Changes( ArrayList<ChangeInfo> changeInfos ){
 		ChangeInfo changes = new ChangeInfo("v0.7.3", true, "");
