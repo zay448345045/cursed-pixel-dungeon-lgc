@@ -49,6 +49,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfMagicMappi
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfRage;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfDisintegration;
+import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfLivingEarth;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfMagicMissile;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.SpiritBow;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Dagger;
@@ -154,7 +155,7 @@ public enum HeroClass {
 	private static void initMage( Hero hero ) {
 		MagesStaff staff;
 		
-		staff = new MagesStaff(new WandOfDisintegration());
+		staff = new MagesStaff(new WandOfLivingEarth());
 		staff.upgrade();
 		(hero.belongings.weapon = staff).identify();
 		hero.belongings.weapon.activate(hero);
