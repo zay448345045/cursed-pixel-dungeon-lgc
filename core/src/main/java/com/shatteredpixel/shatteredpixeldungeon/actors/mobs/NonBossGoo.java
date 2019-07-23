@@ -91,7 +91,7 @@ public class NonBossGoo extends Mob {
         if (Dungeon.level.water[pos] && HP < HT) {
             sprite.emitter().burst( Speck.factory( Speck.HEALING ), 1 );
 
-            HP++;
+            HP+= 10;
         }
 
         return super.act();
