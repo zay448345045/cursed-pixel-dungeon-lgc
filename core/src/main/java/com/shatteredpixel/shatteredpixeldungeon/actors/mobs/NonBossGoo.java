@@ -40,7 +40,7 @@ public class NonBossGoo extends Mob {
         properties.add(Property.DEMONIC);
         properties.add(Property.ACIDIC);
         resistances.add(Grim.class);
-        baseSpeed = 4f;
+        baseSpeed = 2f;
     }
 
     private int pumpedUp = 0;
@@ -48,7 +48,7 @@ public class NonBossGoo extends Mob {
     @Override
     public int damageRoll() {
         int min = 20;
-        int max = (HP*2 <= HT) ? 100 : 80;
+        int max = (HP*2 <= HT) ? 100 : 60;
         if (pumpedUp > 0) {
             pumpedUp = 0;
             PathFinder.buildDistanceMap( pos, BArray.not( Dungeon.level.solid, null ), 2 );
