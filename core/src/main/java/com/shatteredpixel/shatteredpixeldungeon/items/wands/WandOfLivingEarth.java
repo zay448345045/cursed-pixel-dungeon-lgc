@@ -278,7 +278,7 @@ public class WandOfLivingEarth extends DamageWand {
 		}
 	}
 
-	public static class EarthGuardian extends Mob {
+	public class EarthGuardian extends Mob {
 
 		{
 			spriteClass = StatueSprite.class;
@@ -319,7 +319,7 @@ public class WandOfLivingEarth extends DamageWand {
 
 		@Override
 		public int damageRoll() {
-			return Random.NormalIntRange(2 + Dungeon.depth/6, 6 + Dungeon.depth/2);
+			return Random.NormalIntRange(2 + level(), 4 + 2*level());
 		}
 
 		@Override
