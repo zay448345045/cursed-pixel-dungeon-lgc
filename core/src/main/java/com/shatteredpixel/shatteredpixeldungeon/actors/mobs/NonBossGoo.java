@@ -32,7 +32,7 @@ import com.watabou.utils.Random;
 public class NonBossGoo extends Mob {
 
     {
-        HP = HT = 300;
+        HP = HT = 250;
         EXP = 10;
         defenseSkill = 30;
         spriteClass = GooSprite.class;
