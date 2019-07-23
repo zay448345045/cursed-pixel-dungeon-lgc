@@ -94,8 +94,8 @@ public class ScrollOfEnchantment extends ExoticScroll {
 				final Armor.Glyph glyphs[] = new Armor.Glyph[3];
 				
 				Class<? extends Armor.Glyph> existing = ((Armor) item).glyph != null ? ((Armor) item).glyph.getClass() : null;
-				glyphs[0] = Armor.Glyph.randomCommon( existing );
-				glyphs[1] = Armor.Glyph.randomUncommon( existing );
+				glyphs[0] = Armor.Glyph.randomCurse( existing );
+				glyphs[1] = Armor.Glyph.random( existing );
 				glyphs[2] = Armor.Glyph.random( existing, glyphs[0].getClass(), glyphs[1].getClass());
 				
 				GameScene.show(new WndOptions(Messages.titleCase(ScrollOfEnchantment.this.name()),
