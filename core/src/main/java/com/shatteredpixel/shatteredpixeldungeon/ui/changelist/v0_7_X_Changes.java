@@ -89,7 +89,7 @@ public class v0_7_X_Changes {
 						"Huntress starts with +1 gloves and +1 Spirit Bow.\n\n" +
 						"Mage starts with a +1 Staff of Disintegration\n\n" +
 						"Warrior starts with an equipped Ring of Might and +1 Leather Armour, as well as his trusty Shortsword with a free upgrade\n\n" +
-						"Rogue simply starts with his Dagger upgraded once\n\n\n"+
+						"Rogue simply starts with his Dagger upgraded twice\n\n\n"+
 						"Additionally, the player's inventory now has 24 slots, up from 20, and the Seed Pouch stores food as well"));
 
 		changes.addButton( new ChangeButton(new WandOfMagicMissile(),
