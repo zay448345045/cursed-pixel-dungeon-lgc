@@ -63,7 +63,7 @@ public class InterlevelScene extends PixelScene {
 	private static float fadeTime;
 	
 	public enum Mode {
-		DESCEND, ASCEND, CONTINUE, RESURRECT, RETURN, FALL, RESET, NONE, START
+		DESCEND, ASCEND, CONTINUE, RESURRECT, RETURN, FALL, RESET, NONE, START, WATERCHALLENGE
 	}
 	public static Mode mode;
 	
@@ -207,7 +207,7 @@ public class InterlevelScene extends PixelScene {
 
 						switch (mode) {
 							case DESCEND:
-								goToDepth(Dungeon.depth + 1);//My current lazy attempt at refactoring InterLevelScene.java to allow visiting any depth from the start.
+								descend();//My current lazy attempt at refactoring InterLevelScene.java to allow visiting any depth from the start.
 								break;
 							case ASCEND:
 								ascend();//Still use ascend here so the player ends up at the level exit not entrance
@@ -229,6 +229,9 @@ public class InterlevelScene extends PixelScene {
 								break;
 							case START://Testing purposes
 								goToDepth(1);
+								break;
+							case WATERCHALLENGE:
+								goToDepth(27);
 								break;
 						}
 						
@@ -343,7 +346,6 @@ public class InterlevelScene extends PixelScene {
 		} catch(Exception e) {
 
 			level = Dungeon.newLevelWithDepth(Dungeon.depth);
-			Statistics.deepestFloor = Dungeon.depth;
 		}
 		Dungeon.switchLevel( level, level.entrance );
 	return level;
