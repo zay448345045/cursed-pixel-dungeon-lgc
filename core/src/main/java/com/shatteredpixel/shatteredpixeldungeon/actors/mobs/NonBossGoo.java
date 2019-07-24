@@ -82,7 +82,7 @@ public class NonBossGoo extends Mob {
 
     @Override
     public int drRoll() {
-        return Random.NormalIntRange(0, 2);
+        return Random.NormalIntRange(10, 20);
     }
 
     @Override
