@@ -207,12 +207,10 @@ public class InterlevelScene extends PixelScene {
 
 						switch (mode) {
 							case DESCEND:
-								//goToDepth(Dungeon.depth + 1);//My current lazy attempt at refactoring InterLevelScene.java to allow visiting any depth from the start.
-								descend();
+								goToDepth(Dungeon.depth + 1);//My current lazy attempt at refactoring InterLevelScene.java to allow visiting any depth from the start.
 								break;
 							case ASCEND:
-								ascend();
-								//goToDepth(Dungeon.depth - 1);
+								ascend();//Still use ascend here so the player ends up at the level exit not entrance
 								break;
 							case CONTINUE:
 								restore();
@@ -324,6 +322,7 @@ public class InterlevelScene extends PixelScene {
 	}
 
 	public static Level goToDepth(int depthToAccess) throws IOException {
+		int oldDepth = Dungeon.depth;
 		if (Dungeon.hero == null) {
 			DriedRose.clearHeldGhostHero();
 			Dungeon.init();
@@ -336,22 +335,18 @@ public class InterlevelScene extends PixelScene {
 			DriedRose.holdGhostHero( Dungeon.level );
 			Dungeon.saveAll();
 		}
-		Level level;
-
-		if (depthToAccess > Statistics.deepestFloor) {
-			level = Dungeon.newLevelWithDepth(depthToAccess);
-		} else {
-
-			level = Dungeon.loadLevel( GamesInProgress.curSlot );
-		}
-
-		if (depthToAccess > Dungeon.depth) {
-			Dungeon.switchLevel( level, level.exit );
-		} else {
-			Dungeon.switchLevel(level, level.entrance);
-		}
 		Dungeon.depth = depthToAccess;
-		return level;
+		Level level;
+		try {
+			level = Dungeon.loadLevel( GamesInProgress.curSlot );
+
+		} catch(Exception e) {
+
+			level = Dungeon.newLevelWithDepth(Dungeon.depth);
+			Statistics.deepestFloor = Dungeon.depth;
+		}
+		Dungeon.switchLevel( level, level.entrance );
+	return level;
 	}
 
 	private void descend() throws IOException {
