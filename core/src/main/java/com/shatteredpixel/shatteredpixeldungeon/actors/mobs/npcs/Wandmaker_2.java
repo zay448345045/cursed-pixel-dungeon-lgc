@@ -118,10 +118,10 @@ public class Wandmaker_2 extends NPC {
             message.setPos(0, titlebar.bottom() + GAP);
             add(message);
 
-            RedButton btnWand1 = new RedButton(Messages.get(wandmaker_2, "remove_curse")) {
+            RedButton btnWand1 = new RedButton(Messages.get(wandmaker_2, "water_challenge")) {
                 @Override
                 protected void onClick() {
-                    InterlevelScene.mode = InterlevelScene.Mode.WATERCHALLENGE;//Debugging purposes
+                    InterlevelScene.mode = InterlevelScene.Mode.WATERCHALLENGE;
                     Game.switchScene(InterlevelScene.class);
                 }
             };
