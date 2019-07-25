@@ -7,6 +7,7 @@ import com.shatteredpixel.shatteredpixeldungeon.Bones;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Shopkeeper;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Wandmaker_2;
 import com.shatteredpixel.shatteredpixeldungeon.items.Heap;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
@@ -51,7 +52,7 @@ public class StartLevel extends Level {
     }
 
     private void placeNpc() {
-        Mob shopkeeper = new Shopkeeper();
+        Mob shopkeeper = new Wandmaker_2();
         shopkeeper.pos = 10 + 11 * 32;
         mobs.add( shopkeeper );
     }

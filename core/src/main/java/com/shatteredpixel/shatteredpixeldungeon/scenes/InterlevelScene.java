@@ -228,7 +228,7 @@ public class InterlevelScene extends PixelScene {
 								reset();
 								break;
 							case START://Testing purposes
-								goToDepth(1);
+								goToDepth(0);
 								break;
 							case WATERCHALLENGE:
 								goToDepth(27);
