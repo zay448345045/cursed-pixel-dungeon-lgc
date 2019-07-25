@@ -41,6 +41,7 @@ import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.RitualSite
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Rotberry;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
+import com.shatteredpixel.shatteredpixeldungeon.scenes.InterlevelScene;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.WandmakerSprite;
 import com.shatteredpixel.shatteredpixeldungeon.ui.RedButton;
@@ -50,6 +51,7 @@ import com.shatteredpixel.shatteredpixeldungeon.windows.IconTitle;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndBag;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndQuest;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndWandmaker;
+import com.watabou.noosa.Game;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
@@ -119,7 +121,8 @@ public class Wandmaker_2 extends NPC {
             RedButton btnWand1 = new RedButton(Messages.get(wandmaker_2, "remove_curse")) {
                 @Override
                 protected void onClick() {
-                    GameScene.selectItem(itemSelector, WndBag.Mode.ALL, Messages.get(ScrollOfRemoveCurse.class,"inv_title"));
+                    InterlevelScene.mode = InterlevelScene.Mode.WATERCHALLENGE;//Debugging purposes
+                    Game.switchScene(InterlevelScene.class);
                 }
             };
             btnWand1.setRect(0, message.top() + message.height() + GAP, WIDTH, BTN_HEIGHT);
