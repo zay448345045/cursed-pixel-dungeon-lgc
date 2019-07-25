@@ -324,7 +324,7 @@ public class Dungeon {
 			case 28:
 			case 29:
 			case 30:
-				level = new LastShopLevel();
+				level = new WaterChallengeLevel();
 				break;
 			default:
 				level = new DeadEndLevel();

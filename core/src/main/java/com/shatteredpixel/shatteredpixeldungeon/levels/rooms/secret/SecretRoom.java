@@ -72,7 +72,9 @@ public abstract class SecretRoom extends SpecialRoom {
 	
 	public static int secretsForFloor(int depth){
 		if (depth == 1) return 0;
-		
+		if (depth >= 26) {
+			return 3;//Workaround for floors outside of the dungeon
+		}
 		int region = depth/5;
 		int floor = depth%5;
 		

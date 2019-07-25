@@ -90,7 +90,7 @@ public class Food extends Item {
 			
 			Statistics.foodEaten++;
 			Badges.validateFoodEaten();
-			//InterlevelScene.mode = InterlevelScene.Mode.WATERCHALLENGE;
+			//InterlevelScene.mode = InterlevelScene.Mode.WATERCHALLENGE;//Debugging purposes
 			//Game.switchScene(InterlevelScene.class);
 		}
 	}
