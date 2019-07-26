@@ -400,8 +400,15 @@ public class InterlevelScene extends PixelScene {
 		DriedRose.holdGhostHero( Dungeon.level );
 
 		Dungeon.saveAll();
+		Level level;
 		Dungeon.depth--;
-		Level level = Dungeon.loadLevel( GamesInProgress.curSlot );
+		try {
+			level = Dungeon.loadLevel( GamesInProgress.curSlot );
+
+		} catch(Exception e) {
+
+			level = Dungeon.newLevelWithDepth(Dungeon.depth);
+		}
 		Dungeon.switchLevel( level, level.exit );
 	}
 	
