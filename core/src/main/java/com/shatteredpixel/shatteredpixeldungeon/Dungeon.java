@@ -59,6 +59,7 @@ import com.shatteredpixel.shatteredpixeldungeon.levels.PrisonLevel;
 import com.shatteredpixel.shatteredpixeldungeon.levels.SewerBossLevel;
 import com.shatteredpixel.shatteredpixeldungeon.levels.SewerLevel;
 import com.shatteredpixel.shatteredpixeldungeon.levels.StartLevel;
+import com.shatteredpixel.shatteredpixeldungeon.levels.WaterChallengeBossLevel;
 import com.shatteredpixel.shatteredpixeldungeon.levels.WaterChallengeLevel;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.secret.SecretRoom;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.SpecialRoom;
@@ -325,6 +326,9 @@ public class Dungeon {
 			case 29:
 			case 30:
 				level = new WaterChallengeLevel();
+				break;
+			case 31:
+				level = new WaterChallengeBossLevel();
 				break;
 			default:
 				level = new DeadEndLevel();
