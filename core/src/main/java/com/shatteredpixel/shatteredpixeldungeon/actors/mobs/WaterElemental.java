@@ -24,6 +24,7 @@ package com.shatteredpixel.shatteredpixeldungeon.actors.mobs;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
+import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Fire;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Burning;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Chill;
@@ -32,6 +33,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Frost;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Poison;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Pushing;
 import com.shatteredpixel.shatteredpixeldungeon.items.quest.Embers;
+import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfElements;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.levels.features.Door;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
@@ -45,7 +47,7 @@ public class WaterElemental extends Elemental {
     {
         spriteClass = NewbornElementalSprite.class;
 
-        HT = 200;
+        HT = 400;
         HP = HT;
 
         defenseSkill = 45;
@@ -53,6 +55,7 @@ public class WaterElemental extends Elemental {
         EXP = 15;
         maxLvl = 30;
         properties.add(Property.ACIDIC);
+        resistances.add(Fire.class);
 
     }
     private static final float SPLIT_DELAY	= 1f;
@@ -121,6 +124,15 @@ public class WaterElemental extends Elemental {
     @Override
     public void die(Object cause) {
         super.die(cause);
+    }
+    @Override
+    public int attackProc( Char enemy, int damage ) {
+        damage = super.attackProc( enemy, damage );
+        if (Random.Int( 2 ) == 0) {
+            Buff.affect( enemy, Chill.class );
+        }
+
+        return damage;
     }
 }
 

@@ -188,7 +188,6 @@ public class NonBossGoo extends Mob {
 
     @Override
     public void move( int step ) {
-        Dungeon.level.seal();
         super.move( step );
     }
 
@@ -200,10 +199,6 @@ public class NonBossGoo extends Mob {
         super.die( cause );
     }
 
-    @Override
-    public void notice() {
-        super.notice();
-    }
 
     private final String PUMPEDUP = "pumpedup";
 
