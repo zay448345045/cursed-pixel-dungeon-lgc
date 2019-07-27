@@ -47,6 +47,10 @@ import com.watabou.utils.Random;
 public class TrapsRoom extends SpecialRoom {
 
 	public void paint( Level level ) {
+		int DungeonDepth = Dungeon.depth;
+		if (Dungeon.depth > 25) {
+			DungeonDepth = 25;
+		}
 		 
 		Painter.fill( level, this, Terrain.WALL );
 
@@ -56,7 +60,7 @@ public class TrapsRoom extends SpecialRoom {
 				trapClass = null;
 				break;
 			default:
-				trapClass = Random.oneOf(levelTraps[Dungeon.depth/5]);
+				trapClass = Random.oneOf(levelTraps[DungeonDepth/5]);
 				break;
 		}
 
@@ -117,7 +121,10 @@ public class TrapsRoom extends SpecialRoom {
 	}
 	
 	private static Item prize( Level level ) {
-
+		int DungeonDepth = Dungeon.depth;
+		if (Dungeon.depth > 25) {
+			DungeonDepth = 25;
+		}
 		Item prize;
 
 		if (Random.Int(3) != 0){
@@ -129,9 +136,9 @@ public class TrapsRoom extends SpecialRoom {
 		//1 floor set higher in probability, never cursed
 		do {
 			if (Random.Int(2) == 0) {
-				prize = Generator.randomWeapon((Dungeon.depth / 5) + 1);
+				prize = Generator.randomWeapon((DungeonDepth / 5) + 1);
 			} else {
-				prize = Generator.randomArmor((Dungeon.depth / 5) + 1);
+				prize = Generator.randomArmor((DungeonDepth / 5) + 1);
 			}
 		} while (prize.cursed || Challenges.isItemBlocked(prize));
 		prize.cursedKnown = true;
