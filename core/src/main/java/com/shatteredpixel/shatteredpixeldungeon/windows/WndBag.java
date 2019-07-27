@@ -226,7 +226,7 @@ public class WndBag extends WndTabbed {
 		}
 		
 		// Free Space
-		while ((count - 4) < container.size) {
+		while ((count - 6) < container.size) {
 			placeItem( null );
 		}
 	}
