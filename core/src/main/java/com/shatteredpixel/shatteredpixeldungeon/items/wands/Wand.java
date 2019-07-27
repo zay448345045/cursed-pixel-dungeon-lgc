@@ -36,7 +36,10 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroSubClass;
 import com.shatteredpixel.shatteredpixeldungeon.effects.MagicMissile;
+import com.shatteredpixel.shatteredpixeldungeon.items.EquipableItem;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
+import com.shatteredpixel.shatteredpixeldungeon.items.KindofMisc;
+import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Artifact;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.Bag;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.MagicalHolster;
 import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfEnergy;
@@ -55,7 +58,7 @@ import com.watabou.utils.Random;
 
 import java.util.ArrayList;
 
-public abstract class Wand extends Item {
+public abstract class Wand extends KindofMisc {
 
 	public static final String AC_ZAP	= "ZAP";
 
@@ -105,11 +108,12 @@ public abstract class Wand extends Item {
 		super.execute( hero, action );
 
 		if (action.equals( AC_ZAP )) {
-			
-			curUser = hero;
-			curItem = this;
-			GameScene.selectCell( zapper );
-			
+			if (!isEquipped(hero)) GLog.i( Messages.get(Artifact.class, "need_to_equip") );
+			else {
+				curUser = hero;
+				curItem = this;
+				GameScene.selectCell(zapper);
+			}
 		}
 	}
 	
