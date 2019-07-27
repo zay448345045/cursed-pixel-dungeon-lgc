@@ -53,6 +53,8 @@ import com.watabou.utils.Random;
 
 import java.util.ArrayList;
 
+import static com.shatteredpixel.shatteredpixeldungeon.items.wands.Wand.AC_ZAP_OVERRIDE;
+
 public class MagesStaff extends MeleeWeapon {
 
 	private Wand wand;
@@ -137,7 +139,7 @@ public class MagesStaff extends MeleeWeapon {
 
 			if (cursed || hasCurseEnchant()) wand.cursed = true;
 			else                             wand.cursed = false;
-			wand.execute(hero, AC_ZAP);
+			wand.execute(hero, AC_ZAP_OVERRIDE);
 		}
 	}
 

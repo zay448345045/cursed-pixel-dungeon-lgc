@@ -61,6 +61,7 @@ import java.util.ArrayList;
 public abstract class Wand extends KindofMisc {
 
 	public static final String AC_ZAP	= "ZAP";
+	public static final String AC_ZAP_OVERRIDE	= "ZAP";
 
 	private static final float TIME_TO_ZAP	= 1f;
 	@Override
@@ -114,6 +115,11 @@ public abstract class Wand extends KindofMisc {
 				curItem = this;
 				GameScene.selectCell(zapper);
 			}
+		}
+		if (action.equals( AC_ZAP_OVERRIDE )) {
+			curUser = hero;
+			curItem = this;
+			GameScene.selectCell(zapper);
 		}
 	}
 	
