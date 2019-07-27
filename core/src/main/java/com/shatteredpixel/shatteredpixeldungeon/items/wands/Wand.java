@@ -32,6 +32,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.LockedFloor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.MagicImmune;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Recharging;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.SoulMark;
+import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Belongings;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroSubClass;
@@ -534,6 +535,23 @@ public abstract class Wand extends KindofMisc {
 			for (Recharging bonus : target.buffs(Recharging.class)){
 				if (bonus != null && bonus.remainder() > 0f) {
 					partialCharge += CHARGE_BUFF_BONUS * bonus.remainder();
+				}
+			}
+			if (target instanceof Hero){
+				Belongings b = ((Hero) target).belongings;
+
+				if (b.misc1 instanceof Wand){
+					((Wand)b.misc1).charge((Hero)target);
+				}
+				if (b.misc2 instanceof Wand){
+					((Wand)b.misc2).charge((Hero)target);
+				}
+
+				if (b.misc3 instanceof Wand){
+					((Wand)b.misc3).charge((Hero)target);
+				}
+				if (b.misc4 instanceof Wand){
+					((Wand)b.misc4).charge((Hero)target);
 				}
 			}
 		}
