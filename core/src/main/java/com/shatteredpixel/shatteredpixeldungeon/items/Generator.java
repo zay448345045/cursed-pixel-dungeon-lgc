@@ -390,9 +390,11 @@ public class Generator {
 					HandAxe.class,
 					Spear.class,
 					Quarterstaff.class,
+					RunicBlade.class,
 					Dirk.class
+
 			};
-			WEP_T2.probs = new float[]{ 6, 5, 5, 4, 4 };
+			WEP_T2.probs = new float[]{ 6, 5, 5, 4, 3, 4 };
 			
 			WEP_T3.classes = new Class<?>[]{
 					Sword.class,
@@ -408,11 +410,10 @@ public class Generator {
 					Longsword.class,
 					BattleAxe.class,
 					Flail.class,
-					RunicBlade.class,
 					AssassinsBlade.class,
 					Crossbow.class
 			};
-			WEP_T4.probs = new float[]{ 6, 5, 5, 4, 4, 4 };
+			WEP_T4.probs = new float[]{ 6, 5, 5, 4, 4 };
 			
 			WEP_T5.classes = new Class<?>[]{
 					Greatsword.class,
