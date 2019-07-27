@@ -98,11 +98,12 @@ public class v0_7_X_Changes {
 
 		changes.addButton( new ChangeButton(new WandOfMagicMissile(),
 				"A few wand balance changes have been made:\n" +
-						"_-_ Magic Missile now has doubled scaling, upgrading by +2/+4 instead of +1/+2\n" +
+						"_-_ Magic Missile now has doubled scaling, upgrading by +2/+5 instead of +1/+2\n" +
 						"_-_ Wand of Frost scaling buffed\n" +
 						"_-_ Wand of Blast Wave now inflicts Vertigo on targets\n" +
-						"_-_ Wand of Living Earth has been implemented directly from 0.7.4 with existing sprites. Warding is planned.\n" +
-						"_-_ Transfusion self-shielding reduced, now charming scales with upgrades"));
+						"_-_ Wand of Living Earth has been implemented directly from 0.7.4 with existing sprites. HP of guardian increased scaling.\n" +
+						"_-_ Transfusion self-shielding reduced, now charming scales with upgrades\n" +
+						"_-_ Most wands have had scaling buffed by +1 max damage to be able to compete with weapons. For example, Lightning is equal to tier-6 scaling."));
 
 		changes.addButton( new ChangeButton(new DewVial(),
 				"The Dew Vial now has the 'Water' functionality, which allows the player to turn several surrounding tiles into water. It will consume up to 5 dew drops and will be more powerful the more Dew the player has."));
