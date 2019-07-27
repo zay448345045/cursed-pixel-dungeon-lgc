@@ -71,6 +71,10 @@ public class v0_7_X_Changes {
 		changes = new ChangeInfo("v0.1.0-Alpha", false, null);
 		changes.hardlight(Window.TITLE_COLOR);
 		changeInfos.add(changes);
+
+		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.RING_AGATE, null), "Misc Slots",
+				"Misc slots have been reworked so that Wands must be equipped. To compensate, the player now has 4 slots."));
+
 		changes.addButton(new ChangeButton(Icons.get(Icons.WARNING), "Upgrade Limits",
 				"All items in the game have been given upgrade limits:\n" +
 						"_-_Most equipment is capped at +15.\n" +
