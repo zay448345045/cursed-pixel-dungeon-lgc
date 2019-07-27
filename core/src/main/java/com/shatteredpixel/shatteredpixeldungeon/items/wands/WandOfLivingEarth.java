@@ -298,7 +298,7 @@ public class WandOfLivingEarth extends DamageWand {
 		private void setInfo(Hero hero, int wandLevel, int healthToAdd){
 			if (wandLevel > this.wandLevel) {
 				this.wandLevel = wandLevel;
-				HT = 20 + 10 * wandLevel;
+				HT = 20 + 15 * wandLevel;
 			}
 			HP = Math.min(HT, HP + healthToAdd);
 			//half of hero's evasion
