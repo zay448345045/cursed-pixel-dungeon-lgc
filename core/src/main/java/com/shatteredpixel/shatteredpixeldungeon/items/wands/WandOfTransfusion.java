@@ -113,7 +113,7 @@ public class WandOfTransfusion extends Wand {
 				}
 				
 				//and harms the player
-				int selfDmg = Math.round(curUser.HT*0.05f);
+				int selfDmg = Math.round(level() + 1);
 				damageHero(selfDmg);
 
 			}

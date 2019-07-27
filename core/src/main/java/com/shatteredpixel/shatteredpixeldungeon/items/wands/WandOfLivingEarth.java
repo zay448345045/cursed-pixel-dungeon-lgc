@@ -63,7 +63,7 @@ public class WandOfLivingEarth extends DamageWand {
 	
 	@Override
 	public int max(int lvl) {
-		return 4 + 2*lvl;
+		return 4 + 3*lvl;
 	}
 	
 	@Override
