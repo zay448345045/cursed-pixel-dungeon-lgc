@@ -128,7 +128,18 @@ public class Wandmaker_2 extends NPC {
             btnWand1.setRect(0, message.top() + message.height() + GAP, WIDTH, BTN_HEIGHT);
             add(btnWand1);
 
-            resize(WIDTH, (int) btnWand1.bottom());
+            RedButton btnWand2 = new RedButton(Messages.get(wandmaker_2, "earth_challenge")) {
+                @Override
+                protected void onClick() {
+                    InterlevelScene.mode = InterlevelScene.Mode.EARTHCHALLENGE;
+                    Game.switchScene(InterlevelScene.class);
+                }
+            };
+            btnWand2.setRect(0, message.top() + message.height() + GAP + BTN_HEIGHT, WIDTH, BTN_HEIGHT);
+
+            add(btnWand2);
+
+            resize(WIDTH, (int) btnWand2.bottom());
         }
     }
 

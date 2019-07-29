@@ -330,6 +330,13 @@ public class Dungeon {
 			case 35:
 				level = new WaterChallengeBossLevel();
 				break;
+			case 36:
+			case 37:
+			case 38:
+			case 39:
+				level = new CavesLevel();
+				break;
+
 			default:
 				level = new DeadEndLevel();
 				Statistics.deepestFloor--;
@@ -422,6 +429,12 @@ public class Dungeon {
 				break;
 			case 35:
 				level = new WaterChallengeBossLevel();
+				break;
+			case 36:
+			case 37:
+			case 38:
+			case 39:
+				level = new CavesLevel();
 				break;
 			default:
 				level = new DeadEndLevel();
