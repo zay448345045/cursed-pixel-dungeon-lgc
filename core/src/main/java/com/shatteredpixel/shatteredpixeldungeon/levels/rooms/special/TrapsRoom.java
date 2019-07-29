@@ -55,7 +55,11 @@ public class TrapsRoom extends SpecialRoom {
 		Painter.fill( level, this, Terrain.WALL );
 
 		Class<? extends Trap> trapClass;
-		switch (Random.Int(4)){
+		int Decider = Random.Int(4);
+		if (Dungeon.depth > 25){
+			Decider = 0;
+		}
+		switch (Decider) {
 			case 0:
 				trapClass = null;
 				break;
