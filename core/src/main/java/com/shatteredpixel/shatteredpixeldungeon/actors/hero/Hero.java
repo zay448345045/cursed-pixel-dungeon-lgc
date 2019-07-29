@@ -869,6 +869,11 @@ public class Hero extends Char {
 	private boolean actAscend( HeroAction.Ascend action ) {
 		int stairs = action.dst;
 		if (pos == stairs && pos == Dungeon.level.entrance) {
+
+			if (Dungeon.depth == 31) {
+				InterlevelScene.mode = InterlevelScene.Mode.START;
+				Game.switchScene( InterlevelScene.class );
+			}
 			
 			if (Dungeon.depth == 0) {
 				
