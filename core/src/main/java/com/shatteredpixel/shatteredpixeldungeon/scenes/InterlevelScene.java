@@ -371,7 +371,7 @@ public class InterlevelScene extends PixelScene {
 
 		Level level;
 		if (Dungeon.depth >= Statistics.deepestFloor) {
-			level = Dungeon.newLevelWithDepth(Dungeon.depth + 1);
+			level = Dungeon.newLevel();
 		} else {
 			Dungeon.depth++;
 			level = Dungeon.loadLevel( GamesInProgress.curSlot );
@@ -390,7 +390,7 @@ public class InterlevelScene extends PixelScene {
 
 		Level level;
 		if (Dungeon.depth >= Statistics.deepestFloor) {
-			level = Dungeon.newLevelWithDepth(Dungeon.depth + 1);
+			level = Dungeon.newLevel();
 		} else {
 			Dungeon.depth++;
 			level = Dungeon.loadLevel( GamesInProgress.curSlot );
@@ -448,7 +448,7 @@ public class InterlevelScene extends PixelScene {
 		if (Dungeon.level.locked) {
 			Dungeon.hero.resurrect( Dungeon.depth );
 			Dungeon.depth--;
-			Level level = Dungeon.newLevelWithDepth(Dungeon.depth + 1);
+			Level level = Dungeon.newLevel();
 			Dungeon.switchLevel( level, level.entrance );
 		} else {
 			Dungeon.hero.resurrect( -1 );
@@ -463,7 +463,7 @@ public class InterlevelScene extends PixelScene {
 		SpecialRoom.resetPitRoom(Dungeon.depth+1);
 
 		Dungeon.depth--;
-		Level level = Dungeon.newLevelWithDepth(Dungeon.depth + 1);
+		Level level = Dungeon.newLevel();
 		Dungeon.switchLevel( level, level.entrance );
 	}
 	

@@ -349,7 +349,7 @@ public class Dungeon {
 		return level;
 	}
 
-	/*public static Level newLevel() {//Depricated for now
+	public static Level newLevel() {//Depricated for now
 		
 		Dungeon.level = null;
 		Actor.clear();
@@ -446,7 +446,7 @@ public class Dungeon {
 		Statistics.qualifiedForNoKilling = !bossLevel();
 		
 		return level;
-	}*/
+	}
 	
 	public static void resetLevel() {
 		
