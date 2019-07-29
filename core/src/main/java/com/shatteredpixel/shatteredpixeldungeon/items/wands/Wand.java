@@ -110,11 +110,13 @@ public abstract class Wand extends KindofMisc {
 		super.execute( hero, action );
 
 		if (action.equals( AC_ZAP )) {
+			this.charge(hero);
 			if (!isEquipped(hero)) GLog.i( Messages.get(Artifact.class, "need_to_equip") );
 			else {
 				curUser = hero;
 				curItem = this;
 				GameScene.selectCell(zapper);
+
 			}
 		}
 		else if (action.equals( AC_ZAP_OVERRIDE )) {
@@ -517,6 +519,7 @@ public abstract class Wand extends KindofMisc {
 			}
 			
 			spend( TICK );
+
 			
 			return true;
 		}
@@ -537,23 +540,7 @@ public abstract class Wand extends KindofMisc {
 					partialCharge += CHARGE_BUFF_BONUS * bonus.remainder();
 				}
 			}
-			if (target instanceof Hero){
-				Belongings b = ((Hero) target).belongings;
 
-				if (b.misc1 instanceof Wand){
-					((Wand)b.misc1).charge((Hero)target);
-				}
-				if (b.misc2 instanceof Wand){
-					((Wand)b.misc2).charge((Hero)target);
-				}
-
-				if (b.misc3 instanceof Wand){
-					((Wand)b.misc3).charge((Hero)target);
-				}
-				if (b.misc4 instanceof Wand){
-					((Wand)b.misc4).charge((Hero)target);
-				}
-			}
 		}
 
 		public void gainCharge(float charge){
