@@ -55,6 +55,7 @@ public class SewerGolem extends Mob {
 
         FLEEING = new Fleeing();
         baseSpeed = 2f;
+        properties.add(Property.BOSS);
     }
 
     @Override
