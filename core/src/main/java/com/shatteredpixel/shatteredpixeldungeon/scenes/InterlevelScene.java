@@ -63,7 +63,7 @@ public class InterlevelScene extends PixelScene {
 	private static float fadeTime;
 	
 	public enum Mode {
-		DESCEND, ASCEND, CONTINUE, RESURRECT, RETURN, FALL, RESET, NONE, START, WATERCHALLENGE, EARTHCHALLENGE
+		DESCEND, ASCEND, CONTINUE, RESURRECT, RETURN, FALL, RESET, NONE, START, WATERCHALLENGE, EARTHCHALLENGE, DESCEND_GAMEINIT
 	}
 	public static Mode mode;
 	
@@ -96,6 +96,12 @@ public class InterlevelScene extends PixelScene {
 		final float scrollSpeed;
 		fadeTime = NORM_FADE;
 		switch (mode){
+			case DESCEND_GAMEINIT:
+				loadingDepth = 1;
+				fadeTime = SLOW_FADE;
+				scrollSpeed = 5;
+				break;
+
 			default:
 				loadingDepth = Dungeon.depth;
 				scrollSpeed = 0;
@@ -207,6 +213,8 @@ public class InterlevelScene extends PixelScene {
 
 						switch (mode) {
 							case DESCEND:
+								goToDepth(Dungeon.depth);
+							case DESCEND_GAMEINIT:
 								descend();//My current lazy attempt at refactoring InterLevelScene.java to allow visiting any depth from the start.
 								break;
 							case ASCEND:
