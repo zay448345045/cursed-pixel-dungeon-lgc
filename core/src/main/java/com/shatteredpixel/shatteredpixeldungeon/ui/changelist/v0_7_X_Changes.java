@@ -94,7 +94,7 @@ public class v0_7_X_Changes {
 					"_-_ Wayward curse hs not been changed yet"));
 
 		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.ARTIFACT_SANDALS, null), "Tall Grass",
-				"Tall grass can now drop Seeds."));
+				"Tall grass can now drop Stones."));
 
 		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.RING_AGATE, null), "Misc Slots",
 				"Misc slots have been reworked so that Wands must be equipped. To compensate, the player now has 4 slots."));
