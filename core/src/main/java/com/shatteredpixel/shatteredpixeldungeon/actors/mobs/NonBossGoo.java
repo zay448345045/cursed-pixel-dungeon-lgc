@@ -132,7 +132,7 @@ public class NonBossGoo extends Mob {
             spend( attackDelay() );
 
             return true;
-        } else if (pumpedUp >= 2 || Random.Int( (HP*2 <= HT) ? 5 : 7 ) > 0) {
+        } else if (pumpedUp >= 2 || Random.Int( (HP*2 <= HT) ? 2 : 3     ) > 0) {
 
             boolean visible = Dungeon.level.heroFOV[pos];
 
