@@ -31,6 +31,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.food.Blandfruit;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.Food;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.SmallRation;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing;
+import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
 
 public class Challenges {
 
@@ -83,12 +84,11 @@ public class Challenges {
 			}
 		}
 
-		if (Dungeon.isChallenged(NO_HERBALISM)){
+		if (Dungeon.isChallenged(NO_HERBALISM)) {
 			if (item instanceof Dewdrop) {
 				return true;
 			}
 		}
-
 		return false;
 
 	}

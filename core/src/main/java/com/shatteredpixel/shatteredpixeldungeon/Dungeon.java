@@ -589,7 +589,6 @@ public class Dungeon {
 		//3 SOU each floor set, 1.5 (rounded) on forbidden runes challenge
 
 		souLeftThisSet = 3 - (LimitedDrops.UPGRADE_SCROLLS.count - (depth / 5) * 3);
-
 		if (souLeftThisSet <= 0) return false;
 
 		int floorThisSet = (depth % 5);
