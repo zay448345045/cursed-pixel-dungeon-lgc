@@ -72,23 +72,26 @@ public class v0_7_X_Changes {
 		changes.hardlight(Window.TITLE_COLOR);
 		changeInfos.add(changes);
 
-		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.CURSE_INFUSE, null), "Curses Rebalanced",
+		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.ARMOR_PLATE, null), "Curses Rebalanced",
 				"Most curses have been changed to be more viable:\n" +
 						"_-_ Metabolism now heals 5% of max HP instead of 4 dmg\n" +
 						"_-_ Anti Entropy now freezes the enemy for longer. It's also more viable due to the 'Water' Dew Vial function\n" +
 						"_-_ Bulk reduces all incoming damage by 25%\n" +
-						"_-_ Corrosion now activates more often, with a 50% chance" +
-						"_-_ Displacement now gives 5 turns of invisibility" +
-						"_-_ Multiplicity has not been changed yet" +
+						"_-_ Corrosion now activates more often, with a 50% chance\n" +
+						"_-_ Displacement now gives 5 turns of invisibility\n" +
+						"_-_ Multiplicity has not been changed yet\n" +
 						"_-_ Overgrowth has not been changed yet\n" +
-						"_-_ Stench now gives 5 turns of gas immunity. This is not enough to take no damage from the gas, but it's enough to buy you some escape time.\n" +
-						"_-_ Annoying curse now amoks enemies and procs more often\n" +
-						"_-_ Displacing curse now puts enemies it teleports into a magical sleep\n" +
-						"_-_ Fragile curse now inflicts paralysis depending on the amount it has degraded\n" +
-						"_-_ Friendly curse now charms the enemy for longer than the player\n" +
-						"_-_ Polarized curse now does 0 dmg or 2.2x dmg\n" +
-						"_-_ Sacrificial curse now increases dmg depending on HP taken (imo still probably not viable, needs a bigger rework)\n" +
-						"_-_ Wayward curse hs not been changed yet"));
+						"_-_ Stench now gives 5 turns of gas immunity. This is not enough to take no damage from the gas, but it's enough to buy you some escape time."));
+
+		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.LONGSWORD, null), "Curses Rebalanced",
+				"Most curses have been changed to be more viable:\n" +
+					"_-_ Annoying curse now amoks enemies and procs more often\n" +
+					"_-_ Displacing curse now puts enemies it teleports into a magical sleep\n" +
+					"_-_ Fragile curse now inflicts paralysis depending on the amount it has degraded\n" +
+					"_-_ Friendly curse now charms the enemy for longer than the player\n" +
+					"_-_ Polarized curse now does 0 dmg or 2.2x dmg\n" +
+					"_-_ Sacrificial curse now increases dmg depending on HP taken (imo still probably not viable, needs a bigger rework)\n" +
+					"_-_ Wayward curse hs not been changed yet"));
 
 		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.ARTIFACT_SANDALS, null), "Tall Grass",
 				"Tall grass can now drop Seeds."));
