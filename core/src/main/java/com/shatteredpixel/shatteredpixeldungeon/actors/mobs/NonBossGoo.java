@@ -41,6 +41,7 @@ public class NonBossGoo extends Mob {
         properties.add(Property.ACIDIC);
         resistances.add(Grim.class);
         baseSpeed = 2f;
+        int cooldown = 0;
     }
 
     private int pumpedUp = 0;
@@ -48,7 +49,7 @@ public class NonBossGoo extends Mob {
     @Override
     public int damageRoll() {
         int min = 20;
-        int max = (HP*2 <= HT) ? 100 : 60;
+        int max = (HP*2 <= HT) ? 80 : 60;
         if (pumpedUp > 0) {
             pumpedUp = 0;
             PathFinder.buildDistanceMap( pos, BArray.not( Dungeon.level.solid, null ), 2 );
@@ -57,14 +58,14 @@ public class NonBossGoo extends Mob {
                     CellEmitter.get(i).burst(ElmoParticle.FACTORY, 10);
             }
             Sample.INSTANCE.play( Assets.SND_BURNING );
-            return Random.NormalIntRange( min*2, max*2 );
+            return Random.NormalIntRange( min, max*2 );
         } else {
             return Random.NormalIntRange( min, max );
         }
     }
     @Override
     public void damage(int dmg, Object src) {
-        if (pumpedUp > 0) dmg /= 4;
+        if (pumpedUp > 0) dmg /= 2;
         super.damage(dmg, src);
     }
     @Override
@@ -82,7 +83,7 @@ public class NonBossGoo extends Mob {
 
     @Override
     public int drRoll() {
-        return Random.NormalIntRange(10, 20);
+        return Random.NormalIntRange(5, 10);
     }
 
     @Override
@@ -131,7 +132,7 @@ public class NonBossGoo extends Mob {
             spend( attackDelay() );
 
             return true;
-        } else if (pumpedUp >= 2 || Random.Int( (HP*2 <= HT) ? 2 : 5 ) > 0) {
+        } else if (pumpedUp >= 2 || Random.Int( (HP*2 <= HT) ? 5 : 7 ) > 0) {
 
             boolean visible = Dungeon.level.heroFOV[pos];
 
