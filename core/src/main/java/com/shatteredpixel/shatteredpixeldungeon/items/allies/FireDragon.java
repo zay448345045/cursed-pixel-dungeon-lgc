@@ -95,7 +95,7 @@ public class FireDragon extends KindofMisc {
             bee.sprite.parent.add( new AlphaTweener( bee.sprite, 1, 0.15f ) );
 
             Sample.INSTANCE.play( Assets.SND_BEE );
-            return new com.shatteredpixel.shatteredpixeldungeon.items.Honeypot.ShatteredPot();
+            return this;
         } else {
             return this;
         }
