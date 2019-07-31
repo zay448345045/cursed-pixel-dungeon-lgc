@@ -117,7 +117,7 @@ public class FireDragon extends KindofMisc {
     }
 
     //The bee's broken 'home', all this item does is let its bee know where it is, and who owns it (if anyone).
-    public static class ShatteredPot extends Item {
+    /*public static class ShatteredPot extends Item {
 
         {
             image = ItemSpriteSheet.SHATTPOT;
@@ -207,6 +207,6 @@ public class FireDragon extends KindofMisc {
         public int price() {
             return 5 * quantity;
         }
-    }
+    }*/
 }
 
