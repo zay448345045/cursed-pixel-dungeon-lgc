@@ -5,6 +5,7 @@ import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Corruption;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Weakness;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Bee;
@@ -44,6 +45,7 @@ import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class FireDragon extends KindofMisc {
 
@@ -122,31 +124,41 @@ public class FireDragon extends KindofMisc {
             return this;
         }
     }
-    public class Dragon extends Mob  {
+    public class Dragon extends Mob {
 
 
-            {
-                spriteClass = DragonSprite.class;
+        {
+            spriteClass = DragonSprite.class;
 
-                HP = HT = 8 + 4*level();
-                defenseSkill = 2;
-            }
+            HP = HT = 8 + 4 * level();
+            defenseSkill = 2;
+        }
 
-            @Override
-            public int damageRoll() {
-                return Random.NormalIntRange( 1 + level(), 4 + level()*2 );
-            }
+        @Override
+        public int damageRoll() {
+            return Random.NormalIntRange(1 + level(), 4 + level() * 2);
+        }
 
-            @Override
-            public int attackSkill( Char target ) {
-                return 8;
-            }
+        @Override
+        public int attackSkill(Char target) {
+            return 8;
+        }
 
-            @Override
-            public int drRoll() {
-                return Random.NormalIntRange(0, 1);
-            }
+        @Override
+        public int drRoll() {
+            return Random.NormalIntRange(0, 1);
+        }
 
+        @Override
+        protected boolean getCloser(int target) {
+            if (alignment == Alignment.ALLY && enemy == null && buff(Corruption.class) == null){
+                target = Dungeon.hero.pos;
+            } else if (enemy != null) {
+                target = enemy.pos;
+            } else if ((state == WANDERING))
+                this.target = target = Dungeon.hero.pos;
+            return super.getCloser( target );
+        }
 
     }
 
