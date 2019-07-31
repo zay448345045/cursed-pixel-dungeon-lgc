@@ -211,6 +211,9 @@ public class MagesStaff extends MeleeWeapon {
 		}
 		
 		Badges.validateItemLevelAquired(this);
+		if (this.level() > this.UpgradeLimit) {//Prevents the player upgrading beyond the limit via imbuing.
+			this.degrade(this.level() - this.UpgradeLimit );
+		}
 
 		return this;
 	}
