@@ -104,7 +104,7 @@ public class FireDragon extends KindofMisc {
         super.execute( hero, action );
 
         if (action.equals( AC_SUMMON )) {
-            if ( bee.Spawned() ) {//dummy statement that will eventually check if the player has already spawned one.
+            if ( true ) {//dummy statement that will eventually check if the player has already spawned one.
                 hero.sprite.zap( hero.pos );
 
                 shatter( hero, hero.pos );
@@ -164,8 +164,7 @@ public class FireDragon extends KindofMisc {
         boolean Spawned = true;
         {
             spriteClass = DragonSprite.class;
-
-
+            this.alignment = Alignment.ALLY;
             defenseSkill = 2;
 
             HP = HT = 8 + 4 * SpawnerLevel;
