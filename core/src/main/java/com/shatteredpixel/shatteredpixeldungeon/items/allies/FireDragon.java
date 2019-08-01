@@ -58,6 +58,37 @@ public class FireDragon extends KindofMisc {
         usesTargeting = true;
 
         stackable = true;
+
+
+
+    }
+    public Dragon bee = new Dragon();
+
+    boolean Spawned = false;
+    public static String  SPAWNED = "spawned";
+
+    @Override
+    public void storeInBundle( Bundle bundle ) {
+        super.storeInBundle(bundle);
+
+        bundle.put( SPAWNED, Spawned );
+        bee.storeInBundle(bundle);
+
+    }
+
+    @Override
+    public void restoreFromBundle( Bundle bundle ) {
+        super.restoreFromBundle(bundle);
+
+        Spawned = bundle.getBoolean( SPAWNED );
+        bee.restoreFromBundle(bundle);
+        /*if (Spawned) {
+            Dungeon.hero.sprite.zap( Dungeon.hero.pos );
+
+            shatter( Dungeon.hero, Dungeon.hero.pos );
+            this.Spawned = true;
+            Dungeon.hero.next();
+        }*/
     }
 
     @Override
@@ -73,12 +104,14 @@ public class FireDragon extends KindofMisc {
         super.execute( hero, action );
 
         if (action.equals( AC_SUMMON )) {
+            if ( bee.Spawned() ) {//dummy statement that will eventually check if the player has already spawned one.
+                hero.sprite.zap( hero.pos );
 
-            hero.sprite.zap( hero.pos );
+                shatter( hero, hero.pos );
+                this.Spawned = true;
+                hero.next();
+            }
 
-            shatter( hero, hero.pos );
-
-            hero.next();
 
         }
     }
@@ -107,10 +140,11 @@ public class FireDragon extends KindofMisc {
         }
 
         if (newPos != -1) {
-            Dragon bee = new Dragon();
+
             bee.HP = bee.HT;
             bee.alignment = Char.Alignment.ALLY;
             bee.pos = newPos;
+            bee.setLevel(level());
 
             GameScene.add( bee );
             Actor.addDelayed( new Pushing( bee, pos, newPos ), -1f );
@@ -124,19 +158,47 @@ public class FireDragon extends KindofMisc {
             return this;
         }
     }
-    public class Dragon extends Mob {
+    public static class Dragon extends Mob {
 
-
+        int SpawnerLevel = 0;
+        boolean Spawned = true;
         {
             spriteClass = DragonSprite.class;
 
-            HP = HT = 8 + 4 * level();
+
             defenseSkill = 2;
+
+            HP = HT = 8 + 4 * SpawnerLevel;
+        }
+
+
+        public void setLevel (int level) {
+            SpawnerLevel = level;
+        }
+
+        public boolean Spawned() {
+            return Spawned;
+        }
+
+        @Override
+        public void storeInBundle (Bundle bundle) {
+            super.storeInBundle(bundle);
+        }
+
+        @Override
+        public void restoreFromBundle (Bundle bundle) {
+            super.restoreFromBundle(bundle);
+        }
+
+        @Override
+        public void die( Object cause ) {
+            super.die(cause);
+            Spawned = false;
         }
 
         @Override
         public int damageRoll() {
-            return Random.NormalIntRange(1 + level(), 4 + level() * 2);
+            return Random.NormalIntRange(1 + SpawnerLevel, 4 + SpawnerLevel * 2);
         }
 
         @Override
