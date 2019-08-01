@@ -59,7 +59,7 @@ public class Bee extends Mob {
 	private static final String POTPOS	    = "potpos";
 	private static final String POTHOLDER	= "potholder";
 	private static final String ALIGMNENT   = "alignment";
-	
+
 	@Override
 	public void storeInBundle( Bundle bundle ) {
 		super.storeInBundle( bundle );
@@ -68,7 +68,7 @@ public class Bee extends Mob {
 		bundle.put( POTHOLDER, potHolder );
 		bundle.put( ALIGMNENT, alignment);
 	}
-	
+
 	@Override
 	public void restoreFromBundle( Bundle bundle ) {
 		super.restoreFromBundle( bundle );
@@ -82,7 +82,7 @@ public class Bee extends Mob {
 		this.level = level;
 		
 		HT = (2 + level) * 6;
-		defenseSkill = 9 + 1*level;
+		defenseSkill = 9 + level;
 	}
 
 	public void setPotInfo(int potPos, Char potHolder){
