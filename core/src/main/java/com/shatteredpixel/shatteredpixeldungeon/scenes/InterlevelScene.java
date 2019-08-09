@@ -411,8 +411,8 @@ public class InterlevelScene extends PixelScene {
 	}
 	
 	private void ascend() throws IOException {
-		
-		DriedRose.holdGhostHero( Dungeon.level );
+
+		Mob.holdAllies( Dungeon.level );
 
 		Dungeon.saveAll();
 		Level level;
