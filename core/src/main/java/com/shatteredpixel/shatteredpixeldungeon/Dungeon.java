@@ -484,26 +484,26 @@ public class Dungeon {
 	
 	@SuppressWarnings("deprecation")
 	public static void switchLevel( final Level level, int pos ) {
-		
+
 		if (pos == -2){
 			pos = level.exit;
 		} else if (pos < 0 || pos >= level.length()){
 			pos = level.entrance;
 		}
-		
+
 		PathFinder.setMapSize(level.width(), level.height());
-		
+
 		Dungeon.level = level;
-		DriedRose.restoreGhostHero( level, pos );
+		Mob.restoreAllies( level, pos );
 		Actor.init();
-		
+
 		Actor respawner = level.respawner();
 		if (respawner != null) {
 			Actor.addDelayed( respawner, level.respawnTime() );
 		}
 
 		hero.pos = pos;
-		
+
 		for(Mob m : level.mobs){
 			if (m.pos == hero.pos){
 				//displace mob
@@ -515,41 +515,41 @@ public class Dungeon {
 				}
 			}
 		}
-		
+
 		Light light = hero.buff( Light.class );
 		hero.viewDistance = light == null ? level.viewDistance : Math.max( Light.DISTANCE, level.viewDistance );
-		
+
 		hero.curAction = hero.lastAction = null;
-		
+
 		//pre-0.7.1 saves. Adjusting for spirit bows in weapon slot or with upgrades.
 		SpiritBow bow;
 		if (hero.belongings.weapon instanceof SpiritBow){
 			bow = (SpiritBow)hero.belongings.weapon;
 			hero.belongings.weapon = null;
-			
+
 			if (!bow.collect()){
 				level.drop(bow, hero.pos);
 			}
 		} else {
 			bow = hero.belongings.getItem(SpiritBow.class);
 		}
-		
+
 		//pre-0.7.1 saves. refunding upgrades previously spend on a boomerang
 		if (bow != null && bow.spentUpgrades() > 0){
 			ScrollOfUpgrade refund = new ScrollOfUpgrade();
 			refund.quantity(bow.spentUpgrades());
 			bow.level(0);
-			
+
 			//to prevent exploits, some SoU are lost in the conversion of a boomerang higher than +1
 			if (refund.quantity() > 1){
 				refund.quantity(1 + (int)Math.floor((refund.quantity()-1)*0.8f));
 			}
-			
+
 			if (!refund.collect()){
 				level.drop(refund, hero.pos);
 			}
 		}
-		
+
 		observe();
 		try {
 			saveAll();
@@ -568,6 +568,7 @@ public class Dungeon {
 		}
 		dropped.add( item );
 	}
+
 
 	public static boolean posNeeded() {
 		//2 POS each floor set

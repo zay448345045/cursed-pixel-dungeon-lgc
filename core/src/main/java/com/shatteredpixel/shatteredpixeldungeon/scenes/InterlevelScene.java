@@ -28,6 +28,7 @@ import com.shatteredpixel.shatteredpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.DriedRose;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.shatteredpixel.shatteredpixeldungeon.levels.features.Chasm;
@@ -338,7 +339,7 @@ public class InterlevelScene extends PixelScene {
 	public static Level goToDepth(int depthToAccess) throws IOException {
 		int oldDepth = Dungeon.depth;
 		if (Dungeon.hero == null) {
-			DriedRose.clearHeldGhostHero();
+			Mob.clearHeldAllies();
 			Dungeon.init();
 			if (noStory) {
 				Dungeon.chapters.add( WndStory.ID_SEWERS );
@@ -346,7 +347,7 @@ public class InterlevelScene extends PixelScene {
 			}
 			GameLog.wipe();
 		} else {
-			DriedRose.holdGhostHero( Dungeon.level );
+			Mob.holdAllies( Dungeon.level );
 			Dungeon.saveAll();
 		}
 		Dungeon.depth = depthToAccess;

@@ -62,7 +62,7 @@ public class FireDragon extends KindofMisc {
 
 
     }
-    public Dragon bee = new Dragon();
+    public Dragon dragon = new Dragon();
 
     boolean Spawned = false;
     public static String  SPAWNED = "spawned";
@@ -72,7 +72,7 @@ public class FireDragon extends KindofMisc {
         super.storeInBundle(bundle);
 
         bundle.put( SPAWNED, Spawned );
-        bee.storeInBundle(bundle);
+        dragon.storeInBundle(bundle);
 
     }
 
@@ -81,7 +81,7 @@ public class FireDragon extends KindofMisc {
         super.restoreFromBundle(bundle);
 
         Spawned = bundle.getBoolean( SPAWNED );
-        bee.restoreFromBundle(bundle);
+        dragon.restoreFromBundle(bundle);
         /*if (Spawned) {
             Dungeon.hero.sprite.zap( Dungeon.hero.pos );
 
@@ -140,17 +140,18 @@ public class FireDragon extends KindofMisc {
         }
 
         if (newPos != -1) {
+            dragon = new Dragon();
+            dragon.SpawnerLevel = level();
+            dragon.HP = dragon.HT = 8 + 4 * dragon.SpawnerLevel;
+            dragon.alignment = Char.Alignment.ALLY;
+            dragon.pos = newPos;
+            dragon.setLevel(level());
 
-            bee.HP = bee.HT;
-            bee.alignment = Char.Alignment.ALLY;
-            bee.pos = newPos;
-            bee.setLevel(level());
+            GameScene.add( dragon );
+            Actor.addDelayed( new Pushing( dragon, pos, newPos ), -1f );
 
-            GameScene.add( bee );
-            Actor.addDelayed( new Pushing( bee, pos, newPos ), -1f );
-
-            bee.sprite.alpha( 0 );
-            bee.sprite.parent.add( new AlphaTweener( bee.sprite, 1, 0.15f ) );
+            dragon.sprite.alpha( 0 );
+            dragon.sprite.parent.add( new AlphaTweener( dragon.sprite, 1, 0.15f ) );
 
             Sample.INSTANCE.play( Assets.SND_BEE );
             return this;
@@ -169,6 +170,7 @@ public class FireDragon extends KindofMisc {
 
             HP = HT = 8 + 4 * SpawnerLevel;
         }
+
 
 
         public void setLevel (int level) {
