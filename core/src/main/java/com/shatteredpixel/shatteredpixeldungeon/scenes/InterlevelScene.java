@@ -369,7 +369,7 @@ public class InterlevelScene extends PixelScene {
 	private void descend() throws IOException {
 
 		if (Dungeon.hero == null) {
-			DriedRose.clearHeldGhostHero();
+			Mob.clearHeldAllies();
 			Dungeon.init();
 			if (noStory) {
 				Dungeon.chapters.add( WndStory.ID_SEWERS );
@@ -377,7 +377,7 @@ public class InterlevelScene extends PixelScene {
 			}
 			GameLog.wipe();
 		} else {
-			DriedRose.holdGhostHero( Dungeon.level );
+			Mob.holdAllies( Dungeon.level );
 			Dungeon.saveAll();
 		}
 
@@ -395,8 +395,8 @@ public class InterlevelScene extends PixelScene {
 	
 	private void fall() throws IOException {
 
-		DriedRose.holdGhostHero( Dungeon.level );
-		
+		Mob.holdAllies( Dungeon.level );
+
 		Buff.affect( Dungeon.hero, Chasm.Falling.class );
 		Dungeon.saveAll();
 
