@@ -21,6 +21,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.KindofMisc;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor;
+import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Artifact;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.DriedRose;
 import com.shatteredpixel.shatteredpixeldungeon.items.bombs.Firebomb;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing;
@@ -53,9 +54,9 @@ public class FireDragon extends KindofMisc {
     public static final String AC_SUMMON	= "SHATTER";
 
     {
-        image = ItemSpriteSheet.HONEYPOT;
+        image = ItemSpriteSheet.MAGIC_INFUSE;
 
-        defaultAction = AC_THROW;
+        defaultAction = AC_SUMMON;
         usesTargeting = true;
 
         stackable = true;
@@ -113,7 +114,9 @@ public class FireDragon extends KindofMisc {
                 }
 
             }
-            if (spawn) {
+            if (!isEquipped(hero)) GLog.i( Messages.get(Artifact.class, "need_to_equip") );
+            else if (!spawn)  GLog.i( Messages.get(this, "already_spawned") );
+            else {
                 shatter(hero, hero.pos);
                 this.Spawned = true;
                 hero.next();
@@ -164,69 +167,8 @@ public class FireDragon extends KindofMisc {
             return this;
         }
     }
-    public static class Dragon extends Mob {
+    public static class Dragon extends DragonMob {
 
-        int SpawnerLevel = 0;
-        boolean Spawned = true;
-        {
-            spriteClass = DragonSprite.class;
-            this.alignment = Alignment.ALLY;
-            defenseSkill = 2;
-
-            HP = HT = 8 + 4 * SpawnerLevel;
-        }
-
-
-
-        public void setLevel (int level) {
-            SpawnerLevel = level;
-        }
-
-        public boolean Spawned() {
-            return Spawned;
-        }
-
-        @Override
-        public void storeInBundle (Bundle bundle) {
-            super.storeInBundle(bundle);
-        }
-
-        @Override
-        public void restoreFromBundle (Bundle bundle) {
-            super.restoreFromBundle(bundle);
-        }
-
-        @Override
-        public void die( Object cause ) {
-            super.die(cause);
-            Spawned = false;
-        }
-
-        @Override
-        public int damageRoll() {
-            return Random.NormalIntRange(1 + SpawnerLevel, 4 + SpawnerLevel * 2);
-        }
-
-        @Override
-        public int attackSkill(Char target) {
-            return 8;
-        }
-
-        @Override
-        public int drRoll() {
-            return Random.NormalIntRange(0, 1);
-        }
-
-        @Override
-        protected boolean getCloser(int target) {
-            if (alignment == Alignment.ALLY && enemy == null && buff(Corruption.class) == null){
-                target = Dungeon.hero.pos;
-            } else if (enemy != null) {
-                target = enemy.pos;
-            } else if ((state == WANDERING))
-                this.target = target = Dungeon.hero.pos;
-            return super.getCloser( target );
-        }
 
     }
 
