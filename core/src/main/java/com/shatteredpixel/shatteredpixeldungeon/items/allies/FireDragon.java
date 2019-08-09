@@ -21,6 +21,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.KindofMisc;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor;
+import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.DriedRose;
 import com.shatteredpixel.shatteredpixeldungeon.items.bombs.Firebomb;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfBlastWave;
@@ -102,17 +103,21 @@ public class FireDragon extends KindofMisc {
     public void execute( final Hero hero, String action ) {
 
         super.execute( hero, action );
-
+        boolean spawn = true;
         if (action.equals( AC_SUMMON )) {
-            if ( true ) {//dummy statement that will eventually check if the player has already spawned one.
-                hero.sprite.zap( hero.pos );
+            for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
+                //preserve the ghost no matter where they are
+                if (mob instanceof Dragon) {
+                    spawn = false;
 
-                shatter( hero, hero.pos );
+                }
+
+            }
+            if (spawn) {
+                shatter(hero, hero.pos);
                 this.Spawned = true;
                 hero.next();
             }
-
-
         }
     }
 
