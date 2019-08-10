@@ -74,5 +74,6 @@ public class VaultRoom extends SpecialRoom {
 	private ArrayList<Generator.Category> prizeClasses = new ArrayList<>(
 			Arrays.asList(Generator.Category.WAND,
 					Generator.Category.RING,
-					Generator.Category.ARTIFACT));
+					Generator.Category.ARTIFACT,
+					Generator.Category.ALLIES));
 }
