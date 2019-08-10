@@ -11,15 +11,20 @@ import com.watabou.utils.Random;
 public class DragonMob extends Mob {
     int SpawnerLevel = 0;
     boolean Spawned = true;
+
     {
         spriteClass = DragonSprite.class;
         this.alignment = Char.Alignment.ALLY;
-        defenseSkill = 2;
+        defenseSkill = Dungeon.depth;
+        state = WANDERING;
 
         HP = HT = 8 + 4 * SpawnerLevel;
     }
 
-
+    @Override
+    public int attackSkill( Char target ) {
+        return 10 + SpawnerLevel;
+    }
 
     public void setLevel (int level) {
         SpawnerLevel = level;
@@ -48,11 +53,6 @@ public class DragonMob extends Mob {
     @Override
     public int damageRoll() {
         return Random.NormalIntRange(1 + SpawnerLevel, 4 + SpawnerLevel * 2);
-    }
-
-    @Override
-    public int attackSkill(Char target) {
-        return 8;
     }
 
     @Override

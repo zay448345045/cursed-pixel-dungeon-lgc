@@ -23,6 +23,8 @@ package com.shatteredpixel.shatteredpixeldungeon.items;
 
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.ShatteredPixelDungeon;
+import com.shatteredpixel.shatteredpixeldungeon.items.allies.DragonItem;
+import com.shatteredpixel.shatteredpixeldungeon.items.allies.FireDragon;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.ClothArmor;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.LeatherArmor;
@@ -216,6 +218,7 @@ public class Generator {
 		MIS_T3  ( 0,    MissileWeapon.class ),
 		MIS_T4  ( 0,    MissileWeapon.class ),
 		MIS_T5  ( 0,    MissileWeapon.class ),
+		ALLIES  ( 1,     DragonItem.class),
 		
 		WAND	( 3,    Wand.class ),
 		RING	( 1,    Ring.class ),
@@ -260,7 +263,13 @@ public class Generator {
 			GOLD.classes = new Class<?>[]{
 					Gold.class };
 			GOLD.probs = new float[]{ 1 };
-			
+
+			ALLIES.classes = POTION.classes = new Class<?>[]{
+					FireDragon.class
+			};
+
+			ALLIES.probs = new float[]{1};
+
 			POTION.classes = new Class<?>[]{
 					PotionOfStrength.class, //2 drop every chapter, see Dungeon.posNeeded()
 					PotionOfHealing.class,
