@@ -7,6 +7,8 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Fire;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Burning;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Chill;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Frost;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Pushing;
@@ -37,6 +39,15 @@ public class FireDragon extends DragonItem {
 
             return damage;
 
+        }
+
+        @Override
+        public void add(Buff buff) {
+            if (buff instanceof Frost || buff instanceof Chill) {
+                damage(Math.round(HP/10),this);//Damages for 10% of max HP when chilled/frozen
+            } else {
+                super.add(buff);
+            }
         }
 
         @Override

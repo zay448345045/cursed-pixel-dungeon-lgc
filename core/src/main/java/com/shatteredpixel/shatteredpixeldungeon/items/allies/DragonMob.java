@@ -4,11 +4,15 @@ import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Corruption;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC;
+import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
+import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.DragonSprite;
+import com.shatteredpixel.shatteredpixeldungeon.windows.WndQuest;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
-public class DragonMob extends Mob {
+public abstract class DragonMob extends NPC {
     int SpawnerLevel = 0;
     boolean Spawned = true;
 
@@ -59,6 +63,22 @@ public class DragonMob extends Mob {
     public int drRoll() {
         return Random.NormalIntRange(0 + SpawnerLevel, 2 + SpawnerLevel * 3);
     }//base of 0-2 (Cloth Armour), scales by 1-3 (Mail Armour)
+
+    @Override
+    public boolean interact() {
+        int curPos = pos;
+
+        moveSprite(pos, Dungeon.hero.pos);
+        move(Dungeon.hero.pos);
+
+        Dungeon.hero.sprite.move(Dungeon.hero.pos, curPos);
+        Dungeon.hero.move(curPos);
+
+        Dungeon.hero.spend(1 / Dungeon.hero.speed());
+        Dungeon.hero.busy();
+        return true;
+
+    }
 
     @Override
     protected boolean getCloser(int target) {
