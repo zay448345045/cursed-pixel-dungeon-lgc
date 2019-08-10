@@ -52,6 +52,12 @@ import java.util.HashSet;
 public class DragonItem extends KindofMisc {
 
     public static final String AC_SUMMON	= "SHATTER";
+    protected int charge = 0;
+    //the build towards next charge, usually rolls over at 1.
+    //better to keep charge as an int and use a separate float than casting.
+    protected float partialCharge = 0;
+    //the maximum charge, varies per artifact, not all artifacts use this.
+    protected int chargeCap = 100;
 
     {
         image = ItemSpriteSheet.MAGIC_INFUSE;
@@ -64,6 +70,22 @@ public class DragonItem extends KindofMisc {
 
 
     }
+    @Override
+    public String status() {
+        return Messages.format( "%d%%", charge );
+    }
+
+    public void charge(Hero target) {
+        if (charge < chargeCap){
+            partialCharge += 0.1f;
+            if (partialCharge >= 1){
+                partialCharge--;
+                charge++;
+                updateQuickslot();
+            }
+        }
+    }
+
     public Dragon dragon = new Dragon();
 
     boolean Spawned = false;
@@ -84,6 +106,7 @@ public class DragonItem extends KindofMisc {
 
         Spawned = bundle.getBoolean( SPAWNED );
         dragon.restoreFromBundle(bundle);
+
         /*if (Spawned) {
             Dungeon.hero.sprite.zap( Dungeon.hero.pos );
 
@@ -106,13 +129,8 @@ public class DragonItem extends KindofMisc {
         super.execute( hero, action );
         boolean spawn = true;
         if (action.equals( AC_SUMMON )) {
-            for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
-                //preserve the ghost no matter where they are
-                if (mob instanceof Dragon) {
-                    spawn = false;
-
-                }
-
+            if (charge < chargeCap) {
+                spawn = false;
             }
             if (!isEquipped(hero)) GLog.i( Messages.get(Artifact.class, "need_to_equip") );
             else if (!spawn)  GLog.i( Messages.get(this, "already_spawned") );
@@ -150,6 +168,8 @@ public class DragonItem extends KindofMisc {
         if (newPos != -1) {
 
             SpawnDragon(newPos, pos);
+            this.charge = 0;
+            updateQuickslot();
             Sample.INSTANCE.play( Assets.SND_BEE );
             return this;
         } else {

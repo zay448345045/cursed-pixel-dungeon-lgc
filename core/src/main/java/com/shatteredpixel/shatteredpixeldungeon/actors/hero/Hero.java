@@ -64,9 +64,11 @@ import com.shatteredpixel.shatteredpixeldungeon.items.Heap;
 import com.shatteredpixel.shatteredpixeldungeon.items.Heap.Type;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.KindOfWeapon;
+import com.shatteredpixel.shatteredpixeldungeon.items.allies.DragonItem;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.AntiMagic;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.Viscosity;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AlchemistsToolkit;
+import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Artifact;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.CapeOfThorns;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.DriedRose;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.EtherealChains;
@@ -492,6 +494,21 @@ public class Hero extends Char {
 	
 	@Override
 	public boolean act() {
+		Belongings b = ((this)).belongings;
+
+		if (b.misc1 instanceof DragonItem){
+			((DragonItem)b.misc1).charge((this));
+		}
+		if (b.misc2 instanceof DragonItem) {
+			((DragonItem)b.misc2).charge((this));
+		}
+
+		if (b.misc3 instanceof DragonItem){
+			((DragonItem)b.misc1).charge((this));
+		}
+		if (b.misc4 instanceof DragonItem) {
+			((DragonItem)b.misc2).charge((this));
+		}
 		
 		//calls to dungeon.observe will also update hero's local FOV.
 		fieldOfView = Dungeon.level.heroFOV;
