@@ -57,9 +57,9 @@ public class DragonItem extends KindofMisc {
         image = ItemSpriteSheet.MAGIC_INFUSE;
 
         defaultAction = AC_SUMMON;
-        usesTargeting = true;
+        usesTargeting = false;
 
-        stackable = true;
+        stackable = false;
 
 
 
