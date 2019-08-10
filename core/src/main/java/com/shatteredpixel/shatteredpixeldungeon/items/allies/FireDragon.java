@@ -4,6 +4,7 @@ import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
+import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Fire;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Burning;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
@@ -25,6 +26,10 @@ import java.util.ArrayList;
 public class FireDragon extends DragonItem {
     public Dragon dragon = new Dragon();
     public static class Dragon extends DragonMob {
+        {
+            properties.add(Property.FIERY);
+            immunities.add(Fire.class);//immune to fire because it's... well... fiery?
+        }
 
         public int attackProc(Char enemy, int damage ) {
             damage = super.attackProc( enemy, damage );
@@ -33,6 +38,11 @@ public class FireDragon extends DragonItem {
             return damage;
 
         }
+
+        @Override
+        public int damageRoll() {
+            return Random.NormalIntRange(1 + SpawnerLevel, 8 + SpawnerLevel * 4);
+        }//base of 1-8 (Worn Shortsword), scales by 1-4 (Longsword). This is higher than the base value as Fire dragons should do extra damage (due to setting random fires)
 
 
     }
