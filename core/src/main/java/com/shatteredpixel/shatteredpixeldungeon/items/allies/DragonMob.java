@@ -67,7 +67,7 @@ public abstract class DragonMob extends NPC {
     @Override
     public boolean interact() {
         int curPos = pos;
-
+        this.state = WANDERING;//Wake the Dragon up
         moveSprite(pos, Dungeon.hero.pos);
         move(Dungeon.hero.pos);
 
