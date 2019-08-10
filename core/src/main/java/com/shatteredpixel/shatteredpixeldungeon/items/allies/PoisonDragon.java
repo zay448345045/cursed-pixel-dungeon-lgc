@@ -18,6 +18,8 @@ import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Artifact;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.DragonSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.PoisonDragonSprite;
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.tweeners.AlphaTweener;
@@ -30,6 +32,7 @@ public class PoisonDragon extends DragonItem {
     public Dragon dragon = new Dragon();
     public static class Dragon extends DragonMob {
         {
+            spriteClass = PoisonDragonSprite.class;
             properties.add(Property.ACIDIC);
             immunities.add(Poison.class);//immune to poison
         }
