@@ -21,6 +21,8 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.actors.hero;
 
+import android.widget.ExpandableListView;
+
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Badges;
 import com.shatteredpixel.shatteredpixeldungeon.Bones;
@@ -495,20 +497,24 @@ public class Hero extends Char {
 	@Override
 	public boolean act() {
 		Belongings b = ((this)).belongings;
+		try {
+			if (b.misc1 instanceof DragonItem){
+				((DragonItem)b.misc1).charge((this));
+			}
+			if (b.misc2 instanceof DragonItem) {
+				((DragonItem)b.misc2).charge((this));
+			}
 
-		if (b.misc1 instanceof DragonItem){
-			((DragonItem)b.misc1).charge((this));
-		}
-		if (b.misc2 instanceof DragonItem) {
-			((DragonItem)b.misc2).charge((this));
+			if (b.misc3 instanceof DragonItem){
+				((DragonItem)b.misc1).charge((this));
+			}
+			if (b.misc4 instanceof DragonItem) {
+				((DragonItem)b.misc2).charge((this));
+			}
+		} catch (Exception e) {
+
 		}
 
-		if (b.misc3 instanceof DragonItem){
-			((DragonItem)b.misc1).charge((this));
-		}
-		if (b.misc4 instanceof DragonItem) {
-			((DragonItem)b.misc2).charge((this));
-		}
 		
 		//calls to dungeon.observe will also update hero's local FOV.
 		fieldOfView = Dungeon.level.heroFOV;
