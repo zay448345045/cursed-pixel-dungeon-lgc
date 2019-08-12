@@ -271,6 +271,29 @@ public class Yog extends Mob {
 			super.damage(dmg, src);
 			LockedFloor lock = Dungeon.hero.buff(LockedFloor.class);
 			if (lock != null) lock.addTime(dmg*0.5f);
+
+			ArrayList<Integer> spawnPoints = new ArrayList<>();
+
+			for (int i=0; i < PathFinder.NEIGHBOURS8.length; i++) {
+				int p = pos + PathFinder.NEIGHBOURS8[i];
+				if (Actor.findChar( p ) == null && (Dungeon.level.passable[p] || Dungeon.level.avoid[p])) {
+					spawnPoints.add( p );
+				}
+			}
+
+			if (spawnPoints.size() > 0) {
+				Larva larva = new Larva();
+				larva.pos = Random.element( spawnPoints );
+
+				GameScene.add( larva );
+				Actor.addDelayed( new Pushing( larva, pos, larva.pos ), -1 );
+			}
+
+			for (Mob mob : Dungeon.level.mobs) {
+				if (mob instanceof BurningFist || mob instanceof RottingFist || mob instanceof Larva) {
+					mob.aggro( enemy );
+				}
+			}
 		}
 		
 		{
@@ -298,6 +321,7 @@ public class Yog extends Mob {
 			properties.add(Property.BOSS);
 			properties.add(Property.DEMONIC);
 			properties.add(Property.FIERY);
+			immunities.add(Paralysis.class);
 		}
 		
 		@Override

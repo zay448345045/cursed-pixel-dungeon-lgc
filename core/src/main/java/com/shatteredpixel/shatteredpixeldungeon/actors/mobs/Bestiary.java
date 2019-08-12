@@ -159,7 +159,7 @@ public class Bestiary {
 				return new ArrayList<>(Arrays.asList(
 						Succubus.class,
 						Eye.class, Eye.class,
-						Scorpio.class, Scorpio.class, Scorpio.class, NonBossGoo.class, NonBossGoo.class, NonBossGoo.class));
+						Scorpio.class, Scorpio.class, Scorpio.class));//Non Boss Goo removed from Demon Halls
 			case 31: case 32: case 33: case 34:
 				//1x succubus, 2x evil eye, 3x scorpio
 				return new ArrayList<>(Arrays.asList(
