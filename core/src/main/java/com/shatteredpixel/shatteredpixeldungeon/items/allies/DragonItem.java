@@ -52,7 +52,7 @@ import java.util.HashSet;
 public class DragonItem extends KindofMisc {
 
     public static final String AC_SUMMON	= "SHATTER";
-    protected int charge = 0;
+    protected int charge = 100;
     //the build towards next charge, usually rolls over at 1.
     //better to keep charge as an int and use a separate float than casting.
     protected float partialCharge = 0;
@@ -90,12 +90,14 @@ public class DragonItem extends KindofMisc {
 
     boolean Spawned = false;
     public static String  SPAWNED = "spawned";
+    public static String  CHARGE = "charge";
 
     @Override
     public void storeInBundle( Bundle bundle ) {
         super.storeInBundle(bundle);
 
         bundle.put( SPAWNED, Spawned );
+        bundle.put(CHARGE, charge);
         dragon.storeInBundle(bundle);
 
     }
@@ -106,14 +108,8 @@ public class DragonItem extends KindofMisc {
 
         Spawned = bundle.getBoolean( SPAWNED );
         dragon.restoreFromBundle(bundle);
+        charge = bundle.getInt(CHARGE);
 
-        /*if (Spawned) {
-            Dungeon.hero.sprite.zap( Dungeon.hero.pos );
-
-            shatter( Dungeon.hero, Dungeon.hero.pos );
-            this.Spawned = true;
-            Dungeon.hero.next();
-        }*/
     }
 
     @Override
