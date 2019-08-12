@@ -117,7 +117,7 @@ public class WaterChallengeBossLevel extends Level {
 
         exit = space.left + space.width()/2 + (space.top - 1) * width();
 
-        map[exit] = Terrain.LOCKED_EXIT;
+        map[exit] = Terrain.WALL;
 
         Painter.fill( this, ROOM_LEFT - 1, ROOM_TOP - 1,
                 ROOM_RIGHT - ROOM_LEFT + 3, ROOM_BOTTOM - ROOM_TOP + 3, Terrain.WALL );
