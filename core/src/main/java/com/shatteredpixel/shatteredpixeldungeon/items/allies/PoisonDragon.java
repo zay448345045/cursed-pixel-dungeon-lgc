@@ -47,7 +47,7 @@ public class PoisonDragon extends DragonItem {
 
         @Override
         public int defenseProc( Char enemy, int damage ) {
-            enemy.damage(Math.round(damage/3),this);//damages enemies who attack
+            enemy.damage(Math.round(damage/2),this);//damages enemies who attack
             return super.defenseProc(enemy, damage);
         }
 
