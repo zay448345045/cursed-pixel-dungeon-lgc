@@ -56,12 +56,12 @@ public abstract class DragonMob extends NPC {
 
     @Override
     public int damageRoll() {
-        return Random.NormalIntRange(1 + SpawnerLevel, 8 + SpawnerLevel * 3);
+        return Random.NormalIntRange(1 + SpawnerLevel, 8 + SpawnerLevel * 4);
     }//base of 1-8 (Worn Shortsword), scales by 1-3 (Sword)
 
     @Override
     public int drRoll() {
-        return Random.NormalIntRange(0 + SpawnerLevel, 2 + SpawnerLevel * 3);
+        return Random.NormalIntRange(0 + SpawnerLevel, 2 + SpawnerLevel * 4);
     }//base of 0-2 (Cloth Armour), scales by 1-3 (Mail Armour)
 
     @Override

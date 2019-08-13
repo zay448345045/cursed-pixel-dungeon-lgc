@@ -42,15 +42,15 @@ import com.watabou.utils.Random;
 
 import java.util.ArrayList;
 
-public class WaterElemental extends Elemental {
+public class WaterElemental extends Mob {
 
     {
         spriteClass = NewbornElementalSprite.class;
 
-        HT = 400;
+        HT = 300;
         HP = HT;
 
-        defenseSkill = 45;
+        defenseSkill = 30;
 
         EXP = 15;
         maxLvl = 30;

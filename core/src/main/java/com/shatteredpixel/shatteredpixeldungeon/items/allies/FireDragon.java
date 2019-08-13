@@ -52,7 +52,7 @@ public class FireDragon extends DragonItem {
 
         @Override
         public int damageRoll() {
-            return Random.NormalIntRange(1 + SpawnerLevel, 8 + SpawnerLevel * 4);
+            return Random.NormalIntRange(1 + SpawnerLevel, 8 + SpawnerLevel * 5);
         }//base of 1-8 (Worn Shortsword), scales by 1-4 (Longsword). This is higher than the base value as Fire dragons should do extra damage (due to setting random fires)
 
 
