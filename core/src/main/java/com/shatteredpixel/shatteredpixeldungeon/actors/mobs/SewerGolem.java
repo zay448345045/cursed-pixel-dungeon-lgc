@@ -26,6 +26,7 @@ import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Blob;
 import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.SmokeScreen;
+import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.SpawnerGas;
 import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Web;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Blindness;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
@@ -82,7 +83,7 @@ public class SewerGolem extends Mob  {
     @Override
     public void damage( int dmg, Object src ) {
         super.damage(dmg, src);
-        GameScene.add( Blob.seed( this.pos, 300, SmokeScreen.class ) );
+        GameScene.add( Blob.seed( this.pos, 300, SpawnerGas.class ) );
         Buff.affect( this, Terror.class, 5f ).object = Dungeon.hero.id();
         boolean bleeding = (HP*2 <= HT);
         super.damage(dmg, src);
