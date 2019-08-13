@@ -21,137 +21,148 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.actors.mobs;
 
+import com.shatteredpixel.shatteredpixeldungeon.Badges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Blob;
+import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.SmokeScreen;
 import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Web;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Blindness;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Cripple;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.LockedFloor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Poison;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Terror;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Weakness;
+import com.shatteredpixel.shatteredpixeldungeon.effects.particles.SparkParticle;
 import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
+import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.MysteryMeat;
+import com.shatteredpixel.shatteredpixeldungeon.items.keys.SkeletonKey;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing;
+import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Grim;
+import com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.GooSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.SpinnerSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.StatueSprite;
+import com.shatteredpixel.shatteredpixeldungeon.ui.BossHealthBar;
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
+import com.watabou.noosa.Camera;
+import com.watabou.utils.Callback;
+import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 
-public class SewerGolem extends Mob {
-
+public class SewerGolem extends Mob  {
     {
         spriteClass = StatueSprite.class;
 
-        HP = HT = 1000;
-        defenseSkill = 45;
+        HP = HT = 2000;
+        defenseSkill = 30;
 
         EXP = 22;
 
         loot = Generator.randomWeapon();
         lootChance = 0.125f;
 
-        FLEEING = new Fleeing();
         baseSpeed = 2f;
         properties.add(Property.BOSS);
     }
 
     @Override
-    public int damageRoll() {
-        return Random.NormalIntRange(10, 40);
+    public void notice() {
+        super.notice();
+        BossHealthBar.assignBoss(this);
+        yell( Messages.get(this, "notice") );
     }
 
     @Override
-    public int attackSkill(Char target) {
-        return 20;
+    public void damage( int dmg, Object src ) {
+        super.damage(dmg, src);
+        GameScene.add( Blob.seed( this.pos, 300, SmokeScreen.class ) );
+        Buff.affect( this, Terror.class, 5f ).object = Dungeon.hero.id();
+        boolean bleeding = (HP*2 <= HT);
+        super.damage(dmg, src);
+        if ((HP*2 <= HT) && !bleeding){
+            BossHealthBar.bleed(true);
+            ((GooSprite)sprite).spray(true);
+            yell(Messages.get(this, "gluuurp"));
+        }
+        LockedFloor lock = Dungeon.hero.buff(LockedFloor.class);
+        if (lock != null) lock.addTime(dmg*2);
+    }
+    @Override
+    public int damageRoll() {
+        return Random.NormalIntRange( 40, 85);
+    }
+
+    @Override
+    public int attackSkill( Char target ) {
+        return 36;
     }
 
     @Override
     public int drRoll() {
-        return Random.NormalIntRange(0, 6);
+        return Random.NormalIntRange(0, 16);
     }
 
     @Override
-    protected boolean act() {
-        boolean result = super.act();
-
-        if (state == FLEEING && buff( Terror.class ) == null &&
-                enemy != null && enemySeen && enemy.buff( Blindness.class ) == null) {
-            state = HUNTING;
-        }
-        return result;
+    protected boolean canAttack( Char enemy ) {
+        Ballistica attack = new Ballistica( pos, enemy.pos, Ballistica.PROJECTILE);
+        return !Dungeon.level.adjacent( pos, enemy.pos ) && attack.collisionPos == enemy.pos;
     }
 
     @Override
-    public int attackProc(Char enemy, int damage) {
+    public int attackProc( Char enemy, int damage ) {
         damage = super.attackProc( enemy, damage );
-        if (Random.Int(2) == 0) {
-            Buff.affect(enemy, Blindness.class,9);
-            state = FLEEING;
+        sprite.zap( enemy.pos );
+        enemy.sprite.centerEmitter().burst( SparkParticle.FACTORY, 3 );
+        enemy.sprite.flash();
+        if (Random.Int( 2 ) == 0) {
+            Buff.prolong( enemy, Cripple.class, Cripple.DURATION );
         }
 
         return damage;
     }
 
-    protected boolean doAttack( Char enemy ) {
+    @Override
+    public void die( Object cause ) {
 
-        if (Dungeon.level.adjacent( pos, enemy.pos )) {
+        super.die( cause );
 
-            return super.doAttack( enemy );
+        Dungeon.level.unseal();
 
-        } else {
+        GameScene.bossSlain();
 
-            boolean visible = fieldOfView[pos] || fieldOfView[enemy.pos];
-            if (visible) {
-                sprite.zap( enemy.pos );
-            } else {
-                zap();
-            }
-
-            return !visible;
+        //60% chance of 2 blobs, 30% chance of 3, 10% chance for 4. Average of 2.5
+        int blobs = Random.chances(new float[]{0, 0, 6, 3, 1});
+        for (int i = 0; i < blobs; i++){
+            int ofs;
+            do {
+                ofs = PathFinder.NEIGHBOURS8[Random.Int(8)];
+            } while (!Dungeon.level.passable[pos + ofs]);
+            Dungeon.level.drop( new ScrollOfUpgrade(), pos + ofs ).sprite.drop( pos );
         }
+
+        Badges.validateBossSlain();
+
+        yell( Messages.get(this, "defeated") );
     }
 
-    private void zap() {
-        spend( 1 );
 
-        if (hit( this, enemy, true )) {
-
-            int dmg = Random.Int( 20, 26 );
-            enemy.damage( dmg, new Shaman.LightningBolt() );
-
-            if (!enemy.isAlive() && enemy == Dungeon.hero) {
-                Dungeon.fail( getClass() );
-                GLog.n( Messages.get(this, "bolt_kill") );
-            }
-        } else {
-            enemy.sprite.showStatus( CharSprite.NEUTRAL,  enemy.defenseVerb() );
-        }
-    }
 
     @Override
-    public void move(int step) {
-        super.move(step);
-    }
-
-    {
-        resistances.add(Poison.class);
-    }
-
-    {
-        immunities.add(Web.class);
-    }
-
-    private class Fleeing extends Mob.Fleeing {
-        @Override
-        protected void nowhereToRun() {
-            if (buff(Terror.class) == null) {
-                state = HUNTING;
-            } else {
-                super.nowhereToRun();
-            }
+    protected boolean getCloser( int target ) {
+        if (state == HUNTING) {
+            return enemySeen && getFurther( target );
+        } else {
+            return super.getCloser( target );
         }
     }
+
+
+
 }
