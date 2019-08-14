@@ -15,18 +15,15 @@ public class SpawnerGas extends SmokeScreen {
     protected void evolve() {
         super.evolve();
         int cell;
-        int count = 0;
 
         for (int i = area.left; i < area.right; i++){
             for (int j = area.top; j < area.bottom; j++){
-                count += 1;
-                if (count > 49) {
+                if (Random.Int(200) == 1) {
                     cell = i + j*Dungeon.level.width();
                     Minion mob = new Minion();
                     mob.state = mob.WANDERING;
                     mob.pos = cell;
                     GameScene.add(mob);
-                    count = 0;
                 }
 
             }
