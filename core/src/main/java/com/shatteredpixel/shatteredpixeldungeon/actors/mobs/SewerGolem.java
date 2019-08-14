@@ -42,12 +42,15 @@ import com.shatteredpixel.shatteredpixeldungeon.items.food.MysteryMeat;
 import com.shatteredpixel.shatteredpixeldungeon.items.keys.SkeletonKey;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
+import com.shatteredpixel.shatteredpixeldungeon.items.wands.Wand;
+import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfPrismaticLight;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Grim;
 import com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.GooSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.SewerGolemSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.SpinnerSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.StatueSprite;
 import com.shatteredpixel.shatteredpixeldungeon.ui.BossHealthBar;
@@ -59,7 +62,7 @@ import com.watabou.utils.Random;
 
 public class SewerGolem extends Mob  {
     {
-        spriteClass = StatueSprite.class;
+        spriteClass = SewerGolemSprite.class;
 
         HP = HT = 2000;
         defenseSkill = 30;
@@ -69,8 +72,12 @@ public class SewerGolem extends Mob  {
         loot = Generator.randomWeapon();
         lootChance = 0.125f;
 
-        baseSpeed = 2f;
+        baseSpeed = 0.7f;//Slower than the player to allow melee units to catch up
         properties.add(Property.BOSS);
+        properties.add(Property.DEMONIC);
+        immunities.add(Grim.class);
+        resistances.add(Wand.class);
+        resistances.remove(WandOfPrismaticLight.class);//Resistant to all wands except Prismatic Light
     }
 
     @Override
@@ -82,6 +89,7 @@ public class SewerGolem extends Mob  {
 
     @Override
     public void damage( int dmg, Object src ) {
+        this.notice();
         super.damage(dmg, src);
         GameScene.add( Blob.seed( this.pos, 300, SpawnerGas.class ) );
         Buff.affect( this, Terror.class, 5f ).object = Dungeon.hero.id();
@@ -89,8 +97,6 @@ public class SewerGolem extends Mob  {
         super.damage(dmg, src);
         if ((HP*2 <= HT) && !bleeding){
             BossHealthBar.bleed(true);
-            ((GooSprite)sprite).spray(true);
-            yell(Messages.get(this, "gluuurp"));
         }
         LockedFloor lock = Dungeon.hero.buff(LockedFloor.class);
         if (lock != null) lock.addTime(dmg*2);
@@ -163,6 +169,10 @@ public class SewerGolem extends Mob  {
             return super.getCloser( target );
         }
     }
+
+
+
+
 
 
 
