@@ -91,8 +91,10 @@ public class SewerGolem extends Mob  {
     public void damage( int dmg, Object src ) {
         this.notice();
         super.damage(dmg, src);
-        GameScene.add( Blob.seed( this.pos, 300, SpawnerGas.class ) );
-        Buff.affect( this, Terror.class, 5f ).object = Dungeon.hero.id();
+        if (Random.Int(2) == 1) {
+            GameScene.add(Blob.seed(this.pos, 300, SpawnerGas.class));
+            Buff.affect(this, Terror.class, 5f).object = Dungeon.hero.id();
+        }
         boolean bleeding = (HP*2 <= HT);
         super.damage(dmg, src);
         if ((HP*2 <= HT) && !bleeding){

@@ -18,7 +18,7 @@ public class SpawnerGas extends SmokeScreen {
 
         for (int i = area.left; i < area.right; i++){
             for (int j = area.top; j < area.bottom; j++){
-                if (Random.Int(200) == 1) {
+                if (Random.Int(600) == 1) {
                     cell = i + j*Dungeon.level.width();
                     Minion mob = new Minion();
                     mob.state = mob.WANDERING;
