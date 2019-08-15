@@ -100,7 +100,8 @@ public abstract class Level implements Bundlable {
 	protected int width;
 	protected int height;
 	protected int length;
-	
+	protected boolean hasExit = true;
+	protected boolean hasEntrance = true;
 	protected static final float TIME_TO_RESPAWN	= 50;
 
 	public int version;

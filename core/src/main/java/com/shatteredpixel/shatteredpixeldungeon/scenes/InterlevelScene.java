@@ -60,6 +60,9 @@ public class InterlevelScene extends PixelScene {
 	private static final float NORM_FADE = 0.67f; //.33 in, .67 steady, .33 out, 1.33 seconds total
 	//fast fade when ascending, or descending to a floor you've been on
 	private static final float FAST_FADE = 0.50f; //.33 in, .33 steady, .33 out, 1 second total
+	public static final String FALL_NAME = "FALL_NAME";
+	public static final String DESCEND_NAME = "DESCEND_NAME";
+	public static final String ASCEND_NAME = "ASCEND_NAME";
 	
 	private static float fadeTime;
 	
@@ -214,12 +217,12 @@ public class InterlevelScene extends PixelScene {
 
 						switch (mode) {
 							case DESCEND:
-								goToDepth(Dungeon.depth);
+								goToDepth(Dungeon.depth, DESCEND_NAME);
 							case DESCEND_GAMEINIT:
 								descend();//My current lazy attempt at refactoring InterLevelScene.java to allow visiting any depth from the start.
 								break;
 							case ASCEND:
-								ascend();//Still use ascend here so the player ends up at the level exit not entrance
+								goToDepth(Dungeon.depth - 1, ASCEND_NAME);//Still use ascend here so the player ends up at the level exit not entrance
 								break;
 							case CONTINUE:
 								restore();
@@ -228,22 +231,22 @@ public class InterlevelScene extends PixelScene {
 								resurrect();
 								break;
 							case RETURN:
-								returnTo();
+								goToDepth(returnDepth, ASCEND_NAME);
 								break;
 							case FALL:
-								fall();
+								goToDepth(Dungeon.depth + 1, FALL_NAME);
 								break;
 							case RESET:
 								reset();
 								break;
 							case START://Testing purposes
-								goToDepth(0);
+								goToDepth(0, DESCEND_NAME);
 								break;
 							case WATERCHALLENGE:
-								goToDepth(31);
+								goToDepth(31, DESCEND_NAME);
 								break;
 							case EARTHCHALLENGE:
-								goToDepth(36);
+								goToDepth(36, DESCEND_NAME);
 								break;
 						}
 						
@@ -336,7 +339,10 @@ public class InterlevelScene extends PixelScene {
 		}
 	}
 
-	public static Level goToDepth(int depthToAccess) throws IOException {
+	public static Level goToDepth(int depthToAccess,  final String typeOfDescend) throws IOException {
+		if (typeOfDescend == (FALL_NAME) ) {
+			Buff.affect( Dungeon.hero, Chasm.Falling.class );
+		}
 		int oldDepth = Dungeon.depth;
 		if (Dungeon.hero == null) {
 			Mob.clearHeldAllies();
@@ -362,7 +368,14 @@ public class InterlevelScene extends PixelScene {
 
 			level = Dungeon.newLevelWithDepth(Dungeon.depth);
 		}
-		Dungeon.switchLevel( level, level.entrance );
+		if (typeOfDescend == DESCEND_NAME) {
+			Dungeon.switchLevel( level, level.entrance );
+		} else if (typeOfDescend == FALL_NAME) {
+			Dungeon.switchLevel( level, level.fallCell( fallIntoPit ));
+		} else if (typeOfDescend == ASCEND_NAME) {
+			Dungeon.switchLevel( level, level.exit );
+		}
+
 	return level;
 	}
 
@@ -392,8 +405,8 @@ public class InterlevelScene extends PixelScene {
 	}
 
 
-	
-	private void fall() throws IOException {
+	//Depricated 3 outdated functions. Will remove if everything stays alright.
+	/*private void fall() throws IOException {
 
 		Mob.holdAllies( Dungeon.level );
 
@@ -401,11 +414,13 @@ public class InterlevelScene extends PixelScene {
 		Dungeon.saveAll();
 
 		Level level;
-		if (Dungeon.depth >= Statistics.deepestFloor) {
-			level = Dungeon.newLevel();
-		} else {
-			Dungeon.depth++;
+		Dungeon.depth++;
+		try {
 			level = Dungeon.loadLevel( GamesInProgress.curSlot );
+
+		} catch(Exception e) {
+
+			level = Dungeon.newLevelWithDepth(Dungeon.depth);
 		}
 		Dungeon.switchLevel( level, level.fallCell( fallIntoPit ));
 	}
@@ -435,7 +450,7 @@ public class InterlevelScene extends PixelScene {
 		Dungeon.depth = returnDepth;
 		Level level = Dungeon.loadLevel( GamesInProgress.curSlot );
 		Dungeon.switchLevel( level, returnPos );
-	}
+	}*/
 	
 	private void restore() throws IOException {
 		

@@ -45,6 +45,8 @@ import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.SpecialRoom
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.WeakFloorRoom;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.EntranceRoom;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.ExitRoom;
+import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.FakeEntranceRoom;
+import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.FakeExitRoom;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.FissureRoom;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.StandardRoom;
 import com.shatteredpixel.shatteredpixeldungeon.levels.traps.BlazingTrap;
@@ -95,9 +97,13 @@ public abstract class RegularLevel extends Level {
 	
 	protected ArrayList<Room> initRooms() {
 		ArrayList<Room> initRooms = new ArrayList<>();
+
 		initRooms.add ( roomEntrance = new EntranceRoom());
-		if (Dungeon.depth > 25) {
-			initRooms.add(roomExit = new WeakFloorRoom());
+
+		if (!hasExit) {
+			initRooms.add( roomExit = new FakeExitRoom());
+			initRooms.add( new WeakFloorRoom());
+
 		} else {
 			initRooms.add( roomExit = new ExitRoom());
 		}

@@ -55,7 +55,7 @@ public class EarthChallengeLevel extends RegularLevel {
     {
         color1 = 0x534f3e;
         color2 = 0xb9d661;
-
+        hasExit = false;
         viewDistance = Math.min(6, viewDistance);
     }
 
