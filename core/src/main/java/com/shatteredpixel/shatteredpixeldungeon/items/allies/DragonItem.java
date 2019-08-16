@@ -177,6 +177,8 @@ public class DragonItem extends KindofMisc {
 
     }
 
+
+
     public void SpawnDragon(int newPos, int pos) {
         dragon = new Dragon();
         dragon.SpawnerLevel = level();
