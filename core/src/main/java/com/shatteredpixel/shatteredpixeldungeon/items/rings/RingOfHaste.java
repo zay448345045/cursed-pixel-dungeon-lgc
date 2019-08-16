@@ -30,7 +30,7 @@ public class RingOfHaste extends Ring {
 	
 	public String statsInfo() {
 		if (isIdentified()){
-			return Messages.get(this, "stats", new DecimalFormat("#.##").format(100f * (Math.pow(1.2f, soloBonus()) - 1f)));
+			return Messages.get(this, "stats", new DecimalFormat("#.##").format(100f * (soloBonus())));
 		} else {
 			return Messages.get(this, "typical_stats", new DecimalFormat("#.##").format(20f));
 		}
@@ -42,7 +42,8 @@ public class RingOfHaste extends Ring {
 	}
 	
 	public static float speedMultiplier( Char target ){
-		return (float)Math.pow(1.2, getBonus(target, Haste.class));
+		float bonus = (float) Math.min(16, getBonus(target, Haste.class));
+		return (float)1 + bonus;//RoH still has powerful scaling due to having side effects
 	}
 	
 	public class Haste extends RingBuff {

@@ -48,7 +48,7 @@ public class RingOfElements extends Ring {
 	
 	public String statsInfo() {
 		if (isIdentified()){
-			return Messages.get(this, "stats", new DecimalFormat("#.##").format(100f * (1f - Math.pow(0.80f, soloBonus()))));
+			return Messages.get(this, "stats", new DecimalFormat("#.##").format(100f * (0.045 * soloBonus())));
 		} else {
 			return Messages.get(this, "typical_stats", new DecimalFormat("#.##").format(20f));
 		}
@@ -88,7 +88,8 @@ public class RingOfElements extends Ring {
 		
 		for (Class c : RESISTS){
 			if (c.isAssignableFrom(effect)){
-				return (float)Math.pow(0.80, getBonus(target, Resistance.class));
+				float bonus = (float) Math.min(16, getBonus(target, Resistance.class));
+				return (float) (1 - 0.045 * bonus);
 			}
 		}
 		
