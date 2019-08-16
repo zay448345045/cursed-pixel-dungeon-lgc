@@ -52,7 +52,7 @@ public class RingOfForce extends Ring {
 
 	public static int damageRoll( Hero hero ){
 		if (hero.buff(Force.class) != null) {
-			int level = getBonus(hero, Force.class);
+			int level = Math.min(16, getBonus(hero, Force.class));
 			float tier = tier(hero.STR());
 			return Random.NormalIntRange(min(level, tier), max(level, tier));
 		} else {
