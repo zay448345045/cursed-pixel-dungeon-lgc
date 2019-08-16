@@ -78,7 +78,7 @@ public class NonBossGoo extends Mob {
 
     @Override
     public int defenseSkill(Char enemy) {
-        return (int)(super.defenseSkill(enemy) * ((HP*2 <= HT)? 1.5 : 1));
+        return 20;
     }
 
     @Override
@@ -92,7 +92,7 @@ public class NonBossGoo extends Mob {
         if (Dungeon.level.water[pos] && HP < HT) {
             sprite.emitter().burst( Speck.factory( Speck.HEALING ), 1 );
 
-            HP+= 10;
+            HP+= 3;
         }
 
         return super.act();
