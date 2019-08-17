@@ -32,6 +32,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Corruption;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Frost;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Poison;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Pushing;
+import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
 import com.shatteredpixel.shatteredpixeldungeon.items.quest.Embers;
 import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfElements;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
@@ -47,7 +48,7 @@ public class WaterElemental extends Mob {
     {
         spriteClass = NewbornElementalSprite.class;
 
-        HT = 300;
+        HT = 400;
         HP = HT;
 
         defenseSkill = 30;
@@ -68,6 +69,28 @@ public class WaterElemental extends Mob {
     public void add(Buff buff) {
             super.add(buff);
 
+    }
+
+    @Override
+    public int damageRoll() {
+        return Random.NormalIntRange( 24, 39 );
+    }
+
+    @Override
+    public int attackSkill( Char target ) {
+        return 25;
+    }
+
+    @Override
+    public boolean act() {
+
+        if (Dungeon.level.water[pos] && HP < HT) {
+            sprite.emitter().burst( Speck.factory( Speck.HEALING ), 1 );
+
+            HP+= 5;
+        }
+
+        return super.act();
     }
 
     @Override
