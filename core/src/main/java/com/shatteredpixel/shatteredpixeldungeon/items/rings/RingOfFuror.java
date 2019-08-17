@@ -43,7 +43,7 @@ public class RingOfFuror extends Ring {
 	
 	public static float attackDelayMultiplier(Char target ){
 		float bonus = (float) Math.min(16, getBonus(target, Furor.class));
-		return (float) (1 + 0.1875 * bonus);
+		return (float) (1/(1 + 0.1875 * bonus));
 	}
 
 	public class Furor extends RingBuff {
