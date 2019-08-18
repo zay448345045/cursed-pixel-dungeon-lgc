@@ -100,6 +100,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.SpiritBow;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Blocking;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Swift;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Flail;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.MissileWeapon;
 import com.shatteredpixel.shatteredpixeldungeon.journal.Notes;
@@ -458,6 +459,12 @@ public class Hero extends Char {
 	}
 	
 	public float attackDelay() {
+		KindOfWeapon wep = belongings.weapon;
+
+		if (wep instanceof Weapon && (((Weapon) wep).hasEnchant(Swift.class, this)) && Swift.activate(wep)){
+			return 0;
+
+		}
 		if (belongings.weapon != null) {
 			
 			return belongings.weapon.speedFactor( this );

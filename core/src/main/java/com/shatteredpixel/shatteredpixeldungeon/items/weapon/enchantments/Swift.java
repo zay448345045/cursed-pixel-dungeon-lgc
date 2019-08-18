@@ -1,17 +1,26 @@
 package com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments;
 
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
+import com.shatteredpixel.shatteredpixeldungeon.items.KindOfWeapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
 import com.watabou.utils.Random;
 
 public class Swift extends Weapon.Enchantment {
-    private static ItemSprite.Glowing YELLOW = new ItemSprite.Glowing( 0xFFFF00 );
+    private static ItemSprite.Glowing YELLOW_1 = new ItemSprite.Glowing( 0xFFFE00 );
 
     @Override
     public int proc(Weapon weapon, Char attacker, Char defender, int damage) {
-        //no proc effect, see Hero.damage
+        //no proc effect, see Hero.attackDelay
         return damage;
+    }
+
+    public static boolean activate(KindOfWeapon weapon) {
+        if (Random.Int( 2 ) == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public static int drRoll( int level ){
@@ -20,6 +29,6 @@ public class Swift extends Weapon.Enchantment {
 
     @Override
     public ItemSprite.Glowing glowing() {
-        return YELLOW;
+        return YELLOW_1;
     }
 }

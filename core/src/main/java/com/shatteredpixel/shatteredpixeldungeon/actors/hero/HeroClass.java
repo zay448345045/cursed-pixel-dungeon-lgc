@@ -137,7 +137,7 @@ public enum HeroClass {
 	}
 
 	private static void initWarrior( Hero hero ) {
-		(hero.belongings.weapon = new WornShortsword().enchant( new Swift())).identify().upgrade();
+		(hero.belongings.weapon = new WornShortsword()).identify().upgrade();
 		(hero.belongings.armor = new LeatherArmor()).identify().upgrade();
 		(hero.belongings.misc1 = new RingOfMight()).identify();
 		ThrowingStone stones = new ThrowingStone();
