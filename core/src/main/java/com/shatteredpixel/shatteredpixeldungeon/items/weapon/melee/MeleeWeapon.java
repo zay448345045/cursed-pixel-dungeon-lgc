@@ -47,7 +47,7 @@ public class MeleeWeapon extends Weapon {
 	public int STRReq(int lvl){
 		lvl = Math.max(0, lvl);
 		//strength req decreases at +1,+3,+6,+10,etc.
-		return (8 + tier * 2) - (int)(Math.sqrt(8 * lvl + 1) - 1)/2;
+		return (6 + tier * 2);
 	}
 	
 	@Override
