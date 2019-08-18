@@ -21,7 +21,9 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee;
 
+import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
+import com.watabou.utils.Random;
 
 public class RunicBlade extends MeleeWeapon {
 
@@ -43,4 +45,8 @@ public class RunicBlade extends MeleeWeapon {
 				Math.round((level()+1)*(level()+1)/2);	//+level() +1 scaling
 
 	}
+
+	public int damageRoll( Char owner ) {
+		return Random.IntRange( min(), max() );
+	}//Runic Blade doesn't use normal distribution
 }
