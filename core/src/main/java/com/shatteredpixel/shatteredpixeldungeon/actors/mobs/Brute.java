@@ -57,8 +57,8 @@ public class Brute extends Mob {
 	@Override
 	public int damageRoll() {
 		return enraged ?
-			Random.NormalIntRange( 15, 60 ) :
-			Random.NormalIntRange( 6, 35 );
+			Random.NormalIntRange( 30, 90 ) :
+			Random.NormalIntRange( 10, 40 );
 	}
 	
 	@Override

@@ -65,7 +65,7 @@ public class Succubus extends Mob {
 	
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange( 25, 65 );
+		return Random.NormalIntRange( 30, 90 );
 	}
 	
 	@Override

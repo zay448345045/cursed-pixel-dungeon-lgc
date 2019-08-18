@@ -56,7 +56,7 @@ public class Skeleton extends Mob {
 	
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange( 2, 12 );
+		return Random.NormalIntRange( 3, 18 );
 	}
 	
 	@Override

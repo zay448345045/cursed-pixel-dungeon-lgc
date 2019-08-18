@@ -73,7 +73,7 @@ public class WaterElemental extends Mob {
 
     @Override
     public int damageRoll() {
-        return Random.NormalIntRange( 24, 39 );
+        return Random.NormalIntRange( 36, 60 );
     }
 
     @Override
@@ -87,7 +87,7 @@ public class WaterElemental extends Mob {
         if (Dungeon.level.water[pos] && HP < HT) {
             sprite.emitter().burst( Speck.factory( Speck.HEALING ), 1 );
 
-            HP+= 5;
+            HP+= 10;
         }
 
         return super.act();

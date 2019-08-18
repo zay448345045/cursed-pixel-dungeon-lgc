@@ -49,7 +49,7 @@ public class NonBossGoo extends Mob {
     @Override
     public int damageRoll() {
         int min = 20;
-        int max = (HP*2 <= HT) ? 80 : 60;
+        int max = (HP*2 <= HT) ? 120 : 100;
         if (pumpedUp > 0) {
             pumpedUp = 0;
             PathFinder.buildDistanceMap( pos, BArray.not( Dungeon.level.solid, null ), 2 );
@@ -58,7 +58,14 @@ public class NonBossGoo extends Mob {
                     CellEmitter.get(i).burst(ElmoParticle.FACTORY, 10);
             }
             Sample.INSTANCE.play( Assets.SND_BURNING );
-            return Random.NormalIntRange( min, max*2 );
+            int Damage = Random.NormalIntRange( min, max*2 );//Goo can deal heavier damage but is unlikely to one shot the player as damage is rolled up to 3 times
+            if (Damage > Dungeon.hero.HP) {
+                Damage = Random.NormalIntRange( min, max*2 );
+                if (Damage > Dungeon.hero.HP) {
+                    Damage = Random.NormalIntRange( min, max*2 );
+                }
+            }
+            return Damage;
         } else {
             return Random.NormalIntRange( min, max );
         }

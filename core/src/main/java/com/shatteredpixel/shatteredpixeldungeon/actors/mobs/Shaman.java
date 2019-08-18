@@ -55,7 +55,7 @@ public class Shaman extends Mob implements Callback {
 	
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange( 2, 12 );
+		return Random.NormalIntRange( 3, 18 );
 	}
 	
 	@Override
