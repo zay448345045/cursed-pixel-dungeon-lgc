@@ -132,14 +132,14 @@ public class SpiritBow extends Weapon {
 	
 	@Override
 	public int min(int lvl) {
-		return 2 + Dungeon.hero.lvl/4
-				+ (curseInfusionBonus ? 3 : 0);
+		int tier = Math.max(1, Dungeon.hero.lvl/5);
+		return 1 + (tier) + level();
 	}
 	
 	@Override
 	public int max(int lvl) {
-		return 8 + (int)(Dungeon.hero.lvl/1.5f)
-				+ (curseInfusionBonus ? 15 : 0);
+		int tier = Math.max(1, Dungeon.hero.lvl/5);
+		return 4*(tier+1) + (tier*level());//Scaling depends on hero level
 	}
 	
 	private int targetPos;

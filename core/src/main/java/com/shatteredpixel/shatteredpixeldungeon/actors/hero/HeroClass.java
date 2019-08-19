@@ -139,7 +139,7 @@ public enum HeroClass {
 	private static void initWarrior( Hero hero ) {
 		(hero.belongings.weapon = new WornShortsword()).identify().upgrade();
 		(hero.belongings.armor = new LeatherArmor()).identify().upgrade();
-		(hero.belongings.misc1 = new RingOfMight()).identify();
+		hero.HP = hero.HT = 24;
 		ThrowingStone stones = new ThrowingStone();
 		stones.quantity(3).collect();
 		Dungeon.quickslot.setSlot(0, stones);
@@ -199,6 +199,7 @@ public enum HeroClass {
 		(hero.belongings.weapon = new Gloves()).identify().upgrade();
 		SpiritBow bow = new SpiritBow();
 		bow.identify().upgrade().collect();
+		hero.HT = hero.HP = 16;
 
 		Dungeon.quickslot.setSlot(0, bow);
 
