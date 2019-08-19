@@ -16,7 +16,7 @@ public class Swift extends Weapon.Enchantment {
     }
 
     public static boolean activate(KindOfWeapon weapon) {
-        if (Random.Int( 2 ) == 1) {
+        if (Random.Int( 3 ) == 1) {
             return true;
         } else {
             return false;

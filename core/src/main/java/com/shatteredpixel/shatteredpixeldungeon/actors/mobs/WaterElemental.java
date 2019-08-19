@@ -48,10 +48,10 @@ public class WaterElemental extends Mob {
     {
         spriteClass = NewbornElementalSprite.class;
 
-        HT = 400;
+        HT = 500;
         HP = HT;
 
-        defenseSkill = 30;
+        defenseSkill = 25;
 
         EXP = 15;
         maxLvl = 30;
@@ -73,7 +73,7 @@ public class WaterElemental extends Mob {
 
     @Override
     public int damageRoll() {
-        return Random.NormalIntRange( 36, 60 );
+        return Random.NormalIntRange( 36, 70 );
     }
 
     @Override
@@ -87,7 +87,7 @@ public class WaterElemental extends Mob {
         if (Dungeon.level.water[pos] && HP < HT) {
             sprite.emitter().burst( Speck.factory( Speck.HEALING ), 1 );
 
-            HP+= 10;
+            HP+= 15;
         }
 
         return super.act();
@@ -152,7 +152,7 @@ public class WaterElemental extends Mob {
     public int attackProc( Char enemy, int damage ) {
         damage = super.attackProc( enemy, damage );
         if (Random.Int( 2 ) == 0) {
-            Buff.affect( enemy, Chill.class );
+            Buff.affect( enemy, Chill.class, 2f );
         }
 
         return damage;
