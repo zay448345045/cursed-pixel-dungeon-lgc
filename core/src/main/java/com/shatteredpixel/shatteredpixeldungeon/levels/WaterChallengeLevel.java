@@ -58,8 +58,6 @@ public class WaterChallengeLevel extends RegularLevel {
     {
         color1 = 0x48763c;
         color2 = 0x59994a;
-        hasExit = false;
-        hasEntrance = Dungeon.depth == 31;
     }
 
     @Override
