@@ -33,7 +33,7 @@ public class Bulk extends Armor.Glyph {
 	public int proc(Armor armor, Char attacker, Char defender, int damage) {
 		
 		//no proc effect, see armor.speedfactor
-		return Math.round(damage/4*(3));
+		return (int) (damage*0.90);
 	}
 	
 	@Override

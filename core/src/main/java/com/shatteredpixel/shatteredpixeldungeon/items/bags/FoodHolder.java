@@ -32,7 +32,7 @@ public class FoodHolder extends Bag {
     {
         image = ItemSpriteSheet.POUCH;
 
-        size = 20;
+        size = 35;
     }
 
     @Override

@@ -32,7 +32,7 @@ public class ScrollHolder extends Bag {
 	{
 		image = ItemSpriteSheet.HOLDER;
 		
-		size = 24;
+		size = 35;
 	}
 	
 	@Override
