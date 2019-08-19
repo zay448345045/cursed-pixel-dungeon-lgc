@@ -189,22 +189,11 @@ public class SpiritBow extends Weapon {
 		}
 	}
 	
-	@Override
-	public int level() {
-		//need to check if hero is null for loading an upgraded bow from pre-0.7.0
-		return (Dungeon.hero == null ? 0 : Dungeon.hero.lvl/5)
-				+ (curseInfusionBonus ? 1 : 0);
-	}
-	
 	//for fetching upgrades from a boomerang from pre-0.7.1
 	public int spentUpgrades() {
-		return super.level() - (curseInfusionBonus ? 1 : 0);
+		return super.level() - (curseInfusionBonus ? 3 : 0);
 	}
-	
-	@Override
-	public boolean isUpgradable() {
-		return false;
-	}
+
 	
 	public SpiritArrow knockArrow(){
 		return new SpiritArrow();
