@@ -242,9 +242,6 @@ public class GameScene extends PixelScene {
 		
 		for (Mob mob : Dungeon.level.mobs) {
 			addMobSprite( mob );
-			if (Statistics.amuletObtained) {
-				mob.beckon( Dungeon.hero.pos );
-			}
 		}
 		
 		raisedTerrain = new RaisedTerrainTilemap();
