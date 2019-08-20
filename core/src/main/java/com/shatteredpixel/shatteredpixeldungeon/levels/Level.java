@@ -955,7 +955,7 @@ public abstract class Level implements Bundlable {
 			} else if (((Hero)c).heroClass == HeroClass.HUNTRESS) {
 				for (Mob mob : mobs) {
 					int p = mob.pos;
-					if (distance( c.pos, p) == 2) {
+					if (distance( c.pos, p) <= 5) {
 
 						if (!fieldOfView[p]){
 							Dungeon.hero.mindVisionEnemies.add(mob);
