@@ -54,6 +54,7 @@ public class SpiritBow extends Weapon {
 		
 		unique = true;
 		bones = false;
+
 	}
 	
 	public boolean sniperSpecial = false;
@@ -127,19 +128,20 @@ public class SpiritBow extends Weapon {
 	public int STRReq(int lvl) {
 		lvl = Math.max(0, lvl);
 		//strength req decreases at +1,+3,+6,+10,etc.
-		return 10 - (int)(Math.sqrt(8 * lvl + 1) - 1)/2;
+		return 8;
 	}
 	
 	@Override
 	public int min(int lvl) {
 		int tier = Math.max(1, Dungeon.hero.lvl/5);
-		return 1 + (tier) + level();
+		return 1 + (tier) + lvl;
 	}
 	
 	@Override
 	public int max(int lvl) {
-		int tier = Math.max(1, Dungeon.hero.lvl/5);
-		return 4*(tier+1) + (tier*level());//Scaling depends on hero level
+		int level = Math.min(25, Dungeon.hero.lvl);
+		int tier = Math.max(1, (level/5) + 1);
+		return 4*(tier+1) + ((tier)*lvl);//Scaling depends on hero level
 	}
 	
 	private int targetPos;
