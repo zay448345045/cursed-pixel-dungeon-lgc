@@ -33,7 +33,10 @@ import com.shatteredpixel.shatteredpixeldungeon.items.food.MeatPie;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.MysteryMeat;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.SmallRation;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.StewedMeat;
+import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.Scroll;
+import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfTransmutation;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
+import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfEnchantment;
 import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfEnchantment;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
@@ -76,7 +79,11 @@ public class RingOfWealth extends Ring {
 	
 	public String statsInfo() {
 		if (isIdentified()){
-			return Messages.get(this, "stats", new DecimalFormat("#.##").format(100f * (Math.pow(1.2f, soloBonus()) - 1f)), new DecimalFormat("#.##").format(100f*(1/dropsToUpgrade)));
+			float dropChance = 100f*(1/dropsToUpgrade);
+			if (Dungeon.isChallenged(Challenges.NO_SCROLLS)) {//Show 0% on Forbidden Runes
+				dropChance = 0f;
+			}
+			return Messages.get(this, "stats", new DecimalFormat("#.##").format(100f * (Math.pow(1.2f, soloBonus()) - 1f)), new DecimalFormat("#.##").format(dropChance));
 		} else {
 			return Messages.get(this, "typical_stats", new DecimalFormat("#.##").format(20f));
 		}
@@ -138,7 +145,7 @@ public class RingOfWealth extends Ring {
 		triesToDrop -= dropProgression(target, tries);
 
 		while ( triesToDrop <= 0 ){
-			if (Random.Int( (int) dropsToUpgrade) == 1) {
+			if (Random.Int( (int) dropsToUpgrade) == 1 & !Dungeon.isChallenged(Challenges.NO_SCROLLS)) {
 				drops.add(new ScrollOfUpgrade());
 				dropsToUpgrade += dropsIncreases;
 				dropsToRare--;
@@ -206,7 +213,12 @@ public class RingOfWealth extends Ring {
 	private static Item genBasicConsumable(){
 		float roll = Random.Float();
 		if (roll < 0.4f){ //40% chance
-			return Generator.random(Generator.Category.SCROLL);
+			//
+			Scroll scroll;
+			do {
+				scroll = (Scroll) Generator.random(Generator.Category.SCROLL);
+			} while (scroll == null || ((scroll instanceof ScrollOfUpgrade) & Dungeon.isChallenged(Challenges.NO_SCROLLS)));
+			return scroll;
 		} else if (roll < 0.6f){ //20% chance to drop a minor food item
 			return Random.Int(2) == 0 ? new SmallRation() : new MysteryMeat();
 		} else { //40% chance
@@ -219,7 +231,11 @@ public class RingOfWealth extends Ring {
 		if (roll < 0.2f){ //20% chance
 			return Generator.random(Generator.Category.POTION_EXOTIC);
 		} else if (roll < 0.5f) { //30% chance
-			return Generator.random(Generator.Category.SCROLL_EXOTIC);
+			Scroll scroll;
+			do {
+				scroll = (Scroll) Generator.random(Generator.Category.SCROLL_EXOTIC);
+			} while (scroll == null || ((scroll instanceof ScrollOfEnchantment) & Dungeon.isChallenged(Challenges.NO_SCROLLS)));
+			return scroll;
 		} else { //50% chance
 			return Random.Int(2) == 0 ? new FrozenCarpaccio() : new StewedMeat();
 		}
