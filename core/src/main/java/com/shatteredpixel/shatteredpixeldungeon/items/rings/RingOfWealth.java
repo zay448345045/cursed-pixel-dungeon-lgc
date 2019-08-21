@@ -28,20 +28,15 @@ import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
 import com.shatteredpixel.shatteredpixeldungeon.items.Gold;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor;
+import com.shatteredpixel.shatteredpixeldungeon.items.food.FrozenCarpaccio;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.MeatPie;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.MysteryMeat;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.SmallRation;
-import com.shatteredpixel.shatteredpixeldungeon.items.potions.AlchemicalCatalyst;
-import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfExperience;
-import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfTransmutation;
+import com.shatteredpixel.shatteredpixeldungeon.items.food.StewedMeat;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
-import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfEnchantment;
-import com.shatteredpixel.shatteredpixeldungeon.items.spells.ArcaneCatalyst;
-import com.shatteredpixel.shatteredpixeldungeon.items.spells.CurseInfusion;
 import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfEnchantment;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
-import com.shatteredpixel.shatteredpixeldungeon.plants.Starflower;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
@@ -74,12 +69,14 @@ public class RingOfWealth extends Ring {
 	}
 	private float triesToDrop = Float.MIN_VALUE;
 	private int dropsToRare = Integer.MIN_VALUE;
+	private static float dropsToUpgrade = 30;
+	private static final float dropsIncreases = 20;
 
 	public static boolean latestDropWasRare = false;
 	
 	public String statsInfo() {
 		if (isIdentified()){
-			return Messages.get(this, "stats", new DecimalFormat("#.##").format(100f * (Math.pow(1.2f, soloBonus()) - 1f)));
+			return Messages.get(this, "stats", new DecimalFormat("#.##").format(100f * (Math.pow(1.2f, soloBonus()) - 1f)), new DecimalFormat("#.##").format(100f*(1/dropsToUpgrade)));
 		} else {
 			return Messages.get(this, "typical_stats", new DecimalFormat("#.##").format(20f));
 		}
@@ -87,12 +84,14 @@ public class RingOfWealth extends Ring {
 
 	private static final String TRIES_TO_DROP = "tries_to_drop";
 	private static final String DROPS_TO_RARE = "drops_to_rare";
+	private static final String DROPS_TO_UPGRADE = "drops_to_upgrade";
 
 	@Override
 	public void storeInBundle(Bundle bundle) {
 		super.storeInBundle(bundle);
 		bundle.put(TRIES_TO_DROP, triesToDrop);
 		bundle.put(DROPS_TO_RARE, dropsToRare);
+		bundle.put(DROPS_TO_UPGRADE, dropsToUpgrade);
 	}
 
 	@Override
@@ -100,6 +99,7 @@ public class RingOfWealth extends Ring {
 		super.restoreFromBundle(bundle);
 		triesToDrop = bundle.getFloat(TRIES_TO_DROP);
 		dropsToRare = bundle.getInt(DROPS_TO_RARE);
+		dropsToUpgrade = bundle.getInt(DROPS_TO_UPGRADE);
 	}
 
 	@Override
@@ -136,23 +136,32 @@ public class RingOfWealth extends Ring {
 		ArrayList<Item> drops = new ArrayList<>();
 
 		triesToDrop -= dropProgression(target, tries);
+
 		while ( triesToDrop <= 0 ){
-			if (dropsToRare <= 0){
-				Item i;
-				do {
-					i = genRareDrop();
-				} while (Challenges.isItemBlocked(i));
-				drops.add(i);
-				latestDropWasRare = true;
-				dropsToRare = Random.NormalIntRange(0, 20);
-			} else {
-				Item i;
-				do {
-					i = genStandardDrop();
-				} while (Challenges.isItemBlocked(i));
-				drops.add(i);
+			if (Random.Int( (int) dropsToUpgrade) == 1) {
+				drops.add(new ScrollOfUpgrade());
+				dropsToUpgrade += dropsIncreases;
 				dropsToRare--;
+			} else {
+				if (dropsToRare <= 0){
+					Item i;
+					do {
+						i = genRareDrop();
+					} while (Challenges.isItemBlocked(i));
+					drops.add(i);
+					latestDropWasRare = true;
+					dropsToRare = Random.NormalIntRange(0, 20);
+				} else {
+					Item i;
+					do {
+						i = genStandardDrop();
+					} while (Challenges.isItemBlocked(i));
+					drops.add(i);
+					dropsToRare--;
+				}
+
 			}
+			dropsToUpgrade--;
 			triesToDrop += Random.NormalIntRange(0, 60);
 		}
 
@@ -197,22 +206,22 @@ public class RingOfWealth extends Ring {
 	private static Item genBasicConsumable(){
 		float roll = Random.Float();
 		if (roll < 0.4f){ //40% chance
-			return Generator.random(Generator.Category.STONE);
+			return Generator.random(Generator.Category.SCROLL);
 		} else if (roll < 0.6f){ //20% chance to drop a minor food item
 			return Random.Int(2) == 0 ? new SmallRation() : new MysteryMeat();
 		} else { //40% chance
-			return Generator.random(Generator.Category.SCROLL);
+			return Generator.random(Generator.Category.POTION);
 		}
 	}
 	
 	private static Item genExoticConsumable(){
 		float roll = Random.Float();
 		if (roll < 0.2f){ //20% chance
-			return Generator.random(Generator.Category.POTION);
+			return Generator.random(Generator.Category.POTION_EXOTIC);
 		} else if (roll < 0.5f) { //30% chance
 			return Generator.random(Generator.Category.SCROLL_EXOTIC);
 		} else { //50% chance
-			return Random.Int(2) == 0 ? new ScrollOfEnchantment() : new ScrollOfTransmutation();
+			return Random.Int(2) == 0 ? new FrozenCarpaccio() : new StewedMeat();
 		}
 	}
 	
@@ -253,11 +262,11 @@ public class RingOfWealth extends Ring {
 			case 0: default:
 				return Generator.random(Generator.Category.SPELL);
 			case 1:
-				return new ScrollOfEnchantment().quantity(5);
+				return new StoneOfEnchantment().quantity(5);
 			case 2:
-				return new MeatPie();
+				return Generator.random(Generator.Category.ELXIR);
 			case 3:
-				return new ScrollOfTransmutation().quantity(5);
+				return new MeatPie();
 		}
 	}
 	

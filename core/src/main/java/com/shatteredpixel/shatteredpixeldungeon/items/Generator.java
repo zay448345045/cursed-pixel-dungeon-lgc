@@ -63,6 +63,29 @@ import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfParalyticG
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfPurity;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfStrength;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfToxicGas;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.brews.BlizzardBrew;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.brews.CausticBrew;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.brews.InfernalBrew;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.brews.ShockingBrew;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.elixirs.ElixirOfAquaticRejuvenation;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.elixirs.ElixirOfArcaneArmor;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.elixirs.ElixirOfDragonsBlood;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.elixirs.ElixirOfHoneyedHealing;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.elixirs.ElixirOfIcyTouch;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.elixirs.ElixirOfMight;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.elixirs.ElixirOfToxicEssence;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.exotic.PotionOfAdrenalineSurge;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.exotic.PotionOfCleansing;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.exotic.PotionOfCorrosiveGas;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.exotic.PotionOfDragonsBreath;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.exotic.PotionOfEarthenArmor;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.exotic.PotionOfHolyFuror;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.exotic.PotionOfMagicalSight;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.exotic.PotionOfShielding;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.exotic.PotionOfShroudingFog;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.exotic.PotionOfSnapFreeze;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.exotic.PotionOfStamina;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.exotic.PotionOfStormClouds;
 import com.shatteredpixel.shatteredpixeldungeon.items.rings.Ring;
 import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfAccuracy;
 import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfElements;
@@ -228,6 +251,8 @@ public class Generator {
 		FOOD	( 0,    Food.class ),
 		
 		POTION	( 20,   Potion.class ),
+		POTION_EXOTIC	( 1,   Potion.class ),
+		ELXIR	( 1,   Potion.class ),
 		SEED	( 0,    Plant.Seed.class ), //dropped by grass
 		
 		SCROLL	( 20,   Scroll.class ),
@@ -286,7 +311,38 @@ public class Generator {
 					PotionOfPurity.class,
 					PotionOfExperience.class};
 			POTION.probs = new float[]{ 0, 6, 4, 3, 3, 3, 2, 2, 2, 2, 2, 1 };
-			
+
+			POTION_EXOTIC.classes = new Class<?>[]{
+					PotionOfAdrenalineSurge.class, //2 drop every chapter, see Dungeon.posNeeded()
+					PotionOfShielding.class,
+					PotionOfMagicalSight.class,
+					PotionOfSnapFreeze.class,
+					PotionOfDragonsBreath.class,
+					PotionOfCorrosiveGas.class,
+					PotionOfStamina.class,
+					PotionOfShroudingFog.class,
+					PotionOfStormClouds.class,
+					PotionOfEarthenArmor.class,
+					PotionOfCleansing.class,
+					PotionOfHolyFuror.class};
+			POTION_EXOTIC.probs = new float[]{ 0, 6, 4, 3, 3, 3, 2, 2, 2, 2, 2, 1 };
+
+			ELXIR.classes = new Class<?>[] {
+					BlizzardBrew.class,
+					CausticBrew.class,
+					InfernalBrew.class,
+					ShockingBrew.class,
+					ElixirOfAquaticRejuvenation.class,
+					ElixirOfArcaneArmor.class,
+					ElixirOfDragonsBlood.class,
+					ElixirOfHoneyedHealing.class,
+					ElixirOfIcyTouch.class,
+					ElixirOfMight.class,
+					ElixirOfToxicEssence.class
+			};
+
+			ELXIR.probs = new float[] {1,1,1,1,1,1,1,1,1,1,1};
+
 			SEED.classes = new Class<?>[]{
 					Rotberry.Seed.class, //quest item
 					Blindweed.Seed.class,
@@ -349,7 +405,7 @@ public class Generator {
 					ScrollOfPetrification.class,
 					ScrollOfPolymorph.class
 			};
-			SCROLL_EXOTIC.probs = new float[]{ 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+			SCROLL_EXOTIC.probs = SCROLL.probs.clone();
 			
 			STONE.classes = new Class<?>[]{
 					StoneOfEnchantment.class,   //1 is guaranteed to drop on floors 6-19
