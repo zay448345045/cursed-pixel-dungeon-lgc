@@ -873,7 +873,7 @@ public class v0_6_X_Changes {
 				"_-_ Greatshield base damage increased by ~17%"));
 		
 		changes.addButton( new ChangeButton(new ItemSprite(new StoneOfEnchantment()), "Enchant and Glyph Balance Changes",
-				"_-_ Vampiric enchant lifesteal reduced by 20%\n\n" +
+				"_-_ Shielding enchant lifesteal reduced by 20%\n\n" +
 				"Lucky enchant rebalanced:\n" +
 				"_-_ now deals 2x/0x damage, instead of min/max\n" +
 				"_-_ base chance to deal 2x increased by ~10%\n\n" +

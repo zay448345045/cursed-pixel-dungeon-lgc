@@ -22,6 +22,8 @@
 package com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments;
 
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Barrier;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
@@ -29,27 +31,27 @@ import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite.Glowing;
 import com.watabou.utils.Random;
 
-public class Vampiric extends Weapon.Enchantment {
+public class Shielding extends Weapon.Enchantment {
 
-	private static ItemSprite.Glowing RED = new ItemSprite.Glowing( 0x660022 );
+	private static ItemSprite.Glowing SILVER = new ItemSprite.Glowing( 0x909396 );
 	
 	@Override
 	public int proc( Weapon weapon, Char attacker, Char defender, int damage ) {
 		
-		//chance to heal scales from 25%-100% based on missing HP
+		//chance to heal scales from 50%-100% based on missing HP
 		float missingPercent = (attacker.HT - attacker.HP) / (float)attacker.HT;
-		float healChance = 0.25f + .75f*missingPercent;
+		float healChance = 0.50f + .75f*missingPercent;
 		
 		if (Random.Float() < healChance){
 			
 			//heals for 25% of damage dealt
-			int healAmt = Math.round(damage * 0.25f);
+			int healAmt = Math.round(damage * 0.35f);
 			healAmt = Math.min( healAmt, attacker.HT - attacker.HP );
 
 			if (healAmt > 0 && attacker.isAlive()) {
 
-				attacker.HP += healAmt;
-				attacker.sprite.emitter().start( Speck.factory( Speck.HEALING ), 0.4f, 1 );
+				Buff.affect(attacker, Barrier.class).setShield(healAmt);;
+				attacker.sprite.emitter().start( Speck.factory( Speck.DISCOVER ), 0.4f, 1 );
 				attacker.sprite.showStatus( CharSprite.POSITIVE, Integer.toString( healAmt ) );
 				
 			}
@@ -60,6 +62,6 @@ public class Vampiric extends Weapon.Enchantment {
 	
 	@Override
 	public Glowing glowing() {
-		return RED;
+		return SILVER;
 	}
 }

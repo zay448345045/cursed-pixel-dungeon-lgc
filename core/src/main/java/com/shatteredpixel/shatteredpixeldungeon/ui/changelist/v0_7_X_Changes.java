@@ -278,7 +278,7 @@ public class v0_7_X_Changes {
 				"_-_ Throwing hammer base damage increased to 10-20 from 8-20"));
 		
 		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.ARMOR_SCALE, new ItemSprite.Glowing( 0x663300 )), "Enchant/Glyph Buffs",
-				"_-_ Vampiric now has a chance to heal for large amounts, instead of always healing for small amounts.\n\n" +
+				"_-_ Shielding now has a chance to heal for large amounts, instead of always healing for small amounts.\n\n" +
 				"_-_ Entanglement no longer roots, now only applies herbal armor buff. Amount of herbal armor granted reduced to compensate.\n\n" +
 				"_-_ Affection charm duration up to 8-12 from 4-12. This means an affection proc now guarantees a free hit.\n\n" +
 				"_-_ Potential no longer grants small amounts of partial charge on every hit, now has a chance to grant one full charge instead. Overall amount of charge given increased by ~20%."));
@@ -338,7 +338,7 @@ public class v0_7_X_Changes {
 		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.LONGSWORD, new ItemSprite.Glowing(0x0000FF)), "Enchantment Overhaul!",
 				"Enchantments have been significantly rebalanced to be less about direct damage and more about utility and situational power. Their design should now be more similar to glyphs.\n\n" +
 				"Buffed Enchants: Chilling, Lucky.\n\n" +
-				"Nerfed Enchants: Blazing, Shocking, Grim, Vampiric\n\n" +
+				"Nerfed Enchants: Blazing, Shocking, Grim, Shielding\n\n" +
 				"Removed Enchants: Vorpal, Venomous, Dazzling, Eldritch, and Stunning.\n\n" +
 				"New Enchants: Blocking, Blooming, Elastic (formerly a curse), Precise, and Swift.\n\n" +
 				"New Curse: Polarized.\n\n" +
@@ -465,7 +465,7 @@ public class v0_7_X_Changes {
 		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.DIRK, new ItemSprite.Glowing(0xFF4400)), "Nerfed Enchants",
 				"_-_ Blazing no longer deals direct damage, now instead is more likely to set enemies on fire.\n\n" +
 				"_-_ Shocking no longer deals damage to enemy being attacked, deals more damage to surrounding enemies.\n\n" +
-				"_-_ Vampiric now grants less health when hero is at higher HP.\n\n" +
+				"_-_ Shielding now grants less health when hero is at higher HP.\n\n" +
 				"_-_ Grim is now more likely to 'finish off' an enemy, but is less likely to activate at higher enemy health."));
 	}
 	

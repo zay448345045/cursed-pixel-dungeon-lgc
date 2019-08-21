@@ -43,14 +43,14 @@ public class Grim extends Weapon.Enchantment {
 		if (enemyHealth <= 0) return damage; //no point in proccing if they're already dead.
 
 		//scales from 0 - 60% based on how low hp the enemy is, plus 2% per level
-		float maxChance = 0.6f + .03f*level;
-		float chanceMulti = (float)Math.pow( ((defender.HT - enemyHealth) / (float)defender.HT), 2);
-		float chance = maxChance * chanceMulti;
+		//float maxChance = 0.6f + .03f*level;
+		//float chanceMulti = (float)Math.pow( ((defender.HT - enemyHealth) / (float)defender.HT), 2);
+		float chance = ((float)(damage/2))/defender.HP;//Chance is now half of damage dealt out of enemy hp. This is a massive nerf for fast weapons but a smaller one for slow weapons.
 		
 		if (Random.Float() < chance) {
 			
 			defender.damage( defender.HP, this );
-			defender.sprite.emitter().burst( ShadowParticle.UP, 5 );
+			defender.sprite.emitter().burst( ShadowParticle.UP, 10 );
 			
 			if (!defender.isAlive() && attacker instanceof Hero
 				//this prevents unstable from triggering grim achievement

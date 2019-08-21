@@ -34,7 +34,7 @@ import com.shatteredpixel.shatteredpixeldungeon.effects.CellEmitter;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
 import com.shatteredpixel.shatteredpixeldungeon.effects.particles.BloodParticle;
 import com.shatteredpixel.shatteredpixeldungeon.effects.particles.ShadowParticle;
-import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Vampiric;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Shielding;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MagesStaff;
 import com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
@@ -93,8 +93,6 @@ public class WandOfTransfusion extends Wand {
 				
 				ch.sprite.emitter().burst(Speck.factory(Speck.HEALING), 2 + level() / 2);
 				ch.sprite.showStatus(CharSprite.POSITIVE, "+%dHP", healing + shielding);
-				
-				damageHero(selfDmg);
 
 			//for enemies...
 			} else {
@@ -112,11 +110,17 @@ public class WandOfTransfusion extends Wand {
 					Sample.INSTANCE.play(Assets.SND_BURNING);
 				}
 				
-				//and harms the player
-				int selfDmg = Math.round(level() + 1);
-				damageHero(selfDmg);
+
 
 			}
+		//and harms the player
+		int selfDmg = Math.round(level() + 1);
+		if (!freeCharge) {
+			damageHero(selfDmg);
+		} else {
+			freeCharge = false;
+		}
+
 			
 		}
 		
@@ -140,9 +144,15 @@ public class WandOfTransfusion extends Wand {
 
 	@Override
 	public void onHit(MagesStaff staff, Char attacker, Char defender, int damage) {
-		// Vampiric melee effect for Battlemage
-		new Vampiric().proc(staff, attacker, defender, damage);
-
+		// lvl 0 - 10%
+		// lvl 1 - 18%
+		// lvl 2 - 25%
+		if (Random.Int( level() + 10 ) >= 9){
+			//grants a free use of the staff
+			freeCharge = true;
+			GLog.p( Messages.get(this, "charged") );
+			attacker.sprite.emitter().burst(BloodParticle.BURST, 20);
+		}
 	}
 
 	@Override
