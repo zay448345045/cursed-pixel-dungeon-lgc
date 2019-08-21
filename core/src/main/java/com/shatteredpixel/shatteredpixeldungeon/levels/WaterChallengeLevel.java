@@ -82,7 +82,7 @@ public class WaterChallengeLevel extends RegularLevel {
 
     @Override
     public String tilesTex() {
-        return Assets.TILES_SEWERS;
+        return Assets.TILES_WATER_CHALLENGE;
     }
 
     @Override

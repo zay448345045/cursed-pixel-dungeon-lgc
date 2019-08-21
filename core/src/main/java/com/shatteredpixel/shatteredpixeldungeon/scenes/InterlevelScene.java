@@ -215,14 +215,14 @@ public class InterlevelScene extends PixelScene {
 						}
 						Actor.fixTime();
 
-						switch (mode) {
+						switch (mode) {//Second argument decides a few things. DESCEND_NAME, places the player at the entrance, while ASCEND_NAME places them at the exit. FALL_NAME gives them the fall buff and causes them to fall into a random room
 							case DESCEND:
 								goToDepth(Dungeon.depth, DESCEND_NAME);
 							case DESCEND_GAMEINIT:
-								descend();//My current lazy attempt at refactoring InterLevelScene.java to allow visiting any depth from the start.
+								descend();
 								break;
 							case ASCEND:
-								goToDepth(Dungeon.depth - 1, ASCEND_NAME);//Still use ascend here so the player ends up at the level exit not entrance
+								goToDepth(Dungeon.depth - 1, ASCEND_NAME);
 								break;
 							case CONTINUE:
 								restore();
@@ -239,8 +239,8 @@ public class InterlevelScene extends PixelScene {
 							case RESET:
 								reset();
 								break;
-							case START://Testing purposes
-								goToDepth(0, DESCEND_NAME);
+							case START:
+								goToDepth(0, ASCEND_NAME);
 								break;
 							case WATERCHALLENGE:
 								goToDepth(31, DESCEND_NAME);

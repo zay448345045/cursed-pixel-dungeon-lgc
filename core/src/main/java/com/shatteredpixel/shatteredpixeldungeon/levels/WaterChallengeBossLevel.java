@@ -34,6 +34,7 @@ import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
 import com.shatteredpixel.shatteredpixeldungeon.items.Heap;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.keys.SkeletonKey;
+import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.shatteredpixeldungeon.levels.painters.Painter;
 import com.shatteredpixel.shatteredpixeldungeon.levels.traps.ToxicTrap;
 import com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap;
@@ -71,7 +72,7 @@ public class WaterChallengeBossLevel extends Level {
 
     @Override
     public String tilesTex() {
-        return Assets.TILES_SEWERS;
+        return Assets.TILES_BOSS;
     }
 
     @Override
@@ -253,7 +254,7 @@ public class WaterChallengeBossLevel extends Level {
     @Override
     public Heap drop( Item item, int cell ) {
 
-        if (!keyDropped && item instanceof SkeletonKey) {
+        if (!keyDropped && item instanceof ScrollOfUpgrade) {
 
             keyDropped = true;
             unseal();
