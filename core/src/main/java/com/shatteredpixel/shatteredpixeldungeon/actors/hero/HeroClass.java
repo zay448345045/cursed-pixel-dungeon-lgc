@@ -154,7 +154,6 @@ public enum HeroClass {
 		(hero.belongings.weapon = new WornShortsword()).identify().upgrade();
 		(hero.belongings.armor = new LeatherArmor()).identify().upgrade();
 		hero.HP = hero.HT = 24;
-		new MagicalInfusion().collect();
 		ThrowingStone stones = new ThrowingStone();
 		stones.quantity(3).collect();
 		Dungeon.quickslot.setSlot(0, stones);
