@@ -27,11 +27,26 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
+import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
 public class MeleeWeapon extends Weapon {
 	
 	public int tier;
+
+	private static final String TIER = "tier";
+
+	@Override
+	public void storeInBundle(Bundle bundle) {
+		super.storeInBundle(bundle);
+		bundle.put(TIER, tier);
+	}
+
+	@Override
+	public void restoreFromBundle(Bundle bundle) {
+		super.restoreFromBundle(bundle);
+		tier = bundle.getInt(TIER);
+	}
 
 	public Item upgradeTier() {
 
@@ -41,7 +56,6 @@ public class MeleeWeapon extends Weapon {
 
 		return this;
 	}
-
 	@Override
 	public int min(int lvl) {
 		return  tier +  //base
