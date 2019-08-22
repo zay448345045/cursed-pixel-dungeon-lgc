@@ -239,14 +239,12 @@ abstract public class Weapon extends KindOfWeapon {
 			if (enchantment == null || hasCurseEnchant()){
 				enchant(Enchantment.random());
 			}
-		} else {
-			 if (level() >= 6 && Random.Float(12) < Math.pow(2, level()-4)){
-				enchant(null);
-			}
 		}
 		
 		return super.upgrade();
 	}
+
+
 	
 	@Override
 	public String name() {

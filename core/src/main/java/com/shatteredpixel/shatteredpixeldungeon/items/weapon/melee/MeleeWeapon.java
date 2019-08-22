@@ -24,6 +24,7 @@ package com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
+import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.watabou.utils.Random;
@@ -31,6 +32,15 @@ import com.watabou.utils.Random;
 public class MeleeWeapon extends Weapon {
 	
 	public int tier;
+
+	public Item upgradeTier() {
+
+		this.tier++;
+
+		updateQuickslot();
+
+		return this;
+	}
 
 	@Override
 	public int min(int lvl) {

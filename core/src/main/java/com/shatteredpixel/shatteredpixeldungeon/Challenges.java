@@ -93,7 +93,7 @@ public class Challenges {
 		}
 
 		if (Dungeon.isChallenged(NO_SCROLLS)) {
-			if (item instanceof ScrollOfEnchantment || item instanceof MagicalInfusion) {
+			if (item instanceof ScrollOfEnchantment) {
 				return true;
 			}
 		}

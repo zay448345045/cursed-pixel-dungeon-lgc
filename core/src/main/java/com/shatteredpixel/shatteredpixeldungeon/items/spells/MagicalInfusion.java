@@ -26,8 +26,10 @@ import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor;
+import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfTransmutation;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MeleeWeapon;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
@@ -36,19 +38,18 @@ import com.shatteredpixel.shatteredpixeldungeon.windows.WndBag;
 public class MagicalInfusion extends InventorySpell {
 	
 	{
-		mode = WndBag.Mode.UPGRADEABLE;
+		mode = WndBag.Mode.WEAPON;
 		image = ItemSpriteSheet.MAGIC_INFUSE;
 	}
 	
 	@Override
 	protected void onItemSelected( Item item ) {
 
-		if (item instanceof Weapon && ((Weapon) item).enchantment != null && !((Weapon) item).hasCurseEnchant()) {
-			((Weapon) item).upgrade(true);
-		} else if (item instanceof Armor && ((Armor) item).glyph != null && !((Armor) item).hasCurseGlyph()) {
-			((Armor) item).upgrade(true);
-		} else {
-			item.upgrade();
+		if (item instanceof MeleeWeapon) {
+			if (((MeleeWeapon) item).tier <= 5 ) {
+				((MeleeWeapon) item).upgradeTier();
+			}
+
 		}
 		
 		GLog.p( Messages.get(this, "infuse", item.name()) );
@@ -68,7 +69,7 @@ public class MagicalInfusion extends InventorySpell {
 	public static class Recipe extends com.shatteredpixel.shatteredpixeldungeon.items.Recipe.SimpleRecipe {
 		
 		{
-			inputs =  new Class[]{ScrollOfUpgrade.class, ArcaneCatalyst.class};
+			inputs =  new Class[]{ScrollOfUpgrade.class, ScrollOfTransmutation.class};//Scroll of Upgrade + Scroll of Transmutation
 			inQuantity = new int[]{1, 1};
 			
 			cost = 4;
