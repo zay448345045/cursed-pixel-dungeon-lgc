@@ -43,7 +43,7 @@ public class RingOfSharpshooting extends Ring {
 	
 	public static int levelDamageBonus( Char target ){
 		int bonus = Math.min(16, getBonus(target, RingOfSharpshooting.Aim.class));
-		return bonus;
+		return bonus/3;
 	}
 	
 	public static float durabilityMultiplier( Char target ){
