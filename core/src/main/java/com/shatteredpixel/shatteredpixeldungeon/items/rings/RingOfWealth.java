@@ -73,7 +73,7 @@ public class RingOfWealth extends Ring {
 	private float triesToDrop = Float.MIN_VALUE;
 	private int dropsToRare = Integer.MIN_VALUE;
 	private static float dropsToUpgrade = 30;
-	private static final float dropsIncreases = 20;
+	private static final float dropsIncreases = 15;
 
 	public static boolean latestDropWasRare = false;
 	
@@ -82,6 +82,9 @@ public class RingOfWealth extends Ring {
 			float dropChance = 100f*(1/dropsToUpgrade);
 			if (Dungeon.isChallenged(Challenges.NO_SCROLLS)) {//Show 0% on Forbidden Runes
 				dropChance = 0f;
+			}
+			if (dropsToUpgrade <= 0) {//Display 100% chance if the value goes negative, as a scroll is guaranteed
+				dropChance = 100f;
 			}
 			return Messages.get(this, "stats", new DecimalFormat("#.##").format(100f * (Math.pow(1.2f, soloBonus()) - 1f)), new DecimalFormat("#.##").format(dropChance));
 		} else {
@@ -145,7 +148,7 @@ public class RingOfWealth extends Ring {
 		triesToDrop -= dropProgression(target, tries);
 
 		while ( triesToDrop <= 0 ){
-			if (Random.Int( (int) dropsToUpgrade) == 1 & !Dungeon.isChallenged(Challenges.NO_SCROLLS)) {
+			if ((dropsToUpgrade < 2) || (Random.Int( (int) dropsToUpgrade) == 1) & !Dungeon.isChallenged(Challenges.NO_SCROLLS)) {
 				drops.add(new ScrollOfUpgrade());
 				dropsToUpgrade += dropsIncreases;
 				dropsToRare--;
@@ -157,6 +160,7 @@ public class RingOfWealth extends Ring {
 					} while (Challenges.isItemBlocked(i));
 					drops.add(i);
 					latestDropWasRare = true;
+					dropsToUpgrade-=3;
 					dropsToRare = Random.NormalIntRange(0, 20);
 				} else {
 					Item i;
@@ -165,10 +169,11 @@ public class RingOfWealth extends Ring {
 					} while (Challenges.isItemBlocked(i));
 					drops.add(i);
 					dropsToRare--;
+					dropsToUpgrade--;
 				}
 
 			}
-			dropsToUpgrade--;
+
 			triesToDrop += Random.NormalIntRange(0, 60);
 		}
 
@@ -217,7 +222,7 @@ public class RingOfWealth extends Ring {
 			Scroll scroll;
 			do {
 				scroll = (Scroll) Generator.random(Generator.Category.SCROLL);
-			} while (scroll == null || ((scroll instanceof ScrollOfUpgrade) & Dungeon.isChallenged(Challenges.NO_SCROLLS)));
+			} while (scroll == null || ((scroll instanceof ScrollOfUpgrade) & !Dungeon.isChallenged(Challenges.NO_SCROLLS)));
 			return scroll;
 		} else if (roll < 0.6f){ //20% chance to drop a minor food item
 			return Random.Int(2) == 0 ? new SmallRation() : new MysteryMeat();
@@ -234,7 +239,7 @@ public class RingOfWealth extends Ring {
 			Scroll scroll;
 			do {
 				scroll = (Scroll) Generator.random(Generator.Category.SCROLL_EXOTIC);
-			} while (scroll == null || ((scroll instanceof ScrollOfEnchantment) & Dungeon.isChallenged(Challenges.NO_SCROLLS)));
+			} while (scroll == null || ((scroll instanceof ScrollOfEnchantment) & !Dungeon.isChallenged(Challenges.NO_SCROLLS)));
 			return scroll;
 		} else { //50% chance
 			return Random.Int(2) == 0 ? new FrozenCarpaccio() : new StewedMeat();

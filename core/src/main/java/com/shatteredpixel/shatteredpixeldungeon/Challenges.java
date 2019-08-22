@@ -32,6 +32,8 @@ import com.shatteredpixel.shatteredpixeldungeon.items.food.Food;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.SmallRation;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
+import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfEnchantment;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.MagicalInfusion;
 
 public class Challenges {
 
@@ -86,6 +88,12 @@ public class Challenges {
 
 		if (Dungeon.isChallenged(NO_HERBALISM)) {
 			if (item instanceof Dewdrop) {
+				return true;
+			}
+		}
+
+		if (Dungeon.isChallenged(NO_SCROLLS)) {
+			if (item instanceof ScrollOfEnchantment || item instanceof MagicalInfusion) {
 				return true;
 			}
 		}
