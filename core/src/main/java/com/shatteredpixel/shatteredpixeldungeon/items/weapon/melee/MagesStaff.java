@@ -185,7 +185,10 @@ public class MagesStaff extends MeleeWeapon {
 	public Item imbueWand(Wand wand, Char owner){
 
 		this.wand = null;
-		wand.doUnequip(Dungeon.hero, false);
+		if (wand.isEquipped(Dungeon.hero)) {
+			wand.doUnequip(Dungeon.hero, false);
+		}
+
 		//syncs the level of the two items.
 		int targetLevel = Math.max(this.level() - (curseInfusionBonus ? 3 : 0), wand.level());
 
