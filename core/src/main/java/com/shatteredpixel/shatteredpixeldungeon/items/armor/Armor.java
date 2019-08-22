@@ -368,13 +368,11 @@ public class Armor extends EquipableItem {
 
 		if (inscribe && (glyph == null || glyph.curse())){
 			inscribe( Glyph.random() );
-		} else if (!inscribe && level() >= 4 && Random.Float(10) < Math.pow(2, level()-4)){
+		} else if (!inscribe && level() >= 6 && Random.Float(12) < Math.pow(2, level()-4)){
 			inscribe(null);
 		}
-		
-		cursed = false;
 
-		if (seal != null && seal.level() == 0)
+		if (seal != null && seal.level() <= 4)
 			seal.upgrade();
 
 		return super.upgrade();
