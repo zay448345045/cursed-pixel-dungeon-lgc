@@ -557,7 +557,7 @@ public class Generator {
 					RingOfSharpshooting.class,
 					RingOfTenacity.class,
 					RingOfWealth.class};
-			RING.probs = new float[]{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 };//Ring of Wealth can no longer generate naturally
+			RING.probs = new float[]{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0 };//Ring of Wealth can no longer generate naturally. Ring of Tenacity is temporarily removed.
 			
 			ARTIFACT.classes = new Class<?>[]{
 					CapeOfThorns.class,

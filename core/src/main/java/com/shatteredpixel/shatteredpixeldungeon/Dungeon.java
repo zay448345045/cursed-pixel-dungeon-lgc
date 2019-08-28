@@ -256,15 +256,13 @@ public class Dungeon {
 
 
 		depth = depthToAccess;
-		if (depth > Statistics.deepestFloor) {
-			Statistics.deepestFloor = depth;
+			Statistics.deepestFloor = Math.max(Statistics.deepestFloor, depth);
 
 			if (Statistics.qualifiedForNoKilling) {
 				Statistics.completedWithNoKilling = true;
 			} else {
 				Statistics.completedWithNoKilling = false;
 			}
-		}
 
 		Level level;
 		switch (depth) {

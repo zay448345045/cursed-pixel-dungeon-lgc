@@ -89,7 +89,7 @@ public class RingOfElements extends Ring {
 		for (Class c : RESISTS){
 			if (c.isAssignableFrom(effect)){
 				float bonus = (float) Math.min(16, getBonus(target, Resistance.class));
-				return (float) (1 - 0.045 * bonus);
+				return (float) (1 - 0.03125 * bonus);
 			}
 		}
 		
