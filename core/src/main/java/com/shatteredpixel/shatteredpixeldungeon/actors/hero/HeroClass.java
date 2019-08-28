@@ -172,7 +172,7 @@ public enum HeroClass {
 		MagesStaff staff;
 		//new PoisonDragon().identify().upgrade(5).collect();
 		//new ScrollOfUpgrade().quantity(5).collect();
-		new WandOfLightning().identify().upgrade(2).collect();
+		//new WandOfLightning().identify().upgrade(2).collect();
 		staff = new MagesStaff(new WandOfDisintegration());
 		staff.upgrade();
 		(hero.belongings.weapon = staff).identify();

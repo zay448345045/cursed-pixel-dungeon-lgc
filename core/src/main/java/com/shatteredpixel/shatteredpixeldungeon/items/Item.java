@@ -123,7 +123,7 @@ public class Item implements Bundlable {
 	}
 
 	public void use() {
-		if (level > 0 && !isBroken()) {
+		if (level >= 0 && !isBroken()) {
 			int threshold = (int)(maxDurability() * DURABILITY_WARNING_LEVEL);
 			if (durability-- >= threshold && threshold > durability && levelKnown) {
 				GLog.w( TXT_GONNA_BREAK, name() );
