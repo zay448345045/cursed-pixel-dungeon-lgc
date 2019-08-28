@@ -354,6 +354,7 @@ public class Item implements Bundlable {
 	public Item upgrade() {
 		
 		this.level++;
+		this.durability = this.maxDurability()/3;//partially repair an item
 
 		updateQuickslot();
 		
