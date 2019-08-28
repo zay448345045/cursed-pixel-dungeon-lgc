@@ -57,6 +57,7 @@ import com.watabou.utils.Callback;
 import com.watabou.utils.PointF;
 import com.watabou.utils.Random;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public abstract class Wand extends KindofMisc {
@@ -87,6 +88,7 @@ public abstract class Wand extends KindofMisc {
 	private float availableUsesToID = USES_TO_ID/2f;
 
 	protected int collisionProperties = Ballistica.MAGIC_BOLT;
+
 	
 	{
 		defaultAction = AC_ZAP;
@@ -110,6 +112,7 @@ public abstract class Wand extends KindofMisc {
 		super.execute( hero, action );
 
 		if (action.equals( AC_ZAP )) {
+			this.use();
 			this.charge(hero);
 			if (!isEquipped(hero)) GLog.i( Messages.get(Artifact.class, "need_to_equip") );
 			else {
@@ -219,6 +222,7 @@ public abstract class Wand extends KindofMisc {
 		} else if (!isIdentified() && cursedKnown){
 			desc += "\n\n" + Messages.get(Wand.class, "not_cursed");
 		}
+		desc += "\n\n" + Messages.get(Item.class, "durability", new DecimalFormat("#.##").format(durability()));
 
 		return desc;
 	}

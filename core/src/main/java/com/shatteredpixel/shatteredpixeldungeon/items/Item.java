@@ -57,6 +57,11 @@ public class Item implements Bundlable {
 	protected static final float TIME_TO_THROW		= 1.0f;
 	protected static final float TIME_TO_PICK_UP	= 1.0f;
 	protected static final float TIME_TO_DROP		= 1.0f;
+
+	private static final String TXT_BROKEN		= "Because of frequent use, your %s has broken.";
+	private static final String TXT_GONNA_BREAK	= "Because of frequent use, your %s is going to break soon.";
+
+	private static final float DURABILITY_WARNING_LEVEL	= 1/6f;
 	
 	public static final String AC_DROP		= "DROP";
 	public static final String AC_THROW		= "THROW";
@@ -79,12 +84,57 @@ public class Item implements Bundlable {
 	
 	public boolean cursed;
 	public boolean cursedKnown;
+	private int durability = maxDurability(level());
 	
 	// Unique items persist through revival
 	public boolean unique = false;
 
 	// whether an item can be included in heroes remains
 	public boolean bones = false;
+
+	public int durability() {
+		return durability;
+	}
+
+	public int maxDurability( int lvl ) {
+		lvl = Math.min(20,lvl);
+		return 50 + lvl*2;
+	}
+
+	final public int maxDurability() {
+		return maxDurability( level );
+	}
+
+	public boolean isBroken() {
+		return durability <= 0;
+	}
+
+	public void getBroken() {
+	}
+
+	public void fix() {
+		durability = maxDurability();
+	}
+
+	public void polish() {
+		if (durability < maxDurability()) {
+			durability++;
+		}
+	}
+
+	public void use() {
+		if (level > 0 && !isBroken()) {
+			int threshold = (int)(maxDurability() * DURABILITY_WARNING_LEVEL);
+			if (durability-- >= threshold && threshold > durability && levelKnown) {
+				GLog.w( TXT_GONNA_BREAK, name() );
+			}
+			if (isBroken()) {
+				getBroken();
+				this.degrade(1);
+				this.fix();
+			}
+		}
+	}
 	
 	private static Comparator<Item> itemComparator = new Comparator<Item>() {
 		@Override
@@ -456,6 +506,7 @@ public class Item implements Bundlable {
 	private static final String CURSED			= "cursed";
 	private static final String CURSED_KNOWN	= "cursedKnown";
 	private static final String QUICKSLOT		= "quickslotpos";
+	private static final String DURABILITY		= "durability";
 	
 	@Override
 	public void storeInBundle( Bundle bundle ) {
@@ -464,6 +515,7 @@ public class Item implements Bundlable {
 		bundle.put( LEVEL_KNOWN, levelKnown );
 		bundle.put( CURSED, cursed );
 		bundle.put( CURSED_KNOWN, cursedKnown );
+		bundle.put( DURABILITY, durability );
 		if (Dungeon.quickslot.contains(this)) {
 			bundle.put( QUICKSLOT, Dungeon.quickslot.getSlot(this) );
 		}
@@ -481,7 +533,7 @@ public class Item implements Bundlable {
 		} else if (level < 0) {
 			degrade( -level );
 		}
-		
+		durability = bundle.getInt( DURABILITY );
 		cursed	= bundle.getBoolean( CURSED );
 
 		//only want to populate slot on first load.

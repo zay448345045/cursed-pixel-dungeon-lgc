@@ -60,6 +60,7 @@ import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -67,6 +68,7 @@ import static com.shatteredpixel.shatteredpixeldungeon.Dungeon.hero;
 
 
 abstract public class Weapon extends KindOfWeapon {
+
 
 
 
@@ -119,7 +121,7 @@ abstract public class Weapon extends KindOfWeapon {
 		if (enchantment != null && attacker.buff(MagicImmune.class) == null) {
 			damage = enchantment.proc( this, attacker, defender, damage );
 		}
-		
+		this.use();
 		if (!levelKnown && attacker == hero && availableUsesToID >= 1) {
 			availableUsesToID--;
 			usesLeftToID--;
@@ -346,10 +348,6 @@ abstract public class Weapon extends KindOfWeapon {
 
 		public String name( String weaponName ) {
 			return Messages.get(this, "name", weaponName);
-		}
-
-		public String desc() {
-			return Messages.get(this, "desc");
 		}
 
 		public boolean curse() {

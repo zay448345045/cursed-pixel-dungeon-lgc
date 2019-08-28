@@ -67,6 +67,7 @@ import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -124,6 +125,7 @@ public class Armor extends EquipableItem {
 	private static final String CURSE_INFUSION_BONUS = "curse_infusion_bonus";
 	private static final String SEAL            = "seal";
 	private static final String AUGMENT			= "augment";
+
 
 	@Override
 	public void storeInBundle( Bundle bundle ) {
@@ -381,6 +383,7 @@ public class Armor extends EquipableItem {
 		if (glyph != null && defender.buff(MagicImmune.class) == null) {
 			damage = glyph.proc( this, attacker, defender, damage );
 		}
+		this.use();
 		
 		if (!levelKnown && defender == Dungeon.hero && availableUsesToID >= 1) {
 			availableUsesToID--;
@@ -450,7 +453,7 @@ public class Armor extends EquipableItem {
 		} else if (!isIdentified() && cursedKnown){
 			info += "\n\n" + Messages.get(Armor.class, "not_cursed");
 		}
-		
+		info += "\n\n" + Messages.get(Item.class, "durability", new DecimalFormat("#.##").format(durability()));
 		return info;
 	}
 

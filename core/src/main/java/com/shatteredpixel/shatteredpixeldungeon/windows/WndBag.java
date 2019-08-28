@@ -361,7 +361,7 @@ public class WndBag extends WndTabbed {
 		protected void layout() {
 			bg.x = x;
 			bg.y = y;
-			
+
 			super.layout();
 		}
 		

@@ -30,6 +30,8 @@ import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.text.DecimalFormat;
+
 public class MeleeWeapon extends Weapon {
 	
 	public int tier;
@@ -132,7 +134,7 @@ public class MeleeWeapon extends Weapon {
 		} else if (!isIdentified() && cursedKnown){
 			info += "\n\n" + Messages.get(Weapon.class, "not_cursed");
 		}
-		
+		info += "\n\n" + Messages.get(Item.class, "durability", new DecimalFormat("#.##").format(durability()));
 		return info;
 	}
 	

@@ -72,7 +72,7 @@ public class WndItem extends Window {
 			width += 20;
 			info.maxWidth(width);
 		}
-		
+
 		IconTitle titlebar = new IconTitle( item );
 		titlebar.setRect( 0, 0, width, 0 );
 		add( titlebar );
