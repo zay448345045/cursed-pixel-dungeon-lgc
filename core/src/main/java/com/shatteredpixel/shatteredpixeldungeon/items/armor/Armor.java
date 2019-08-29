@@ -75,7 +75,7 @@ public class Armor extends EquipableItem {
 
 	protected static final String AC_DETACH       = "DETACH";
 	public boolean isUpgradable() {
-		if ( seal != null ) {//Armour can be upgraded to +20 when the broken seal is attatched only
+		if ( seal != null ) {//Armour can be upgraded to +20 when the broken seal is attached only
 			UpgradeLimit = 20;
 		}
 		return super.isUpgradable();
@@ -126,6 +126,18 @@ public class Armor extends EquipableItem {
 	private static final String SEAL            = "seal";
 	private static final String AUGMENT			= "augment";
 
+	@Override
+	public void breakThis() {
+		super.breakThis();
+		if (Random.Int(3) == 1) {
+			this.inscribe(null);
+		}
+
+	}
+	@Override
+	public boolean isFixable() {
+		return durability() < maxDurability(level());
+	}
 
 	@Override
 	public void storeInBundle( Bundle bundle ) {

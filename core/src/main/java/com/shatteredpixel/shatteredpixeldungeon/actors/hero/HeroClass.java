@@ -136,7 +136,7 @@ public enum HeroClass {
 		new MagicalHolster().collect();
 		Dungeon.LimitedDrops.MAGICAL_HOLSTER.drop();
 
-		new StoneOfRepair().quantity(2).collect();
+		new StoneOfRepair().quantity(3).collect();
 	}
 
 	public Badges.Badge masteryBadge() {

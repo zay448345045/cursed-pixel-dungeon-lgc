@@ -90,7 +90,8 @@ public class WndBag extends WndTabbed {
 		TRANMSUTABLE,
 		ALCHEMY,
 		RECYCLABLE,
-		NOT_EQUIPPED
+		NOT_EQUIPPED,
+		FIXABLE
 	}
 
 	protected static final int COLS_P    = 5;
@@ -390,6 +391,7 @@ public class WndBag extends WndTabbed {
 					enable(
 						mode == Mode.FOR_SALE && !item.unique && (item.price() > 0) && (!item.isEquipped( Dungeon.hero ) || !item.cursed) ||
 						mode == Mode.UPGRADEABLE && item.isUpgradable() ||
+						mode == Mode.FIXABLE && item.isFixable() ||
 						mode == Mode.UNIDENTIFED && !item.isIdentified() ||
 						mode == Mode.UNCURSABLE && ScrollOfRemoveCurse.uncursable(item) ||
 						mode == Mode.CURSABLE && ((item instanceof EquipableItem && !(item instanceof MissileWeapon)) || item instanceof Wand) ||

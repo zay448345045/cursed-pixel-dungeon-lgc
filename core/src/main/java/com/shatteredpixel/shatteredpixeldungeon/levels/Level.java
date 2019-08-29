@@ -193,6 +193,11 @@ public abstract class Level implements Bundlable {
 				addItemToSpawn( new Stylus() );
 				Dungeon.LimitedDrops.ARCANE_STYLI.count++;
 			}
+
+			if (Dungeon.repairStoneNeeded()) {
+				addItemToSpawn( new StoneOfRepair() );
+				Dungeon.LimitedDrops.ARCANE_STYLI.count++;
+			}
 			//one scroll of transmutation is guaranteed to spawn somewhere on chapter 2-4
 			int enchChapter = (int)((Dungeon.seed / 10) % 3) + 1;
 			if ( Dungeon.depth / 5 == enchChapter &&

@@ -50,6 +50,20 @@ public class MeleeWeapon extends Weapon {
 		tier = bundle.getInt(TIER);
 	}
 
+	@Override
+	public void breakThis() {
+		super.breakThis();
+		if (Random.Int(3) == 1) {
+			this.enchant(null);
+		}
+
+	}
+
+	@Override
+	public boolean isFixable() {
+		return durability() < maxDurability(level());
+	}
+
 	public Item upgradeTier() {
 
 		this.tier++;

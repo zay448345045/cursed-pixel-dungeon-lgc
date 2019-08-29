@@ -421,7 +421,7 @@ public class Generator {
 					StoneOfFlock.class,
 					StoneOfShock.class
 			};
-			STONE.probs = new float[]{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+			STONE.probs = new float[]{ 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 			
 			//TODO: add last ones when implemented
 			WAND.classes = new Class<?>[]{

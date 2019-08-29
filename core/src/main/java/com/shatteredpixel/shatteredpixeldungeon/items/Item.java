@@ -44,6 +44,7 @@ import com.watabou.noosa.particles.Emitter;
 import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Callback;
+import com.watabou.utils.Random;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -105,6 +106,10 @@ public class Item implements Bundlable {
 		return maxDurability( level );
 	}
 
+	public boolean isFixable() {
+		return false;
+	}
+
 	public boolean isBroken() {
 		return durability <= 0;
 	}
@@ -122,6 +127,12 @@ public class Item implements Bundlable {
 		}
 	}
 
+	public void breakThis() {
+		getBroken();
+		this.degrade(1);
+		this.fix();
+	}
+
 	public void use() {
 		if (level >= 0 && !isBroken()) {
 			int threshold = (int)(maxDurability() * DURABILITY_WARNING_LEVEL);
@@ -129,9 +140,7 @@ public class Item implements Bundlable {
 				GLog.w( TXT_GONNA_BREAK, name() );
 			}
 			if (isBroken()) {
-				getBroken();
-				this.degrade(1);
-				this.fix();
+				breakThis();
 			}
 		}
 	}
@@ -354,7 +363,7 @@ public class Item implements Bundlable {
 	public Item upgrade() {
 		
 		this.level++;
-		this.durability = this.maxDurability()/3;//partially repair an item
+		this.durability = Math.max(durability,this.maxDurability()/3);//partially repair an item
 
 		updateQuickslot();
 		

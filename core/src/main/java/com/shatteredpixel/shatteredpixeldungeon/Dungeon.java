@@ -93,6 +93,7 @@ public class Dungeon {
 		STRENGTH_POTIONS,
 		UPGRADE_SCROLLS,
 		ARCANE_STYLI,
+		REPAIR_STONE,
 
 		//Health potion sources
 		//enemies
@@ -606,6 +607,16 @@ public class Dungeon {
 		return Random.Int(5 - floorThisSet) < asLeftThisSet;
 	}
 
+	public static boolean repairStoneNeeded() {
+		//2 Repair Stone each floor set
+		int asLeftThisSet = 1 - (LimitedDrops.REPAIR_STONE.count - (int) (depth / 2.5));
+		if (asLeftThisSet <= 0) return false;
+
+		int floorThisSet = (depth % 5);
+		//chance is floors left / stones left
+		return Random.Int(5 - floorThisSet) < asLeftThisSet;
+	}
+
 	private static final String VERSION		= "version";
 	private static final String SEED		= "seed";
 	private static final String CHALLENGES	= "challenges";
@@ -737,7 +748,7 @@ public class Dungeon {
 			LimitedDrops.restore( bundle.getBundle(LIMDROPS) );
 
 			chapters = new HashSet<Integer>();
-			int ids[] = bundle.getIntArray( CHAPTERS );
+			int[] ids = bundle.getIntArray(CHAPTERS);
 			if (ids != null) {
 				for (int id : ids) {
 					chapters.add( id );

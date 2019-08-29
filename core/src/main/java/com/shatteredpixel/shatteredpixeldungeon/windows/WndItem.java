@@ -26,6 +26,7 @@ import com.shatteredpixel.shatteredpixeldungeon.SPDSettings;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene;
+import com.shatteredpixel.shatteredpixeldungeon.ui.HealthBar;
 import com.shatteredpixel.shatteredpixeldungeon.ui.ItemSlot;
 import com.shatteredpixel.shatteredpixeldungeon.ui.RedButton;
 import com.shatteredpixel.shatteredpixeldungeon.ui.RenderedTextMultiline;
@@ -74,6 +75,9 @@ public class WndItem extends Window {
 		}
 
 		IconTitle titlebar = new IconTitle( item );
+		HealthBar health = new HealthBar();
+		health.level((float) item.durability()/item.maxDurability());
+		titlebar.add( health );
 		titlebar.setRect( 0, 0, width, 0 );
 		add( titlebar );
 

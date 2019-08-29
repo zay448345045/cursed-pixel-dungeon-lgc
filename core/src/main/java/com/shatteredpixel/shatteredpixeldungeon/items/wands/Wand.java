@@ -105,7 +105,10 @@ public abstract class Wand extends KindofMisc {
 
 		return actions;
 	}
-	
+	@Override
+	public boolean isFixable() {
+		return durability() < maxDurability(level());
+	}
 	@Override
 	public void execute( Hero hero, String action ) {
 

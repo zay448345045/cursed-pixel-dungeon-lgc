@@ -282,7 +282,7 @@ public class RingOfWealth extends Ring {
 			case 0: default:
 				return Generator.random(Generator.Category.SPELL);
 			case 1:
-				return new StoneOfRepair().quantity(5);
+				return new ScrollOfEnchantment().quantity(3);
 			case 2:
 				return Generator.random(Generator.Category.ELXIR);
 			case 3:
