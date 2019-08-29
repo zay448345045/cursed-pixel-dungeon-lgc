@@ -63,9 +63,10 @@ public class InterlevelScene extends PixelScene {
 	public static final String FALL_NAME = "FALL_NAME";
 	public static final String DESCEND_NAME = "DESCEND_NAME";
 	public static final String ASCEND_NAME = "ASCEND_NAME";
+	public static final String RESET_NAME = "RESET_NAME";
 	
 	private static float fadeTime;
-	
+
 	public enum Mode {
 		DESCEND, ASCEND, CONTINUE, RESURRECT, RETURN, FALL, RESET, NONE, START, WATERCHALLENGE, EARTHCHALLENGE, DESCEND_GAMEINIT
 	}
@@ -313,6 +314,7 @@ public class InterlevelScene extends PixelScene {
 
 				else throw new RuntimeException("fatal error occured while moving between floors. " +
 							"Seed:" + Dungeon.seed + " depth:" + Dungeon.depth, error);
+				errorMsg += "\n\n" + error;
 
 				add( new WndError( errorMsg ) {
 					public void onBackPressed() {
@@ -320,6 +322,7 @@ public class InterlevelScene extends PixelScene {
 						Game.switchScene( StartScene.class );
 					}
 				} );
+
 				thread = null;
 				error = null;
 			} else if (thread != null && (int)waitingTime == 10){
@@ -361,13 +364,18 @@ public class InterlevelScene extends PixelScene {
 			Dungeon.depth = 1;
 		}
 		Level level;
-		try {
-			level = Dungeon.loadLevel( GamesInProgress.curSlot );
+		if (!typeOfDescend.equals(RESET_NAME)) {//If an error is thrown but caught, still load a new floor
+			try {
+				level = Dungeon.loadLevel( GamesInProgress.curSlot );
 
-		} catch(Exception e) {
+			} catch(Exception e) {
 
+				level = Dungeon.newLevelWithDepth(Dungeon.depth);
+			}
+		} else {
 			level = Dungeon.newLevelWithDepth(Dungeon.depth);
 		}
+
 		if (typeOfDescend == DESCEND_NAME) {
 			Dungeon.switchLevel( level, level.entrance );
 		} else if (typeOfDescend == FALL_NAME) {
