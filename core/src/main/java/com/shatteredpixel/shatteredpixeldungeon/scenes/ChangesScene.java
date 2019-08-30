@@ -30,7 +30,7 @@ import com.shatteredpixel.shatteredpixeldungeon.ui.RedButton;
 import com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane;
 import com.shatteredpixel.shatteredpixeldungeon.ui.Window;
 import com.shatteredpixel.shatteredpixeldungeon.ui.changelist.ChangeInfo;
-import com.shatteredpixel.shatteredpixeldungeon.ui.changelist.Cruel_Changes;
+import com.shatteredpixel.shatteredpixeldungeon.ui.changelist.CursedChanges;
 import com.shatteredpixel.shatteredpixeldungeon.ui.changelist.v0_1_X_Changes;
 import com.shatteredpixel.shatteredpixeldungeon.ui.changelist.v0_2_X_Changes;
 import com.shatteredpixel.shatteredpixeldungeon.ui.changelist.v0_3_X_Changes;
@@ -82,7 +82,7 @@ public class ChangesScene extends PixelScene {
 		
 		switch (changesSelected){
 			case 0: default:
-				Cruel_Changes.addAllChanges(changeInfos);
+				CursedChanges.addAllChanges(changeInfos);
 				break;
 			case 1:
 				v0_7_X_Changes.addAllChanges(changeInfos);
@@ -147,7 +147,7 @@ public class ChangesScene extends PixelScene {
 				panel.innerHeight() + 2);
 		list.scrollTo(0, 0);
 		
-		RedButton btn0_7 = new RedButton("Too Cruel PD"){
+		RedButton btn0_7 = new RedButton("Cursed PD"){
 			@Override
 			protected void onClick() {
 				super.onClick();
