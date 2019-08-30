@@ -364,7 +364,7 @@ public class InterlevelScene extends PixelScene {
 			Dungeon.depth = 1;
 		}
 		Level level;
-		if (!typeOfDescend.equals(RESET_NAME)) {//If an error is thrown but caught, still load a new floor
+		if (Dungeon.levelExists(Dungeon.depth)) {//Load a new floor if file not found
 			try {
 				level = Dungeon.loadLevel( GamesInProgress.curSlot );
 

@@ -85,7 +85,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Dungeon {
-
+	public static ArrayList LoadedDepths = new ArrayList();
 	//enum of items which have limited spawns, records how many have spawned
 	//could all be their own separate numbers, but this allows iterating, much nicer for bundling/initializing.
 	public static enum LimitedDrops {
@@ -239,18 +239,6 @@ public class Dungeon {
 		return level;
 	}
 
-	public static Level goToDepth(int depthToAccess) throws IOException {
-		Level level;
-		if (Dungeon.depth >= Statistics.deepestFloor) {
-			level = Dungeon.newLevelWithDepth(depthToAccess);
-		} else {
-			Dungeon.depth = depthToAccess;
-			level = Dungeon.loadLevel( GamesInProgress.curSlot );
-		}
-		Dungeon.switchLevel( level, level.entrance );
-		return level;
-	}
-
 
 	public static Level newLevelWithDepth(int depthToAccess) {
 
@@ -343,6 +331,7 @@ public class Dungeon {
 		}
 
 		level.create();
+		LoadedDepths.add(depthToAccess);
 
 		Statistics.qualifiedForNoKilling = !bossLevel();
 
@@ -841,6 +830,10 @@ public class Dungeon {
 		} else {
 			return level;
 		}
+	}
+
+	public static boolean levelExists(int save) throws IOException {
+		return LoadedDepths.contains(save);
 	}
 
 	public static void deleteGame( int save, boolean deleteLevels ) {
