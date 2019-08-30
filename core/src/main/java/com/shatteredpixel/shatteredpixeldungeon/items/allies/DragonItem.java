@@ -6,6 +6,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Corruption;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.LockedFloor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Weakness;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Bee;
@@ -22,6 +23,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.KindofMisc;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Artifact;
+import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Artifact.ArtifactBuff;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.DriedRose;
 import com.shatteredpixel.shatteredpixeldungeon.items.bombs.Firebomb;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing;
@@ -60,7 +62,7 @@ public class DragonItem extends KindofMisc {
     protected int chargeCap = 100;
 
     {
-        image = ItemSpriteSheet.MAGIC_INFUSE;
+        image = ItemSpriteSheet.FEATHER_FALL;
 
         defaultAction = AC_SUMMON;
         usesTargeting = false;
@@ -83,6 +85,38 @@ public class DragonItem extends KindofMisc {
                 charge++;
                 updateQuickslot();
             }
+        }
+    }
+
+    public class recharge extends Buff {
+        @Override
+        public boolean act() {
+            LockedFloor lock = target.buff(LockedFloor.class);
+            if (charge < chargeCap && !cursed && (lock == null || lock.regenOn())) {
+                partialCharge += 0.1;
+
+                if (partialCharge >= 1) {
+                    partialCharge --;
+                    charge ++;
+
+                    if (charge == chargeCap){
+                        partialCharge = 0;
+                    }
+                }
+            }
+
+            updateQuickslot();
+
+            spend( TICK );
+
+            return true;
+        }
+        public int itemLevel() {
+            return level();
+        }
+
+        public boolean isCursed() {
+            return cursed;
         }
     }
 

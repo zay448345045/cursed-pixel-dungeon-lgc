@@ -41,6 +41,7 @@ import com.shatteredpixel.shatteredpixeldungeon.levels.traps.WeakeningTrap;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.ChangesScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.AlbinoSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.PoisonDragonSprite;
@@ -66,7 +67,7 @@ public class CursedChanges {
 		changeInfos.add(changes);
 		
 		changes = new ChangeInfo(Messages.get(ChangesScene.class, "changes"),false,null);
-		changes.hardlight( Window.TITLE_COLOR );
+		changes.hardlight( CharSprite.WARNING );
 		changeInfos.add(changes);
 
 		changes.addButton(new ChangeButton(new MagicalInfusion(),
@@ -96,7 +97,7 @@ public class CursedChanges {
 				"Misc slots have been reworked so that Wands must be equipped. To compensate, the player now has 4 slots."));
 
 		changes = new ChangeInfo(Messages.get(ChangesScene.class, "buffs"), false, null);
-		changes.hardlight(Window.TITLE_COLOR);
+		changes.hardlight( CharSprite.POSITIVE );
 		changeInfos.add(changes);
 
 		changes.addButton(new ChangeButton(Icons.get(Icons.SKULL), "Enemies Buffed",
@@ -154,7 +155,7 @@ public class CursedChanges {
 						"_-_ Most wands have had scaling buffed by +1 max damage to be able to compete with weapons. For example, Lightning is equal to tier-5 scaling."));
 
 		changes = new ChangeInfo(Messages.get(ChangesScene.class, "nerfs"), false, null);
-		changes.hardlight(Window.TITLE_COLOR);
+		changes.hardlight( CharSprite.NEGATIVE );
 		changeInfos.add(changes);
 
 		changes.addButton(new ChangeButton(new Greatsword().enchant(new Grim()),
@@ -162,10 +163,10 @@ public class CursedChanges {
 				"_-_ Grim was far too powerful with fast weapons. For this reason, it's chance to proc is half the damage dealt out of the current enemy HP\n" +
 						"_-_ Vampiric has been replaced with Shielding - this enchantment functions the same but grants shielding instead of HP and procs more often."));
 
-		changes.addButton(new ChangeButton(new PotionOfHealing(),
+		changes.addButton(new ChangeButton(new ItemSprite(ItemSpriteSheet.POTION_AZURE, null), "Potion of Healing nerfed",
 				"Potion of Healing was far too effective. As a result, it now heals 1/3 of missing HP and shields for the same amount. This is instant, however."));
 
-		changes.addButton(new ChangeButton(new RingOfTenacity(),
+		changes.addButton(new ChangeButton(new ItemSprite(ItemSpriteSheet.RING_EMERALD, null), "Rings Nerfed",
 				"Rings were far too powerful. No longer:\n" +
 						"_-_ All rings now scale linearly.\n" +
 						"_-_ They cap at sensible values. For example, +15 Furor grants 4x attack speed and +15 Elements provides 50% resistance.\n" +
