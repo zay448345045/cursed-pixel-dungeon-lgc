@@ -43,7 +43,7 @@ public class RingOfHaste extends Ring {
 	
 	public static float speedMultiplier( Char target ){
 		float bonus = (float) Math.min(16, getBonus(target, Haste.class));
-		return (float) (1/(1 + 0.1875 * bonus));
+		return (float) ((1 + 0.1875 * bonus));
 	}
 	
 	public class Haste extends RingBuff {
