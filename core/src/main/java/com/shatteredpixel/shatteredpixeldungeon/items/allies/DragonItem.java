@@ -25,6 +25,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Artifact;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Artifact.ArtifactBuff;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.DriedRose;
+import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.UnstableSpellbook;
 import com.shatteredpixel.shatteredpixeldungeon.items.bombs.Firebomb;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfBlastWave;
@@ -52,7 +53,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class DragonItem extends KindofMisc {
-
+    protected Buff passiveBuff;
+    protected Buff activeBuff;
     public static final String AC_SUMMON	= "SHATTER";
     protected int charge = 100;
     //the build towards next charge, usually rolls over at 1.
@@ -88,7 +90,65 @@ public class DragonItem extends KindofMisc {
         }
     }
 
-    public class recharge extends Buff {
+    @Override
+    public boolean doEquip( final Hero hero ) {
+
+        if (super.doEquip(hero)) {
+
+            identify();
+            return true;
+
+        } else {
+
+            return false;
+
+        }
+
+    }
+
+    public void activate( Char ch ) {
+        passiveBuff = passiveBuff();
+        passiveBuff.attachTo(ch);
+    }
+
+    @Override
+    public boolean doUnequip( Hero hero, boolean collect, boolean single ) {
+        if (super.doUnequip( hero, collect, single )) {
+
+            passiveBuff.detach();
+            passiveBuff = null;
+
+            if (activeBuff != null){
+                activeBuff.detach();
+                activeBuff = null;
+            }
+
+            return true;
+
+        } else {
+
+            return false;
+
+        }
+    }
+
+    public class CrystalBuff extends Buff {
+
+        public int itemLevel() {
+            return level();
+        }
+
+        public boolean isCursed() {
+            return cursed;
+        }
+
+    }
+
+    protected CrystalBuff passiveBuff() {
+        return new recharge();
+    }
+
+    public class recharge extends CrystalBuff {
         @Override
         public boolean act() {
             LockedFloor lock = target.buff(LockedFloor.class);
@@ -110,13 +170,6 @@ public class DragonItem extends KindofMisc {
             spend( TICK );
 
             return true;
-        }
-        public int itemLevel() {
-            return level();
-        }
-
-        public boolean isCursed() {
-            return cursed;
         }
     }
 
