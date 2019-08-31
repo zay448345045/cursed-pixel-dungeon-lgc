@@ -309,7 +309,7 @@ public class Armor extends EquipableItem {
 		if (lvl >= max){
 			return (lvl - max);
 		} else {
-			return lvl;
+			return max;
 		}
 	}
 	

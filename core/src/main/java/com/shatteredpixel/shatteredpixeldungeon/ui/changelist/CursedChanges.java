@@ -178,7 +178,10 @@ public class CursedChanges {
 		changeInfos.add(changes);
 
 		changes.addButton(new ChangeButton(Icons.get(Icons.WARNING), "Degradation",
-				""));
+				"Degradation reworked!\n" +
+						"_-_ now functions more like \"Dynamic Strength\"\n" +
+						"_-_ Items will lose up to 50% effectiveness from attacking repeatedly\n" +
+						"_-_ Applies to armour as well"));
 
 		changes.addButton(new ChangeButton(new Greatsword().enchant(new Swift()),
 				"Added a new enchantment: Swift. This enchantment gives an item a chance not to consume a turn on use."));
