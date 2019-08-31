@@ -515,7 +515,9 @@ public class Hero extends Char {
 	
 	@Override
 	public boolean act() {
-		
+		if (!(curAction instanceof HeroAction.Attack)) {
+			belongings.weapon.polish();
+		}
 		//calls to dungeon.observe will also update hero's local FOV.
 		fieldOfView = Dungeon.level.heroFOV;
 		
@@ -559,6 +561,7 @@ public class Hero extends Char {
 			resting = false;
 			
 			ready = false;
+
 			
 			if (curAction instanceof HeroAction.Move) {
 				actResult = actMove( (HeroAction.Move)curAction );
@@ -586,6 +589,7 @@ public class Hero extends Char {
 				
 			} else if (curAction instanceof HeroAction.Attack) {
 				actResult = actAttack( (HeroAction.Attack)curAction );
+				belongings.weapon.use();
 				
 			} else if (curAction instanceof HeroAction.Alchemy) {
 				actResult = actAlchemy( (HeroAction.Alchemy)curAction );

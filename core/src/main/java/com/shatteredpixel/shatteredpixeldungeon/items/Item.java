@@ -124,6 +124,7 @@ public class Item implements Bundlable {
 		if (durability < maxDurability()) {
 			durability++;
 		}
+
 	}
 
 	public void breakThis() {
@@ -134,7 +135,10 @@ public class Item implements Bundlable {
 
 	public void use() {
 		if (level >= 1 && !isBroken()) {
-			durability-=2;
+			durability -= 2;
+			if (isBroken()) {
+				breakThis();
+			}
 		}
 	}
 	
