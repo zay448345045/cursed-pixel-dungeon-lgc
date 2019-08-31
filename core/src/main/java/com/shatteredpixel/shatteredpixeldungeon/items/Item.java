@@ -85,7 +85,7 @@ public class Item implements Bundlable {
 	
 	public boolean cursed;
 	public boolean cursedKnown;
-	private int durability = maxDurability(level());
+	private float durability = maxDurability(level());
 	
 	// Unique items persist through revival
 	public boolean unique = false;
@@ -93,15 +93,15 @@ public class Item implements Bundlable {
 	// whether an item can be included in heroes remains
 	public boolean bones = false;
 
-	public int durability() {
+	public float durability() {
 		return durability;
 	}
 
-	public int maxDurability( int lvl ) {
-		return 20;
+	public float maxDurability( int lvl ) {
+		return 20f;
 	}
 
-	final public int maxDurability() {
+	final public float maxDurability() {
 		return maxDurability( level );
 	}
 
@@ -136,9 +136,6 @@ public class Item implements Bundlable {
 	public void use() {
 		if (level >= 1 && !isBroken()) {
 			durability -= 2;
-			if (isBroken()) {
-				breakThis();
-			}
 		}
 	}
 	

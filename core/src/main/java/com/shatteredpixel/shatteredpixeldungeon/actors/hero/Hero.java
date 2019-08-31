@@ -518,6 +518,7 @@ public class Hero extends Char {
 		if (!(curAction instanceof HeroAction.Attack)) {
 			belongings.weapon.polish();
 		}
+		belongings.armor.polish();
 		//calls to dungeon.observe will also update hero's local FOV.
 		fieldOfView = Dungeon.level.heroFOV;
 		
@@ -1016,7 +1017,7 @@ public class Hero extends Char {
 			Berserk berserk = Buff.affect(this, Berserk.class);
 			berserk.damage(damage);
 		}
-		
+		belongings.armor.use();
 		if (belongings.armor != null) {
 			damage = belongings.armor.proc( enemy, this, damage );
 		}

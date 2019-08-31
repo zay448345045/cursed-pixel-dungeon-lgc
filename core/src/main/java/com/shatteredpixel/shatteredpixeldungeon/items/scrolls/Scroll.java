@@ -41,7 +41,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfBlink;
 import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfClairvoyance;
 import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfDeepenedSleep;
 import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfDisarming;
-import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfRepair;
+import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfEnchantment;
 import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfFlock;
 import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfIntuition;
 import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfShock;
@@ -326,7 +326,7 @@ public abstract class Scroll extends Item {
 			stones.put(ScrollOfTransmutation.class, StoneOfAugmentation.class);
 			amnts.put(ScrollOfTransmutation.class,  2);
 			
-			stones.put(ScrollOfUpgrade.class,       StoneOfRepair.class);
+			stones.put(ScrollOfUpgrade.class,       StoneOfEnchantment.class);
 			amnts.put(ScrollOfUpgrade.class,        2);
 		}
 		

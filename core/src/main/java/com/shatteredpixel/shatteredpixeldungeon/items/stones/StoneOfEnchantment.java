@@ -21,28 +21,46 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.items.stones;
 
+import com.shatteredpixel.shatteredpixeldungeon.effects.Enchanting;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
+import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
+import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
+import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndBag;
 
-public class StoneOfRepair extends InventoryStone {
+public class StoneOfEnchantment extends InventoryStone {
 	
 	{
-		mode = WndBag.Mode.FIXABLE;
+		mode = WndBag.Mode.ENCHANTABLE;
 		image = ItemSpriteSheet.STONE_ENCHANT;
-
 	}
-	private float TIME_TO_UPGRADE = 3f;
-
+	
 	@Override
 	protected void onItemSelected(Item item) {
 		
-		item.fix();
-		curUser.sprite.centerEmitter().start( Speck.factory( Speck.KIT ), 0.05f, 10 );
-		curUser.spend( TIME_TO_UPGRADE );
-		curUser.busy();
-		curUser.sprite.operate( curUser.pos );
+		if (item instanceof Weapon) {
+			
+			((Weapon)item).enchant();
+			
+		} else {
+			
+			((Armor)item).inscribe();
+			
+		}
+		
+		curUser.sprite.emitter().start( Speck.factory( Speck.LIGHT ), 0.1f, 5 );
+		Enchanting.show( curUser, item );
+		
+		if (item instanceof Weapon) {
+			GLog.p(Messages.get(this, "weapon"));
+		} else {
+			GLog.p(Messages.get(this, "armor"));
+		}
+		
+		useAnimation();
 		
 	}
 	

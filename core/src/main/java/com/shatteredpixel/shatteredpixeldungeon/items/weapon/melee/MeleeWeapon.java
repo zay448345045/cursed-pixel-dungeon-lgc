@@ -27,6 +27,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
+import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
@@ -50,14 +51,7 @@ public class MeleeWeapon extends Weapon {
 		tier = bundle.getInt(TIER);
 	}
 
-	@Override
-	public void breakThis() {
-		super.breakThis();
-		if (Random.Int(3) == 1) {
-			this.enchant(null);
-		}
 
-	}
 
 	@Override
 	public boolean isFixable() {
@@ -93,7 +87,9 @@ public class MeleeWeapon extends Weapon {
 	@Override
 	public int damageRoll(Char owner) {
 		int damage = augment.damageFactor(super.damageRoll( owner ));
-
+		float damageReduction = damage * ((this.maxDurability()-this.durability())/this.maxDurability()*2);
+		damage -= (int) damageReduction;
+		damage = Math.max(damage,min(level()));
 		if (owner instanceof Hero) {
 			int exStr = ((Hero)owner).STR() - STRReq();
 			if (exStr > 0) {

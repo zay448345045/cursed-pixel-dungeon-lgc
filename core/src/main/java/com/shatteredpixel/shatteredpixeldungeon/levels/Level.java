@@ -55,7 +55,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.TimekeepersHourg
 import com.shatteredpixel.shatteredpixeldungeon.items.food.SmallRation;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfStrength;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
-import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfRepair;
+import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfEnchantment;
 import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfIntuition;
 import com.shatteredpixel.shatteredpixeldungeon.levels.features.Chasm;
 import com.shatteredpixel.shatteredpixeldungeon.levels.features.Door;
@@ -195,14 +195,14 @@ public abstract class Level implements Bundlable {
 			}
 
 			if (Dungeon.repairStoneNeeded()) {
-				addItemToSpawn( new StoneOfRepair() );
+				addItemToSpawn( new StoneOfEnchantment() );
 				Dungeon.LimitedDrops.ARCANE_STYLI.count++;
 			}
 			//one scroll of transmutation is guaranteed to spawn somewhere on chapter 2-4
 			int enchChapter = (int)((Dungeon.seed / 10) % 3) + 1;
 			if ( Dungeon.depth / 5 == enchChapter &&
 					Dungeon.seed % 4 + 1 == Dungeon.depth % 5){
-				addItemToSpawn( new StoneOfRepair() );
+				addItemToSpawn( new StoneOfEnchantment() );
 			}
 			
 			if ( Dungeon.depth == ((Dungeon.seed % 3) + 1)){

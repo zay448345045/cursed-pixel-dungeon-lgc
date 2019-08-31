@@ -178,11 +178,7 @@ public class CursedChanges {
 		changeInfos.add(changes);
 
 		changes.addButton(new ChangeButton(Icons.get(Icons.WARNING), "Degradation",
-				"A Vanilla mechanic has returned - Degradation:\n" +
-						"_-_ Items have 50 - 100 durability depending on upgrades.\n" +
-						"_-_ If an item breaks, it loses an upgrade.\n" +
-						"_-_ Scroll of Upgrade partially repairs items\n" +
-						"_-_ Stone of Enchantment is now Stone of Repair, fully repairs items."));
+				""));
 
 		changes.addButton(new ChangeButton(new Greatsword().enchant(new Swift()),
 				"Added a new enchantment: Swift. This enchantment gives an item a chance not to consume a turn on use."));

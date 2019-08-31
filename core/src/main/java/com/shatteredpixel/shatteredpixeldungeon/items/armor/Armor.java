@@ -290,6 +290,9 @@ public class Armor extends EquipableItem {
 
 	public int DRMax(int lvl){
 		int max = tier * (2 + lvl) + augment.defenseFactor(lvl);
+		float reduction = max * ((this.maxDurability()-this.durability())/this.maxDurability()*2);
+		max -= (int) reduction;
+		max = Math.max(max,DRMin());
 		if (lvl > max){
 			return ((lvl - max)+1)/2;
 		} else {
@@ -302,7 +305,7 @@ public class Armor extends EquipableItem {
 	}
 
 	public int DRMin(int lvl){
-		int max = DRMax(lvl);
+		int max = (int) ((tier/2f) * (2 + lvl) + augment.defenseFactor(lvl));
 		if (lvl >= max){
 			return (lvl - max);
 		} else {
