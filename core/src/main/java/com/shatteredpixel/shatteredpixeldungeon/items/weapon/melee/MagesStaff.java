@@ -61,10 +61,6 @@ public class MagesStaff extends MeleeWeapon {
 
 	public static final String AC_IMBUE = "IMBUE";
 	public static final String AC_ZAP	= "ZAP";
-	@Override
-	public int maxDurability(int level) {
-		return 2 * super.maxDurability(level);
-	}
 
 	public boolean isUpgradable() {
 		if ( Dungeon.hero.heroClass == HeroClass.MAGE ) {//Mage can upgrade 5 more times...
@@ -140,7 +136,6 @@ public class MagesStaff extends MeleeWeapon {
 				GameScene.show(new WndItem(null, this, true));
 				return;
 			}
-			this.use();
 
 			if (cursed) wand.cursed = true;
 			else                             wand.cursed = false;

@@ -115,7 +115,6 @@ public abstract class Wand extends KindofMisc {
 		super.execute( hero, action );
 
 		if (action.equals( AC_ZAP )) {
-			this.use();
 			this.charge(hero);
 			if (!isEquipped(hero)) GLog.i( Messages.get(Artifact.class, "need_to_equip") );
 			else {
@@ -225,7 +224,6 @@ public abstract class Wand extends KindofMisc {
 		} else if (!isIdentified() && cursedKnown){
 			desc += "\n\n" + Messages.get(Wand.class, "not_cursed");
 		}
-		desc += "\n\n" + Messages.get(Item.class, "durability", new DecimalFormat("#.##").format(durability()));
 
 		return desc;
 	}

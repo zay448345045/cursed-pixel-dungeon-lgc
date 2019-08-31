@@ -19,6 +19,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Artifact;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.DragonSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.PoisonDragonSprite;
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
 import com.watabou.noosa.audio.Sample;
@@ -30,6 +31,8 @@ import java.util.ArrayList;
 
 public class PoisonDragon extends DragonItem {
     public Dragon dragon = new Dragon();
+    private static ItemSprite.Glowing YELLOW = new ItemSprite.Glowing( 0xFFFE00 );
+
     public static class Dragon extends DragonMob {
         {
             spriteClass = PoisonDragonSprite.class;
@@ -69,4 +72,9 @@ public class PoisonDragon extends DragonItem {
         dragon.sprite.parent.add( new AlphaTweener( dragon.sprite, 1, 0.15f ) );
         dragon.notice();
     }
+    @Override
+    public ItemSprite.Glowing glowing() {
+        return YELLOW;
+    }
+
 }

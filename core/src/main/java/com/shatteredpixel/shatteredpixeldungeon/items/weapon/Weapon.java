@@ -121,7 +121,6 @@ abstract public class Weapon extends KindOfWeapon {
 		if (enchantment != null && attacker.buff(MagicImmune.class) == null) {
 			damage = enchantment.proc( this, attacker, defender, damage );
 		}
-		this.use();
 		if (!levelKnown && attacker == hero && availableUsesToID >= 1) {
 			availableUsesToID--;
 			usesLeftToID--;

@@ -17,6 +17,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Artifact;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.tweeners.AlphaTweener;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 
 public class FireDragon extends DragonItem {
     public Dragon dragon = new Dragon();
+    private static ItemSprite.Glowing YELLOW = new ItemSprite.Glowing( 0xFFFE00 );
     public static class Dragon extends DragonMob {
         {
             properties.add(Property.FIERY);
@@ -73,5 +75,10 @@ public class FireDragon extends DragonItem {
         dragon.sprite.alpha( 0 );
         dragon.sprite.parent.add( new AlphaTweener( dragon.sprite, 1, 0.15f ) );
         dragon.notice();
+    }
+
+    @Override
+    public ItemSprite.Glowing glowing() {
+        return YELLOW;
     }
 }

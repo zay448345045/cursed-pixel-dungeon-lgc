@@ -98,8 +98,7 @@ public class Item implements Bundlable {
 	}
 
 	public int maxDurability( int lvl ) {
-		lvl = Math.min(20,lvl);
-		return 50 + lvl*2;
+		return 20;
 	}
 
 	final public int maxDurability() {
@@ -135,13 +134,7 @@ public class Item implements Bundlable {
 
 	public void use() {
 		if (level >= 1 && !isBroken()) {
-			int threshold = (int)(maxDurability() * DURABILITY_WARNING_LEVEL);
-			if (durability-- >= threshold && threshold > durability && levelKnown) {
-				GLog.w( TXT_GONNA_BREAK, name() );
-			}
-			if (isBroken()) {
-				breakThis();
-			}
+			durability-=2;
 		}
 	}
 	
