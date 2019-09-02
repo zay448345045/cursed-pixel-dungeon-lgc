@@ -31,16 +31,11 @@ public class Gauntlet extends MeleeWeapon {
 		
 		tier = 5;
 		DLY = 0.5f; //2x speed
-	}
-	
-	@Override
-	public int max(int lvl) {
-		return  Math.round(2.5f*(tier+1)) +     //15 base, down from 30
-				lvl*Math.round(0.5f*(tier+1));  //+3 per level, down from +6
+		damageMultiplier = 0.5f;
 	}
 	
 	@Override
 	public int defenseFactor( Char owner ) {
-		return 5;	//5 extra defence
+		return 10;	//5 extra defence
 	}
 }

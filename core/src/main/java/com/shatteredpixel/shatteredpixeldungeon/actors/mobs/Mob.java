@@ -108,7 +108,11 @@ public abstract class Mob extends Char {
 	private static final String STATE	= "state";
 	private static final String SEEN	= "seen";
 	private static final String TARGET	= "target";
-	
+
+	public int missingHP() {
+		return this.HT - this.HP;
+	}
+
 	@Override
 	public void storeInBundle( Bundle bundle ) {
 		

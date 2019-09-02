@@ -21,7 +21,12 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee;
 
+import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
+import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Bleeding;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
+import com.watabou.utils.Random;
 
 public class Scimitar extends MeleeWeapon {
 
@@ -29,7 +34,7 @@ public class Scimitar extends MeleeWeapon {
 		image = ItemSpriteSheet.SCIMITAR;
 
 		tier = 3;
-		DLY = 0.8f; //1.25x speed
+		DLY = 1f; //1.25x speed
 	}
 
 	@Override
@@ -38,4 +43,11 @@ public class Scimitar extends MeleeWeapon {
 				lvl*(tier+1);   //scaling unchanged
 	}
 
+	@Override
+	public int proc(Char attacker, Char defender, int damage) {
+		if (Random.Int(1, 3) == 1) {
+			Buff.affect( defender, Bleeding.class ).set( damage/3 );
+		}
+		return super.proc(attacker, defender, damage);
+	}
 }

@@ -27,6 +27,7 @@ import com.shatteredpixel.shatteredpixeldungeon.Challenges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.items.BrokenSeal;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
+import com.shatteredpixel.shatteredpixeldungeon.items.allies.PoisonDragon;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.ClothArmor;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.LeatherArmor;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.CloakOfShadows;
@@ -164,7 +165,7 @@ public enum HeroClass {
 
 	private static void initMage( Hero hero ) {
 		MagesStaff staff;
-		//new PoisonDragon().identify().upgrade(5).collect();
+		//new PoisonDragon().identify().collect();
 		//new ScrollOfUpgrade().quantity(5).collect();
 		//new WandOfLightning().identify().upgrade(2).collect();
 		staff = new MagesStaff(new WandOfDisintegration());

@@ -15,6 +15,7 @@ import com.watabou.utils.Random;
 public abstract class DragonMob extends NPC {
     int SpawnerLevel = 0;
     boolean Spawned = true;
+    int regenDelay = 0;
 
     {
         spriteClass = DragonSprite.class;
@@ -79,6 +80,17 @@ public abstract class DragonMob extends NPC {
         return true;
 
     }
+
+    @Override
+    public boolean act() {
+        regenDelay += 1;
+        if (regenDelay > 9) {
+            regenDelay = 0;
+            HP += Math.min(HT/10,this.missingHP());
+        }
+        return super.act();
+    }
+
 
     @Override
     protected boolean getCloser(int target) {

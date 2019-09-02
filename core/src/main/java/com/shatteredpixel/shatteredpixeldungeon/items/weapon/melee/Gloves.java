@@ -32,12 +32,8 @@ public class Gloves extends MeleeWeapon {
 		DLY = 0.5f; //2x speed
 		
 		bones = false;
+		damageMultiplier = 0.5f;
 	}
 
-	@Override
-	public int max(int lvl) {
-		return  (int)(3f*(tier+1)) +    //6 base, down from 10
-				lvl*tier;               //+1 per level, down from +2
-	}
 
 }

@@ -33,13 +33,9 @@ public class Dirk extends MeleeWeapon {
 		image = ItemSpriteSheet.DIRK;
 
 		tier = 2;
+		damageMultiplier = 0.80f;
 	}
 
-	@Override
-	public int max(int lvl) {
-		return  4*(tier+1) +    //12 base, down from 15
-				lvl*(tier+1);   //scaling unchanged
-	}
 	
 	@Override
 	public int damageRoll(Char owner) {

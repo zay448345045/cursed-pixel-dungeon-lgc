@@ -29,19 +29,14 @@ public class Greataxe extends MeleeWeapon {
 		image = ItemSpriteSheet.GREATAXE;
 
 		tier = 6;
-	}
-
-	@Override
-	public int max(int lvl) {
-		return  5*(tier+5) +    //50 base, up from 30
-				lvl*(tier+1);   //scaling unchanged
+		damageMultiplier = 1.2f;
 	}
 
 	@Override
 	public int STRReq(int lvl) {
 		lvl = Math.max(0, lvl);
 		//20 base strength req, up from 18
-		return (6 + tier * 2);
+		return (8 + tier * 2);
 	}
 
 }

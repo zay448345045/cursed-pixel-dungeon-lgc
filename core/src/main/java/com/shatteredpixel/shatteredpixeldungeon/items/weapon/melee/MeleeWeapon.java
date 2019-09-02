@@ -37,7 +37,7 @@ import java.text.DecimalFormat;
 public class MeleeWeapon extends Weapon {
 	
 	public int tier;
-
+	public float damageMultiplier = 1f;
 	private static final String TIER = "tier";
 
 	@Override
@@ -75,8 +75,8 @@ public class MeleeWeapon extends Weapon {
 
 	@Override
 	public int max(int lvl) {
-		return  5*(tier+1) +    //base
-				lvl*(tier+1);   //level scaling
+		return  (int) ((5*(tier+1) +    //base
+				lvl*(tier+1))*damageMultiplier);   //level scaling
 	}
 
 	public int STRReq(int lvl){

@@ -58,6 +58,7 @@ import java.util.ArrayList;
 public class CursedChanges {
 	
 	public static void addAllChanges( ArrayList<ChangeInfo> changeInfos ){
+
 		add_v0_1_0_Changes(changeInfos);
 	}
 

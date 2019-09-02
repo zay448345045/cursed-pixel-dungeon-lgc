@@ -31,6 +31,7 @@ public class Sai extends MeleeWeapon {
 
 		tier = 3;
 		DLY = 0.5f; //2x speed
+		damageMultiplier = 0.5f;
 	}
 
 	@Override
