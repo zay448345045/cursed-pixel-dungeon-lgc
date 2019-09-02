@@ -31,7 +31,7 @@ import java.util.ArrayList;
 
 public class PoisonDragon extends DragonItem {
     public Dragon dragon = new Dragon();
-    private static ItemSprite.Glowing YELLOW = new ItemSprite.Glowing( 0xFFFE00 );
+    private static ItemSprite.Glowing PINK = new ItemSprite.Glowing( 0xFF00FF );
 
     public static class Dragon extends DragonMob {
         {
@@ -74,7 +74,7 @@ public class PoisonDragon extends DragonItem {
     }
     @Override
     public ItemSprite.Glowing glowing() {
-        return YELLOW;
+        return PINK;
     }
 
 }

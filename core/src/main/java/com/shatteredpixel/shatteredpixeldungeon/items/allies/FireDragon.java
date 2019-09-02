@@ -28,7 +28,7 @@ import java.util.ArrayList;
 
 public class FireDragon extends DragonItem {
     public Dragon dragon = new Dragon();
-    private static ItemSprite.Glowing YELLOW = new ItemSprite.Glowing( 0xFFFE00 );
+    private static ItemSprite.Glowing ORANGE = new ItemSprite.Glowing( 0xFF4400 );
     public static class Dragon extends DragonMob {
         {
             properties.add(Property.FIERY);
@@ -79,6 +79,6 @@ public class FireDragon extends DragonItem {
 
     @Override
     public ItemSprite.Glowing glowing() {
-        return YELLOW;
+        return ORANGE;
     }
 }
