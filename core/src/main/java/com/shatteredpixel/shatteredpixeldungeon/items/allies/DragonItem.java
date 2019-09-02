@@ -74,6 +74,13 @@ public class DragonItem extends KindofMisc {
 
 
     }
+
+    @Override
+    public Item upgrade() {
+        this.dragon.updateHT(level());
+        return super.upgrade();
+    }
+
     @Override
     public String status() {
         return Messages.format( "%d%%", charge );
@@ -152,7 +159,7 @@ public class DragonItem extends KindofMisc {
         @Override
         public boolean act() {
             LockedFloor lock = target.buff(LockedFloor.class);
-            if (charge < chargeCap && !cursed && (lock == null || lock.regenOn())) {
+            if (charge < chargeCap && !cursed && (lock == null || lock.regenOn()) & dragon == null) {
                 partialCharge += 0.1;
 
                 if (partialCharge >= 1) {

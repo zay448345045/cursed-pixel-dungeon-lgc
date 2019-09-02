@@ -47,7 +47,7 @@ public class Dagger extends MeleeWeapon {
 				//deals 75% toward max to max on surprise, instead of min to max.
 				int diff = max() - min();
 				int damage = augment.damageFactor(Random.NormalIntRange(
-						min() + Math.round(diff*0.75f),
+						min() + Math.round(diff*0.67f),
 						max()));
 				int exStr = hero.STR() - STRReq();
 				if (exStr > 0) {

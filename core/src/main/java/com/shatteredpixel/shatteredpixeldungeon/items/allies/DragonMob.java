@@ -24,6 +24,7 @@ public abstract class DragonMob extends NPC {
         state = WANDERING;
 
         HP = HT = 8 + 4 * SpawnerLevel;
+        baseSpeed = 2f;
     }
 
     @Override
@@ -37,6 +38,10 @@ public abstract class DragonMob extends NPC {
 
     public boolean Spawned() {
         return Spawned;
+    }
+
+    public void updateHT(int level) {
+        HP = HT = 8 + 4 * level;
     }
 
     @Override
