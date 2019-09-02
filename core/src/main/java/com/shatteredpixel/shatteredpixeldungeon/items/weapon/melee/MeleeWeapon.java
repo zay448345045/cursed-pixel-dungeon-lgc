@@ -88,13 +88,13 @@ public class MeleeWeapon extends Weapon {
 	@Override
 	public int damageRoll(Char owner) {
 		int damage = augment.damageFactor(super.damageRoll( owner ));
-		float damageReduction = damage * ((this.maxDurability()-this.durability())/this.maxDurability()*2);
+		/*float damageReduction = damage * ((this.maxDurability()-this.durability())/this.maxDurability()*2);
 		damage -= (int) damageReduction/2;
 		int minDamage = min(level());
 		if (Dungeon.hero.subClass == HeroSubClass.GLADIATOR) {//Gladiator suffers less
 			minDamage*=2;
 		}
-		damage = Math.max(damage,minDamage);
+		damage = Math.max(damage,minDamage);*/
 		if (owner instanceof Hero) {
 			int exStr = ((Hero)owner).STR() - STRReq();
 			if (exStr > 0) {
@@ -149,7 +149,7 @@ public class MeleeWeapon extends Weapon {
 		} else if (!isIdentified() && cursedKnown){
 			info += "\n\n" + Messages.get(Weapon.class, "not_cursed");
 		}
-		info += "\n\n" + Messages.get(Item.class, "durability", new DecimalFormat("#.##").format(durability()));
+		//info += "\n\n" + Messages.get(Item.class, "durability", new DecimalFormat("#.##").format(durability()));
 		return info;
 	}
 	

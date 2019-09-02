@@ -133,11 +133,11 @@ public class Item implements Bundlable {
 		this.fix();
 	}
 
-	public void use() {
+	/*public void use() {
 		if (level >= 1 && !isBroken()) {
 			durability -= 2;
 		}
-	}
+	}*/
 	
 	private static Comparator<Item> itemComparator = new Comparator<Item>() {
 		@Override

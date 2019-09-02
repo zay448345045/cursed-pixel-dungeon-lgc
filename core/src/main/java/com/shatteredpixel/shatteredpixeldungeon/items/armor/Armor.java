@@ -290,9 +290,9 @@ public class Armor extends EquipableItem {
 
 	public int DRMax(int lvl){
 		int max = tier * (2 + lvl) + augment.defenseFactor(lvl);
-		float reduction = max * ((this.maxDurability()-this.durability())/this.maxDurability()*2);
+		/*float reduction = max * ((this.maxDurability()-this.durability())/this.maxDurability()*2);
 		max -= (int) reduction;
-		max = Math.max(max,DRMin());
+		max = Math.max(max,DRMin());*/
 		if (lvl > max){
 			return ((lvl - max)+1)/2;
 		} else {
@@ -466,7 +466,7 @@ public class Armor extends EquipableItem {
 		} else if (!isIdentified() && cursedKnown){
 			info += "\n\n" + Messages.get(Armor.class, "not_cursed");
 		}
-		info += "\n\n" + Messages.get(Item.class, "durability", new DecimalFormat("#.##").format(durability()));
+		//info += "\n\n" + Messages.get(Item.class, "durability", new DecimalFormat("#.##").format(durability()));
 		return info;
 	}
 

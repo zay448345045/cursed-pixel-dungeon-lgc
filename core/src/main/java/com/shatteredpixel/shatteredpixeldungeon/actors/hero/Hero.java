@@ -516,9 +516,15 @@ public class Hero extends Char {
 	@Override
 	public boolean act() {
 		if (!(curAction instanceof HeroAction.Attack)) {
-			belongings.weapon.polish();
+			if (belongings.weapon != null) {
+				belongings.weapon.polish();
+			}
+
 		}
-		belongings.armor.polish();
+		if (belongings.armor != null) {
+			belongings.armor.polish();
+		}
+
 		//calls to dungeon.observe will also update hero's local FOV.
 		fieldOfView = Dungeon.level.heroFOV;
 		
@@ -590,8 +596,9 @@ public class Hero extends Char {
 				
 			} else if (curAction instanceof HeroAction.Attack) {
 				actResult = actAttack( (HeroAction.Attack)curAction );
-				belongings.weapon.use();
-				
+				/*if (belongings.weapon != null) {
+					belongings.weapon.use();
+				}*/
 			} else if (curAction instanceof HeroAction.Alchemy) {
 				actResult = actAlchemy( (HeroAction.Alchemy)curAction );
 				
@@ -1017,7 +1024,9 @@ public class Hero extends Char {
 			Berserk berserk = Buff.affect(this, Berserk.class);
 			berserk.damage(damage);
 		}
-		belongings.armor.use();
+		/*if (belongings.armor != null) {
+			belongings.armor.use();
+		}*/
 		if (belongings.armor != null) {
 			damage = belongings.armor.proc( enemy, this, damage );
 		}
