@@ -515,7 +515,7 @@ public class Hero extends Char {
 	
 	@Override
 	public boolean act() {
-		if (!(curAction instanceof HeroAction.Attack)) {
+		/*if (!(curAction instanceof HeroAction.Attack)) {
 			if (belongings.weapon != null) {
 				belongings.weapon.polish();
 			}
@@ -523,7 +523,7 @@ public class Hero extends Char {
 		}
 		if (belongings.armor != null) {
 			belongings.armor.polish();
-		}
+		}*/
 
 		//calls to dungeon.observe will also update hero's local FOV.
 		fieldOfView = Dungeon.level.heroFOV;
