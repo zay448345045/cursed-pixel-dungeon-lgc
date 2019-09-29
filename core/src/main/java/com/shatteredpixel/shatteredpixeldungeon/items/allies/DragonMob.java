@@ -24,7 +24,7 @@ public abstract class DragonMob extends NPC {
         state = WANDERING;
 
         HP = HT = 8 + 4 * SpawnerLevel;
-        baseSpeed = 2f;
+        baseSpeed = 1f;
     }
 
     @Override
