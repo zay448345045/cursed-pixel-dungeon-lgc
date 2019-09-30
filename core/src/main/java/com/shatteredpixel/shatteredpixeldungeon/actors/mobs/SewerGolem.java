@@ -44,6 +44,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.Wand;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfPrismaticLight;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Grim;
 import com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
@@ -60,7 +61,8 @@ import com.watabou.utils.Callback;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 
-public class SewerGolem extends Mob  {
+public class SewerGolem extends Mob implements Callback  {
+    private static final float TIME_TO_ZAP	= 1f;
     {
         spriteClass = SewerGolemSprite.class;
 
@@ -69,15 +71,60 @@ public class SewerGolem extends Mob  {
 
         EXP = 22;
 
-        loot = Generator.randomWeapon();
-        lootChance = 0.125f;
+        loot = Generator.randomWeapon().enchant(Weapon.Enchantment.random()).upgrade(10);
+        lootChance = 0.5f;
 
-        baseSpeed = 0.7f;//Slower than the player to allow melee units to catch up
+        baseSpeed = 0.8f;//Slower than the player to allow melee units to catch up
         properties.add(Property.BOSS);
         properties.add(Property.DEMONIC);
         immunities.add(Grim.class);
         resistances.add(Wand.class);
         resistances.remove(WandOfPrismaticLight.class);//Resistant to all wands except Prismatic Light
+    }
+
+    public static class LightningBolt{}
+
+    @Override
+    protected boolean doAttack( Char enemy ) {
+
+        if (Dungeon.level.distance( pos, enemy.pos ) <= 1) {
+
+            return super.doAttack( enemy );
+
+        } else {
+
+            boolean visible = fieldOfView[pos] || fieldOfView[enemy.pos];
+            if (visible) {
+                sprite.zap( enemy.pos );
+            }
+
+            spend( TIME_TO_ZAP );
+
+            if (hit( this, enemy, true )) {
+                int dmg = Random.NormalIntRange(20, 60);
+                if (Dungeon.level.water[enemy.pos] && !enemy.flying) {
+                    dmg *= 2f;
+                }
+                enemy.damage( dmg, new LightningBolt() );
+
+                enemy.sprite.centerEmitter().burst( SparkParticle.FACTORY, 3 );
+                enemy.sprite.flash();
+
+                if (enemy == Dungeon.hero) {
+
+                    Camera.main.shake( 2, 0.3f );
+
+                    if (!enemy.isAlive()) {
+                        Dungeon.fail( getClass() );
+                        GLog.n( Messages.get(this, "zap_kill") );
+                    }
+                }
+            } else {
+                enemy.sprite.showStatus( CharSprite.NEUTRAL,  enemy.defenseVerb() );
+            }
+
+            return !visible;
+        }
     }
 
     @Override
@@ -90,9 +137,8 @@ public class SewerGolem extends Mob  {
     @Override
     public void damage( int dmg, Object src ) {
         this.notice();
-        super.damage(dmg, src);
         if (Random.Int(2) == 1) {
-            GameScene.add(Blob.seed(this.pos, 300, SpawnerGas.class));
+            GameScene.add(Blob.seed(Dungeon.hero.pos, 300, SpawnerGas.class));
             Buff.affect(this, Terror.class, 5f).object = Dungeon.hero.id();
         }
         boolean bleeding = (HP*2 <= HT);
@@ -173,9 +219,8 @@ public class SewerGolem extends Mob  {
     }
 
 
-
-
-
-
-
+    @Override
+    public void call() {
+        next();
+    }
 }
