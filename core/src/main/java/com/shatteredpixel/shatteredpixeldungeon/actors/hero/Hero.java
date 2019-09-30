@@ -33,6 +33,7 @@ import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Alchemy;
+import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.EvilGas;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.AdrenalineSurge;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Awareness;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Barkskin;
@@ -142,9 +143,13 @@ public class Hero extends Char {
 	{
 		actPriority = HERO_PRIO;
 		resistances.add(Grim.class);//Hero is resistant to Grim
+		immunities.remove(EvilGas.class);
 		alignment = Alignment.ALLY;
+
 	}
-	
+
+
+
 	public static final int MAX_LEVEL = 30;
 
 	public static final int STARTING_STR = 10;

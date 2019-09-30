@@ -39,19 +39,19 @@ public class Challenges {
 
 	//Some of these internal IDs are outdated and don't represent what these challenges do
 	public static final int NO_FOOD				= 1;
-	public static final int NO_ARMOR			= 2;
-	public static final int NO_HEALING			= 4;
-	public static final int NO_HERBALISM		= 8;
-	public static final int SWARM_INTELLIGENCE	= 16;
-	public static final int DARKNESS			= 32;
-	public static final int NO_SCROLLS		    = 64;
-	public static final int EVIL_GAS		    = 128;
+	/*public static final int NO_ARMOR			= 2;*/
+	public static final int NO_HEALING			= 2;
+	public static final int NO_HERBALISM		= 4;
+	public static final int SWARM_INTELLIGENCE	= 8;
+	public static final int DARKNESS			= 16;
+	public static final int NO_SCROLLS		    = 32;
+	public static final int EVIL_GAS		    = 64;
 
-	public static final int MAX_VALUE           = 255;
+	public static final int MAX_VALUE           = 127;
 
 	public static final String[] NAME_IDS = {
 			"no_food",
-			"no_armor",
+			/*"no_armor",*/
 			"no_healing",
 			"no_herbalism",
 			"swarm_intelligence",
@@ -61,7 +61,7 @@ public class Challenges {
 	};
 
 	public static final int[] MASKS = {
-			NO_FOOD, NO_ARMOR, NO_HEALING, NO_HERBALISM, SWARM_INTELLIGENCE, DARKNESS, NO_SCROLLS, EVIL_GAS
+			NO_FOOD, /*NO_ARMOR,*/ NO_HEALING, NO_HERBALISM, SWARM_INTELLIGENCE, DARKNESS, NO_SCROLLS, EVIL_GAS
 	};
 
 	public static boolean isItemBlocked( Item item ){
@@ -73,11 +73,11 @@ public class Challenges {
 			}
 		}
 
-		if (Dungeon.isChallenged(NO_ARMOR)){
+		/*if (Dungeon.isChallenged(NO_ARMOR)){
 			if (item instanceof Armor && !(item instanceof ClothArmor || item instanceof ClassArmor)) {
 				return true;
 			}
-		}
+		}*/
 
 		if (Dungeon.isChallenged(NO_HEALING)){
 			if (item instanceof PotionOfHealing){

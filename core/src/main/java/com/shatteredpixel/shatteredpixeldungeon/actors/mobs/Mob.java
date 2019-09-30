@@ -28,6 +28,8 @@ import com.shatteredpixel.shatteredpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
+import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Blob;
+import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.EvilGas;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Adrenaline;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Amok;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
@@ -57,6 +59,7 @@ import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.shatteredpixel.shatteredpixeldungeon.levels.features.Chasm;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Swiftthistle;
+import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
 import com.watabou.utils.Bundle;
@@ -75,8 +78,8 @@ public abstract class Mob extends Char {
 		actPriority = MOB_PRIO;
 		
 		alignment = Alignment.ENEMY;
+		immunities.add(EvilGas.class);
 	}
-	
 	private static final String	TXT_DIED	= "You hear something died in the distance";
 	
 	protected static final String TXT_NOTICE1	= "?!";
@@ -580,7 +583,9 @@ public abstract class Mob extends Char {
 		if (state != HUNTING) {
 			alerted = true;
 		}
-		
+		if (Dungeon.isChallenged(Challenges.EVIL_GAS)) {
+			GameScene.add(Blob.seed(this.pos, 50, EvilGas.class).setStrength(1+Dungeon.depth/4));
+		}
 		super.damage( dmg, src );
 	}
 	

@@ -57,6 +57,7 @@ public class Speck extends Image {
 	public static final int JET         = 106;
 	public static final int TOXIC       = 107;
 	public static final int CORROSION   = 108;
+	public static final int EVIL_GAS    = 120;
 	public static final int PARALYSIS   = 109;
 	public static final int DUST        = 110;
 	public static final int STENCH      = 111;
@@ -111,6 +112,7 @@ public class Speck extends Image {
 		case JET:
 		case TOXIC:
 		case CORROSION:
+		case EVIL_GAS:
 		case PARALYSIS:
 		case STENCH:
 		case CONFUSION:
@@ -185,6 +187,7 @@ public class Speck extends Image {
 			break;
 
 		case RED_LIGHT:
+		case EVIL_GAS:
 			tint(0xFFCC0000);
 		case LIGHT:
 			angle = Random.Float( 360 );
