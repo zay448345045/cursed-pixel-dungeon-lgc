@@ -102,7 +102,9 @@ import com.shatteredpixel.shatteredpixeldungeon.items.weapon.SpiritBow;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Blocking;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Grim;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Precise;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Swift;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Unstable;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Flail;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.MissileWeapon;
 import com.shatteredpixel.shatteredpixeldungeon.journal.Notes;
@@ -344,6 +346,12 @@ public class Hero extends Char {
 	@Override
 	public int attackSkill( Char target ) {
 		KindOfWeapon wep = belongings.weapon;
+
+		if (wep instanceof Weapon
+				&& (((Weapon) wep).hasEnchant(Precise.class, this)
+				|| (((Weapon) wep).hasEnchant(Unstable.class, this) && Random.Int(11) == 0))){
+				return Integer.MAX_VALUE;
+			}
 		
 		float accuracy = 1;
 		accuracy *= RingOfAccuracy.accuracyMultiplier( this );

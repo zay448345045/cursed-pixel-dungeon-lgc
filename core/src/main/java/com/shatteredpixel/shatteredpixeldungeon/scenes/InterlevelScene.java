@@ -68,7 +68,7 @@ public class InterlevelScene extends PixelScene {
 	private static float fadeTime;
 
 	public enum Mode {
-		DESCEND, ASCEND, CONTINUE, RESURRECT, RETURN, FALL, RESET, NONE, START, WATERCHALLENGE, EARTHCHALLENGE, DESCEND_GAMEINIT
+		DESCEND, ASCEND, CONTINUE, RESURRECT, RETURN, FALL, RESET, NONE, START, WATERCHALLENGE, EARTHCHALLENGE, DESCEND_GAMEINIT, DESCEND_FIX
 	}
 	public static Mode mode;
 	
@@ -306,22 +306,32 @@ public class InterlevelScene extends PixelScene {
 			
 		case STATIC:
 			if (error != null) {
-				String errorMsg;
-				if (error instanceof FileNotFoundException)     errorMsg = Messages.get(this, "file_not_found");
+				String errorMsg = Messages.get(this, "file_not_found");
+				if (error instanceof FileNotFoundException) {
+					try {//Attempt to reset if error when descending
+						createNewLevel(Dungeon.depth);
+						error = null;
+					} catch (Exception e) {
+						error = e;
+					}
+
+				}
 				else if (error instanceof IOException)          errorMsg = Messages.get(this, "io_error");
 				else if (error.getMessage() != null &&
 						error.getMessage().equals("old save")) errorMsg = Messages.get(this, "io_error");
 
-				else throw new RuntimeException("fatal error occured while moving between floors. " +
-							"Seed:" + Dungeon.seed + " depth:" + Dungeon.depth, error);
+				else errorMsg = Messages.get(this, "io_error");
 				errorMsg += "\n\n" + error;
-
-				add( new WndError( errorMsg ) {
-					public void onBackPressed() {
-						super.onBackPressed();
-						Game.switchScene( StartScene.class );
-					}
-				} );
+				if (error != null) {//In case resetting the floor fixed it
+					add(new WndError(errorMsg) {
+						public void onBackPressed() {
+							super.onBackPressed();
+							Game.switchScene(StartScene.class);
+						}
+					});
+				} else {
+					Game.switchScene(GameScene.class);
+				}
 
 				thread = null;
 				error = null;
@@ -340,6 +350,14 @@ public class InterlevelScene extends PixelScene {
 			}
 			break;
 		}
+	}
+
+	public static Level createNewLevel(int depthToAccess) {
+		Level level;
+		Dungeon.depth = depthToAccess;
+		level = Dungeon.newLevelWithDepth(Dungeon.depth);
+		Dungeon.switchLevel( level, level.entrance );
+		return level;
 	}
 
 	public static Level goToDepth(int depthToAccess,  final String typeOfDescend) throws IOException {

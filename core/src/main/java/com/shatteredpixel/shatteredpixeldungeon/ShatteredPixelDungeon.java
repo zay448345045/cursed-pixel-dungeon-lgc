@@ -93,11 +93,7 @@ public class ShatteredPixelDungeon extends Game {
 		com.watabou.utils.Bundle.addAlias(
 				com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic.class,
 				"com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Vorpal" );
-		
-		//v0.7.3
-		com.watabou.utils.Bundle.addAlias(
-				com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic.class,
-				"com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Precise" );
+
 	}
 	
 	@Override

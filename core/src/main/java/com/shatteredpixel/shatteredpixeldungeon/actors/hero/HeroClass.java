@@ -51,6 +51,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfEnchantment;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfDisintegration;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.SpiritBow;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Precise;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Dagger;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Gloves;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MagesStaff;
@@ -146,7 +147,7 @@ public enum HeroClass {
 	}
 
 	private static void initWarrior( Hero hero ) {
-		(hero.belongings.weapon = new WornShortsword()).identify().upgrade();
+		(hero.belongings.weapon = new WornShortsword().enchant(new Precise())).identify().upgrade();
 		(hero.belongings.armor = new LeatherArmor()).identify().upgrade();
 		hero.HP = hero.HT = 24;
 		ThrowingStone stones = new ThrowingStone();
