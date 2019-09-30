@@ -55,7 +55,7 @@ public class EvilGas extends CorrosiveGas {
                         if (!ch.isImmune(this.getClass())) {
                             Buff.affect(ch, Corrosion.class).set(4f, strength);
                             Buff.prolong(ch, Vertigo.class, 2);
-                            Cripple.prolong(ch, Cripple.class, 4f);
+                            //Cripple.prolong(ch, Cripple.class, 4f);
                         }
                     }
                 }

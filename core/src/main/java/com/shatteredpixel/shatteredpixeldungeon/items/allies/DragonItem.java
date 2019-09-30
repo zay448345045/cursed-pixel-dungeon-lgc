@@ -159,7 +159,7 @@ public class DragonItem extends KindofMisc {
         @Override
         public boolean act() {
             LockedFloor lock = target.buff(LockedFloor.class);
-            if (charge < chargeCap && !cursed && (lock == null || lock.regenOn()) & dragon == null) {
+            if (charge < chargeCap && !cursed && (lock == null || lock.regenOn())) {
                 partialCharge += 0.1;
 
                 if (partialCharge >= 1) {
