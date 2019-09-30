@@ -147,7 +147,7 @@ public enum HeroClass {
 	}
 
 	private static void initWarrior( Hero hero ) {
-		(hero.belongings.weapon = new WornShortsword().enchant(new Precise())).identify().upgrade();
+		(hero.belongings.weapon = new WornShortsword()/*.enchant(new Precise())*/).identify().upgrade();
 		(hero.belongings.armor = new LeatherArmor()).identify().upgrade();
 		hero.HP = hero.HT = 24;
 		ThrowingStone stones = new ThrowingStone();

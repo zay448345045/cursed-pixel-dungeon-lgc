@@ -32,11 +32,33 @@ import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite.Glowing;
 import com.watabou.utils.Random;
 
 public class Precise extends Weapon.Enchantment {
+    {
+        testing = false;
+    }
+
     private static ItemSprite.Glowing WHITE = new ItemSprite.Glowing( 0xFFFFFF );
     @Override
     public int proc(Weapon weapon, Char attacker, Char defender, int damage) {
+        testing = true;
+        float evasion = defender.defenseSkill(attacker);
+        float accuracy = attacker.attackSkill(defender);
+        testing = false;
+
+        float hitChance;
+        if (evasion >= accuracy){
+            hitChance = (accuracy/evasion)/2f;
+        } else {
+            hitChance = 1f - (evasion/accuracy)/2f;
+        }
+
+        //75% of dodge chance is applied as damage reduction
+        hitChance = (1f + 3f*hitChance)/4f;
+
+        damage = (int)Math.ceil(damage * hitChance);
+
         return damage;
     }
+
 
     @Override
     public Glowing glowing() {
