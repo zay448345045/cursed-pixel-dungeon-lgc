@@ -38,7 +38,7 @@ public class Golem extends Mob {
 		defenseSkill = 18;
 		
 		EXP = 12;
-		maxLvl = 27;
+		maxLvl = 22;
 		
 		properties.add(Property.INORGANIC);
 	}

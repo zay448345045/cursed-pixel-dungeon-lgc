@@ -10,8 +10,8 @@ public class Minion extends Wraith {
     {
         defenseSkill = 0;
         HP = HT = 80;
-        immunities.add(Wand.class);
-        immunities.remove(WandOfPrismaticLight.class);//immune to wands except prismatic light
+        resistances.add(Wand.class);
+        resistances.remove(WandOfPrismaticLight.class);//immune to wands except prismatic light
         properties.add(Property.DEMONIC);
     }
 

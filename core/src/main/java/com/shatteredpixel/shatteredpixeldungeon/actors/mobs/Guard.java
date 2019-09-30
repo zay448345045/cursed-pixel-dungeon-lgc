@@ -51,7 +51,7 @@ public class Guard extends Mob {
 		defenseSkill = 10;
 
 		EXP = 6;
-		maxLvl = 19;
+		maxLvl = 14;
 
 		loot = null;    //see createloot.
 		lootChance = 0.25f;
