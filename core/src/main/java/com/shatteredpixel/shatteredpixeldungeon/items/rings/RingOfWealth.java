@@ -33,9 +33,12 @@ import com.shatteredpixel.shatteredpixeldungeon.items.food.MeatPie;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.MysteryMeat;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.SmallRation;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.StewedMeat;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.AlchemicalCatalyst;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.Scroll;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfEnchantment;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.ArcaneCatalyst;
+import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfEnchantment;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.watabou.utils.Bundle;
@@ -190,27 +193,12 @@ public class RingOfWealth extends Ring {
 			Item result = new Gold().random();
 			result.quantity(Math.round(result.quantity() * Random.NormalFloat(0.33f, 1f)));
 			return result;
-		} else if (roll < 0.6f){ //30% chance
+		} else if (roll < 0.8f){ //50% chance
 			return genBasicConsumable();
-		} else if (roll < 0.9f){ //30% chance
+		} else { //20% chance
 			return genExoticConsumable();
-		} else { //10% chance
-			if (Random.Int(3) != 0){
-				Weapon weapon = Generator.randomWeapon();
-				weapon.enchant(null);
-				weapon.cursed = false;
-				weapon.cursedKnown = true;
-				weapon.level(0);
-				return weapon;
-			} else {
-				Armor armor = Generator.randomArmor();
-				armor.inscribe(null);
-				armor.cursed = false;
-				armor.cursedKnown = true;
-				armor.level(0);
-				return armor;
-			}
 		}
+
 	}
 	
 	private static Item genBasicConsumable(){
@@ -240,7 +228,7 @@ public class RingOfWealth extends Ring {
 			} while (scroll == null || ((scroll instanceof ScrollOfEnchantment) & !Dungeon.isChallenged(Challenges.NO_SCROLLS)));
 			return scroll;
 		} else { //50% chance
-			return Random.Int(2) == 0 ? new FrozenCarpaccio() : new StewedMeat();
+			return Random.Int(2) == 0 ? new ArcaneCatalyst() : new AlchemicalCatalyst();
 		}
 	}
 	
@@ -250,10 +238,24 @@ public class RingOfWealth extends Ring {
 			Item result = new Gold().random();
 			result.quantity(Math.round(result.quantity() * Random.NormalFloat(3f, 6f)));
 			return result;
-		} else if (roll < 0.7f){ //40% chance
+		} else if (roll < 0.6f){ //30% chance
 			return genHighValueConsumable();
-		} else if (roll < 0.9f){ //20% chance
-			Item result = Random.Int(2) == 0 ? Generator.random(Generator.Category.ARTIFACT) : Generator.random(Generator.Category.RING);
+		} else if (roll < 0.9f){ //30% chance
+			Item result;
+			int random = Random.Int(3);
+			switch (random){
+				default:
+					result = Generator.random(Generator.Category.ARTIFACT);
+					break;
+				case 1:
+					result = Generator.random(Generator.Category.RING);
+					break;
+				case 2:
+					result = Generator.random(Generator.Category.WAND);
+					break;
+				case 3:
+					result = Generator.random(Generator.Category.ALLIES);
+			}
 			result.cursed = false;
 			result.cursedKnown = true;
 			return result;
@@ -281,7 +283,7 @@ public class RingOfWealth extends Ring {
 			case 0: default:
 				return Generator.random(Generator.Category.SPELL);
 			case 1:
-				return new ScrollOfEnchantment().quantity(3);
+				return new StoneOfEnchantment().quantity(3);
 			case 2:
 				return Generator.random(Generator.Category.ELXIR);
 			case 3:

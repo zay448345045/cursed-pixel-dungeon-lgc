@@ -33,6 +33,7 @@ import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.levels.painters.Painter;
 import com.watabou.utils.Point;
+import com.watabou.utils.Random;
 
 public class CryptRoom extends SpecialRoom {
 
@@ -80,8 +81,9 @@ public class CryptRoom extends SpecialRoom {
 			return new Gold().random();
 		}
 
-		//if it isn't already cursed, give it a free upgrade
-		if (!prize.cursed){
+		//Bonus upgrades scaling with dungeon depth
+		prize.upgrade(Random.NormalIntRange( Dungeon.depth/4, Dungeon.depth/2 ) + 1);
+		if (!prize.cursed){//if it isn't already cursed, give it a free upgrade
 			prize.upgrade();
 			//curse the armor, unless it has a glyph
 			if (!prize.hasGoodGlyph()){
