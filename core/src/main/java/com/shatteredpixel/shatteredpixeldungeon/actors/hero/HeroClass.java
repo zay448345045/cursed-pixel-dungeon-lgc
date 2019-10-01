@@ -179,10 +179,10 @@ public enum HeroClass {
 		//new ScrollOfUpgrade().quantity(5).collect();
 		//new WandOfLightning().identify().upgrade(2).collect();
 		staff = new MagesStaff(new WandOfDisintegration());
-		new WandOfMagicMissile().enchant(Weapon.Enchantment.random()).identify().upgrade(5).collect();
+		/*new WandOfMagicMissile().enchant(Weapon.Enchantment.random()).identify().upgrade(5).collect();
 		new WandOfMagicMissile().identify().collect();
 		new ScrollOfEnchantment().quantity(5).identify().collect();
-		new StoneOfEnchantment().quantity(5).identify().collect();
+		new StoneOfEnchantment().quantity(5).identify().collect();*/
 		staff.upgrade();
 		(hero.belongings.weapon = staff).identify();
 		//(hero.belongings.misc1 = new RingOfWealth()).upgrade(20).identify();

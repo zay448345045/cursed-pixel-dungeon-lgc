@@ -36,6 +36,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.wands.Wand;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfCorrosion;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfCorruption;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfDisintegration;
+import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfMagicMissile;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfRegrowth;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
@@ -253,6 +254,11 @@ public class MagesStaff extends MeleeWeapon {
 		if (wand != null) {
 			int curCharges = wand.curCharges;
 			wand.level(level());
+			if (this.wand instanceof WandOfMagicMissile) {//If imbuing a Wand of Magic Missile, update the enchantment on the Staff.
+				if (((WandOfMagicMissile) this.wand).Enchantment != null) {
+					this.enchant(((WandOfMagicMissile) this.wand).Enchantment);
+				}
+			}
 			//gives the wand one additional max charge
 			wand.maxCharges = Math.min(wand.maxCharges + 1, 10);
 			wand.curCharges = Math.min(curCharges + (levelled ? 1 : 0), wand.maxCharges);
@@ -275,7 +281,7 @@ public class MagesStaff extends MeleeWeapon {
 			//perhaps reword to fit in journal better
 			//info += "\n\n" + Messages.get(this, "no_wand");
 		} else {
-			info += "\n\n" + Messages.get(this, "has_wand", Messages.get(wand, "name")) + " " + wand.statsDesc();
+			info += "\n\n" + Messages.get(this, "has_wand", wand.name() + " " + wand.statsDesc());
 		}
 
 		return info;
@@ -319,6 +325,9 @@ public class MagesStaff extends MeleeWeapon {
 		if (curseInfusionBonus && (ench == null || !ench.curse())){
 			curseInfusionBonus = false;
 			updateWand(false);
+		}
+		if (this.wand instanceof WandOfMagicMissile) {
+			((WandOfMagicMissile) this.wand).enchant(ench);
 		}
 		return super.enchant(ench);
 	}
