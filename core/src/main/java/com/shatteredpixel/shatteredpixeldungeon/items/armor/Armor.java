@@ -581,7 +581,7 @@ public class Armor extends EquipableItem {
 				Repulsion.class, Camouflage.class, Flow.class };
 		
 		private static final Class<?>[] rare = new Class<?>[]{
-				Affection.class, AntiMagic.class, Thorns.class };
+				Affection.class, /*AntiMagic.class,*/ Thorns.class };
 		
 		private static final float[] typeChances = new float[]{
 				50, //12.5% each
