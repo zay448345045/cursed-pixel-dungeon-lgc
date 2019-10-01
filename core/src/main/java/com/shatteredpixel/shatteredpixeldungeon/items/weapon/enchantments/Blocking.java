@@ -24,6 +24,7 @@ package com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.FlavourBuff;
+import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
@@ -37,7 +38,7 @@ public class Blocking extends Weapon.Enchantment {
 	private static ItemSprite.Glowing BLUE = new ItemSprite.Glowing( 0x0000FF );
 	
 	@Override
-	public int proc(Weapon weapon, Char attacker, Char defender, int damage) {
+	public int proc(Item weapon, Char attacker, Char defender, int damage) {
 		
 		int level = Math.max( 0, weapon.level() );
 		

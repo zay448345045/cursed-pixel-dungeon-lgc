@@ -25,6 +25,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Drowsy;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Paralysis;
+import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
 import com.watabou.utils.Bundle;
@@ -36,7 +37,7 @@ public class Fragile extends Weapon.Enchantment {
 	private int hits = 0;
 
 	@Override
-	public int proc( Weapon weapon, Char attacker, Char defender, int damage ) {
+	public int proc(Item weapon, Char attacker, Char defender, int damage ) {
 		//degrades from 100% to 25% damage over 150 hits
 		float damageMultiplier = 1f - hits*0.005f;
 		damage *= (damageMultiplier);

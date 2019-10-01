@@ -1,6 +1,7 @@
 package com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments;
 
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
+import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.KindOfWeapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
@@ -10,7 +11,7 @@ public class Swift extends Weapon.Enchantment {
     private static ItemSprite.Glowing YELLOW_1 = new ItemSprite.Glowing( 0xFFFE00 );
 
     @Override
-    public int proc(Weapon weapon, Char attacker, Char defender, int damage) {
+    public int proc(Item weapon, Char attacker, Char defender, int damage) {
         //no proc effect, see Hero.attackDelay
         return damage;
     }

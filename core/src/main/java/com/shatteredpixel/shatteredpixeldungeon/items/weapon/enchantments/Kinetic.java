@@ -24,6 +24,7 @@ package com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.FlavourBuff;
+import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
@@ -36,7 +37,7 @@ public class Kinetic extends Weapon.Enchantment {
 	private static ItemSprite.Glowing YELLOW = new ItemSprite.Glowing( 0xFFFF00 );
 	
 	@Override
-	public int proc(Weapon weapon, Char attacker, Char defender, int damage) {
+	public int proc(Item weapon, Char attacker, Char defender, int damage) {
 		
 		int conservedDamage = 0;
 		if (attacker.buff(ConservedDamage.class) != null) {

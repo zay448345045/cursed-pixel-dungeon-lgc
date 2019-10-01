@@ -21,10 +21,12 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.items.stones;
 
+import com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroAction;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Enchanting;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor;
+import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfMagicMissile;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
@@ -45,10 +47,12 @@ public class StoneOfEnchantment extends InventoryStone {
 			
 			((Weapon)item).enchant();
 			
-		} else {
+		} else if (item instanceof Armor) {
 			
 			((Armor)item).inscribe();
 			
+		} else if (item instanceof WandOfMagicMissile) {
+			((WandOfMagicMissile)item).enchant(Weapon.Enchantment.random());
 		}
 		
 		curUser.sprite.emitter().start( Speck.factory( Speck.LIGHT ), 0.1f, 5 );

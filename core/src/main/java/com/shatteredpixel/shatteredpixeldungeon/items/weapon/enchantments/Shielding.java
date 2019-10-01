@@ -25,6 +25,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Barrier;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
+import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
@@ -36,7 +37,7 @@ public class Shielding extends Weapon.Enchantment {
 	private static ItemSprite.Glowing SILVER = new ItemSprite.Glowing( 0x909396 );
 	
 	@Override
-	public int proc( Weapon weapon, Char attacker, Char defender, int damage ) {
+	public int proc(Item weapon, Char attacker, Char defender, int damage ) {
 		
 		//chance to heal scales from 50%-100% based on missing HP
 		float missingPercent = (attacker.HT - attacker.HP) / (float)attacker.HT;

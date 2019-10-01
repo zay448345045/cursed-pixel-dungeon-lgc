@@ -27,6 +27,7 @@ import com.shatteredpixel.shatteredpixeldungeon.effects.Enchanting;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor;
 import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfEnchantment;
+import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfMagicMissile;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
@@ -52,14 +53,20 @@ public class ScrollOfEnchantment extends ExoticScroll {
 		@Override
 		public void onSelect(final Item item) {
 			
-			if (item instanceof Weapon){
+			if (item instanceof Weapon || item instanceof WandOfMagicMissile){
 				
 				final Weapon.Enchantment enchants[] = new Weapon.Enchantment[3];
-				
-				Class<? extends Weapon.Enchantment> existing = ((Weapon) item).enchantment != null ? ((Weapon) item).enchantment.getClass() : null;
-				enchants[0] = Weapon.Enchantment.randomCurse( existing );
-				enchants[1] = Weapon.Enchantment.random( existing );
-				enchants[2] = Weapon.Enchantment.random( existing, enchants[0].getClass(), enchants[1].getClass());
+				if (item instanceof Weapon) {
+					Class<? extends Weapon.Enchantment> existing = ((Weapon) item).enchantment != null ? ((Weapon) item).enchantment.getClass() : null;
+					enchants[0] = Weapon.Enchantment.randomCurse( existing );
+					enchants[1] = Weapon.Enchantment.random( existing );
+					enchants[2] = Weapon.Enchantment.random( existing, enchants[0].getClass(), enchants[1].getClass());
+				} else {
+					Class<? extends Weapon.Enchantment> existing = ((WandOfMagicMissile) item).Enchantment != null ? ((WandOfMagicMissile) item).Enchantment.getClass() : null;
+					enchants[0] = Weapon.Enchantment.randomCurse( existing );
+					enchants[1] = Weapon.Enchantment.random( existing );
+					enchants[2] = Weapon.Enchantment.random( existing, enchants[0].getClass(), enchants[1].getClass());
+				}
 				
 				GameScene.show(new WndOptions(Messages.titleCase(ScrollOfEnchantment.this.name()),
 						Messages.get(ScrollOfEnchantment.class, "weapon") +
@@ -73,7 +80,11 @@ public class ScrollOfEnchantment extends ExoticScroll {
 					@Override
 					protected void onSelect(int index) {
 						if (index < 3) {
-							((Weapon) item).enchant(enchants[index]);
+							if (item instanceof Weapon) {
+								((Weapon) item).enchant(enchants[index]);
+							} else if (item instanceof WandOfMagicMissile) {
+								((WandOfMagicMissile)item).enchant(enchants[index]);
+							}
 							GLog.p(Messages.get(StoneOfEnchantment.class, "weapon"));
 							((ScrollOfEnchantment)curItem).readAnimation();
 							

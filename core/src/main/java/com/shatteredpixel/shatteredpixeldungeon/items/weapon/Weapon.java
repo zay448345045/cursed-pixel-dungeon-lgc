@@ -294,7 +294,7 @@ abstract public class Weapon extends KindOfWeapon {
 
 		return enchant( ench );
 	}
-
+	@Override
 	public boolean hasEnchant(Class<?extends Enchantment> type, Char owner) {
 		return enchantment != null && enchantment.getClass() == type && owner.buff(MagicImmune.class) == null;
 	}
@@ -338,7 +338,7 @@ abstract public class Weapon extends KindOfWeapon {
 		};
 		
 			
-		public abstract int proc( Weapon weapon, Char attacker, Char defender, int damage );
+		public abstract int proc( Item weapon, Char attacker, Char defender, int damage );
 
 		public String name() {
 			if (!curse())

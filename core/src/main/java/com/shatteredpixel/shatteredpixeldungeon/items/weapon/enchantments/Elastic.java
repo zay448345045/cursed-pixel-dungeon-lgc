@@ -22,6 +22,7 @@
 package com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments;
 
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
+import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfBlastWave;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica;
@@ -33,7 +34,7 @@ public class Elastic extends Weapon.Enchantment {
 	private static ItemSprite.Glowing PINK = new ItemSprite.Glowing( 0xFF00FF );
 	
 	@Override
-	public int proc(Weapon weapon, Char attacker, Char defender, int damage ) {
+	public int proc(Item weapon, Char attacker, Char defender, int damage ) {
 		// lvl 0 - 20%
 		// lvl 1 - 33%
 		// lvl 2 - 43%

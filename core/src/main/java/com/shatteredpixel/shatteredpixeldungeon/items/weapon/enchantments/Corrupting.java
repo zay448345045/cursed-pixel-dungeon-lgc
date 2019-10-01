@@ -31,6 +31,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.PinCushion;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.SoulMark;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob;
+import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
@@ -42,7 +43,7 @@ public class Corrupting extends Weapon.Enchantment {
 	private static ItemSprite.Glowing BLACK = new ItemSprite.Glowing( 0x440066 );
 	
 	@Override
-	public int proc(Weapon weapon, Char attacker, Char defender, int damage) {
+	public int proc(Item weapon, Char attacker, Char defender, int damage) {
 		if (defender.buff(Corruption.class) != null || !(defender instanceof Mob)) return damage;
 		
 		int level = Math.max( 0, weapon.level() );

@@ -25,6 +25,7 @@ import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.effects.CellEmitter;
 import com.shatteredpixel.shatteredpixeldungeon.effects.particles.LeafParticle;
+import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
@@ -40,7 +41,7 @@ public class Blooming extends Weapon.Enchantment {
 	private static ItemSprite.Glowing DARK_GREEN = new ItemSprite.Glowing( 0x008800 );
 	
 	@Override
-	public int proc(Weapon weapon, Char attacker, Char defender, int damage) {
+	public int proc(Item weapon, Char attacker, Char defender, int damage) {
 		
 		// lvl 0 - 33%
 		// lvl 1 - 50%

@@ -38,7 +38,7 @@ public class Precise extends Weapon.Enchantment {
 
     private static ItemSprite.Glowing WHITE = new ItemSprite.Glowing( 0xFFFFFF );
     @Override
-    public int proc(Weapon weapon, Char attacker, Char defender, int damage) {
+    public int proc(Item weapon, Char attacker, Char defender, int damage) {
         testing = true;
         float evasion = defender.defenseSkill(attacker);
         float accuracy = attacker.attackSkill(defender);

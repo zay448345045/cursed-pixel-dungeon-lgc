@@ -27,14 +27,43 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Recharging;
 import com.shatteredpixel.shatteredpixeldungeon.effects.SpellSprite;
+import com.shatteredpixel.shatteredpixeldungeon.items.Item;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon.Enchantment;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MagesStaff;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MeleeWeapon;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.WarHammer;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.WornShortsword;
 import com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 
 public class WandOfMagicMissile extends DamageWand {
-
+	public Enchantment Enchantment = null;
 	{
 		image = ItemSpriteSheet.WAND_MAGIC_MISSILE;
+
+	}
+
+	public ItemSprite.Glowing glowing() {
+		if (this.Enchantment != null) {
+			return this.Enchantment.glowing();
+		} else {
+			return null;
+		}
+
+	}
+
+	@Override
+	public String name() {
+		return Enchantment != null && (cursedKnown || !Enchantment.curse()) ? Enchantment.name( super.name() ) : super.name();
+	}
+
+	public WandOfMagicMissile enchant( Enchantment ench ) {
+		if (ench == null || !ench.curse()) curseInfusionBonus = false;
+		Enchantment = ench;
+		updateQuickslot();
+		return this;
 	}
 
 	public int min(int lvl){
@@ -42,17 +71,18 @@ public class WandOfMagicMissile extends DamageWand {
 	}
 
 	public int max(int lvl){
-		return 8+5*lvl;
+		return 8+4*lvl;
 	}
 	
 	@Override
 	protected void onZap( Ballistica bolt ) {
 				
 		Char ch = Actor.findChar( bolt.collisionPos );
+		int damage = damageRoll();
 		if (ch != null) {
-
+			damage = proc(this, Dungeon.hero, ch, damage);//Proc enchantment
 			processSoulMark(ch, chargesPerCast());
-			ch.damage(damageRoll(), this);
+			ch.damage(damage, this);
 
 			ch.sprite.burst(0xFFFFFFFF, level() / 2 + 2);
 
@@ -67,9 +97,17 @@ public class WandOfMagicMissile extends DamageWand {
 		SpellSprite.show(attacker, SpellSprite.CHARGE);
 
 	}
+
 	
 	protected int initialCharges() {
 		return 3;
 	}
 
+	public int proc(WandOfMagicMissile Wand, Char attacker, Char defender, int damage) {
+		if (this.Enchantment != null) {
+			return this.Enchantment.proc(Wand,attacker,defender,damage);
+		} else {
+			return damage;
+		}
+	}
 }

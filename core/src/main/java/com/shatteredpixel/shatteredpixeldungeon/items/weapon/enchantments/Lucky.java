@@ -36,7 +36,7 @@ public class Lucky extends Weapon.Enchantment {
 	private static ItemSprite.Glowing GREEN = new ItemSprite.Glowing( 0x00FF00 );
 	
 	@Override
-	public int proc( Weapon weapon, Char attacker, Char defender, int damage ) {
+	public int proc( Item weapon, Char attacker, Char defender, int damage ) {
 		int level = Math.max( 0, weapon.level() );
 		
 		//10% chance, + 1% per weapon level
