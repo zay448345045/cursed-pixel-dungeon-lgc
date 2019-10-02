@@ -46,7 +46,7 @@ public class FireDragon extends DragonItem {
         @Override
         public void add(Buff buff) {
             if (buff instanceof Frost || buff instanceof Chill) {
-                damage(Math.round(HP/10),this);//Damages for 10% of max HP when chilled/frozen
+                damage(Math.round(HP/5),this);//Damages for 10% of max HP when chilled/frozen
             } else {
                 super.add(buff);
             }
@@ -64,7 +64,7 @@ public class FireDragon extends DragonItem {
     public void SpawnDragon(int newPos, int pos) {
         dragon = new Dragon();
         dragon.SpawnerLevel = level();
-        dragon.HP = dragon.HT = 16 + 8 * dragon.SpawnerLevel;
+        dragon.HP = dragon.HT = dragon.HPcalc(dragon.SpawnerLevel);
         dragon.alignment = Char.Alignment.ALLY;
         dragon.pos = newPos;
         dragon.setLevel(level());

@@ -60,7 +60,7 @@ public class PoisonDragon extends DragonItem {
     public void SpawnDragon(int newPos, int pos) {
         dragon = new Dragon();
         dragon.SpawnerLevel = level();
-        dragon.HP = dragon.HT = 16 + 8 * dragon.SpawnerLevel;
+        dragon.HP = dragon.HT = dragon.HPcalc(dragon.SpawnerLevel);
         dragon.alignment = Char.Alignment.ALLY;
         dragon.pos = newPos;
         dragon.setLevel(level());

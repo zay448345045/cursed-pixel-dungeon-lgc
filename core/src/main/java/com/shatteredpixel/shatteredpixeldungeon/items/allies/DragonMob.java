@@ -23,7 +23,7 @@ public abstract class DragonMob extends NPC {
         defenseSkill = Dungeon.depth;
         state = WANDERING;
 
-        HP = HT = 8 + 4 * SpawnerLevel;
+        HP = HT = HPcalc(SpawnerLevel);
         baseSpeed = 1f;
     }
 
@@ -31,6 +31,17 @@ public abstract class DragonMob extends NPC {
     public int attackSkill( Char target ) {
         return 10 + SpawnerLevel;
     }
+
+    public void updateStats(int lvl) {
+        this.alignment = Char.Alignment.ALLY;
+        defenseSkill = Dungeon.depth;
+        state = WANDERING;
+
+        HP = HT = HPcalc(lvl);
+        baseSpeed = 1f;
+    }
+
+
 
     public void setLevel (int level) {
         SpawnerLevel = level;
@@ -40,8 +51,8 @@ public abstract class DragonMob extends NPC {
         return Spawned;
     }
 
-    public void updateHT(int level) {
-        HP = HT = 8 + 4 * level;
+    public int HPcalc(int level) {
+        return  20 + 10 * level;
     }
 
     @Override
@@ -84,6 +95,11 @@ public abstract class DragonMob extends NPC {
         Dungeon.hero.busy();
         return true;
 
+    }
+
+    @Override
+    public int defenseSkill(Char enemy) {
+        return 2*(SpawnerLevel+2);
     }
 
     @Override
