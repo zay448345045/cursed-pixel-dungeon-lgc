@@ -17,7 +17,7 @@ import com.watabou.utils.Random;
 
 public class VampiricDragon extends DragonItem {
     public Dragon dragon = new Dragon();
-    private static ItemSprite.Glowing GREEN = new ItemSprite.Glowing( 0xFF00FF );
+    private static ItemSprite.Glowing GREEN = new ItemSprite.Glowing( 0x00CC07 );
 
     public static class Dragon extends DragonMob {
         {
@@ -40,13 +40,18 @@ public class VampiricDragon extends DragonItem {
                 if (healAmt > 0 && isAlive()) {
 
                     HP += healAmt;
-                    sprite.emitter().start(Speck.factory(Speck.DISCOVER), 0.4f, 1);
+                    sprite.emitter().start(Speck.factory(Speck.HEALING), 0.4f, 1);
                     sprite.showStatus(CharSprite.POSITIVE, Integer.toString(healAmt));
 
                 }
             }
             return  super.attackProc(enemy, damage);
 
+        }
+
+        @Override
+        public int damageRoll() {
+            return (int)(super.damageRoll()*0.65);//35% reduced damage
         }
     }
 
