@@ -301,7 +301,7 @@ public class Generator {
 					EarthenDragon.class
 			};
 
-			ALLIES.probs = new float[]{1,1};//All Allies are equally likely
+			ALLIES.probs = new float[]{1,1,1,1,1};//All Allies are equally likely
 
 			POTION.classes = new Class<?>[]{
 					PotionOfStrength.class, //2 drop every chapter, see Dungeon.posNeeded()
