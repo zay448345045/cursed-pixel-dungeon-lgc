@@ -257,6 +257,8 @@ public class MagesStaff extends MeleeWeapon {
 			if (this.wand instanceof WandOfMagicMissile) {//If imbuing a Wand of Magic Missile, update the enchantment on the Staff.
 				if (((WandOfMagicMissile) this.wand).Enchantment != null) {
 					this.enchant(((WandOfMagicMissile) this.wand).Enchantment);
+				} else if (this.enchantment != null) {
+					((WandOfMagicMissile) this.wand).enchant(this.enchantment);
 				}
 			}
 			//gives the wand one additional max charge

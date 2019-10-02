@@ -323,6 +323,7 @@ public class InterlevelScene extends PixelScene {
 				else errorMsg = Messages.get(this, "io_error");
 				errorMsg += "\n\n" + error;
 				if (error != null) {//In case resetting the floor fixed it
+					thread = null;
 					add(new WndError(errorMsg) {
 						public void onBackPressed() {
 							super.onBackPressed();
@@ -330,10 +331,10 @@ public class InterlevelScene extends PixelScene {
 						}
 					});
 				} else {
-					Game.switchScene(GameScene.class);
+
 				}
 
-				thread = null;
+
 				error = null;
 			} else if (thread != null && (int)waitingTime == 10){
 				waitingTime = 11f;
