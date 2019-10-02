@@ -26,6 +26,7 @@ import com.shatteredpixel.shatteredpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.shatteredpixeldungeon.items.allies.DragonItem;
 import com.shatteredpixel.shatteredpixeldungeon.items.allies.FireDragon;
 import com.shatteredpixel.shatteredpixeldungeon.items.allies.PoisonDragon;
+import com.shatteredpixel.shatteredpixeldungeon.items.allies.VampiricDragon;
 import com.shatteredpixel.shatteredpixeldungeon.items.allies.WaterDragon;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.ClothArmor;
@@ -294,7 +295,8 @@ public class Generator {
 			ALLIES.classes = new Class<?>[]{
 					FireDragon.class,
 					PoisonDragon.class,
-					WaterDragon.class
+					WaterDragon.class,
+					VampiricDragon.class
 			};
 
 			ALLIES.probs = new float[]{1,1};//All Allies are equally likely

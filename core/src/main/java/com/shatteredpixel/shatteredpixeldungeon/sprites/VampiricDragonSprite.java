@@ -10,21 +10,23 @@ public class VampiricDragonSprite extends MobSprite {
     public VampiricDragonSprite() {
         super();
 
-        texture( Assets.PETDRAGON_EXTRA );
+        texture( Assets.PETDRAGON );
 
         TextureFilm frames = new TextureFilm( texture, 16, 16 );
 
-        idle = new MovieClip.Animation( 2, true );
-        idle.frames( frames, 32, 32, 32, 33 );
+        idle = new Animation(2, true);
+        idle.frames(frames, 48, 49, 50, 51);
 
-        run = new MovieClip.Animation( 10, true );
-        run.frames( frames, 38, 39, 40, 41, 42 );
+        run = new Animation(8, true);
+        run.frames(frames, 52, 53, 54, 55);
 
-        attack = new MovieClip.Animation( 15, false );
-        attack.frames( frames, 34, 35, 36, 37, 32 );
+        attack = new Animation(8, false);
+        attack.frames(frames, 56, 57, 58, 59);
 
-        die = new MovieClip.Animation( 10, false );
-        die.frames( frames, 43, 44, 45, 46 );
+        zap = attack.clone();
+
+        die = new Animation(8, false);
+        die.frames(frames, 60, 61, 62, 63);
 
         play( idle );
     }

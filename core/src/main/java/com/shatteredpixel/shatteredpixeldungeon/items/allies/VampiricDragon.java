@@ -12,6 +12,7 @@ import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.PoisonDragonSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.VampiricDragonSprite;
 import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.utils.Random;
 
@@ -21,7 +22,7 @@ public class VampiricDragon extends DragonItem {
 
     public static class Dragon extends DragonMob {
         {
-            spriteClass = PoisonDragonSprite.class;
+            spriteClass = VampiricDragonSprite.class;
             immunities.add(Grim.class);//immune to Grim
             PassiveRegen = false;
         }
