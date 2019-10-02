@@ -21,6 +21,7 @@ public class WaterDragon extends DragonItem {
             spriteClass = WaterDragonSprite.class;
             immunities.add(Chill.class);//immune to chill
             baseSpeed = 1.5f;
+            PassiveRegen = false;
         }
 
         @Override

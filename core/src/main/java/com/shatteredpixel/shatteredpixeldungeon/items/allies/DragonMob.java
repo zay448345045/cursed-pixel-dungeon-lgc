@@ -16,7 +16,7 @@ public abstract class DragonMob extends NPC {
     int SpawnerLevel = 0;
     boolean Spawned = true;
     int regenDelay = 0;
-
+    boolean PassiveRegen = true;
     {
         spriteClass = DragonSprite.class;
         this.alignment = Char.Alignment.ALLY;
@@ -104,10 +104,12 @@ public abstract class DragonMob extends NPC {
 
     @Override
     public boolean act() {
-        regenDelay += 1;
-        if (regenDelay > 9) {
-            regenDelay = 0;
-            HP += Math.min(HT/10,this.missingHP());
+        if (PassiveRegen) {
+            regenDelay += 1;
+            if (regenDelay > 9) {
+                regenDelay = 0;
+                HP += Math.min(HT / 10, this.missingHP());
+            }
         }
         return super.act();
     }
