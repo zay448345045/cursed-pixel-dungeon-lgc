@@ -43,6 +43,15 @@ public class AboutScene extends PixelScene {
 	private static final String TXT_SHPX =
 			"Design, Code, & Graphics: Evan";
 
+	private static final String TTL_CPX = "Cursed Pixel Dungeon";
+
+	private static final String TXT_CPX =
+			"Code: Potion of Yendor/smujamesb, Graphics: Various\n" +
+					"Inspired by Shattered Pixel Dungeon by 00-Evan and Sprouted Pixel Dungeon by Dachhack\n" +
+					"Invite to our Discord Server, where I and most of the graphic designers can be found:";
+
+	private static final String LNK_CURSED = "https://discord.gg/wEaQyTj";
+
 	private static final String LNK_SHPX = "ShatteredPixel.com";
 
 	private static final String TTL_WATA = "Pixel Dungeon";
@@ -63,28 +72,28 @@ public class AboutScene extends PixelScene {
 
 		Image shpx = Icons.SHPX.get();
 		shpx.x = (colWidth - shpx.width()) / 2;
-		shpx.y = colTop;
+		shpx.y = colTop - 10;
 		align(shpx);
 		add( shpx );
 
 		new Flare( 7, 64 ).color( 0x225511, true ).show( shpx, 0 ).angularSpeed = +20;
 
-		RenderedText shpxtitle = renderText( TTL_SHPX, 8 );
-		shpxtitle.hardlight( Window.SHPX_COLOR );
+		RenderedText shpxtitle = renderText( TTL_CPX, 8 );
+		shpxtitle.hardlight( Window.TITLE_COLOR );
 		add( shpxtitle );
 
 		shpxtitle.x = (colWidth - shpxtitle.width()) / 2;
 		shpxtitle.y = shpx.y + shpx.height + 5;
 		align(shpxtitle);
 
-		RenderedTextMultiline shpxtext = renderMultiline( TXT_SHPX, 8 );
+		RenderedTextMultiline shpxtext = renderMultiline( TXT_CPX, 8 );
 		shpxtext.maxWidth((int)Math.min(colWidth, 120));
 		add( shpxtext );
 
 		shpxtext.setPos((colWidth - shpxtext.width()) / 2, shpxtitle.y + shpxtitle.height() + 12);
 		align(shpxtext);
 
-		RenderedTextMultiline shpxlink = renderMultiline( LNK_SHPX, 8 );
+		RenderedTextMultiline shpxlink = renderMultiline( LNK_CURSED, 8 );
 		shpxlink.maxWidth(shpxtext.maxWidth());
 		shpxlink.hardlight( Window.SHPX_COLOR );
 		add( shpxlink );
@@ -95,7 +104,7 @@ public class AboutScene extends PixelScene {
 		TouchArea shpxhotArea = new TouchArea( shpxlink.left(), shpxlink.top(), shpxlink.width(), shpxlink.height() ) {
 			@Override
 			protected void onClick( Touch touch ) {
-				DeviceCompat.openURI( "https://" + LNK_SHPX );
+				DeviceCompat.openURI( "https://" + LNK_CURSED );
 			}
 		};
 		add( shpxhotArea );
