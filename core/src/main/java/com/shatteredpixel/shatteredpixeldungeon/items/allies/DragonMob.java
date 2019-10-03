@@ -41,7 +41,7 @@ public abstract class DragonMob extends NPC {
         baseSpeed = 1f;
     }
 
-
+    public final String LEVEL = "level";
 
     public void setLevel (int level) {
         SpawnerLevel = level;
@@ -57,11 +57,13 @@ public abstract class DragonMob extends NPC {
 
     @Override
     public void storeInBundle (Bundle bundle) {
+        bundle.put(LEVEL, SpawnerLevel);
         super.storeInBundle(bundle);
     }
 
     @Override
     public void restoreFromBundle (Bundle bundle) {
+        SpawnerLevel = bundle.getInt(LEVEL);
         super.restoreFromBundle(bundle);
     }
 

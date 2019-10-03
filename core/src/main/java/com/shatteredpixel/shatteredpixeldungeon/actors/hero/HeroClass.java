@@ -178,9 +178,9 @@ public enum HeroClass {
 
 	private static void initMage( Hero hero ) {
 		MagesStaff staff;
-		//new PoisonDragon().identify().collect();
-		//new EarthenDragon().identify().collect();
-		//new ScrollOfUpgrade().quantity(5).collect();
+		new PoisonDragon().identify().collect();
+		new EarthenDragon().identify().collect();
+		new ScrollOfUpgrade().quantity(5).collect();
 		//new WandOfLightning().identify().upgrade(2).collect();
 		staff = new MagesStaff(new WandOfDisintegration());
 		/*new WandOfMagicMissile().enchant(Weapon.Enchantment.random()).identify().upgrade(5).collect();

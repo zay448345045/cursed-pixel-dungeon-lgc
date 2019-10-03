@@ -77,7 +77,8 @@ public class DragonItem extends KindofMisc {
 
     @Override
     public Item upgrade() {
-        this.dragon.updateStats(level());
+        this.dragon.SpawnerLevel = level();
+        this.dragon.updateStats(this.dragon.SpawnerLevel);
         return super.upgrade();
     }
 
