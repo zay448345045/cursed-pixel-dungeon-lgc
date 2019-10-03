@@ -161,7 +161,7 @@ public class Bestiary {
 						Eye.class, Eye.class,
 						Scorpio.class, Scorpio.class, Scorpio.class));//Non Boss Goo removed from Demon Halls
 			case 31: case 32: case 33: case 34:
-				//1x succubus, 2x evil eye, 3x scorpio
+				//1x Water Elemental, 1x Goo, 2x Larvae
 				return new ArrayList<>(Arrays.asList(
 						WaterElemental.class,
 						NonBossGoo.class,
