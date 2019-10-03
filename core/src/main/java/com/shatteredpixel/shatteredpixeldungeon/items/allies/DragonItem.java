@@ -64,7 +64,7 @@ public class DragonItem extends KindofMisc {
     protected int chargeCap = 100;
 
     {
-        image = ItemSpriteSheet.FEATHER_FALL;
+        image = ItemSpriteSheet.DRAGON_CRYSTAL;
 
         defaultAction = AC_SUMMON;
         usesTargeting = false;

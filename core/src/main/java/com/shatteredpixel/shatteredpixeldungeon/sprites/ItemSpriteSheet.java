@@ -584,6 +584,8 @@ public class ItemSpriteSheet {
 	public static final int MAGIC_INFUSE    = SPELLS+10;
 	public static final int ALCHEMIZE       = SPELLS+11;
 	public static final int RECYCLE         = SPELLS+12;
+
+	public static final int DRAGON_CRYSTAL  = SPELLS+13;
 	static{
 		assignItemRect(MAGIC_PORTER,    12, 11);
 		assignItemRect(PHASE_SHIFT,     12, 11);
