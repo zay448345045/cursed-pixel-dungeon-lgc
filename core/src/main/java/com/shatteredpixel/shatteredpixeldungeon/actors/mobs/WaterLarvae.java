@@ -13,10 +13,8 @@ public class WaterLarvae extends Mob {
         HP = HT = 120;
         defenseSkill = 25;
 
-        EXP = 0;
-        maxLvl = -2;
-
-        state = HUNTING;
+        EXP = 22;
+        maxLvl = 30;
 
         properties.add(Property.DEMONIC);
     }
