@@ -163,8 +163,9 @@ public class Bestiary {
 			case 31: case 32: case 33: case 34:
 				//1x succubus, 2x evil eye, 3x scorpio
 				return new ArrayList<>(Arrays.asList(
-						WaterElemental.class, WaterElemental.class,
-						NonBossGoo.class, NonBossGoo.class, NonBossGoo.class));
+						WaterElemental.class,
+						NonBossGoo.class,
+						WaterLarvae.class));
 		}
 		
 	}

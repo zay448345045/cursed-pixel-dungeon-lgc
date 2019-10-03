@@ -36,5 +36,3 @@ public class WaterLarvae extends Mob {
     }
 
 }
-}
-}

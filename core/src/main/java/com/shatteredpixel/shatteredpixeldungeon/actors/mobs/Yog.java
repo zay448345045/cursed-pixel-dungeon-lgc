@@ -148,35 +148,6 @@ public class Yog extends Mob {
 	}
 	
 	@Override
-	public int defenseProc( Char enemy, int damage ) {
-
-		ArrayList<Integer> spawnPoints = new ArrayList<>();
-		
-		for (int i=0; i < PathFinder.NEIGHBOURS8.length; i++) {
-			int p = pos + PathFinder.NEIGHBOURS8[i];
-			if (Actor.findChar( p ) == null && (Dungeon.level.passable[p] || Dungeon.level.avoid[p])) {
-				spawnPoints.add( p );
-			}
-		}
-		
-		if (spawnPoints.size() > 0) {
-			Larva larva = new Larva();
-			larva.pos = Random.element( spawnPoints );
-			
-			GameScene.add( larva );
-			Actor.addDelayed( new Pushing( larva, pos, larva.pos ), -1 );
-		}
-
-		for (Mob mob : Dungeon.level.mobs) {
-			if (mob instanceof BurningFist || mob instanceof RottingFist || mob instanceof Larva) {
-				mob.aggro( enemy );
-			}
-		}
-
-		return super.defenseProc(enemy, damage);
-	}
-	
-	@Override
 	public void beckon( int cell ) {
 	}
 	
@@ -407,7 +378,7 @@ public class Yog extends Mob {
 		{
 			spriteClass = LarvaSprite.class;
 			
-			HP = HT = 25;
+			HP = HT = 20;
 			defenseSkill = 20;
 			
 			EXP = 0;
@@ -425,7 +396,7 @@ public class Yog extends Mob {
 		
 		@Override
 		public int damageRoll() {
-			return Random.NormalIntRange( 22, 30 );
+			return Random.NormalIntRange( 22, 55 );
 		}
 		
 		@Override
