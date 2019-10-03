@@ -2,15 +2,16 @@ package com.shatteredpixel.shatteredpixeldungeon.actors.mobs;
 
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.LarvaSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.WaterLarvaSprite;
 import com.watabou.utils.Random;
 
 public class WaterLarvae extends Mob {
 
     {
-        spriteClass = LarvaSprite.class;
+        spriteClass = WaterLarvaSprite.class;
 
-        HP = HT = 20;
-        defenseSkill = 20;
+        HP = HT = 120;
+        defenseSkill = 25;
 
         EXP = 0;
         maxLvl = -2;
@@ -27,7 +28,7 @@ public class WaterLarvae extends Mob {
 
     @Override
     public int damageRoll() {
-        return Random.NormalIntRange( 22, 55 );
+        return Random.NormalIntRange( 80, 120 );
     }
 
     @Override

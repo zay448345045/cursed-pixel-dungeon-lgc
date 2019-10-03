@@ -165,7 +165,7 @@ public class Bestiary {
 				return new ArrayList<>(Arrays.asList(
 						WaterElemental.class,
 						NonBossGoo.class,
-						WaterLarvae.class));
+						WaterLarvae.class, WaterLarvae.class));
 		}
 		
 	}
