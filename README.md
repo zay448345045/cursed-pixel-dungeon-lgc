@@ -6,13 +6,13 @@ Based on the source code of Pixel Dungeon, by Watabou.
 Look below for compilation instructions.
 
 Shattered Pixel Dungeon on Google Play:
-https://play.google.com/store/apps/details?id=com.shatteredpixel.shatteredpixeldungeon
+https://play.google.com/store/apps/details?id=cursedpixeldungeon
 
 On Amazon:
 https://www.amazon.com/Shattered-Pixel-Dungeon/dp/B00OH2C21M
 
 On F-Droid (Which compiles directly from this source code):
-https://f-droid.org/repository/browse/?fdid=com.shatteredpixel.shatteredpixeldungeon
+https://f-droid.org/repository/browse/?fdid=cursedpixeldungeon
 
 Official website and blog:
 http://www.shatteredpixel.com
