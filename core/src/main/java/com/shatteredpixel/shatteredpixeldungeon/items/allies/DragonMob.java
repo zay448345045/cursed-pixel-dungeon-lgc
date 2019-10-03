@@ -34,7 +34,6 @@ public abstract class DragonMob extends NPC {
 
     public void updateStats(int lvl) {
         this.alignment = Char.Alignment.ALLY;
-        defenseSkill = Dungeon.depth;
         state = WANDERING;
 
         HP = HT = HPcalc(lvl);
@@ -76,12 +75,12 @@ public abstract class DragonMob extends NPC {
     @Override
     public int damageRoll() {
         return Random.NormalIntRange(1 + SpawnerLevel, 8 + SpawnerLevel * 4);
-    }//base of 1-8 (Worn Shortsword), scales by 1-3 (Sword)
+    }//base of 1-8 (Worn Shortsword), scales by 1-4 (Sword)
 
     @Override
     public int drRoll() {
-        return Random.NormalIntRange(0 + SpawnerLevel, 2 + SpawnerLevel * 4);
-    }//base of 0-2 (Cloth Armour), scales by 1-3 (Mail Armour)
+        return Random.NormalIntRange(1 + SpawnerLevel*2, 2 + SpawnerLevel * 4);
+    }//base of 1-2 (Cloth Armour), scales by 2-4 (Scale Armour)
 
     @Override
     public boolean interact() {

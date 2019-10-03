@@ -190,7 +190,6 @@ public class DragonItem extends KindofMisc {
     @Override
     public void storeInBundle( Bundle bundle ) {
         super.storeInBundle(bundle);
-
         bundle.put( SPAWNED, Spawned );
         bundle.put(CHARGE, charge);
         dragon.storeInBundle(bundle);
@@ -200,7 +199,6 @@ public class DragonItem extends KindofMisc {
     @Override
     public void restoreFromBundle( Bundle bundle ) {
         super.restoreFromBundle(bundle);
-
         Spawned = bundle.getBoolean( SPAWNED );
         dragon.restoreFromBundle(bundle);
         charge = bundle.getInt(CHARGE);

@@ -35,10 +35,14 @@ public class EarthenDragon extends DragonItem {
         @Override
         public int defenseProc( Char enemy, int damage ) {
             Buff.affect( this, Roots.class, 3);
-            Buff.affect( this, Earthroot.Armor.class ).level( 5 + 2 * SpawnerLevel );
+            Buff.affect( this, Earthroot.Armor.class ).level( 5 + 4 * SpawnerLevel );
             return super.defenseProc(enemy, damage);
         }
 
+        @Override
+        public int defenseSkill(Char enemy) {
+            return super.defenseSkill(enemy)/2;
+        }
     }
 
     @Override
