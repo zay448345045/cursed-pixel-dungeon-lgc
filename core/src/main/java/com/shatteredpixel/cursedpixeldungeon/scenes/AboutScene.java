@@ -78,7 +78,7 @@ public class AboutScene extends PixelScene {
 
 		new Flare( 7, 64 ).color( 0x225511, true ).show( shpx, 0 ).angularSpeed = +20;
 
-		RenderedText shpxtitle = renderText( TTL_CPX, 8 );
+		RenderedText shpxtitle = renderText( TTL_SHPX, 8 );
 		shpxtitle.hardlight( Window.TITLE_COLOR );
 		add( shpxtitle );
 
@@ -86,14 +86,14 @@ public class AboutScene extends PixelScene {
 		shpxtitle.y = shpx.y + shpx.height + 5;
 		align(shpxtitle);
 
-		RenderedTextMultiline shpxtext = renderMultiline( TXT_CPX, 8 );
+		RenderedTextMultiline shpxtext = renderMultiline( TXT_SHPX, 8 );
 		shpxtext.maxWidth((int)Math.min(colWidth, 120));
 		add( shpxtext );
 
 		shpxtext.setPos((colWidth - shpxtext.width()) / 2, shpxtitle.y + shpxtitle.height() + 12);
 		align(shpxtext);
 
-		RenderedTextMultiline shpxlink = renderMultiline( LNK_CURSED, 8 );
+		RenderedTextMultiline shpxlink = renderMultiline( LNK_SHPX, 8 );
 		shpxlink.maxWidth(shpxtext.maxWidth());
 		shpxlink.hardlight( Window.SHPX_COLOR );
 		add( shpxlink );
@@ -104,7 +104,7 @@ public class AboutScene extends PixelScene {
 		TouchArea shpxhotArea = new TouchArea( shpxlink.left(), shpxlink.top(), shpxlink.width(), shpxlink.height() ) {
 			@Override
 			protected void onClick( Touch touch ) {
-				DeviceCompat.openURI( "https://" + LNK_CURSED );
+				DeviceCompat.openURI( "https://" + LNK_SHPX );
 			}
 		};
 		add( shpxhotArea );
