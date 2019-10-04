@@ -320,7 +320,7 @@ abstract public class Weapon extends KindOfWeapon {
 		
 		private static final Class<?>[] uncommon = new Class<?>[]{
 				Blocking.class, Blooming.class, Elastic.class,
-				Lucky.class, Projecting.class, Unstable.class, Precise.class};
+				Lucky.class, Projecting.class, Unstable.class/*, Precise.class*/};
 		
 		private static final Class<?>[] rare = new Class<?>[]{
 				Corrupting.class, Grim.class, Shielding.class, Swift.class};
