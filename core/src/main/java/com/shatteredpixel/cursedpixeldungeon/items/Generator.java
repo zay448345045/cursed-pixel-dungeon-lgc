@@ -220,6 +220,7 @@ import com.shatteredpixel.cursedpixeldungeon.plants.Stormvine;
 import com.shatteredpixel.cursedpixeldungeon.plants.Sungrass;
 import com.shatteredpixel.cursedpixeldungeon.plants.Swiftthistle;
 import com.watabou.utils.Bundle;
+import com.watabou.utils.Callback;
 import com.watabou.utils.GameMath;
 import com.watabou.utils.Random;
 
@@ -672,6 +673,7 @@ public class Generator {
 			Category.WEP_T2,
 			Category.WEP_T3,
 			Category.WEP_T4,
+			Category.WEP_T5,
 			Category.WEP_T5
 	};
 

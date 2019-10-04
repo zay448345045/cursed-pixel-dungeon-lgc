@@ -32,6 +32,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MagesStaff;
 import com.shatteredpixel.cursedpixeldungeon.mechanics.Ballistica;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
+import com.watabou.utils.Bundle;
 
 public class WandOfMagicMissile extends DamageWand {
 	public Enchantment Enchantment = null;
@@ -59,6 +60,18 @@ public class WandOfMagicMissile extends DamageWand {
 		Enchantment = ench;
 		updateQuickslot();
 		return this;
+	}
+	private static final String ENCHANTMENT	    = "enchantment";
+	@Override
+	public void storeInBundle(Bundle bundle) {
+		bundle.put( ENCHANTMENT, Enchantment );
+		super.storeInBundle(bundle);
+	}
+
+	@Override
+	public void restoreFromBundle(Bundle bundle) {
+		Enchantment = (Enchantment)bundle.get( ENCHANTMENT );
+		super.restoreFromBundle(bundle);
 	}
 
 	public int min(int lvl){
