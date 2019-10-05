@@ -56,7 +56,7 @@ public class Assets {
 	public static final String SPECKS		= "specks.png";
 	public static final String EFFECTS		= "effects.png";
 
-
+	public static final String GUARDIAN = "guardian.png";
 	public static final String FOSSILSKELETON = "fossilskeleton.png";
 	public static final String WATERLARVA = "snowslug.png";
 	public static final String PETDRAGON = "petreddragon.png";

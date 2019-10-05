@@ -147,19 +147,19 @@ public class Bestiary {
 				//3x succubus, 3x evil eye
 				return new ArrayList<>(Arrays.asList(
 						Succubus.class, Succubus.class, Succubus.class,
-						Eye.class, Eye.class, Eye.class, NonBossGoo.class));
+						Eye.class, Eye.class, Eye.class));
 			case 23:
 				//2x succubus, 4x evil eye, 2x scorpio
 				return new ArrayList<>(Arrays.asList(
 						Succubus.class, Succubus.class,
 						Eye.class, Eye.class, Eye.class, Eye.class,
-						Scorpio.class, Scorpio.class, NonBossGoo.class, NonBossGoo.class));
+						Scorpio.class, Scorpio.class));
 			case 24: case 25: case 26:
 				//1x succubus, 2x evil eye, 3x scorpio
 				return new ArrayList<>(Arrays.asList(
 						Succubus.class,
 						Eye.class, Eye.class,
-						Scorpio.class, Scorpio.class, Scorpio.class));//Non Boss Goo removed from Demon Halls
+						Scorpio.class, Scorpio.class, Scorpio.class));
 			case 31: case 32: case 33: case 34:
 				//1x Water Elemental, 1x Goo, 2x Larvae
 				return new ArrayList<>(Arrays.asList(
@@ -170,7 +170,7 @@ public class Bestiary {
 				return new ArrayList<>(Arrays.asList(
 						FossilSkeleton.class,
 						FossilSkeleton.class,
-						FossilSkeleton.class, Wraith.class));
+						EarthenGuardian.class, EarthenGuardian.class));
 		}
 		
 	}

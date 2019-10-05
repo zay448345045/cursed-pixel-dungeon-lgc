@@ -189,7 +189,7 @@ public class Hero extends Char {
 	public Hero() {
 		super();
 		name = Messages.get(this, "name");
-		HP = HT = 20;
+		HP = HT = 2000;
 		if (heroClass == HeroClass.WARRIOR) {
 			HP = HT = 24;
 		} else if (heroClass == HeroClass.HUNTRESS) {
