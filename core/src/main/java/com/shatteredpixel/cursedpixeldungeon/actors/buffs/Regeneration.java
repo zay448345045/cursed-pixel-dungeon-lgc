@@ -42,7 +42,7 @@ public class Regeneration extends Buff {
 			if (target.HP < regencap() && !((Hero)target).isStarving()) {
 				LockedFloor lock = target.buff(LockedFloor.class);
 				if (target.HP > 0 && (lock == null || lock.regenOn())) {
-					target.HP += target.HT/20;
+					target.HP += 1;
 					if (target.HP == regencap()) {
 						((Hero) target).resting = false;
 					}
@@ -57,7 +57,7 @@ public class Regeneration extends Buff {
 				else
 					spend( REGENERATION_DELAY - regenBuff.itemLevel()*0.9f );
 			else
-				spend( REGENERATION_DELAY );
+				spend( REGENERATION_DELAY/(target.HT/20f));
 			
 		} else {
 			

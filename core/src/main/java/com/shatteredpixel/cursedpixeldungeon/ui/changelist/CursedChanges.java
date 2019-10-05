@@ -72,7 +72,7 @@ public class CursedChanges {
 		changes.hardlight(Window.TITLE_COLOR);
 		changeInfos.add(changes);
 
-		changes.addButton(new ChangeButton(new PotionOfCorrosiveGas().identify(), "New \"Corrosion\" Challenge!\n" +
+		changes.addButton(new ChangeButton(new ItemSprite(ItemSpriteSheet.POTION_BISTRE),"Challenge updates!", "New \"Corrosion\" Challenge!\n" +
 				"- All enemies spawn Corrosion + Vertigo gas\n" +
 				"- Faith is my Armour challenge removed due to being too unfair"));
 
