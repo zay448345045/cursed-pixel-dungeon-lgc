@@ -73,7 +73,7 @@ public class CursedChanges {
 		changeInfos.add(changes);
 
 		changes.addButton(new ChangeButton(new PotionOfCorrosiveGas().identify(), "New \"Corrosion\" Challenge!\n" +
-				"- All enemies spawn Corrosion + Vertigo gas" +
+				"- All enemies spawn Corrosion + Vertigo gas\n" +
 				"- Faith is my Armour challenge removed due to being too unfair"));
 
 		changes.addButton(new ChangeButton(new WaterDragon(), "New Dragons have ben added!\n" +
