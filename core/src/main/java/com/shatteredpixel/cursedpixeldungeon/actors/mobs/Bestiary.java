@@ -166,6 +166,11 @@ public class Bestiary {
 						WaterElemental.class,
 						NonBossGoo.class,
 						WaterLarvae.class, WaterLarvae.class));
+			case 36: case 37: case 38: case 39:
+				return new ArrayList<>(Arrays.asList(
+						FossilSkeleton.class,
+						FossilSkeleton.class,
+						FossilSkeleton.class, Wraith.class));
 		}
 		
 	}
