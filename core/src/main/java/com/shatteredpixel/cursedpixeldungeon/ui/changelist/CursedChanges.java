@@ -24,6 +24,8 @@ package com.shatteredpixel.cursedpixeldungeon.ui.changelist;
 import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.items.DewVial;
 import com.shatteredpixel.cursedpixeldungeon.items.allies.PoisonDragon;
+import com.shatteredpixel.cursedpixeldungeon.items.allies.WaterDragon;
+import com.shatteredpixel.cursedpixeldungeon.items.potions.exotic.PotionOfCorrosiveGas;
 import com.shatteredpixel.cursedpixeldungeon.items.spells.MagicalInfusion;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfMagicMissile;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Grim;
@@ -34,6 +36,7 @@ import com.shatteredpixel.cursedpixeldungeon.scenes.ChangesScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
+import com.shatteredpixel.cursedpixeldungeon.sprites.RatSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.SewerGolemSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.StatueSprite;
 import com.shatteredpixel.cursedpixeldungeon.ui.Icons;
@@ -45,12 +48,61 @@ import java.util.ArrayList;
 public class CursedChanges {
 	
 	public static void addAllChanges( ArrayList<ChangeInfo> changeInfos ){
-
+		add_unversioned_Changes(changeInfos);
+		add_v0_2_0_Changes(changeInfos);
 		add_v0_1_0_Changes(changeInfos);
 	}
 
+	public static void add_v0_2_0_Changes(ArrayList<ChangeInfo> changeInfos) {
+		ChangeInfo changes = new ChangeInfo("0.2.0 - alpha", true, "");
+		changes.hardlight(Window.TITLE_COLOR);
+		changeInfos.add(changes);
+
+		changes = new ChangeInfo(Messages.get(ChangesScene.class, "changes"), false, null);
+		changes.hardlight(CharSprite.WARNING);
+		changeInfos.add(changes);
+
+		changes.addButton( new ChangeButton(new Image(Assets.SPINNER, 144, 0, 16, 16), "Bug Fixes",
+				"Fixed more instances of 'Save File not Found'\n" +
+						"Fixed transmuting Tier 6 items crashing the game\n" +
+						"Fixed broken plant gfx for Earth Challenge"));
+
+
+		changes = new ChangeInfo(Messages.get(ChangesScene.class, "new"), false, null);
+		changes.hardlight(Window.TITLE_COLOR);
+		changeInfos.add(changes);
+
+		changes.addButton(new ChangeButton(new PotionOfCorrosiveGas(), "New \"Corrosion\" Challenge!\n" +
+				"- All enemies spawn Corrosion + Vertigo gas" +
+				"- Faith is my Armour challenge removed due to being too unfair"));
+
+		changes.addButton(new ChangeButton(new WaterDragon(), "New Dragons have ben added!\n" +
+				"- Water Dragon - High Evasion, low HP, Fast, regens only in water\n" +
+				"- Earthen Dragon - Low Evasion, normal HP and damage, old Entanglement procs when hit and roots enemies\n" +
+				"- Vampiric Dragon - Low damage, no regen, but steals HP from enemies"));
+
+		changes = new ChangeInfo(Messages.get(ChangesScene.class, "buffs"), false, null);
+		changes.hardlight( CharSprite.POSITIVE );
+		changeInfos.add(changes);
+
+		changes.addButton(new ChangeButton(new ItemSprite(ItemSpriteSheet.TOMB),"Crypt Rooms Changed", "Crypt rooms have been rebalanced to include same upgrade scaling with depth as Animated Statues"));
+
+		changes.addButton(new ChangeButton(new ItemSprite(ItemSpriteSheet.RING_EMERALD, null), "Ring of Wealth changed",
+				"Ring of Wealth dropped an annoying amount of +0 Loot. This has been changed:\n" +
+						"_-_ +0 armour/weapon can't drop anymore.\n" +
+						"_-_ If a Ring/Artifact would be dropped, a Wand or Dragon Crystal may be dropped instead.\n" +
+						"_-_ Food drops nerfed; now half as likely and always Mystery Meat or small Ration."));
+
+		changes.addButton( new ChangeButton(new WandOfMagicMissile(),"Wand of Magic Missile can now be enchanted!"));
+
+		changes = new ChangeInfo(Messages.get(ChangesScene.class, "nerfs"), false, null);
+		changes.hardlight( CharSprite.NEGATIVE );
+		changeInfos.add(changes);
+
+		changes.addButton( new ChangeButton(new RatSprite(), "Exp Limits reduced", "Enemies have had their exp limits reduced to prevent overleveling."));
+	}
 	public static void add_v0_1_0_Changes(ArrayList<ChangeInfo> changeInfos){
-		ChangeInfo changes = new ChangeInfo( "0.1.0 - alpha", true, "");
+		ChangeInfo changes = new ChangeInfo( "0.1.0 - release", true, "");
 		changes.hardlight(Window.TITLE_COLOR);
 		changeInfos.add(changes);
 		
@@ -177,9 +229,7 @@ public class CursedChanges {
 		changes.addButton(new ChangeButton(new PoisonDragon(),
 				"A new misc type has been added: Allies. They can be summoned from crystals and will help the player."));
 
-		changes.addButton(new ChangeButton(new SewerGolemSprite(), "Water Challenge", "Two of the four end game challenges have been added:\n" +
-				"_-_ The Water Challenge, which is partially complete, and contains a boss as well as new enemies.\n" +
-				"_-_ The Earth Challenge, which is incomplete."));
+
 
 		changes.addButton( new ChangeButton(new DewVial(),
 				"The Dew Vial now has the 'Water' functionality, which allows the player to turn several surrounding tiles into water. It will consume up to 5 dew drops and will be more powerful the more Dew the player has."));
@@ -207,6 +257,20 @@ public class CursedChanges {
 		changes.addButton( new ChangeButton(new Image(Assets.SPINNER, 144, 0, 16, 16), "Bug Fixes",
 				"Fixed many instances of 'Save File not Found'"));
 
+	}
+
+	public static void add_unversioned_Changes(ArrayList<ChangeInfo> changeInfos) {
+		ChangeInfo changes = new ChangeInfo("Unversioned Changes", true, "");
+		changes.hardlight(Window.TITLE_COLOR);
+		changeInfos.add(changes);
+
+		changes = new ChangeInfo(Messages.get(ChangesScene.class, "new"), false, null);
+		changes.hardlight(Window.TITLE_COLOR);
+		changeInfos.add(changes);
+
+		changes.addButton(new ChangeButton(new SewerGolemSprite(), "Water Challenge", "Two of the four end game challenges have been added:\n" +
+				"_-_ The Water Challenge, which is partially complete, and contains a boss as well as 3 new enemies.\n" +
+				"_-_ The Earth Challenge, which is incomplete."));
 	}
 	
 	
