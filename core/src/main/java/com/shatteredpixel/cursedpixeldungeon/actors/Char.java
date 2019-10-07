@@ -122,7 +122,11 @@ public abstract class Char extends Actor {
 	public boolean[] fieldOfView = null;
 	
 	private HashSet<Buff> buffs = new HashSet<>();
-	
+
+	public boolean canInteract( Hero h ){
+		return Dungeon.level.adjacent( pos, h.pos );
+	}
+
 	@Override
 	protected boolean act() {
 		if (fieldOfView == null || fieldOfView.length != Dungeon.level.length()){

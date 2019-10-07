@@ -27,6 +27,7 @@ import com.shatteredpixel.cursedpixeldungeon.effects.particles.FlameParticle;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.LeafParticle;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.RainbowParticle;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.ShadowParticle;
+import com.shatteredpixel.cursedpixeldungeon.effects.particles.WardParticle;
 import com.shatteredpixel.cursedpixeldungeon.tiles.DungeonTilemap;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Group;
@@ -58,6 +59,8 @@ public class MagicMissile extends Emitter {
 	public static final int BEACON          = 6;
 	public static final int SHADOW          = 7;
 	public static final int RAINBOW         = 8;
+	public static final int EARTH           = 9;
+	public static final int WARD            = 10;
 
 	public static final int FIRE_CONE       = 100;
 	public static final int FOLIAGE_CONE    = 101;
@@ -132,6 +135,14 @@ public class MagicMissile extends Emitter {
 			case RAINBOW:
 				size( 4 );
 				pour( RainbowParticle.BURST, 0.01f );
+				break;
+			case EARTH:
+				size( 4 );
+				pour( EarthParticle.FACTORY, 0.01f );
+				break;
+			case WARD:
+				size( 4 );
+				pour( ForceParticle.FACTORY, 0.01f );
 				break;
 
 			case FIRE_CONE:
