@@ -163,6 +163,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfMagicMissile;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfPrismaticLight;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfRegrowth;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfTransfusion;
+import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfWarding;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.AssassinsBlade;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.BattleAxe;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Crossbow;
@@ -441,11 +442,11 @@ public class Generator {
 					WandOfLivingEarth.class,
 					WandOfFrost.class,
 					WandOfPrismaticLight.class,
-					//WandOfWarding.class,
+					WandOfWarding.class,
 					WandOfTransfusion.class,
 					WandOfCorruption.class,
 					WandOfRegrowth.class };
-			WAND.probs = new float[]{ 5, 4, 4, 4, 4, 3, 3, 3, 3, /*3,*/ 3, 3, 3 };
+			WAND.probs = new float[]{ 5, 4, 4, 4, 4, 3, 3, 3, 3,3, 3, 3, 3 };
 			
 			//see generator.randomWeapon
 			WEAPON.classes = new Class<?>[]{};
