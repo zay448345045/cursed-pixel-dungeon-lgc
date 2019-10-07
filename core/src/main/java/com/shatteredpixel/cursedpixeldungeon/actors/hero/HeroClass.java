@@ -27,6 +27,7 @@ import com.shatteredpixel.cursedpixeldungeon.Challenges;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.items.BrokenSeal;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
+import com.shatteredpixel.cursedpixeldungeon.items.TomeOfMastery;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.ClothArmor;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.LeatherArmor;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.CloakOfShadows;
@@ -133,6 +134,10 @@ public enum HeroClass {
 			new PotionOfPurity().quantity(1).collect();
 		} else {
 			new PotionOfPurity().quantity(3).collect();
+		}
+
+		if (Badges.isUnlocked(Badges.Badge.BOSS_SLAIN_4)) {
+			new TomeOfMastery().collect();
 		}
 	}
 
