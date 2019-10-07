@@ -70,8 +70,8 @@ public class Bones {
 
 	private static Item pickItem(Hero hero){
 		Item item = null;
-		if (Random.Int(3) != 0) {
-			switch (Random.Int(6)) {
+		if (Random.Int(2) != 0) {
+			switch (Random.Int(8)) {
 				case 0:
 					item = hero.belongings.weapon;
 					break;
@@ -84,7 +84,13 @@ public class Bones {
 				case 3:
 					item = hero.belongings.misc2;
 					break;
-				case 4: case 5:
+				case 4:
+					item = hero.belongings.misc3;
+					break;
+				case 5:
+					item = hero.belongings.misc4;
+					break;
+				case 6: case 7:
 					item = Dungeon.quickslot.randomNonePlaceholder();
 					break;
 			}
@@ -169,8 +175,8 @@ public class Bones {
 				
 				if (item.isUpgradable()) {
 					//caps at +3
-					if (item.level() > 3) {
-						item.degrade( item.level() - 3 );
+					if (item.level() > Dungeon.depth) {
+						item.degrade( item.level() - Dungeon.depth );
 					}
 					//thrown weapons are always IDed, otherwise set unknown
 					item.levelKnown = item instanceof MissileWeapon;
