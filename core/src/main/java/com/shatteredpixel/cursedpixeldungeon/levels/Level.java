@@ -1019,7 +1019,7 @@ public abstract class Level implements Bundlable {
 	}
 
 	public void pressCell( int cell ){
-		pressCell( cell );
+		//pressCell( cell );
 	}
 
 	

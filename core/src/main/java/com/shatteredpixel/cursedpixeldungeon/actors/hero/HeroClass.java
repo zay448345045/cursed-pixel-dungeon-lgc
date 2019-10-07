@@ -48,6 +48,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfMagicMapping;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfRage;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfDisintegration;
+import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfWarding;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.SpiritBow;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Dagger;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Gloves;
@@ -172,7 +173,7 @@ public enum HeroClass {
 		//new EarthenDragon().identify().collect();
 		//new ScrollOfUpgrade().quantity(5).collect();
 		//new WandOfLightning().identify().upgrade(2).collect();
-		staff = new MagesStaff(new WandOfDisintegration());
+		staff = new MagesStaff(new WandOfWarding());
 		/*new WandOfMagicMissile().enchant(Weapon.Enchantment.random()).identify().upgrade(5).collect();
 		new WandOfMagicMissile().identify().collect();
 		new ScrollOfEnchantment().quantity(5).identify().collect();
