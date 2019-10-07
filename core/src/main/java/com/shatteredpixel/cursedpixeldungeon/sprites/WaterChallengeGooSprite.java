@@ -43,7 +43,7 @@ public class WaterChallengeGooSprite extends MobSprite {
 
         spray = centerEmitter();
         spray.autoKill = false;
-        spray.pour( GooSprite.GooParticle.FACTORY, 0.04f );
+        spray.pour( GooParticle.FACTORY, 0.04f );
         spray.on = false;
     }
 
@@ -81,7 +81,7 @@ public class WaterChallengeGooSprite extends MobSprite {
         public static final Emitter.Factory FACTORY = new Emitter.Factory() {
             @Override
             public void emit( Emitter emitter, int index, float x, float y ) {
-                ((GooSprite.GooParticle)emitter.recycle( GooSprite.GooParticle.class )).reset( x, y );
+                ((GooParticle)emitter.recycle( GooParticle.class )).reset( x, y );
             }
         };
 
