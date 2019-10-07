@@ -127,6 +127,21 @@ public abstract class Wand extends KindofMisc {
 			GameScene.selectCell(zapper);
 		}
 	}
+
+	public boolean tryToZap( Hero owner, int target ){
+
+		if (owner.buff(MagicImmune.class) != null){
+			GLog.w( Messages.get(this, "no_magic") );
+			return false;
+		}
+
+		if ( curCharges >= (cursed ? 1 : chargesPerCast())){
+			return true;
+		} else {
+			GLog.w(Messages.get(this, "fizzles"));
+			return false;
+		}
+	}
 	
 	protected abstract void onZap( Ballistica attack );
 
@@ -504,6 +519,12 @@ public abstract class Wand extends KindofMisc {
 			
 			return true;
 		}
+
+		public Wand wand(){
+			return Wand.this;
+		}
+
+
 		
 		@Override
 		public boolean act() {

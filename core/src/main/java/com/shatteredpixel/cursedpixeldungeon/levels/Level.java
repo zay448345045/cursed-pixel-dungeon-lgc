@@ -43,6 +43,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroClass;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroSubClass;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Bestiary;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
+import com.shatteredpixel.cursedpixeldungeon.actors.mobs.npcs.Sheep;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.FlowParticle;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.WindParticle;
 import com.shatteredpixel.cursedpixeldungeon.items.Generator;
@@ -999,6 +1000,28 @@ public abstract class Level implements Bundlable {
 		int by = b / width();
 		return Math.max( Math.abs( ax - bx ), Math.abs( ay - by ) );
 	}
+
+	public void occupyCell( Char ch ){
+		if (!ch.flying){
+
+			if (pit[ch.pos]){
+				if (ch == Dungeon.hero) {
+					Chasm.heroFall(ch.pos);
+				} else if (ch instanceof Mob) {
+					Chasm.mobFall( (Mob)ch );
+				}
+				return;
+			}
+
+			//characters which are not the hero or a sheep 'soft' press cells
+			pressCell( ch.pos );
+		}
+	}
+
+	public void pressCell( int cell ){
+		pressCell( cell );
+	}
+
 	
 	public boolean adjacent( int a, int b ) {
 		return distance( a, b ) == 1;
