@@ -36,6 +36,7 @@ import com.shatteredpixel.cursedpixeldungeon.levels.Terrain;
 import com.shatteredpixel.cursedpixeldungeon.levels.features.Door;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.NewbornElementalSprite;
+import com.shatteredpixel.cursedpixeldungeon.sprites.WaterElementalSprite;
 import com.watabou.utils.Random;
 
 import java.util.ArrayList;
@@ -43,9 +44,9 @@ import java.util.ArrayList;
 public class WaterElemental extends Mob {
 
     {
-        spriteClass = NewbornElementalSprite.class;
+        spriteClass = WaterElementalSprite.class;
 
-        HT = 500;
+        HT = 400;
         HP = HT;
 
         defenseSkill = 25;

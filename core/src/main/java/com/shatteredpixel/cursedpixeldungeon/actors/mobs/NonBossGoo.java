@@ -15,6 +15,7 @@ import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.GooSprite;
+import com.shatteredpixel.cursedpixeldungeon.sprites.WaterChallengeGooSprite;
 import com.shatteredpixel.cursedpixeldungeon.utils.BArray;
 import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
 import com.watabou.noosa.Camera;
@@ -29,7 +30,7 @@ public class NonBossGoo extends Mob {
         HP = HT = 300;
         EXP = 10;
         defenseSkill = 30;
-        spriteClass = GooSprite.class;
+        spriteClass = WaterChallengeGooSprite.class;
 
         properties.add(Property.DEMONIC);
         properties.add(Property.ACIDIC);
