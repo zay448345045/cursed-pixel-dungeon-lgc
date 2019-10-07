@@ -56,7 +56,7 @@ public class DM300 extends Mob {
 	{
 		spriteClass = DM300Sprite.class;
 		
-		HP = HT = 400;
+		HP = HT = 800;
 		EXP = 30;
 		defenseSkill = 18;
 		
@@ -132,9 +132,12 @@ public class DM300 extends Mob {
 
 	@Override
 	public void damage(int dmg, Object src) {
-		super.damage(dmg, src);
 		LockedFloor lock = Dungeon.hero.buff(LockedFloor.class);
 		if (lock != null && !isImmune(src.getClass())) lock.addTime(dmg*1.5f);
+		if (dmg >= 30){
+			dmg = 4 + (int)(Math.sqrt(8*(dmg - 30) + 1) - 1)/2;
+		}
+		super.damage(dmg, src);
 	}
 
 	@Override
