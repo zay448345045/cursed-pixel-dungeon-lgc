@@ -208,9 +208,9 @@ public class Hero extends Char {
 		
 		HT = 20 + 5*(lvl-1) + HTBoost;
 		if (heroClass == HeroClass.WARRIOR) {
-			HP = HT = 6*(lvl+3) + HTBoost;
+			HT = 6*(lvl+3) + HTBoost;
 		} else if (heroClass == HeroClass.HUNTRESS) {
-			HP = HT = 4*(lvl+3) + HTBoost;
+			HT = 4*(lvl+3) + HTBoost;
 		}
 
 		float multiplier = RingOfMight.HTMultiplier(this);
