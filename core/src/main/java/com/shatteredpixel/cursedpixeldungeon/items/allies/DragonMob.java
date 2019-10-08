@@ -25,7 +25,7 @@ public abstract class DragonMob extends NPC {
 
     @Override
     public int attackSkill( Char target ) {
-        return 10 + SpawnerLevel;
+        return 5 + SpawnerLevel*2;
     }
 
     public void updateStats(int lvl) {
