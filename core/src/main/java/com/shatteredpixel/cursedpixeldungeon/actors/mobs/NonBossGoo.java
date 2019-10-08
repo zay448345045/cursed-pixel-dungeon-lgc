@@ -14,7 +14,6 @@ import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Grim;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.CharSprite;
-import com.shatteredpixel.cursedpixeldungeon.sprites.GooSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.WaterChallengeGooSprite;
 import com.shatteredpixel.cursedpixeldungeon.utils.BArray;
 import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
@@ -123,7 +122,7 @@ public class NonBossGoo extends Mob {
     @Override
     protected boolean doAttack( Char enemy ) {
         if (pumpedUp == 1) {
-            ((GooSprite)sprite).pumpUp();
+            ((WaterChallengeGooSprite)sprite).pumpUp();
             PathFinder.buildDistanceMap( pos, BArray.not( Dungeon.level.solid, null ), 2 );
             for (int i = 0; i < PathFinder.distance.length; i++) {
                 if (PathFinder.distance[i] < Integer.MAX_VALUE)
@@ -140,7 +139,7 @@ public class NonBossGoo extends Mob {
 
             if (visible) {
                 if (pumpedUp >= 2) {
-                    ((GooSprite) sprite).pumpAttack();
+                    ((WaterChallengeGooSprite) sprite).pumpAttack();
                 }
                 else
                     sprite.attack( enemy.pos );
@@ -156,7 +155,7 @@ public class NonBossGoo extends Mob {
 
             pumpedUp++;
 
-            ((GooSprite)sprite).pumpUp();
+            ((WaterChallengeGooSprite)sprite).pumpUp();
 
             for (int i=0; i < PathFinder.NEIGHBOURS9.length; i++) {
                 int j = pos + PathFinder.NEIGHBOURS9[i];
