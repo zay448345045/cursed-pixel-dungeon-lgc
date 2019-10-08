@@ -28,6 +28,7 @@ import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.items.BrokenSeal;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.TomeOfMastery;
+import com.shatteredpixel.cursedpixeldungeon.items.allies.PoisonDragon;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.ClothArmor;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.LeatherArmor;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.CloakOfShadows;
@@ -43,9 +44,11 @@ import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfInvisibility;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfLiquidFlame;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfMindVision;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfPurity;
+import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfStrength;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfIdentify;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfLullaby;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfMagicMapping;
+import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfMirrorImage;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfRage;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfDisintegration;
@@ -67,7 +70,9 @@ public enum HeroClass {
 	WARRIOR( "warrior", HeroSubClass.BERSERKER, HeroSubClass.GLADIATOR ),
 	MAGE( "mage", HeroSubClass.BATTLEMAGE, HeroSubClass.WARLOCK ),
 	ROGUE( "rogue", HeroSubClass.ASSASSIN, HeroSubClass.FREERUNNER ),
-	HUNTRESS( "huntress", HeroSubClass.SNIPER, HeroSubClass.WARDEN );
+	HUNTRESS( "huntress", HeroSubClass.SNIPER, HeroSubClass.WARDEN ),
+	PRIESTESS("priestess", HeroSubClass.NECROMACER, HeroSubClass.MEDIC);
+
 
 	private String title;
 	private HeroSubClass[] subClasses;
@@ -98,6 +103,9 @@ public enum HeroClass {
 
 			case HUNTRESS:
 				initHuntress( hero );
+				break;
+			case PRIESTESS:
+				initPriestess(hero);
 				break;
 		}
 		
@@ -151,8 +159,20 @@ public enum HeroClass {
 				return Badges.Badge.MASTERY_ROGUE;
 			case HUNTRESS:
 				return Badges.Badge.MASTERY_HUNTRESS;
+			case PRIESTESS:
+				return Badges.Badge.MASTERY_HUNTRESS;
 		}
 		return null;
+	}
+
+	private static void initPriestess( Hero hero) {
+		(hero.belongings.weapon = new WornShortsword()).identify().upgrade();
+		(hero.belongings.armor = new ClothArmor()).identify();
+		(hero.belongings.misc1 = new PoisonDragon()).identify().upgrade();
+		hero.HP = hero.HT = 20;
+		Dungeon.quickslot.setSlot(0,hero.belongings.misc1);
+		new PotionOfHealing().identify();
+		new ScrollOfMirrorImage().identify();
 	}
 
 	private static void initWarrior( Hero hero ) {
@@ -169,7 +189,7 @@ public enum HeroClass {
 		
 
 		
-		new PotionOfHealing().identify();
+		new PotionOfStrength().identify();
 		new ScrollOfRage().identify();
 	}
 
@@ -249,6 +269,8 @@ public enum HeroClass {
 				return Assets.ROGUE;
 			case HUNTRESS:
 				return Assets.HUNTRESS;
+			case PRIESTESS:
+				return Assets.PRIESTESS;
 		}
 	}
 	
@@ -285,6 +307,14 @@ public enum HeroClass {
 						Messages.get(HeroClass.class, "huntress_perk3"),
 						Messages.get(HeroClass.class, "huntress_perk4"),
 						Messages.get(HeroClass.class, "huntress_perk5"),
+				};
+			case PRIESTESS:
+				return new String[]{
+						Messages.get(HeroClass.class, "priestess_perk1"),
+						Messages.get(HeroClass.class, "priestess_perk2"),
+						Messages.get(HeroClass.class, "priestess_perk3"),
+						Messages.get(HeroClass.class, "priestess_perk4"),
+						Messages.get(HeroClass.class, "priestess_perk5"),
 				};
 		}
 	}

@@ -64,8 +64,8 @@ public class WndStartGame extends Window {
 		title.x = (WIDTH - title.width())/2f;
 		title.y = 2;
 		add(title);
-		
-		float heroBtnSpacing = (WIDTH - 4*HeroBtn.WIDTH)/5f;
+
+		float heroBtnSpacing = (WIDTH - 5*HeroBtn.WIDTH)/5f;
 		
 		float curX = heroBtnSpacing;
 		for (HeroClass cl : HeroClass.values()){
@@ -158,7 +158,7 @@ public class WndStartGame extends Window {
 		
 		private Image hero;
 		
-		private static final int WIDTH = 24;
+		private static final int WIDTH = 20;
 		private static final int HEIGHT = 16;
 		
 		HeroBtn ( HeroClass cl ){
@@ -174,9 +174,10 @@ public class WndStartGame extends Window {
 				hero = new Image(Assets.ROGUE, 0, 90, 12, 15);
 			} else if (cl == HeroClass.HUNTRESS){
 				hero = new Image(Assets.HUNTRESS, 0, 90, 12, 15);
+			} else if (cl == HeroClass.PRIESTESS) {
+				hero = new Image(Assets.PRIESTESS, 0, 90, 12, 15);
 			}
 			add(hero);
-			
 		}
 		
 		@Override
@@ -336,6 +337,11 @@ public class WndStartGame extends Window {
 						case HUNTRESS:
 							heroItem.icon(new ItemSprite(ItemSpriteSheet.SPIRIT_BOW, null));
 							heroLoadout.icon(new ItemSprite(ItemSpriteSheet.GLOVES, null));
+							heroMisc.icon(new Image(Assets.TILES_SEWERS, 112, 96, 16, 16 ));
+							break;
+						case PRIESTESS:
+							heroItem.icon(new ItemSprite(ItemSpriteSheet.DRAGON_CRYSTAL, null));
+							heroLoadout.icon(new ItemSprite(ItemSpriteSheet.WORN_SHORTSWORD, null));
 							heroMisc.icon(new Image(Assets.TILES_SEWERS, 112, 96, 16, 16 ));
 							break;
 					}

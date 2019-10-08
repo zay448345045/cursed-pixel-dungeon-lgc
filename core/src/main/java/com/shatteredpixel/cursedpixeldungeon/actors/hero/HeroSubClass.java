@@ -38,8 +38,12 @@ public enum HeroSubClass {
 	FREERUNNER( "freerunner" ),
 	
 	SNIPER( "sniper" ),
-	WARDEN( "warden" );
-	
+	WARDEN( "warden" ),
+
+	NECROMACER("necromacer"),
+	MEDIC("medic");
+
+
 	private String title;
 	
 	HeroSubClass( String title ) {

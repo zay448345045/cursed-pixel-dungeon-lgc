@@ -69,6 +69,9 @@ abstract public class ClassArmor extends Armor {
 		case HUNTRESS:
 			classArmor = new HuntressArmor();
 			break;
+		case PRIESTESS:
+			classArmor = new MageArmor();//Priestess Class Armour not implemented yet
+			break;
 		}
 		
 		classArmor.level(armor.level() - (armor.curseInfusionBonus ? 3 : 0));
