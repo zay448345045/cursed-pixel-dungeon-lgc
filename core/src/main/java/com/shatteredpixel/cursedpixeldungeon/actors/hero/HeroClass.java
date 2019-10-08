@@ -169,6 +169,7 @@ public enum HeroClass {
 		(hero.belongings.weapon = new WornShortsword()).identify().upgrade();
 		(hero.belongings.armor = new ClothArmor()).identify();
 		(hero.belongings.misc1 = new PoisonDragon()).identify().upgrade();
+		hero.belongings.misc1.activate(hero);
 		hero.HP = hero.HT = 20;
 		Dungeon.quickslot.setSlot(0,hero.belongings.misc1);
 		new PotionOfHealing().identify();
@@ -182,7 +183,6 @@ public enum HeroClass {
 		ThrowingStone stones = new ThrowingStone();
 		stones.quantity(3).collect();
 		Dungeon.quickslot.setSlot(0, stones);
-		hero.STR();
 		if (hero.belongings.armor != null){
 			hero.belongings.armor.affixSeal(new BrokenSeal());
 		}
