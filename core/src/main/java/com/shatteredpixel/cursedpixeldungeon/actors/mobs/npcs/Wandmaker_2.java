@@ -127,18 +127,18 @@ public class Wandmaker_2 extends NPC {
                     Game.switchScene(InterlevelScene.class);
                 }
             };
-            btnWand3.setRect(0, message.top() + message.height() + GAP + BTN_HEIGHT, WIDTH, BTN_HEIGHT);
+            btnWand3.setRect(0, message.top() + message.height() + GAP + BTN_HEIGHT*2, WIDTH, BTN_HEIGHT);
 
             add(btnWand3);
 
-            RedButton btnWand4 = new RedButton(Messages.get(wandmaker_2, "fire_challenge")) {
+            RedButton btnWand4 = new RedButton(Messages.get(wandmaker_2, "air_challenge")) {
                 @Override
                 protected void onClick() {
-                    InterlevelScene.mode = InterlevelScene.Mode.FIRECHALLENGE;
+                    InterlevelScene.mode = InterlevelScene.Mode.AIRCHALLENGE;
                     Game.switchScene(InterlevelScene.class);
                 }
             };
-            btnWand4.setRect(0, message.top() + message.height() + GAP + BTN_HEIGHT, WIDTH, BTN_HEIGHT);
+            btnWand4.setRect(0, message.top() + message.height() + GAP + BTN_HEIGHT*3, WIDTH, BTN_HEIGHT);
 
             add(btnWand4);
 
