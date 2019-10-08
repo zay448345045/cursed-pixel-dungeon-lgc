@@ -583,7 +583,7 @@ public class Badges {
 				case ROGUE:
 					badge = Badge.BOSS_SLAIN_1_ROGUE;
 					break;
-				case HUNTRESS:
+				case HUNTRESS: default:
 					badge = Badge.BOSS_SLAIN_1_HUNTRESS;
 					break;
 				}

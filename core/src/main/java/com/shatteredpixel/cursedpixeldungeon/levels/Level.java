@@ -968,6 +968,16 @@ public abstract class Level implements Bundlable {
 						}
 					}
 				}
+			} else if (((Hero)c).heroClass == HeroClass.PRIESTESS) {
+				for (Mob mob : mobs) {
+					Char.Alignment a = mob.alignment;
+					int p = mob.pos;
+					if (a == Char.Alignment.ALLY) {
+						if (!fieldOfView[p]){
+							Dungeon.hero.mindVisionEnemies.add(mob);
+						}
+					}
+				}
 			}
 			
 			for (Mob m : Dungeon.hero.mindVisionEnemies) {
