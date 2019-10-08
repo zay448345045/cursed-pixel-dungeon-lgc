@@ -7,6 +7,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.LockedFloor;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
+import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroClass;
 import com.shatteredpixel.cursedpixeldungeon.effects.Pushing;
 import com.shatteredpixel.cursedpixeldungeon.effects.Splash;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
@@ -34,6 +35,14 @@ public class DragonItem extends KindofMisc {
     protected float partialCharge = 0;
     //the maximum charge, varies per artifact, not all artifacts use this.
     protected int chargeCap = 100;
+
+    @Override
+    public boolean isUpgradable() {
+        if ( Dungeon.hero.heroClass == HeroClass.PRIESTESS ) {//Only Priestess gets +20 Allies
+            UpgradeLimit = 20;
+        }
+        return super.isUpgradable();
+    }
 
     {
         image = ItemSpriteSheet.DRAGON_CRYSTAL;
@@ -258,14 +267,6 @@ public class DragonItem extends KindofMisc {
         dragon.sprite.alpha( 0 );
         dragon.sprite.parent.add( new AlphaTweener( dragon.sprite, 1, 0.15f ) );
         dragon.notice();
-    }
-
-
-
-
-    @Override
-    public boolean isUpgradable() {
-        return super.isUpgradable();
     }
 
     @Override
