@@ -68,7 +68,7 @@ public class InterlevelScene extends PixelScene {
 	private static float fadeTime;
 
 	public enum Mode {
-		DESCEND, ASCEND, CONTINUE, RESURRECT, RETURN, FALL, RESET, NONE, START, WATERCHALLENGE, EARTHCHALLENGE, DESCEND_GAMEINIT, DESCEND_FIX
+		DESCEND, ASCEND, CONTINUE, RESURRECT, RETURN, FALL, RESET, NONE, START, WATERCHALLENGE, EARTHCHALLENGE, DESCEND_GAMEINIT, DESCEND_FIX, FIRECHALLENGE, AIRCHALLENGE
 	}
 	public static Mode mode;
 	
@@ -248,6 +248,12 @@ public class InterlevelScene extends PixelScene {
 								break;
 							case EARTHCHALLENGE:
 								goToDepth(36, DESCEND_NAME);
+								break;
+							case FIRECHALLENGE:
+								goToDepth(41, DESCEND_NAME);
+								break;
+							case AIRCHALLENGE:
+								goToDepth(46, DESCEND_NAME);
 								break;
 						}
 						
