@@ -32,9 +32,7 @@ public class VampiricDragon extends DragonItem {
             float healChance = 0.25f + .50f * missingPercent;
 
             if (Random.Float() < healChance) {
-
-                //heals for 25% of damage dealt
-                int healAmt = Math.round(damage * 0.50f);
+                int healAmt = Math.round(damage * 0.70f);//Heals 70% of dmg on proc
                 healAmt = Math.min(healAmt, HT - HP);
 
                 if (healAmt > 0 && isAlive()) {
@@ -51,7 +49,7 @@ public class VampiricDragon extends DragonItem {
 
         @Override
         public int damageRoll() {
-            return (int)(super.damageRoll()*0.65);//35% reduced damage
+            return (int)(super.damageRoll()*0.75);//25% reduced damage (35% was too much imo)
         }
     }
 
