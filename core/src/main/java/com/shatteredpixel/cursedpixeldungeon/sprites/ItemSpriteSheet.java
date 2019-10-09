@@ -177,8 +177,17 @@ public class ItemSpriteSheet {
 		assignItemRect(SHRAPNEL_BOMB,   10, 13);
 	}
 
-	
-	                                                                                    //16 free slots
+	private static final int DRAGON_CRYSTALS          =                               xy(1, 6);
+	public static final int WHITEDRAGONCRYSTAL            = DRAGON_CRYSTALS+0;
+	public static final int YELLOWDRAGONCRYSTAL        = DRAGON_CRYSTALS+1;
+	public static final int REDDRAGONCRYSTAL       = DRAGON_CRYSTALS+2;
+	public static final int PURPLEDRAGONCRYSTAL      = DRAGON_CRYSTALS+3;
+	public static final int LIGHTBLUEDRAGONCRYSTAL   = DRAGON_CRYSTALS+4;
+	public static final int BLUEDRAGONCRYSTAL       = DRAGON_CRYSTALS+5;
+	public static final int GREENDRAGONCRYSTAL      = DRAGON_CRYSTALS+6;
+	public static final int LIGHTGREENDRAGONCRYSTAL      = DRAGON_CRYSTALS+7;
+	public static final int BROWNDRAGONCRYSTAL    = DRAGON_CRYSTALS+8;
+	public static final int ADORNEDDRAGONCRYSTAL     = DRAGON_CRYSTALS+9;
 
 	private static final int WEP_TIER1      =                               xy(1, 7);   //8 slots
 	public static final int WORN_SHORTSWORD = WEP_TIER1+0;

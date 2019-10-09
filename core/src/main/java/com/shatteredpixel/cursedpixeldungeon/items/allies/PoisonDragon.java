@@ -7,12 +7,15 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Poison;
 import com.shatteredpixel.cursedpixeldungeon.effects.Pushing;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
+import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.cursedpixeldungeon.sprites.PoisonDragonSprite;
 import com.watabou.noosa.tweeners.AlphaTweener;
 
 public class PoisonDragon extends DragonItem {
     public Dragon dragon = new Dragon();
-    private static ItemSprite.Glowing PINK = new ItemSprite.Glowing( 0xFF00FF );
+    {
+        image  = ItemSpriteSheet.ADORNEDDRAGONCRYSTAL;
+    }
 
     public static class Dragon extends DragonMob {
         {
@@ -52,10 +55,6 @@ public class PoisonDragon extends DragonItem {
         dragon.sprite.alpha( 0 );
         dragon.sprite.parent.add( new AlphaTweener( dragon.sprite, 1, 0.15f ) );
         dragon.notice();
-    }
-    @Override
-    public ItemSprite.Glowing glowing() {
-        return PINK;
     }
 
 }
