@@ -8,13 +8,16 @@ import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Grim;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
+import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.cursedpixeldungeon.sprites.VampiricDragonSprite;
 import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.utils.Random;
 
 public class VampiricDragon extends DragonItem {
     public Dragon dragon = new Dragon();
-    private static ItemSprite.Glowing GREEN = new ItemSprite.Glowing( 0x00CC07 );
+    {
+        image = ItemSpriteSheet.LIGHTGREENDRAGONCRYSTAL;
+    }
 
     public static class Dragon extends DragonMob {
         {
@@ -67,10 +70,6 @@ public class VampiricDragon extends DragonItem {
         dragon.sprite.alpha( 0 );
         dragon.sprite.parent.add( new AlphaTweener( dragon.sprite, 1, 0.15f ) );
         dragon.notice();
-    }
-    @Override
-    public ItemSprite.Glowing glowing() {
-        return GREEN;
     }
 
 }

@@ -8,13 +8,16 @@ import com.shatteredpixel.cursedpixeldungeon.effects.Pushing;
 import com.shatteredpixel.cursedpixeldungeon.effects.Speck;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
+import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.cursedpixeldungeon.sprites.WaterDragonSprite;
 import com.watabou.noosa.tweeners.AlphaTweener;
 
 public class WaterDragon extends DragonItem {
 
     public Dragon dragon = new Dragon();
-    private static ItemSprite.Glowing BLUE = new ItemSprite.Glowing( 0x4CC5ED );
+    {
+        image = ItemSpriteSheet.LIGHTBLUEDRAGONCRYSTAL;
+    }
 
     public static class Dragon extends DragonMob {
         {
@@ -63,10 +66,5 @@ public class WaterDragon extends DragonItem {
         dragon.sprite.alpha( 0 );
         dragon.sprite.parent.add( new AlphaTweener( dragon.sprite, 1, 0.15f ) );
         dragon.notice();
-    }
-
-    @Override
-    public ItemSprite.Glowing glowing() {
-        return BLUE;
     }
 }

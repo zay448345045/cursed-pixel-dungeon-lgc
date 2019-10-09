@@ -10,11 +10,14 @@ import com.shatteredpixel.cursedpixeldungeon.plants.Earthroot;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.EarthenDragonSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
+import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 import com.watabou.noosa.tweeners.AlphaTweener;
 
 public class EarthenDragon extends DragonItem {
     public Dragon dragon = new Dragon();
-    private static ItemSprite.Glowing BROWN = new ItemSprite.Glowing( 0x5C4E29);
+    {
+        image = ItemSpriteSheet.BROWNDRAGONCRYSTAL;
+    }
 
     public static class Dragon extends DragonMob {
         {
@@ -58,10 +61,6 @@ public class EarthenDragon extends DragonItem {
         dragon.sprite.alpha( 0 );
         dragon.sprite.parent.add( new AlphaTweener( dragon.sprite, 1, 0.15f ) );
         dragon.notice();
-    }
-    @Override
-    public ItemSprite.Glowing glowing() {
-        return BROWN;
     }
 
 }

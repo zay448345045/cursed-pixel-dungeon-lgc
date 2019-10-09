@@ -10,12 +10,15 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Frost;
 import com.shatteredpixel.cursedpixeldungeon.effects.Pushing;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
+import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.utils.Random;
 
 public class FireDragon extends DragonItem {
     public Dragon dragon = new Dragon();
-    private static ItemSprite.Glowing ORANGE = new ItemSprite.Glowing( 0xFF4400 );
+    {
+        image = ItemSpriteSheet.REDDRAGONCRYSTAL;
+    }
     public static class Dragon extends DragonMob {
         {
             properties.add(Property.FIERY);
@@ -62,10 +65,5 @@ public class FireDragon extends DragonItem {
         dragon.sprite.alpha( 0 );
         dragon.sprite.parent.add( new AlphaTweener( dragon.sprite, 1, 0.15f ) );
         dragon.notice();
-    }
-
-    @Override
-    public ItemSprite.Glowing glowing() {
-        return ORANGE;
     }
 }
