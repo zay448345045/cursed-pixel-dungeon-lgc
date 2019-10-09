@@ -57,6 +57,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfWarding;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.SpiritBow;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Dagger;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Gloves;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.InscribedKnife;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MagesStaff;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.WornShortsword;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.ThrowingKnife;
@@ -166,7 +167,7 @@ public enum HeroClass {
 	}
 
 	private static void initPriestess( Hero hero) {
-		(hero.belongings.weapon = new WornShortsword()).identify().upgrade();
+		(hero.belongings.weapon = new InscribedKnife()).identify().upgrade();
 		(hero.belongings.armor = new ClothArmor()).identify();
 		(hero.belongings.misc1 = new PoisonDragon()).identify().upgrade();
 		hero.belongings.misc1.activate(hero);
