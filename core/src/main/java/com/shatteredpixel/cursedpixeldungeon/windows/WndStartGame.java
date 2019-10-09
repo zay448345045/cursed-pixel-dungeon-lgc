@@ -340,9 +340,9 @@ public class WndStartGame extends Window {
 							heroMisc.icon(new Image(Assets.TILES_SEWERS, 112, 96, 16, 16 ));
 							break;
 						case PRIESTESS:
-							heroItem.icon(new ItemSprite(ItemSpriteSheet.DRAGON_CRYSTAL, null));
-							heroLoadout.icon(new ItemSprite(ItemSpriteSheet.WORN_SHORTSWORD, null));
-							heroMisc.icon(new Image(Assets.TILES_SEWERS, 112, 96, 16, 16 ));
+							heroItem.icon(new ItemSprite(ItemSpriteSheet.ADORNEDDRAGONCRYSTAL, null));
+							heroLoadout.icon(new ItemSprite(ItemSpriteSheet.INSCRIBED_KINFE, null));
+							heroMisc.icon(new Image(Assets.RAT, 112, 96, 16, 16 ));
 							break;
 					}
 					
