@@ -50,7 +50,7 @@ public class WandOfFrost extends DamageWand {
 	}
 
 	public int max(int lvl){
-		return 8+7*lvl;
+		return 8+3*lvl;
 	}
 
 	@Override
@@ -70,9 +70,9 @@ public class WandOfFrost extends DamageWand {
 				return; //do nothing, can't affect a frozen target
 			}
 			if (ch.buff(Chill.class) != null){
-				//7.5% less damage per turn of chill remaining
+				//20% more damage per turn of chill remaining
 				float chill = ch.buff(Chill.class).cooldown();
-				damage = (int)Math.round(damage * Math.pow(0.9f, chill));
+				damage = (int)Math.round(damage * Math.pow(1.2f, chill));
 			} else {
 				ch.sprite.burst( 0xFF99CCFF, level() / 2 + 2 );
 			}
