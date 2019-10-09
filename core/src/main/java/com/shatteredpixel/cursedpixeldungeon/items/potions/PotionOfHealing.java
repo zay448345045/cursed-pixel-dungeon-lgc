@@ -21,16 +21,22 @@
 
 package com.shatteredpixel.cursedpixeldungeon.items.potions;
 
+import com.shatteredpixel.cursedpixeldungeon.Assets;
+import com.shatteredpixel.cursedpixeldungeon.Dungeon;
+import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Barrier;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Bleeding;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Cripple;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Healing;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Poison;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Weakness;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
+import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Bee;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
+import com.watabou.noosa.audio.Sample;
 
 public class PotionOfHealing extends Potion {
 
@@ -43,13 +49,17 @@ public class PotionOfHealing extends Potion {
 	@Override
 	public void apply( Hero hero ) {
 		setKnown();
-		int healing = (hero.HT-hero.HP)/3;		//starts out healing 30 hp, equalizes with hero health total at level 11
-		hero.HP += healing;//Refills 1/3 of missing HP
-		Buff.affect(hero, Barrier.class).setShield(healing);
-		cure( hero );
+		heal(hero);
 		GLog.p( Messages.get(this, "heal") );
 	}
-	
+
+	public void heal (Char Char) {
+		int healing = (Char.HT-Char.HP)/3;
+		Char.HP += healing;
+		Buff.affect(Char, Barrier.class).setShield(healing);
+		cure( Char );
+	}
+
 	public static void cure( Char ch ) {
 		Buff.detach( ch, Poison.class );
 		Buff.detach( ch, Cripple.class );
@@ -61,5 +71,18 @@ public class PotionOfHealing extends Potion {
 	@Override
 	public int price() {
 		return isKnown() ? 30 * quantity : super.price();
+	}
+
+	@Override
+	public void shatter(int cell) {//Can now heal other allies/enemies
+		if (Dungeon.level.heroFOV[cell]) {
+			Sample.INSTANCE.play( Assets.SND_SHATTER );
+			splash( cell );
+		}
+
+		Char ch = Actor.findChar(cell);
+		if (ch != null){
+			heal(ch);
+		}
 	}
 }
