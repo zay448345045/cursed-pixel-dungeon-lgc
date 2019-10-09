@@ -85,7 +85,7 @@ public class WaterElemental extends Mob {
         if (Dungeon.level.water[pos] && HP < HT) {
             sprite.emitter().burst( Speck.factory( Speck.HEALING ), 1 );
 
-            HP+= 15;
+            HP+= 10;
         }
 
         return super.act();
@@ -141,7 +141,7 @@ public class WaterElemental extends Mob {
         }
         return clone;
     }
-
+    public class ElementalIce {}//Used so Ring of Elements only affects extra damage.
     @Override
     public void die(Object cause) {
         super.die(cause);
@@ -150,7 +150,18 @@ public class WaterElemental extends Mob {
     public int attackProc( Char enemy, int damage ) {
         damage = super.attackProc( enemy, damage );
         if (Random.Int( 2 ) == 0) {
-            Buff.affect( enemy, Chill.class, 2f );
+            Buff.affect( enemy, Chill.class, 4f );
+        } else {
+            float duration = 0;
+            Chill chill = Dungeon.hero.buff(Chill.class);
+            if (chill != null) {
+                duration = chill.speedFactor();
+            }
+            if (duration > 0) {
+                enemy.damage((int)(damageRoll()*duration),ElementalIce.class);
+            }
+
+
         }
 
         return damage;
