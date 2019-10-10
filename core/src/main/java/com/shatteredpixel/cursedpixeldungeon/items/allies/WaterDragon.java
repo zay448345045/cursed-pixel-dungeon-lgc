@@ -12,14 +12,14 @@ import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.cursedpixeldungeon.sprites.WaterDragonSprite;
 import com.watabou.noosa.tweeners.AlphaTweener;
 
-public class WaterDragon extends DragonItem {
+public class WaterDragon extends DragonCrystal {
 
     public Dragon dragon = new Dragon();
     {
         image = ItemSpriteSheet.LIGHTBLUEDRAGONCRYSTAL;
     }
 
-    public static class Dragon extends DragonMob {
+    public static class Dragon extends DragonCrystal.Dragon {
         {
             spriteClass = WaterDragonSprite.class;
             immunities.add(Chill.class);//immune to chill
@@ -38,33 +38,15 @@ public class WaterDragon extends DragonItem {
 
             return super.act();
         }
+
         @Override
-        public int HPcalc(int level) {
-            return  16 + 8 * level;
+        public int HPCalc() {
+            return 24 + 8 * Crystal.level();
         }
 
         @Override
         public int defenseSkill(Char enemy) {
-            return (SpawnerLevel+2);
+            return (Crystal.level()+2);
         }
-    }
-
-
-
-    @Override
-    public void SpawnDragon(int newPos, int pos) {
-        dragon = new Dragon();
-        dragon.SpawnerLevel = level();
-        dragon.HP = dragon.HT = dragon.HPcalc(dragon.SpawnerLevel);
-        dragon.alignment = Char.Alignment.ALLY;
-        dragon.pos = newPos;
-        dragon.setLevel(level());
-
-        GameScene.add( dragon );
-        Actor.addDelayed( new Pushing( dragon, pos, newPos ), -1f );
-
-        dragon.sprite.alpha( 0 );
-        dragon.sprite.parent.add( new AlphaTweener( dragon.sprite, 1, 0.15f ) );
-        dragon.notice();
     }
 }

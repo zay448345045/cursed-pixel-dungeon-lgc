@@ -325,7 +325,7 @@ public class DragonCrystal extends KindofMisc {
 			properties.add(Property.UNDEAD);
 		}
 		
-		private DragonCrystal Crystal = null;
+		public DragonCrystal Crystal = null;
 		
 		public Dragon(){
 			super();
@@ -348,10 +348,11 @@ public class DragonCrystal extends KindofMisc {
 			}
 
 			if (Crystal == null) return;
-			HT = 30 + 10 * Crystal.level();
+			HT = HPCalc();
 		}
 
-		public void saySpawned(){
+		public int HPCalc() {
+			return  30 + 10* Crystal.level();
 		}
 
 		public void sayDefeated(){

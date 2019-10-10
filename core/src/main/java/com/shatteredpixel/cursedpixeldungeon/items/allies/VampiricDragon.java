@@ -13,13 +13,13 @@ import com.shatteredpixel.cursedpixeldungeon.sprites.VampiricDragonSprite;
 import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.utils.Random;
 
-public class VampiricDragon extends DragonItem {
+public class VampiricDragon extends DragonCrystal {
     public Dragon dragon = new Dragon();
     {
         image = ItemSpriteSheet.LIGHTGREENDRAGONCRYSTAL;
     }
 
-    public static class Dragon extends DragonMob {
+    public static class Dragon extends DragonCrystal.Dragon {
         {
             spriteClass = VampiricDragonSprite.class;
             immunities.add(Grim.class);//immune to Grim
@@ -51,23 +51,6 @@ public class VampiricDragon extends DragonItem {
         public int damageRoll() {
             return (int)(super.damageRoll()*0.75);//25% reduced damage (35% was too much imo)
         }
-    }
-
-    @Override
-    public void SpawnDragon(int newPos, int pos) {
-        dragon = new Dragon();
-        dragon.SpawnerLevel = level();
-        dragon.HP = dragon.HT = dragon.HPcalc(dragon.SpawnerLevel);
-        dragon.alignment = Char.Alignment.ALLY;
-        dragon.pos = newPos;
-        dragon.setLevel(level());
-
-        GameScene.add( dragon );
-        Actor.addDelayed( new Pushing( dragon, pos, newPos ), -1f );
-
-        dragon.sprite.alpha( 0 );
-        dragon.sprite.parent.add( new AlphaTweener( dragon.sprite, 1, 0.15f ) );
-        dragon.notice();
     }
 
 }

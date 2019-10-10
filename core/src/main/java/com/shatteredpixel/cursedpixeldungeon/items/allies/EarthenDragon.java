@@ -13,13 +13,13 @@ import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 import com.watabou.noosa.tweeners.AlphaTweener;
 
-public class EarthenDragon extends DragonItem {
+public class EarthenDragon extends DragonCrystal {
     public Dragon dragon = new Dragon();
     {
         image = ItemSpriteSheet.BROWNDRAGONCRYSTAL;
     }
 
-    public static class Dragon extends DragonMob {
+    public static class Dragon extends DragonCrystal.Dragon {
         {
             spriteClass = EarthenDragonSprite.class;
             immunities.add(Paralysis.class);//immune to paralysis
@@ -36,7 +36,7 @@ public class EarthenDragon extends DragonItem {
         @Override
         public int defenseProc( Char enemy, int damage ) {
             Buff.affect( this, Roots.class, 3);
-            Buff.affect( this, Earthroot.Armor.class ).level( 5 + 4 * SpawnerLevel );
+            Buff.affect( this, Earthroot.Armor.class ).level( 5 + 4 * this.Crystal.level() );
             return super.defenseProc(enemy, damage);
         }
 
@@ -44,23 +44,6 @@ public class EarthenDragon extends DragonItem {
         public int defenseSkill(Char enemy) {
             return super.defenseSkill(enemy)/2;
         }
-    }
-
-    @Override
-    public void SpawnDragon(int newPos, int pos) {
-        dragon = new Dragon();
-        dragon.SpawnerLevel = level();
-        dragon.HP = dragon.HT = dragon.HPcalc(dragon.SpawnerLevel);
-        dragon.alignment = Char.Alignment.ALLY;
-        dragon.pos = newPos;
-        dragon.setLevel(level());
-
-        GameScene.add( dragon );
-        Actor.addDelayed( new Pushing( dragon, pos, newPos ), -1f );
-
-        dragon.sprite.alpha( 0 );
-        dragon.sprite.parent.add( new AlphaTweener( dragon.sprite, 1, 0.15f ) );
-        dragon.notice();
     }
 
 }

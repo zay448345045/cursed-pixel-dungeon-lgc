@@ -14,12 +14,12 @@ import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.utils.Random;
 
-public class FireDragon extends DragonItem {
+public class FireDragon extends DragonCrystal {
     public Dragon dragon = new Dragon();
     {
         image = ItemSpriteSheet.REDDRAGONCRYSTAL;
     }
-    public static class Dragon extends DragonMob {
+    public static class Dragon extends DragonCrystal.Dragon {
         {
             properties.add(Property.FIERY);
             immunities.add(Fire.class);//immune to fire because it's... well... fiery?
@@ -44,26 +44,9 @@ public class FireDragon extends DragonItem {
 
         @Override
         public int damageRoll() {
-            return Random.NormalIntRange(1 + SpawnerLevel, 8 + SpawnerLevel * 5);
-        }//base of 1-8 (Worn Shortsword), scales by 1-4 (Longsword). This is higher than the base value as Fire dragons should do extra damage (due to setting random fires)
+            return Random.NormalIntRange(1 + Crystal.level(), 8 + Crystal.level() * 5);
+        }//base of 1-8 (Worn Shortsword), scales by 1-5 (Longsword). This is higher than the base value as Fire dragons should do extra damage (due to setting random fires)
 
 
-    }
-
-    @Override
-    public void SpawnDragon(int newPos, int pos) {
-        dragon = new Dragon();
-        dragon.SpawnerLevel = level();
-        dragon.HP = dragon.HT = dragon.HPcalc(dragon.SpawnerLevel);
-        dragon.alignment = Char.Alignment.ALLY;
-        dragon.pos = newPos;
-        dragon.setLevel(level());
-
-        GameScene.add( dragon );
-        Actor.addDelayed( new Pushing( dragon, pos, newPos ), -1f );
-
-        dragon.sprite.alpha( 0 );
-        dragon.sprite.parent.add( new AlphaTweener( dragon.sprite, 1, 0.15f ) );
-        dragon.notice();
     }
 }
