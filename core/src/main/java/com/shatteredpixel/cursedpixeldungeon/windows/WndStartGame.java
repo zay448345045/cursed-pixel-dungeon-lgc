@@ -342,7 +342,7 @@ public class WndStartGame extends Window {
 						case PRIESTESS:
 							heroItem.icon(new ItemSprite(ItemSpriteSheet.ADORNEDDRAGONCRYSTAL, null));
 							heroLoadout.icon(new ItemSprite(ItemSpriteSheet.INSCRIBED_KINFE, null));
-							heroMisc.icon(new Image(Assets.RAT, 112, 96, 16, 16 ));
+							heroMisc.icon(new Image(Assets.RAT,0,0,16,15));
 							break;
 					}
 					

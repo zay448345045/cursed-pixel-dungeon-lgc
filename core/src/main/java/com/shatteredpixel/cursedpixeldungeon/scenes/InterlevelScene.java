@@ -473,7 +473,7 @@ public class InterlevelScene extends PixelScene {
 	
 	private void returnTo() throws IOException {
 		
-		DriedRose.holdGhostHero( Dungeon.level );
+		DragonCrystal.holdGhostHero( Dungeon.level );
 
 		Dungeon.saveAll();
 		Dungeon.depth = returnDepth;

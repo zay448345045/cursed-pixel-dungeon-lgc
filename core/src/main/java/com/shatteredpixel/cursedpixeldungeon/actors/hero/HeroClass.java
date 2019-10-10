@@ -28,6 +28,7 @@ import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.items.BrokenSeal;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.TomeOfMastery;
+import com.shatteredpixel.cursedpixeldungeon.items.allies.DragonCrystal;
 import com.shatteredpixel.cursedpixeldungeon.items.allies.PoisonDragon;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.ClothArmor;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.LeatherArmor;
@@ -169,7 +170,7 @@ public enum HeroClass {
 	private static void initPriestess( Hero hero) {
 		(hero.belongings.weapon = new InscribedKnife()).identify().upgrade();
 		(hero.belongings.armor = new ClothArmor()).identify();
-		(hero.belongings.misc1 = new PoisonDragon()).identify().upgrade();
+		(hero.belongings.misc1 = new DragonCrystal()).identify().upgrade();
 		hero.belongings.misc1.activate(hero);
 		hero.HP = hero.HT = 20;
 		Dungeon.quickslot.setSlot(0,hero.belongings.misc1);
