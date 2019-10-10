@@ -226,7 +226,7 @@ public class DragonCrystal extends KindofMisc {
 		@Override
 		public boolean act() {
 			LockedFloor lock = target.buff(LockedFloor.class);
-			if (charge < chargeCap && !cursed && (lock == null || lock.regenOn())) {
+			if (charge < chargeCap && !cursed && (lock == null || lock.regenOn())&& Dragon == null) {
 				partialCharge += 0.1;
 
 				if (partialCharge >= 1) {
@@ -274,6 +274,7 @@ public class DragonCrystal extends KindofMisc {
 	
 	private static final String WEAPON =        "weapon";
 	private static final String ARMOR =         "armor";
+	private static final String CHARGE  =         "charge";
 
 	@Override
 	public void storeInBundle( Bundle bundle ) {
@@ -283,6 +284,7 @@ public class DragonCrystal extends KindofMisc {
 		bundle.put( FIRSTSUMMON, firstSummon );
 		bundle.put( GHOSTID, DragonID);
 		bundle.put( PETALS, droppedPetals );
+		bundle.put( CHARGE, charge);
 		
 		if (weapon != null) bundle.put( WEAPON, weapon );
 		if (armor != null)  bundle.put( ARMOR, armor );
@@ -296,7 +298,8 @@ public class DragonCrystal extends KindofMisc {
 		firstSummon = bundle.getBoolean( FIRSTSUMMON );
 		DragonID = bundle.getInt( GHOSTID );
 		droppedPetals = bundle.getInt( PETALS );
-		
+		charge = bundle.getInt(CHARGE);
+
 		if (bundle.contains(WEAPON)) weapon = (MeleeWeapon)bundle.get( WEAPON );
 		if (bundle.contains(ARMOR))  armor = (Armor)bundle.get( ARMOR );
 	}
