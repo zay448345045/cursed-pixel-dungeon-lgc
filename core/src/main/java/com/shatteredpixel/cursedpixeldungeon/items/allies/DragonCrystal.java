@@ -33,7 +33,6 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Corruption;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.LockedFloor;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
-import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Wraith;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.npcs.NPC;
 import com.shatteredpixel.cursedpixeldungeon.effects.CellEmitter;
 import com.shatteredpixel.cursedpixeldungeon.effects.Speck;
@@ -41,24 +40,15 @@ import com.shatteredpixel.cursedpixeldungeon.effects.particles.ShaftParticle;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.KindofMisc;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.Armor;
-import com.shatteredpixel.cursedpixeldungeon.items.armor.glyphs.AntiMagic;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.Artifact;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfRetribution;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.exotic.ScrollOfPsionicBlast;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MeleeWeapon;
-import com.shatteredpixel.cursedpixeldungeon.levels.Level;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
-import com.shatteredpixel.cursedpixeldungeon.scenes.PixelScene;
-import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.cursedpixeldungeon.sprites.PoisonDragonSprite;
-import com.shatteredpixel.cursedpixeldungeon.ui.RenderedTextMultiline;
-import com.shatteredpixel.cursedpixeldungeon.ui.Window;
 import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
-import com.shatteredpixel.cursedpixeldungeon.windows.IconTitle;
-import com.shatteredpixel.cursedpixeldungeon.windows.WndBag;
-import com.shatteredpixel.cursedpixeldungeon.windows.WndBlacksmith;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.PathFinder;
@@ -87,7 +77,7 @@ public class DragonCrystal extends KindofMisc {
 	private boolean talkedTo = false;
 	private boolean firstSummon = false;
 	
-	private Dragon ghost = null;
+	private Dragon Dragon = null;
 	private int DragonID = 0;
 	
 	private MeleeWeapon weapon = null;
@@ -107,13 +97,17 @@ public class DragonCrystal extends KindofMisc {
 		return actions;
 	}
 
+	public DragonCrystal.Dragon GetDragonTypeToSpawn() {
+		return new DragonCrystal.Dragon(this);
+	}
+
 	@Override
 	public void execute( Hero hero, String action ) {
 
 		super.execute(hero, action);
 
 		if (action.equals(AC_SUMMON)) {
-			if (ghost != null)         GLog.i( Messages.get(this, "spawned") );
+			if (Dragon != null)         GLog.i( Messages.get(this, "spawned") );
 			else if (!isEquipped( hero ))   GLog.i( Messages.get(Artifact.class, "need_to_equip") );
 			else if (charge != chargeCap)   GLog.i( Messages.get(this, "no_charge") );
 			else if (cursed)                GLog.i( Messages.get(this, "cursed") );
@@ -127,25 +121,17 @@ public class DragonCrystal extends KindofMisc {
 				}
 
 				if (spawnPoints.size() > 0) {
-					ghost = new Dragon( this );
-					DragonID = ghost.id();
-					ghost.pos = Random.element(spawnPoints);
+					Dragon = GetDragonTypeToSpawn();
+					DragonID = Dragon.id();
+					Dragon.pos = Random.element(spawnPoints);
 
-					GameScene.add(ghost, 1f);
-					CellEmitter.get(ghost.pos).start( ShaftParticle.FACTORY, 0.3f, 4 );
-					CellEmitter.get(ghost.pos).start( Speck.factory(Speck.LIGHT), 0.2f, 3 );
+					GameScene.add(Dragon, 1f);
+					CellEmitter.get(Dragon.pos).start( ShaftParticle.FACTORY, 0.3f, 4 );
+					CellEmitter.get(Dragon.pos).start( Speck.factory(Speck.LIGHT), 0.2f, 3 );
 
 					hero.spend(1f);
 					hero.busy();
 					hero.sprite.operate(hero.pos);
-
-					if (!firstSummon) {
-						ghost.yell( Messages.get(Dragon.class, "hello", Dungeon.hero.givenName()) );
-						Sample.INSTANCE.play( Assets.SND_GHOST );
-						firstSummon = true;
-					} else
-						ghost.saySpawned();
-					
 					charge = 0;
 					updateQuickslot();
 
@@ -263,8 +249,8 @@ public class DragonCrystal extends KindofMisc {
 	
 	@Override
 	public Item upgrade() {
-		if (ghost != null){
-			ghost.updateCrystal();
+		if (Dragon != null){
+			Dragon.updateCrystal();
 		}
 
 		return super.upgrade();
@@ -314,129 +300,6 @@ public class DragonCrystal extends KindofMisc {
 		if (bundle.contains(WEAPON)) weapon = (MeleeWeapon)bundle.get( WEAPON );
 		if (bundle.contains(ARMOR))  armor = (Armor)bundle.get( ARMOR );
 	}
-	
-	// *** static methods for transferring a ghost hero between floors ***
-	
-	private static Dragon heldGhost;
-	
-	public static void holdGhostHero( Level level ){
-		for (Mob mob : level.mobs.toArray( new Mob[0] )) {
-			if (mob instanceof Dragon) {
-				level.mobs.remove( mob );
-				heldGhost = (Dragon) mob;
-				break;
-			}
-		}
-	}
-	
-	public static void restoreGhostHero( Level level, int pos ){
-		if (heldGhost != null){
-			level.mobs.add( heldGhost );
-			
-			int ghostPos;
-			do {
-				ghostPos = pos + PathFinder.NEIGHBOURS8[Random.Int(8)];
-			} while (Dungeon.level.solid[ghostPos] || level.findMob(ghostPos) != null);
-			
-			heldGhost.pos = ghostPos;
-			heldGhost = null;
-		}
-	}
-	
-	public static void clearHeldGhostHero(){
-		heldGhost = null;
-	}
-
-	public class roseRecharge extends CrystalBuff {
-
-		@Override
-		public boolean act() {
-			
-			spend( TICK );
-			
-			if (ghost == null && DragonID != 0){
-				Actor a = Actor.findById(DragonID);
-				if (a != null){
-					ghost = (Dragon)a;
-				} else {
-					DragonID = 0;
-				}
-			}
-			
-			//Crystal does not charge while ghost hero is alive
-			if (ghost != null){
-				return true;
-			}
-			
-			LockedFloor lock = target.buff(LockedFloor.class);
-			if (charge < chargeCap && !cursed && (lock == null || lock.regenOn())) {
-				partialCharge += 1/5f; //500 turns to a full charge
-				if (partialCharge > 1){
-					charge++;
-					partialCharge--;
-					if (charge == chargeCap){
-						partialCharge = 0f;
-						GLog.p( Messages.get(DragonCrystal.class, "charged") );
-					}
-				}
-			} else if (cursed && Random.Int(100) == 0) {
-
-				ArrayList<Integer> spawnPoints = new ArrayList<Integer>();
-
-				for (int i = 0; i < PathFinder.NEIGHBOURS8.length; i++) {
-					int p = target.pos + PathFinder.NEIGHBOURS8[i];
-					if (Actor.findChar(p) == null && (Dungeon.level.passable[p] || Dungeon.level.avoid[p])) {
-						spawnPoints.add(p);
-					}
-				}
-
-				if (spawnPoints.size() > 0) {
-					Wraith.spawnAt(Random.element(spawnPoints));
-					Sample.INSTANCE.play(Assets.SND_CURSED);
-				}
-
-			}
-
-			updateQuickslot();
-
-			return true;
-		}
-	}
-
-	public static class Petal extends Item {
-
-		{
-			stackable = true;
-			image = ItemSpriteSheet.PETAL;
-		}
-
-		@Override
-		public boolean doPickUp( Hero hero ) {
-			DragonCrystal rose = hero.belongings.getItem( DragonCrystal.class );
-
-			if (rose == null){
-				GLog.w( Messages.get(this, "no_rose") );
-				return false;
-			} if ( rose.level() >= rose.levelCap ){
-				GLog.i( Messages.get(this, "no_room") );
-				hero.spendAndNext(TIME_TO_PICK_UP);
-				return true;
-			} else {
-
-				rose.upgrade();
-				if (rose.level() == rose.levelCap) {
-					GLog.p( Messages.get(this, "maxlevel") );
-				} else
-					GLog.i( Messages.get(this, "levelup") );
-
-				Sample.INSTANCE.play( Assets.SND_DEWDROP );
-				hero.spendAndNext(TIME_TO_PICK_UP);
-				return true;
-
-			}
-		}
-
-	}
 
 	public static class Dragon extends NPC {
 
@@ -469,30 +332,24 @@ public class DragonCrystal extends KindofMisc {
 			updateCrystal();
 			HP = HT;
 		}
+
+		public Class CrystalType() {
+			return DragonCrystal.class;
+		}
 		
 		private void updateCrystal(){
 			if (Crystal == null) {
-				Crystal = Dungeon.hero.belongings.getItem(DragonCrystal.class);
+				Crystal = (DragonCrystal) Dungeon.hero.belongings.getItem(CrystalType());
 			}
-			
-			defenseSkill = (Dungeon.hero.lvl+4)*2;
+
 			if (Crystal == null) return;
-			HT = 30 + 8* Crystal.level();
+			HT = 30 + 10 * Crystal.level();
 		}
 
 		public void saySpawned(){
 		}
 
-		public void sayAnhk(){
-		}
-
 		public void sayDefeated(){
-		}
-
-		public void sayHeroKilled(){
-		}
-
-		public void sayBossBeaten(){
 		}
 
 		@Override
@@ -505,7 +362,6 @@ public class DragonCrystal extends KindofMisc {
 			if (!isAlive())
 				return true;
 			if (!Dungeon.hero.isAlive()){
-				sayHeroKilled();
 				sprite.die();
 				destroy();
 				return true;
@@ -527,77 +383,24 @@ public class DragonCrystal extends KindofMisc {
 		}
 
 		@Override
-		public int attackSkill(Char target) {
-			
-			//same accuracy as the hero.
-			int acc = Dungeon.hero.lvl + 9;
-			
-			if (Crystal != null && Crystal.weapon != null){
-				acc *= Crystal.weapon.accuracyFactor(this);
-			}
-			
-			return acc;
+		public int attackSkill( Char target ) {
+			return 5 + Crystal.level()*2;
 		}
-		
-		@Override
-		protected float attackDelay() {
-			float delay = super.attackDelay();
-			if (Crystal != null && Crystal.weapon != null){
-				delay *= Crystal.weapon.speedFactor(this);
-			}
-			return delay;
-		}
-		
-		@Override
-		protected boolean canAttack(Char enemy) {
-			return super.canAttack(enemy) || (Crystal != null && Crystal.weapon != null && Crystal.weapon.canReach(this, enemy.pos));
-		}
-		
+
 		@Override
 		public int damageRoll() {
-			int dmg = 0;
-			if (Crystal != null && Crystal.weapon != null){
-				dmg += Crystal.weapon.damageRoll(this);
-			} else {
-				dmg += Random.NormalIntRange(0, 5);
-			}
-			
-			return dmg;
-		}
-		
-		@Override
-		public int attackProc(Char enemy, int damage) {
-			damage = super.attackProc(enemy, damage);
-			if (Crystal != null && Crystal.weapon != null) {
-				damage = Crystal.weapon.proc( this, enemy, damage );
-			}
-			return damage;
-		}
-		
-		@Override
-		public int defenseProc(Char enemy, int damage) {
-			if (Crystal != null && Crystal.armor != null) {
-				return Crystal.armor.proc( enemy, this, damage );
-			} else {
-				return super.defenseProc(enemy, damage);
-			}
-		}
+			return Random.NormalIntRange(1 + Crystal.level(), 8 + Crystal.level() * 4);
+		}//base of 1-8 (Worn Shortsword), scales by 1-4 (Sword)
+
 		@Override
 		public int defenseSkill(Char enemy) {
 			return 2*(Crystal.level()+2);
 		}//2 Evasion, scaling at 2/level
-		
+
 		@Override
 		public int drRoll() {
-			int block = 0;
-			if (Crystal != null && Crystal.armor != null){
-				block += Random.NormalIntRange( Crystal.armor.DRMin(), Crystal.armor.DRMax());
-			}
-			if (Crystal != null && Crystal.weapon != null){
-				block += Random.NormalIntRange( 0, Crystal.weapon.defenseFactor( this ));
-			}
-			return block;
-		}
+			return Random.NormalIntRange(1 + Crystal.level() * 2, 2 + Crystal.level() * 4);
+		}//base of 1-2 (Cloth Armour), scales by 2-4 (Scale Armour)
 
 		@Override
 		public boolean interact() {
@@ -629,7 +432,7 @@ public class DragonCrystal extends KindofMisc {
 		public void destroy() {
 			updateCrystal();
 			if (Crystal != null) {
-				Crystal.ghost = null;
+				Crystal.Dragon = null;
 				Crystal.DragonID = -1;
 			}
 			super.destroy();
