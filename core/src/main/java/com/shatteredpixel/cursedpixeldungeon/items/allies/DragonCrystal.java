@@ -302,6 +302,8 @@ public class DragonCrystal extends KindofMisc {
 	}
 
 	public static class Dragon extends NPC {
+		int regenDelay = 0;
+		boolean PassiveRegen = true;
 
 		{
 			spriteClass = PoisonDragonSprite.class;
@@ -357,6 +359,12 @@ public class DragonCrystal extends KindofMisc {
 			updateCrystal();
 			if (Crystal == null || !Crystal.isEquipped(Dungeon.hero)){
 				damage(1, this);
+			} else if (PassiveRegen) {
+				regenDelay += 1;
+				if (regenDelay > 9) {
+					regenDelay = 0;
+					HP += Math.min(HT / 10, this.missingHP());
+				}
 			}
 			
 			if (!isAlive())

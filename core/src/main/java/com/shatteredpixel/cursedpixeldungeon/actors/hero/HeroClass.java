@@ -170,7 +170,7 @@ public enum HeroClass {
 	private static void initPriestess( Hero hero) {
 		(hero.belongings.weapon = new InscribedKnife()).identify().upgrade();
 		(hero.belongings.armor = new ClothArmor()).identify();
-		(hero.belongings.misc1 = new DragonCrystal()).identify().upgrade();
+		(hero.belongings.misc1 = new PoisonDragon()).identify().upgrade();
 		hero.belongings.misc1.activate(hero);
 		hero.HP = hero.HT = 20;
 		Dungeon.quickslot.setSlot(0,hero.belongings.misc1);
