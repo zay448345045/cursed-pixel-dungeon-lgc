@@ -23,7 +23,7 @@ package com.shatteredpixel.cursedpixeldungeon.items;
 
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
-import com.shatteredpixel.cursedpixeldungeon.items.allies.DragonItem;
+import com.shatteredpixel.cursedpixeldungeon.items.allies.DragonCrystal;
 import com.shatteredpixel.cursedpixeldungeon.items.allies.EarthenDragon;
 import com.shatteredpixel.cursedpixeldungeon.items.allies.FireDragon;
 import com.shatteredpixel.cursedpixeldungeon.items.allies.PoisonDragon;
@@ -192,10 +192,10 @@ import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Sword;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.WarHammer;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Whip;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.WornShortsword;
-import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.HeavyBoomerang;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.Bolas;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.FishingSpear;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.ForceCube;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.HeavyBoomerang;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.Javelin;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.Kunai;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.MissileWeapon;
@@ -221,7 +221,6 @@ import com.shatteredpixel.cursedpixeldungeon.plants.Stormvine;
 import com.shatteredpixel.cursedpixeldungeon.plants.Sungrass;
 import com.shatteredpixel.cursedpixeldungeon.plants.Swiftthistle;
 import com.watabou.utils.Bundle;
-import com.watabou.utils.Callback;
 import com.watabou.utils.GameMath;
 import com.watabou.utils.Random;
 
@@ -247,7 +246,7 @@ public class Generator {
 		MIS_T3  ( 0,    MissileWeapon.class ),
 		MIS_T4  ( 0,    MissileWeapon.class ),
 		MIS_T5  ( 0,    MissileWeapon.class ),
-		ALLIES  ( 1,     DragonItem.class),
+		ALLIES  ( 1,     DragonCrystal.class),
 		
 		WAND	( 3,    Wand.class ),
 		RING	( 1,    Ring.class ),
