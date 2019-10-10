@@ -97,7 +97,7 @@ public class DragonCrystal extends KindofMisc {
 		return actions;
 	}
 
-	public DragonCrystal.Dragon GetDragonTypeToSpawn() {
+	public DragonCrystal.Dragon GetDragonTypeToSpawn() {//This ensures that subclasses spawn their own type of Dragon, not the general one.
 		return new DragonCrystal.Dragon(this);
 	}
 

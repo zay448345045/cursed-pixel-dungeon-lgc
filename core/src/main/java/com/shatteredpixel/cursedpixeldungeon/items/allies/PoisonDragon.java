@@ -11,13 +11,18 @@ import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.cursedpixeldungeon.sprites.PoisonDragonSprite;
 import com.watabou.noosa.tweeners.AlphaTweener;
 
-public class PoisonDragon extends DragonItem {
+public class PoisonDragon extends DragonCrystal {
     public Dragon dragon = new Dragon();
     {
         image  = ItemSpriteSheet.ADORNEDDRAGONCRYSTAL;
     }
 
-    public static class Dragon extends DragonMob {
+    @Override
+    public DragonCrystal.Dragon GetDragonTypeToSpawn() {
+        return new Dragon();
+    }
+
+    public static class Dragon extends DragonCrystal.Dragon {
         {
             spriteClass = PoisonDragonSprite.class;
             properties.add(Property.ACIDIC);
@@ -33,28 +38,16 @@ public class PoisonDragon extends DragonItem {
         }
 
         @Override
+        public Class CrystalType() {
+            return PoisonDragon.class;
+        }
+
+        @Override
         public int defenseProc( Char enemy, int damage ) {
             enemy.damage(Math.round(damage/2),this);//damages enemies who attack
             return super.defenseProc(enemy, damage);
         }
 
-    }
-
-    @Override
-    public void SpawnDragon(int newPos, int pos) {
-        dragon = new Dragon();
-        dragon.SpawnerLevel = level();
-        dragon.HP = dragon.HT = dragon.HPcalc(dragon.SpawnerLevel);
-        dragon.alignment = Char.Alignment.ALLY;
-        dragon.pos = newPos;
-        dragon.setLevel(level());
-
-        GameScene.add( dragon );
-        Actor.addDelayed( new Pushing( dragon, pos, newPos ), -1f );
-
-        dragon.sprite.alpha( 0 );
-        dragon.sprite.parent.add( new AlphaTweener( dragon.sprite, 1, 0.15f ) );
-        dragon.notice();
     }
 
 }
