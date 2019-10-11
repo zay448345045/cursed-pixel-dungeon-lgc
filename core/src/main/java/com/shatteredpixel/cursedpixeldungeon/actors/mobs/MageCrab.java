@@ -93,7 +93,8 @@ public class MageCrab extends Mob implements Callback {
 
     @Override
     protected boolean canAttack( Char enemy ) {
-        return new Ballistica( pos, enemy.pos, Ballistica.MAGIC_BOLT).collisionPos == enemy.pos;
+        Ballistica attack = new Ballistica( pos, enemy.pos, Ballistica.PROJECTILE);
+        return !Dungeon.level.adjacent( pos, enemy.pos ) && attack.collisionPos == enemy.pos;
     }
 
     @Override
