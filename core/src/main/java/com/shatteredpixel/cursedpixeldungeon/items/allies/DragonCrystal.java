@@ -422,7 +422,7 @@ public class DragonCrystal extends KindofMisc {
 
 		@Override
 		public int attackSkill( Char target ) {
-			return 5 + Crystal.level()*2;
+			return Dungeon.hero.lvl + 9;
 		}
 
 		@Override
@@ -432,7 +432,7 @@ public class DragonCrystal extends KindofMisc {
 
 		@Override
 		public int defenseSkill(Char enemy) {
-			return 2*(Crystal.level()+2);
+			return 5 + Dungeon.hero.lvl;
 		}//2 Evasion, scaling at 2/level
 
 		@Override

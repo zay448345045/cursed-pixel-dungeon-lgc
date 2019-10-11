@@ -19,12 +19,12 @@ import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
 public class MageCrab extends Mob implements Callback {
-    private static final float TIME_TO_ZAP	= 2f;
+    private static final float TIME_TO_ZAP	= 1f;
     {
         spriteClass = MageCrabSprite.class;
 
-        HP = HT = 190;
-        defenseSkill = 24;
+        HP = HT = 210;
+        defenseSkill = 27;
         viewDistance = Light.DISTANCE;
 
         EXP = 14;
