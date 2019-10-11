@@ -63,32 +63,6 @@ public class Amulet extends Item {
 		}
 	}
 	
-	@Override
-	public boolean doPickUp( Hero hero ) {
-		if (super.doPickUp( hero )) {
-			
-			if (!Statistics.amuletObtained) {
-				Statistics.amuletObtained = true;
-				Badges.validateVictory();
-				hero.spend(-TIME_TO_PICK_UP);
-
-				//add a delayed actor here so pickup behaviour can fully process.
-				Actor.addDelayed(new Actor(){
-					@Override
-					protected boolean act() {
-						Actor.remove(this);
-						showAmuletScene( true );
-						return false;
-					}
-				}, -5);
-			}
-			
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
 	private void showAmuletScene( boolean showText ) {
 		try {
 			Dungeon.saveAll();

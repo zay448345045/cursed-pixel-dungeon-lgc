@@ -31,6 +31,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Cripple;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.LockedFloor;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Terror;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.SparkParticle;
+import com.shatteredpixel.cursedpixeldungeon.items.AmuletSectorWater;
 import com.shatteredpixel.cursedpixeldungeon.items.Generator;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.Wand;
@@ -50,7 +51,7 @@ import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 
 public class SewerGolem extends Mob implements Callback  {
-    private static final float TIME_TO_ZAP	= 1f;
+    private static final float TIME_TO_ZAP	= 2f;
     {
         spriteClass = SewerGolemSprite.class;
 
@@ -59,10 +60,10 @@ public class SewerGolem extends Mob implements Callback  {
 
         EXP = 22;
 
-        loot = Generator.randomWeapon().enchant(Weapon.Enchantment.random()).upgrade(10);
-        lootChance = 0.5f;
+        loot = new AmuletSectorWater();
+        lootChance = 1f;
 
-        baseSpeed = 0.8f;//Slower than the player to allow melee units to catch up
+        baseSpeed = 1.5f;//Faster than the hero
         properties.add(Property.BOSS);
         properties.add(Property.DEMONIC);
         immunities.add(Grim.class);
