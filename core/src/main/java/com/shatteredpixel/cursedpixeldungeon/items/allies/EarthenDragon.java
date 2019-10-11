@@ -19,6 +19,11 @@ public class EarthenDragon extends DragonCrystal {
         image = ItemSpriteSheet.BROWNDRAGONCRYSTAL;
     }
 
+    @Override
+    public DragonCrystal.Dragon GetDragonTypeToSpawn() {
+        return new EarthenDragon.Dragon();
+    }
+
     public static class Dragon extends DragonCrystal.Dragon {
         {
             spriteClass = EarthenDragonSprite.class;
@@ -31,6 +36,11 @@ public class EarthenDragon extends DragonCrystal {
 
             return damage;
 
+        }
+
+        @Override
+        public Class CrystalType() {
+            return EarthenDragon.class;
         }
 
         @Override

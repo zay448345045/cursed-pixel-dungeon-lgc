@@ -19,10 +19,21 @@ public class FireDragon extends DragonCrystal {
     {
         image = ItemSpriteSheet.REDDRAGONCRYSTAL;
     }
+
+    @Override
+    public DragonCrystal.Dragon GetDragonTypeToSpawn() {
+        return new FireDragon.Dragon();
+    }
+
     public static class Dragon extends DragonCrystal.Dragon {
         {
             properties.add(Property.FIERY);
             immunities.add(Fire.class);//immune to fire because it's... well... fiery?
+        }
+
+        @Override
+        public Class CrystalType() {
+            return FireDragon.class;
         }
 
         public int attackProc(Char enemy, int damage ) {

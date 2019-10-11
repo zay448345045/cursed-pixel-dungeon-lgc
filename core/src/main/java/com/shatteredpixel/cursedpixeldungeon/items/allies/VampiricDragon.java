@@ -19,11 +19,21 @@ public class VampiricDragon extends DragonCrystal {
         image = ItemSpriteSheet.LIGHTGREENDRAGONCRYSTAL;
     }
 
+    @Override
+    public DragonCrystal.Dragon GetDragonTypeToSpawn() {
+        return new VampiricDragon.Dragon();
+    }
+
     public static class Dragon extends DragonCrystal.Dragon {
         {
             spriteClass = VampiricDragonSprite.class;
             immunities.add(Grim.class);//immune to Grim
             PassiveRegen = false;
+        }
+
+        @Override
+        public Class CrystalType() {
+            return VampiricDragon.class;
         }
 
         public int attackProc(Char enemy, int damage ) {

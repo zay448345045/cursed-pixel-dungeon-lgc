@@ -19,12 +19,22 @@ public class WaterDragon extends DragonCrystal {
         image = ItemSpriteSheet.LIGHTBLUEDRAGONCRYSTAL;
     }
 
+    @Override
+    public DragonCrystal.Dragon GetDragonTypeToSpawn() {
+        return new WaterDragon.Dragon();
+    }
+
     public static class Dragon extends DragonCrystal.Dragon {
         {
             spriteClass = WaterDragonSprite.class;
             immunities.add(Chill.class);//immune to chill
             baseSpeed = 1.5f;
             PassiveRegen = false;
+        }
+
+        @Override
+        public Class CrystalType() {
+            return WaterDragon.class;
         }
 
         @Override
