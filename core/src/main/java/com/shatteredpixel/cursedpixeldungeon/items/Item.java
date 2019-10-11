@@ -70,7 +70,8 @@ public class Item implements Bundlable {
 	public String defaultAction;
 	public boolean usesTargeting;
 	public int UpgradeLimit = 15;//Most items cap at +15
-	public boolean isUpgradable() {
+
+    public boolean isUpgradable() {
 		return level() <= UpgradeLimit - 1;
 	}
 	protected String name = Messages.get(this, "name");

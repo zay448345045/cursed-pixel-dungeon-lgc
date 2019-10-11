@@ -912,7 +912,7 @@ public class Hero extends Char {
 		int stairs = action.dst;
 		if (pos == stairs && pos == Dungeon.level.entrance) {
 
-			if (Dungeon.depth == 31 || Dungeon.depth == 36) {
+			if (Dungeon.depth == 31 || Dungeon.depth == 36 || Dungeon.depth == 41 || Dungeon.depth == 46) {
 				InterlevelScene.mode = InterlevelScene.Mode.START;
 				Game.switchScene( InterlevelScene.class );
 				return true;
@@ -920,7 +920,7 @@ public class Hero extends Char {
 			
 			if (Dungeon.depth == 0) {
 				
-				if (belongings.getItem( Amulet.class ) == null) {
+				if (belongings.getItem( Amulet.class ) == null && !(belongings.getItem(Amulet.class).WATER_IMBEDDED)) {
 					GameScene.show( new WndMessage( Messages.get(this, "leave") ) );
 					ready();
 				} else {

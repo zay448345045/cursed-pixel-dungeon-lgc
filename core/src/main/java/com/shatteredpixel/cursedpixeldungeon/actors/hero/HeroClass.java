@@ -25,6 +25,8 @@ import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.Badges;
 import com.shatteredpixel.cursedpixeldungeon.Challenges;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
+import com.shatteredpixel.cursedpixeldungeon.items.Amulet;
+import com.shatteredpixel.cursedpixeldungeon.items.AmuletSectorWater;
 import com.shatteredpixel.cursedpixeldungeon.items.BrokenSeal;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.TomeOfMastery;
@@ -201,6 +203,8 @@ public enum HeroClass {
 		//new EarthenDragon().identify().collect();
 		//new ScrollOfUpgrade().quantity(5).collect();
 		//new WandOfLightning().identify().upgrade(2).collect();
+		//new Amulet().collect();
+		//new AmuletSectorWater().collect();
 		staff = new MagesStaff(new WandOfMagicMissile());
 		/*new WandOfMagicMissile().enchant(Weapon.Enchantment.random()).identify().upgrade(5).collect();
 		new WandOfMagicMissile().identify().collect();

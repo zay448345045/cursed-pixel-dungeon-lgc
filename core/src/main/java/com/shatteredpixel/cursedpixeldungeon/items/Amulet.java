@@ -21,15 +21,15 @@
 
 package com.shatteredpixel.cursedpixeldungeon.items;
 
-import com.shatteredpixel.cursedpixeldungeon.Badges;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
-import com.shatteredpixel.cursedpixeldungeon.Statistics;
-import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
+import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.AmuletScene;
+import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.scenes.InterlevelScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
+import com.shatteredpixel.cursedpixeldungeon.windows.WndBag;
 import com.watabou.noosa.Game;
 
 import java.io.IOException;
@@ -39,6 +39,8 @@ public class Amulet extends Item {
 	
 	private static final String AC_END = "END";
 	private static final String AC_IMBED = "EMBED";
+	public boolean WATER_IMBEDDED = false;
+	public final String WATERSECTOR = "WATERSECTOR";
 	
 	{
 		image = ItemSpriteSheet.AMULET;
@@ -53,6 +55,12 @@ public class Amulet extends Item {
 		actions.add( AC_IMBED );
 		return actions;
 	}
+
+	public void imbed(String ImbedType) {
+		if (ImbedType == WATERSECTOR) {
+			WATER_IMBEDDED = true;
+		}
+	}
 	
 	@Override
 	public void execute( Hero hero, String action ) {
@@ -63,9 +71,20 @@ public class Amulet extends Item {
 			InterlevelScene.mode = InterlevelScene.Mode.START;
 			Game.switchScene(InterlevelScene.class);
 		} else if (action.equals(AC_IMBED)) {
-
+			curItem = this;
+			GameScene.selectItem(amuletSelector, WndBag.Mode.IMBED, Messages.get(this, "prompt"));
 		}
 	}
+
+	protected static WndBag.Listener amuletSelector = new WndBag.Listener() {
+		@Override
+		public void onSelect( Item item ) {
+			if (item != null && item instanceof AmuletSectorWater) {
+				item.detach(Dungeon.hero.belongings.backpack);
+				((Amulet)curItem).imbed(((Amulet)curItem).WATERSECTOR);
+			}
+		}
+	};
 	
 	private void showAmuletScene( boolean showText ) {
 		try {
