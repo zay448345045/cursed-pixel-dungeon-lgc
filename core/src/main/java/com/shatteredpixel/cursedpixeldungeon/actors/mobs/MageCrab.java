@@ -13,7 +13,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfHealing;
 import com.shatteredpixel.cursedpixeldungeon.mechanics.Ballistica;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.sprites.CharSprite;
-import com.shatteredpixel.cursedpixeldungeon.sprites.ScorpioSprite;
+import com.shatteredpixel.cursedpixeldungeon.sprites.MageCrabSprite;
 import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
@@ -21,7 +21,7 @@ import com.watabou.utils.Random;
 public class MageCrab extends Mob implements Callback {
     private static final float TIME_TO_ZAP	= 2f;
     {
-        spriteClass = ScorpioSprite.class;
+        spriteClass = MageCrabSprite.class;
 
         HP = HT = 190;
         defenseSkill = 24;
@@ -128,6 +128,11 @@ public class MageCrab extends Mob implements Callback {
 
     @Override
     public void call() {
+        next();
+    }
+
+    public void onZapComplete() {
+        zap();
         next();
     }
 }

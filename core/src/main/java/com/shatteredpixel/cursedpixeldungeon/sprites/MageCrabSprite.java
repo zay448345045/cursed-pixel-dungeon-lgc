@@ -1,6 +1,7 @@
 package com.shatteredpixel.cursedpixeldungeon.sprites;
 
 import com.shatteredpixel.cursedpixeldungeon.Assets;
+import com.shatteredpixel.cursedpixeldungeon.actors.mobs.MageCrab;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Warlock;
 import com.shatteredpixel.cursedpixeldungeon.effects.MagicMissile;
 import com.watabou.noosa.TextureFilm;
@@ -48,7 +49,7 @@ public class MageCrabSprite extends MobSprite {
                 new Callback() {
                     @Override
                     public void call() {
-                        ((Warlock)ch).onZapComplete();
+                        ((MageCrab)ch).onZapComplete();
                     }
                 } );
         Sample.INSTANCE.play( Assets.SND_ZAP );
