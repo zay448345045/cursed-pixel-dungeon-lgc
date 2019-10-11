@@ -225,6 +225,23 @@ public class DragonCrystal extends KindofMisc {
 	public class recharge extends CrystalBuff {
 		@Override
 		public boolean act() {
+
+            spend( TICK );
+
+            if (Dragon == null && DragonID != 0){
+                Actor a = Actor.findById(DragonID);
+                if (a != null){
+                    Dragon = (Dragon) a;
+                } else {
+                    DragonID = 0;
+                }
+            }
+
+            //rose does not charge while ghost hero is alive
+            if (Dragon != null){
+                return true;
+            }
+
 			LockedFloor lock = target.buff(LockedFloor.class);
 			if (charge < chargeCap && !cursed && (lock == null || lock.regenOn())&& Dragon == null) {
 				partialCharge += 0.1;
