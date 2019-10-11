@@ -160,13 +160,31 @@ public class Bestiary {
 						Succubus.class,
 						Eye.class, Eye.class,
 						Scorpio.class, Scorpio.class, Scorpio.class));
-			case 31: case 32: case 33: case 34:
-				//1x Water Elemental, 1x Goo, 2x Larvae
+			case 31:
+				return new ArrayList<>(Arrays.asList(
+						WaterElemental.class,WaterElemental.class,
+						WaterLarvae.class,WaterLarvae.class,WaterLarvae.class,WaterLarvae.class));
+
+			case 32:
 				return new ArrayList<>(Arrays.asList(
 						WaterElemental.class,
 						NonBossGoo.class,
-						WaterLarvae.class, WaterLarvae.class,
-						MageCrab.class, MageCrab.class));
+						WaterLarvae.class,WaterLarvae.class,WaterLarvae.class,
+						MageCrab.class));
+
+			case 33:
+				return new ArrayList<>(Arrays.asList(
+						WaterElemental.class,
+						NonBossGoo.class,
+						WaterLarvae.class,WaterLarvae.class,
+						MageCrab.class,MageCrab.class));
+			case 34:
+				return new ArrayList<>(Arrays.asList(
+						NonBossGoo.class,
+						NonBossGoo.class,
+						MageCrab.class,MageCrab.class,MageCrab.class,
+						WaterLarvae.class));
+
 			case 36: case 37: case 38: case 39:
 				return new ArrayList<>(Arrays.asList(
 						FossilSkeleton.class,
