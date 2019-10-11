@@ -32,6 +32,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Burning;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Corruption;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.LockedFloor;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
+import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroClass;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.npcs.NPC;
 import com.shatteredpixel.cursedpixeldungeon.effects.CellEmitter;
@@ -64,6 +65,14 @@ public class DragonCrystal extends KindofMisc {
 
 
 		defaultAction = AC_SUMMON;
+	}
+
+	@Override
+	public boolean isUpgradable() {
+		if (Dungeon.hero.heroClass == HeroClass.PRIESTESS) {//Priestess can upgrade this more
+			UpgradeLimit = 20;
+		}
+		return super.isUpgradable();
 	}
 	int levelCap = 10;
 
