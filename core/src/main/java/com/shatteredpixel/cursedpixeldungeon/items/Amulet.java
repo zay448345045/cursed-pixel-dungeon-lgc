@@ -38,6 +38,7 @@ import java.util.ArrayList;
 public class Amulet extends Item {
 	
 	private static final String AC_END = "END";
+	private static final String AC_IMBED = "EMBED";
 	
 	{
 		image = ItemSpriteSheet.AMULET;
@@ -49,6 +50,7 @@ public class Amulet extends Item {
 	public ArrayList<String> actions( Hero hero ) {
 		ArrayList<String> actions = super.actions( hero );
 		actions.add( AC_END );
+		actions.add( AC_IMBED );
 		return actions;
 	}
 	
@@ -60,6 +62,8 @@ public class Amulet extends Item {
 		if (action.equals(AC_END)) {
 			InterlevelScene.mode = InterlevelScene.Mode.START;
 			Game.switchScene(InterlevelScene.class);
+		} else if (action.equals(AC_IMBED)) {
+
 		}
 	}
 	

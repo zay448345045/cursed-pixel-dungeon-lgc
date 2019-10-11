@@ -26,6 +26,7 @@ import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.SPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Belongings;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
+import com.shatteredpixel.cursedpixeldungeon.items.AmuletSectorWater;
 import com.shatteredpixel.cursedpixeldungeon.items.EquipableItem;
 import com.shatteredpixel.cursedpixeldungeon.items.Gold;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
@@ -92,7 +93,8 @@ public class WndBag extends WndTabbed {
 		ALCHEMY,
 		RECYCLABLE,
 		NOT_EQUIPPED,
-		FIXABLE
+		FIXABLE,
+		IMBED
 	}
 
 	protected static final int COLS_P    = 5;
@@ -411,6 +413,7 @@ public class WndBag extends WndTabbed {
 						mode == Mode.TRANMSUTABLE && ScrollOfTransmutation.canTransmute(item) ||
 						mode == Mode.NOT_EQUIPPED && !item.isEquipped(Dungeon.hero) ||
 						mode == Mode.RECYCLABLE && Recycle.isRecyclable(item) ||
+						mode == Mode.IMBED && item instanceof AmuletSectorWater ||
 						mode == Mode.ALL
 					);
 				}
