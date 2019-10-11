@@ -3,17 +3,23 @@ package com.shatteredpixel.cursedpixeldungeon.actors.mobs;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Chill;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Cripple;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Light;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Weakness;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.food.MysteryMeat;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfHealing;
 import com.shatteredpixel.cursedpixeldungeon.mechanics.Ballistica;
+import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
+import com.shatteredpixel.cursedpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ScorpioSprite;
+import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
 public class MageCrab extends Mob implements Callback {
+    private static final float TIME_TO_ZAP	= 2f;
     {
         spriteClass = ScorpioSprite.class;
 
@@ -28,6 +34,46 @@ public class MageCrab extends Mob implements Callback {
         lootChance = 0.2f;
 
         properties.add(Property.DEMONIC);
+    }
+
+    public static class MageCrabIce{}
+
+    protected boolean doAttack( Char enemy ) {
+
+        if (Dungeon.level.adjacent( pos, enemy.pos )) {
+
+            return super.doAttack( enemy );
+
+        } else {
+
+            boolean visible = fieldOfView[pos] || fieldOfView[enemy.pos];
+            if (visible) {
+                sprite.zap( enemy.pos );
+            } else {
+                zap();
+            }
+
+            return !visible;
+        }
+    }
+
+    private void zap() {
+        spend( TIME_TO_ZAP );
+
+        if (hit( this, enemy, true )) {
+            Buff.affect( enemy, Chill.class, 3f );
+
+
+            int dmg = Random.Int( 30, 40 );
+            enemy.damage( dmg, new MageCrabIce() );
+
+            if (!enemy.isAlive() && enemy == Dungeon.hero) {
+                Dungeon.fail( getClass() );
+                GLog.n( Messages.get(this, "bolt_kill") );
+            }
+        } else {
+            enemy.sprite.showStatus( CharSprite.NEUTRAL,  enemy.defenseVerb() );
+        }
     }
 
     @Override
@@ -47,8 +93,7 @@ public class MageCrab extends Mob implements Callback {
 
     @Override
     protected boolean canAttack( Char enemy ) {
-        Ballistica attack = new Ballistica( pos, enemy.pos, Ballistica.PROJECTILE);
-        return !Dungeon.level.adjacent( pos, enemy.pos ) && attack.collisionPos == enemy.pos;
+        return new Ballistica( pos, enemy.pos, Ballistica.MAGIC_BOLT).collisionPos == enemy.pos;
     }
 
     @Override

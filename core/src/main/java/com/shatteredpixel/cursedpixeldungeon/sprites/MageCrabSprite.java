@@ -42,7 +42,7 @@ public class MageCrabSprite extends MobSprite {
         play( zap );
 
         MagicMissile.boltFromChar( parent,
-                MagicMissile.SHADOW,
+                MagicMissile.FROST,
                 this,
                 cell,
                 new Callback() {
