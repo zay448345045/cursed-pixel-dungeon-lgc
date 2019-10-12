@@ -56,7 +56,7 @@ public class WaterDragon extends DragonCrystal {
 
         @Override
         public int defenseSkill(Char enemy) {
-            return (Crystal.level()+2);
+            return super.defenseSkill*2;
         }
     }
 }
