@@ -37,7 +37,7 @@ public class LuckyBadge extends Power {
     }
     @Override
     public int price() {
-        return 820;
+        return 82;
     }
     public boolean isUpgradable() {
         return false;
@@ -65,6 +65,11 @@ public class LuckyBadge extends Power {
             Buff.detach(spawner);
         }
 
+    }
+
+    @Override
+    public String desc() {
+        return Messages.get(this, "desc") + "\n\n" + statsInfo();
     }
 
     public String statsInfo() {
