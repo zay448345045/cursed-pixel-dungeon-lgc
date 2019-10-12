@@ -149,6 +149,7 @@ public class MagesStaff extends MeleeWeapon {
 		if (wand != null &&
 				attacker instanceof Hero && ((Hero)attacker).subClass == HeroSubClass.BATTLEMAGE) {
 			if (wand.curCharges < wand.maxCharges) wand.curCharges += 1;
+			updateQuickslot();
 			ScrollOfRecharging.charge((Hero)attacker);
 			wand.onHit(this, attacker, defender, damage);
 		}
