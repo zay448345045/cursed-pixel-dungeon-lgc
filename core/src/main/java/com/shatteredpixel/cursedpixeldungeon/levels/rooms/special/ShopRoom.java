@@ -47,6 +47,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.bombs.Bomb;
 import com.shatteredpixel.cursedpixeldungeon.items.food.SmallRation;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.Potion;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfHealing;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.LuckyBadge;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfWealth;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.Scroll;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfIdentify;
@@ -175,7 +176,7 @@ public class ShopRoom extends SpecialRoom {
 					new FishingSpear().quantity(2) :
 					new Shuriken().quantity(2));
 			itemsToSpawn.add( new LeatherArmor().identify() );
-			itemsToSpawn.add(new RingOfWealth().upgrade(10).identify());
+			itemsToSpawn.add(new LuckyBadge());
 			break;
 			
 		case 11:

@@ -40,7 +40,7 @@ public class LuckyBadge extends Power {
         return 820;
     }
     public boolean isUpgradable() {
-        return level() <= 19;
+        return false;
     }
     private float triesToDrop = Float.MIN_VALUE;
     private int dropsToRare = Integer.MIN_VALUE;
