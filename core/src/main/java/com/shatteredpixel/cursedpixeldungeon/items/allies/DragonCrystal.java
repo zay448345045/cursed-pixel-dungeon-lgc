@@ -427,8 +427,8 @@ public class DragonCrystal extends KindofMisc {
 
 		@Override
 		public int damageRoll() {
-			return Random.NormalIntRange(1 + Crystal.level(), 8 + Crystal.level() * 4);
-		}//base of 1-8 (Worn Shortsword), scales by 1-4 (Sword)
+			return Random.NormalIntRange(1 + Crystal.level(), 8 + Crystal.level() * 3);
+		}//base of 1-8 (Worn Shortsword), scales by 1-3 (Sword)
 
 		@Override
 		public int defenseSkill(Char enemy) {
@@ -437,8 +437,8 @@ public class DragonCrystal extends KindofMisc {
 
 		@Override
 		public int drRoll() {
-			return Random.NormalIntRange(1 + Crystal.level() * 2, 2 + Crystal.level() * 4);
-		}//base of 1-2 (Cloth Armour), scales by 2-4 (Scale Armour)
+			return Random.NormalIntRange(1 + Crystal.level() * 2, 2 + Crystal.level() * 5);
+		}//base of 1-2 (Cloth Armour), scales by 2-5 (Plate Armour)
 
 		@Override
 		public boolean interact() {

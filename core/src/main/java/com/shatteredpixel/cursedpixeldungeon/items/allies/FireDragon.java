@@ -47,7 +47,7 @@ public class FireDragon extends DragonCrystal {
         @Override
         public void add(Buff buff) {
             if (buff instanceof Frost || buff instanceof Chill) {
-                damage(Math.round(HP/5),this);//Damages for 10% of max HP when chilled/frozen
+                damage(Math.round(HP/5),this);//Damages for 20% of max HP when chilled/frozen
             } else {
                 super.add(buff);
             }
@@ -55,7 +55,7 @@ public class FireDragon extends DragonCrystal {
 
         @Override
         public int damageRoll() {
-            return Random.NormalIntRange(1 + Crystal.level(), 8 + Crystal.level() * 5);
+            return (int) (super.damageRoll()*1.3);
         }//base of 1-8 (Worn Shortsword), scales by 1-5 (Longsword). This is higher than the base value as Fire dragons should do extra damage (due to setting random fires)
 
 
