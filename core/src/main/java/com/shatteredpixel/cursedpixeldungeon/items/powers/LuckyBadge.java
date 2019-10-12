@@ -44,8 +44,8 @@ public class LuckyBadge extends Power {
     }
     private float triesToDrop = Float.MIN_VALUE;
     private int dropsToRare = Integer.MIN_VALUE;
-    private static float dropsToUpgrade = 30;
-    private static final float dropsIncreases = 15;
+    private static float dropsToUpgrade = 60;
+    private static final float dropsIncreases = 18;
 
     public static boolean latestDropWasRare = false;
 

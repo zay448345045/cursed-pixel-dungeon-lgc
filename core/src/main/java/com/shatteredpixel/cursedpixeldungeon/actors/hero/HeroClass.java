@@ -152,7 +152,6 @@ public enum HeroClass {
 		if (Badges.isUnlocked(Badges.Badge.BOSS_SLAIN_4)) {
 			new TomeOfMastery().collect();
 		}
-		new LuckyBadge().collect();
 	}
 
 	public Badges.Badge masteryBadge() {
