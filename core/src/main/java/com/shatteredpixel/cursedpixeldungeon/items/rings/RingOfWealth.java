@@ -49,22 +49,7 @@ import java.util.HashSet;
 public class RingOfWealth extends Ring {
 	@Override
 	public int price() {
-		int price = 75;
-		if (cursed && cursedKnown) {
-			price /= 2;
-		}
-		if (levelKnown) {
-			if (level() > 0) {
-				price *= (level() + 1);
-			} else if (level() < 0) {
-				price /= (1 - level());
-			}
-		}
-		if (price < 1) {
-			price = 1;
-		}
-		price = price/10;
-		return price;
+		return 820;
 	}
 	public boolean isUpgradable() {
 		return level() <= 19;

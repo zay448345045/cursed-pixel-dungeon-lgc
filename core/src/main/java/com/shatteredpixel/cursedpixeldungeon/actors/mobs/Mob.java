@@ -50,6 +50,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.Generator;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.DriedRose;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.TimekeepersHourglass;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.LuckyBadge;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.Ring;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfWealth;
 import com.shatteredpixel.cursedpixeldungeon.items.stones.StoneOfAggression;
@@ -667,6 +668,11 @@ public abstract class Mob extends Char {
 					new Flare(8, 24).color(0xFFFFFF, true).show(sprite, 3f);
 				}
 			}
+		}
+
+		Item luckybadgedrop = LuckyBadge.tryForBonusDrop(Dungeon.hero, 1);
+		if (luckybadgedrop != null) {
+			Dungeon.level.drop(luckybadgedrop, pos).sprite.drop();
 		}
 		
 		//lucky enchant logic

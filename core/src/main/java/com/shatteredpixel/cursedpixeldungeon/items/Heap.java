@@ -45,6 +45,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.food.MysteryMeat;
 import com.shatteredpixel.cursedpixeldungeon.items.journal.DocumentPage;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.Potion;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfStrength;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.LuckyBadge;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfWealth;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.Scroll;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfUpgrade;
@@ -150,6 +151,10 @@ public class Heap implements Bundlable {
 				} else {
 					new Flare(8, 24).color(0xFFFFFF, true).show(sprite, 2f);
 				}
+			}
+			Item luckybadgedrop = LuckyBadge.tryForBonusDrop(hero, 1);
+			if (luckybadgedrop != null) {
+				items.add(0, luckybadgedrop);
 			}
 			sprite.link();
 			sprite.drop();
