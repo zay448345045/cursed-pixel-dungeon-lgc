@@ -920,14 +920,19 @@ public class Hero extends Char {
 			
 			if (Dungeon.depth == 0) {
 				
-				if (belongings.getItem( Amulet.class ) == null && !(belongings.getItem(Amulet.class).WATER_IMBEDDED)) {
+				if (belongings.getItem( Amulet.class ) == null) {
 					GameScene.show( new WndMessage( Messages.get(this, "leave") ) );
 					ready();
 				} else {
-					Badges.silentValidateHappyEnd();
-					Dungeon.win( Amulet.class );
-					Dungeon.deleteGame( GamesInProgress.curSlot, true );
-					Game.switchScene( SurfaceScene.class );
+					if (belongings.getItem(Amulet.class).WATER_IMBEDDED) {
+						Badges.silentValidateHappyEnd();
+						Dungeon.win(Amulet.class);
+						Dungeon.deleteGame(GamesInProgress.curSlot, true);
+						Game.switchScene(SurfaceScene.class);
+					} else {
+						GameScene.show( new WndMessage( Messages.get(this, "leave") ) );
+						ready();
+					}
 				}
 				
 			} else {
