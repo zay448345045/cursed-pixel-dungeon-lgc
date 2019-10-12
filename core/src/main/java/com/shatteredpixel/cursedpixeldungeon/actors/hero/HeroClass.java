@@ -48,6 +48,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfLiquidFlame;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfMindVision;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfPurity;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfStrength;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.LuckyBadge;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfIdentify;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfLullaby;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfMagicMapping;
@@ -151,6 +152,7 @@ public enum HeroClass {
 		if (Badges.isUnlocked(Badges.Badge.BOSS_SLAIN_4)) {
 			new TomeOfMastery().collect();
 		}
+		new LuckyBadge().collect();
 	}
 
 	public Badges.Badge masteryBadge() {

@@ -354,7 +354,7 @@ public class ItemSpriteSheet {
 		assignItemRect(ARMOR_HUNTRESS,  13, 15);
 	}
 
-	                                                                                    //16 free slots
+	public static final int LUCKYBADGE = xy(1, 13);
 
 	private static final int WANDS              =                           xy(1, 14);  //16 slots
 	public static final int WAND_MAGIC_MISSILE  = WANDS+0;
