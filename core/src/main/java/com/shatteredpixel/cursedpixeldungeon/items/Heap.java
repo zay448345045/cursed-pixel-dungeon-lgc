@@ -153,7 +153,7 @@ public class Heap implements Bundlable {
 				}
 			}
 			Item luckybadgedrop = LuckyBadge.tryForBonusDrop(hero, 1);
-			if (luckybadgedrop != null) {
+			if (luckybadgedrop != null && Dungeon.hero.belongings.getItem(LuckyBadge.class) != null) {
 				items.add(0, luckybadgedrop);
 			}
 			sprite.link();

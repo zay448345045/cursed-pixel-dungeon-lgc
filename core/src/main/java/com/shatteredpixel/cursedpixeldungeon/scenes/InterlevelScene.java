@@ -337,7 +337,7 @@ public class InterlevelScene extends PixelScene {
 						}
 					});
 				} else {
-
+					Statistics.deepestFloor = 0;
 				}
 
 
