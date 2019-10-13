@@ -1,5 +1,6 @@
 package com.shatteredpixel.cursedpixeldungeon.items.allies;
 
+import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
@@ -31,7 +32,7 @@ public class PoisonDragon extends DragonCrystal {
 
         public int attackProc(Char enemy, int damage ) {
             damage = super.attackProc( enemy, damage );
-            Buff.affect( enemy, Poison.class ).set( this.HP / 5 );
+            Buff.affect( enemy, Poison.class ).set( 1 + Dungeon.depth / 6 );
 
             return damage;
 
