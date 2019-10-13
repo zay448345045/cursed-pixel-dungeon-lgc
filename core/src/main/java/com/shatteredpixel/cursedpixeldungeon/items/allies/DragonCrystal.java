@@ -341,18 +341,23 @@ public class DragonCrystal extends KindofMisc {
 
 			alignment = Alignment.ALLY;
 			
-			WANDERING = new Wandering();
+			//WANDERING = new Wandering();
 			
-			state = HUNTING;
+			state = FOLLOWING;
 			
 			//before other mobs
 			actPriority = MOB_PRIO + 1;
 			
 			properties.add(Property.UNDEAD);
 		}
-		
+
 		public DragonCrystal Crystal = null;
-		
+
+		@Override
+		public AiState defaultState() {
+			return FOLLOWING;
+		}
+
 		public Dragon(){
 			super();
 		}

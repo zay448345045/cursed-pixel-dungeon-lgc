@@ -93,6 +93,7 @@ public abstract class Mob extends Char {
 	public AiState WANDERING	= new Wandering();
 	public AiState FLEEING		= new Fleeing();
 	public AiState PASSIVE		= new Passive();
+	public AiState FOLLOWING    = new Following();
 	public AiState state = SLEEPING;
 	
 	public Class<? extends CharSprite> spriteClass;
@@ -117,7 +118,7 @@ public abstract class Mob extends Char {
 	public int missingHP() {
 		return this.HT - this.HP;
 	}
-
+	public AiState defaultState() {return WANDERING;}
 	@Override
 	public void storeInBundle( Bundle bundle ) {
 		
@@ -132,6 +133,8 @@ public abstract class Mob extends Char {
 		} else if (state == FLEEING) {
 			bundle.put( STATE, Fleeing.TAG );
 		} else if (state == PASSIVE) {
+			bundle.put( STATE, Passive.TAG );
+		} else if (state == FOLLOWING) {
 			bundle.put( STATE, Passive.TAG );
 		}
 		bundle.put( SEEN, enemySeen );
@@ -154,10 +157,11 @@ public abstract class Mob extends Char {
 			this.state = FLEEING;
 		} else if (state.equals( Passive.TAG )) {
 			this.state = PASSIVE;
+		} else if (state.equals( Following.TAG)) {
+			this.state = FOLLOWING;
 		}
 
 		enemySeen = bundle.getBoolean( SEEN );
-
 		target = bundle.getInt( TARGET );
 	}
 	
@@ -580,7 +584,7 @@ public abstract class Mob extends Char {
 	public void damage( int dmg, Object src ) {
 
 		if (state == SLEEPING) {
-			state = WANDERING;
+			state = defaultState();
 		}
 		if (state != HUNTING) {
 			alerted = true;
@@ -719,7 +723,7 @@ public abstract class Mob extends Char {
 		notice();
 		
 		if (state != HUNTING) {
-			state = WANDERING;
+			state = defaultState();
 		}
 		target = cell;
 	}
@@ -780,6 +784,44 @@ public abstract class Mob extends Char {
 		}
 	}
 
+	protected class Following extends Wandering implements AiState {
+
+		public static final String TAG	= "FOLLOWING";
+
+		@Override
+		public boolean act( boolean enemyInFOV, boolean justAlerted ) {
+			if ( enemyInFOV ) {
+
+				enemySeen = true;
+
+				notice();
+				alerted = true;
+				state = HUNTING;
+				target = enemy.pos;
+
+			} else {
+
+				enemySeen = false;
+
+				int oldPos = pos;
+				//always move towards the hero when wandering
+				if (getCloser( target = Dungeon.hero.pos )) {
+					//moves 2 tiles at a time when returning to the hero from a distance
+					if (!Dungeon.level.adjacent(Dungeon.hero.pos, pos)){
+						getCloser( target = Dungeon.hero.pos );
+					}
+					spend( 1 / speed() );
+					return moveSprite( oldPos, pos );
+				} else {
+					spend( TICK );
+				}
+
+			}
+			return true;
+		}
+
+	}
+
 	protected class Wandering implements AiState {
 
 		public static final String TAG	= "WANDERING";
@@ -837,7 +879,7 @@ public abstract class Mob extends Char {
 				if (enemyInFOV) {
 					target = enemy.pos;
 				} else if (enemy == null) {
-					state = WANDERING;
+					state = defaultState();
 					target = Dungeon.level.randomDestination();
 					return true;
 				}
@@ -852,7 +894,7 @@ public abstract class Mob extends Char {
 					spend( TICK );
 					if (!enemyInFOV) {
 						sprite.showLost();
-						state = WANDERING;
+						state = defaultState();
 						target = Dungeon.level.randomDestination();
 					}
 					return true;

@@ -136,7 +136,7 @@ public class Messages {
 				return get(c.getSuperclass(), k, args);
 			} else {
 				if (c != null) {
-					return "missed_string:" + c.getName() + k;
+					return "missed_string:"+c.getName().replace("com.shatteredpixel.cursedpixeldungeon.", "")+"."+k;
 				} else {
 					return "!!!NTF!!!";
 				}

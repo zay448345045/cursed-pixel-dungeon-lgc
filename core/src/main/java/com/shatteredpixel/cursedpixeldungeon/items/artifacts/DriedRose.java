@@ -393,8 +393,6 @@ public class DriedRose extends Artifact {
 
 			alignment = Alignment.ALLY;
 			
-			WANDERING = new Wandering();
-			
 			state = HUNTING;
 			
 			//before other mobs
@@ -404,7 +402,12 @@ public class DriedRose extends Artifact {
 		}
 		
 		private DriedRose rose = null;
-		
+
+		@Override
+		public AiState defaultState() {
+			return FOLLOWING;
+		}
+
 		public GhostHero(){
 			super();
 		}
