@@ -42,6 +42,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.SoulMark;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Terror;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Weakness;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
+import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroSubClass;
 import com.shatteredpixel.cursedpixeldungeon.effects.Flare;
 import com.shatteredpixel.cursedpixeldungeon.effects.Speck;
 import com.shatteredpixel.cursedpixeldungeon.effects.Surprise;
@@ -587,6 +588,11 @@ public abstract class Mob extends Char {
 		if (Dungeon.isChallenged(Challenges.EVIL_GAS)) {
 			int amount = Math.min( (int) (50*((float)dmg/(float)HT)), 50);
 			GameScene.add(Blob.seed(this.pos, amount, EvilGas.class).setStrength(1+Dungeon.depth/4));
+		}
+		if (Alignment.ALLY == this.alignment && Dungeon.hero.subClass == HeroSubClass.NECROMACER) {//Necromancers heal 33% of damage done to allies
+			int restoration = Math.min(dmg, HP);
+			Dungeon.hero.HP = (int)Math.ceil(Math.min(Dungeon.hero.HT, Dungeon.hero.HP+(restoration*0.33f)));
+			Dungeon.hero.sprite.emitter().burst( Speck.factory(Speck.HEALING), 1 );
 		}
 		super.damage( dmg, src );
 	}
