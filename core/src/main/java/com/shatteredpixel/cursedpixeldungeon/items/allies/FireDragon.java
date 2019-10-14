@@ -9,8 +9,10 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Chill;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Frost;
 import com.shatteredpixel.cursedpixeldungeon.effects.Pushing;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
+import com.shatteredpixel.cursedpixeldungeon.sprites.DragonSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
+import com.shatteredpixel.cursedpixeldungeon.sprites.PoisonDragonSprite;
 import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.utils.Random;
 
@@ -29,6 +31,7 @@ public class FireDragon extends DragonCrystal {
         {
             properties.add(Property.FIERY);
             immunities.add(Fire.class);//immune to fire because it's... well... fiery?
+            spriteClass = DragonSprite.class;
         }
 
         @Override
