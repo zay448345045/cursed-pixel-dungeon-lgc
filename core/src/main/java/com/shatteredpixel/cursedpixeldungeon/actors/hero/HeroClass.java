@@ -60,6 +60,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfMagicMissile;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfWarding;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.SpiritBow;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Dagger;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Dirk;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Gloves;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.InscribedKnife;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MagesStaff;
@@ -225,7 +226,7 @@ public enum HeroClass {
 	}
 
 	private static void initRogue( Hero hero ) {
-		(hero.belongings.weapon = new Dagger()).identify().upgrade(2);
+		(hero.belongings.weapon = new Dirk()).identify().upgrade();
 
 		CloakOfShadows cloak = new CloakOfShadows();
 		(hero.belongings.misc1 = cloak).identify();
