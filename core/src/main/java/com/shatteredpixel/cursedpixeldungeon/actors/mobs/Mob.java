@@ -158,7 +158,7 @@ public abstract class Mob extends Char {
 		} else if (state.equals( Passive.TAG )) {
 			this.state = PASSIVE;
 		} else if (state.equals( Following.TAG)) {
-			this.state = FOLLOWING;
+			this.state = HUNTING;
 		}
 
 		enemySeen = bundle.getBoolean( SEEN );
