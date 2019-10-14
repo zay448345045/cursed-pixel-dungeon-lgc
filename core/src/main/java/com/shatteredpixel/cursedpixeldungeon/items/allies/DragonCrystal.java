@@ -68,6 +68,11 @@ public class DragonCrystal extends KindofMisc {
 	}
 
 	@Override
+	public int price() {
+		return 75*level();
+	}
+
+	@Override
 	public boolean isUpgradable() {
 		if (Dungeon.hero.heroClass == HeroClass.PRIESTESS) {//Priestess can upgrade this more
 			UpgradeLimit = 20;
