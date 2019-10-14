@@ -969,7 +969,7 @@ public abstract class Mob extends Char {
 
 			for (Mob ally : heldAllies) {
 				level.mobs.add(ally);
-				ally.state = ally.WANDERING;
+				ally.state = ally.HUNTING;
 
 				if (!candidatePositions.isEmpty()){
 					ally.pos = candidatePositions.remove(0);
