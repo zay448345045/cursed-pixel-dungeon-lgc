@@ -346,7 +346,7 @@ public class DragonCrystal extends KindofMisc {
 
 			alignment = Alignment.ALLY;
 			
-			//WANDERING = new Wandering();
+			WANDERING = new Wandering();
 			
 			state = FOLLOWING;
 			
@@ -357,11 +357,6 @@ public class DragonCrystal extends KindofMisc {
 		}
 
 		public DragonCrystal Crystal = null;
-
-		@Override
-		public AiState defaultState() {
-			return FOLLOWING;
-		}
 
 		public Dragon(){
 			super();
