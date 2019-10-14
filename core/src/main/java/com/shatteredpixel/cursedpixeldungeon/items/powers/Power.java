@@ -8,6 +8,8 @@ import java.util.ArrayList;
 public abstract class Power extends Item {
     {
         cursed = false;
+        bones = false;
+        unique = true;
     }
 
     @Override
