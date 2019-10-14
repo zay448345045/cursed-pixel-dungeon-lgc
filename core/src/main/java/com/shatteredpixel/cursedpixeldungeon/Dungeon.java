@@ -90,6 +90,7 @@ public class Dungeon {
 		UPGRADE_SCROLLS,
 		ARCANE_STYLI,
 		REPAIR_STONE,
+		ALCHEMISTS_TOOLKIT,
 
 		//Health potion sources
 		//enemies
