@@ -31,8 +31,8 @@ public class PoisonDragon extends DragonCrystal {
         }
 
         public int attackProc(Char enemy, int damage ) {
-            damage = super.attackProc( enemy, damage );
-            Buff.affect( enemy, Poison.class ).set( 1 + Dungeon.depth / 6 );
+            damage = (int)(super.attackProc( enemy, damage )*0.75f);
+            Buff.affect( enemy, Poison.class ).set( 2 + Dungeon.depth / 6 );
 
             return damage;
 
@@ -49,6 +49,10 @@ public class PoisonDragon extends DragonCrystal {
             return super.defenseProc(enemy, damage);
         }
 
+        @Override
+        public int drRoll() {
+            return (int)(super.drRoll()*0.75);
+        }
     }
 
 }
