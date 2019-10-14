@@ -113,7 +113,7 @@ public class SewerLevel extends RegularLevel {
 			Dungeon.LimitedDrops.DEW_VIAL.drop();
 		}
 		if (!Dungeon.LimitedDrops.ALCHEMISTS_TOOLKIT.dropped()) {
-			addItemToSpawn( new AlchemistsToolkit());
+			//addItemToSpawn( new AlchemistsToolkit());
 			Dungeon.LimitedDrops.ALCHEMISTS_TOOLKIT.drop();
 		}
 

@@ -34,6 +34,7 @@ import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
 import com.shatteredpixel.cursedpixeldungeon.windows.WndBag;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Bundle;
+import com.watabou.utils.GameMath;
 
 import java.util.ArrayList;
 
@@ -48,6 +49,8 @@ public class AlchemistsToolkit extends Power {
 	int charge = 0;
 	float partialCharge = 0;
 	int chargeCap = 100;
+
+	int exp = 0;
 
 	public static final String AC_BREW = "BREW";
 	
@@ -112,6 +115,30 @@ public class AlchemistsToolkit extends Power {
 	public void restoreFromBundle(Bundle bundle) {
 		super.restoreFromBundle(bundle);
 	}
+
+	@Override
+	public String status() {
+
+		//if the artifact isn't IDed, or is cursed, don't display anything
+		if (!isIdentified() || cursed){
+			return null;
+		}
+		//display as percent
+		if (chargeCap == 100)
+			return Messages.format( "%d%%", charge );
+
+		//display as #/#
+		if (chargeCap > 0)
+			return Messages.format( "%d/%d", charge, chargeCap );
+
+		//if there's no cap -
+		//- but there is charge anyway, display that charge
+		if (charge != 0)
+			return Messages.format( "%d", charge );
+
+		//otherwise, if there's no charge, return null.
+		return null;
+	}
 	
 	public class Energy extends Buff implements AlchemyScene.AlchemyProvider {
 
@@ -123,30 +150,33 @@ public class AlchemistsToolkit extends Power {
 			return cursed;
 		}
 
-		@Override
-		public boolean act() {
+		public void gainCharge(float levelPortion) {
 
-			spend( TICK );
+			if (cursed) return;
 
-			LockedFloor lock = target.buff(LockedFloor.class);
-			if (charge < chargeCap && !cursed && (lock == null || lock.regenOn())) {
-				partialCharge += 0.1;
+			if (charge < chargeCap) {
 
-				if (partialCharge >= 1) {
-					partialCharge --;
-					charge ++;
+				//generates 2 energy every hero level, +0.1 energy per toolkit level
+				//to a max of 12 energy per hero level
+				//This means that energy absorbed into the kit is recovered in 6.67 hero levels (as 33% of input energy is kept)
+				//exp towards toolkit levels is included here
+				float effectiveLevel = GameMath.gate(0, level() + exp/10f, 10);
+				partialCharge += (2 + (1f * effectiveLevel)) * levelPortion;
+
+				//charge is in increments of 1/10 max hunger value.
+				while (partialCharge >= 1) {
+					charge++;
+					partialCharge -= 1;
 
 					if (charge == chargeCap){
+						GLog.p( Messages.get(com.shatteredpixel.cursedpixeldungeon.items.artifacts.AlchemistsToolkit.class, "full") );
 						partialCharge = 0;
 					}
+
+					updateQuickslot();
 				}
-			}
-
-			updateQuickslot();
-
-			spend( TICK );
-
-			return true;
+			} else
+				partialCharge = 0;
 		}
 		
 		@Override
@@ -163,7 +193,6 @@ public class AlchemistsToolkit extends Power {
 	@Override
 	public boolean doPickUp(Hero hero) {
 		if (super.doPickUp(hero)){
-			GLog.n( Messages.get( this, "chill") );
 			Buff.affect(hero, Energy.class);
 			return true;
 		}
@@ -174,7 +203,7 @@ public class AlchemistsToolkit extends Power {
 	protected void onDetach() {
 		Energy spawner = Dungeon.hero.buff(Energy.class);
 		if (spawner != null){
-			Buff.detach(spawner);
+			spawner.detach();
 		}
 	}
 
