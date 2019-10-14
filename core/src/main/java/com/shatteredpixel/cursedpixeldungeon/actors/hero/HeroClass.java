@@ -150,9 +150,7 @@ public enum HeroClass {
 			new PotionOfPurity().quantity(3).collect();
 		}
 
-		if (Badges.isUnlocked(Badges.Badge.BOSS_SLAIN_4)) {
-			new TomeOfMastery().collect();
-		}
+
 	}
 
 	public Badges.Badge masteryBadge() {
@@ -180,6 +178,9 @@ public enum HeroClass {
 		Dungeon.quickslot.setSlot(0,hero.belongings.misc1);
 		new PotionOfHealing().identify();
 		new ScrollOfMirrorImage().identify();
+		if (Badges.isUnlocked(Badges.Badge.VICTORY_PRIESTESS)) {
+			new TomeOfMastery().collect();
+		}
 	}
 
 	private static void initWarrior( Hero hero ) {
@@ -197,6 +198,9 @@ public enum HeroClass {
 		
 		new PotionOfStrength().identify();
 		new ScrollOfRage().identify();
+		if (Badges.isUnlocked(Badges.Badge.VICTORY_WARRIOR)) {
+			new TomeOfMastery().collect();
+		}
 	}
 
 	private static void initMage( Hero hero ) {
@@ -223,6 +227,9 @@ public enum HeroClass {
 		
 		new ScrollOfUpgrade().identify();
 		new PotionOfLiquidFlame().identify();
+		if (Badges.isUnlocked(Badges.Badge.VICTORY_MAGE)) {
+			new TomeOfMastery().collect();
+		}
 	}
 
 	private static void initRogue( Hero hero ) {
@@ -242,6 +249,9 @@ public enum HeroClass {
 		
 		new ScrollOfMagicMapping().identify();
 		new PotionOfInvisibility().identify();
+		if (Badges.isUnlocked(Badges.Badge.VICTORY_ROGUE)) {
+			new TomeOfMastery().collect();
+		}
 	}
 
 	private static void initHuntress( Hero hero ) {
@@ -257,6 +267,9 @@ public enum HeroClass {
 		
 		new PotionOfMindVision().identify();
 		new ScrollOfLullaby().identify();
+		if (Badges.isUnlocked(Badges.Badge.VICTORY_HUNTRESS)) {
+			new TomeOfMastery().collect();
+		}
 	}
 	
 	public String title() {

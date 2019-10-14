@@ -180,7 +180,6 @@ public class SewerGolem extends Mob implements Callback  {
         Dungeon.level.unseal();
 
         GameScene.bossSlain();
-
         //60% chance of 2 blobs, 30% chance of 3, 10% chance for 4. Average of 2.5
         int blobs = Random.chances(new float[]{0, 0, 6, 3, 1});
         for (int i = 0; i < blobs; i++){
