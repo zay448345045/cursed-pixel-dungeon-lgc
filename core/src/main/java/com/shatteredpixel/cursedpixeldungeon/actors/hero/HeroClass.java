@@ -145,7 +145,7 @@ public enum HeroClass {
 		new MagicalHolster().collect();
 		Dungeon.LimitedDrops.MAGICAL_HOLSTER.drop();
 
-		new PowerHolder().collect();
+		//new PowerHolder().collect();
 
 		if (!Dungeon.isChallenged(Challenges.NO_HEALING)) {
 			new PotionOfHealing().quantity(3).collect();
