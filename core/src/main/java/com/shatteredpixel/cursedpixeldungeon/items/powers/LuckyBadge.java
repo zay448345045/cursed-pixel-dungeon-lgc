@@ -178,7 +178,7 @@ public class LuckyBadge extends Power {
             } while (scroll == null || ((scroll instanceof ScrollOfEnchantment) & !Dungeon.isChallenged(Challenges.NO_SCROLLS)));
             return scroll;
         } else { //50% chance
-            return Random.Int(2) == 0 ? new ArcaneCatalyst() : new AlchemicalCatalyst();
+            return Random.Int(2) == 0 ? new SmallRation() : new MysteryMeat();
         }
     }
 
