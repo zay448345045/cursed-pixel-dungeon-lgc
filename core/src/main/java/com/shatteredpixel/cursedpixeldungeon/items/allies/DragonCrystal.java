@@ -240,8 +240,6 @@ public class DragonCrystal extends KindofMisc {
 		@Override
 		public boolean act() {
 
-            spend( TICK );
-
             if (Dragon == null && DragonID != 0){
                 Actor a = Actor.findById(DragonID);
                 if (a != null){

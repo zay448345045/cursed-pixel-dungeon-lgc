@@ -22,11 +22,13 @@
 package com.shatteredpixel.cursedpixeldungeon.items.powers;
 
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
+import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.LockedFloor;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.Recipe;
+import com.shatteredpixel.cursedpixeldungeon.items.allies.DragonCrystal;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.AlchemyScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
@@ -46,9 +48,7 @@ public class AlchemistsToolkit extends Power {
 	}
 
 
-	int charge = 0;
-	float partialCharge = 0;
-	int chargeCap = 100;
+
 
 	int exp = 0;
 
@@ -80,8 +80,8 @@ public class AlchemistsToolkit extends Power {
 			
 		}
 	}
-
-	protected Energy passiveBuff() {
+	@Override
+	protected PowerBuff passiveBuff() {
 		return new Energy();
 	}
 
@@ -140,7 +140,7 @@ public class AlchemistsToolkit extends Power {
 		return null;
 	}
 	
-	public class Energy extends Buff implements AlchemyScene.AlchemyProvider {
+	public class Energy extends PowerBuff implements AlchemyScene.AlchemyProvider {
 
 		public int itemLevel() {
 			return level();
@@ -148,6 +148,32 @@ public class AlchemistsToolkit extends Power {
 
 		public boolean isCursed() {
 			return cursed;
+		}
+
+		@Override
+		public boolean act() {
+
+			spend( TICK );
+
+			LockedFloor lock = target.buff(LockedFloor.class);
+			if (charge < chargeCap && !cursed && (lock == null || lock.regenOn())) {
+				partialCharge += 0.1;
+
+				if (partialCharge >= 1) {
+					partialCharge --;
+					charge ++;
+
+					if (charge == chargeCap){
+						partialCharge = 0;
+					}
+				}
+			}
+
+			updateQuickslot();
+
+			spend( TICK );
+
+			return true;
 		}
 
 		public void gainCharge(float levelPortion) {
@@ -187,23 +213,6 @@ public class AlchemistsToolkit extends Power {
 		@Override
 		public void spendEnergy(int reduction) {
 			charge = Math.max(0, charge - reduction);
-		}
-	}
-
-	@Override
-	public boolean doPickUp(Hero hero) {
-		if (super.doPickUp(hero)){
-			Buff.affect(hero, Energy.class);
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	protected void onDetach() {
-		Energy spawner = Dungeon.hero.buff(Energy.class);
-		if (spawner != null){
-			spawner.detach();
 		}
 	}
 

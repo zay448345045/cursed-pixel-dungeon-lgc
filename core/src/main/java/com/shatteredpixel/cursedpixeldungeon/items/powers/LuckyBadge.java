@@ -49,23 +49,6 @@ public class LuckyBadge extends Power {
 
     public static boolean latestDropWasRare = false;
 
-    @Override
-    public boolean doPickUp(Hero hero) {
-        if (super.doPickUp(hero)){
-            Buff.affect(hero, LuckyBuff.class);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    protected void onDetach() {
-        LuckyBuff spawner = Dungeon.hero.buff(LuckyBuff.class);
-        if (spawner != null) {
-            Buff.detach(spawner);
-        }
-
-    }
 
     @Override
     public String desc() {
@@ -107,8 +90,9 @@ public class LuckyBadge extends Power {
         dropsToUpgrade = bundle.getInt(DROPS_TO_UPGRADE);
     }
 
-    protected LuckyBuff buff( ) {
-        return new LuckyBadge.LuckyBuff();
+    @Override
+    protected PowerBuff passiveBuff() {
+        return new LuckyBuff();
     }
 
     public static Item tryForBonusDrop(Char target, int tries ){
@@ -118,9 +102,6 @@ public class LuckyBadge extends Power {
             return null;
         }
         //find the largest count (if they aren't synced yet)
-        for (LuckyBadge.LuckyBuff l : buffs){
-
-        }
 
 
         //now handle reward logic
@@ -260,7 +241,7 @@ public class LuckyBadge extends Power {
         }
     }
 
-    class LuckyBuff extends Buff {
+    class LuckyBuff extends PowerBuff {
 
     }
 }
