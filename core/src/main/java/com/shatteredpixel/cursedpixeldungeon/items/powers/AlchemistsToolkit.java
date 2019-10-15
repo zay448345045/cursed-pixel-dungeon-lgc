@@ -140,79 +140,60 @@ public class AlchemistsToolkit extends Power {
 		return null;
 	}
 	
-	public class Energy extends PowerBuff implements AlchemyScene.AlchemyProvider {
-
-		public int itemLevel() {
-			return level();
-		}
-
-		public boolean isCursed() {
-			return cursed;
-		}
+	public static class Energy extends PowerBuff implements AlchemyScene.AlchemyProvider {
 
 		@Override
 		public boolean act() {
+			if (Dungeon.hero != null) {
+				AlchemistsToolkit Toolkit = Dungeon.hero.belongings.getItem(AlchemistsToolkit.class);
+				if (Toolkit != null) {
+					spend(TICK);
 
-			spend( TICK );
+					LockedFloor lock = target.buff(LockedFloor.class);
+					if (Toolkit.charge < Toolkit.chargeCap && !Toolkit.cursed && (lock == null || lock.regenOn())) {
+						Toolkit.partialCharge += 0.1;
 
-			LockedFloor lock = target.buff(LockedFloor.class);
-			if (charge < chargeCap && !cursed && (lock == null || lock.regenOn())) {
-				partialCharge += 0.1;
+						if (Toolkit.partialCharge >= 1) {
+							Toolkit.partialCharge--;
+							Toolkit.charge++;
 
-				if (partialCharge >= 1) {
-					partialCharge --;
-					charge ++;
-
-					if (charge == chargeCap){
-						partialCharge = 0;
-					}
-				}
-			}
-
-			updateQuickslot();
-
-			spend( TICK );
-
-			return true;
-		}
-
-		public void gainCharge(float levelPortion) {
-
-			if (cursed) return;
-
-			if (charge < chargeCap) {
-
-				//generates 2 energy every hero level, +0.1 energy per toolkit level
-				//to a max of 12 energy per hero level
-				//This means that energy absorbed into the kit is recovered in 6.67 hero levels (as 33% of input energy is kept)
-				//exp towards toolkit levels is included here
-				float effectiveLevel = GameMath.gate(0, level() + exp/10f, 10);
-				partialCharge += (2 + (1f * effectiveLevel)) * levelPortion;
-
-				//charge is in increments of 1/10 max hunger value.
-				while (partialCharge >= 1) {
-					charge++;
-					partialCharge -= 1;
-
-					if (charge == chargeCap){
-						GLog.p( Messages.get(com.shatteredpixel.cursedpixeldungeon.items.artifacts.AlchemistsToolkit.class, "full") );
-						partialCharge = 0;
+							if (Toolkit.charge == Toolkit.chargeCap) {
+								Toolkit.partialCharge = 0;
+							}
+						}
 					}
 
 					updateQuickslot();
 				}
-			} else
-				partialCharge = 0;
+			}
+
+			return true;
 		}
 		
 		@Override
 		public int getEnergy() {
-			return charge;
+			if (Dungeon.hero != null) {
+				AlchemistsToolkit Toolkit = Dungeon.hero.belongings.getItem(AlchemistsToolkit.class);
+				if (Toolkit != null) {
+					return Toolkit.charge;
+
+				} else {
+					return 0;
+				}
+			} else {
+				return 0;
+			}
 		}
-		
+
 		@Override
 		public void spendEnergy(int reduction) {
-			charge = Math.max(0, charge - reduction);
+			if (Dungeon.hero != null) {
+				AlchemistsToolkit Toolkit = Dungeon.hero.belongings.getItem(AlchemistsToolkit.class);
+				if (Toolkit != null) {
+					Toolkit.charge = Math.max(0, Toolkit.charge - reduction);
+
+				}
+			}
 		}
 	}
 
