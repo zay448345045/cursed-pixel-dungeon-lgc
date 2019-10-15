@@ -28,7 +28,7 @@ import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 public class FoodHolder extends Bag {
 
     {
-        image = ItemSpriteSheet.POUCH;
+        image = ItemSpriteSheet.FOODBAG;
 
         size = 35;
     }

@@ -38,6 +38,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.artifacts.CloakOfShadows;
 import com.shatteredpixel.cursedpixeldungeon.items.bags.FoodHolder;
 import com.shatteredpixel.cursedpixeldungeon.items.bags.MagicalHolster;
 import com.shatteredpixel.cursedpixeldungeon.items.bags.PotionBandolier;
+import com.shatteredpixel.cursedpixeldungeon.items.bags.PowerHolder;
 import com.shatteredpixel.cursedpixeldungeon.items.bags.ScrollHolder;
 import com.shatteredpixel.cursedpixeldungeon.items.bags.VelvetPouch;
 import com.shatteredpixel.cursedpixeldungeon.items.food.Food;
@@ -143,6 +144,8 @@ public enum HeroClass {
 
 		new MagicalHolster().collect();
 		Dungeon.LimitedDrops.MAGICAL_HOLSTER.drop();
+
+		new PowerHolder().collect();
 
 		if (!Dungeon.isChallenged(Challenges.NO_HEALING)) {
 			new PotionOfHealing().quantity(3).collect();

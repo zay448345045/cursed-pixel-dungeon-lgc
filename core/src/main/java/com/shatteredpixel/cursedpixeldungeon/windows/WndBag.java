@@ -36,6 +36,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.bags.Bag;
 import com.shatteredpixel.cursedpixeldungeon.items.bags.FoodHolder;
 import com.shatteredpixel.cursedpixeldungeon.items.bags.MagicalHolster;
 import com.shatteredpixel.cursedpixeldungeon.items.bags.PotionBandolier;
+import com.shatteredpixel.cursedpixeldungeon.items.bags.PowerHolder;
 import com.shatteredpixel.cursedpixeldungeon.items.bags.ScrollHolder;
 import com.shatteredpixel.cursedpixeldungeon.items.bags.VelvetPouch;
 import com.shatteredpixel.cursedpixeldungeon.items.food.Food;
@@ -155,7 +156,8 @@ public class WndBag extends WndTabbed {
 			stuff.getItem( ScrollHolder.class ),
 			stuff.getItem( PotionBandolier.class ),
 			stuff.getItem( FoodHolder.class ),
-			stuff.getItem( MagicalHolster.class )};
+			stuff.getItem( MagicalHolster.class ),
+			stuff.getItem( PowerHolder.class )};
 
 		for (Bag b : bags) {
 			if (b != null) {
@@ -290,11 +292,13 @@ public class WndBag extends WndTabbed {
 		} else if (bag instanceof ScrollHolder) {
 			return Icons.get(Icons.SCROLL_HOLDER);
 		} else if (bag instanceof FoodHolder) {
-				return Icons.get( Icons.SEED_POUCH );
+			return Icons.get( Icons.SEED_POUCH );
 		} else if (bag instanceof MagicalHolster) {
 			return Icons.get( Icons.WAND_HOLSTER );
 		} else if (bag instanceof PotionBandolier) {
-			return Icons.get( Icons.POTION_BANDOLIER );
+			return Icons.get(Icons.POTION_BANDOLIER);
+		} else if (bag instanceof PowerHolder ) {
+			return Icons.get( Icons.BACKPACK );
 		} else {
 			return Icons.get( Icons.BACKPACK );
 		}
