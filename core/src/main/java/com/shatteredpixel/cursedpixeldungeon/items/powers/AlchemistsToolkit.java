@@ -80,10 +80,6 @@ public class AlchemistsToolkit extends Power {
 			
 		}
 	}
-	@Override
-	protected PowerBuff passiveBuff() {
-		return new Energy();
-	}
 
 	public void charge(Hero target) {
 		if (charge < chargeCap){
@@ -139,61 +135,22 @@ public class AlchemistsToolkit extends Power {
 		//otherwise, if there's no charge, return null.
 		return null;
 	}
-	
-	public static class Energy extends PowerBuff implements AlchemyScene.AlchemyProvider {
 
-		@Override
-		public boolean act() {
-			if (Dungeon.hero != null) {
-				AlchemistsToolkit Toolkit = Dungeon.hero.belongings.getItem(AlchemistsToolkit.class);
-				if (Toolkit != null) {
-					spend(TICK);
+	@Override
+	public void onHeroGainExp(float levelPercent, Hero hero) {
+		this.charge += 1;
+		this.charge = Math.min(this.charge,this.chargeCap);
+	}
 
-					LockedFloor lock = target.buff(LockedFloor.class);
-					if (Toolkit.charge < Toolkit.chargeCap && !Toolkit.cursed && (lock == null || lock.regenOn())) {
-						Toolkit.partialCharge += 0.1;
-
-						if (Toolkit.partialCharge >= 1) {
-							Toolkit.partialCharge--;
-							Toolkit.charge++;
-
-							if (Toolkit.charge == Toolkit.chargeCap) {
-								Toolkit.partialCharge = 0;
-							}
-						}
-					}
-
-					updateQuickslot();
-				}
-			}
-
-			return true;
-		}
-		
+	public class Energy extends Buff implements AlchemyScene.AlchemyProvider {
 		@Override
 		public int getEnergy() {
-			if (Dungeon.hero != null) {
-				AlchemistsToolkit Toolkit = Dungeon.hero.belongings.getItem(AlchemistsToolkit.class);
-				if (Toolkit != null) {
-					return Toolkit.charge;
-
-				} else {
-					return 0;
-				}
-			} else {
-				return 0;
-			}
+			return charge;
 		}
 
 		@Override
 		public void spendEnergy(int reduction) {
-			if (Dungeon.hero != null) {
-				AlchemistsToolkit Toolkit = Dungeon.hero.belongings.getItem(AlchemistsToolkit.class);
-				if (Toolkit != null) {
-					Toolkit.charge = Math.max(0, Toolkit.charge - reduction);
-
-				}
-			}
+			charge = Math.max(0, charge - reduction);
 		}
 	}
 
