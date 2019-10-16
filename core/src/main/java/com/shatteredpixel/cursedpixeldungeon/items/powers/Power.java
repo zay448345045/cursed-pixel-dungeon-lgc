@@ -12,7 +12,6 @@ public abstract class Power extends Item {
     {
         cursed = false;
         cursedKnown = true;
-
         unique = true;
     }
     int charge = 0;

@@ -21,14 +21,8 @@
 
 package com.shatteredpixel.cursedpixeldungeon.items.powers;
 
-import com.shatteredpixel.cursedpixeldungeon.Dungeon;
-import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
-import com.shatteredpixel.cursedpixeldungeon.actors.buffs.LockedFloor;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
-import com.shatteredpixel.cursedpixeldungeon.items.Item;
-import com.shatteredpixel.cursedpixeldungeon.items.Recipe;
-import com.shatteredpixel.cursedpixeldungeon.items.allies.DragonCrystal;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.AlchemyScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
@@ -36,11 +30,10 @@ import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
 import com.shatteredpixel.cursedpixeldungeon.windows.WndBag;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Bundle;
-import com.watabou.utils.GameMath;
 
 import java.util.ArrayList;
 
-public class AlchemistsToolkit extends Power {
+public class Alchemy extends Power {
 
 	{
 		image = ItemSpriteSheet.ARTIFACT_TOOLKIT;
@@ -136,9 +129,9 @@ public class AlchemistsToolkit extends Power {
 	}
 
 	public class Energy extends Buff implements AlchemyScene.AlchemyProvider {
-		AlchemistsToolkit Toolkit = null;
+		Alchemy Toolkit = null;
 
-		public void setToolkit(AlchemistsToolkit toolkit) {
+		public void setToolkit(Alchemy toolkit) {
 			Toolkit = toolkit;
 		}
 

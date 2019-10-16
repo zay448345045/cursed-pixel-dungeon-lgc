@@ -25,10 +25,8 @@ import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.npcs.Ghost;
 import com.shatteredpixel.cursedpixeldungeon.effects.Ripple;
-import com.shatteredpixel.cursedpixeldungeon.items.Amulet;
 import com.shatteredpixel.cursedpixeldungeon.items.DewVial;
-import com.shatteredpixel.cursedpixeldungeon.items.powers.AlchemistsToolkit;
-import com.shatteredpixel.cursedpixeldungeon.items.powers.LuckyBadge;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.Alchemy;
 import com.shatteredpixel.cursedpixeldungeon.levels.painters.Painter;
 import com.shatteredpixel.cursedpixeldungeon.levels.painters.SewerPainter;
 import com.shatteredpixel.cursedpixeldungeon.levels.traps.AlarmTrap;
@@ -114,7 +112,7 @@ public class SewerLevel extends RegularLevel {
 			Dungeon.LimitedDrops.DEW_VIAL.drop();
 		}
 		if (!Dungeon.LimitedDrops.ALCHEMISTS_TOOLKIT.dropped()) {
-			addItemToSpawn( new AlchemistsToolkit());
+			addItemToSpawn( new Alchemy());
 			Dungeon.LimitedDrops.ALCHEMISTS_TOOLKIT.drop();
 		}
 

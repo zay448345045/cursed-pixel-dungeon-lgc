@@ -41,6 +41,8 @@ import com.shatteredpixel.cursedpixeldungeon.items.potions.elixirs.ElixirOfIcyTo
 import com.shatteredpixel.cursedpixeldungeon.items.potions.elixirs.ElixirOfMight;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.elixirs.ElixirOfToxicEssence;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.exotic.ExoticPotion;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.Alchemy;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.Power;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.Scroll;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.exotic.ExoticScroll;
 import com.shatteredpixel.cursedpixeldungeon.items.spells.Alchemize;
@@ -55,7 +57,6 @@ import com.shatteredpixel.cursedpixeldungeon.items.spells.PhaseShift;
 import com.shatteredpixel.cursedpixeldungeon.items.spells.ReclaimTrap;
 import com.shatteredpixel.cursedpixeldungeon.items.spells.Recycle;
 import com.shatteredpixel.cursedpixeldungeon.items.spells.WildEnergy;
-import com.shatteredpixel.cursedpixeldungeon.items.wands.Wand;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.darts.Dart;
 
 import java.util.ArrayList;
@@ -244,7 +245,7 @@ public abstract class Recipe {
 	public static boolean usableInRecipe(Item item){
 		return !item.cursed
 				&& (!(item instanceof EquipableItem) || item instanceof Dart || item instanceof AlchemistsToolkit)
-				&& !(item instanceof Wand);
+				&& !(item instanceof Power);
 	}
 }
 
