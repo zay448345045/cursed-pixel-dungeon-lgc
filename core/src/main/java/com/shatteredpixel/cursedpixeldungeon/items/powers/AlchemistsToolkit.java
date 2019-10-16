@@ -140,6 +140,7 @@ public class AlchemistsToolkit extends Power {
 	public void onHeroGainExp(float levelPercent, Hero hero) {
 		this.charge += 1;
 		this.charge = Math.min(this.charge,this.chargeCap);
+		updateQuickslot();
 	}
 
 	public class Energy extends Buff implements AlchemyScene.AlchemyProvider {
