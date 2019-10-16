@@ -34,7 +34,7 @@ public class WndInfoMob extends WndTitledMessage {
 	
 	public WndInfoMob( Mob mob ) {
 		
-		super( new MobTitle( mob ), mob.description() );
+		super( new MobTitle( mob ), mob.description()  );
 		
 	}
 	
