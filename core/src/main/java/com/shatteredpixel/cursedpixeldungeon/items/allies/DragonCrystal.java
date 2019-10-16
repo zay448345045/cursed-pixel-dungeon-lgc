@@ -345,9 +345,9 @@ public class DragonCrystal extends KindofMisc {
 
 			alignment = Alignment.ALLY;
 			
-			WANDERING = new Wandering();
+			WANDERING = new Following();
 			
-			state = FOLLOWING;
+			state = HUNTING;
 			
 			//before other mobs
 			actPriority = MOB_PRIO + 1;

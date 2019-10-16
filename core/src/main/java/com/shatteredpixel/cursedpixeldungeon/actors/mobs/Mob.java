@@ -93,7 +93,6 @@ public abstract class Mob extends Char {
 	public AiState WANDERING	= new Wandering();
 	public AiState FLEEING		= new Fleeing();
 	public AiState PASSIVE		= new Passive();
-	public AiState FOLLOWING    = new Following();
 	public AiState state = SLEEPING;
 	
 	public Class<? extends CharSprite> spriteClass;
@@ -134,8 +133,6 @@ public abstract class Mob extends Char {
 			bundle.put( STATE, Fleeing.TAG );
 		} else if (state == PASSIVE) {
 			bundle.put( STATE, Passive.TAG );
-		} else if (state == FOLLOWING) {
-			bundle.put( STATE, Passive.TAG );
 		}
 		bundle.put( SEEN, enemySeen );
 		bundle.put( TARGET, target );
@@ -157,8 +154,6 @@ public abstract class Mob extends Char {
 			this.state = FLEEING;
 		} else if (state.equals( Passive.TAG )) {
 			this.state = PASSIVE;
-		} else if (state.equals( Following.TAG)) {
-			this.state = HUNTING;
 		}
 
 		enemySeen = bundle.getBoolean( SEEN );
@@ -784,9 +779,8 @@ public abstract class Mob extends Char {
 		}
 	}
 
-	protected class Following extends Wandering implements AiState {
 
-		public static final String TAG	= "FOLLOWING";
+	public class Following extends Wandering implements AiState {
 
 		@Override
 		public boolean act( boolean enemyInFOV, boolean justAlerted ) {
@@ -822,7 +816,7 @@ public abstract class Mob extends Char {
 
 	}
 
-	protected class Wandering implements AiState {
+	public class Wandering implements AiState {
 
 		public static final String TAG	= "WANDERING";
 

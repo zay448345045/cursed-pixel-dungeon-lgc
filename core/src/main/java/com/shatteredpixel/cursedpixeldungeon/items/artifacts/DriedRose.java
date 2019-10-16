@@ -403,11 +403,6 @@ public class DriedRose extends Artifact {
 		
 		private DriedRose rose = null;
 
-		@Override
-		public AiState defaultState() {
-			return FOLLOWING;
-		}
-
 		public GhostHero(){
 			super();
 		}
