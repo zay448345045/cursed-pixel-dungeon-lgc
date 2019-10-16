@@ -22,18 +22,22 @@
 package com.shatteredpixel.cursedpixeldungeon.items.armor.curses;
 
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Terror;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.Armor;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
+import com.watabou.utils.Random;
 
 public class Bulk extends Armor.Glyph {
 	
 	private static ItemSprite.Glowing BLACK = new ItemSprite.Glowing( 0x000000 );
 	
 	@Override
-	public int proc(Armor armor, Char attacker, Char defender, int damage) {
-		
-		//no proc effect, see armor.speedfactor
-		return (int) (damage*0.85);
+	public int proc(Armor armor, Char attacker, Char defender, int damage) {//see Armour.speedfactor
+		if (Random.Int(3) == 0) {
+			Buff.affect(attacker, Terror.class, 5);
+		}
+		return damage;
 	}
 	
 	@Override
