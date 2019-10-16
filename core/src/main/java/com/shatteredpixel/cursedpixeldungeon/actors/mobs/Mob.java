@@ -140,12 +140,12 @@ public abstract class Mob extends Char {
 
 	public void wanderRandom() {
 		WANDERING = new Wandering();
-		state = WANDERING;
+		state = HUNTING;
 	}
 
 	public void followHero() {
 		WANDERING = new Following();
-		state = WANDERING;
+		state = HUNTING;
 	}
 	
 	@Override

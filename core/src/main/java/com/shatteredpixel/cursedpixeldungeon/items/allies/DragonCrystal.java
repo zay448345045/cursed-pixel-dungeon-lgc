@@ -103,11 +103,11 @@ public class DragonCrystal extends KindofMisc {
 
 	@Override
 	public ArrayList<String> actions( Hero hero ) {
-		ArrayList<String> actions = super.actions( hero );
-		if (isEquipped( hero ) && charge == chargeCap && !cursed) {
+		ArrayList<String> actions = super.actions(hero);
+		if (isEquipped(hero) && charge == chargeCap && !cursed) {
 			actions.add(AC_SUMMON);
 		}
-		
+
 		return actions;
 	}
 
@@ -166,13 +166,11 @@ public class DragonCrystal extends KindofMisc {
 		String desc = super.desc();
 
 		if (isEquipped( Dungeon.hero )){
-			if (!cursed){
+			if (Dragon != null){
 
-				if (level() < levelCap)
-					desc+= "\n\n" + Messages.get(this, "desc_hint");
-
+				desc += "\n\n" + this.Dragon.description();
 			} else
-				desc += "\n\n" + Messages.get(this, "desc_cursed");
+				desc += "\n\n" + Messages.get(this, "desc_no_dragon");
 		}
 
 		return desc;
