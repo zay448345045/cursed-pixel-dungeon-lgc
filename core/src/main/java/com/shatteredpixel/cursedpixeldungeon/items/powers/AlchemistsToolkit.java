@@ -56,6 +56,7 @@ public class AlchemistsToolkit extends Power {
 	
 	protected WndBag.Mode mode = WndBag.Mode.POTION;
 
+	Energy energy = new Energy();
 
 	@Override
 	public ArrayList<String> actions( Hero hero ) {
@@ -74,21 +75,10 @@ public class AlchemistsToolkit extends Power {
 			else if (hero.visibleEnemies() > hero.mindVisionEnemies.size()) GLog.i( Messages.get(this, "enemy_near") );
 			else {
 				
-				AlchemyScene.setProvider(hero.buff(Energy.class));
+				AlchemyScene.setProvider(energy);
 				Game.switchScene(AlchemyScene.class);
 			}
 			
-		}
-	}
-
-	public void charge(Hero target) {
-		if (charge < chargeCap){
-			partialCharge += 0.5f;
-			if (partialCharge >= 1){
-				partialCharge--;
-				charge++;
-				updateQuickslot();
-			}
 		}
 	}
 
@@ -109,6 +99,7 @@ public class AlchemistsToolkit extends Power {
 	
 	@Override
 	public void restoreFromBundle(Bundle bundle) {
+		energy.setToolkit(this);
 		super.restoreFromBundle(bundle);
 	}
 
@@ -140,19 +131,32 @@ public class AlchemistsToolkit extends Power {
 	public void onHeroGainExp(float levelPercent, Hero hero) {
 		this.charge += 1;
 		this.charge = Math.min(this.charge,this.chargeCap);
+		energy.setToolkit(this);
 		updateQuickslot();
 	}
 
 	public class Energy extends Buff implements AlchemyScene.AlchemyProvider {
+		AlchemistsToolkit Toolkit = null;
+
+		public void setToolkit(AlchemistsToolkit toolkit) {
+			Toolkit = toolkit;
+		}
+
 		@Override
 		public int getEnergy() {
-			return charge;
+			if (Toolkit == null) {
+				return 0;
+			} else {
+				return charge;
+			}
 		}
 
 		@Override
 		public void spendEnergy(int reduction) {
-			charge = Math.max(0, charge - reduction);
+			if (Toolkit != null) {
+				charge = Math.max(0, charge - reduction);
+			}
+
 		}
 	}
-
 }
