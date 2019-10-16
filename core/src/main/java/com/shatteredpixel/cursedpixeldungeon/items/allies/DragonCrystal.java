@@ -239,6 +239,7 @@ public class DragonCrystal extends KindofMisc {
 	public class recharge extends CrystalBuff {
 		@Override
 		public boolean act() {
+			spend( TICK );
 
             if (Dragon == null && DragonID != 0){
                 Actor a = Actor.findById(DragonID);
@@ -270,7 +271,7 @@ public class DragonCrystal extends KindofMisc {
 
 			updateQuickslot();
 
-			spend( TICK );
+
 
 			return true;
 		}
