@@ -137,6 +137,16 @@ public abstract class Mob extends Char {
 		bundle.put( SEEN, enemySeen );
 		bundle.put( TARGET, target );
 	}
+
+	public void wanderRandom() {
+		WANDERING = new Wandering();
+		state = WANDERING;
+	}
+
+	public void followHero() {
+		WANDERING = new Following();
+		state = WANDERING;
+	}
 	
 	@Override
 	public void restoreFromBundle( Bundle bundle ) {
