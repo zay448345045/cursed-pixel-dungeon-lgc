@@ -428,7 +428,9 @@ public class DragonCrystal extends KindofMisc {
 			
 			//will never attack something far from the player
 			if (enemy != null && Dungeon.level.mobs.contains(enemy)
-					&& Dungeon.level.distance(enemy.pos, Dungeon.hero.pos) <= 8){
+					&& Dungeon.level.distance(enemy.pos, Dungeon.hero.pos) <= 8) {
+				return enemy;
+			} else if (!(state instanceof Following)){//If not following, should attack whatever enemy is present.
 				return enemy;
 			} else {
 				return null;
