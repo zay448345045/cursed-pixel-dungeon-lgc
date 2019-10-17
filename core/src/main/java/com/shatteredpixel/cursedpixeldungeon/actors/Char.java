@@ -114,7 +114,7 @@ public abstract class Char extends Actor {
 		ENEMY,
 		NEUTRAL,
 		ALLY,
-		NEUTRAL_CHAOTIC
+		WRAITH
 	}
 	public Alignment alignment;
 	

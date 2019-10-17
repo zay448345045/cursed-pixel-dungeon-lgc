@@ -42,6 +42,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.SoulMark;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Terror;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Weakness;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
+import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroClass;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroSubClass;
 import com.shatteredpixel.cursedpixeldungeon.effects.Flare;
 import com.shatteredpixel.cursedpixeldungeon.effects.Speck;
@@ -290,7 +291,19 @@ public abstract class Mob extends Char {
 				if (fieldOfView[Dungeon.hero.pos]) {
 					enemies.add(Dungeon.hero);
 				}
-				
+
+			} else if (alignment == Alignment.WRAITH) {
+				for (Mob mob : Dungeon.level.mobs){
+					if (Dungeon.hero.subClass == HeroSubClass.NECROMACER) {
+						this.alignment = Alignment.ALLY;//Switch to Ally if the hero is a Necromancer
+					}
+					if (!(mob instanceof Wraith)) {
+						enemies.add(mob);
+					}
+				}
+				if (fieldOfView[Dungeon.hero.pos]) {
+					enemies.add(Dungeon.hero);
+				}
 			}
 			
 			Charm charm = buff( Charm.class );
