@@ -48,6 +48,7 @@ import com.shatteredpixel.cursedpixeldungeon.effects.Flare;
 import com.shatteredpixel.cursedpixeldungeon.effects.Speck;
 import com.shatteredpixel.cursedpixeldungeon.effects.Surprise;
 import com.shatteredpixel.cursedpixeldungeon.effects.Wound;
+import com.shatteredpixel.cursedpixeldungeon.effects.particles.ShadowParticle;
 import com.shatteredpixel.cursedpixeldungeon.items.Generator;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.DriedRose;
@@ -664,7 +665,13 @@ public abstract class Mob extends Char {
 		if (Dungeon.hero.isAlive() && !Dungeon.level.heroFOV[pos]) {
 			GLog.i( Messages.get(this, "died") );
 		}
-		
+
+		if (Dungeon.hero.subClass == HeroSubClass.NECROMACER && Random.Int(3) == 0) {
+			if (Wraith.spawnAt( pos ) != null) {
+				Dungeon.hero.sprite.emitter().burst(ShadowParticle.CURSE, 6);
+			}
+		}
+
 		super.die( cause );
 	}
 	

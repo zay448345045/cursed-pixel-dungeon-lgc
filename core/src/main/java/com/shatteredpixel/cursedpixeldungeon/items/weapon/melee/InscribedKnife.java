@@ -25,6 +25,7 @@ public class InscribedKnife extends MeleeWeapon {
     public ArrayList<String> actions(Hero hero) {
         ArrayList<String> actions = super.actions( hero );
         actions.add(AC_CURSE);
+        actions.add(AC_SUMMON);
         return actions;
     }
 
