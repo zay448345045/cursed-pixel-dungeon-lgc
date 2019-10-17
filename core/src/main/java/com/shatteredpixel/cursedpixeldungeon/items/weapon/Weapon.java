@@ -76,13 +76,6 @@ abstract public class Weapon extends KindOfWeapon {
 	public float	DLY	= 1f;	// Speed modifier
 	public int      RCH = 1;    // Reach modifier (only applies to melee hits)
 
-	@Override
-	public boolean isUpgradable() {
-		if ( Dungeon.hero.heroClass == HeroClass.ROGUE ) {//Rogue can upgrade weapons more, as this is a major focus on his class
-			UpgradeLimit = 20;
-		}
-		return super.isUpgradable();
-	}
 
 	public enum Augment {
 		SPEED   (0.7f, 0.6667f),

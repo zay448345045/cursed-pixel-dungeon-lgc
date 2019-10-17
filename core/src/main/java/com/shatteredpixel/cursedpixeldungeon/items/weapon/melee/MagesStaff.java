@@ -63,16 +63,15 @@ public class MagesStaff extends MeleeWeapon {
 	public static final String AC_IMBUE = "IMBUE";
 	public static final String AC_ZAP	= "ZAP";
 
-	public boolean isUpgradable() {
-		if ( Dungeon.hero.heroClass == HeroClass.MAGE ) {//Mage can upgrade 5 more times...
-			UpgradeLimit = 20;
-			if (Dungeon.hero.subClass == HeroSubClass.BATTLEMAGE) {//And Battlemage can reach a grand total of +25
-				UpgradeLimit = 25;
-			}
+	@Override
+	public int UpgradeLimit() {
+		if (Dungeon.hero.subClass == HeroSubClass.BATTLEMAGE) {
+			return 25;
+		} else {
+			return 20;
 		}
-
-		return super.isUpgradable();
 	}
+
 	private static final float STAFF_SCALE_FACTOR = 0.75f;
 
 	{
@@ -216,8 +215,8 @@ public class MagesStaff extends MeleeWeapon {
 		}
 		
 		Badges.validateItemLevelAquired(this);
-		if (this.level() > this.UpgradeLimit) {//Prevents the player upgrading beyond the limit via imbuing.
-			this.degrade(this.level() - this.UpgradeLimit );
+		if (this.level() > this.UpgradeLimit()) {//Prevents the player upgrading beyond the limit via imbuing.
+			this.degrade(this.level() - this.UpgradeLimit() );
 		}
 
 		return this;

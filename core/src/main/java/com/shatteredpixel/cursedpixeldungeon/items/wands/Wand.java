@@ -64,11 +64,12 @@ public abstract class Wand extends KindofMisc {
 
 	private static final float TIME_TO_ZAP	= 1f;
 	@Override
-	public boolean isUpgradable() {
-		if ( Dungeon.hero.heroClass == HeroClass.MAGE ) {//Only Mage gets +20 wands
-			UpgradeLimit = 20;
+	public int UpgradeLimit() {
+		if (Dungeon.hero.heroClass == HeroClass.MAGE) {
+			return 20;
+		} else {
+			return super.UpgradeLimit();
 		}
-		return super.isUpgradable();
 	}
 	public int maxCharges = initialCharges();
 	public int curCharges = maxCharges;
@@ -146,6 +147,11 @@ public abstract class Wand extends KindofMisc {
 	protected abstract void onZap( Ballistica attack );
 
 	public abstract void onHit( MagesStaff staff, Char attacker, Char defender, int damage);
+
+	@Override
+	public void activate(Char ch) {
+		this.charge(ch);
+	}
 
 	@Override
 	public boolean collect( Bag container ) {

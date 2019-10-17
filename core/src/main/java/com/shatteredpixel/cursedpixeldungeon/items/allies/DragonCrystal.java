@@ -73,12 +73,14 @@ public class DragonCrystal extends KindofMisc {
 	}
 
 	@Override
-	public boolean isUpgradable() {
-		if (Dungeon.hero.heroClass == HeroClass.PRIESTESS) {//Priestess can upgrade this more
-			UpgradeLimit = 20;
+	public int UpgradeLimit() {
+		if (Dungeon.hero.heroClass == HeroClass.PRIESTESS) {
+			return 20;
+		} else {
+			return super.UpgradeLimit();
 		}
-		return super.isUpgradable();
 	}
+
 	int levelCap = 10;
 
 	int charge = 100;
@@ -359,6 +361,19 @@ public class DragonCrystal extends KindofMisc {
 			super();
 		}
 
+		public int min() {
+			return  1 + Crystal.level();    //level scaling
+		}
+
+		public int max() {
+			return  8 + Crystal.level() * 3;   //level scaling
+		}
+
+		@Override
+		public String description() {
+			return super.description() + Messages.get(DragonCrystal.class,"stats_desc", HT, min(),max());
+		}
+
 		public Dragon(DragonCrystal rose){
 			super();
 			this.Crystal = rose;
@@ -429,7 +444,7 @@ public class DragonCrystal extends KindofMisc {
 
 		@Override
 		public int damageRoll() {
-			return Random.NormalIntRange(1 + Crystal.level(), 8 + Crystal.level() * 3);
+			return Random.NormalIntRange(min(), max());
 		}//base of 1-8 (Worn Shortsword), scales by 1-3 (Sword)
 
 		@Override

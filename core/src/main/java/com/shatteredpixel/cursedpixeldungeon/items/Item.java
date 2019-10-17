@@ -69,10 +69,12 @@ public class Item implements Bundlable {
 	
 	public String defaultAction;
 	public boolean usesTargeting;
-	public int UpgradeLimit = 15;//Most items cap at +15
+	public int UpgradeLimit() {
+		return 15;
+	}//Most items cap at +15
 
     public boolean isUpgradable() {
-		return level() <= UpgradeLimit - 1;
+		return level() <= UpgradeLimit() - 1;
 	}
 	protected String name = Messages.get(this, "name");
 	public int image = 0;

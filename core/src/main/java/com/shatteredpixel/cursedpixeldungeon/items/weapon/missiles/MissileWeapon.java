@@ -54,11 +54,13 @@ abstract public class MissileWeapon extends Weapon {
 	}
 	
 	protected boolean sticky = true;
-	public boolean isUpgradable() {
-		if ( Dungeon.hero.heroClass == HeroClass.HUNTRESS ) {
-			UpgradeLimit  = 20;
+	@Override
+	public int UpgradeLimit() {
+		if (Dungeon.hero.heroClass == HeroClass.HUNTRESS) {
+			return 20;
+		} else {
+			return super.UpgradeLimit();
 		}
-		return super.isUpgradable();
 	}
 	protected static final float MAX_DURABILITY = 100;
 	protected float durability = MAX_DURABILITY;
