@@ -64,7 +64,7 @@ public class MageCrab extends Mob implements Callback {
             Buff.affect( enemy, Chill.class, 3f );
 
 
-            int dmg = Random.Int( 30, 40 );
+            int dmg = Random.Int( 10, 30 );
             enemy.damage( dmg, new MageCrabIce() );
 
             if (!enemy.isAlive() && enemy == Dungeon.hero) {
@@ -83,7 +83,7 @@ public class MageCrab extends Mob implements Callback {
 
     @Override
     public int attackSkill( Char target ) {
-        return 36;
+        return 70;
     }
 
     @Override

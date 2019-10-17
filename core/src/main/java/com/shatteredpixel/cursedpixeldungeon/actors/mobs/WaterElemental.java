@@ -76,7 +76,7 @@ public class WaterElemental extends Mob {
 
     @Override
     public int attackSkill( Char target ) {
-        return 25;
+        return 35;
     }
 
     @Override
@@ -158,7 +158,7 @@ public class WaterElemental extends Mob {
                 duration = chill.speedFactor();
             }
             if (duration > 0) {
-                enemy.damage((int)(damageRoll()*duration),ElementalIce.class);
+                enemy.damage((int)(damageRoll()*duration*0.5f),ElementalIce.class);
             }
 
 
