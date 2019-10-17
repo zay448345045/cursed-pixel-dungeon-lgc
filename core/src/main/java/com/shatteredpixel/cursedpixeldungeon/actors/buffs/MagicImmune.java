@@ -22,6 +22,7 @@
 package com.shatteredpixel.cursedpixeldungeon.actors.buffs;
 
 import com.shatteredpixel.cursedpixeldungeon.items.armor.glyphs.AntiMagic;
+import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfElements;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.ui.BuffIndicator;
 import com.watabou.noosa.Image;
@@ -34,7 +35,7 @@ public class MagicImmune extends FlavourBuff {
 	}
 	
 	{
-		immunities.addAll(AntiMagic.RESISTS);
+		immunities.addAll(RingOfElements.RESISTS);
 	}
 	
 	//FIXME what about active buffs/debuffs?, what about rings? what about artifacts?

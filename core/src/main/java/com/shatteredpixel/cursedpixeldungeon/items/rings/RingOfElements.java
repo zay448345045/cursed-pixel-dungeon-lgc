@@ -34,6 +34,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Paralysis;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Poison;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Weakness;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Eye;
+import com.shatteredpixel.cursedpixeldungeon.actors.mobs.MageCrab;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Shaman;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Warlock;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.WaterElemental;
@@ -83,6 +84,7 @@ public class RingOfElements extends Ring {
 		RESISTS.add( Eye.DeathGaze.class );
 		RESISTS.add( Yog.BurningFist.DarkBolt.class );
 		RESISTS.add( WaterElemental.ElementalIce.class );
+		RESISTS.add( MageCrab.MageCrabIce.class );
 	}
 	
 	public static float resist( Char target, Class effect ){
