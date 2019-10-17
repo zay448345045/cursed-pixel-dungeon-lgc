@@ -351,8 +351,6 @@ public class DragonCrystal extends KindofMisc {
 			
 			//before other mobs
 			actPriority = MOB_PRIO + 1;
-			
-			properties.add(Property.UNDEAD);
 		}
 
 		public DragonCrystal Crystal = null;
@@ -371,7 +369,7 @@ public class DragonCrystal extends KindofMisc {
 
 		@Override
 		public String description() {
-			return super.description() + Messages.get(DragonCrystal.class,"stats_desc", HT, min(),max());
+			return super.description() + "\n\n" + Messages.get(DragonCrystal.class,"stats_desc", HT, min(),max(),attackSkill(this),defenseSkill(this));
 		}
 
 		public Dragon(DragonCrystal rose){
