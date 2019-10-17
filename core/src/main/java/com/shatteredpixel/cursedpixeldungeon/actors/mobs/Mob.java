@@ -665,14 +665,14 @@ public abstract class Mob extends Char {
 		if (Dungeon.hero.isAlive() && !Dungeon.level.heroFOV[pos]) {
 			GLog.i( Messages.get(this, "died") );
 		}
-
+		super.die( cause );
 		if (Dungeon.hero.subClass == HeroSubClass.NECROMACER && Random.Int(3) == 0) {
 			if (Wraith.spawnAt( pos ) != null) {
 				Dungeon.hero.sprite.emitter().burst(ShadowParticle.CURSE, 6);
 			}
 		}
 
-		super.die( cause );
+
 	}
 	
 	public void rollToDropLoot(){
