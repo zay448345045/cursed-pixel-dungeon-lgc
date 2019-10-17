@@ -4,6 +4,8 @@ import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 
+import java.util.ArrayList;
+
 public class InscribedKnife extends MeleeWeapon {
 
     {
@@ -15,6 +17,16 @@ public class InscribedKnife extends MeleeWeapon {
     }
     int charge = 0;
     int maxCharge = 40;
+
+    public static final String AC_CURSE = "CURSE";
+    public static final String AC_SUMMON = "SUMMON";
+
+    @Override
+    public ArrayList<String> actions(Hero hero) {
+        ArrayList<String> actions = super.actions( hero );
+        actions.add(AC_CURSE);
+        return actions;
+    }
 
     @Override
     public void onHeroGainExp(float levelPercent, Hero hero) {
