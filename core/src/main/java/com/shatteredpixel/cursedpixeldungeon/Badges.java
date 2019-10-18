@@ -127,7 +127,7 @@ public class Badges {
 		UNLOCK_MAGE( 65 ),
 		UNLOCK_ROGUE( 66 ),
 		UNLOCK_HUNTRESS( 67 ),
-		UNLOCK_PRIESTESS,
+		UNLOCK_PRIESTESS( 67 ),
 		ITEM_LEVEL_1( 48 ),
 		ITEM_LEVEL_2( 49 ),
 		ITEM_LEVEL_3( 50 ),
@@ -724,7 +724,7 @@ public class Badges {
 	}
 
 	public static void validatePriestessUnlock(){
-		if (Statistics.allyAssists >= 20 && !global.contains(Badge.UNLOCK_PRIESTESS)){
+		if (Statistics.allyAssists >= 1 && !global.contains(Badge.UNLOCK_PRIESTESS)){
 			displayBadge( Badge.UNLOCK_PRIESTESS );
 		}
 	}
