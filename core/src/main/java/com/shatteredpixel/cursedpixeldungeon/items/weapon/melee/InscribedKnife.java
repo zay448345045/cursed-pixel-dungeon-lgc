@@ -4,6 +4,9 @@ import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Belongings;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
+import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroSubClass;
+import com.shatteredpixel.cursedpixeldungeon.effects.particles.EnergyParticle;
+import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.allies.DragonCrystal;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.Artifact;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
@@ -27,20 +30,26 @@ public class InscribedKnife extends MeleeWeapon {
     public static final String AC_SUMMON = "SUMMON";
 
     @Override
+    public int UpgradeLimit() {
+        return 20;
+    }
+
+    @Override
     public int proc(Char attacker, Char defender, int damage) {
-        if (attacker instanceof Hero) {
+        if (attacker instanceof Hero && ((Hero)attacker).subClass == HeroSubClass.MEDIC) {
+            ((Hero)attacker).sprite.centerEmitter().burst( EnergyParticle.FACTORY, 15 );
             Belongings b = ((Hero) attacker).belongings;
             if (b.misc1 instanceof DragonCrystal) {
                 ((DragonCrystal)b.misc1).Charge(1);
             }
-            if (b.misc2 instanceof Artifact) {
-                ((Artifact) b.misc2).charge((Hero)attacker);
+            if (b.misc2 instanceof DragonCrystal) {
+                ((DragonCrystal)b.misc2).Charge(1);
             }
-            if (b.misc3 instanceof Artifact) {
-                ((Artifact) b.misc3).charge((Hero) attacker);
+            if (b.misc3 instanceof DragonCrystal) {
+                ((DragonCrystal)b.misc3).Charge(1);
             }
-            if (b.misc4 instanceof Artifact) {
-                ((Artifact) b.misc4).charge((Hero) attacker);
+            if (b.misc4 instanceof DragonCrystal) {
+                ((DragonCrystal)b.misc4).Charge(1);
             }
         }
         return super.proc(attacker, defender, damage);

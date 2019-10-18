@@ -33,6 +33,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Corruption;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.LockedFloor;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroClass;
+import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroSubClass;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.npcs.NPC;
 import com.shatteredpixel.cursedpixeldungeon.effects.CellEmitter;
@@ -376,6 +377,12 @@ public class DragonCrystal extends KindofMisc {
 		@Override
 		public String description() {
 			return super.description() + "\n\n" + Messages.get(DragonCrystal.class,"stats_desc", HT, min(),max(),attackSkill(this),defenseSkill(this));
+		}
+
+		@Override
+		public int attackProc(Char enemy, int damage) {
+			if (enemy instanceof Mob && Dungeon.hero.subClass == HeroSubClass.MEDIC) ((Mob)enemy).aggro(this);
+			return super.attackProc(enemy, damage);
 		}
 
 		public Dragon(DragonCrystal rose){
