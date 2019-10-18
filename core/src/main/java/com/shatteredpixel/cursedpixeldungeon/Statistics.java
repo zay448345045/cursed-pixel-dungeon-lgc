@@ -37,7 +37,8 @@ public class Statistics {
 	public static int upgradesUsed;
 	public static int sneakAttacks;
 	public static int thrownAssists;
-	
+	public static int allyAssists;
+
 	public static float duration;
 	
 	public static boolean qualifiedForNoKilling = false;
@@ -58,6 +59,7 @@ public class Statistics {
 		upgradesUsed    = 0;
 		sneakAttacks    = 0;
 		thrownAssists   = 0;
+		allyAssists     = 0;
 		
 		duration	= 0;
 		
@@ -78,6 +80,7 @@ public class Statistics {
 	private static final String UPGRADES	= "upgradesUsed";
 	private static final String SNEAKS		= "sneakAttacks";
 	private static final String THROWN		= "thrownAssists";
+	private static final String ALLIES		= "allyAssists";
 	
 	private static final String DURATION	= "duration";
 	
@@ -95,6 +98,7 @@ public class Statistics {
 		bundle.put( UPGRADES,   upgradesUsed );
 		bundle.put( SNEAKS,		sneakAttacks );
 		bundle.put( THROWN,		thrownAssists );
+		bundle.put( ALLIES,     allyAssists );
 		
 		bundle.put( DURATION,	duration );
 		
@@ -113,6 +117,7 @@ public class Statistics {
 		upgradesUsed    = bundle.getInt( UPGRADES );
 		sneakAttacks    = bundle.getInt( SNEAKS );
 		thrownAssists   = bundle.getInt( THROWN );
+		allyAssists     = bundle.getInt( ALLIES );
 		
 		duration		= bundle.getFloat( DURATION );
 		
