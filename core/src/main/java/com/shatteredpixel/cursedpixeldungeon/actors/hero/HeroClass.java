@@ -171,7 +171,7 @@ public enum HeroClass {
 		Dungeon.quickslot.setSlot(0,hero.belongings.misc1);
 		new PotionOfHealing().identify();
 		new ScrollOfMirrorImage().identify();
-		if (Badges.isUnlocked(Badges.Badge.VICTORY_PRIESTESS)) {
+		if (Badges.isUnlocked(Badges.Badge.VICTORY_PRIESTESS) | DeviceCompat.isDebug()) {
 			new TomeOfMastery().collect();
 		}
 	}
@@ -191,7 +191,7 @@ public enum HeroClass {
 		
 		new PotionOfStrength().identify();
 		new ScrollOfRage().identify();
-		if (Badges.isUnlocked(Badges.Badge.VICTORY_WARRIOR)) {
+		if (Badges.isUnlocked(Badges.Badge.VICTORY_WARRIOR) | DeviceCompat.isDebug()) {
 			new TomeOfMastery().collect();
 		}
 	}
@@ -220,7 +220,7 @@ public enum HeroClass {
 		
 		new ScrollOfUpgrade().identify();
 		new PotionOfLiquidFlame().identify();
-		if (Badges.isUnlocked(Badges.Badge.VICTORY_MAGE)) {
+		if (Badges.isUnlocked(Badges.Badge.VICTORY_MAGE) | DeviceCompat.isDebug()) {
 			new TomeOfMastery().collect();
 		}
 	}
@@ -242,7 +242,7 @@ public enum HeroClass {
 		
 		new ScrollOfMagicMapping().identify();
 		new PotionOfInvisibility().identify();
-		if (Badges.isUnlocked(Badges.Badge.VICTORY_ROGUE)) {
+		if (Badges.isUnlocked(Badges.Badge.VICTORY_ROGUE) | DeviceCompat.isDebug()) {
 			new TomeOfMastery().collect();
 		}
 	}
@@ -260,7 +260,7 @@ public enum HeroClass {
 		
 		new PotionOfMindVision().identify();
 		new ScrollOfLullaby().identify();
-		if (Badges.isUnlocked(Badges.Badge.VICTORY_HUNTRESS)) {
+		if (Badges.isUnlocked(Badges.Badge.VICTORY_HUNTRESS) | DeviceCompat.isDebug()) {
 			new TomeOfMastery().collect();
 		}
 	}
