@@ -1,5 +1,6 @@
 package com.shatteredpixel.cursedpixeldungeon.items.weapon.melee;
 
+import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
@@ -15,7 +16,7 @@ public class InscribedKnife extends MeleeWeapon {
 
         bones = false;
     }
-    int charge = 0;
+    float charge = 0;
     int maxCharge = 40;
 
     public static final String AC_CURSE = "CURSE";
@@ -31,12 +32,14 @@ public class InscribedKnife extends MeleeWeapon {
 
     @Override
     public void onHeroGainExp(float levelPercent, Hero hero) {
-        super.onHeroGainExp(levelPercent, hero);
-        charge += (int) (levelPercent/2);
+        if (this.isEquipped(Dungeon.hero)) {
+            super.onHeroGainExp(levelPercent, hero);
+            charge += (levelPercent / 2);
+        }
     }
 
     @Override
     public String desc() {
-        return super.desc() + "\n\n" + Messages.get(this, "charge_desc", charge, maxCharge);
+        return super.desc() + "\n\n" + Messages.get(this, "charge_desc", (int)charge, maxCharge);
     }
 }
