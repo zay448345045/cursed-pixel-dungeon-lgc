@@ -532,6 +532,7 @@ public abstract class Mob extends Char {
 		if (buff(Weakness.class) != null){
 			damage *= 0.67f;
 		}
+		if (enemy instanceof Mob && ((Mob)enemy).alignment == Alignment.ENEMY && Dungeon.hero.subClass == HeroSubClass.MEDIC) ((Mob)enemy).aggro(this);
 		return damage;
 	}
 	

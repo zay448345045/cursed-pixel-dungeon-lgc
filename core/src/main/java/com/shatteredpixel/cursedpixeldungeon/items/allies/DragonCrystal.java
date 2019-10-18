@@ -381,7 +381,7 @@ public class DragonCrystal extends KindofMisc {
 
 		@Override
 		public int attackProc(Char enemy, int damage) {
-			if (enemy instanceof Mob && Dungeon.hero.subClass == HeroSubClass.MEDIC) ((Mob)enemy).aggro(this);
+
 			return super.attackProc(enemy, damage);
 		}
 
