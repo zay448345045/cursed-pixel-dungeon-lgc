@@ -31,7 +31,11 @@ public class InscribedKnife extends MeleeWeapon {
 
     @Override
     public int UpgradeLimit() {
-        return 20;
+       if (Dungeon.hero.subClass == HeroSubClass.MEDIC) {
+           return 25;
+       } else {
+           return 20;
+       }
     }
 
     @Override
