@@ -51,6 +51,7 @@ import com.shatteredpixel.cursedpixeldungeon.effects.Wound;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.ShadowParticle;
 import com.shatteredpixel.cursedpixeldungeon.items.Generator;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
+import com.shatteredpixel.cursedpixeldungeon.items.allies.DragonCrystal;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.DriedRose;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.TimekeepersHourglass;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.LuckyBadge;
@@ -659,6 +660,10 @@ public abstract class Mob extends Char {
 		
 		if (Dungeon.hero.isAlive() && !Dungeon.level.heroFOV[pos]) {
 			GLog.i( Messages.get(this, "died") );
+		}
+		if (cause instanceof DragonCrystal.Dragon) {
+			Statistics.allyAssists += 1;
+			Badges.validatePriestessUnlock();
 		}
 		super.die( cause );
 		if (Dungeon.hero.subClass == HeroSubClass.NECROMACER && Random.Int(3) == 0 && cause instanceof Item) {//Must be killed by the hero (by an item)
