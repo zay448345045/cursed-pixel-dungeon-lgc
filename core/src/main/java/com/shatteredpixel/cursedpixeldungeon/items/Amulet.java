@@ -31,6 +31,7 @@ import com.shatteredpixel.cursedpixeldungeon.scenes.InterlevelScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.cursedpixeldungeon.windows.WndBag;
 import com.watabou.noosa.Game;
+import com.watabou.utils.Bundle;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -61,7 +62,19 @@ public class Amulet extends Item {
 			WATER_IMBEDDED = true;
 		}
 	}
-	
+	public final String WATER_IMBED = "water_imbedded";
+	@Override
+	public void storeInBundle(Bundle bundle) {
+		bundle.put(WATER_IMBED, WATER_IMBEDDED);
+		super.storeInBundle(bundle);
+	}
+
+	@Override
+	public void restoreFromBundle(Bundle bundle) {
+		WATER_IMBEDDED = bundle.getBoolean(WATER_IMBED);
+		super.restoreFromBundle(bundle);
+	}
+
 	@Override
 	public void execute( Hero hero, String action ) {
 
