@@ -37,6 +37,7 @@ import com.shatteredpixel.cursedpixeldungeon.ui.Window;
 import com.shatteredpixel.cursedpixeldungeon.windows.IconTitle;
 import com.shatteredpixel.cursedpixeldungeon.windows.WndBag;
 import com.watabou.noosa.Game;
+import com.watabou.utils.DeviceCompat;
 
 public class Wandmaker_2 extends NPC {
 
@@ -108,41 +109,46 @@ public class Wandmaker_2 extends NPC {
             };
             btnWand1.setRect(0, message.top() + message.height() + GAP, WIDTH, BTN_HEIGHT);
             add(btnWand1);
+            if (DeviceCompat.isDebug()) {//Other Challenges only on core-debug apk.
 
-            RedButton btnWand2 = new RedButton(Messages.get(wandmaker_2, "earth_challenge")) {
-                @Override
-                protected void onClick() {
-                    InterlevelScene.mode = InterlevelScene.Mode.EARTHCHALLENGE;
-                    Game.switchScene(InterlevelScene.class);
-                }
-            };
-            btnWand2.setRect(0, message.top() + message.height() + GAP + BTN_HEIGHT, WIDTH, BTN_HEIGHT);
 
-            add(btnWand2);
+                RedButton btnWand2 = new RedButton(Messages.get(wandmaker_2, "earth_challenge")) {
+                    @Override
+                    protected void onClick() {
+                        InterlevelScene.mode = InterlevelScene.Mode.EARTHCHALLENGE;
+                        Game.switchScene(InterlevelScene.class);
+                    }
+                };
+                btnWand2.setRect(0, message.top() + message.height() + GAP + BTN_HEIGHT, WIDTH, BTN_HEIGHT);
 
-            RedButton btnWand3 = new RedButton(Messages.get(wandmaker_2, "fire_challenge")) {
-                @Override
-                protected void onClick() {
-                    InterlevelScene.mode = InterlevelScene.Mode.FIRECHALLENGE;
-                    Game.switchScene(InterlevelScene.class);
-                }
-            };
-            btnWand3.setRect(0, message.top() + message.height() + GAP + BTN_HEIGHT*2, WIDTH, BTN_HEIGHT);
+                add(btnWand2);
 
-            add(btnWand3);
+                RedButton btnWand3 = new RedButton(Messages.get(wandmaker_2, "fire_challenge")) {
+                    @Override
+                    protected void onClick() {
+                        InterlevelScene.mode = InterlevelScene.Mode.FIRECHALLENGE;
+                        Game.switchScene(InterlevelScene.class);
+                    }
+                };
+                btnWand3.setRect(0, message.top() + message.height() + GAP + BTN_HEIGHT * 2, WIDTH, BTN_HEIGHT);
 
-            RedButton btnWand4 = new RedButton(Messages.get(wandmaker_2, "air_challenge")) {
-                @Override
-                protected void onClick() {
-                    InterlevelScene.mode = InterlevelScene.Mode.AIRCHALLENGE;
-                    Game.switchScene(InterlevelScene.class);
-                }
-            };
-            btnWand4.setRect(0, message.top() + message.height() + GAP + BTN_HEIGHT*3, WIDTH, BTN_HEIGHT);
+                add(btnWand3);
 
-            add(btnWand4);
+                RedButton btnWand4 = new RedButton(Messages.get(wandmaker_2, "air_challenge")) {
+                    @Override
+                    protected void onClick() {
+                        InterlevelScene.mode = InterlevelScene.Mode.AIRCHALLENGE;
+                        Game.switchScene(InterlevelScene.class);
+                    }
+                };
+                btnWand4.setRect(0, message.top() + message.height() + GAP + BTN_HEIGHT * 3, WIDTH, BTN_HEIGHT);
 
-            resize(WIDTH, (int) btnWand4.bottom());
+                add(btnWand4);
+                resize(WIDTH, (int) btnWand4.bottom());
+            } else {
+                resize(WIDTH, (int) btnWand1.bottom());
+            }
+
         }
     }
 
