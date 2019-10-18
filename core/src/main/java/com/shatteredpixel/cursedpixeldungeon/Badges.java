@@ -722,6 +722,12 @@ public class Badges {
 			displayBadge( Badge.UNLOCK_HUNTRESS );
 		}
 	}
+
+	public static void validatePriestessUnlock(){
+		if (Statistics.allyAssists >= 20 && !global.contains(Badge.UNLOCK_PRIESTESS)){
+			displayBadge( Badge.UNLOCK_PRIESTESS );
+		}
+	}
 	
 	public static void validateMasteryCombo( int n ) {
 		if (!local.contains( Badge.MASTERY_COMBO ) && n == 10) {

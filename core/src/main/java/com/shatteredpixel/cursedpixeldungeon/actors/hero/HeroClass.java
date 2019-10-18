@@ -346,6 +346,8 @@ public enum HeroClass {
 				return Badges.isUnlocked(Badges.Badge.UNLOCK_ROGUE);
 			case HUNTRESS:
 				return Badges.isUnlocked(Badges.Badge.UNLOCK_HUNTRESS);
+			case PRIESTESS:
+				return Badges.isUnlocked(Badges.Badge.UNLOCK_PRIESTESS);
 		}
 	}
 	
