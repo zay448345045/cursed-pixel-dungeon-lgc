@@ -21,6 +21,7 @@
 
 package com.shatteredpixel.cursedpixeldungeon.actors.buffs;
 
+import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Belongings;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.Artifact;
@@ -49,6 +50,12 @@ public class ArtifactRecharge extends Buff {
 			}
 			if (b.misc2 instanceof Artifact){
 				((Artifact)b.misc2).charge((Hero)target);
+			}
+			if (b.misc3 instanceof Artifact) {
+				((Artifact)b.misc3).charge((Hero)target);
+			}
+			if (b.misc4 instanceof Artifact) {
+				((Artifact)b.misc4).charge((Hero)target);
 			}
 		}
 		

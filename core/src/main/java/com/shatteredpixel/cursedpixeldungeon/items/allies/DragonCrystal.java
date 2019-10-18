@@ -117,6 +117,12 @@ public class DragonCrystal extends KindofMisc {
 		return new DragonCrystal.Dragon(this);
 	}
 
+	public void Charge(int amount) {
+		this.charge += amount;
+		this.charge = Math.min(this.charge,this.chargeCap);
+		updateQuickslot();
+	}
+
 	@Override
 	public void execute( Hero hero, String action ) {
 
