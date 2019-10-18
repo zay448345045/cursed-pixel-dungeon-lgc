@@ -724,7 +724,7 @@ public class Badges {
 	}
 
 	public static void validatePriestessUnlock(){
-		if (Statistics.allyAssists >= 1 && !global.contains(Badge.UNLOCK_PRIESTESS)){
+		if (Statistics.allyAssists >= 20 && !global.contains(Badge.UNLOCK_PRIESTESS)){
 			displayBadge( Badge.UNLOCK_PRIESTESS );
 		}
 	}

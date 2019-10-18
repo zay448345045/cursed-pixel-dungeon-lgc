@@ -198,7 +198,7 @@ public enum HeroClass {
 
 	private static void initMage( Hero hero ) {
 		MagesStaff staff;
-		new PoisonDragon().identify().collect();
+		//new PoisonDragon().identify().collect();
 		//new EarthenDragon().identify().collect();
 		//new ScrollOfUpgrade().quantity(5).collect();
 		//new WandOfLightning().identify().upgrade(2).collect();
@@ -335,7 +335,7 @@ public enum HeroClass {
 	
 	public boolean isUnlocked(){
 		//always unlock on debug builds
-		//if (DeviceCompat.isDebug()) return true;
+		if (DeviceCompat.isDebug()) return true;
 		
 		switch (this){
 			case WARRIOR: default:
