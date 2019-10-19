@@ -37,6 +37,8 @@ public class InscribedKnife extends MeleeWeapon {
         defaultAction = AC_CURSE;
 
         usesTargeting = true;
+
+        unique = true;
     }
     float charge = 0;
     int maxCharge = 40;

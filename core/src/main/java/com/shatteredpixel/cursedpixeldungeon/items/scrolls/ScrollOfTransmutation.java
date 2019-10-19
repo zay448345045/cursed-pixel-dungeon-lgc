@@ -38,6 +38,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.scrolls.exotic.ExoticScroll;
 import com.shatteredpixel.cursedpixeldungeon.items.stones.Runestone;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.Wand;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.Weapon;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.InscribedKnife;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MagesStaff;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MeleeWeapon;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.MissileWeapon;
@@ -59,7 +60,7 @@ public class ScrollOfTransmutation extends InventoryScroll {
 	}
 	
 	public static boolean canTransmute(Item item){
-		return item instanceof MeleeWeapon ||
+		return item instanceof MeleeWeapon && !(item instanceof InscribedKnife) ||
 				(item instanceof MissileWeapon && !(item instanceof Dart)) ||
 				(item instanceof Potion && !(item instanceof Elixir || item instanceof Brew || item instanceof AlchemicalCatalyst)) ||
 				item instanceof Scroll ||
