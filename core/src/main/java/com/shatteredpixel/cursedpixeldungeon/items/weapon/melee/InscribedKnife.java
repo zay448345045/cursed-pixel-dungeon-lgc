@@ -8,7 +8,9 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Doom;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Belongings;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroSubClass;
+import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Wraith;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.EnergyParticle;
+import com.shatteredpixel.cursedpixeldungeon.effects.particles.ShadowParticle;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.allies.DragonCrystal;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.Artifact;
@@ -103,7 +105,7 @@ public class InscribedKnife extends MeleeWeapon {
 
         @Override
         public void onSelect(Integer target) {
-            Char enemy = null;
+            Char enemy;
             if (target != null) {
                 int cell = target;
                 if (Actor.findChar(target) != null)
@@ -113,6 +115,7 @@ public class InscribedKnife extends MeleeWeapon {
                 enemy = Actor.findChar(cell);
                 if (enemy != null) {
                     Buff.affect(enemy, Doom.class);
+                    enemy.sprite.emitter().burst(ShadowParticle.CURSE, 6);
                     GLog.i( Messages.get(this, "curse_message") );
                 } else {
                     GLog.w( Messages.get(this, "curse_fail") );
@@ -126,11 +129,47 @@ public class InscribedKnife extends MeleeWeapon {
         }
     };
 
+    protected static CellSelector.Listener summon = new  CellSelector.Listener() {
+
+        @Override
+        public void onSelect(Integer target) {
+            if (target != null) {
+                int cell = target;
+                if (Actor.findChar(target) != null)
+                    QuickSlotButton.target(Actor.findChar(target));
+                else
+                    QuickSlotButton.target(Actor.findChar(cell));
+                if (Wraith.spawnAt(cell) != null) {
+                    GLog.i( Messages.get(this, "summon_message") );
+                } else {
+                    GLog.w( Messages.get(this, "summon_fail") );
+                }
+            }
+        }
+
+        @Override
+        public String prompt() {
+            return Messages.get(this, "prompt_summon");
+        }
+    };
+
     @Override
     public void execute(Hero hero, String action) {
         super.execute(hero, action);
-        if (action.equals(AC_CURSE) && charge > CURSE_AMT) {
-            GameScene.selectCell(curse);
+        if (action.equals(AC_CURSE)) {
+            if (true) {
+                GameScene.selectCell(curse);
+                charge -= CURSE_AMT;
+            } else {
+                GLog.i( Messages.get(this, "no_charge") );
+            }
+        } else if (action.equals(AC_SUMMON)) {
+            if (true) {
+                GameScene.selectCell(summon);
+                charge -= SUMMON_AMT;
+            } else {
+                GLog.i( Messages.get(this, "no_charge") );
+            }
         }
     }
 }
