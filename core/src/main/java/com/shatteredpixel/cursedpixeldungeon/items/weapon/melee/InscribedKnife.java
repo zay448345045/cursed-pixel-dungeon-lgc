@@ -1,7 +1,10 @@
 package com.shatteredpixel.cursedpixeldungeon.items.weapon.melee;
 
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
+import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Doom;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Belongings;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroSubClass;
@@ -9,8 +12,13 @@ import com.shatteredpixel.cursedpixeldungeon.effects.particles.EnergyParticle;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.allies.DragonCrystal;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.Artifact;
+import com.shatteredpixel.cursedpixeldungeon.items.wands.Wand;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
+import com.shatteredpixel.cursedpixeldungeon.scenes.CellSelector;
+import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
+import com.shatteredpixel.cursedpixeldungeon.ui.QuickSlotButton;
+import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
 
 import java.util.ArrayList;
 
@@ -22,12 +30,18 @@ public class InscribedKnife extends MeleeWeapon {
         tier = 1;
 
         bones = false;
+
+        defaultAction = AC_CURSE;
+
+        usesTargeting = true;
     }
     float charge = 0;
     int maxCharge = 40;
 
     public static final String AC_CURSE = "CURSE";
     public static final String AC_SUMMON = "SUMMON";
+    public static final int CURSE_AMT = 30;
+    public static final int SUMMON_AMT = 40;
 
     @Override
     public int UpgradeLimit() {
@@ -85,8 +99,38 @@ public class InscribedKnife extends MeleeWeapon {
         return super.desc() + "\n\n" + Messages.get(this, "charge_desc", (int)charge, maxCharge);
     }
 
+    protected static CellSelector.Listener curse = new  CellSelector.Listener() {
+
+        @Override
+        public void onSelect(Integer target) {
+            Char enemy = null;
+            if (target != null) {
+                int cell = target;
+                if (Actor.findChar(target) != null)
+                    QuickSlotButton.target(Actor.findChar(target));
+                else
+                    QuickSlotButton.target(Actor.findChar(cell));
+                enemy = Actor.findChar(cell);
+                if (enemy != null) {
+                    Buff.affect(enemy, Doom.class);
+                    GLog.i( Messages.get(this, "curse_message") );
+                } else {
+                    GLog.w( Messages.get(this, "curse_fail") );
+                }
+            }
+        }
+
+        @Override
+        public String prompt() {
+            return Messages.get(this, "prompt_curse");
+        }
+    };
+
     @Override
     public void execute(Hero hero, String action) {
         super.execute(hero, action);
+        if (action.equals(AC_CURSE) && charge > CURSE_AMT) {
+            GameScene.selectCell(curse);
+        }
     }
 }
