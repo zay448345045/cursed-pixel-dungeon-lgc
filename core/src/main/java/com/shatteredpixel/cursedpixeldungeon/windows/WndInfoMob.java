@@ -26,6 +26,7 @@ import com.shatteredpixel.cursedpixeldungeon.SPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroClass;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
+import com.shatteredpixel.cursedpixeldungeon.items.artifacts.DriedRose;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.InterlevelScene;
 import com.shatteredpixel.cursedpixeldungeon.scenes.PixelScene;
@@ -56,7 +57,7 @@ public class WndInfoMob extends Window {
 		message.maxWidth(width);
 		message.setPos(0, titlebar.bottom() + GAP);
 		add(message);
-		if (mob.alignment == Char.Alignment.ALLY && Dungeon.hero.heroClass == HeroClass.PRIESTESS) {//Only Priestess can see these buttons
+		if (mob.alignment == Char.Alignment.ALLY && Dungeon.hero.heroClass == HeroClass.PRIESTESS || mob instanceof DriedRose.GhostHero) {//Only Priestess can see these buttons, but the Sad Ghost always has them.
 			RedButton btnWander = new RedButton(Messages.get(mob, "wander")) {
 				@Override
 				protected void onClick() {

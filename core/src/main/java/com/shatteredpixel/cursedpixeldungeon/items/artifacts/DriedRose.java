@@ -394,6 +394,8 @@ public class DriedRose extends Artifact {
 			alignment = Alignment.ALLY;
 			
 			state = HUNTING;
+
+			WANDERING = new Following();
 			
 			//before other mobs
 			actPriority = MOB_PRIO + 1;
