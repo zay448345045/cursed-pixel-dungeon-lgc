@@ -67,9 +67,23 @@ public class CursedChanges {
 		changes.hardlight(CharSprite.WARNING);
 		changeInfos.add(changes);
 
+		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.MASTERY, null), "Tome of Mastery",
+				"Hero starts with Tome if they have beaten game on that class."));
+
+		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.LUCKYBADGE, null), "Lucky Badge",
+				"Ring of Wealth and Alchemist's Toolkit have been reworked:\n" +
+						"_-_ No longer must be equipped\n" +
+						"_-_ Ring of Wealth replaced with SPS Lucky Badge gfx"));
+
 		changes.addButton( new ChangeButton( new Image(Assets.WARRIOR, 0, 90, 12, 15), "Starting Equipment",
 				"Starting Equipment has received minor changes again:\n" +
 						"_-_ Hero starts with 3 Healing Potions and 1 Purity."));
+
+		changes.addButton( new ChangeButton( new Image(Assets.PRIESTESS, 0, 90, 12, 15), "New Class",
+				"New Class added!\n" +
+						"_-_ Starts with Poison Dragon and unique Inscribed Knife\n" +
+						"_-_ Has subclasses Necromancer and Medic\n" +
+						"_-_ Can command Allies and has other perks to do with them."));
 
 		changes.addButton( new ChangeButton(new Image(Assets.SPINNER, 144, 0, 16, 16), "Bug Fixes",
 				"Fixed more instances of 'Save File not Found'\n" +
