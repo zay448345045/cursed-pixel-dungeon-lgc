@@ -157,14 +157,14 @@ public class InscribedKnife extends MeleeWeapon {
     public void execute(Hero hero, String action) {
         super.execute(hero, action);
         if (action.equals(AC_CURSE)) {
-            if (true) {
+            if (charge >= CURSE_AMT) {
                 GameScene.selectCell(curse);
                 charge -= CURSE_AMT;
             } else {
                 GLog.i( Messages.get(this, "no_charge") );
             }
         } else if (action.equals(AC_SUMMON)) {
-            if (true) {
+            if (charge >= SUMMON_AMT) {
                 GameScene.selectCell(summon);
                 charge -= SUMMON_AMT;
             } else {
