@@ -338,6 +338,7 @@ public class InterlevelScene extends PixelScene {
 					});
 				} else {
 					Statistics.deepestFloor = 0;
+					phase = Phase.FADE_OUT;
 				}
 
 

@@ -42,13 +42,14 @@ import com.shatteredpixel.cursedpixeldungeon.sprites.StatueSprite;
 import com.shatteredpixel.cursedpixeldungeon.ui.Icons;
 import com.shatteredpixel.cursedpixeldungeon.ui.Window;
 import com.watabou.noosa.Image;
+import com.watabou.utils.DeviceCompat;
 
 import java.util.ArrayList;
 
 public class CursedChanges {
 	
 	public static void addAllChanges( ArrayList<ChangeInfo> changeInfos ){
-		add_unversioned_Changes(changeInfos);
+		if (DeviceCompat.isDebug()) add_unversioned_Changes(changeInfos);
 		add_v0_2_0_Changes(changeInfos);
 		add_v0_1_0_Changes(changeInfos);
 	}
@@ -268,9 +269,11 @@ public class CursedChanges {
 		changes.hardlight(Window.TITLE_COLOR);
 		changeInfos.add(changes);
 
-		changes.addButton(new ChangeButton(new SewerGolemSprite(), "Water Challenge", "Two of the four end game challenges have been added:\n" +
-				"_-_ The Water Challenge, which is partially complete, and contains a boss as well as 3 new enemies.\n" +
-				"_-_ The Earth Challenge, which is incomplete."));
+		changes.addButton(new ChangeButton(new SewerGolemSprite(), "Challenges", "All 4 endgame challenges are accessible in some way:\n" +
+				"_-_ The Water Challenge - complete\n" +
+				"_-_ The Earth Challenge - incomplete.\n" +
+				"_-_ The Air Challenge - not yet started\n" +
+				"_-_ The Fire Challenge - not yet started"));
 	}
 	
 	
