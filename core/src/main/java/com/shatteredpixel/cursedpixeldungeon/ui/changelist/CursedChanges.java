@@ -25,11 +25,14 @@ import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.items.DewVial;
 import com.shatteredpixel.cursedpixeldungeon.items.allies.PoisonDragon;
 import com.shatteredpixel.cursedpixeldungeon.items.allies.WaterDragon;
+import com.shatteredpixel.cursedpixeldungeon.items.armor.PlateArmor;
+import com.shatteredpixel.cursedpixeldungeon.items.armor.glyphs.AntiMagic;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.exotic.PotionOfCorrosiveGas;
 import com.shatteredpixel.cursedpixeldungeon.items.spells.MagicalInfusion;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfMagicMissile;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Grim;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Swift;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Unstable;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Greatsword;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.ChangesScene;
@@ -63,15 +66,29 @@ public class CursedChanges {
 		changes.hardlight(CharSprite.WARNING);
 		changeInfos.add(changes);
 
+		changes.addButton( new ChangeButton( new Image(Assets.WARRIOR, 0, 90, 12, 15), "Starting Equipment",
+				"Starting Equipment has received minor changes again:\n" +
+						"_-_ Hero starts with 3 Healing Potions and 1 Purity."));
+
 		changes.addButton( new ChangeButton(new Image(Assets.SPINNER, 144, 0, 16, 16), "Bug Fixes",
 				"Fixed more instances of 'Save File not Found'\n" +
 						"Fixed transmuting Tier 6 items crashing the game\n" +
-						"Fixed broken plant gfx for Earth Challenge"));
+						"Fixed broken plant gfx for Earth Challenge [Beta Only]\n" +
+						"Fixed various bugs with Dragon Crystals"));
+
+		changes.addButton(new ChangeButton(new PlateArmor().inscribe(new AntiMagic()), "Anti Magic Glyph removed\n" +
+				"This glyph was far too powerful, especially alongside Ring of Elements."));
 
 
 		changes = new ChangeInfo(Messages.get(ChangesScene.class, "new"), false, null);
 		changes.hardlight(Window.TITLE_COLOR);
 		changeInfos.add(changes);
+
+		changes.addButton(new ChangeButton(new SewerGolemSprite(), "Water Challenge", "Water Challenge is now accessible in release APK!\n" +
+				"_-_ New enemy 'Water Elemental' - Splits on hit, has good HP and does some magic damage\n" +
+				"_-_ New enemy 'Goo' - functions like the boss Goo, but scaled up\n" +
+				"_-_ New enemy 'Water Larva' - very low HP, but has massive melee damage\n" +
+				"_-_ New enemy 'Magic Crab' - medium HP, flees from hero, shoots ice that slows them down."));
 
 		changes.addButton(new ChangeButton(new ItemSprite(ItemSpriteSheet.POTION_BISTRE),"Challenge updates!", "New \"Corrosion\" Challenge!\n" +
 				"- All enemies spawn Corrosion + Vertigo gas\n" +
@@ -94,7 +111,7 @@ public class CursedChanges {
 						"_-_ If a Ring/Artifact would be dropped, a Wand or Dragon Crystal may be dropped instead.\n" +
 						"_-_ Food drops nerfed; now half as likely and always Mystery Meat or small Ration."));
 
-		changes.addButton( new ChangeButton(new WandOfMagicMissile(),"Wand of Magic Missile can now be enchanted!"));
+		changes.addButton( new ChangeButton(new WandOfMagicMissile().enchant(new Unstable()),"Wand of Magic Missile can now be enchanted!"));
 
 		changes = new ChangeInfo(Messages.get(ChangesScene.class, "nerfs"), false, null);
 		changes.hardlight( CharSprite.NEGATIVE );
