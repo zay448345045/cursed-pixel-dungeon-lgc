@@ -116,9 +116,9 @@ public class InscribedKnife extends MeleeWeapon {
                 if (enemy != null) {
                     Buff.affect(enemy, Doom.class);
                     enemy.sprite.emitter().burst(ShadowParticle.CURSE, 6);
-                    GLog.i( Messages.get(this, "curse_message") );
+                    GLog.i( Messages.get(InscribedKnife.class, "curse_message") );
                 } else {
-                    GLog.w( Messages.get(this, "curse_fail") );
+                    GLog.w( Messages.get(InscribedKnife.class, "curse_fail") );
                 }
             }
         }
@@ -140,9 +140,9 @@ public class InscribedKnife extends MeleeWeapon {
                 else
                     QuickSlotButton.target(Actor.findChar(cell));
                 if (Wraith.spawnAt(cell) != null) {
-                    GLog.i( Messages.get(this, "summon_message") );
+                    GLog.i( Messages.get(InscribedKnife.class, "summon_message") );
                 } else {
-                    GLog.w( Messages.get(this, "summon_fail") );
+                    GLog.w( Messages.get(InscribedKnife.class, "summon_fail") );
                 }
             }
         }
