@@ -21,6 +21,7 @@ import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.cursedpixeldungeon.ui.QuickSlotButton;
 import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
+import com.watabou.utils.Bundle;
 
 import java.util.ArrayList;
 
@@ -42,8 +43,22 @@ public class InscribedKnife extends MeleeWeapon {
 
     public static final String AC_CURSE = "CURSE";
     public static final String AC_SUMMON = "SUMMON";
+    public static final String CHARGE = "charge";
     public static final int CURSE_AMT = 30;
     public static final int SUMMON_AMT = 40;
+
+    @Override
+    public void storeInBundle(Bundle bundle) {
+        super.storeInBundle(bundle);
+
+        bundle.put(CHARGE, charge);
+    }
+
+    @Override
+    public void restoreFromBundle(Bundle bundle) {
+        charge = bundle.getInt(CHARGE);
+        super.restoreFromBundle(bundle);
+    }
 
     @Override
     public int UpgradeLimit() {
