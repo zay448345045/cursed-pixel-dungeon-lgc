@@ -427,6 +427,7 @@ public class DriedRose extends Artifact {
 		public void saySpawned(){
 			if (Messages.lang() != Languages.ENGLISH) return; //don't say anything if not on english
 			int i = (Dungeon.depth - 1) / 5;
+			i = Math.min(i,5);
 			fieldOfView = new boolean[Dungeon.level.length()];
 			Dungeon.level.updateFieldOfView(this, fieldOfView);
 			if (chooseEnemy() == null)
