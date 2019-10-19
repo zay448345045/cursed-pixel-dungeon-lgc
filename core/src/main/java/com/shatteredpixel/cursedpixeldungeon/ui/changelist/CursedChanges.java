@@ -30,6 +30,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.armor.glyphs.AntiMagic;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.exotic.PotionOfCorrosiveGas;
 import com.shatteredpixel.cursedpixeldungeon.items.spells.MagicalInfusion;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfMagicMissile;
+import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfWarding;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Grim;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Swift;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Unstable;
@@ -83,6 +84,8 @@ public class CursedChanges {
 		changes = new ChangeInfo(Messages.get(ChangesScene.class, "new"), false, null);
 		changes.hardlight(Window.TITLE_COLOR);
 		changeInfos.add(changes);
+
+		changes.addButton( new ChangeButton(new WandOfWarding(),"Wand of Warding added!"));
 
 		changes.addButton(new ChangeButton(new SewerGolemSprite(), "Water Challenge", "Water Challenge is now accessible in release APK!\n" +
 				"_-_ New enemy 'Water Elemental' - Splits on hit, has good HP and does some magic damage\n" +
@@ -157,6 +160,10 @@ public class CursedChanges {
 		changes = new ChangeInfo(Messages.get(ChangesScene.class, "buffs"), false, null);
 		changes.hardlight( CharSprite.POSITIVE );
 		changeInfos.add(changes);
+
+		changes.addButton( new ChangeButton(new Image(Assets.KING, 1, 0, 14, 16), "Bosses buffed again",
+				"_-_ DM300 now has 800 HP and resists large amounts of damage\n" +
+						"_-_ Dwarf King now has 800 HP and a larger arena. Skeletons also deal damage scaling with the number there are."));
 
 		changes.addButton(new ChangeButton(Icons.get(Icons.SKULL), "Enemies Buffed",
 				"Enemies have been buffed at all levels. The amount of extra HP that they have been given scales with depth. This is mainly due to more Scrolls Of Upgrade being availible and the player having higher HP.\n\n" +

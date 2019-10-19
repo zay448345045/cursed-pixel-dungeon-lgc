@@ -147,7 +147,7 @@ public class DragonCrystal extends KindofMisc {
 					Dragon = GetDragonTypeToSpawn();
 					DragonID = Dragon.id();
 					Dragon.pos = Random.element(spawnPoints);
-
+					Dragon.HP = Dragon.HT/2;
 					GameScene.add(Dragon, 1f);
 					CellEmitter.get(Dragon.pos).start( ShaftParticle.FACTORY, 0.3f, 4 );
 					CellEmitter.get(Dragon.pos).start( Speck.factory(Speck.LIGHT), 0.2f, 3 );
