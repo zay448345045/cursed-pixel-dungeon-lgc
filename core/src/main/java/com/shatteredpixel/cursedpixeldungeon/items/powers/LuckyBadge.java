@@ -22,8 +22,10 @@ import com.shatteredpixel.cursedpixeldungeon.items.spells.ArcaneCatalyst;
 import com.shatteredpixel.cursedpixeldungeon.items.stones.StoneOfEnchantment;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
+import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
+import com.shatteredpixel.cursedpixeldungeon.windows.WndItem;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
@@ -34,7 +36,9 @@ import java.util.HashSet;
 public class LuckyBadge extends Power {
     {
         image = ItemSpriteSheet.LUCKYBADGE;
+        defaultAction = AC_INFO;
     }
+    public static final String AC_INFO = "INFO_WINDOW";
     @Override
     public int price() {
         return 82;
@@ -49,6 +53,13 @@ public class LuckyBadge extends Power {
 
     public static boolean latestDropWasRare = false;
 
+    @Override
+    public void execute(Hero hero, String action) {
+        super.execute(hero, action);
+        if (action.equals(AC_INFO)) {
+            GameScene.show(new WndItem(null, this, true));
+        }
+    }
 
     @Override
     public String desc() {

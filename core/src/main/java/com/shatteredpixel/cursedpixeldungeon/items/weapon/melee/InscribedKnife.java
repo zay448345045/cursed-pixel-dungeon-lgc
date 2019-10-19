@@ -38,6 +38,11 @@ public class InscribedKnife extends MeleeWeapon {
        }
     }
 
+    public void Charge(float amount) {
+        charge += amount;
+        charge = Math.min(charge,maxCharge);
+    }
+
     @Override
     public int proc(Char attacker, Char defender, int damage) {
         if (attacker instanceof Hero && ((Hero)attacker).subClass == HeroSubClass.MEDIC) {
@@ -71,12 +76,17 @@ public class InscribedKnife extends MeleeWeapon {
     public void onHeroGainExp(float levelPercent, Hero hero) {
         if (this.isEquipped(Dungeon.hero)) {
             super.onHeroGainExp(levelPercent, hero);
-            charge += (levelPercent / 2);
+            Charge(1f + 0.1f*level());//Charge gained scales slowly with level
         }
     }
 
     @Override
     public String desc() {
         return super.desc() + "\n\n" + Messages.get(this, "charge_desc", (int)charge, maxCharge);
+    }
+
+    @Override
+    public void execute(Hero hero, String action) {
+        super.execute(hero, action);
     }
 }
