@@ -48,6 +48,8 @@ import com.shatteredpixel.cursedpixeldungeon.items.spells.Recycle;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.Wand;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfMagicMissile;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.SpiritBow;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.InscribedKnife;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MagesStaff;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MeleeWeapon;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.MissileWeapon;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
@@ -95,7 +97,8 @@ public class WndBag extends WndTabbed {
 		RECYCLABLE,
 		NOT_EQUIPPED,
 		FIXABLE,
-		IMBED
+		IMBED,
+		INCREASE_TIER
 	}
 
 	protected static final int COLS_P    = 5;
@@ -418,6 +421,7 @@ public class WndBag extends WndTabbed {
 						mode == Mode.NOT_EQUIPPED && !item.isEquipped(Dungeon.hero) ||
 						mode == Mode.RECYCLABLE && Recycle.isRecyclable(item) ||
 						mode == Mode.IMBED && item instanceof AmuletSectorWater ||
+						mode == Mode.INCREASE_TIER && item instanceof MeleeWeapon && !(item instanceof MagesStaff | item instanceof InscribedKnife) ||
 						mode == Mode.ALL
 					);
 				}

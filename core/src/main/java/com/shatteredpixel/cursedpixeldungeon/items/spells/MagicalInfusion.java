@@ -36,7 +36,7 @@ import com.shatteredpixel.cursedpixeldungeon.windows.WndBag;
 public class MagicalInfusion extends InventorySpell {
 	
 	{
-		mode = WndBag.Mode.WEAPON;
+		mode = WndBag.Mode.INCREASE_TIER;
 		image = ItemSpriteSheet.MAGIC_INFUSE;
 	}
 	
