@@ -120,6 +120,10 @@ public class CursedChanges {
 		changes.hardlight( CharSprite.POSITIVE );
 		changeInfos.add(changes);
 
+		changes.addButton( new ChangeButton(new Image(Assets.KING, 1, 0, 14, 16), "Bosses buffed again",
+				"_-_ DM300 now has 800 HP and resists large amounts of damage\n" +
+						"_-_ Dwarf King now has 800 HP and a larger arena. Skeletons also deal damage scaling with the number there are."));
+
 		changes.addButton(new ChangeButton(new ItemSprite(ItemSpriteSheet.TOMB),"Crypt Rooms Changed", "Crypt rooms have been rebalanced to include same upgrade scaling with depth as Animated Statues"));
 
 		changes.addButton(new ChangeButton(new ItemSprite(ItemSpriteSheet.RING_EMERALD, null), "Ring of Wealth changed",
@@ -144,6 +148,9 @@ public class CursedChanges {
 		changes = new ChangeInfo(Messages.get(ChangesScene.class, "changes"),false,null);
 		changes.hardlight( CharSprite.WARNING );
 		changeInfos.add(changes);
+
+		changes.addButton( new ChangeButton(new Image(Assets.SPINNER, 144, 0, 16, 16), "Bug Fixes",
+				"Fixed many instances of 'Save File not Found'"));
 
 		changes.addButton(new ChangeButton(new MagicalInfusion(),
 				"Magical Infusion reworked:\n" +
@@ -171,13 +178,46 @@ public class CursedChanges {
 		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.RING_AGATE, null), "Misc Slots",
 				"Misc slots have been reworked so that Wands must be equipped. To compensate, the player now has 4 slots."));
 
+		changes = new ChangeInfo(Messages.get(ChangesScene.class, "new"), false, null);
+		changes.hardlight(Window.TITLE_COLOR);
+		changeInfos.add(changes);
+
+		/*changes.addButton(new ChangeButton(Icons.get(Icons.WARNING), "Degradation",
+				"Degradation reworked!\n" +
+						"_-_ now functions more like \"Dynamic Strength\"\n" +
+						"_-_ Items will lose up to 50% effectiveness from attacking repeatedly\n" +
+						"_-_ Applies to armour as well"));*/
+
+		changes.addButton(new ChangeButton(new Greatsword().enchant(new Swift()),
+				"Added a new enchantment: Swift. This enchantment gives an item a chance not to consume a turn on use."));
+
+		changes.addButton(new ChangeButton(new PoisonDragon(),
+				"A new misc type has been added: Allies. They can be summoned from crystals and will help the player."));
+
+
+
+		changes.addButton( new ChangeButton(new DewVial(),
+				"The Dew Vial now has the 'Water' functionality, which allows the player to turn several surrounding tiles into water. It will consume up to 5 dew drops and will be more powerful the more Dew the player has."));
+
+		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.RING_EMERALD, null), "Ring Of Wealth",
+				"A few changes have been made to the Ring of Wealth:\n" +
+						"_-_ It no longer spawns naturally\n" +
+						"_-_ A +10 ROW spawns in the first shop for about 800 Gold. Better save up!\n" +
+						"_-_ It can be used to farm for Scrolls of Upgrade\n" +
+						"_-_ It now shows the chance to drop a Scroll of Upgrade in the description"));
+
+		changes.addButton(new ChangeButton(Icons.get(Icons.WARNING), "Upgrade Limits",
+				"All items in the game have been given upgrade limits:\n" +
+						"_-_ Most equipment is capped at +15.\n" +
+						"_-_ Wands can be upgraded to +20 by the Mage. Additionally, Battlemage can upgrade his staff to +25, but other wands are still capped at +20.\n" +
+						"_-_ Warrior, in turn, can upgrade armour higher. While most armour is capped at the regular level, if the Warrior has his Broken Seal attatched, the limit will be temporarily increased to +20. Warrior also can upgrade his Broken Seal to +5.\n" +
+						"_-_ Rogue can upgrade weapons more. They are capped at +20 for him and +15 for others\n" +
+						"_-_ Huntress can simply upgrade thrown weapons to +20 instead of +15. I may have to buff this in future, possibly to extend this bonus to the Ring of Sharpshooting as well."));
+
+
 		changes = new ChangeInfo(Messages.get(ChangesScene.class, "buffs"), false, null);
 		changes.hardlight( CharSprite.POSITIVE );
 		changeInfos.add(changes);
-
-		changes.addButton( new ChangeButton(new Image(Assets.KING, 1, 0, 14, 16), "Bosses buffed again",
-				"_-_ DM300 now has 800 HP and resists large amounts of damage\n" +
-						"_-_ Dwarf King now has 800 HP and a larger arena. Skeletons also deal damage scaling with the number there are."));
 
 		changes.addButton(new ChangeButton(Icons.get(Icons.SKULL), "Enemies Buffed",
 				"Enemies have been buffed at all levels. The amount of extra HP that they have been given scales with depth. This is mainly due to more Scrolls Of Upgrade being availible and the player having higher HP.\n\n" +
@@ -252,49 +292,6 @@ public class CursedChanges {
 						"_-_ Ring of Tenacity has been removed from the game."));
 
 
-		changes = new ChangeInfo(Messages.get(ChangesScene.class, "new"), false, null);
-		changes.hardlight(Window.TITLE_COLOR);
-		changeInfos.add(changes);
-
-		/*changes.addButton(new ChangeButton(Icons.get(Icons.WARNING), "Degradation",
-				"Degradation reworked!\n" +
-						"_-_ now functions more like \"Dynamic Strength\"\n" +
-						"_-_ Items will lose up to 50% effectiveness from attacking repeatedly\n" +
-						"_-_ Applies to armour as well"));*/
-
-		changes.addButton(new ChangeButton(new Greatsword().enchant(new Swift()),
-				"Added a new enchantment: Swift. This enchantment gives an item a chance not to consume a turn on use."));
-
-		changes.addButton(new ChangeButton(new PoisonDragon(),
-				"A new misc type has been added: Allies. They can be summoned from crystals and will help the player."));
-
-
-
-		changes.addButton( new ChangeButton(new DewVial(),
-				"The Dew Vial now has the 'Water' functionality, which allows the player to turn several surrounding tiles into water. It will consume up to 5 dew drops and will be more powerful the more Dew the player has."));
-
-		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.RING_EMERALD, null), "Ring Of Wealth",
-				"A few changes have been made to the Ring of Wealth:\n" +
-						"_-_ It no longer spawns naturally\n" +
-						"_-_ A +10 ROW spawns in the first shop for about 800 Gold. Better save up!\n" +
-						"_-_ It can be used to farm for Scrolls of Upgrade\n" +
-						"_-_ It now shows the chance to drop a Scroll of Upgrade in the description"));
-
-		changes.addButton(new ChangeButton(Icons.get(Icons.WARNING), "Upgrade Limits",
-				"All items in the game have been given upgrade limits:\n" +
-						"_-_ Most equipment is capped at +15.\n" +
-						"_-_ Wands can be upgraded to +20 by the Mage. Additionally, Battlemage can upgrade his staff to +25, but other wands are still capped at +20.\n" +
-						"_-_ Warrior, in turn, can upgrade armour higher. While most armour is capped at the regular level, if the Warrior has his Broken Seal attatched, the limit will be temporarily increased to +20. Warrior also can upgrade his Broken Seal to +5.\n" +
-						"_-_ Rogue can upgrade weapons more. They are capped at +20 for him and +15 for others\n" +
-						"_-_ Huntress can simply upgrade thrown weapons to +20 instead of +15. I may have to buff this in future, possibly to extend this bonus to the Ring of Sharpshooting as well."));
-
-
-		changes = new ChangeInfo(Messages.get(ChangesScene.class, "bugfixes"), false, null);
-		changes.hardlight(Window.TITLE_COLOR);
-		changeInfos.add(changes);
-
-		changes.addButton( new ChangeButton(new Image(Assets.SPINNER, 144, 0, 16, 16), "Bug Fixes",
-				"Fixed many instances of 'Save File not Found'"));
 
 	}
 
