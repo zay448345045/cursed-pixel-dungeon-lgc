@@ -27,6 +27,7 @@ import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.cursedpixeldungeon.items.EquipableItem;
 import com.shatteredpixel.cursedpixeldungeon.items.Generator;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
+import com.shatteredpixel.cursedpixeldungeon.items.allies.DragonCrystal;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.Artifact;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.AlchemicalCatalyst;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.Potion;
@@ -68,7 +69,8 @@ public class ScrollOfTransmutation extends InventoryScroll {
 				item instanceof Wand ||
 				item instanceof Plant.Seed ||
 				item instanceof Runestone ||
-				item instanceof Artifact;
+				item instanceof Artifact ||
+				item instanceof DragonCrystal;
 	}
 	
 	@Override
@@ -94,6 +96,8 @@ public class ScrollOfTransmutation extends InventoryScroll {
 			result = changeStone((Runestone) item);
 		} else if (item instanceof Artifact) {
 			result = changeArtifact( (Artifact)item );
+		} else if (item instanceof DragonCrystal) {
+			result = changeCrystal( ((DragonCrystal)item));
 		} else {
 			result = null;
 		}
@@ -176,6 +180,28 @@ public class ScrollOfTransmutation extends InventoryScroll {
 		
 		return n;
 		
+	}
+
+	private DragonCrystal changeCrystal( DragonCrystal d ) {
+		DragonCrystal n;
+		do {
+			n = (DragonCrystal)Generator.random(Generator.Category.ALLIES);
+		} while (Challenges.isItemBlocked(n) || n.getClass() == d.getClass());
+
+		n.level(0);
+
+		int level = d.level();
+		if (level > 0) {
+			n.upgrade( level );
+		} else if (level < 0) {
+			n.degrade( -level );
+		}
+
+		n.levelKnown = d.levelKnown;
+		n.cursedKnown = d.cursedKnown;
+		n.cursed = d.cursed;
+
+		return n;
 	}
 	
 	private Ring changeRing( Ring r ) {
