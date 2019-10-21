@@ -667,7 +667,7 @@ public abstract class Mob extends Char {
 			Badges.validatePriestessUnlock();
 		}
 		super.die( cause );
-		if (Dungeon.hero.subClass == HeroSubClass.NECROMACER && Random.Int(3) <= 1 && cause instanceof Item) {//Must be killed by the hero (by an item)
+		if (Dungeon.hero.subClass == HeroSubClass.NECROMACER && Random.Int(1) == 0 && cause instanceof Item) {//Must be killed by the hero (by an item)
 			if (Wraith.spawnAt( pos ) != null) {
 				Dungeon.hero.sprite.emitter().burst(ShadowParticle.CURSE, 6);
 			}

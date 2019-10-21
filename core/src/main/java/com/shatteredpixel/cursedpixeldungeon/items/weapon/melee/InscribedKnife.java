@@ -12,9 +12,12 @@ import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Wraith;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.EnergyParticle;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.ShadowParticle;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
+import com.shatteredpixel.cursedpixeldungeon.items.KindOfWeapon;
 import com.shatteredpixel.cursedpixeldungeon.items.allies.DragonCrystal;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.Artifact;
+import com.shatteredpixel.cursedpixeldungeon.items.artifacts.DriedRose;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.Wand;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.CellSelector;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
@@ -76,6 +79,11 @@ public class InscribedKnife extends MeleeWeapon {
         charge = Math.min(charge,maxCharge);
     }
 
+    public void loseCharge(float amount) {
+        charge -= amount;
+        charge = Math.max(charge,0);
+    }
+
     @Override
     public int proc(Char attacker, Char defender, int damage) {
         if (attacker instanceof Hero && ((Hero)attacker).subClass == HeroSubClass.MEDIC) {
@@ -123,7 +131,8 @@ public class InscribedKnife extends MeleeWeapon {
         @Override
         public void onSelect(Integer target) {
             Char enemy;
-            if (target != null) {
+            KindOfWeapon Knife = Dungeon.hero.belongings.weapon;
+            if (target != null && Knife instanceof InscribedKnife) {
                 int cell = target;
                 if (Actor.findChar(target) != null)
                     QuickSlotButton.target(Actor.findChar(target));
@@ -134,6 +143,7 @@ public class InscribedKnife extends MeleeWeapon {
                     Buff.affect(enemy, Doom.class);
                     enemy.sprite.emitter().burst(ShadowParticle.CURSE, 6);
                     GLog.i( Messages.get(InscribedKnife.class, "curse_message") );
+                    ((InscribedKnife)Knife).loseCharge(InscribedKnife.CURSE_AMT);
                 } else {
                     GLog.w( Messages.get(InscribedKnife.class, "curse_fail") );
                 }
@@ -150,7 +160,8 @@ public class InscribedKnife extends MeleeWeapon {
 
         @Override
         public void onSelect(Integer target) {
-            if (target != null) {
+            KindOfWeapon Knife = Dungeon.hero.belongings.weapon;
+            if (target != null && Knife instanceof InscribedKnife) {
                 int cell = target;
                 if (Actor.findChar(target) != null)
                     QuickSlotButton.target(Actor.findChar(target));
@@ -158,6 +169,7 @@ public class InscribedKnife extends MeleeWeapon {
                     QuickSlotButton.target(Actor.findChar(cell));
                 if (Wraith.spawnAt(cell) != null) {
                     GLog.i( Messages.get(InscribedKnife.class, "summon_message") );
+                    ((InscribedKnife)Knife).loseCharge(InscribedKnife.SUMMON_AMT);
                 } else {
                     GLog.w( Messages.get(InscribedKnife.class, "summon_fail") );
                 }
@@ -173,17 +185,15 @@ public class InscribedKnife extends MeleeWeapon {
     @Override
     public void execute(Hero hero, String action) {
         super.execute(hero, action);
-        if (action.equals(AC_CURSE)) {
+        if (action.equals(AC_CURSE) && isEquipped(hero)) {
             if (charge >= CURSE_AMT) {
                 GameScene.selectCell(curse);
-                charge -= CURSE_AMT;
             } else {
                 GLog.i( Messages.get(this, "no_charge") );
             }
-        } else if (action.equals(AC_SUMMON)) {
+        } else if (action.equals(AC_SUMMON) && isEquipped(hero)) {
             if (charge >= SUMMON_AMT) {
                 GameScene.selectCell(summon);
-                charge -= SUMMON_AMT;
             } else {
                 GLog.i( Messages.get(this, "no_charge") );
             }
