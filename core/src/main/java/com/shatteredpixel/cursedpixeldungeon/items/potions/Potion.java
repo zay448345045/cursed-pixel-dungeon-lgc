@@ -528,8 +528,7 @@ public class Potion extends Item {
 			}
 			
 			while (result instanceof PotionOfHealing
-					&& (Dungeon.isChallenged(Challenges.NO_HEALING)
-					|| Random.Int(10) < Dungeon.LimitedDrops.COOKING_HP.count)) {
+					&& (Dungeon.isChallenged(Challenges.NO_HEALING))) {
 				result = Generator.random(Generator.Category.POTION);
 			}
 			
