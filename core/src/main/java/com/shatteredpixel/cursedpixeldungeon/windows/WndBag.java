@@ -421,7 +421,7 @@ public class WndBag extends WndTabbed {
 						mode == Mode.NOT_EQUIPPED && !item.isEquipped(Dungeon.hero) ||
 						mode == Mode.RECYCLABLE && Recycle.isRecyclable(item) ||
 						mode == Mode.IMBED && item instanceof AmuletSectorWater ||
-						mode == Mode.INCREASE_TIER && item instanceof MeleeWeapon && !(item instanceof MagesStaff | item instanceof InscribedKnife) ||
+						mode == Mode.INCREASE_TIER && item instanceof MeleeWeapon && !(item instanceof MagesStaff | item instanceof InscribedKnife) && ((MeleeWeapon)item).tier < 6 ||
 						mode == Mode.ALL
 					);
 				}
