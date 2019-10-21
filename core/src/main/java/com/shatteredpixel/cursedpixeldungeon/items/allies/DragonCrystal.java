@@ -414,14 +414,19 @@ public class DragonCrystal extends KindofMisc {
 
 		@Override
 		protected boolean act() {
+			boolean act = super.act();
 			updateCrystal();
 			if (Crystal == null || !Crystal.isEquipped(Dungeon.hero)){
 				damage(1, this);
-			} else if (PassiveRegen) {
+			} else  {
 				regenDelay += 1;
 				if (regenDelay > 9) {
 					regenDelay = 0;
-					HP += Math.min(HT / 10, this.missingHP());
+					int healing = Math.min(HT / 10, this.missingHP());
+					if (!PassiveRegen) {
+						healing = 0;
+					}
+					HP += healing;
 				}
 			}
 			
@@ -432,7 +437,7 @@ public class DragonCrystal extends KindofMisc {
 				destroy();
 				return true;
 			}
-			return super.act();
+			return act;
 		}
 		
 		@Override

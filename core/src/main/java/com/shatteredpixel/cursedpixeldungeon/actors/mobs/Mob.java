@@ -59,6 +59,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.rings.Ring;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfWealth;
 import com.shatteredpixel.cursedpixeldungeon.items.stones.StoneOfAggression;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Lucky;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.InscribedKnife;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.MissileWeapon;
 import com.shatteredpixel.cursedpixeldungeon.levels.Level;
 import com.shatteredpixel.cursedpixeldungeon.levels.features.Chasm;
@@ -667,7 +668,7 @@ public abstract class Mob extends Char {
 			Badges.validatePriestessUnlock();
 		}
 		super.die( cause );
-		if (Dungeon.hero.subClass == HeroSubClass.NECROMACER && Random.Int(1) == 0 && cause instanceof Item) {//Must be killed by the hero (by an item)
+		if (Dungeon.hero.subClass == HeroSubClass.NECROMACER && Random.Float() >= 0.5f && (cause instanceof Item | cause instanceof Hero)) {//Must be killed by the hero (by an item)
 			if (Wraith.spawnAt( pos ) != null) {
 				Dungeon.hero.sprite.emitter().burst(ShadowParticle.CURSE, 6);
 			}
