@@ -168,6 +168,8 @@ public class Dungeon {
 
 	public static long seed;
 
+	public static ArrayList<Level> Levels = new ArrayList<>();
+
 	public static void init() {
 
 		version = Game.versionCode;
@@ -219,6 +221,10 @@ public class Dungeon {
 		Badges.reset();
 
 		GamesInProgress.selectedClass.initHero( hero );
+		for (int i=0; i < 50; i++) {
+			Dungeon.Levels.add(newLevelWithDepth(i));
+		}
+
 	}
 
 	public static boolean isChallenged( int mask ) {
@@ -620,6 +626,7 @@ public class Dungeon {
 	private static final String CHAPTERS	= "chapters";
 	private static final String QUESTS		= "quests";
 	private static final String BADGES		= "badges";
+	private static final String LEVELS		= "levels";
 
 	public static void saveGame( int save ) throws IOException {
 		try {
@@ -660,6 +667,12 @@ public class Dungeon {
 			Blacksmith	.Quest.storeInBundle( quests );
 			Imp			.Quest.storeInBundle( quests );
 			bundle.put( QUESTS, quests );
+
+			Bundle LevelsBundle = new Bundle();
+			for (int i=0; i < Levels.size(); i++) {
+				Levels.get(i).storeInBundle(LevelsBundle);
+			}
+			bundle.put(LEVELS, Levels);
 
 			SpecialRoom.storeRoomsInBundle( bundle );
 			SecretRoom.storeRoomsInBundle( bundle );
@@ -760,6 +773,11 @@ public class Dungeon {
 
 			SpecialRoom.restoreRoomsFromBundle(bundle);
 			SecretRoom.restoreRoomsFromBundle(bundle);
+		}
+
+		Bundle LevelsBundle = bundle.getBundle(LEVELS);
+		for (int i=0; i < Levels.size(); i++) {
+			Levels.get(i).restoreFromBundle(LevelsBundle);
 		}
 
 		Bundle badges = bundle.getBundle(BADGES);
