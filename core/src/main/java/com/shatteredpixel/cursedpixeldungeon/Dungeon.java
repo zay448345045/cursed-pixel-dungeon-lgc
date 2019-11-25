@@ -221,9 +221,6 @@ public class Dungeon {
 		Badges.reset();
 
 		GamesInProgress.selectedClass.initHero( hero );
-		for (int i=0; i < 50; i++) {
-			Dungeon.Levels.add(newLevelWithDepth(i));
-		}
 
 	}
 
@@ -668,11 +665,6 @@ public class Dungeon {
 			Imp			.Quest.storeInBundle( quests );
 			bundle.put( QUESTS, quests );
 
-			Bundle LevelsBundle = new Bundle();
-			for (int i=0; i < Levels.size(); i++) {
-				Levels.get(i).storeInBundle(LevelsBundle);
-			}
-			bundle.put(LEVELS, Levels);
 
 			SpecialRoom.storeRoomsInBundle( bundle );
 			SecretRoom.storeRoomsInBundle( bundle );
@@ -775,10 +767,6 @@ public class Dungeon {
 			SecretRoom.restoreRoomsFromBundle(bundle);
 		}
 
-		Bundle LevelsBundle = bundle.getBundle(LEVELS);
-		for (int i=0; i < Levels.size(); i++) {
-			Levels.get(i).restoreFromBundle(LevelsBundle);
-		}
 
 		Bundle badges = bundle.getBundle(BADGES);
 		if (!badges.isNull()) {
