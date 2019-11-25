@@ -218,7 +218,8 @@ public class InterlevelScene extends PixelScene {
 
 						switch (mode) {//Second argument decides a few things. DESCEND_NAME, places the player at the entrance, while ASCEND_NAME places them at the exit. FALL_NAME gives them the fall buff and causes them to fall into a random room
 							case DESCEND:
-								goToDepth(Dungeon.depth, DESCEND_NAME);
+								goToDepth(Dungeon.depth + 1, DESCEND_NAME);
+								break;
 							case DESCEND_GAMEINIT:
 								descend();
 								break;
@@ -363,7 +364,7 @@ public class InterlevelScene extends PixelScene {
 	public static Level createNewLevel(int depthToAccess) {
 		Level level;
 		Dungeon.depth = depthToAccess;
-		level = Dungeon.newLevelWithDepth(Dungeon.depth);
+		level = Dungeon.createNewLevelWithDepth(Dungeon.depth);
 		Dungeon.switchLevel( level, level.entrance );
 		return level;
 	}
@@ -390,7 +391,13 @@ public class InterlevelScene extends PixelScene {
 			Dungeon.depth = 1;
 		}
 		Level level;
-		level = Dungeon.loadLevel( GamesInProgress.curSlot );
+		try {
+			level = Dungeon.loadLevel( GamesInProgress.curSlot );
+
+		} catch(Exception e) {
+
+			level = Dungeon.createNewLevelWithDepth(Dungeon.depth);
+		}
 
 
 
@@ -421,7 +428,7 @@ public class InterlevelScene extends PixelScene {
 		}
 
 		Level level;
-		level = Dungeon.newLevel();
+		level = Dungeon.loadLevel(GamesInProgress.curSlot);
 		Dungeon.switchLevel( level, level.entrance );
 	}
 
@@ -441,7 +448,7 @@ public class InterlevelScene extends PixelScene {
 
 		} catch(Exception e) {
 
-			level = Dungeon.newLevelWithDepth(Dungeon.depth);
+			level = Dungeon.createNewLevelWithDepth(Dungeon.depth);
 		}
 		Dungeon.switchLevel( level, level.fallCell( fallIntoPit ));
 	}
@@ -458,7 +465,7 @@ public class InterlevelScene extends PixelScene {
 
 		} catch(Exception e) {
 
-			level = Dungeon.newLevelWithDepth(Dungeon.depth);
+			level = Dungeon.createNewLevelWithDepth(Dungeon.depth);
 		}
 		Dungeon.switchLevel( level, level.exit );
 	}
@@ -490,7 +497,7 @@ public class InterlevelScene extends PixelScene {
 
 			} catch(Exception e) {
 
-				level = Dungeon.newLevelWithDepth(Dungeon.depth);
+				level = Dungeon.createNewLevelWithDepth(Dungeon.depth);
 			}
 			Dungeon.switchLevel( level, Dungeon.hero.pos );
 		}

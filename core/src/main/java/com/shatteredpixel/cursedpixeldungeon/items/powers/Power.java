@@ -38,12 +38,12 @@ public abstract class Power extends Item {
     }
 
     @Override
-    public boolean doPickUp(Hero hero) {
+    public boolean collect() {
         if (passiveBuff != null) {
             passiveBuff = passiveBuff();
-            passiveBuff.attachTo(hero);
+            passiveBuff.attachTo(curUser);
         }
-        return super.doPickUp(hero);
+        return super.collect();
     }
 
 

@@ -76,6 +76,7 @@ import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 import com.watabou.utils.SparseArray;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -239,20 +240,7 @@ public class Dungeon {
 		return level;
 	}
 
-
 	public static Level newLevelWithDepth(int depthToAccess) {
-
-
-
-		depth = depthToAccess;
-			Statistics.deepestFloor = Math.max(Statistics.deepestFloor, depth);
-
-			if (Statistics.qualifiedForNoKilling) {
-				Statistics.completedWithNoKilling = true;
-			} else {
-				Statistics.completedWithNoKilling = false;
-			}
-
 		Level level;
 		switch (depth) {
 
@@ -331,6 +319,21 @@ public class Dungeon {
 		}
 
 		level.create();
+		return level;
+	}
+
+
+	public static Level createNewLevelWithDepth(int depthToAccess) {
+		depth = depthToAccess;
+			Statistics.deepestFloor = Math.max(Statistics.deepestFloor, depth);
+
+			if (Statistics.qualifiedForNoKilling) {
+				Statistics.completedWithNoKilling = true;
+			} else {
+				Statistics.completedWithNoKilling = false;
+			}
+
+		Level level = newLevelWithDepth(depthToAccess);
 		LoadedDepths.add(depthToAccess);
 
 		Statistics.qualifiedForNoKilling = !bossLevel();
@@ -692,6 +695,9 @@ public class Dungeon {
 	}
 
 	public static void saveLevel( int save ) throws IOException {
+		saveLevel(save, depth, level);
+	}
+	public static void saveLevel( int save, int depth, Level level ) throws IOException {
 		Bundle bundle = new Bundle();
 		bundle.put( LEVEL, level );
 
