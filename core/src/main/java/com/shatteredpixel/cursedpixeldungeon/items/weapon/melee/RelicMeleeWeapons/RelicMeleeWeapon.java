@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class RelicMeleeWeapon extends MeleeWeapon {
     {
         tier = 6;
+        defaultAction = AC_ACTIVATE;
     }
 
     public static final String AC_ACTIVATE = "activate";
@@ -70,7 +71,7 @@ public class RelicMeleeWeapon extends MeleeWeapon {
     }
 
     protected RelicMeleeWeaponBuff passiveBuff() {
-        return null;
+        return new RelicMeleeWeaponBuff();
     }
 
     public RelicEnchantment enchantment() {//Ensures that it can only hold it's special enchantment
