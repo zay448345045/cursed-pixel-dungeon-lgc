@@ -35,7 +35,9 @@ public class RelicMeleeWeapon extends MeleeWeapon {
     @Override
     public ArrayList<String> actions(Hero hero) {
         ArrayList<String> actions =  super.actions(hero);
-        actions.add(AC_ACTIVATE);
+        if (isEquipped(hero) & charge >= chargeCap) {
+            actions.add(AC_ACTIVATE);
+        }
         return actions;
     }
 
@@ -44,7 +46,11 @@ public class RelicMeleeWeapon extends MeleeWeapon {
 
         super.execute(hero, action);
         if (action.equals(AC_ACTIVATE)) {
-            ((RelicEnchantment)enchantment).activate(this,hero);
+            if (isEquipped(hero) & charge >= chargeCap) {
+                ((RelicEnchantment) enchantment).activate(this, hero);
+            } else {
+                GLog.i(Messages.get(RelicMeleeWeapon.class,"no_charge",name()));
+            }
         }
     }
 

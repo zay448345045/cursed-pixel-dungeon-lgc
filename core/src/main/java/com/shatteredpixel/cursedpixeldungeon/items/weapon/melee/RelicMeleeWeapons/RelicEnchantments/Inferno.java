@@ -43,18 +43,12 @@ public class Inferno extends RelicEnchantment {
                     Buff.affect(defender, Burning.class).reignite(defender, 8f);
                 }
             } else {
-                if (Random.Int(2) == 0) {
+                if (Random.Int(2) == 0 & pos != attacker.pos) {
                     GameScene.add(Blob.seed(pos, 3, Fire.class));
                 }
             }
         }
-
-
-
-
         defender.sprite.emitter().burst(FlameParticle.FACTORY, (weapon.level()+3)*3);
-
-
         return damage;
 
     }
@@ -63,7 +57,11 @@ public class Inferno extends RelicEnchantment {
     public void activate(RelicMeleeWeapon weapon, Char owner) {
         super.activate(weapon,owner);
         for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
-            mob.damage(mob.HT/2, Grim.class);//Uses "Grim" so it's not too OP against bosses
+            int damage = mob.HT/2;
+            if (mob.properties().contains(Char.Property.BOSS)) {
+                damage /=4;
+            }
+            mob.damage(damage, Fire.class);
             GameScene.add(Blob.seed(mob.pos, 3, Fire.class));
         }
     }
