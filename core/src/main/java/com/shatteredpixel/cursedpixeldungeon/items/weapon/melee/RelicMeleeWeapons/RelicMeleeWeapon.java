@@ -1,22 +1,34 @@
-package com.shatteredpixel.cursedpixeldungeon.items.weapon.melee;
+package com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons;
 
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.LockedFloor;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.Weapon;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MeleeWeapon;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
+import com.watabou.utils.Bundle;
 
 public class RelicMeleeWeapon extends MeleeWeapon {
 
     protected Buff passiveBuff;
-    protected Buff activeBuff;
     protected int charge = 0;
     protected float partialCharge = 0;
-    protected int chargeCap = 0;
+    protected int chargeCap = 100;
     protected int cooldown = 0;
 
-    public void activate( Char ch ) {
+    public RelicMeleeWeapon() {
+        super();
+        enchant();
+    }
+
+    @Override
+    public int max(int lvl) {
+        return (int) (super.max(lvl)*0.5f);
+    }
+
+    public void activate(Char ch ) {
         passiveBuff = passiveBuff();
         if (passiveBuff != null) {
             passiveBuff.attachTo(ch);
@@ -33,6 +45,15 @@ public class RelicMeleeWeapon extends MeleeWeapon {
         return null;
     }
 
+    public Enchantment enchantment() {//Ensures that it can only hold it's special enchantment
+        return null;
+    }
+
+    @Override
+    public Weapon enchant(Enchantment ench) {
+        return super.enchant(enchantment());
+    }
+
     @Override
     public String status() {
         if (!isIdentified()){
@@ -40,6 +61,23 @@ public class RelicMeleeWeapon extends MeleeWeapon {
         }
         //display as percent
         return Messages.format( "%d%%", charge );
+    }
+    private static final String CHARGE = "charge";
+    private static final String PARTIALCHARGE = "partialcharge";
+
+    @Override
+    public void storeInBundle( Bundle bundle ) {
+        super.storeInBundle(bundle);
+        bundle.put( CHARGE , charge );
+        bundle.put( PARTIALCHARGE , partialCharge );
+    }
+
+    @Override
+    public void restoreFromBundle( Bundle bundle ) {
+        super.restoreFromBundle(bundle);
+        charge = Math.min( chargeCap, bundle.getInt( CHARGE ));
+        charge = bundle.getInt( CHARGE );
+        partialCharge = bundle.getFloat( PARTIALCHARGE );
     }
 
     public class RelicMeleeWeaponBuff extends Buff {
