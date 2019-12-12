@@ -1,6 +1,7 @@
 package com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons;
 
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicEnchantments.Inferno;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicEnchantments.RelicEnchantment;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 
 public class MaracarsBlades extends RelicMeleeWeapon {
@@ -12,7 +13,7 @@ public class MaracarsBlades extends RelicMeleeWeapon {
     }
 
     @Override
-    public Enchantment enchantment() {
+    public RelicEnchantment enchantment() {
         return new Inferno();
     }
 }

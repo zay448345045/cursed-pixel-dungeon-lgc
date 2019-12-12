@@ -6,6 +6,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.LockedFloor;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MeleeWeapon;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicEnchantments.RelicEnchantment;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
 import com.watabou.utils.Bundle;
@@ -48,7 +49,7 @@ public class RelicMeleeWeapon extends MeleeWeapon {
         return null;
     }
 
-    public Enchantment enchantment() {//Ensures that it can only hold it's special enchantment
+    public RelicEnchantment enchantment() {//Ensures that it can only hold it's special enchantment
         return null;
     }
 
