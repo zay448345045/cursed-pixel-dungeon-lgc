@@ -11,16 +11,19 @@ import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
 import com.watabou.utils.Bundle;
 
 public class RelicMeleeWeapon extends MeleeWeapon {
+    {
+        tier = 6;
+    }
 
     protected Buff passiveBuff;
-    protected int charge = 0;
+    protected int charge = 100;
     protected float partialCharge = 0;
     protected int chargeCap = 100;
     protected int cooldown = 0;
 
     public RelicMeleeWeapon() {
         super();
-        enchant();
+        enchant(enchantment());
     }
 
     @Override
