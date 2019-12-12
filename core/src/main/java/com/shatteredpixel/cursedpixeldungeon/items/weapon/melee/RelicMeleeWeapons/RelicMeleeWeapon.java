@@ -56,6 +56,7 @@ public class RelicMeleeWeapon extends MeleeWeapon {
 
     public void use() {
         charge = 0;
+        updateQuickslot();
     }
 
     @Override

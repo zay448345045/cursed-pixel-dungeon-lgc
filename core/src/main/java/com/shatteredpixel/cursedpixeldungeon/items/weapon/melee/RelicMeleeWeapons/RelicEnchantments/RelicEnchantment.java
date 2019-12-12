@@ -15,7 +15,7 @@ public abstract class RelicEnchantment extends Weapon.Enchantment {
             return relicProc((RelicMeleeWeapon)weapon,attacker,defender,damage);
         } else {
             GLog.w("Inconceivable!");
-            return 0;
+            return damage;
         }
     }
 
