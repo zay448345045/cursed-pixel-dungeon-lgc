@@ -7,7 +7,6 @@ import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapon
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
 
-import javax.microedition.khronos.opengles.GL;
 
 public abstract class RelicEnchantment extends Weapon.Enchantment {
     @Override
@@ -21,6 +20,10 @@ public abstract class RelicEnchantment extends Weapon.Enchantment {
     }
 
     public abstract int relicProc(RelicMeleeWeapon weapon, Char attacker, Char defender, int damage);
+
+    public void activate(RelicMeleeWeapon weapon, Char owner) {
+        weapon.use();
+    }
 
     @Override
     public ItemSprite.Glowing glowing() {

@@ -11,10 +11,14 @@ import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
 import com.watabou.utils.Bundle;
 
+import java.util.ArrayList;
+
 public class RelicMeleeWeapon extends MeleeWeapon {
     {
         tier = 6;
     }
+
+    public static final String AC_ACTIVATE = "activate";
 
     protected Buff passiveBuff;
     protected int charge = 100;
@@ -25,6 +29,26 @@ public class RelicMeleeWeapon extends MeleeWeapon {
     public RelicMeleeWeapon() {
         super();
         enchant(enchantment());
+    }
+
+    @Override
+    public ArrayList<String> actions(Hero hero) {
+        ArrayList<String> actions =  super.actions(hero);
+        actions.add(AC_ACTIVATE);
+        return actions;
+    }
+
+    @Override
+    public void execute(Hero hero, String action) {
+
+        super.execute(hero, action);
+        if (action.equals(AC_ACTIVATE)) {
+            ((RelicEnchantment)enchantment).activate(this,hero);
+        }
+    }
+
+    public void use() {
+        charge = 0;
     }
 
     @Override

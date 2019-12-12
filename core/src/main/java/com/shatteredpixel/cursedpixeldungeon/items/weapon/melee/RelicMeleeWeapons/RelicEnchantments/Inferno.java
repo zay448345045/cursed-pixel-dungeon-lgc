@@ -1,16 +1,23 @@
 package com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicEnchantments;
 
+import com.cursedpixel.curseddungeon.R;
+import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
+import com.shatteredpixel.cursedpixeldungeon.actors.blobs.Blob;
+import com.shatteredpixel.cursedpixeldungeon.actors.blobs.Fire;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Burning;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroAction;
+import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.FlameParticle;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Blazing;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Grim;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MeleeWeapon;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicMeleeWeapon;
+import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
@@ -35,6 +42,10 @@ public class Inferno extends RelicEnchantment {
                 } else {
                     Buff.affect(defender, Burning.class).reignite(defender, 8f);
                 }
+            } else {
+                if (Random.Int(2) == 0) {
+                    GameScene.add(Blob.seed(pos, 3, Fire.class));
+                }
             }
         }
 
@@ -46,6 +57,15 @@ public class Inferno extends RelicEnchantment {
 
         return damage;
 
+    }
+
+    @Override
+    public void activate(RelicMeleeWeapon weapon, Char owner) {
+        super.activate(weapon,owner);
+        for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
+            mob.damage(mob.HT/2, Grim.class);//Uses "Grim" so it's not too OP against bosses
+            GameScene.add(Blob.seed(mob.pos, 3, Fire.class));
+        }
     }
 
     @Override
