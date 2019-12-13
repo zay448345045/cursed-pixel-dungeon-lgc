@@ -1,6 +1,6 @@
 package com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons;
 
-import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicEnchantments.Etheral;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicEnchantments.Ethereal;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicEnchantments.RelicEnchantment;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 
@@ -15,6 +15,6 @@ public class RaRothsNunchucks extends RelicMeleeWeapon {
 
     @Override
     public RelicEnchantment enchantment() {
-        return new Etheral();
+        return new Ethereal();
     }
 }

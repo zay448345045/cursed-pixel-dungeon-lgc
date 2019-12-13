@@ -16,7 +16,7 @@ import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
 import com.watabou.utils.Random;
 
-public class Etheral extends RelicEnchantment {
+public class Ethereal extends RelicEnchantment {
     private static ItemSprite.Glowing SILVER = new ItemSprite.Glowing( 0x909396 );
 
     @Override
