@@ -19,7 +19,9 @@ public class Etheral extends RelicEnchantment {
 
     @Override
     public int relicProc(RelicMeleeWeapon weapon, Char attacker, Char defender, int damage) {
-        Buff.affect(defender, Blindness.class, Random.Int(weapon.level()));
+        if (Random.Int(weapon.level() + 30) > 100) {
+            Buff.affect(defender, Blindness.class, Random.Int(weapon.level()));
+        }
         if (Random.Int(Dungeon.level.distance(attacker.pos, defender.pos)*2 + Math.max(0,(5 - weapon.level()/2))) == 0) {
             Buff.affect(defender, MagicalSleep.class);
         }

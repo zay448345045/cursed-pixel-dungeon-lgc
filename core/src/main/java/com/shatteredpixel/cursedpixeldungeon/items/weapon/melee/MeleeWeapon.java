@@ -38,15 +38,6 @@ public class MeleeWeapon extends Weapon {
 	private static final String TIER = "tier";
 
 	@Override
-	public int UpgradeLimit() {
-		if (Dungeon.hero.heroClass == HeroClass.ROGUE) {
-			return 20;
-		} else {
-			return super.UpgradeLimit();
-		}
-	}
-
-	@Override
 	public void storeInBundle(Bundle bundle) {
 		super.storeInBundle(bundle);
 		bundle.put(TIER, tier);
@@ -56,13 +47,6 @@ public class MeleeWeapon extends Weapon {
 	public void restoreFromBundle(Bundle bundle) {
 		super.restoreFromBundle(bundle);
 		tier = bundle.getInt(TIER);
-	}
-
-
-
-	@Override
-	public boolean isFixable() {
-		return durability() < maxDurability(level());
 	}
 
 	public Item upgradeTier() {
@@ -82,7 +66,7 @@ public class MeleeWeapon extends Weapon {
 	@Override
 	public int max(int lvl) {
 		return  (int) ((5*(tier+1) +    //base
-				lvl*(tier))*damageMultiplier);   //level scaling
+				lvl*(tier+1))*damageMultiplier);   //level scaling
 	}
 
 	public int STRReq(int lvl){

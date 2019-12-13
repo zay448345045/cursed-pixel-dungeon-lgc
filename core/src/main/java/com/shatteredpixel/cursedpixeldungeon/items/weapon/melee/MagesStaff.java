@@ -66,9 +66,9 @@ public class MagesStaff extends MeleeWeapon {
 	@Override
 	public int UpgradeLimit() {
 		if (Dungeon.hero.subClass == HeroSubClass.BATTLEMAGE) {
-			return 25;
-		} else {
 			return 20;
+		} else {
+			return super.UpgradeLimit();
 		}
 	}
 

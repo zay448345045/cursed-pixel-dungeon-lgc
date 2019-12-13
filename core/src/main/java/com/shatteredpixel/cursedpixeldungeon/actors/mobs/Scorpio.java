@@ -53,7 +53,7 @@ public class Scorpio extends Mob {
 	
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange( 60, 120);
+		return Random.NormalIntRange( 60, 100);
 	}
 	
 	@Override

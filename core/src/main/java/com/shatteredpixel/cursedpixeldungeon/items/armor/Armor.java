@@ -72,15 +72,6 @@ import java.util.Arrays;
 public class Armor extends EquipableItem {
 
 	protected static final String AC_DETACH       = "DETACH";
-
-	@Override
-	public int UpgradeLimit() {
-		if (Dungeon.hero.heroClass == HeroClass.WARRIOR) {
-			return 20;
-		} else {
-			return super.UpgradeLimit();
-		}
-	}
 	public enum Augment {
 		EVASION (1.5f , -1f),
 		DEFENSE (-1.5f, 1f),

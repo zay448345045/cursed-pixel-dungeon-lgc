@@ -63,14 +63,6 @@ public abstract class Wand extends KindofMisc {
 	public static final String AC_ZAP_OVERRIDE	= "ZAP_OVERRIDE";
 
 	private static final float TIME_TO_ZAP	= 1f;
-	@Override
-	public int UpgradeLimit() {
-		if (Dungeon.hero.heroClass == HeroClass.MAGE) {
-			return 20;
-		} else {
-			return super.UpgradeLimit();
-		}
-	}
 	public int maxCharges = initialCharges();
 	public int curCharges = maxCharges;
 	public float partialCharge = 0f;

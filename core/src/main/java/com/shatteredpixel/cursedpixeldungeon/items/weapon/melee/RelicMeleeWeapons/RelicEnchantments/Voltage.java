@@ -33,28 +33,32 @@ public class Voltage extends RelicEnchantment {
 
         int level = Math.max(0, weapon.level());
         int distance = 5 + level;
+        try {
 
-        for (Mob mob : Dungeon.level.mobs) {
+            for (Mob mob : Dungeon.level.mobs) {
 
-            if (Dungeon.level.distance(attacker.pos, mob.pos) < distance && mob.isAlive()){
-                // int dmg = 20;
-                attacker.sprite.parent.addToFront( new Lightning( attacker.pos, mob.pos, null ) );
+                if (Dungeon.level.distance(attacker.pos, mob.pos) < distance && mob.isAlive()) {
+                    // int dmg = 20;
+                    attacker.sprite.parent.addToFront(new Lightning(attacker.pos, mob.pos, null));
 
-                mob.sprite.centerEmitter().burst(SparkParticle.FACTORY, 3);
-                mob.sprite.flash();
+                    mob.sprite.centerEmitter().burst(SparkParticle.FACTORY, 3);
+                    mob.sprite.flash();
 
-                if (Dungeon.level.water[mob.pos] && !mob.flying) {
-                    damage *= 2;
+                    if (Dungeon.level.water[mob.pos] && !mob.flying) {
+                        damage *= 2;
+                    }
+
+                    if (mob.isAlive() & mob != defender) {
+                        mob.damage(damage / 4, weapon);
+                        mob.aggro( attacker );
+                    }
+
+                    Camera.main.shake(2, 0.3f);
                 }
-
-                if (mob.isAlive() & mob != defender){
-                    mob.damage(damage/4, weapon);
-                }
-
-                Camera.main.shake(2, 0.3f);
             }
+        } catch (Exception e) {
+            return damage;
         }
-
 
         return damage;
     }

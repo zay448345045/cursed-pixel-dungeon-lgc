@@ -68,25 +68,20 @@ public class DragonCrystal extends KindofMisc {
 		defaultAction = AC_SUMMON;
 	}
 
+	public DragonCrystal() {
+		chargeCap = 100;
+	}
+
 	@Override
 	public int price() {
 		return 75*level();
 	}
 
-	@Override
-	public int UpgradeLimit() {
-		if (Dungeon.hero.heroClass == HeroClass.PRIESTESS) {
-			return 20;
-		} else {
-			return super.UpgradeLimit();
-		}
-	}
-
 	int levelCap = 10;
 
-	int charge = 100;
-	int chargeCap = 100;
-	float partialCharge = 0;
+	private int charge = 100;
+	private int chargeCap;
+	private float partialCharge = 0;
 
 	protected Buff passiveBuff;
 	protected Buff activeBuff;

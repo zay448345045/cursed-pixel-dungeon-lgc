@@ -64,7 +64,7 @@ public class Eye extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(45, 105);
+		return Random.NormalIntRange(45, 70);
 	}
 
 	@Override
