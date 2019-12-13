@@ -4,8 +4,11 @@ import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicMeleeWeapon;
+import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
+
+import javax.microedition.khronos.opengles.GL;
 
 
 public abstract class RelicEnchantment extends Weapon.Enchantment {
@@ -23,6 +26,7 @@ public abstract class RelicEnchantment extends Weapon.Enchantment {
 
     public void activate(RelicMeleeWeapon weapon, Char owner) {
         weapon.use();
+        GLog.p(Messages.get(this,"activated"));
     }
 
     @Override

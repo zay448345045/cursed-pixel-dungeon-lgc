@@ -102,6 +102,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Precise;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Swift;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Unstable;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Flail;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RaRothsNunchucks;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.MissileWeapon;
 import com.shatteredpixel.cursedpixeldungeon.journal.Notes;
 import com.shatteredpixel.cursedpixeldungeon.levels.Level;
@@ -451,9 +452,9 @@ public class Hero extends Char {
 	}
 
 	public boolean canSurpriseAttack(){
-		if (belongings.weapon == null || !(belongings.weapon instanceof Weapon))    return true;
-		if (STR() < ((Weapon)belongings.weapon).STRReq())                           return false;
-		if (belongings.weapon instanceof Flail)                                     return false;
+		if (belongings.weapon == null || !(belongings.weapon instanceof Weapon))                return true;
+		if (STR() < ((Weapon)belongings.weapon).STRReq())                                       return false;
+		if (belongings.weapon instanceof Flail | belongings.weapon instanceof RaRothsNunchucks) return false;
 
 		return true;
 	}

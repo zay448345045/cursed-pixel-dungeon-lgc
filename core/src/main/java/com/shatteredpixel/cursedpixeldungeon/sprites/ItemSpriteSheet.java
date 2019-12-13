@@ -456,6 +456,7 @@ public class ItemSpriteSheet {
 	public static final int MARACARS_BLADES     = ARTIFACTS+26;
 	public static final int THONOTHS_AXE        = ARTIFACTS+25;
 	public static final int NEPTUNES_TRIDENT    = AMULETS+4;
+	public static final int RA_ROTHS_NUNCHUCKS  = AMULETS+12;
 
 
 	private static final int SCROLLS        =                               xy(1, 19);  //16 slots

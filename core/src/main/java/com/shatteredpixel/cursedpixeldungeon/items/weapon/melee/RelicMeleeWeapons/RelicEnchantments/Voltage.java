@@ -2,6 +2,8 @@ package com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapo
 
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
+import com.shatteredpixel.cursedpixeldungeon.actors.blobs.Blob;
+import com.shatteredpixel.cursedpixeldungeon.actors.blobs.StormCloud;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Paralysis;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
@@ -9,11 +11,14 @@ import com.shatteredpixel.cursedpixeldungeon.effects.Lightning;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.SparkParticle;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicMeleeWeapon;
 import com.shatteredpixel.cursedpixeldungeon.levels.Level;
+import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
 import com.watabou.noosa.Camera;
 import com.watabou.utils.Random;
 
 import java.util.ArrayList;
+
+import javax.microedition.khronos.opengles.GL;
 
 public class Voltage extends RelicEnchantment {
     private static ItemSprite.Glowing WHITE = new ItemSprite.Glowing( 0xFFFFFF, 0.5f );
@@ -53,6 +58,16 @@ public class Voltage extends RelicEnchantment {
 
         return damage;
     }
+
+    @Override
+    public void activate(RelicMeleeWeapon weapon, Char owner) {
+        super.activate(weapon, owner);
+        GameScene.add(Blob.seed(owner.pos, 500, StormCloud.class));
+        for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
+            GameScene.add(Blob.seed(mob.pos, 100, StormCloud.class));
+        }
+    }
+
     @Override
     public ItemSprite.Glowing glowing() {
         return WHITE;
