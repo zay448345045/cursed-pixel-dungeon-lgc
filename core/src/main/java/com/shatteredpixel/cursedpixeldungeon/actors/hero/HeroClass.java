@@ -58,7 +58,9 @@ import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Dirk;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Gloves;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.InscribedKnife;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MagesStaff;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.LorsionsGreataxe;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.MaracarsBlades;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.NeptunesTrident;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.ThonothsAxe;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.WornShortsword;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.ThrowingKnife;
@@ -141,7 +143,8 @@ public enum HeroClass {
 		new PotionOfStrength().quantity(10).identify().collect();
 		new MaracarsBlades().identify().collect();
 		new ThonothsAxe().identify().collect();
-
+		new LorsionsGreataxe().identify().collect();
+		new NeptunesTrident().identify().collect();
 		if (!Dungeon.isChallenged(Challenges.NO_HEALING)) {
 			new PotionOfHealing().quantity(3).collect();
 			new PotionOfPurity().quantity(1).collect();

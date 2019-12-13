@@ -417,8 +417,6 @@ public class ItemSpriteSheet {
 	public static final int ARTIFACT_ROSE1      = ARTIFACTS+20;
 	public static final int ARTIFACT_ROSE2      = ARTIFACTS+21;
 	public static final int ARTIFACT_ROSE3      = ARTIFACTS+22;
-	public static final int MARACARS_BLADES     = ARTIFACTS+26;
-	public static final int THONOTHS_AXE        = ARTIFACTS+25;
 	static{
 		assignItemRect(ARTIFACT_CLOAK,      9,  15);
 		assignItemRect(ARTIFACT_ARMBAND,    16, 13);
@@ -445,6 +443,8 @@ public class ItemSpriteSheet {
 		assignItemRect(ARTIFACT_ROSE3,      14, 14);
 	}
 
+
+
 	private static final int AMULETS          =                            xy(1, 18);  //16 slots
 
 	public static final int AMULET_FIRE = AMULETS + 0;
@@ -452,6 +452,10 @@ public class ItemSpriteSheet {
 	public static final int AMULET_WATER= AMULETS + 2;
 	public static final int AMULET_EARTH= AMULETS + 3;
 
+	//T6 weps
+	public static final int MARACARS_BLADES     = ARTIFACTS+26;
+	public static final int THONOTHS_AXE        = ARTIFACTS+25;
+	public static final int NEPTUNES_TRIDENT    = AMULETS+4;
 
 
 	private static final int SCROLLS        =                               xy(1, 19);  //16 slots

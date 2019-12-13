@@ -42,6 +42,9 @@ public class LorsionsGreataxe extends RelicMeleeWeapon {
 	@Override
 	public int damageRoll(Char owner) {
 		float multiplier = 1f;
+		if (heavyAttack) {
+			multiplier = 1f + 5f * owner.missingHPPercent();
+		}
 		heavyAttack = false;
 		return (int) (super.damageRoll(owner) * multiplier);
 	}

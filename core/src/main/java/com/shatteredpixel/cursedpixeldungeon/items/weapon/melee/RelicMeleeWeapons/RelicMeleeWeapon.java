@@ -22,7 +22,7 @@ public class RelicMeleeWeapon extends MeleeWeapon {
     public static final String AC_ACTIVATE = "activate";
 
     protected Buff passiveBuff;
-    protected int charge = 100;
+    public int charge = 100;
     protected float partialCharge = 0;
     protected int chargeCap = 100;
     protected int cooldown = 0;
@@ -32,6 +32,7 @@ public class RelicMeleeWeapon extends MeleeWeapon {
         super();
         enchant(enchantment());
     }
+
 
     @Override
     public ArrayList<String> actions(Hero hero) {

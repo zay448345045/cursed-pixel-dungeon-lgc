@@ -153,6 +153,10 @@ public abstract class Char extends Actor {
 		bundle.put( TAG_HT, HT );
 		bundle.put( BUFFS, buffs );
 	}
+
+	public float missingHPPercent() {
+		return 1f - HP/(float)HT;
+	}
 	
 	@Override
 	public void restoreFromBundle( Bundle bundle ) {

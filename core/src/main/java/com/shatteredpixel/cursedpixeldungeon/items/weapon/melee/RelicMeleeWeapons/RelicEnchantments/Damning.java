@@ -6,19 +6,23 @@ import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Doom;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Weakness;
-import com.shatteredpixel.cursedpixeldungeon.effects.particles.ShadowParticle;
 import com.shatteredpixel.cursedpixeldungeon.items.KindOfWeapon;
-import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.InscribedKnife;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.LorsionsGreataxe;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicMeleeWeapon;
-import com.shatteredpixel.cursedpixeldungeon.levels.Level;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.CellSelector;
+import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
+import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.cursedpixeldungeon.ui.QuickSlotButton;
 import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
 import com.watabou.utils.Random;
 
 public class Damning extends RelicEnchantment {
+    private static ItemSprite.Glowing BLACK = new ItemSprite.Glowing( 0x000000 );
+    @Override
+    public ItemSprite.Glowing glowing() {
+        return BLACK;
+    }
     @Override
     public int relicProc(RelicMeleeWeapon weapon, Char attacker, Char defender, int damage) {
         if (Random.Int(4) == 0) {
@@ -31,10 +35,9 @@ public class Damning extends RelicEnchantment {
 
     @Override
     public void activate(RelicMeleeWeapon weapon, Char owner) {
-        super.activate(weapon, owner);
-
+        GameScene.selectCell(crush);
     }
-    protected static CellSelector.Listener crush = new  CellSelector.Listener() {
+    private static CellSelector.Listener crush = new  CellSelector.Listener() {
 
         @Override
         public void onSelect(Integer target) {
@@ -52,6 +55,9 @@ public class Damning extends RelicEnchantment {
                     if (Dungeon.level.trueDistance(Dungeon.hero.pos,enemy.pos) <= Greataxe.RCH) {
                         Greataxe.prepare();
                         Dungeon.hero.attack(enemy);
+                        Dungeon.hero.sprite.attack(enemy.pos);
+                        Dungeon.hero.spendAndNext(Greataxe.speedFactor(Dungeon.hero));//This is enforced here so that augments make a difference
+                        Greataxe.use();
                     } else {
                         GLog.n( Messages.get(Damning.class, "short_reach") );
                     }
