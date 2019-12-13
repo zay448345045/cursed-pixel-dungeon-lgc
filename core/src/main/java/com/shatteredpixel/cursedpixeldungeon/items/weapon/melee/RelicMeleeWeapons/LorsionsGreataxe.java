@@ -19,24 +19,45 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
-package com.shatteredpixel.cursedpixeldungeon.items.weapon.melee;
+package com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons;
 
+import com.shatteredpixel.cursedpixeldungeon.actors.Char;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MeleeWeapon;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicEnchantments.Damning;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicEnchantments.RelicEnchantment;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 
-public class Greataxe extends MeleeWeapon {
+public class LorsionsGreataxe extends RelicMeleeWeapon {
 
 	{
 		image = ItemSpriteSheet.GREATAXE;
 
 		tier = 6;
-		damageMultiplier = 1.2f;
+		ACC = 1.33f;
+		damageMultiplier = 0.6f;
+	}
+
+	private boolean heavyAttack = false;
+
+	@Override
+	public int damageRoll(Char owner) {
+		float multiplier = 1f;
+		heavyAttack = false;
+		return (int) (super.damageRoll(owner) * multiplier);
+	}
+
+	public void prepare() {
+		heavyAttack = true;
+	}
+
+	@Override
+	public RelicEnchantment enchantment() {
+		return new Damning();
 	}
 
 	@Override
 	public int STRReq(int lvl) {
-		lvl = Math.max(0, lvl);
-		//20 base strength req, up from 18
-		return (8 + tier * 2);
+		return 20;
 	}
 
 }

@@ -50,7 +50,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.weapon.curses.Wayward;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Lucky;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Dagger;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Flail;
-import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Greataxe;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.LorsionsGreataxe;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.ChangesScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.CharSprite;
@@ -868,8 +868,8 @@ public class v0_6_X_Changes {
 				"_-_ Meat and small rations are 50% more filling\n" +
 				"_-_ Pasties and blandfruit are 12.5% more filling"));
 		
-		changes.addButton( new ChangeButton(new ItemSprite(new Greataxe()), "Tier-5 Weapon Buffs",
-				"_-_ Greataxe base damage increased by ~22%\n" +
+		changes.addButton( new ChangeButton(new ItemSprite(new LorsionsGreataxe()), "Tier-5 Weapon Buffs",
+				"_-_ LorsionsGreataxe base damage increased by ~22%\n" +
 				"_-_ Greatshield base damage increased by ~17%"));
 		
 		changes.addButton( new ChangeButton(new ItemSprite(new StoneOfEnchantment()), "Enchant and Glyph Balance Changes",

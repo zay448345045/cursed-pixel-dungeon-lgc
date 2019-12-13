@@ -98,7 +98,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Flail;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Gauntlet;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Glaive;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Gloves;
-import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Greataxe;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.LorsionsGreataxe;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Greatshield;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Greatsword;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.HandAxe;
@@ -175,7 +175,7 @@ public enum Catalog {
 		WEAPONS.seen.put( Greatsword.class,                 false);
 		WEAPONS.seen.put( WarHammer.class,                  false);
 		WEAPONS.seen.put( Glaive.class,                     false);
-		WEAPONS.seen.put( Greataxe.class,                   false);
+		WEAPONS.seen.put( LorsionsGreataxe.class,                   false);
 		WEAPONS.seen.put( Greatshield.class,                false);
 		WEAPONS.seen.put( Gauntlet.class,                   false);
 	

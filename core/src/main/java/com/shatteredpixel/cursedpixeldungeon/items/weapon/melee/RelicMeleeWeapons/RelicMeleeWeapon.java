@@ -26,6 +26,7 @@ public class RelicMeleeWeapon extends MeleeWeapon {
     protected float partialCharge = 0;
     protected int chargeCap = 100;
     protected int cooldown = 0;
+    protected float chargeToAdd = 1/5f;
 
     public RelicMeleeWeapon() {
         super();
@@ -130,13 +131,13 @@ public class RelicMeleeWeapon extends MeleeWeapon {
         public boolean act() {
             LockedFloor lock = target.buff(LockedFloor.class);
             if (charge < chargeCap && !cursed && (lock == null || lock.regenOn())) {
-                partialCharge += 1/5f; //500 turns to a full charge
+                partialCharge += chargeToAdd;
                 if (partialCharge > 1){
                     charge++;
                     partialCharge--;
                     if (charge == chargeCap){
                         partialCharge = 0f;
-                        GLog.p( Messages.get(RelicMeleeWeapon.class, "charged") );
+                        GLog.p( Messages.get(RelicMeleeWeapon.class, "charged"),name() );
                     }
                 }
             }

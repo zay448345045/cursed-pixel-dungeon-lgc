@@ -8,6 +8,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.blobs.Blob;
 import com.shatteredpixel.cursedpixeldungeon.actors.blobs.Fire;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Burning;
+import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroAction;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.FlameParticle;
@@ -48,6 +49,13 @@ public class Inferno extends RelicEnchantment {
                 }
             }
         }
+        for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
+            if (attacker.fieldOfView[mob.pos] & Random.Int(4) == 0) {
+                GameScene.add(Blob.seed(mob.pos, 3, Fire.class));
+            }
+        }
+
+
         defender.sprite.emitter().burst(FlameParticle.FACTORY, (weapon.level()+3)*3);
         return damage;
 

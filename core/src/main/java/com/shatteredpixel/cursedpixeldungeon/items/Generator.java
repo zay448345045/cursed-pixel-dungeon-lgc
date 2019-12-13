@@ -173,7 +173,6 @@ import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Flail;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Gauntlet;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Glaive;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Gloves;
-import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Greataxe;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Greatshield;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Greatsword;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.HandAxe;
@@ -493,11 +492,10 @@ public class Generator {
 					Greatsword.class,
 					WarHammer.class,
 					Glaive.class,
-					Greataxe.class,
 					Greatshield.class,
 					Gauntlet.class
 			};
-			WEP_T5.probs = new float[]{ 6, 5, 5, 4, 4, 4 };
+			WEP_T5.probs = new float[]{ 6, 5, 5, 4, 4 };
 			
 			//see Generator.randomArmor
 			ARMOR.classes = new Class<?>[]{

@@ -1,0 +1,69 @@
+package com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicEnchantments;
+
+import com.shatteredpixel.cursedpixeldungeon.Dungeon;
+import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
+import com.shatteredpixel.cursedpixeldungeon.actors.Char;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Doom;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Weakness;
+import com.shatteredpixel.cursedpixeldungeon.effects.particles.ShadowParticle;
+import com.shatteredpixel.cursedpixeldungeon.items.KindOfWeapon;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.InscribedKnife;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.LorsionsGreataxe;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicMeleeWeapon;
+import com.shatteredpixel.cursedpixeldungeon.levels.Level;
+import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
+import com.shatteredpixel.cursedpixeldungeon.scenes.CellSelector;
+import com.shatteredpixel.cursedpixeldungeon.ui.QuickSlotButton;
+import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
+import com.watabou.utils.Random;
+
+public class Damning extends RelicEnchantment {
+    @Override
+    public int relicProc(RelicMeleeWeapon weapon, Char attacker, Char defender, int damage) {
+        if (Random.Int(4) == 0) {
+            Buff.affect(defender, Doom.class);
+        } else {
+            Buff.prolong(defender, Weakness.class, Weakness.DURATION);
+        }
+        return damage;
+    }
+
+    @Override
+    public void activate(RelicMeleeWeapon weapon, Char owner) {
+        super.activate(weapon, owner);
+
+    }
+    protected static CellSelector.Listener crush = new  CellSelector.Listener() {
+
+        @Override
+        public void onSelect(Integer target) {
+            Char enemy;
+            KindOfWeapon Axe = Dungeon.hero.belongings.weapon;
+            if (target != null && Axe instanceof LorsionsGreataxe) {
+                int cell = target;
+                LorsionsGreataxe Greataxe = (LorsionsGreataxe) Axe;
+                if (Actor.findChar(target) != null)
+                    QuickSlotButton.target(Actor.findChar(target));
+                else
+                    QuickSlotButton.target(Actor.findChar(cell));
+                enemy = Actor.findChar(cell);
+                if (enemy != null) {
+                    if (Dungeon.level.trueDistance(Dungeon.hero.pos,enemy.pos) <= Greataxe.RCH) {
+                        Greataxe.prepare();
+                        Dungeon.hero.attack(enemy);
+                    } else {
+                        GLog.n( Messages.get(Damning.class, "short_reach") );
+                    }
+                } else {
+                    GLog.w( Messages.get(Damning.class, "no_enemy") );
+                }
+            }
+        }
+
+        @Override
+        public String prompt() {
+            return Messages.get(this, "prompt_curse");
+        }
+    };
+}

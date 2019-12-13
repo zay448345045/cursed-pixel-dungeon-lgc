@@ -7,7 +7,7 @@ import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 public class ThonothsAxe extends RelicMeleeWeapon {
     {
         image = ItemSpriteSheet.THONOTHS_AXE;
-        ACC = 1.5f;
+        ACC = 2f;
         damageMultiplier = 0.74f;
     }
 
