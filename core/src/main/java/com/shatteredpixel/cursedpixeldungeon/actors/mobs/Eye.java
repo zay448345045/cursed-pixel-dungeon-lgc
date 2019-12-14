@@ -31,6 +31,8 @@ import com.shatteredpixel.cursedpixeldungeon.effects.particles.PurpleParticle;
 import com.shatteredpixel.cursedpixeldungeon.items.Dewdrop;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfDisintegration;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Grim;
+import com.shatteredpixel.cursedpixeldungeon.levels.Level;
+import com.shatteredpixel.cursedpixeldungeon.levels.Terrain;
 import com.shatteredpixel.cursedpixeldungeon.mechanics.Ballistica;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
@@ -158,8 +160,16 @@ public class Eye extends Mob {
 		boolean terrainAffected = false;
 
 		for (int pos : beam.subPath(1, beam.dist)) {
-
-			Dungeon.level.destroy( pos );
+			int terr = Dungeon.level.map[pos];
+			if (terr == Terrain.EMPTY || terr == Terrain.GRASS ||
+					terr == Terrain.EMBERS || terr == Terrain.EMPTY_SP ||
+					terr == Terrain.HIGH_GRASS || terr == Terrain.FURROWED_GRASS
+					|| terr == Terrain.EMPTY_DECO || terr == Terrain.WATER) {
+				Dungeon.level.destroy(pos);
+			} else if (terr == Terrain.SECRET_TRAP || terr == Terrain.TRAP || terr == Terrain.INACTIVE_TRAP) {
+				Dungeon.level.destroy(pos);
+				Dungeon.level.traps.remove(pos);
+			}
 			GameScene.updateMap( pos );
 			terrainAffected = true;
 
