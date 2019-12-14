@@ -64,20 +64,26 @@ public class DM300 extends Mob {
 		properties.add(Property.BOSS);
 		properties.add(Property.INORGANIC);
 	}
+
+	public DM300() {
+		super();
+		HP = HT *= multiplier();
+		defenseSkill *= multiplier();
+	}
 	
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange( 30, 40 );
+		return (int) (Random.NormalIntRange( 30, 40 )*multiplier());
 	}
 	
 	@Override
 	public int attackSkill( Char target ) {
-		return 28;
+		return(int) (28*multiplier());
 	}
 	
 	@Override
 	public int drRoll() {
-		return Random.NormalIntRange(0, 10);
+		return (int) (Random.NormalIntRange(0, 10)*multiplier());
 	}
 	
 	@Override

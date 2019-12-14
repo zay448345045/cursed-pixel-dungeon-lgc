@@ -118,6 +118,10 @@ public abstract class Mob extends Char {
 	private static final String SEEN	= "seen";
 	private static final String TARGET	= "target";
 
+	public float multiplier() {
+		return (Dungeon.hero.lvl/(float)Dungeon.depth);
+	}
+
 	public int missingHP() {
 		return this.HT - this.HP;
 	}
