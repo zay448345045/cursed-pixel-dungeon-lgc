@@ -607,7 +607,10 @@ public class ItemSpriteSheet {
 	public static final int THONOTHS_AXE        = ARTIFACTS+25;
 	public static final int NEPTUNES_TRIDENT    = AMULETS+4;
 	public static final int RA_ROTHS_NUNCHUCKS  = AMULETS+12;
-	public static final int LORTUGOS_CRYSTAL    = SPELLS+8;
+	public static final int LOTURGOS_CRYSTAL    = SPELLS+8;
+	static {
+		assignItemRect(LOTURGOS_CRYSTAL,    10, 15);
+	}
 
 	public static final int DRAGON_CRYSTAL  = SPELLS+13;
 	static{

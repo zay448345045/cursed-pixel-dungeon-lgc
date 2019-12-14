@@ -39,7 +39,7 @@ import java.util.ArrayList;
 public class Amulet extends Item {
 	
 	private static final String AC_END = "END";
-	private static final String AC_IMBED = "EMBED";
+	private static final String AC_EMBED = "embed";
 	public boolean WATER_IMBEDDED = false;
 	public final String WATERSECTOR = "WATERSECTOR";
 	
@@ -53,7 +53,7 @@ public class Amulet extends Item {
 	public ArrayList<String> actions( Hero hero ) {
 		ArrayList<String> actions = super.actions( hero );
 		actions.add( AC_END );
-		actions.add( AC_IMBED );
+		actions.add(AC_EMBED);
 		return actions;
 	}
 
@@ -83,7 +83,7 @@ public class Amulet extends Item {
 		if (action.equals(AC_END)) {
 			InterlevelScene.mode = InterlevelScene.Mode.START;
 			Game.switchScene(InterlevelScene.class);
-		} else if (action.equals(AC_IMBED)) {
+		} else if (action.equals(AC_EMBED)) {
 			curItem = this;
 			GameScene.selectItem(amuletSelector, WndBag.Mode.IMBED, Messages.get(this, "prompt"));
 		}

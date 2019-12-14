@@ -59,6 +59,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Gloves;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.InscribedKnife;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MagesStaff;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.LorsionsGreataxe;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.LoturgosCrystal;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.MaracarsBlades;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.NeptunesTrident;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RaRothsNunchucks;
@@ -141,18 +142,14 @@ public enum HeroClass {
 
 		new MagicalHolster().collect();
 		Dungeon.LimitedDrops.MAGICAL_HOLSTER.drop();
+		//Extra stuff
 		new PotionOfStrength().quantity(10).identify().collect();
 		new MaracarsBlades().identify().collect();
 		new ThonothsAxe().identify().collect();
 		new LorsionsGreataxe().identify().collect();
 		new NeptunesTrident().identify().collect();
 		new RaRothsNunchucks().identify().collect();
-		if (!Dungeon.isChallenged(Challenges.NO_HEALING)) {
-			new PotionOfHealing().quantity(3).collect();
-			new PotionOfPurity().quantity(1).collect();
-		} else {
-			new PotionOfPurity().quantity(3).collect();
-		}
+		new LoturgosCrystal().identify().collect();
 	}
 
 	public Badges.Badge masteryBadge() {
@@ -166,7 +163,7 @@ public enum HeroClass {
 			case HUNTRESS:
 				return Badges.Badge.MASTERY_HUNTRESS;
 			case PRIESTESS:
-				return Badges.Badge.MASTERY_HUNTRESS;
+				return Badges.Badge.MASTERY_PRIESTESS;
 		}
 		return null;
 	}
