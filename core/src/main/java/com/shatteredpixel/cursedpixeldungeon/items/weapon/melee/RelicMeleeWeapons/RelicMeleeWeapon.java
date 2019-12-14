@@ -63,7 +63,7 @@ public class RelicMeleeWeapon extends MeleeWeapon {
 
     @Override
     public int max(int lvl) {
-        return (int) (super.max(lvl)*0.5f);
+        return (int) (super.max(lvl)*0.7f);
     }
 
     public void activate(Char ch ) {
