@@ -179,7 +179,7 @@ public class Eye extends Mob {
 			}
 
 			if (hit( this, ch, true )) {
-				ch.damage( Random.NormalIntRange( 30, 50 ), new DeathGaze() );
+				ch.damage( Random.NormalIntRange( 60, 150 ), new DeathGaze() );
 
 				if (Dungeon.level.heroFOV[pos]) {
 					ch.sprite.flash();

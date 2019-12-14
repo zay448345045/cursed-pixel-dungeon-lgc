@@ -191,11 +191,11 @@ public class Hero extends Char {
 	public Hero() {
 		super();
 		name = Messages.get(this, "name");
-		HP = HT = 20;
+		HP = HT = 40;
 		if (heroClass == HeroClass.WARRIOR) {
-			HP = HT = 24;
+			HP = HT = 48;
 		} else if (heroClass == HeroClass.HUNTRESS) {
-			HP = HT = 16;
+			HP = HT = 32;
 		}
 
 		STR = STARTING_STR;
@@ -208,11 +208,11 @@ public class Hero extends Char {
 	public void updateHT( boolean boostHP ){
 		int curHT = HT;
 		
-		HT = 20 + 5*(lvl-1) + HTBoost;
+		HT = 40 + 10*(lvl-1) + HTBoost;
 		if (heroClass == HeroClass.WARRIOR) {
-			HT = 6*(lvl+3) + HTBoost;
+			HT = 12*(lvl+3) + HTBoost;
 		} else if (heroClass == HeroClass.HUNTRESS) {
-			HT = 4*(lvl+3) + HTBoost;
+			HT = 8*(lvl+3) + HTBoost;
 		}
 
 		float multiplier = RingOfMight.HTMultiplier(this);

@@ -41,6 +41,7 @@ public class Voltage extends RelicEnchantment {
                         if (Dungeon.level.water[mob.pos] && !mob.flying) {
                             splitDamage *= 2;
                         }
+                        splitDamage = mob.defenseProc( attacker, splitDamage );
                         mob.damage( splitDamage, weapon );
                         mob.aggro( attacker );
                     }

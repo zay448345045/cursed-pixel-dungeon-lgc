@@ -258,7 +258,7 @@ public enum HeroClass {
 		(hero.belongings.weapon = new Gloves()).identify().upgrade();
 		SpiritBow bow = new SpiritBow();
 		bow.identify().upgrade().collect();
-		hero.HT = hero.HP = 16;
+		hero.HT = hero.HP = 32;
 
 		Dungeon.quickslot.setSlot(0, bow);
 

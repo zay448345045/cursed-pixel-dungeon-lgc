@@ -64,7 +64,7 @@ public class MageCrab extends Mob implements Callback {
             Buff.affect( enemy, Chill.class, 3f );
 
 
-            int dmg = Random.Int( 10, 30 );
+            int dmg = Random.Int( 20, 60 );
             enemy.damage( dmg, new MageCrabIce() );
 
             if (!enemy.isAlive() && enemy == Dungeon.hero) {
