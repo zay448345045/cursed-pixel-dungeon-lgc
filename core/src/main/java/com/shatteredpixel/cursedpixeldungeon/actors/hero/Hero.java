@@ -103,6 +103,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Swift;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Unstable;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Flail;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RaRothsNunchucks;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicEnchantments.Barrier;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.MissileWeapon;
 import com.shatteredpixel.cursedpixeldungeon.journal.Notes;
 import com.shatteredpixel.cursedpixeldungeon.levels.Level;
@@ -1078,6 +1079,12 @@ public class Hero extends Char {
 		if (belongings.armor != null && belongings.armor.hasGlyph(AntiMagic.class, this)
 				&& AntiMagic.RESISTS.contains(src.getClass())){
 			dmg -= AntiMagic.drRoll(belongings.armor.level());
+		}
+
+		//Barrier enchantment
+		Barrier.BarrierBuff Barrier = buff(com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicEnchantments.Barrier.BarrierBuff.class);
+		if (AntiMagic.RESISTS.contains(src.getClass()) & Barrier != null) {
+			dmg -= Barrier.blockingRoll();
 		}
 
 		super.damage( dmg, src );

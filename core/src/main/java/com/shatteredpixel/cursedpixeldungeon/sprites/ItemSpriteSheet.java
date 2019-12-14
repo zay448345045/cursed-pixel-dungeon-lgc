@@ -452,12 +452,6 @@ public class ItemSpriteSheet {
 	public static final int AMULET_WATER= AMULETS + 2;
 	public static final int AMULET_EARTH= AMULETS + 3;
 
-	//T6 weps
-	public static final int MARACARS_BLADES     = ARTIFACTS+26;
-	public static final int THONOTHS_AXE        = ARTIFACTS+25;
-	public static final int NEPTUNES_TRIDENT    = AMULETS+4;
-	public static final int RA_ROTHS_NUNCHUCKS  = AMULETS+12;
-
 
 	private static final int SCROLLS        =                               xy(1, 19);  //16 slots
 	public static final int SCROLL_KAUNAN   = SCROLLS+0;
@@ -607,6 +601,13 @@ public class ItemSpriteSheet {
 	public static final int MAGIC_INFUSE    = SPELLS+10;
 	public static final int ALCHEMIZE       = SPELLS+11;
 	public static final int RECYCLE         = SPELLS+12;
+
+	//T6 weps
+	public static final int MARACARS_BLADES     = ARTIFACTS+26;
+	public static final int THONOTHS_AXE        = ARTIFACTS+25;
+	public static final int NEPTUNES_TRIDENT    = AMULETS+4;
+	public static final int RA_ROTHS_NUNCHUCKS  = AMULETS+12;
+	public static final int LORTUGOS_CRYSTAL    = SPELLS+8;
 
 	public static final int DRAGON_CRYSTAL  = SPELLS+13;
 	static{
