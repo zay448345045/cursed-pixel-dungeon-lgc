@@ -69,8 +69,10 @@ public class Inferno extends RelicEnchantment {
             if (mob.properties().contains(Char.Property.BOSS)) {
                 damage /=4;
             }
-            mob.damage(damage, Fire.class);
-            GameScene.add(Blob.seed(mob.pos, 3, Fire.class));
+            if (mob.alignment == Char.Alignment.ENEMY) {
+                mob.damage(damage, Fire.class);
+                GameScene.add(Blob.seed(mob.pos, 3, Fire.class));
+            }
         }
     }
 
