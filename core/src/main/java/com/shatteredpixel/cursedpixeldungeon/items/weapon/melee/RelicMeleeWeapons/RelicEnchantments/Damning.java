@@ -52,7 +52,7 @@ public class Damning extends RelicEnchantment {
                     QuickSlotButton.target(Actor.findChar(cell));
                 enemy = Actor.findChar(cell);
                 if (enemy != null) {
-                    if (Dungeon.level.trueDistance(Dungeon.hero.pos,enemy.pos) <= Greataxe.RCH) {
+                    if (Dungeon.level.trueDistance(Dungeon.hero.pos,enemy.pos) <= Greataxe.RCH + 1) {
                         Greataxe.prepare();
                         Dungeon.hero.attack(enemy);
                         Dungeon.hero.sprite.attack(enemy.pos);
@@ -69,7 +69,7 @@ public class Damning extends RelicEnchantment {
 
         @Override
         public String prompt() {
-            return Messages.get(this, "prompt_curse");
+            return Messages.get(Damning.class, "prompt");
         }
     };
 }

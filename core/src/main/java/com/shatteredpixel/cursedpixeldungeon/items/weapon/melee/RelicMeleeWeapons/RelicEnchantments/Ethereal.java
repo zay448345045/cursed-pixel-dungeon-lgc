@@ -2,8 +2,6 @@ package com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapo
 
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
-import com.shatteredpixel.cursedpixeldungeon.actors.blobs.Blob;
-import com.shatteredpixel.cursedpixeldungeon.actors.blobs.StormCloud;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Blindness;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Cripple;
@@ -12,7 +10,6 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.MagicalSleep;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.cursedpixeldungeon.effects.Speck;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicMeleeWeapon;
-import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
 import com.watabou.utils.Random;
 
@@ -22,7 +19,7 @@ public class Ethereal extends RelicEnchantment {
     @Override
     public int relicProc(RelicMeleeWeapon weapon, Char attacker, Char defender, int damage) {
         defender.sprite.emitter().start( Speck.factory( Speck.DISCOVER ), 0.4f, 5 * weapon.level() + 1 );
-        if (Random.Int( 100-weapon.level()) > 30) {
+        if (Random.Int( 100-weapon.level()) < 30) {
             Buff.affect(defender, Blindness.class, Random.Int(weapon.level()));
             Buff.prolong(defender, Cripple.class, Cripple.DURATION);
         }

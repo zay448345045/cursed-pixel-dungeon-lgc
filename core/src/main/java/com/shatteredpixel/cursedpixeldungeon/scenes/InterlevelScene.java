@@ -221,7 +221,7 @@ public class InterlevelScene extends PixelScene {
 								goToDepth(Dungeon.depth + 1, DESCEND_NAME);
 								break;
 							case DESCEND_GAMEINIT:
-								descend();
+								init();
 								break;
 							case ASCEND:
 								goToDepth(Dungeon.depth - 1, ASCEND_NAME);
@@ -412,24 +412,9 @@ public class InterlevelScene extends PixelScene {
 	return level;
 	}
 
-	private void descend() throws IOException {
-		Dungeon.depth = 0;
-		if (Dungeon.hero == null) {
-			Mob.clearHeldAllies();
-			Dungeon.init();
-			if (noStory) {
-				Dungeon.chapters.add( WndStory.ID_SEWERS );
-				noStory = false;
-			}
-			GameLog.wipe();
-		} else {
-			Mob.holdAllies( Dungeon.level );
-			Dungeon.saveAll();
-		}
-
-		Level level;
-		level = Dungeon.loadLevel(GamesInProgress.curSlot);
-		Dungeon.switchLevel( level, level.entrance );
+	private void init() throws IOException {
+		Dungeon.init();
+		createNewLevel(0);
 	}
 
 

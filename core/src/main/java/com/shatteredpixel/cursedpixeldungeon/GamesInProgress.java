@@ -110,6 +110,7 @@ public class GamesInProgress {
 
 			} catch (IOException e) {
 				info = null;
+				delete(slot);
 			} catch (Exception e){
 				ShatteredPixelDungeon.reportException( e );
 				info = null;

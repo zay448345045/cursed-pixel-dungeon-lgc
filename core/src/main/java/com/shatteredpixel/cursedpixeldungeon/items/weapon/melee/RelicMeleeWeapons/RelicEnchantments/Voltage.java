@@ -4,25 +4,17 @@ import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.blobs.Blob;
 import com.shatteredpixel.cursedpixeldungeon.actors.blobs.StormCloud;
-import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
-import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Paralysis;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.cursedpixeldungeon.effects.Lightning;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.SparkParticle;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicMeleeWeapon;
-import com.shatteredpixel.cursedpixeldungeon.levels.Level;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
 import com.watabou.noosa.Camera;
-import com.watabou.utils.Random;
-
-import java.util.ArrayList;
-
-import javax.microedition.khronos.opengles.GL;
 
 public class Voltage extends RelicEnchantment {
     private static ItemSprite.Glowing WHITE = new ItemSprite.Glowing( 0xFFFFFF, 0.5f );
-    private int cost = 10;
+    private int cost = 4;
     @Override
     public int relicProc(RelicMeleeWeapon weapon, Char attacker, Char defender, int damage) {
         if (weapon.charge>=cost){
@@ -37,7 +29,7 @@ public class Voltage extends RelicEnchantment {
 
             for (Mob mob : Dungeon.level.mobs) {
 
-                if (Dungeon.level.distance(attacker.pos, mob.pos) < distance && mob.isAlive()) {
+                if (Dungeon.level.distance(attacker.pos, mob.pos) < distance && mob.isAlive() && mob.alignment == Char.Alignment.ENEMY) {
                     // int dmg = 20;
                     attacker.sprite.parent.addToFront(new Lightning(attacker.pos, mob.pos, null));
 
