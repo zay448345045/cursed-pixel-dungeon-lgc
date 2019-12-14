@@ -36,12 +36,12 @@ public class Voltage extends RelicEnchantment {
                     mob.sprite.centerEmitter().burst(SparkParticle.FACTORY, 3);
                     mob.sprite.flash();
 
-                    if (Dungeon.level.water[mob.pos] && !mob.flying) {
-                        damage *= 2;
-                    }
-
                     if (mob.isAlive() & mob != defender) {
-                        mob.damage(damage / 4, weapon);
+                        int splitDamage = damage/4;
+                        if (Dungeon.level.water[mob.pos] && !mob.flying) {
+                            splitDamage *= 2;
+                        }
+                        mob.damage( splitDamage, weapon );
                         mob.aggro( attacker );
                     }
 

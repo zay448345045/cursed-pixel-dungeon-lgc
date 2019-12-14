@@ -2,6 +2,7 @@ package com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapo
 
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Barrier;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Bleeding;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.BlobImmunity;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
@@ -28,6 +29,7 @@ public class Vicious extends RelicEnchantment {
         super.activate(weapon, owner);
         Buff.affect( owner, MagicImmune.class, DURATION );
         Buff.affect( owner, BlobImmunity.class, DURATION );
+        Buff.affect( owner, Barrier.class ).setShield(owner.HT);
     }
 
     @Override

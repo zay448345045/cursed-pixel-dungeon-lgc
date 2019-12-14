@@ -37,7 +37,7 @@ public class Damning extends RelicEnchantment {
     public void activate(RelicMeleeWeapon weapon, Char owner) {
         GameScene.selectCell(crush);
     }
-    private static CellSelector.Listener crush = new  CellSelector.Listener() {
+    private CellSelector.Listener crush = new  CellSelector.Listener() {
 
         @Override
         public void onSelect(Integer target) {
@@ -57,7 +57,7 @@ public class Damning extends RelicEnchantment {
                         Dungeon.hero.attack(enemy);
                         Dungeon.hero.sprite.attack(enemy.pos);
                         Dungeon.hero.spendAndNext(Greataxe.speedFactor(Dungeon.hero));//This is enforced here so that augments make a difference
-                        Greataxe.use();
+                        Damning.super.activate(Greataxe,Dungeon.hero);
                     } else {
                         GLog.n( Messages.get(Damning.class, "short_reach") );
                     }

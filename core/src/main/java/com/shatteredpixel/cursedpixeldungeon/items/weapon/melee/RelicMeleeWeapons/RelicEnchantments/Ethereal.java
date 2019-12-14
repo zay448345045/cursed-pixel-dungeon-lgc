@@ -20,10 +20,10 @@ public class Ethereal extends RelicEnchantment {
     public int relicProc(RelicMeleeWeapon weapon, Char attacker, Char defender, int damage) {
         defender.sprite.emitter().start( Speck.factory( Speck.DISCOVER ), 0.4f, 5 * weapon.level() + 1 );
         if (Random.Int( 100-weapon.level()) < 30) {
-            Buff.affect(defender, Blindness.class, Random.Int(weapon.level()));
+            Buff.prolong(defender, Blindness.class, 1 + Random.Int(weapon.level()/2+3));
             Buff.prolong(defender, Cripple.class, Cripple.DURATION);
         }
-        if (Random.Int(Dungeon.level.distance(attacker.pos, defender.pos)*2 + Math.max(0,(5 - weapon.level()/2))) <= 2) {
+        if (Random.Int(Dungeon.level.distance(attacker.pos, defender.pos)*2 - (weapon.level()/2) + 10) <= 2) {
             Buff.affect(defender, MagicalSleep.class);
         }
         return damage;
@@ -32,9 +32,9 @@ public class Ethereal extends RelicEnchantment {
     @Override
     public void activate(RelicMeleeWeapon weapon, Char owner) {
         super.activate(weapon, owner);
-        Buff.affect(owner, Drowsy.class);
+        Buff.affect(owner, MagicalSleep.class);
         for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
-            Buff.affect(mob, Drowsy.class);
+            Buff.affect(mob, MagicalSleep.class);
         }
     }
 
