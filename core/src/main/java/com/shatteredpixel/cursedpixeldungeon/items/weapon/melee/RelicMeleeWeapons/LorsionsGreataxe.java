@@ -34,7 +34,7 @@ public class LorsionsGreataxe extends RelicMeleeWeapon {
 
 		tier = 6;
 		ACC = 1.33f;
-		damageMultiplier = 0.6f;
+		damageMultiplier = 1.2f;
 		chargeToAdd = 1f;
 	}
 
