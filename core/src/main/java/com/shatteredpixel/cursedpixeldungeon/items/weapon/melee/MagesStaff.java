@@ -63,15 +63,6 @@ public class MagesStaff extends MeleeWeapon {
 	public static final String AC_IMBUE = "IMBUE";
 	public static final String AC_ZAP	= "ZAP";
 
-	@Override
-	public int UpgradeLimit() {
-		if (Dungeon.hero.subClass == HeroSubClass.BATTLEMAGE) {
-			return 20;
-		} else {
-			return super.UpgradeLimit();
-		}
-	}
-
 	private static final float STAFF_SCALE_FACTOR = 0.75f;
 
 	{
@@ -84,6 +75,8 @@ public class MagesStaff extends MeleeWeapon {
 
 		unique = true;
 		bones = false;
+
+		bonusSubClass = HeroSubClass.BATTLEMAGE;
 	}
 
 	public MagesStaff() {

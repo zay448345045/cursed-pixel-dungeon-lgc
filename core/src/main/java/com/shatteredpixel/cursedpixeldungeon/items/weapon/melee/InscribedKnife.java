@@ -42,6 +42,7 @@ public class InscribedKnife extends MeleeWeapon {
         usesTargeting = true;
 
         unique = true;
+        bonusSubClass = HeroSubClass.MEDIC;
     }
     float charge = 0;
     int maxCharge = 40;
@@ -63,15 +64,6 @@ public class InscribedKnife extends MeleeWeapon {
     public void restoreFromBundle(Bundle bundle) {
         charge = bundle.getInt(CHARGE);
         super.restoreFromBundle(bundle);
-    }
-
-    @Override
-    public int UpgradeLimit() {
-       if (Dungeon.hero.subClass == HeroSubClass.MEDIC) {
-           return 25;
-       } else {
-           return 20;
-       }
     }
 
     public void Charge(float amount) {

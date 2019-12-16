@@ -67,12 +67,12 @@ public class GrindingLevel extends SewerLevel {
         int lootAmt = 1;
 
         int getScaleFactor() {
-            return Dungeon.hero.lvl-1;
+            return Math.min(30,Dungeon.hero.lvl-1);
         }
 
         public Guardian() {
             super();
-            HP = HT = 15 + 5 * getScaleFactor();
+            HP = HT = 15 + 10 * getScaleFactor();
             aggro(Dungeon.hero);
         }
 
