@@ -60,23 +60,18 @@ public class Item implements Bundlable {
 	protected static final float TIME_TO_THROW		= 1.0f;
 	protected static final float TIME_TO_PICK_UP	= 1.0f;
 	protected static final float TIME_TO_DROP		= 1.0f;
-
-	private static final String TXT_BROKEN		= "Because of frequent use, your %s has broken.";
-	private static final String TXT_GONNA_BREAK	= "Because of frequent use, your %s is going to break soon.";
-
-	private static final float DURABILITY_WARNING_LEVEL	= 1/6f;
 	
 	public static final String AC_DROP		= "DROP";
 	public static final String AC_THROW		= "THROW";
 	
 	public String defaultAction;
 	public boolean usesTargeting;
-	public HeroSubClass bonusSubClass = null;
+	protected HeroSubClass bonusSubClass = null;
 	public int UpgradeLimit() {
 		int levelLimit = 2+(int)(Dungeon.hero.lvl/2f);
 		levelLimit = Math.min(15,levelLimit);
 		if (levelLimit == 15 & Dungeon.hero.subClass == bonusSubClass) {
-			levelLimit = 20;
+			levelLimit = (int) (levelLimit * 1.3334f);
 		}
 		return levelLimit;
 	}

@@ -8,6 +8,7 @@ public class LoturgosCrystal extends RelicMeleeWeapon {
     {
         image = ItemSpriteSheet.LOTURGOS_CRYSTAL;
         chargeToAdd = 1f;
+        usesTargeting = true;
     }
 
     @Override

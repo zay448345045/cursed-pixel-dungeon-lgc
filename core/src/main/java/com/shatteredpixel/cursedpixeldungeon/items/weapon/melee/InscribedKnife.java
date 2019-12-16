@@ -44,14 +44,14 @@ public class InscribedKnife extends MeleeWeapon {
         unique = true;
         bonusSubClass = HeroSubClass.MEDIC;
     }
-    float charge = 0;
-    int maxCharge = 40;
+    private float charge = 0;
+    private int maxCharge = 40;
 
-    public static final String AC_CURSE = "CURSE";
-    public static final String AC_SUMMON = "SUMMON";
+    private static final String AC_CURSE = "CURSE";
+    private static final String AC_SUMMON = "SUMMON";
     public static final String CHARGE = "charge";
-    public static final int CURSE_AMT = 30;
-    public static final int SUMMON_AMT = 40;
+    private static final int CURSE_AMT = 30;
+    private static final int SUMMON_AMT = 40;
 
     @Override
     public void storeInBundle(Bundle bundle) {
@@ -66,12 +66,12 @@ public class InscribedKnife extends MeleeWeapon {
         super.restoreFromBundle(bundle);
     }
 
-    public void Charge(float amount) {
+    private void Charge(float amount) {
         charge += amount;
         charge = Math.min(charge,maxCharge);
     }
 
-    public void loseCharge(float amount) {
+    private void loseCharge(float amount) {
         charge -= amount;
         charge = Math.max(charge,0);
     }
@@ -148,7 +148,7 @@ public class InscribedKnife extends MeleeWeapon {
         }
     };
 
-    protected static CellSelector.Listener summon = new  CellSelector.Listener() {
+    private static CellSelector.Listener summon = new  CellSelector.Listener() {
 
         @Override
         public void onSelect(Integer target) {
