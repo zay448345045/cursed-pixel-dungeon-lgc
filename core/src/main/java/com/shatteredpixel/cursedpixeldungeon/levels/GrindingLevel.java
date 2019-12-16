@@ -60,7 +60,7 @@ public class GrindingLevel extends SewerLevel {
         float DRFactor = 1f;
 
         int getScaleFactor() {
-            return Dungeon.hero.lvl;
+            return Dungeon.hero.lvl-1;
         }
 
         public Guardian() {
