@@ -1310,7 +1310,9 @@ public class Hero extends Char {
 	}
 	
 	public void earnExp( int exp, Class source ) {
-		
+		if (lvl > Dungeon.depth) {
+			exp = Math.min(1, exp);
+		}
 		this.exp += exp;
 		float percent = exp/(float)maxExp();
 

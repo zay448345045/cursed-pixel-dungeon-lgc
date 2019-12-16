@@ -32,6 +32,8 @@ public class Statistics {
 	public static int potionsCooked;
 	public static int piranhasKilled;
 	public static int ankhsUsed;
+
+	public static int challengesCompleted;
 	
 	//used for hero unlock badges
 	public static int upgradesUsed;
@@ -60,6 +62,7 @@ public class Statistics {
 		sneakAttacks    = 0;
 		thrownAssists   = 0;
 		allyAssists     = 0;
+		challengesCompleted = 0;
 		
 		duration	= 0;
 		
@@ -81,6 +84,7 @@ public class Statistics {
 	private static final String SNEAKS		= "sneakAttacks";
 	private static final String THROWN		= "thrownAssists";
 	private static final String ALLIES		= "allyAssists";
+	private static final String CHALS		= "challengesCompleted";
 	
 	private static final String DURATION	= "duration";
 	
@@ -99,6 +103,7 @@ public class Statistics {
 		bundle.put( SNEAKS,		sneakAttacks );
 		bundle.put( THROWN,		thrownAssists );
 		bundle.put( ALLIES,     allyAssists );
+		bundle.put( CHALS,      challengesCompleted);
 		
 		bundle.put( DURATION,	duration );
 		
@@ -118,6 +123,7 @@ public class Statistics {
 		sneakAttacks    = bundle.getInt( SNEAKS );
 		thrownAssists   = bundle.getInt( THROWN );
 		allyAssists     = bundle.getInt( ALLIES );
+		challengesCompleted = bundle.getInt( CHALS );
 		
 		duration		= bundle.getFloat( DURATION );
 		

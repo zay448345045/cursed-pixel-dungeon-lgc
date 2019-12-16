@@ -67,12 +67,12 @@ public class GrindingLevel extends SewerLevel {
         int lootAmt = 1;
 
         int getScaleFactor() {
-            return Math.min(30,Dungeon.hero.lvl-1);
+            return Math.min(30,Math.max(0,Dungeon.hero.lvl-2));
         }
 
         public Guardian() {
             super();
-            HP = HT = 15 + 10 * getScaleFactor();
+            HP = HT = 10 + 7 * getScaleFactor();
             aggro(Dungeon.hero);
         }
 
@@ -189,27 +189,21 @@ public class GrindingLevel extends SewerLevel {
             lootAmt = 2;//Tankier, so provides more reward.
             HP = HT = (int)(super.HT*2f);
         }
-
-        @Override
-        public int attackProc(Char enemy, int damage) {
-            Buff.affect(this, Barrier.class).setShield(Math.max(1,damage/2));
-            return super.attackProc(enemy, damage);
-        }
     }
 
     public static class YellowGuardian extends Guardian {
         private int delay = 0;
-        private static final int BLINK_DELAY	= 5;
+        private static final int BLINK_DELAY = 5;
         {
             spriteClass = YellowGuardianSprite.class;
             HP = HT = super.HT/2;
-            damageFactor = 1.25f;
+            damageFactor = 2.5f;
             DRFactor = 0f;
         }
 
         @Override
         protected float attackDelay() {
-            return 0.67f;
+            return 1.5f;
         }
 
         private void blink(int target ) {

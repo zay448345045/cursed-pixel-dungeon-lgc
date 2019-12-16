@@ -484,6 +484,13 @@ public class Dungeon {
 		return !(depth == 1 | (depth > 26 & depth < 30));
 	}
 
+	public static int expDepth() {
+		if (depth > 25) {
+			return 30 + Statistics.challengesCompleted;
+		}
+		return depth;
+	}
+
 	public static int scaleWithDepth() {
 		if (depth == 27) {
 			return hero.lvl;
