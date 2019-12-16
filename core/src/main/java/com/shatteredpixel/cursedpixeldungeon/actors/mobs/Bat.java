@@ -49,7 +49,7 @@ public class Bat extends Mob {
 	
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange( 10, 36 );
+		return Random.NormalIntRange( 10, 42 );
 	}
 	
 	@Override

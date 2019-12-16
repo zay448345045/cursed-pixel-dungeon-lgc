@@ -161,10 +161,9 @@ public class Eye extends Mob {
 
 		for (int pos : beam.subPath(1, beam.dist)) {
 			int terr = Dungeon.level.map[pos];
-			if (terr == Terrain.EMPTY || terr == Terrain.GRASS ||
-					terr == Terrain.EMBERS || terr == Terrain.EMPTY_SP ||
+			if (terr == Terrain.EMPTY || terr == Terrain.GRASS || terr == Terrain.EMPTY_SP ||
 					terr == Terrain.HIGH_GRASS || terr == Terrain.FURROWED_GRASS
-					|| terr == Terrain.EMPTY_DECO || terr == Terrain.WATER) {
+					|| terr == Terrain.EMPTY_DECO || terr == Terrain.WATER || terr == Terrain.FLAMABLE ) {
 				Dungeon.level.destroy(pos);
 			} else if (terr == Terrain.SECRET_TRAP || terr == Terrain.TRAP || terr == Terrain.INACTIVE_TRAP) {
 				Dungeon.level.destroy(pos);

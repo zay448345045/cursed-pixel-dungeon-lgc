@@ -886,7 +886,7 @@ public class Hero extends Char {
 	
 	private boolean actDescend( HeroAction.Descend action ) {
 		int stairs = action.dst;
-		if (pos == stairs && pos == Dungeon.level.exit) {
+		if (pos == stairs && pos == Dungeon.level.exit & !(Dungeon.depth == 27)) {
 			
 			curAction = null;
 
@@ -914,7 +914,7 @@ public class Hero extends Char {
 		int stairs = action.dst;
 		if (pos == stairs && pos == Dungeon.level.entrance) {
 
-			if (Dungeon.depth == 31 || Dungeon.depth == 36 || Dungeon.depth == 41 || Dungeon.depth == 46) {
+			if (Dungeon.depth == 31 || Dungeon.depth == 36 || Dungeon.depth == 41 || Dungeon.depth == 46 || Dungeon.depth == 27) {
 				InterlevelScene.mode = InterlevelScene.Mode.START;
 				Game.switchScene( InterlevelScene.class );
 				return true;
@@ -1097,7 +1097,7 @@ public class Hero extends Char {
 
 		Mob target = null;
 		for (Mob m : Dungeon.level.mobs.toArray(new Mob[0])) {
-			if (fieldOfView[ m.pos ] && m.alignment == Alignment.ENEMY) {
+			if (fieldOfView[ m.pos ] && m.isEnemy()) {
 				visible.add(m);
 				if (!visibleEnemies.contains( m )) {
 					newMob = true;

@@ -29,7 +29,7 @@ public class Voltage extends RelicEnchantment {
 
             for (Mob mob : Dungeon.level.mobs) {
 
-                if (Dungeon.level.distance(attacker.pos, mob.pos) < distance && mob.isAlive() && mob.alignment == Char.Alignment.ENEMY) {
+                if (Dungeon.level.distance(attacker.pos, mob.pos) < distance && mob.isAlive() && mob.isEnemy()) {
                     // int dmg = 20;
                     attacker.sprite.parent.addToFront(new Lightning(attacker.pos, mob.pos, null));
 
@@ -37,9 +37,9 @@ public class Voltage extends RelicEnchantment {
                     mob.sprite.flash();
 
                     if (mob.isAlive() & mob != defender) {
-                        int splitDamage = damage/4;
+                        int splitDamage = damage/6;
                         if (Dungeon.level.water[mob.pos] && !mob.flying) {
-                            splitDamage *= 2;
+                            splitDamage *= 3;
                         }
                         splitDamage = mob.defenseProc( attacker, splitDamage );
                         mob.damage( splitDamage, weapon );

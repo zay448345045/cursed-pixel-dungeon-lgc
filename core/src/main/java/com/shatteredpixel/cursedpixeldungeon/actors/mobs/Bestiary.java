@@ -21,6 +21,7 @@
 
 package com.shatteredpixel.cursedpixeldungeon.actors.mobs;
 
+import com.shatteredpixel.cursedpixeldungeon.levels.GrindingLevel;
 import com.watabou.utils.Random;
 
 import java.util.ArrayList;
@@ -160,6 +161,10 @@ public class Bestiary {
 						Succubus.class,
 						Eye.class, Eye.class,
 						Scorpio.class, Scorpio.class, Scorpio.class));
+			case 27:
+				return new ArrayList<Class<? extends Mob>>(Arrays.asList(
+						GrindingLevel.Guardian.class, GrindingLevel.Guardian.class, GrindingLevel.Guardian.class, GrindingLevel.Guardian.class, GrindingLevel.Guardian.class,
+						GrindingLevel.Guardian.class, GrindingLevel.Guardian.class, GrindingLevel.Guardian.class, GrindingLevel.Guardian.class, GrindingLevel.Guardian.class));
 			case 31:
 				return new ArrayList<>(Arrays.asList(
 						WaterElemental.class,WaterElemental.class,

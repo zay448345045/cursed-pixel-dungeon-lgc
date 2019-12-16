@@ -34,7 +34,7 @@ import com.watabou.utils.Random;
 
 import java.util.Arrays;
 
-public class LastLevel extends Level {
+public class AmuletLevel extends Level {
 
 	{
 		color1 = 0x801500;

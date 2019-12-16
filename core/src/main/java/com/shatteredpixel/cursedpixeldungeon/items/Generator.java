@@ -181,6 +181,13 @@ import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Mace;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MagesStaff;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MeleeWeapon;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Quarterstaff;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.LorsionsGreataxe;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.LoturgosCrystal;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.MaracarsBlades;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.NeptunesTrident;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RaRothsNunchucks;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicMeleeWeapon;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.ThonothsAxe;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RoundShield;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RunicBlade;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Sai;
@@ -236,6 +243,7 @@ public class Generator {
 		WEP_T3	( 0,    MeleeWeapon.class),
 		WEP_T4	( 0,    MeleeWeapon.class),
 		WEP_T5	( 0,    MeleeWeapon.class),
+		WEP_T6	( 0,    RelicMeleeWeapon.class),
 		
 		ARMOR	( 4,    Armor.class ),
 		
@@ -287,6 +295,8 @@ public class Generator {
 		}
 		
 		private static final float[] INITIAL_ARTIFACT_PROBS = new float[]{ 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1};
+
+		private static final float[] INITIAL_WEP_T6_PROBS = new float[]{ 1, 1, 1, 1, 1, 1 };
 		
 		static {
 			GOLD.classes = new Class<?>[]{
@@ -496,6 +506,16 @@ public class Generator {
 					Gauntlet.class
 			};
 			WEP_T5.probs = new float[]{ 6, 5, 5, 4, 4 };
+
+			WEP_T6.classes = new Class<?>[]{
+					LorsionsGreataxe.class,
+					LoturgosCrystal.class,
+					MaracarsBlades.class,
+					NeptunesTrident.class,
+					RaRothsNunchucks.class,
+					ThonothsAxe.class
+			};
+			WEP_T6.probs = INITIAL_WEP_T6_PROBS.clone();
 			
 			//see Generator.randomArmor
 			ARMOR.classes = new Class<?>[]{

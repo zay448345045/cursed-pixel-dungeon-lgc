@@ -45,6 +45,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfLiquidFlame;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfMindVision;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfPurity;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfStrength;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.LuckyBadge;
 import com.shatteredpixel.cursedpixeldungeon.items.quest.CorpseDust;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfIdentify;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfLullaby;
@@ -150,6 +151,7 @@ public enum HeroClass {
 		new NeptunesTrident().identify().collect();
 		new RaRothsNunchucks().identify().collect();
 		new LoturgosCrystal().identify().collect();
+		new LuckyBadge().collect();
 	}
 
 	public Badges.Badge masteryBadge() {

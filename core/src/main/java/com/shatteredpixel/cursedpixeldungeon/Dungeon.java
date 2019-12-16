@@ -48,9 +48,10 @@ import com.shatteredpixel.cursedpixeldungeon.levels.CityBossLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.CityLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.DeadEndLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.EarthChallengeLevel;
+import com.shatteredpixel.cursedpixeldungeon.levels.GrindingLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.HallsBossLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.HallsLevel;
-import com.shatteredpixel.cursedpixeldungeon.levels.LastLevel;
+import com.shatteredpixel.cursedpixeldungeon.levels.AmuletLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.LastShopLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.Level;
 import com.shatteredpixel.cursedpixeldungeon.levels.PrisonBossLevel;
@@ -76,7 +77,6 @@ import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 import com.watabou.utils.SparseArray;
 
-import java.io.EOFException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -295,7 +295,10 @@ public class Dungeon {
 				level = new HallsBossLevel();
 				break;
 			case 26:
-				level = new LastLevel();
+				level = new AmuletLevel();
+				break;
+			case 27:
+				level = new GrindingLevel();
 				break;
 			case 31:
 			case 32:
@@ -411,7 +414,7 @@ public class Dungeon {
 				level = new HallsBossLevel();
 				break;
 			case 26:
-				level = new LastLevel();
+				level = new AmuletLevel();
 				break;
 			case 31:
 			case 32:

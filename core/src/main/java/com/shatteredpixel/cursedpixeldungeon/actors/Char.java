@@ -128,6 +128,10 @@ public abstract class Char extends Actor {
 		return Dungeon.level.adjacent( pos, h.pos );
 	}
 
+	public boolean isEnemy() {
+		return alignment == Alignment.ENEMY | alignment == Alignment.WRAITH;
+	}
+
 	@Override
 	protected boolean act() {
 		if (fieldOfView == null || fieldOfView.length != Dungeon.level.length()){

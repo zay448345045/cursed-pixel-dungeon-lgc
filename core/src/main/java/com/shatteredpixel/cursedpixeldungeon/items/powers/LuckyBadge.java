@@ -2,6 +2,7 @@ package com.shatteredpixel.cursedpixeldungeon.items.powers;
 
 import com.shatteredpixel.cursedpixeldungeon.Challenges;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
+import com.shatteredpixel.cursedpixeldungeon.Statistics;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
@@ -23,9 +24,11 @@ import com.shatteredpixel.cursedpixeldungeon.items.stones.StoneOfEnchantment;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
+import com.shatteredpixel.cursedpixeldungeon.scenes.InterlevelScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
 import com.shatteredpixel.cursedpixeldungeon.windows.WndItem;
+import com.watabou.noosa.Game;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
@@ -39,6 +42,7 @@ public class LuckyBadge extends Power {
         defaultAction = AC_INFO;
     }
     public static final String AC_INFO = "INFO_WINDOW";
+    public static final String AC_PORT = "port";
     @Override
     public int price() {
         return 82;
@@ -50,7 +54,8 @@ public class LuckyBadge extends Power {
     private int dropsToRare = Integer.MIN_VALUE;
     private static float dropsToUpgrade = 60;
     private static final float dropsIncreases = 18;
-
+    public final int GrindDepth = 27;
+    private int returnDepth = -1;
     public static boolean latestDropWasRare = false;
 
     @Override
@@ -58,7 +63,27 @@ public class LuckyBadge extends Power {
         super.execute(hero, action);
         if (action.equals(AC_INFO)) {
             GameScene.show(new WndItem(null, this, true));
+        } else if (action.equals(AC_PORT)) {
+            if (Dungeon.depth == GrindDepth) {
+                InterlevelScene.mode = InterlevelScene.Mode.RETURN;
+                if (returnDepth < 0) {
+                    returnDepth = Statistics.deepestFloor;
+                }
+                InterlevelScene.returnDepth = this.returnDepth;
+
+            } else {
+                InterlevelScene.mode = InterlevelScene.Mode.GRIND;
+                returnDepth = Dungeon.depth;
+            }
+            Game.switchScene(InterlevelScene.class);
         }
+    }
+
+    @Override
+    public ArrayList<String> actions(Hero hero) {
+        ArrayList<String> actions = super.actions(hero);
+        actions.add(AC_PORT);
+        return actions;
     }
 
     @Override
@@ -84,6 +109,7 @@ public class LuckyBadge extends Power {
     private static final String TRIES_TO_DROP = "tries_to_drop";
     private static final String DROPS_TO_RARE = "drops_to_rare";
     private static final String DROPS_TO_UPGRADE = "drops_to_upgrade";
+    private static final String RETURN_DEPTH = "return_depth";
 
     @Override
     public void storeInBundle(Bundle bundle) {
@@ -91,6 +117,7 @@ public class LuckyBadge extends Power {
         bundle.put(TRIES_TO_DROP, triesToDrop);
         bundle.put(DROPS_TO_RARE, dropsToRare);
         bundle.put(DROPS_TO_UPGRADE, dropsToUpgrade);
+        bundle.put( RETURN_DEPTH, returnDepth );
     }
 
     @Override
@@ -99,6 +126,7 @@ public class LuckyBadge extends Power {
         triesToDrop = bundle.getFloat(TRIES_TO_DROP);
         dropsToRare = bundle.getInt(DROPS_TO_RARE);
         dropsToUpgrade = bundle.getInt(DROPS_TO_UPGRADE);
+        returnDepth = bundle.getInt( RETURN_DEPTH );
     }
 
     @Override

@@ -8,11 +8,16 @@ import com.watabou.utils.Random;
 
 public class Minion extends Wraith {
     {
-        defenseSkill = 0;
-        HP = HT = 80;
         resistances.add(Wand.class);
         properties.add(Property.DEMONIC);
         alignment = Alignment.ENEMY;
+    }
+
+    public Minion() {
+        super();
+        adjustStats(30);
+        defenseSkill = 0;
+        HP = HT = 80;
     }
 
     @Override

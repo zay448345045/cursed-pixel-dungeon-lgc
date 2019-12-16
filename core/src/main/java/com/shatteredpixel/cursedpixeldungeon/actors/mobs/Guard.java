@@ -63,7 +63,7 @@ public class Guard extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(6, 23);
+		return Random.NormalIntRange(6, 33);
 	}
 
 	private boolean chain(int target){
