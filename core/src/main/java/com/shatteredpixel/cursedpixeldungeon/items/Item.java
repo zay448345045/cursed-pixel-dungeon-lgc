@@ -70,8 +70,10 @@ public class Item implements Bundlable {
 	public String defaultAction;
 	public boolean usesTargeting;
 	public int UpgradeLimit() {
-		return 15;
-	}//Most items cap at +15
+		int levelLimit = 2+(int)(Dungeon.hero.lvl/2f);
+		levelLimit = Math.min(15,levelLimit);
+		return levelLimit;
+	}
 
     public boolean isUpgradable() {
 		return level() <= UpgradeLimit() - 1;

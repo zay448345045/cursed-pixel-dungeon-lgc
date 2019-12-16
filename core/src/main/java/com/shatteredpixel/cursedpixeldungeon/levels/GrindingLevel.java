@@ -4,14 +4,20 @@ import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Barrier;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Burning;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Paralysis;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.LuckyBadge;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfTeleportation;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Blocking;
 import com.shatteredpixel.cursedpixeldungeon.levels.traps.WornDartTrap;
 import com.shatteredpixel.cursedpixeldungeon.mechanics.Ballistica;
 import com.shatteredpixel.cursedpixeldungeon.sprites.StatueSprite;
+import com.watabou.utils.Bundle;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 
@@ -19,7 +25,7 @@ import java.util.ArrayList;
 
 public class GrindingLevel extends SewerLevel {
     static {
-        TIME_TO_RESPAWN = 25;//Double the spawn rate
+        TIME_TO_RESPAWN = 15;
     }
 
     @Override
@@ -58,6 +64,7 @@ public class GrindingLevel extends SewerLevel {
         float accuFactor = 1f;
         float evaFactor = 1f;
         float DRFactor = 1f;
+        int lootAmt = 1;
 
         int getScaleFactor() {
             return Dungeon.hero.lvl-1;
@@ -71,9 +78,11 @@ public class GrindingLevel extends SewerLevel {
 
         @Override
         public void die(Object cause) {
-            Item luckybadgedrop = LuckyBadge.tryForBonusDrop(Dungeon.hero, 1);
-            if (luckybadgedrop != null) {
-                Dungeon.level.drop(luckybadgedrop, pos).sprite.drop();
+            for (int i = 0; i < lootAmt; i++) {
+                Item luckybadgedrop = LuckyBadge.tryForBonusDrop(Dungeon.hero, 1);
+                if (luckybadgedrop != null) {
+                    Dungeon.level.drop(luckybadgedrop, pos).sprite.drop();
+                }
             }
             super.die(cause);
         }
@@ -112,12 +121,37 @@ public class GrindingLevel extends SewerLevel {
     }
 
     public static class GreenGuardian extends Guardian {
+
+        private boolean canParalyze = true;
+        private final String CAN_PARALYZE = "can_paralyze";
         {
             spriteClass = GreenGuardianSprite.class;
             evaFactor = 0.5f;
             accuFactor = 2f;
             damageFactor = 0.7f;
             DRFactor = 2f;
+        }
+
+        @Override
+        public int attackProc(Char enemy, int damage) {
+            if (canParalyze & Random.Int(2) == 0) {
+                Buff.affect(enemy, Paralysis.class, Paralysis.DURATION/2f);
+                canParalyze = false;
+            }
+            enemy.damage(Math.max(10,enemy.HP)/10,this);
+            return super.attackProc(enemy, damage);
+        }
+
+        @Override
+        public void storeInBundle(Bundle bundle) {
+            bundle.put( CAN_PARALYZE, canParalyze );
+            super.storeInBundle(bundle);
+        }
+
+        @Override
+        public void restoreFromBundle(Bundle bundle) {
+            canParalyze = bundle.getBoolean( CAN_PARALYZE );
+            super.restoreFromBundle(bundle);
         }
     }
     public static class RedGuardian extends Guardian {
@@ -127,11 +161,21 @@ public class GrindingLevel extends SewerLevel {
             accuFactor = 2f;
             damageFactor = 0.75f;
             DRFactor = 0f;
+            evaFactor = 1.5f;
+            HP = HT = (int) (super.HT*0.67f);
         }
 
         @Override
         protected float attackDelay() {
             return 0.5f;
+        }
+
+        @Override
+        public int attackProc(Char enemy, int damage) {
+            if (Random.Int(3) == 0) {
+                Buff.affect(enemy, Burning.class).reignite(enemy);
+            }
+            return super.attackProc(enemy, damage);
         }
     }
 
@@ -139,9 +183,17 @@ public class GrindingLevel extends SewerLevel {
         {
             spriteClass = BlueGuardianSprite.class;
             baseSpeed = 0.5f;
+            evaFactor = 0.5f;
             damageFactor = 2f;
             DRFactor = 2f;
-            HP = HT = (int)(super.HT*1.5f);
+            lootAmt = 2;//Tankier, so provides more reward.
+            HP = HT = (int)(super.HT*2f);
+        }
+
+        @Override
+        public int attackProc(Char enemy, int damage) {
+            Buff.affect(this, Barrier.class).setShield(Math.max(1,damage/2));
+            return super.attackProc(enemy, damage);
         }
     }
 
@@ -160,7 +212,7 @@ public class GrindingLevel extends SewerLevel {
             return 0.67f;
         }
 
-        private void blink( int target ) {
+        private void blink(int target ) {
 
             Ballistica route = new Ballistica( pos, target, Ballistica.PROJECTILE);
             int cell = route.collisionPos;
