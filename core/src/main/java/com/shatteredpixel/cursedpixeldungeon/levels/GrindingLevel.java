@@ -141,6 +141,7 @@ public class GrindingLevel extends SewerLevel {
             baseSpeed = 0.5f;
             damageFactor = 2f;
             DRFactor = 2f;
+            HP = HT = (int)(super.HT*1.5f);
         }
     }
 
