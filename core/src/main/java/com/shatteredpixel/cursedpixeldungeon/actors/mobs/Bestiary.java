@@ -163,8 +163,8 @@ public class Bestiary {
 						Scorpio.class, Scorpio.class, Scorpio.class));
 			case 27:
 				return new ArrayList<Class<? extends Mob>>(Arrays.asList(
-						GrindingLevel.Guardian.class, GrindingLevel.Guardian.class, GrindingLevel.Guardian.class, GrindingLevel.Guardian.class, GrindingLevel.Guardian.class,
-						GrindingLevel.Guardian.class, GrindingLevel.Guardian.class, GrindingLevel.Guardian.class, GrindingLevel.Guardian.class, GrindingLevel.Guardian.class));
+						GrindingLevel.RedGuardian.class, GrindingLevel.RedGuardian.class, GrindingLevel.GreenGuardian.class, GrindingLevel.GreenGuardian.class,
+						GrindingLevel.YellowGuardian.class, GrindingLevel.YellowGuardian.class, GrindingLevel.BlueGuardian.class, GrindingLevel.BlueGuardian.class));
 			case 31:
 				return new ArrayList<>(Arrays.asList(
 						WaterElemental.class,WaterElemental.class,

@@ -710,11 +710,6 @@ public abstract class Mob extends Char {
 				}
 			}
 		}
-
-		Item luckybadgedrop = LuckyBadge.tryForBonusDrop(Dungeon.hero, 1);
-		if (luckybadgedrop != null && Dungeon.hero.belongings.getItem(LuckyBadge.class) != null) {
-			Dungeon.level.drop(luckybadgedrop, pos).sprite.drop();
-		}
 		
 		//lucky enchant logic
 		if (Dungeon.hero.lvl <= maxLvl && buff(Lucky.LuckProc.class) != null){

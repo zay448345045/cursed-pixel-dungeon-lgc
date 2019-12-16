@@ -473,7 +473,24 @@ public class Dungeon {
 	}
 
 	public static boolean bossLevel( int depth ) {
-		return depth == 5 || depth == 10 || depth == 15 || depth == 20 || depth == 25;
+		return depth % 5 == 0 | depth == 27;
+	}
+
+	public static boolean canSpawnMimic() {
+		return canSpawnMimic(depth);
+	}
+
+	public static boolean canSpawnMimic( int depth ) {
+		return !(depth == 1 | (depth > 26 & depth < 30));
+	}
+
+	public static int scaleWithDepth() {
+		if (depth == 27) {
+			return hero.lvl;
+		} else if ( depth > 30 & depth < 50 ) {//Challenges all act as if they are depth 30
+			return 30;
+		}
+		return depth;
 	}
 
 	@SuppressWarnings("deprecation")

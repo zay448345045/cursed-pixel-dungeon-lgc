@@ -81,6 +81,9 @@ public class Wraith extends Mob {
 	
 	public void adjustStats( int level ) {
 		this.level = level;
+		if (Dungeon.depth == 27) {
+			this.level = Dungeon.hero.lvl;//Makes Wraiths scale with hero level on grinding depth
+		}
 		defenseSkill = attackSkill( null ) * 5;
 		enemySeen = true;
 	}

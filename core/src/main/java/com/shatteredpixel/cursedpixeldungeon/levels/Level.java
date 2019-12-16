@@ -103,7 +103,7 @@ public abstract class Level implements Bundlable {
 	protected int length;
 	protected boolean hasExit = true;
 	protected boolean hasEntrance = true;
-	protected static final float TIME_TO_RESPAWN	= 50;
+	public static float TIME_TO_RESPAWN	= 50;
 
 	public int version;
 	
@@ -535,9 +535,7 @@ public abstract class Level implements Bundlable {
 	}
 	
 	public float respawnTime(){
-		if (Statistics.amuletObtained){
-			return TIME_TO_RESPAWN/2f;
-		} else if (Dungeon.level.feeling == Feeling.DARK){
+		 if (Dungeon.level.feeling == Feeling.DARK){
 			return 2*TIME_TO_RESPAWN/3f;
 		} else {
 			return TIME_TO_RESPAWN;

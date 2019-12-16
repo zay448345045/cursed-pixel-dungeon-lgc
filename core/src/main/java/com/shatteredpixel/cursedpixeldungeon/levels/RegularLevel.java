@@ -311,7 +311,7 @@ public abstract class RegularLevel extends Level {
 				type = Heap.Type.CHEST;
 				break;
 			case 5:
-				type = Dungeon.depth > 1 ? Heap.Type.MIMIC : Heap.Type.CHEST;
+				type = Dungeon.canSpawnMimic() ? Heap.Type.MIMIC : Heap.Type.CHEST;
 				break;
 			default:
 				type = Heap.Type.HEAP;
