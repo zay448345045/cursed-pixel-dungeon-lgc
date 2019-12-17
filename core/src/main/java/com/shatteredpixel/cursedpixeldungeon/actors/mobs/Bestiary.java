@@ -243,7 +243,7 @@ public class Bestiary {
 	//switches out regular mobs for their alt versions when appropriate
 	private static void swapMobAlts(ArrayList<Class<?extends Mob>> rotation){
 		for (int i = 0; i < rotation.size(); i++){
-			if (Random.Int( 50 ) == 0) {
+			if (Random.Int( 3 ) == 0) {
 				Class<? extends Mob> cl = rotation.get(i);
 				if (cl == Rat.class) {
 					cl = Albino.class;
@@ -255,7 +255,9 @@ public class Bestiary {
 					cl = Senior.class;
 				} else if (cl == Scorpio.class) {
 					cl = Acidic.class;
-				}
+				} /*else if (cl == GrindingLevel.RedGuardian.class) {//Broken sadly :(
+					cl = GrindingLevel.OrangeGuardian.class;
+				}*/
 				rotation.set(i, cl);
 			}
 		}

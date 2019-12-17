@@ -14,14 +14,12 @@ import com.watabou.noosa.Camera;
 
 public class Voltage extends RelicEnchantment {
     private static ItemSprite.Glowing WHITE = new ItemSprite.Glowing( 0xFFFFFF, 0.5f );
-    private int cost = 4;
+    private int cost = 5;
     @Override
     public int relicProc(RelicMeleeWeapon weapon, Char attacker, Char defender, int damage) {
-        if (weapon.charge>=cost){
-            weapon.charge-=cost;
-        } else {
-            return damage;
-        }
+
+
+        boolean procced = false;
 
         int level = Math.max(0, weapon.level());
         int distance = 5 + level;
@@ -37,6 +35,7 @@ public class Voltage extends RelicEnchantment {
                     mob.sprite.flash();
 
                     if (mob.isAlive() & mob != defender) {
+                        procced = true;
                         int splitDamage = damage/6;
                         if (Dungeon.level.water[mob.pos] && !mob.flying) {
                             splitDamage *= 3;
@@ -50,6 +49,12 @@ public class Voltage extends RelicEnchantment {
                 }
             }
         } catch (Exception e) {
+            return damage;
+        }
+
+        if (weapon.charge>=cost & procced){
+            weapon.charge-=cost;
+        } else {
             return damage;
         }
 

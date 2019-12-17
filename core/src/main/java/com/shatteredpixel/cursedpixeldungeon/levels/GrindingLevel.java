@@ -4,28 +4,37 @@ import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
-import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Barrier;
+import com.shatteredpixel.cursedpixeldungeon.actors.blobs.Fire;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Burning;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Paralysis;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Weakness;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
+import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Warlock;
+import com.shatteredpixel.cursedpixeldungeon.effects.MagicMissile;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.LuckyBadge;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfTeleportation;
-import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Blocking;
 import com.shatteredpixel.cursedpixeldungeon.levels.traps.WornDartTrap;
 import com.shatteredpixel.cursedpixeldungeon.mechanics.Ballistica;
+import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
+import com.shatteredpixel.cursedpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.StatueSprite;
+import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
+import com.watabou.utils.Callback;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 
 import java.util.ArrayList;
 
 public class GrindingLevel extends SewerLevel {
-    static {
-        TIME_TO_RESPAWN = 15;
+
+    @Override
+    public float respawnTime() {
+        return super.respawnTime()/5f;
     }
 
     @Override
@@ -253,6 +262,45 @@ public class GrindingLevel extends SewerLevel {
         }
     }
 
+    public static class OrangeGuardian extends RedGuardian implements Callback {
+        {
+            spriteClass = OrangeGuardianSprite.class;
+            baseSpeed = 1f;
+        }
+
+        static class FireBolt {}
+
+        public void onZapComplete() {
+            zap();
+            next();
+        }
+
+        private void zap() {
+            spend( attackDelay()*2 );
+
+            if (hit( this, enemy, true )) {
+                if (enemy == Dungeon.hero && Random.Int( 2 ) == 0) {
+                    Buff.affect( enemy, Burning.class ).reignite(enemy);
+                }
+
+                int dmg = damageRoll()/3;
+                enemy.damage( dmg, new FireBolt() );
+
+                if (!enemy.isAlive() && enemy == Dungeon.hero) {
+                    Dungeon.fail( getClass() );
+                    GLog.n( Messages.get(this, "bolt_kill") );
+                }
+            } else {
+                enemy.sprite.showStatus( CharSprite.NEUTRAL,  enemy.defenseVerb() );
+            }
+        }
+
+        @Override
+        public void call() {
+            next();
+        }
+    }
+
     public static class GreenGuardianSprite extends StatueSprite {
 
         public GreenGuardianSprite(){
@@ -278,6 +326,48 @@ public class GrindingLevel extends SewerLevel {
         public void resetColor() {
             super.resetColor();
             tint(1, 0, 0, 0.2f);
+        }
+    }
+
+    public class OrangeGuardianSprite extends StatueSprite {
+
+        public OrangeGuardianSprite() {
+            super();
+            zap = attack.clone();
+            tint(1, 0.5f, 0, 0.2f);
+        }
+
+        @Override
+        public void resetColor() {
+            super.resetColor();
+            tint(1, 0.5f, 0, 0.2f);
+        }
+        @Override
+        public void zap( int cell ) {
+            super.zap( cell );
+
+            turnTo( ch.pos , cell );
+            play( zap );
+
+            MagicMissile.boltFromChar( parent,
+                    MagicMissile.FIRE_CONE,
+                    this,
+                    cell,
+                    new Callback() {
+                        @Override
+                        public void call() {
+                            ((OrangeGuardian)ch).onZapComplete();
+                        }
+                    } );
+            Sample.INSTANCE.play( Assets.SND_ZAP );
+        }
+
+        @Override
+        public void onComplete( Animation anim ) {
+            if (anim == zap) {
+                idle();
+            }
+            super.onComplete( anim );
         }
     }
 

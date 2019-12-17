@@ -33,6 +33,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.MerchantsBeacon;
 import com.shatteredpixel.cursedpixeldungeon.items.Stylus;
 import com.shatteredpixel.cursedpixeldungeon.items.Torch;
+import com.shatteredpixel.cursedpixeldungeon.items.armor.Armor;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.LeatherArmor;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.MailArmor;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.PlateArmor;
@@ -55,12 +56,15 @@ import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfMagicMapping;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfRemoveCurse;
 import com.shatteredpixel.cursedpixeldungeon.items.stones.Runestone;
 import com.shatteredpixel.cursedpixeldungeon.items.stones.StoneOfAugmentation;
+import com.shatteredpixel.cursedpixeldungeon.items.stones.StoneOfEnchantment;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.Wand;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.BattleAxe;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Greatsword;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.HandAxe;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Longsword;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Mace;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MeleeWeapon;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Shortsword;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Sword;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.WarHammer;
@@ -164,49 +168,83 @@ public class ShopRoom extends SpecialRoom {
 		}
 
 	}
-	
+
+	protected static Armor generateArmor(int depth) {
+		Armor armor;
+		int minTier = depth/5;
+		int maxTier = depth/5 + 2;
+		do {
+			armor = Generator.randomArmor();
+			armor.cursed = false;
+			if (armor.hasCurseGlyph()) {
+				armor.inscribe(Armor.Glyph.random());
+			}
+		} while ((armor.tier > maxTier | armor.tier < minTier));
+		armor.identify();
+		armor.cursed = false;
+		armor.upgrade(Random.NormalIntRange( Dungeon.depth/5, Dungeon.depth/3 ) + 1);
+		return armor;
+	}
+
+	protected static MeleeWeapon generateWeapon(int depth) {
+		MeleeWeapon weapon;
+		int minTier = depth/5;
+		int maxTier = depth/5 + 2;
+		do {
+			weapon = (MeleeWeapon) Generator.random(Generator.Category.WEAPON);
+			if (weapon.hasCurseEnchant()) {
+				weapon.enchant(Weapon.Enchantment.random());
+			}
+		} while ((weapon.tier > maxTier | weapon.tier < minTier));
+		weapon.identify();
+		weapon.cursed = false;
+		weapon.upgrade(Random.NormalIntRange( Dungeon.depth/5, Dungeon.depth/3 ) + 1);
+		return weapon;
+	}
+
 	protected static ArrayList<Item> generateItems() {
 
 		ArrayList<Item> itemsToSpawn = new ArrayList<>();
-		
+
 		switch (Dungeon.depth) {
-		case 6:
-			itemsToSpawn.add( (Random.Int( 2 ) == 0 ? new Shortsword().identify() : new HandAxe()).identify() );
-			itemsToSpawn.add( Random.Int( 2 ) == 0 ?
-					new FishingSpear().quantity(2) :
-					new Shuriken().quantity(2));
-			itemsToSpawn.add( new LeatherArmor().identify() );
-			itemsToSpawn.add(new LuckyBadge());
-			break;
-			
-		case 11:
-			itemsToSpawn.add( (Random.Int( 2 ) == 0 ? new Sword().identify() : new Mace()).identify() );
-			itemsToSpawn.add( Random.Int( 2 ) == 0 ?
-					new ThrowingSpear().quantity(2) :
-					new Bolas().quantity(2));
-			itemsToSpawn.add( new MailArmor().identify() );
-			break;
-			
-		case 16:
-			itemsToSpawn.add( (Random.Int( 2 ) == 0 ? new Longsword().identify() : new BattleAxe()).identify() );
-			itemsToSpawn.add( Random.Int( 2 ) == 0 ?
-					new Javelin().quantity(2) :
-					new Tomahawk().quantity(2));
-			itemsToSpawn.add( new ScaleArmor().identify() );
-			break;
-			
-		case 21:
-			itemsToSpawn.add( Random.Int( 2 ) == 0 ? new Greatsword().identify() : new WarHammer().identify() );
-			itemsToSpawn.add( Random.Int(2) == 0 ?
-					new Trident().quantity(2) :
-					new ThrowingHammer().quantity(2));
-			itemsToSpawn.add( new PlateArmor().identify() );
-			itemsToSpawn.add( new Torch() );
-			itemsToSpawn.add( new Torch() );
-			itemsToSpawn.add( new Torch() );
-			break;
+			case 6:
+				itemsToSpawn.add( Random.Int( 2 ) == 0 ?
+						new FishingSpear().quantity(2) :
+						new Shuriken().quantity(2));
+				break;
+
+			case 11:
+				itemsToSpawn.add( Random.Int( 2 ) == 0 ?
+						new ThrowingSpear().quantity(2) :
+						new Bolas().quantity(2));
+				break;
+
+			case 16:
+				itemsToSpawn.add( Random.Int( 2 ) == 0 ?
+						new Javelin().quantity(2) :
+						new Tomahawk().quantity(2));
+				break;
+
+			case 21:
+				itemsToSpawn.add( Random.Int(2) == 0 ?
+						new Trident().quantity(2) :
+						new ThrowingHammer().quantity(2));
+				itemsToSpawn.add( new Torch() );
+				itemsToSpawn.add( new Torch() );
+				itemsToSpawn.add( new Torch() );
+				break;
 		}
-		
+		for (int a = 0; a < Random.IntRange(1,2); a++) {
+			Armor armor = generateArmor(Dungeon.depth);
+			itemsToSpawn.add( armor );
+		}
+
+		for (int a = 0; a < Random.IntRange(1,2); a++) {
+			MeleeWeapon weapon = generateWeapon(Dungeon.depth);
+			itemsToSpawn.add( weapon );
+		}
+
+
 		itemsToSpawn.add( TippedDart.randomTipped(2) );
 
 		itemsToSpawn.add( new MerchantsBeacon() );
@@ -232,12 +270,14 @@ public class ShopRoom extends SpecialRoom {
 
 		itemsToSpawn.add( new SmallRation() );
 		itemsToSpawn.add( new SmallRation() );
-		
+
 		switch (Random.Int(4)){
 			case 0:
 				itemsToSpawn.add( new Bomb() );
 				break;
 			case 1:
+				itemsToSpawn.add( new StoneOfEnchantment() );
+				break;
 			case 2:
 				itemsToSpawn.add( new Bomb.DoubleBomb() );
 				break;
@@ -272,23 +312,20 @@ public class ShopRoom extends SpecialRoom {
 		}
 
 		Item rare;
-		switch (Random.Int(10)){
-			case 0:
+		switch (Random.Int(2)){
+			case 0: default:
 				rare = Generator.random( Generator.Category.WAND );
-				rare.level( 0 );
 				break;
 			case 1:
 				rare = Generator.random(Generator.Category.RING);
-				rare.level( 0 );
 				break;
 			case 2:
 				rare = Generator.random( Generator.Category.ARTIFACT );
 				break;
-			default:
-				rare = new Stylus();
 		}
 		rare.cursed = false;
 		rare.cursedKnown = true;
+		rare.levelKnown = true;
 		itemsToSpawn.add( rare );
 
 		//hard limit is 63 items + 1 shopkeeper, as shops can't be bigger than 8x8=64 internally
