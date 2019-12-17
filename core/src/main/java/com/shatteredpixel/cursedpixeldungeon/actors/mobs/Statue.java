@@ -51,8 +51,9 @@ public class Statue extends Mob {
 		super();
 		
 		do {
-			weapon = (MeleeWeapon) Generator.random(Generator.Category.WEAPON).upgrade(Random.NormalIntRange( Dungeon.depth/4, Dungeon.depth/2 ) + 1);
-		} while (weapon.cursed);
+			weapon = (MeleeWeapon) Generator.randomWeapon();
+		} while (weapon == null | weapon.cursed);
+		weapon.upgrade(Random.NormalIntRange( Dungeon.scaleWithDepth()/4, Dungeon.scaleWithDepth()/2 ) + 1);
 		
 		weapon.enchant( Enchantment.random() );
 		
