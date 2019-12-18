@@ -23,6 +23,7 @@ package com.shatteredpixel.cursedpixeldungeon.sprites;
 
 import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
+import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroClass;
 import com.watabou.gltextures.SmartTexture;

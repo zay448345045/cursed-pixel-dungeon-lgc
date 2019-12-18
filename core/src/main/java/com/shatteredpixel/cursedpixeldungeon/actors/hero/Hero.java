@@ -102,8 +102,11 @@ import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Precise;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Swift;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Unstable;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Flail;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.ChainsawHand;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RaRothsNunchucks;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicEnchantments.Barrier;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicEnchantments.Bloodlust;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicMeleeWeapon;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.MissileWeapon;
 import com.shatteredpixel.cursedpixeldungeon.journal.Notes;
 import com.shatteredpixel.cursedpixeldungeon.levels.Level;
@@ -129,12 +132,14 @@ import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
+import com.watabou.utils.Callback;
 import com.watabou.utils.GameMath;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
 
 public class Hero extends Char {
 
@@ -1562,13 +1567,14 @@ public class Hero extends Char {
 			}
 		}
 	}
-	
-	@Override
-	public void onAttackComplete() {
-		
+
+	private boolean actuallyAttack( Char enemy ) {
+		return actuallyAttack(enemy,false);
+	}
+
+	private boolean actuallyAttack(Char enemy, boolean guaranteed) {
 		AttackIndicator.target(enemy);
-		
-		boolean hit = attack( enemy );
+		boolean hit = attack( enemy, guaranteed );
 
 		if (subClass == HeroSubClass.GLADIATOR){
 			if (hit) {
@@ -1577,6 +1583,35 @@ public class Hero extends Char {
 				Combo combo = buff(Combo.class);
 				if (combo != null) combo.miss( enemy );
 			}
+		}
+		return hit;
+	}
+	
+	@Override
+	public void onAttackComplete() {
+
+		actuallyAttack(enemy);
+		if (belongings.weapon instanceof ChainsawHand && belongings.weapon.hasEnchant(Bloodlust.class,this) && ((RelicMeleeWeapon) belongings.weapon).charge > 1 & enemy.isAlive() && ((ChainsawHand)belongings.weapon).isTurnedOn() ) {
+			boolean hit;
+			int attacks = 0;
+			do {
+				hit = hit(this, enemy, false);
+				if (hit) {
+					sprite.attack(enemy.pos, new Callback() {
+						@Override
+						public void call() {
+							actuallyAttack(enemy, true);
+						}
+					});
+				} else {
+					String defense = enemy.defenseVerb();
+					enemy.sprite.showStatus( CharSprite.NEUTRAL, defense );
+
+					Sample.INSTANCE.play(Assets.SND_MISS);
+				}
+
+				attacks++;
+			} while (hit & ((RelicMeleeWeapon) belongings.weapon).charge > 0 & enemy.isAlive());
 		}
 		
 		Invisibility.dispel();

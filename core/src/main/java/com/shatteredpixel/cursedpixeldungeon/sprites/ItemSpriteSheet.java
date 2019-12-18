@@ -611,6 +611,7 @@ public class ItemSpriteSheet {
 	public static final int CHAINSAW_HAND       = WEP_TIER3+6;
 	static {
 		assignItemRect(LOTURGOS_CRYSTAL,    10, 15);
+		assignItemRect(CHAINSAW_HAND,       13, 13);
 	}
 
 	public static final int DRAGON_CRYSTAL  = SPELLS+13;

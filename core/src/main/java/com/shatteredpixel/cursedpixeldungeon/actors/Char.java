@@ -189,56 +189,65 @@ public abstract class Char extends Actor {
 			}
 		}
 	}
-	
+
+	public int damagePhysical(Char enemy ) {
+		boolean visibleFight = Dungeon.level.heroFOV[pos] || Dungeon.level.heroFOV[enemy.pos];
+		int dr = enemy.drRoll();
+
+		if (this instanceof Hero){
+			Hero h = (Hero)this;
+			if (h.belongings.weapon instanceof MissileWeapon
+					&& h.subClass == HeroSubClass.SNIPER
+					&& !Dungeon.level.adjacent(h.pos, enemy.pos)){
+				dr = 0;
+			}
+		}
+
+		int dmg;
+		Preparation prep = buff(Preparation.class);
+		if (prep != null){
+			dmg = prep.damageRoll(this, enemy);
+		} else {
+			dmg = damageRoll();
+		}
+
+		int effectiveDamage = enemy.defenseProc( this, dmg );
+		effectiveDamage = Math.max( effectiveDamage - dr, 0 );
+		effectiveDamage = attackProc( enemy, effectiveDamage );
+
+		if (visibleFight) {
+			Sample.INSTANCE.play( Assets.SND_HIT, 1, 1, Random.Float( 0.8f, 1.25f ) );
+		}
+
+		// If the enemy is already dead, interrupt the attack.
+		// This matters as defence procs can sometimes inflict self-damage, such as armor glyphs.
+
+
+		//TODO: consider revisiting this and shaking in more cases.
+		float shake = 0f;
+		if (enemy == Dungeon.hero)
+			shake = effectiveDamage / (enemy.HT / 4);
+
+		if (shake > 1f)
+			Camera.main.shake( GameMath.gate( 1, shake, 5), 0.3f );
+		return effectiveDamage;
+	}
+
 	public boolean attack( Char enemy ) {
+		return attack(enemy,false);
+	}
+	
+	public boolean attack( Char enemy, boolean guaranteed ) {
 
 		if (enemy == null) return false;
 		
 		boolean visibleFight = Dungeon.level.heroFOV[pos] || Dungeon.level.heroFOV[enemy.pos];
 		
-		if (hit( this, enemy, false )) {
-			
-			int dr = enemy.drRoll();
-			
-			if (this instanceof Hero){
-				Hero h = (Hero)this;
-				if (h.belongings.weapon instanceof MissileWeapon
-						&& h.subClass == HeroSubClass.SNIPER
-						&& !Dungeon.level.adjacent(h.pos, enemy.pos)){
-					dr = 0;
-				}
-			}
-			
-			int dmg;
-			Preparation prep = buff(Preparation.class);
-			if (prep != null){
-				dmg = prep.damageRoll(this, enemy);
-			} else {
-				dmg = damageRoll();
-			}
-			
-			int effectiveDamage = enemy.defenseProc( this, dmg );
-			effectiveDamage = Math.max( effectiveDamage - dr, 0 );
-			effectiveDamage = attackProc( enemy, effectiveDamage );
-			
-			if (visibleFight) {
-				Sample.INSTANCE.play( Assets.SND_HIT, 1, 1, Random.Float( 0.8f, 1.25f ) );
-			}
-
-			// If the enemy is already dead, interrupt the attack.
-			// This matters as defence procs can sometimes inflict self-damage, such as armor glyphs.
+		if (hit( this, enemy, false ) | guaranteed) {
+			int effectiveDamage = damagePhysical(enemy);
 			if (!enemy.isAlive()){
 				return true;
 			}
-
-			//TODO: consider revisiting this and shaking in more cases.
-			float shake = 0f;
-			if (enemy == Dungeon.hero)
-				shake = effectiveDamage / (enemy.HT / 4);
-
-			if (shake > 1f)
-				Camera.main.shake( GameMath.gate( 1, shake, 5), 0.3f );
-
 			enemy.damage( effectiveDamage, this );
 
 			if (buff(FireImbue.class) != null)

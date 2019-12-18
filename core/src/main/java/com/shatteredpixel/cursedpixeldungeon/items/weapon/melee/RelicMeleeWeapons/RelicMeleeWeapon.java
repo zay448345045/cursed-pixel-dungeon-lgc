@@ -48,16 +48,27 @@ public class RelicMeleeWeapon extends MeleeWeapon {
 
         super.execute(hero, action);
         if (action.equals(AC_ACTIVATE)) {
-            if (isEquipped(hero) & charge >= chargeCap) {
-                ((RelicEnchantment) enchantment).activate(this, hero);
-            } else {
-                GLog.i(Messages.get(RelicMeleeWeapon.class,"no_charge",name()));
-            }
+            specialAction(hero);
+        }
+    }
+
+    public void specialAction(Hero hero) {
+        if (isEquipped(hero) & charge >= chargeCap) {
+            ((RelicEnchantment) enchantment).activate(this, hero);
+        } else {
+            GLog.i(Messages.get(RelicMeleeWeapon.class,"no_charge",name()));
         }
     }
 
     public void use() {
-        charge = 0;
+        use(charge);
+    }
+
+    public void use(int amount) {
+        charge -= amount;
+        if (charge < 0) {
+            charge = 0;
+        }
         updateQuickslot();
     }
 
@@ -131,12 +142,13 @@ public class RelicMeleeWeapon extends MeleeWeapon {
         @Override
         public boolean act() {
             LockedFloor lock = target.buff(LockedFloor.class);
-            if (charge < chargeCap && !cursed && (lock == null || lock.regenOn())) {
+            if (charge < chargeCap  && (lock == null || lock.regenOn())) {
                 partialCharge += chargeToAdd;
                 if (partialCharge > 1){
                     charge++;
+                    updateQuickslot();
                     partialCharge--;
-                    if (charge == chargeCap){
+                    if (charge >= chargeCap){
                         partialCharge = 0f;
                         GLog.p( Messages.get(RelicMeleeWeapon.class, "charged"),name() );
                     }

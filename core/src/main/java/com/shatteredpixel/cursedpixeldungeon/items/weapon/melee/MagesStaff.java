@@ -76,16 +76,12 @@ public class MagesStaff extends MeleeWeapon {
 		bones = false;
 
 		bonusSubClass = HeroSubClass.BATTLEMAGE;
+
+		damageMultiplier = 0.8f;
 	}
 
 	public MagesStaff() {
 		wand = null;
-	}
-
-	@Override
-	public int max(int lvl) {
-		return  4*(tier+1) +    //8 base damage, down from 10
-				lvl;   //scaling unaffected [As of Cursed Pixel Dungeon 0.1.0, tier does not affect scaling, only base damage]
 	}
 
 	public MagesStaff(Wand wand){

@@ -181,6 +181,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Mace;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MagesStaff;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MeleeWeapon;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Quarterstaff;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.ChainsawHand;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.LorsionsGreataxe;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.LoturgosCrystal;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.MaracarsBlades;
@@ -296,7 +297,7 @@ public class Generator {
 		
 		private static final float[] INITIAL_ARTIFACT_PROBS = new float[]{ 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1};
 
-		private static final float[] INITIAL_WEP_T6_PROBS = new float[]{ 1, 1, 1, 1, 1, 1 };
+		private static final float[] INITIAL_WEP_T6_PROBS = new float[]{ 1, 1, 1, 1, 1, 1, 1 };
 		
 		static {
 			GOLD.classes = new Class<?>[]{
@@ -513,7 +514,8 @@ public class Generator {
 					MaracarsBlades.class,
 					NeptunesTrident.class,
 					RaRothsNunchucks.class,
-					ThonothsAxe.class
+					ThonothsAxe.class,
+					ChainsawHand.class
 			};
 			WEP_T6.probs = INITIAL_WEP_T6_PROBS.clone();
 			
