@@ -1,23 +1,37 @@
 package com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons;
 
-import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicEnchantments.Bloodlust;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicEnchantments.RelicEnchantment;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
+import com.watabou.utils.Bundle;
 
 import java.util.ArrayList;
 
 public class ChainsawHand extends RelicMeleeWeapon {
     {
         image = ItemSpriteSheet.CHAINSAW_HAND;
-        ACC = 2f;
-        damageMultiplier = 0.5f;
+        ACC = 1.5f;
+        damageMultiplier = 0.3f;
         cursed = true;
     }
 
     private final String AC_DEACTIVATE = "deactivate";
+
+    private static final String ACTIVATED = "activated";
+
+    @Override
+    public void storeInBundle( Bundle bundle ) {
+        super.storeInBundle(bundle);
+        bundle.put( ACTIVATED , turnedOn );
+    }
+
+    @Override
+    public void restoreFromBundle( Bundle bundle ) {
+        super.restoreFromBundle(bundle);
+        turnedOn = bundle.getBoolean( ACTIVATED );
+    }
 
     private boolean turnedOn = false;
 

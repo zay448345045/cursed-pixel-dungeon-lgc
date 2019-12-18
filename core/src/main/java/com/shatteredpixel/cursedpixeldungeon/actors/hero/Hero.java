@@ -972,7 +972,7 @@ public class Hero extends Char {
 		enemy = action.target;
 
 		if (enemy.isAlive() && canAttack( enemy ) && !isCharmedBy( enemy )) {
-			
+
 			sprite.attack( enemy.pos );
 
 			return false;
@@ -1568,13 +1568,24 @@ public class Hero extends Char {
 		}
 	}
 
-	private boolean actuallyAttack( Char enemy ) {
-		return actuallyAttack(enemy,false);
-	}
 
-	private boolean actuallyAttack(Char enemy, boolean guaranteed) {
+
+	private boolean actuallyAttack(Char enemy) {
 		AttackIndicator.target(enemy);
-		boolean hit = attack( enemy, guaranteed );
+		boolean hit = attack( enemy, false );
+		final Char enemyToHit = enemy;
+		if (hit) {
+			if (belongings.weapon instanceof ChainsawHand && belongings.weapon.hasEnchant(Bloodlust.class,this) && ((RelicMeleeWeapon) belongings.weapon).charge > 1 & enemy.isAlive() && ((ChainsawHand)belongings.weapon).isTurnedOn() ) {
+				sprite.attack(enemy.pos, new Callback() {
+					@Override
+					public void call() {
+						actuallyAttack(enemyToHit);
+						next();
+					}
+				});
+
+			}
+		}
 
 		if (subClass == HeroSubClass.GLADIATOR){
 			if (hit) {
@@ -1591,28 +1602,7 @@ public class Hero extends Char {
 	public void onAttackComplete() {
 
 		actuallyAttack(enemy);
-		if (belongings.weapon instanceof ChainsawHand && belongings.weapon.hasEnchant(Bloodlust.class,this) && ((RelicMeleeWeapon) belongings.weapon).charge > 1 & enemy.isAlive() && ((ChainsawHand)belongings.weapon).isTurnedOn() ) {
-			boolean hit;
-			int attacks = 0;
-			do {
-				hit = hit(this, enemy, false);
-				if (hit) {
-					sprite.attack(enemy.pos, new Callback() {
-						@Override
-						public void call() {
-							actuallyAttack(enemy, true);
-						}
-					});
-				} else {
-					String defense = enemy.defenseVerb();
-					enemy.sprite.showStatus( CharSprite.NEUTRAL, defense );
 
-					Sample.INSTANCE.play(Assets.SND_MISS);
-				}
-
-				attacks++;
-			} while (hit & ((RelicMeleeWeapon) belongings.weapon).charge > 0 & enemy.isAlive());
-		}
 		
 		Invisibility.dispel();
 		spend( attackDelay() );
@@ -1621,7 +1611,7 @@ public class Hero extends Char {
 
 		super.onAttackComplete();
 	}
-	
+
 	@Override
 	public void onOperateComplete() {
 		

@@ -20,6 +20,6 @@ public class Bloodlust extends RelicEnchantment {
 
     @Override
     public int relicProc(RelicMeleeWeapon weapon, Char attacker, Char defender, int damage) {
-        return damage;//Effect is in hero.actAttack(). This does mean it doesn't work for Statues, but I doubt Statues will ever use Tier 6 weapons.
+        return damage;//Effect is in hero.actuallyAttack(). This does mean it doesn't work for Statues, but I doubt Statues will ever use Tier 6 weapons.
     }
 }
