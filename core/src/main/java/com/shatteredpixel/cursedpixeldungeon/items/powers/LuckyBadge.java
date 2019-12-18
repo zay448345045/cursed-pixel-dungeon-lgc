@@ -84,6 +84,7 @@ public class LuckyBadge extends Power {
                 returnDepth = Statistics.deepestFloor;
             }
             InterlevelScene.returnDepth = this.returnDepth;
+            Game.switchScene(InterlevelScene.class);
         }
     }
 
