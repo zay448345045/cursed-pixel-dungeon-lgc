@@ -707,6 +707,9 @@ public class Generator {
 			Category c = wepTiers[Random.chances(floorSetTierProbs[floorSet])];
 			MeleeWeapon w = (MeleeWeapon)c.classes[Random.chances(c.probs)].newInstance();
 			w.random();
+			if (Dungeon.depth > 30 & Random.Int(30) == 0) {
+				w = (MeleeWeapon) Generator.random(Category.WEP_T6);
+			}
 			return w;
 		} catch (Exception e) {
 			ShatteredPixelDungeon.reportException(e);

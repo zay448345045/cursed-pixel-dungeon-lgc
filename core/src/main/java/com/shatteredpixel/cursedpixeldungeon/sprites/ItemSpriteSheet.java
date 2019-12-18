@@ -608,6 +608,7 @@ public class ItemSpriteSheet {
 	public static final int NEPTUNES_TRIDENT    = AMULETS+4;
 	public static final int RA_ROTHS_NUNCHUCKS  = AMULETS+12;
 	public static final int LOTURGOS_CRYSTAL    = SPELLS+8;
+	public static final int CHAINSAW_HAND       = WEP_TIER3+6;
 	static {
 		assignItemRect(LOTURGOS_CRYSTAL,    10, 15);
 	}

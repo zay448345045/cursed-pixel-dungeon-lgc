@@ -152,7 +152,6 @@ public class GrindingLevel extends SewerLevel {
                 Buff.affect(enemy, Paralysis.class, Paralysis.DURATION/2f);
                 canParalyze = false;
             }
-            enemy.damage(Math.max(10,enemy.HP)/10,this);
             return super.attackProc(enemy, damage);
         }
 
@@ -189,6 +188,7 @@ public class GrindingLevel extends SewerLevel {
             if (Random.Int(3) == 0) {
                 Buff.affect(enemy, Burning.class).reignite(enemy);
             }
+            enemy.damage(Math.max(20,enemy.HP)/20,this);
             return super.attackProc(enemy, damage);
         }
     }
@@ -287,9 +287,33 @@ public class GrindingLevel extends SewerLevel {
             baseSpeed = 1f;
         }
 
+        @Override
+        protected boolean canAttack( Char enemy ) {
+            return new Ballistica( pos, enemy.pos, Ballistica.MAGIC_BOLT).collisionPos == enemy.pos;
+        }
+
+        protected boolean doAttack( Char enemy ) {
+
+            if (Dungeon.level.adjacent( pos, enemy.pos )) {
+
+                return super.doAttack( enemy );
+
+            } else {
+
+                boolean visible = fieldOfView[pos] || fieldOfView[enemy.pos];
+                if (visible) {
+                    sprite.zap( enemy.pos );
+                } else {
+                    zap();
+                }
+
+                return !visible;
+            }
+        }
+
         static class FireBolt {}
 
-        public void onZapComplete() {
+        void onZapComplete() {
             zap();
             next();
         }

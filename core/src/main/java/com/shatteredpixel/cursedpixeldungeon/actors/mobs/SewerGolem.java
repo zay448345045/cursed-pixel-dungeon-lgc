@@ -60,7 +60,7 @@ public class SewerGolem extends Mob implements Callback  {
 
         EXP = 22;
 
-        loot = new AmuletSectorWater();
+        loot = Generator.random(Generator.Category.WEP_T6);
         lootChance = 1f;
 
         baseSpeed = 1.5f;//Faster than the hero
@@ -189,6 +189,8 @@ public class SewerGolem extends Mob implements Callback  {
             } while (!Dungeon.level.passable[pos + ofs]);
             Dungeon.level.drop( new ScrollOfUpgrade(), pos + ofs ).sprite.drop( pos );
         }
+
+        Dungeon.level.drop(new AmuletSectorWater(), pos).sprite.drop(pos);
 
         Badges.validateBossSlain();
 
