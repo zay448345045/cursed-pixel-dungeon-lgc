@@ -17,6 +17,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.LuckyBadge;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfElements;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfTeleportation;
+import com.shatteredpixel.cursedpixeldungeon.items.wands.Wand;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Grim;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Shielding;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MeleeWeapon;
@@ -80,6 +81,11 @@ public class GrindingLevel extends SewerLevel {
         float DRFactor = 1f;
         int lootAmt = 1;
 
+        @Override
+        public String description() {
+            return Messages.get(Guardian.class,"desc") + "\n\n" + super.description();
+        }
+
         int getScaleFactor() {
             return Math.min(30,Math.max(0,Dungeon.hero.lvl-2));
         }
@@ -108,7 +114,7 @@ public class GrindingLevel extends SewerLevel {
 
         @Override
         public int drRoll() {
-            return (int) (Random.Int(getScaleFactor() + 1) * DRFactor);
+            return (int) (Random.Int(getScaleFactor()/2 + 1) * DRFactor);
         }
 
         @Override
@@ -173,7 +179,7 @@ public class GrindingLevel extends SewerLevel {
             baseSpeed = 2f;
             accuFactor = 2f;
             damageFactor = 0.75f;
-            DRFactor = 0f;
+            DRFactor = 0.5f;
             evaFactor = 1.5f;
             HP = HT = (int) (super.HT*0.67f);
         }
@@ -185,10 +191,7 @@ public class GrindingLevel extends SewerLevel {
 
         @Override
         public int attackProc(Char enemy, int damage) {
-            if (Random.Int(3) == 0) {
-                Buff.affect(enemy, Burning.class).reignite(enemy);
-            }
-            enemy.damage(Math.max(20,enemy.HP)/20,this);
+            enemy.damage(Math.max(15,enemy.HP)/15,this);
             return super.attackProc(enemy, damage);
         }
     }
@@ -210,6 +213,7 @@ public class GrindingLevel extends SewerLevel {
         {
             spriteClass = PurpleGuardianSprite.class;
             HP = HT = (int)(super.HT*0.67f);//33% less HP, but shields itself with melee attacks
+            lootAmt = 3;//Tanky and rare so 1 (normal) +1 (tanky) +1 (rare)
         }
 
         @Override
@@ -225,8 +229,8 @@ public class GrindingLevel extends SewerLevel {
         {
             spriteClass = YellowGuardianSprite.class;
             HP = HT = super.HT/2;
-            damageFactor = 2.5f;
-            DRFactor = 0f;
+            damageFactor = 2f;
+            DRFactor = 0.5f;
         }
 
         @Override
@@ -285,6 +289,8 @@ public class GrindingLevel extends SewerLevel {
         {
             spriteClass = OrangeGuardianSprite.class;
             baseSpeed = 1f;
+            resistances.add(Wand.class);
+            lootAmt = 2;//
         }
 
         @Override
@@ -326,7 +332,7 @@ public class GrindingLevel extends SewerLevel {
                     Buff.affect( enemy, Burning.class ).reignite(enemy);
                 }
 
-                int dmg = damageRoll()/3;
+                int dmg = damageRoll()/2;
                 enemy.damage( dmg, new FireBolt() );
 
                 if (!enemy.isAlive() && enemy == Dungeon.hero) {
@@ -372,18 +378,18 @@ public class GrindingLevel extends SewerLevel {
         }
     }
 
-    public class OrangeGuardianSprite extends StatueSprite {
+    public static class OrangeGuardianSprite extends StatueSprite {
 
         public OrangeGuardianSprite() {
             super();
             zap = attack.clone();
-            tint(1, 0.5f, 0, 0.2f);
+            tint(2, 1, 0, 0.2f);
         }
 
         @Override
         public void resetColor() {
             super.resetColor();
-            tint(1, 0.5f, 0, 0.2f);
+            tint(2, 1, 0, 0.2f);
         }
         @Override
         public void zap( int cell ) {

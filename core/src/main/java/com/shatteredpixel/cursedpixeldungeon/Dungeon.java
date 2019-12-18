@@ -38,9 +38,11 @@ import com.shatteredpixel.cursedpixeldungeon.items.Generator;
 import com.shatteredpixel.cursedpixeldungeon.items.Heap;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.Potion;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.LuckyBadge;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.Ring;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.Scroll;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.SpiritBow;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Lucky;
 import com.shatteredpixel.cursedpixeldungeon.journal.Notes;
 import com.shatteredpixel.cursedpixeldungeon.levels.CavesBossLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.CavesLevel;
@@ -473,7 +475,7 @@ public class Dungeon {
 	}
 
 	public static boolean bossLevel( int depth ) {
-		return depth % 5 == 0 | depth == 27;
+		return depth % 5 == 0 | depth == LuckyBadge.GrindDepth | depth == LuckyBadge.HomeDepth;
 	}
 
 	public static boolean canSpawnMimic() {
@@ -492,7 +494,7 @@ public class Dungeon {
 	}
 
 	public static int scaleWithDepth() {
-		if (depth == 27) {
+		if (depth == LuckyBadge.GrindDepth | depth == LuckyBadge.HomeDepth) {
 			return hero.lvl;
 		} else if ( depth > 30 & depth < 50 ) {//Challenges all act as if they are depth 30
 			return 30;

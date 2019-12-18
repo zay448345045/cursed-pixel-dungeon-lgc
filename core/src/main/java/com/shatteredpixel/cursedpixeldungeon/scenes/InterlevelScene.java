@@ -30,6 +30,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.DriedRose;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.LuckyBadge;
 import com.shatteredpixel.cursedpixeldungeon.levels.Level;
 import com.shatteredpixel.cursedpixeldungeon.levels.features.Chasm;
 import com.shatteredpixel.cursedpixeldungeon.levels.rooms.special.SpecialRoom;
@@ -68,7 +69,7 @@ public class InterlevelScene extends PixelScene {
 	private static float fadeTime;
 
 	public enum Mode {
-		DESCEND, ASCEND, CONTINUE, RESURRECT, RETURN, FALL, RESET, NONE, START, WATERCHALLENGE, EARTHCHALLENGE, DESCEND_GAMEINIT, DESCEND_FIX, FIRECHALLENGE, AIRCHALLENGE, GRIND
+		DESCEND, ASCEND, CONTINUE, RESURRECT, RETURN, FALL, RESET, NONE, START, WATERCHALLENGE, EARTHCHALLENGE, DESCEND_GAMEINIT, DESCEND_FIX, FIRECHALLENGE, AIRCHALLENGE, GRIND, HOME
 	}
 	public static Mode mode;
 	
@@ -257,7 +258,10 @@ public class InterlevelScene extends PixelScene {
 								goToDepth(46, DESCEND_NAME);
 								break;
 							case GRIND:
-								goToDepth( 27, DESCEND_NAME);
+								goToDepth( LuckyBadge.GrindDepth, DESCEND_NAME );
+								break;
+							case HOME:
+								goToDepth( LuckyBadge.HomeDepth, DESCEND_NAME );
 						}
 						
 						if ((Dungeon.depth % 5) == 0) {

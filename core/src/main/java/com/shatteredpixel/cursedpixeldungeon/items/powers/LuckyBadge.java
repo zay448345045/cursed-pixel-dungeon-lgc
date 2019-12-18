@@ -4,7 +4,6 @@ import com.shatteredpixel.cursedpixeldungeon.Challenges;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.Statistics;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
-import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.items.Generator;
 import com.shatteredpixel.cursedpixeldungeon.items.Gold;
@@ -13,20 +12,15 @@ import com.shatteredpixel.cursedpixeldungeon.items.armor.Armor;
 import com.shatteredpixel.cursedpixeldungeon.items.food.MeatPie;
 import com.shatteredpixel.cursedpixeldungeon.items.food.MysteryMeat;
 import com.shatteredpixel.cursedpixeldungeon.items.food.SmallRation;
-import com.shatteredpixel.cursedpixeldungeon.items.potions.AlchemicalCatalyst;
-import com.shatteredpixel.cursedpixeldungeon.items.rings.Ring;
-import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfWealth;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.Scroll;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.exotic.ScrollOfEnchantment;
-import com.shatteredpixel.cursedpixeldungeon.items.spells.ArcaneCatalyst;
 import com.shatteredpixel.cursedpixeldungeon.items.stones.StoneOfEnchantment;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.scenes.InterlevelScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
-import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
 import com.shatteredpixel.cursedpixeldungeon.windows.WndItem;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Bundle;
@@ -42,7 +36,8 @@ public class LuckyBadge extends Power {
         defaultAction = AC_INFO;
     }
     public static final String AC_INFO = "INFO_WINDOW";
-    public static final String AC_PORT = "port";
+    public static final String AC_GRIND = "grind";
+    public static final String AC_HOME = "home";
     @Override
     public int price() {
         return 82;
@@ -54,7 +49,8 @@ public class LuckyBadge extends Power {
     private int dropsToRare = Integer.MIN_VALUE;
     private static float dropsToUpgrade = 20;
     private static final float dropsIncreases = 26;
-    public final int GrindDepth = 27;
+    public static final int GrindDepth = 27;
+    public static final int HomeDepth = 28;
     private int returnDepth = -1;
     public static boolean latestDropWasRare = false;
 
@@ -68,7 +64,7 @@ public class LuckyBadge extends Power {
         super.execute(hero, action);
         if (action.equals(AC_INFO)) {
             GameScene.show(new WndItem(null, this, true));
-        } else if (action.equals(AC_PORT)) {
+        } else if (action.equals(AC_GRIND)) {
             if (Dungeon.depth == GrindDepth) {
                 InterlevelScene.mode = InterlevelScene.Mode.RETURN;
                 if (returnDepth < 0) {
@@ -81,13 +77,27 @@ public class LuckyBadge extends Power {
                 returnDepth = Dungeon.depth;
             }
             Game.switchScene(InterlevelScene.class);
+        } else if (action.equals(AC_HOME)) {
+            if (Dungeon.depth == HomeDepth) {
+                InterlevelScene.mode = InterlevelScene.Mode.RETURN;
+                if (returnDepth < 0) {
+                    returnDepth = Statistics.deepestFloor;
+                }
+                InterlevelScene.returnDepth = this.returnDepth;
+
+            } else {
+                InterlevelScene.mode = InterlevelScene.Mode.HOME;
+                returnDepth = Dungeon.depth;
+            }
+            Game.switchScene(InterlevelScene.class);
         }
     }
 
     @Override
     public ArrayList<String> actions(Hero hero) {
         ArrayList<String> actions = super.actions(hero);
-        actions.add(AC_PORT);
+        actions.add(AC_GRIND);
+        actions.add(AC_HOME);
         return actions;
     }
 

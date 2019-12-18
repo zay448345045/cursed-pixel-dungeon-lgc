@@ -8,8 +8,7 @@ import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
 import com.watabou.utils.Callback;
-
-import javax.microedition.khronos.opengles.GL;
+import com.watabou.utils.Random;
 
 public class Bloodlust extends RelicEnchantment {
 
@@ -27,15 +26,19 @@ public class Bloodlust extends RelicEnchantment {
 
     @Override
     public int relicProc(RelicMeleeWeapon weapon, Char attacker, final Char defender, final int damage) {
+
         if (attacker instanceof Hero & defender.isAlive()) {
-            if (weapon.charge > 0 & ((ChainsawHand)weapon).isTurnedOn()) {
-                weapon.use(2);
-                final Hero hero = (Hero) attacker;
+            final Hero hero = (Hero) attacker;
+            if (!defender.isAlive()) {
+                hero.spendAndNext(hero.attackDelay());
+                return damage; //no point in proccing if they're already dead.
+            }
+            if (weapon.charge > 0 & ((ChainsawHand)weapon).isTurnedOn() & hero.canAttack(defender)) {
+                weapon.use(1);
                 hero.sprite.attack(defender.pos, new Callback() {
                     @Override
                     public void call() {
                         hero.actuallyAttack(defender);
-                        hero.next();
                     }
                 });
             } else {
@@ -45,7 +48,7 @@ public class Bloodlust extends RelicEnchantment {
             attacker.next();
             return damage;//TODO: allow proccing from Statues and Ghost
         }
-
+        attacker.next();
         return damage;
     }
 }

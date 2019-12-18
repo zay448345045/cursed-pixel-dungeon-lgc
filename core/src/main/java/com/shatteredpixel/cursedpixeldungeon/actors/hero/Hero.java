@@ -1582,14 +1582,10 @@ public class Hero extends Char {
 	
 	@Override
 	public void onAttackComplete() {
-
+		curAction = null;
 		actuallyAttack(enemy);
-
-		
 		Invisibility.dispel();
 		spend( attackDelay() );
-
-		curAction = null;
 
 		super.onAttackComplete();
 	}

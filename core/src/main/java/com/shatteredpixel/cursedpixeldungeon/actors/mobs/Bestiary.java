@@ -257,9 +257,9 @@ public class Bestiary {
 					cl = Acidic.class;
 				} else if (cl == GrindingLevel.BlueGuardian.class) {
 					cl = GrindingLevel.PurpleGuardian.class;
-				}/*else if (cl == GrindingLevel.RedGuardian.class) {//Broken sadly :(
+				}else if (cl == GrindingLevel.RedGuardian.class) {
 					cl = GrindingLevel.OrangeGuardian.class;
-				}*/
+				}
 				rotation.set(i, cl);
 			}
 		}
