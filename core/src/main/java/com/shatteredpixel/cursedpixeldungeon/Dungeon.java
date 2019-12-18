@@ -58,6 +58,7 @@ import com.shatteredpixel.cursedpixeldungeon.levels.LastShopLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.Level;
 import com.shatteredpixel.cursedpixeldungeon.levels.PrisonBossLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.PrisonLevel;
+import com.shatteredpixel.cursedpixeldungeon.levels.SafeRoom;
 import com.shatteredpixel.cursedpixeldungeon.levels.SewerBossLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.SewerLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.StartLevel;
@@ -301,6 +302,9 @@ public class Dungeon {
 				break;
 			case 27:
 				level = new GrindingLevel();
+				break;
+			case 28:
+				level = new SafeRoom();
 				break;
 			case 31:
 			case 32:

@@ -38,6 +38,7 @@ public class LuckyBadge extends Power {
     public static final String AC_INFO = "INFO_WINDOW";
     public static final String AC_GRIND = "grind";
     public static final String AC_HOME = "home";
+    public static final String AC_RETURN = "return";
     @Override
     public int price() {
         return 82;
@@ -65,39 +66,36 @@ public class LuckyBadge extends Power {
         if (action.equals(AC_INFO)) {
             GameScene.show(new WndItem(null, this, true));
         } else if (action.equals(AC_GRIND)) {
-            if (Dungeon.depth == GrindDepth) {
-                InterlevelScene.mode = InterlevelScene.Mode.RETURN;
-                if (returnDepth < 0) {
-                    returnDepth = Statistics.deepestFloor;
-                }
-                InterlevelScene.returnDepth = this.returnDepth;
-
-            } else {
-                InterlevelScene.mode = InterlevelScene.Mode.GRIND;
+            InterlevelScene.mode = InterlevelScene.Mode.GRIND;
+            if (Dungeon.depth != GrindDepth & Dungeon.depth != HomeDepth) {
                 returnDepth = Dungeon.depth;
             }
             Game.switchScene(InterlevelScene.class);
         } else if (action.equals(AC_HOME)) {
-            if (Dungeon.depth == HomeDepth) {
-                InterlevelScene.mode = InterlevelScene.Mode.RETURN;
-                if (returnDepth < 0) {
-                    returnDepth = Statistics.deepestFloor;
-                }
-                InterlevelScene.returnDepth = this.returnDepth;
-
-            } else {
-                InterlevelScene.mode = InterlevelScene.Mode.HOME;
+            InterlevelScene.mode = InterlevelScene.Mode.HOME;
+            if (Dungeon.depth != GrindDepth & Dungeon.depth != HomeDepth) {
                 returnDepth = Dungeon.depth;
             }
             Game.switchScene(InterlevelScene.class);
+
+        } else if (action.equals(AC_RETURN))  {
+            InterlevelScene.mode = InterlevelScene.Mode.RETURN;
+            if (returnDepth < 0) {
+                returnDepth = Statistics.deepestFloor;
+            }
+            InterlevelScene.returnDepth = this.returnDepth;
         }
     }
 
     @Override
     public ArrayList<String> actions(Hero hero) {
         ArrayList<String> actions = super.actions(hero);
-        actions.add(AC_GRIND);
-        actions.add(AC_HOME);
+        if (!(Dungeon.depth==GrindDepth | Dungeon.depth == HomeDepth)) {
+            actions.add(AC_GRIND);
+            actions.add(AC_HOME);
+        } else {
+            actions.add(AC_RETURN);
+        }
         return actions;
     }
 

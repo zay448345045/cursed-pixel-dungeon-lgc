@@ -23,26 +23,26 @@ public class SafeRoom extends Level {
 
     @Override
     public String tilesTex() {
-        return Assets.TILES_SURFACE;
+        return Assets.TILES_PRISON;
     }
 
     @Override
     public String waterTex() {
-        return Assets.WATER_SEWERS;
+        return Assets.WATER_PRISON;
     }
 
     @Override
     protected boolean build() {
 
-        setSize(32, 32);
+        setSize(48, 48);
 
         map = Layouts.SAFE_ROOM_DEFAULT.clone();
 
         buildFlagMaps();
         cleanWalls();
 
-        entrance = 25 + 23 * 32;
-        exit = 17 + 13 * 32;
+        entrance = 23 + width * 15;
+        exit = 0;
 
         return true;
     }
