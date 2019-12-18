@@ -26,7 +26,6 @@ import com.shatteredpixel.cursedpixeldungeon.Badges;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
-import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroClass;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroSubClass;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.ElmoParticle;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
@@ -208,8 +207,8 @@ public class MagesStaff extends MeleeWeapon {
 		}
 		
 		Badges.validateItemLevelAquired(this);
-		if (this.level() > this.UpgradeLimit()) {//Prevents the player upgrading beyond the limit via imbuing.
-			this.degrade(this.level() - this.UpgradeLimit() );
+		if (this.level() > this.upgradeLimit()) {//Prevents the player upgrading beyond the limit via imbuing.
+			this.degrade(this.level() - this.upgradeLimit() );
 		}
 
 		return this;

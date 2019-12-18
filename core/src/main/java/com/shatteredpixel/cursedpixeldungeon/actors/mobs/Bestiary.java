@@ -255,7 +255,9 @@ public class Bestiary {
 					cl = Senior.class;
 				} else if (cl == Scorpio.class) {
 					cl = Acidic.class;
-				} /*else if (cl == GrindingLevel.RedGuardian.class) {//Broken sadly :(
+				} else if (cl == GrindingLevel.BlueGuardian.class) {
+					cl = GrindingLevel.PurpleGuardian.class;
+				}/*else if (cl == GrindingLevel.RedGuardian.class) {//Broken sadly :(
 					cl = GrindingLevel.OrangeGuardian.class;
 				}*/
 				rotation.set(i, cl);

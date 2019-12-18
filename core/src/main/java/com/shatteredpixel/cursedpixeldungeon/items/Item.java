@@ -28,7 +28,6 @@ import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
-import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroClass;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroSubClass;
 import com.shatteredpixel.cursedpixeldungeon.effects.Speck;
 import com.shatteredpixel.cursedpixeldungeon.items.bags.Bag;
@@ -67,17 +66,17 @@ public class Item implements Bundlable {
 	public String defaultAction;
 	public boolean usesTargeting;
 	protected HeroSubClass bonusSubClass = null;
-	public int UpgradeLimit() {
+	public int upgradeLimit() {
 		int levelLimit = 2+(int)(Dungeon.hero.lvl/2f);
 		levelLimit = Math.min(15,levelLimit);
-		if (levelLimit == 15 & Dungeon.hero.subClass == bonusSubClass) {
+		if (Dungeon.hero.subClass == bonusSubClass) {
 			levelLimit = (int) (levelLimit * 1.3334f);
 		}
 		return levelLimit;
 	}
 
     public boolean isUpgradable() {
-		return level() <= UpgradeLimit() - 1;
+		return level() <= upgradeLimit() - 1;
 	}
 	protected String name = Messages.get(this, "name");
 	public int image = 0;

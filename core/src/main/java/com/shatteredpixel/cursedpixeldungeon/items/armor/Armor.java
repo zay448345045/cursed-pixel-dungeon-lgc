@@ -98,6 +98,8 @@ public class Armor extends EquipableItem {
 	
 	public Glyph glyph;
 	public boolean curseInfusionBonus = false;
+
+	private int storedUpgrades = 0;
 	
 	private BrokenSeal seal;
 	
@@ -117,14 +119,10 @@ public class Armor extends EquipableItem {
 	private static final String CURSE_INFUSION_BONUS = "curse_infusion_bonus";
 	private static final String SEAL            = "seal";
 	private static final String AUGMENT			= "augment";
+	private static final String STORED_UPGRADES = "stored_upgrades";
 
-	@Override
-	public void breakThis() {
-		super.breakThis();
-		if (Random.Int(3) == 1) {
-			this.inscribe(null);
-		}
-
+	public void storeUpgrades(int number) {
+		storedUpgrades = number;
 	}
 	@Override
 	public boolean isFixable() {
@@ -140,6 +138,7 @@ public class Armor extends EquipableItem {
 		bundle.put( CURSE_INFUSION_BONUS, curseInfusionBonus );
 		bundle.put( SEAL, seal);
 		bundle.put( AUGMENT, augment);
+		bundle.put( STORED_UPGRADES, storedUpgrades );
 	}
 
 	@Override
@@ -150,6 +149,7 @@ public class Armor extends EquipableItem {
 		inscribe((Glyph) bundle.get(GLYPH));
 		curseInfusionBonus = bundle.getBoolean( CURSE_INFUSION_BONUS );
 		seal = (BrokenSeal)bundle.get(SEAL);
+		storedUpgrades = bundle.getInt(STORED_UPGRADES);
 		
 		//pre-0.7.2 saves
 		if (bundle.contains( "unfamiliarity" )){
@@ -187,6 +187,10 @@ public class Armor extends EquipableItem {
 
 			if (seal.level() > 0){
 				degrade(seal.level());
+			}
+			upgrade(storedUpgrades);
+			if (level() > upgradeLimit()) {
+				level(upgradeLimit());
 			}
 			GLog.i( Messages.get(Armor.class, "detach_seal") );
 			hero.sprite.operate(hero.pos);

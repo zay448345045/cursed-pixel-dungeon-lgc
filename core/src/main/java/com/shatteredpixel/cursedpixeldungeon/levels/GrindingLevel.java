@@ -15,7 +15,12 @@ import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Warlock;
 import com.shatteredpixel.cursedpixeldungeon.effects.MagicMissile;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.LuckyBadge;
+import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfElements;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfTeleportation;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Grim;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Shielding;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MeleeWeapon;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.WornShortsword;
 import com.shatteredpixel.cursedpixeldungeon.levels.traps.WornDartTrap;
 import com.shatteredpixel.cursedpixeldungeon.mechanics.Ballistica;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
@@ -197,6 +202,20 @@ public class GrindingLevel extends SewerLevel {
             DRFactor = 2f;
             lootAmt = 2;//Tankier, so provides more reward.
             HP = HT = (int)(super.HT*2f);
+            resistances.add(Grim.class);
+        }
+    }
+
+    public static class PurpleGuardian extends BlueGuardian {
+        {
+            spriteClass = PurpleGuardianSprite.class;
+            HP = HT = (int)(super.HT*0.67f);//33% less HP, but shields itself with melee attacks
+        }
+
+        @Override
+        public int attackProc(Char enemy, int damage) {
+            new Shielding().proc(new MeleeWeapon(),this, enemy, damage);
+            return super.attackProc(enemy, damage);
         }
     }
 
@@ -212,7 +231,7 @@ public class GrindingLevel extends SewerLevel {
 
         @Override
         protected float attackDelay() {
-            return 1.5f;
+            return 2f;
         }
 
         private void blink(int target ) {
@@ -382,6 +401,19 @@ public class GrindingLevel extends SewerLevel {
         public void resetColor() {
             super.resetColor();
             tint(0, 0, 1, 0.2f);
+        }
+    }
+
+    public static class PurpleGuardianSprite extends StatueSprite {
+        public PurpleGuardianSprite(){
+            super();
+            tint(1, 0, 1, 0.2f);
+        }
+
+        @Override
+        public void resetColor() {
+            super.resetColor();
+            tint(1, 0, 1, 0.2f);
         }
     }
 
