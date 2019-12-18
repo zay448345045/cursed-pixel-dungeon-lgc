@@ -102,11 +102,8 @@ import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Precise;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Swift;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Unstable;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Flail;
-import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.ChainsawHand;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RaRothsNunchucks;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicEnchantments.Barrier;
-import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicEnchantments.Bloodlust;
-import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicMeleeWeapon;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.MissileWeapon;
 import com.shatteredpixel.cursedpixeldungeon.journal.Notes;
 import com.shatteredpixel.cursedpixeldungeon.levels.Level;
@@ -132,7 +129,6 @@ import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
-import com.watabou.utils.Callback;
 import com.watabou.utils.GameMath;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
@@ -1570,22 +1566,9 @@ public class Hero extends Char {
 
 
 
-	private boolean actuallyAttack(Char enemy) {
+	public void actuallyAttack(Char enemy) {
 		AttackIndicator.target(enemy);
 		boolean hit = attack( enemy, false );
-		final Char enemyToHit = enemy;
-		if (hit) {
-			if (belongings.weapon instanceof ChainsawHand && belongings.weapon.hasEnchant(Bloodlust.class,this) && ((RelicMeleeWeapon) belongings.weapon).charge > 1 & enemy.isAlive() && ((ChainsawHand)belongings.weapon).isTurnedOn() ) {
-				sprite.attack(enemy.pos, new Callback() {
-					@Override
-					public void call() {
-						actuallyAttack(enemyToHit);
-						next();
-					}
-				});
-
-			}
-		}
 
 		if (subClass == HeroSubClass.GLADIATOR){
 			if (hit) {
@@ -1595,7 +1578,6 @@ public class Hero extends Char {
 				if (combo != null) combo.miss( enemy );
 			}
 		}
-		return hit;
 	}
 	
 	@Override

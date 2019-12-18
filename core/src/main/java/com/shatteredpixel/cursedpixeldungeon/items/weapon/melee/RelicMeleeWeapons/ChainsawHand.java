@@ -1,10 +1,14 @@
 package com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons;
 
+import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.Weapon;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MeleeWeapon;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicEnchantments.Bloodlust;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicEnchantments.RelicEnchantment;
+import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
+import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
 import com.watabou.utils.Bundle;
 
 import java.util.ArrayList;
@@ -70,6 +74,24 @@ public class ChainsawHand extends RelicMeleeWeapon {
 
     @Override
     public void specialAction(Hero hero) {
+        hero.spendAndNext(1f);
         turnedOn = !turnedOn;
+        if (turnedOn) {
+            GLog.p(Messages.get(Bloodlust.class,"activated"));
+            defaultAction = AC_DEACTIVATE;
+        } else {
+            GLog.n(Messages.get(Bloodlust.class,"deactivated"));
+            defaultAction = AC_ACTIVATE;
+        }
+    }
+
+    @Override
+    public void activate(Char ch) {
+        super.activate(ch);
+        if (turnedOn) {
+            defaultAction = AC_DEACTIVATE;
+        } else {
+            defaultAction = AC_ACTIVATE;
+        }
     }
 }
