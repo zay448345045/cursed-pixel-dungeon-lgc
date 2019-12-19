@@ -65,11 +65,12 @@ public class InterlevelScene extends PixelScene {
 	public static final String DESCEND_NAME = "DESCEND_NAME";
 	public static final String ASCEND_NAME = "ASCEND_NAME";
 	public static final String RESET_NAME = "RESET_NAME";
+	public static final String RETURNTO_NAME = "returnto_name";
 	
 	private static float fadeTime;
 
 	public enum Mode {
-		DESCEND, ASCEND, CONTINUE, RESURRECT, RETURN, FALL, RESET, NONE, START, WATERCHALLENGE, EARTHCHALLENGE, DESCEND_GAMEINIT, DESCEND_FIX, FIRECHALLENGE, AIRCHALLENGE, GRIND, HOME
+		DESCEND, ASCEND, CONTINUE, RESURRECT, RETURN, FALL, RESET, NONE, START, WATERCHALLENGE, EARTHCHALLENGE, DESCEND_GAMEINIT, DESCEND_FIX, FIRECHALLENGE, AIRCHALLENGE, GRIND, HOME, RETURNTO
 	}
 	public static Mode mode;
 	
@@ -234,7 +235,10 @@ public class InterlevelScene extends PixelScene {
 								resurrect();
 								break;
 							case RETURN:
-								goToDepth(returnDepth, ASCEND_NAME);
+								goToDepth(returnDepth, DESCEND_NAME);
+								break;
+							case RETURNTO:
+								goToDepth(returnDepth, RETURNTO_NAME);
 								break;
 							case FALL:
 								goToDepth(Dungeon.depth + 1, FALL_NAME);
@@ -406,13 +410,19 @@ public class InterlevelScene extends PixelScene {
 		}
 
 
-
-		if (typeOfDescend == DESCEND_NAME) {
-			Dungeon.switchLevel( level, level.entrance );
-		} else if (typeOfDescend == FALL_NAME) {
-			Dungeon.switchLevel( level, level.fallCell( fallIntoPit ));
-		} else if (typeOfDescend == ASCEND_NAME) {
-			Dungeon.switchLevel( level, level.exit );
+		switch (typeOfDescend) {
+			default:
+				Dungeon.switchLevel(level, level.entrance);
+				break;
+			case FALL_NAME:
+				Dungeon.switchLevel(level, level.fallCell(fallIntoPit));
+				break;
+			case ASCEND_NAME:
+				Dungeon.switchLevel(level, level.exit);
+				break;
+			case RETURNTO_NAME:
+				Dungeon.switchLevel(level, returnPos);
+				break;
 		}
 
 	return level;
@@ -459,17 +469,15 @@ public class InterlevelScene extends PixelScene {
 			level = Dungeon.createNewLevelWithDepth(Dungeon.depth);
 		}
 		Dungeon.switchLevel( level, level.exit );
-	}
+	}*/
 	
 	private void returnTo() throws IOException {
-		
-		DragonCrystal.holdGhostHero( Dungeon.level );
 
 		Dungeon.saveAll();
 		Dungeon.depth = returnDepth;
 		Level level = Dungeon.loadLevel( GamesInProgress.curSlot );
 		Dungeon.switchLevel( level, returnPos );
-	}*/
+	}
 	
 	private void restore() throws IOException {
 		

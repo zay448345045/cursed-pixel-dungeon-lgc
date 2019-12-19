@@ -53,6 +53,8 @@ import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfMagicMapping;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfMirrorImage;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfRage;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfUpgrade;
+import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfCorrosion;
+import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfCorruption;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfMagicMissile;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.SpiritBow;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Dirk;
@@ -154,6 +156,7 @@ public enum HeroClass {
 		new RaRothsNunchucks().identify().collect();
 		new LoturgosCrystal().identify().collect();
 		new ChainsawHand().identify().collect();
+		new WandOfCorruption().upgrade(99).identify().collect();
 		new LuckyBadge().collect();
 	}
 

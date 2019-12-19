@@ -109,7 +109,7 @@ public class GrindingLevel extends SewerLevel {
 
         @Override
         public int damageRoll() {
-            return (int) (Random.IntRange(1 + getScaleFactor(), 3 + getScaleFactor()*2) * damageFactor);
+            return (int) (Random.IntRange(1 + getScaleFactor(), 5 + getScaleFactor()*3) * damageFactor);
         }
 
         @Override
@@ -201,7 +201,7 @@ public class GrindingLevel extends SewerLevel {
             spriteClass = BlueGuardianSprite.class;
             baseSpeed = 0.5f;
             evaFactor = 0.5f;
-            damageFactor = 2f;
+            damageFactor = 1.5f;
             DRFactor = 2f;
             lootAmt = 2;//Tankier, so provides more reward.
             HP = HT = (int)(super.HT*2f);
@@ -212,7 +212,6 @@ public class GrindingLevel extends SewerLevel {
     public static class PurpleGuardian extends BlueGuardian {
         {
             spriteClass = PurpleGuardianSprite.class;
-            HP = HT = (int)(super.HT*0.67f);//33% less HP, but shields itself with melee attacks
             lootAmt = 3;//Tanky and rare so 1 (normal) +1 (tanky) +1 (rare)
         }
 
@@ -229,7 +228,7 @@ public class GrindingLevel extends SewerLevel {
         {
             spriteClass = YellowGuardianSprite.class;
             HP = HT = super.HT/2;
-            damageFactor = 2f;
+            damageFactor = 1.5f;
             DRFactor = 0.5f;
         }
 

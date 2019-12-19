@@ -30,9 +30,9 @@ public class RingOfFuror extends Ring {
 	
 	public String statsInfo() {
 		if (isIdentified()){
-			return Messages.get(this, "stats", new DecimalFormat("#.##").format(100f * (( 0.1875 * soloBonus()))));
+			return Messages.get(this, "stats", new DecimalFormat("#.##").format(100f * (( 0.0625 * soloBonus()))));
 		} else {
-			return Messages.get(this, "typical_stats", new DecimalFormat("#.##").format(10.5f));
+			return Messages.get(this, "typical_stats", new DecimalFormat("#.##").format(6.25f));
 		}
 	}
 
@@ -43,7 +43,7 @@ public class RingOfFuror extends Ring {
 	
 	public static float attackDelayMultiplier(Char target ){
 		float bonus = (float) Math.min(16, getBonus(target, Furor.class));
-		return (float) (1/(1 + 0.1875 * bonus));
+		return (float) (1/(1 + 0.0625 * bonus));
 	}
 
 	public class Furor extends RingBuff {

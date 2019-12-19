@@ -17,6 +17,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.exotic.ScrollOfEnchantment;
 import com.shatteredpixel.cursedpixeldungeon.items.stones.StoneOfEnchantment;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.Weapon;
+import com.shatteredpixel.cursedpixeldungeon.levels.Level;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.scenes.InterlevelScene;
@@ -53,6 +54,7 @@ public class LuckyBadge extends Power {
     public static final int GrindDepth = 27;
     public static final int HomeDepth = 28;
     private int returnDepth = -1;
+    private int returnPos   = -1;
     public static boolean latestDropWasRare = false;
 
     public LuckyBadge() {
@@ -71,6 +73,7 @@ public class LuckyBadge extends Power {
                 InterlevelScene.mode = InterlevelScene.Mode.GRIND;
                 if (Dungeon.depth != GrindDepth & Dungeon.depth != HomeDepth) {
                     returnDepth = Dungeon.depth;
+                    returnPos = hero.pos;
                 }
                 Game.switchScene(InterlevelScene.class);
                 break;
@@ -78,14 +81,20 @@ public class LuckyBadge extends Power {
                 InterlevelScene.mode = InterlevelScene.Mode.HOME;
                 if (Dungeon.depth != GrindDepth & Dungeon.depth != HomeDepth) {
                     returnDepth = Dungeon.depth;
+                    returnPos = hero.pos;
                 }
                 Game.switchScene(InterlevelScene.class);
                 break;
             case AC_RETURN:
-                InterlevelScene.mode = InterlevelScene.Mode.RETURN;
                 if (returnDepth < 0) {
                     returnDepth = Statistics.deepestFloor;
                 }
+                if (returnPos < 0) {
+                    InterlevelScene.mode = InterlevelScene.Mode.RETURN;
+                } else {
+                    InterlevelScene.mode = InterlevelScene.Mode.RETURNTO;
+                }
+                InterlevelScene.returnPos = this.returnPos;
                 InterlevelScene.returnDepth = this.returnDepth;
                 Game.switchScene(InterlevelScene.class);
                 break;
@@ -128,6 +137,7 @@ public class LuckyBadge extends Power {
     private static final String DROPS_TO_RARE = "drops_to_rare";
     private static final String DROPS_TO_UPGRADE = "drops_to_upgrade";
     private static final String RETURN_DEPTH = "return_depth";
+    private static final String RETURN_POS = "return_pos";
 
     @Override
     public void storeInBundle(Bundle bundle) {
@@ -136,6 +146,7 @@ public class LuckyBadge extends Power {
         bundle.put(DROPS_TO_RARE, dropsToRare);
         bundle.put(DROPS_TO_UPGRADE, dropsToUpgrade);
         bundle.put( RETURN_DEPTH, returnDepth );
+        bundle.put( RETURN_POS, returnPos );
     }
 
     @Override
@@ -145,6 +156,7 @@ public class LuckyBadge extends Power {
         dropsToRare = bundle.getInt(DROPS_TO_RARE);
         dropsToUpgrade = bundle.getInt(DROPS_TO_UPGRADE);
         returnDepth = bundle.getInt( RETURN_DEPTH );
+        returnPos = bundle.getInt( RETURN_POS );
     }
 
     @Override
