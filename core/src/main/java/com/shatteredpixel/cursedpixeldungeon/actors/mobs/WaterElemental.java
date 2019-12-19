@@ -35,7 +35,6 @@ import com.shatteredpixel.cursedpixeldungeon.effects.Speck;
 import com.shatteredpixel.cursedpixeldungeon.levels.Terrain;
 import com.shatteredpixel.cursedpixeldungeon.levels.features.Door;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
-import com.shatteredpixel.cursedpixeldungeon.sprites.NewbornElementalSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.WaterElementalSprite;
 import com.watabou.utils.Random;
 
@@ -58,7 +57,7 @@ public class WaterElemental extends Mob {
     }
     private static final float SPLIT_DELAY	= 1f;
 
-    int generation	= 0;
+    private int generation	= 0;
 
     private static final String GENERATION	= "generation";
 
