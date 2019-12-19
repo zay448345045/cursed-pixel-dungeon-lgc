@@ -36,7 +36,7 @@ public class FetidRat extends Rat {
 	{
 		spriteClass = FetidRatSprite.class;
 
-		HP = HT = 20;
+		HP = HT = 40;
 		defenseSkill = 5;
 
 		EXP = 4;
@@ -54,7 +54,7 @@ public class FetidRat extends Rat {
 
 	@Override
 	public int drRoll() {
-		return Random.NormalIntRange(0, 2);
+		return Random.NormalIntRange(0, 4);
 	}
 
 	@Override

@@ -23,6 +23,7 @@ package com.shatteredpixel.cursedpixeldungeon.actors.mobs;
 
 import com.shatteredpixel.cursedpixeldungeon.Badges;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
+import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.blobs.Blob;
 import com.shatteredpixel.cursedpixeldungeon.actors.blobs.SpawnerGas;
@@ -30,6 +31,8 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Cripple;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.LockedFloor;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Terror;
+import com.shatteredpixel.cursedpixeldungeon.effects.CellEmitter;
+import com.shatteredpixel.cursedpixeldungeon.effects.Speck;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.SparkParticle;
 import com.shatteredpixel.cursedpixeldungeon.items.AmuletSectorWater;
 import com.shatteredpixel.cursedpixeldungeon.items.Generator;
@@ -67,8 +70,6 @@ public class SewerGolem extends Mob implements Callback  {
         properties.add(Property.BOSS);
         properties.add(Property.DEMONIC);
         immunities.add(Grim.class);
-        resistances.add(Wand.class);
-        resistances.remove(WandOfPrismaticLight.class);//Resistant to all wands except Prismatic Light
     }
 
     public static class LightningBolt{}
@@ -126,9 +127,24 @@ public class SewerGolem extends Mob implements Callback  {
     @Override
     public void damage( int dmg, Object src ) {
         this.notice();
-        if (Random.Int(2) == 1) {
+        if (Random.Int(2) == 1 & dmg > HT/100f) {
             GameScene.add(Blob.seed(Dungeon.hero.pos, 300, SpawnerGas.class));
-            Buff.affect(this, Terror.class, 5f).object = Dungeon.hero.id();
+            int newPos = -1;
+            for (int i = 0; i < 20; i++) {
+                newPos = Dungeon.level.randomRespawnCell();
+                if (newPos != -1) {
+                    break;
+                }
+            }
+            if (newPos != -1) {
+                CellEmitter.get(pos).start(Speck.factory(Speck.LIGHT), 0.2f, 3);
+                pos = newPos;
+                sprite.place(pos);
+                sprite.visible = Dungeon.hero.fieldOfView[pos];
+            }
+        }
+        if (src instanceof Wand & !(src instanceof WandOfPrismaticLight)) {
+            dmg = Random.Int(dmg);
         }
         boolean bleeding = (HP*2 <= HT);
         super.damage(dmg, src);

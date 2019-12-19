@@ -84,6 +84,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfExperience;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfHealing;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfStrength;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.elixirs.ElixirOfMight;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.LuckyBadge;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfAccuracy;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfEvasion;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfForce;
@@ -915,9 +916,11 @@ public class Hero extends Char {
 		int stairs = action.dst;
 		if (pos == stairs && pos == Dungeon.level.entrance) {
 
-			if (Dungeon.depth == 31 || Dungeon.depth == 36 || Dungeon.depth == 41 || Dungeon.depth == 46 || Dungeon.depth == 27) {
+			if (Dungeon.depth == 31 || Dungeon.depth == 36 || Dungeon.depth == 41 || Dungeon.depth == 46) {
 				InterlevelScene.mode = InterlevelScene.Mode.START;
 				Game.switchScene( InterlevelScene.class );
+				return true;
+			} else if (Dungeon.depth == LuckyBadge.GrindDepth | Dungeon.depth == LuckyBadge.HomeDepth) {
 				return true;
 			}
 			

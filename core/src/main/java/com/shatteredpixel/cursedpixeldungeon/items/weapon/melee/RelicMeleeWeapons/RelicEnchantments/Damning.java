@@ -25,7 +25,7 @@ public class Damning extends RelicEnchantment {
     }
     @Override
     public int relicProc(RelicMeleeWeapon weapon, Char attacker, Char defender, int damage) {
-        if (Random.Int(4) == 0) {
+        if (Random.Int(2) == 0) {
             Buff.affect(defender, Doom.class);
         } else {
             Buff.prolong(defender, Weakness.class, Weakness.DURATION);

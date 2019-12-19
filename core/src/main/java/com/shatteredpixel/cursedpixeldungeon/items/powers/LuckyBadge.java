@@ -63,28 +63,32 @@ public class LuckyBadge extends Power {
     @Override
     public void execute(Hero hero, String action) {
         super.execute(hero, action);
-        if (action.equals(AC_INFO)) {
-            GameScene.show(new WndItem(null, this, true));
-        } else if (action.equals(AC_GRIND)) {
-            InterlevelScene.mode = InterlevelScene.Mode.GRIND;
-            if (Dungeon.depth != GrindDepth & Dungeon.depth != HomeDepth) {
-                returnDepth = Dungeon.depth;
-            }
-            Game.switchScene(InterlevelScene.class);
-        } else if (action.equals(AC_HOME)) {
-            InterlevelScene.mode = InterlevelScene.Mode.HOME;
-            if (Dungeon.depth != GrindDepth & Dungeon.depth != HomeDepth) {
-                returnDepth = Dungeon.depth;
-            }
-            Game.switchScene(InterlevelScene.class);
-
-        } else if (action.equals(AC_RETURN))  {
-            InterlevelScene.mode = InterlevelScene.Mode.RETURN;
-            if (returnDepth < 0) {
-                returnDepth = Statistics.deepestFloor;
-            }
-            InterlevelScene.returnDepth = this.returnDepth;
-            Game.switchScene(InterlevelScene.class);
+        switch (action) {
+            case AC_INFO:
+                GameScene.show(new WndItem(null, this, true));
+                break;
+            case AC_GRIND:
+                InterlevelScene.mode = InterlevelScene.Mode.GRIND;
+                if (Dungeon.depth != GrindDepth & Dungeon.depth != HomeDepth) {
+                    returnDepth = Dungeon.depth;
+                }
+                Game.switchScene(InterlevelScene.class);
+                break;
+            case AC_HOME:
+                InterlevelScene.mode = InterlevelScene.Mode.HOME;
+                if (Dungeon.depth != GrindDepth & Dungeon.depth != HomeDepth) {
+                    returnDepth = Dungeon.depth;
+                }
+                Game.switchScene(InterlevelScene.class);
+                break;
+            case AC_RETURN:
+                InterlevelScene.mode = InterlevelScene.Mode.RETURN;
+                if (returnDepth < 0) {
+                    returnDepth = Statistics.deepestFloor;
+                }
+                InterlevelScene.returnDepth = this.returnDepth;
+                Game.switchScene(InterlevelScene.class);
+                break;
         }
     }
 

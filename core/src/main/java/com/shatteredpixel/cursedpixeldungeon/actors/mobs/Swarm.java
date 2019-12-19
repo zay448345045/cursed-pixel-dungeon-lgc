@@ -45,7 +45,7 @@ public class Swarm extends Mob {
 	{
 		spriteClass = SwarmSprite.class;
 		
-		HP = HT = 50;
+		HP = HT = 100;
 		defenseSkill = 5;
 
 		EXP = 3;
@@ -59,7 +59,7 @@ public class Swarm extends Mob {
 	
 	private static final float SPLIT_DELAY	= 1f;
 	
-	int generation	= 0;
+	private int generation	= 0;
 	
 	private static final String GENERATION	= "generation";
 	
@@ -78,7 +78,7 @@ public class Swarm extends Mob {
 	
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange( 1, 4 );
+		return Random.NormalIntRange( 2, 6 );
 	}
 	
 	@Override

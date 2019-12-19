@@ -53,7 +53,6 @@ public class WaterElemental extends Mob {
 
         EXP = 15;
         maxLvl = 30;
-        properties.add(Property.ACIDIC);
         resistances.add(Fire.class);
 
     }
@@ -71,7 +70,7 @@ public class WaterElemental extends Mob {
 
     @Override
     public int damageRoll() {
-        return Random.NormalIntRange( 36, 70 );
+        return Random.NormalIntRange( 46, 80 );
     }
 
     @Override

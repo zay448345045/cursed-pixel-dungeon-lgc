@@ -47,7 +47,7 @@ public class Guard extends Mob {
 	{
 		spriteClass = GuardSprite.class;
 
-		HP = HT = 60;
+		HP = HT = 70;
 		defenseSkill = 10;
 
 		EXP = 6;
@@ -116,7 +116,7 @@ public class Guard extends Mob {
 
 	@Override
 	public int attackSkill( Char target ) {
-		return 14;
+		return 16;
 	}
 
 	@Override
@@ -172,7 +172,6 @@ public class Guard extends Mob {
 					&& !canAttack( enemy )
 					&& Dungeon.level.distance( pos, enemy.pos ) < 5
 					&& Random.Int(3) == 0
-					
 					&& chain(enemy.pos)){
 				return false;
 			} else {
