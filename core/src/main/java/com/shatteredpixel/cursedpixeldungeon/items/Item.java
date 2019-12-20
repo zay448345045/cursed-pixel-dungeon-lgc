@@ -23,6 +23,7 @@ package com.shatteredpixel.cursedpixeldungeon.items;
 
 import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.Badges;
+import com.shatteredpixel.cursedpixeldungeon.Constants;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
@@ -68,7 +69,7 @@ public class Item implements Bundlable {
 	protected HeroSubClass bonusSubClass = null;
 	public int upgradeLimit() {
 		int levelLimit = 2+(int)(Dungeon.hero.lvl/2f);
-		levelLimit = Math.min(15,levelLimit);
+		levelLimit = Math.min(Constants.upgradeLimit,levelLimit);
 		if (Dungeon.hero.subClass == bonusSubClass) {
 			levelLimit = (int) (levelLimit * 1.3334f);
 		}

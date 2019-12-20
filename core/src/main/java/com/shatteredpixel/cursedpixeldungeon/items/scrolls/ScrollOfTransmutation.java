@@ -22,6 +22,7 @@
 package com.shatteredpixel.cursedpixeldungeon.items.scrolls;
 
 import com.shatteredpixel.cursedpixeldungeon.Challenges;
+import com.shatteredpixel.cursedpixeldungeon.Constants;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.cursedpixeldungeon.items.EquipableItem;
@@ -164,7 +165,7 @@ public class ScrollOfTransmutation extends InventoryScroll {
 		} while (Challenges.isItemBlocked(n) || n.getClass() == w.getClass());
 		
 		int level = w.level();
-		if (w.curseInfusionBonus) level--;
+		if (w.curseInfusionBonus) level -= Constants.curseInfusionBonusAmt;
 		if (level > 0) {
 			n.upgrade( level );
 		} else if (level < 0) {
@@ -249,7 +250,7 @@ public class ScrollOfTransmutation extends InventoryScroll {
 		
 		n.level( 0 );
 		int level = w.level();
-		if (w.curseInfusionBonus) level--;
+		if (w.curseInfusionBonus) level -= Constants.curseInfusionBonusAmt;
 		n.upgrade( level );
 		
 		n.levelKnown = w.levelKnown;

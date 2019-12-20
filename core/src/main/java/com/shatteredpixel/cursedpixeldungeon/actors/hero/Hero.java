@@ -921,7 +921,7 @@ public class Hero extends Char {
 				Game.switchScene( InterlevelScene.class );
 				return true;
 			} else if (Dungeon.depth == LuckyBadge.GrindDepth | Dungeon.depth == LuckyBadge.HomeDepth) {
-				return true;
+				return false;
 			}
 			
 			if (Dungeon.depth == 0) {

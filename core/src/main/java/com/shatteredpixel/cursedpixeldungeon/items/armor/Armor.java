@@ -22,6 +22,7 @@
 package com.shatteredpixel.cursedpixeldungeon.items.armor;
 
 import com.shatteredpixel.cursedpixeldungeon.Badges;
+import com.shatteredpixel.cursedpixeldungeon.Constants;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
@@ -100,7 +101,16 @@ public class Armor extends EquipableItem {
 	public boolean curseInfusionBonus = false;
 
 	private int storedUpgrades = 0;
-	
+
+	@Override
+	public int upgradeLimit() {
+		int limit = super.upgradeLimit();
+		if (curseInfusionBonus) {
+			limit += Constants.curseInfusionBonusAmt;
+		}
+		return limit;
+	}
+
 	private BrokenSeal seal;
 	
 	public int tier;
@@ -369,7 +379,7 @@ public class Armor extends EquipableItem {
 	
 	@Override
 	public int level() {
-		return super.level() + (curseInfusionBonus ? 3 : 0);
+		return super.level() + (curseInfusionBonus ? Constants.curseInfusionBonusAmt : 0);
 	}
 	
 	@Override

@@ -23,6 +23,7 @@ package com.shatteredpixel.cursedpixeldungeon.items.wands;
 
 import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.Badges;
+import com.shatteredpixel.cursedpixeldungeon.Constants;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
@@ -95,6 +96,16 @@ public abstract class Wand extends KindofMisc {
 
 		return actions;
 	}
+
+	@Override
+	public int upgradeLimit() {
+		int limit = super.upgradeLimit();
+		if (curseInfusionBonus) {
+			limit += Constants.curseInfusionBonusAmt;
+		}
+		return limit;
+	}
+
 	@Override
 	public boolean isFixable() {
 		return durability() < maxDurability(level());
@@ -262,7 +273,7 @@ public abstract class Wand extends KindofMisc {
 			curseInfusionBonus = false;
 			updateLevel();
 		}
-		return super.level() + (curseInfusionBonus ? 3 : 0);
+		return super.level() + (curseInfusionBonus ? Constants.curseInfusionBonusAmt : 0);
 	}
 	
 	@Override

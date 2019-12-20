@@ -21,6 +21,7 @@
 
 package com.shatteredpixel.cursedpixeldungeon.items.armor;
 
+import com.shatteredpixel.cursedpixeldungeon.Constants;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Invisibility;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.items.BrokenSeal;
@@ -74,7 +75,7 @@ abstract public class ClassArmor extends Armor {
 			break;
 		}
 		
-		classArmor.level(armor.level() - (armor.curseInfusionBonus ? 3 : 0));
+		classArmor.level(armor.level() - (armor.curseInfusionBonus ? Constants.curseInfusionBonusAmt : 0));
 		classArmor.armorTier = armor.tier;
 		classArmor.augment = armor.augment;
 		classArmor.inscribe( armor.glyph );

@@ -21,6 +21,7 @@
 
 package com.shatteredpixel.cursedpixeldungeon.items.weapon.melee;
 
+import com.shatteredpixel.cursedpixeldungeon.Constants;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
@@ -67,6 +68,15 @@ public class MeleeWeapon extends Weapon {
 	public int max(int lvl) {
 		return  (int) ((5*(tier+1) +    //base
 				lvl*(tier+1))*damageMultiplier);   //level scaling
+	}
+
+	@Override
+	public int upgradeLimit() {
+		int limit = super.upgradeLimit();
+		if (curseInfusionBonus) {
+			limit += Constants.curseInfusionBonusAmt;
+		}
+		return limit;
 	}
 
 	public int STRReq(int lvl){

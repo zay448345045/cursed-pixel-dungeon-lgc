@@ -41,6 +41,7 @@ public class Resetter extends Spell {
 	@Override
 	protected void onCast(Hero hero) {
 		new DistortionTrap().activate();
+		detach( curUser.belongings.backpack );
 	}
 
 	public static class Recipe extends com.shatteredpixel.cursedpixeldungeon.items.Recipe.SimpleRecipe {

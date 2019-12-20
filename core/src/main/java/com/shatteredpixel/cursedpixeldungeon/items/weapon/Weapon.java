@@ -22,6 +22,7 @@
 package com.shatteredpixel.cursedpixeldungeon.items.weapon;
 
 import com.shatteredpixel.cursedpixeldungeon.Badges;
+import com.shatteredpixel.cursedpixeldungeon.Constants;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
@@ -219,7 +220,7 @@ abstract public class Weapon extends KindOfWeapon {
 	
 	@Override
 	public int level() {
-		return super.level() + (curseInfusionBonus ? 3 : 0);
+		return super.level() + (curseInfusionBonus ? Constants.curseInfusionBonusAmt : 0);
 	}
 	
 	@Override
