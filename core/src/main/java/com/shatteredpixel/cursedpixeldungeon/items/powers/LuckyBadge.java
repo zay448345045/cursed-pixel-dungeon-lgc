@@ -55,7 +55,7 @@ public class LuckyBadge extends Power {
     public static final int HomeDepth = 28;
     private int returnDepth = -1;
     private int returnPos   = -1;
-    public static boolean latestDropWasRare = false;
+    private static boolean latestDropWasRare = false;
 
     public LuckyBadge() {
         super();
@@ -179,7 +179,7 @@ public class LuckyBadge extends Power {
                 item = new ScrollOfUpgrade();
                 dropsToUpgrade += dropsIncreases;
             } else {
-            if (Random.Int(19) == 0) {// 1/20 chance
+            if (Random.Int(9) == 0 & !latestDropWasRare) {// 1/10 chance
                 Item i;
                 do {
                     i = genRareDrop();
@@ -195,11 +195,6 @@ public class LuckyBadge extends Power {
                 item = i;
                 dropsToUpgrade--;
             }
-
-        }
-
-        //store values back into rings
-        for (LuckyBadge.LuckyBuff l : buffs){
 
         }
 

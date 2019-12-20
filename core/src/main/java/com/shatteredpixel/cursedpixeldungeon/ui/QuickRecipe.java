@@ -50,7 +50,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.potions.exotic.ExoticPotion;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.Scroll;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.exotic.ExoticScroll;
 import com.shatteredpixel.cursedpixeldungeon.items.spells.Alchemize;
-import com.shatteredpixel.cursedpixeldungeon.items.spells.AquaBlast;
+import com.shatteredpixel.cursedpixeldungeon.items.spells.Resetter;
 import com.shatteredpixel.cursedpixeldungeon.items.spells.ArcaneCatalyst;
 import com.shatteredpixel.cursedpixeldungeon.items.spells.BeaconOfReturning;
 import com.shatteredpixel.cursedpixeldungeon.items.spells.CurseInfusion;
@@ -360,7 +360,7 @@ public class QuickRecipe extends Component {
 				result.add(new QuickRecipe(new BeaconOfReturning.Recipe()));
 				result.add(null);
 				result.add(null);
-				result.add(new QuickRecipe(new AquaBlast.Recipe()));
+				result.add(new QuickRecipe(new Resetter.Recipe()));
 				result.add(new QuickRecipe(new FeatherFall.Recipe()));
 				result.add(new QuickRecipe(new ReclaimTrap.Recipe()));
 				result.add(null);

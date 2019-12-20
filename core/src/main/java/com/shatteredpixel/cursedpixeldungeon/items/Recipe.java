@@ -41,12 +41,11 @@ import com.shatteredpixel.cursedpixeldungeon.items.potions.elixirs.ElixirOfIcyTo
 import com.shatteredpixel.cursedpixeldungeon.items.potions.elixirs.ElixirOfMight;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.elixirs.ElixirOfToxicEssence;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.exotic.ExoticPotion;
-import com.shatteredpixel.cursedpixeldungeon.items.powers.Alchemy;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.Power;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.Scroll;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.exotic.ExoticScroll;
 import com.shatteredpixel.cursedpixeldungeon.items.spells.Alchemize;
-import com.shatteredpixel.cursedpixeldungeon.items.spells.AquaBlast;
+import com.shatteredpixel.cursedpixeldungeon.items.spells.Resetter;
 import com.shatteredpixel.cursedpixeldungeon.items.spells.ArcaneCatalyst;
 import com.shatteredpixel.cursedpixeldungeon.items.spells.BeaconOfReturning;
 import com.shatteredpixel.cursedpixeldungeon.items.spells.CurseInfusion;
@@ -194,7 +193,7 @@ public abstract class Recipe {
 		new ShockingBrew.Recipe(),
 		new CausticBrew.Recipe(),
 		new Alchemize.Recipe(),
-		new AquaBlast.Recipe(),
+		new Resetter.Recipe(),
 		new BeaconOfReturning.Recipe(),
 		new CurseInfusion.Recipe(),
 		new FeatherFall.Recipe(),

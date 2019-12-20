@@ -23,8 +23,6 @@ package com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments;
 
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
-import com.shatteredpixel.cursedpixeldungeon.items.Generator;
-import com.shatteredpixel.cursedpixeldungeon.items.Gold;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
@@ -48,7 +46,7 @@ public class Lucky extends Weapon.Enchantment {
 
 	}
 	
-	public static Item genLoot(){
+	/*public static Item genLoot(){//I may re use this, but currently Lucky enchantment simply drops a common Lucky Badge drop
 		float roll = Random.Float();
 		if (roll < 0.6f){
 			Item result = new Gold().random();
@@ -63,7 +61,7 @@ public class Lucky extends Weapon.Enchantment {
 					? Generator.random(Generator.Category.POTION)
 					: Generator.random(Generator.Category.SCROLL);
 		}
-	}
+	}*/
 
 	@Override
 	public Glowing glowing() {

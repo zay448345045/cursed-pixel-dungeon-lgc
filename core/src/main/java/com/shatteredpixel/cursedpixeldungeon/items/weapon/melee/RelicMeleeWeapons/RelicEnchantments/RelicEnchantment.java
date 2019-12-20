@@ -8,8 +8,6 @@ import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
 
-import javax.microedition.khronos.opengles.GL;
-
 
 public abstract class RelicEnchantment extends Weapon.Enchantment {
     @Override

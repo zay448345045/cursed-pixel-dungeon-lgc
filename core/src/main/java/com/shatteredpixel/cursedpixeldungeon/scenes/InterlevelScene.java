@@ -244,7 +244,7 @@ public class InterlevelScene extends PixelScene {
 								goToDepth(Dungeon.depth + 1, FALL_NAME);
 								break;
 							case RESET:
-								reset();
+								createNewLevel(Dungeon.depth);
 								break;
 							case START:
 								goToDepth(0, ASCEND_NAME);
@@ -371,19 +371,17 @@ public class InterlevelScene extends PixelScene {
 		}
 	}
 
-	public static Level createNewLevel(int depthToAccess) {
+	private static void createNewLevel(int depthToAccess) {
 		Level level;
 		Dungeon.depth = depthToAccess;
 		level = Dungeon.createNewLevelWithDepth(Dungeon.depth);
 		Dungeon.switchLevel( level, level.entrance );
-		return level;
 	}
 
-	public static Level goToDepth(int depthToAccess,  final String typeOfDescend) throws IOException {
-		if (typeOfDescend == (FALL_NAME) ) {
+	private static void goToDepth(int depthToAccess, final String typeOfDescend) throws IOException {
+		if (typeOfDescend.equals(FALL_NAME)) {
 			Buff.affect( Dungeon.hero, Chasm.Falling.class );
 		}
-		int oldDepth = Dungeon.depth;
 		if (Dungeon.hero == null) {
 			Mob.clearHeldAllies();
 			Dungeon.init();
@@ -425,7 +423,6 @@ public class InterlevelScene extends PixelScene {
 				break;
 		}
 
-	return level;
 	}
 
 	private void init() throws IOException {
@@ -469,7 +466,7 @@ public class InterlevelScene extends PixelScene {
 			level = Dungeon.createNewLevelWithDepth(Dungeon.depth);
 		}
 		Dungeon.switchLevel( level, level.exit );
-	}*/
+	}
 	
 	private void returnTo() throws IOException {
 
@@ -477,7 +474,7 @@ public class InterlevelScene extends PixelScene {
 		Dungeon.depth = returnDepth;
 		Level level = Dungeon.loadLevel( GamesInProgress.curSlot );
 		Dungeon.switchLevel( level, returnPos );
-	}
+	}*/
 	
 	private void restore() throws IOException {
 		

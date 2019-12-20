@@ -127,7 +127,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.scrolls.exotic.ScrollOfPolymo
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.exotic.ScrollOfPrismaticImage;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.exotic.ScrollOfPsionicBlast;
 import com.shatteredpixel.cursedpixeldungeon.items.spells.Alchemize;
-import com.shatteredpixel.cursedpixeldungeon.items.spells.AquaBlast;
+import com.shatteredpixel.cursedpixeldungeon.items.spells.Resetter;
 import com.shatteredpixel.cursedpixeldungeon.items.spells.CurseInfusion;
 import com.shatteredpixel.cursedpixeldungeon.items.spells.FeatherFall;
 import com.shatteredpixel.cursedpixeldungeon.items.spells.MagicalInfusion;
@@ -383,7 +383,7 @@ public class Generator {
 					MagicalPorter.class,
 					PhaseShift.class,
 					WildEnergy.class,
-					AquaBlast.class,
+					Resetter.class,
 					FeatherFall.class,
 					ReclaimTrap.class,
 					Alchemize.class,
