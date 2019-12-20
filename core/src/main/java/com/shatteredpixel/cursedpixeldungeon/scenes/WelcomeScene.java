@@ -100,7 +100,7 @@ public class WelcomeScene extends PixelScene {
 				super.onClick();
 				if (previousVersion == 0){
 					SPDSettings.version(ShatteredPixelDungeon.versionCode);
-					WelcomeScene.this.add(new WndStartGame(1));
+					WelcomeScene.this.add(new WndStartGame(1, false));
 				} else {
 					updateVersion(previousVersion);
 					ShatteredPixelDungeon.switchScene(TitleScene.class);

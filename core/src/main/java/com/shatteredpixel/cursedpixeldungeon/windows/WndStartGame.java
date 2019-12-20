@@ -54,7 +54,11 @@ public class WndStartGame extends Window {
 	private static final int WIDTH    = 120;
 	private static final int HEIGHT   = 140;
 
-	public WndStartGame(final int slot){
+	/*public WndStartGame(final int slot) {
+		new WndStartGame(slot, false);
+	}*/
+
+	public WndStartGame(final int slot, final boolean testing){
 		
 		Badges.loadGlobal();
 		Journal.loadGlobal();
@@ -95,8 +99,8 @@ public class WndStartGame extends Window {
 				GamesInProgress.curSlot = slot;
 				Dungeon.hero = null;
 				ActionIndicator.action = null;
-				InterlevelScene.mode = InterlevelScene.Mode.DESCEND_GAMEINIT;//Testing
-				
+				InterlevelScene.mode = InterlevelScene.Mode.DESCEND_GAMEINIT;
+				InterlevelScene.testing = testing;
 				if (SPDSettings.intro()) {
 					SPDSettings.intro( false );
 					Game.switchScene( IntroScene.class );

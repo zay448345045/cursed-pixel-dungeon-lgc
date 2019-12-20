@@ -31,6 +31,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.TomeOfMastery;
 import com.shatteredpixel.cursedpixeldungeon.items.allies.PoisonDragon;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.ClothArmor;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.LeatherArmor;
+import com.shatteredpixel.cursedpixeldungeon.items.armor.PlateArmor;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.CloakOfShadows;
 import com.shatteredpixel.cursedpixeldungeon.items.bags.FoodHolder;
 import com.shatteredpixel.cursedpixeldungeon.items.bags.MagicalHolster;
@@ -148,15 +149,20 @@ public enum HeroClass {
 		new MagicalHolster().collect();
 		Dungeon.LimitedDrops.MAGICAL_HOLSTER.drop();
 		//Extra stuff
-		/*new PotionOfStrength().quantity(10).identify().collect();
-		new MaracarsBlades().identify().collect();
-		new ThonothsAxe().identify().collect();
-		new LorsionsGreataxe().identify().collect();
-		new NeptunesTrident().identify().collect();
-		new RaRothsNunchucks().identify().collect();
-		new LoturgosCrystal().identify().collect();
-		new ChainsawHand().identify().collect();
-		new WandOfCorruption().upgrade(99).identify().collect();*/
+		if (Dungeon.testing) {
+			new PotionOfStrength().quantity(10).identify().collect();
+			new MaracarsBlades().identify().collect();
+			new ThonothsAxe().identify().collect();
+			new LorsionsGreataxe().identify().collect();
+			new NeptunesTrident().identify().collect();
+			new RaRothsNunchucks().identify().collect();
+			new LoturgosCrystal().identify().collect();
+			new ChainsawHand().identify().collect();
+			//new WandOfCorruption().upgrade(99).identify().collect();
+			new PlateArmor().identify().collect();
+			new ScrollOfUpgrade().identify().quantity(999).collect();
+
+		}
 		new LuckyBadge().collect();
 	}
 

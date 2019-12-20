@@ -79,6 +79,8 @@ public class InterlevelScene extends PixelScene {
 	
 	public static boolean noStory = false;
 
+	public static boolean testing = false;
+
 	public static boolean fallIntoPit;
 	
 	private enum Phase {
@@ -426,7 +428,7 @@ public class InterlevelScene extends PixelScene {
 	}
 
 	private void init() throws IOException {
-		Dungeon.init();
+		Dungeon.init(testing);
 		createNewLevel(0);
 	}
 

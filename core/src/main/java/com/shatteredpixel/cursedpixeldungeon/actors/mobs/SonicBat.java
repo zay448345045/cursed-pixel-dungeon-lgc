@@ -8,6 +8,7 @@ public class SonicBat extends Bat {
         EXP = 25;
         maxLvl = 30;
         defenseSkill = 30;
+        baseSpeed = 3f;
     }
 
     @Override

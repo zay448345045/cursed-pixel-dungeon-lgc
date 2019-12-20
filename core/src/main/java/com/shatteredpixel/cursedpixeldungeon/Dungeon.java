@@ -174,9 +174,15 @@ public class Dungeon {
 
 	public static long seed;
 
+	public static boolean testing;
+
 	public static ArrayList<Level> Levels = new ArrayList<>();
 
 	public static void init() {
+		init(false);
+	}
+
+	public static void init(boolean testing) {
 		version = Game.versionCode;
 		challenges = SPDSettings.challenges();
 
@@ -226,6 +232,8 @@ public class Dungeon {
 		Badges.reset();
 
 		GamesInProgress.selectedClass.initHero( hero );
+
+		Dungeon.testing = !testing;
 
 		/*for (int i = 0; i < Constants.numDepths; i++) {
 			depth = i;//This line is needed because of an absolutely stupid problem with PD levelgen. I will fix it someday.
