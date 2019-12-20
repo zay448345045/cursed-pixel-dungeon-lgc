@@ -175,7 +175,6 @@ public class Dungeon {
 	public static ArrayList<Level> Levels = new ArrayList<>();
 
 	public static void init() {
-
 		version = Game.versionCode;
 		challenges = SPDSettings.challenges();
 
@@ -225,6 +224,12 @@ public class Dungeon {
 		Badges.reset();
 
 		GamesInProgress.selectedClass.initHero( hero );
+
+		/*for (int i = 0; i < Constants.numDepths; i++) {
+			depth = i;//This line is needed because of an absolutely stupid problem with PD levelgen. I will fix it someday.
+			Levels.add(newLevelWithDepth(i));
+		}
+		depth = 0;*/
 
 	}
 
@@ -688,7 +693,7 @@ public class Dungeon {
 			bundle.put ( LIMDROPS, limDrops );
 
 			int count = 0;
-			int ids[] = new int[chapters.size()];
+			int[] ids = new int[chapters.size()];
 			for (Integer id : chapters) {
 				ids[count++] = id;
 			}
@@ -727,10 +732,10 @@ public class Dungeon {
 		}
 	}
 
-	public static void saveLevel( int save ) throws IOException {
+	private static void saveLevel(int save) throws IOException {
 		saveLevel(save, depth, level);
 	}
-	public static void saveLevel( int save, int depth, Level level ) throws IOException {
+	private static void saveLevel(int save, int depth, Level level) throws IOException {
 		Bundle bundle = new Bundle();
 		bundle.put( LEVEL, level );
 
@@ -753,7 +758,7 @@ public class Dungeon {
 		loadGame( save, true );
 	}
 
-	public static void loadGame( int save, boolean fullLoad ) throws IOException {
+	public static void loadGame(int save, boolean fullLoad) throws IOException {
 
 		Bundle bundle = FileUtils.bundleFromFile( GamesInProgress.gameFile( save ) );
 
@@ -776,6 +781,8 @@ public class Dungeon {
 		Ring.restore( bundle );
 
 		quickslot.restorePlaceholders( bundle );
+
+
 
 		if (fullLoad) {
 
@@ -829,9 +836,10 @@ public class Dungeon {
 				}
 			}
 		}
-
 		gold = bundle.getInt( GOLD );
 		depth = bundle.getInt( DEPTH );
+
+
 
 		Statistics.restoreFromBundle( bundle );
 		Generator.restoreFromBundle( bundle );
