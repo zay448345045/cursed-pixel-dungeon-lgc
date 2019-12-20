@@ -102,8 +102,8 @@ public class CityBossLevel extends Level {
 		
 		int y = TOP + 1;
 		while (y < TOP + HALL_HEIGHT) {
-			map[y * width() + CENTER - 2] = Terrain.STATUE_SP;
-			map[y * width() + CENTER + 2] = Terrain.STATUE_SP;
+			map[y * width() + CENTER - 3] = Terrain.STATUE_SP;
+			map[y * width() + CENTER + 3] = Terrain.STATUE_SP;
 			y += 2;
 		}
 		
@@ -144,9 +144,9 @@ public class CityBossLevel extends Level {
 	
 	public int pedestal( boolean left ) {
 		if (left) {
-			return (TOP + HALL_HEIGHT / 2) * width() + CENTER - 2;
+			return (TOP + HALL_HEIGHT / 2) * width() + CENTER - 3;
 		} else {
-			return (TOP + HALL_HEIGHT / 2) * width() + CENTER + 2;
+			return (TOP + HALL_HEIGHT / 2) * width() + CENTER + 3;
 		}
 	}
 	

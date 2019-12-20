@@ -144,7 +144,7 @@ public abstract class StandardRoom extends Room {
 		rooms.add(MinefieldRoom.class);
 	}
 	
-	private static float[][] chances = new float[40][];
+	private static float[][] chances = new float[50][];
 	static {
 		chances[1] =  new float[]{20,  15,5, 0,0, 0,0, 0,0, 0,0,    1,0,1,0,1,0,1,1,0,0};
 		chances[2] =  new float[]{20,  15,5, 0,0, 0,0, 0,0, 0,0,    1,1,1,1,1,1,1,1,1,1};
@@ -163,7 +163,7 @@ public abstract class StandardRoom extends Room {
 		chances[21] = chances[5];
 		
 		chances[22] = new float[]{20,  0,0, 0,0, 0,0, 0,0, 15,5,    1,1,1,1,1,1,1,1,1,1};
-		chances[39] = chances[38] = chances[37] = chances[36] = chances[35] = chances[34] = chances[33] =chances[32] =chances[30] = chances[31] = chances[29] = chances[28] = chances[27] = chances[26] = chances[25] = chances[24] = chances[23] = chances[22];//allows floors up to 28
+		chances[49] =chances[48] =chances[47] =chances[46] =chances[45] =chances[44] =chances[43] =chances[42] =chances[41] =chances[40] = chances[39] = chances[38] = chances[37] = chances[36] = chances[35] = chances[34] = chances[33] =chances[32] =chances[30] = chances[31] = chances[29] = chances[28] = chances[27] = chances[26] = chances[25] = chances[24] = chances[23] = chances[22];//allows floors up to 28
 	}
 	
 	

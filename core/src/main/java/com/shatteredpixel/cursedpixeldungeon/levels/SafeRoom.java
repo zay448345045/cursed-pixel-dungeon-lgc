@@ -9,17 +9,12 @@ import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.watabou.noosa.Group;
 
-import java.util.ArrayList;
-
 public class SafeRoom extends Level {
 
     {
         color1 = 0x6a723d;
         color2 = 0x88924c;
     }
-
-    //keep track of that need to be removed as the level is changed. We dump 'em back into the level at the end.
-    private ArrayList<Item> storedItems = new ArrayList<>();
 
     @Override
     public String tilesTex() {
@@ -70,12 +65,10 @@ public class SafeRoom extends Level {
 
     @Override
     public String tileName(int tile) {
-        switch (tile) {
-            case Terrain.WATER:
-                return Messages.get(SewerLevel.class, "water_name");
-            default:
-                return super.tileName(tile);
+        if (tile == Terrain.WATER) {
+            return Messages.get(SewerLevel.class, "water_name");
         }
+        return super.tileName(tile);
     }
 
     @Override

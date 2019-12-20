@@ -514,7 +514,7 @@ public class InterlevelScene extends PixelScene {
 		}
 	}
 
-	private void reset() throws IOException {
+	/*private void reset() throws IOException {
 
 		DriedRose.holdGhostHero( Dungeon.level );
 
@@ -523,7 +523,7 @@ public class InterlevelScene extends PixelScene {
 		Dungeon.depth--;
 		Level level = Dungeon.newLevel();
 		Dungeon.switchLevel( level, level.entrance );
-	}
+	}*/
 	
 	@Override
 	protected void onBackPressed() {

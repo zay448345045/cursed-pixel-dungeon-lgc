@@ -148,7 +148,7 @@ public enum HeroClass {
 		new MagicalHolster().collect();
 		Dungeon.LimitedDrops.MAGICAL_HOLSTER.drop();
 		//Extra stuff
-		new PotionOfStrength().quantity(10).identify().collect();
+		/*new PotionOfStrength().quantity(10).identify().collect();
 		new MaracarsBlades().identify().collect();
 		new ThonothsAxe().identify().collect();
 		new LorsionsGreataxe().identify().collect();
@@ -156,7 +156,7 @@ public enum HeroClass {
 		new RaRothsNunchucks().identify().collect();
 		new LoturgosCrystal().identify().collect();
 		new ChainsawHand().identify().collect();
-		new WandOfCorruption().upgrade(99).identify().collect();
+		new WandOfCorruption().upgrade(99).identify().collect();*/
 		new LuckyBadge().collect();
 	}
 

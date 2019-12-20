@@ -44,12 +44,14 @@ import com.shatteredpixel.cursedpixeldungeon.items.scrolls.Scroll;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.SpiritBow;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Lucky;
 import com.shatteredpixel.cursedpixeldungeon.journal.Notes;
+import com.shatteredpixel.cursedpixeldungeon.levels.AirChallengeLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.CavesBossLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.CavesLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.CityBossLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.CityLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.DeadEndLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.EarthChallengeLevel;
+import com.shatteredpixel.cursedpixeldungeon.levels.FireChallengeLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.GrindingLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.HallsBossLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.HallsLevel;
@@ -326,7 +328,18 @@ public class Dungeon {
 			case 39:
 				level = new EarthChallengeLevel();
 				break;
-
+			case 41:
+			case 42:
+			case 43:
+			case 44:
+				level = new FireChallengeLevel();
+				break;
+			case 46:
+			case 47:
+			case 48:
+			case 49:
+				level = new AirChallengeLevel();
+				break;
 			default:
 				level = new DeadEndLevel();
 				Statistics.deepestFloor--;

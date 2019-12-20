@@ -70,6 +70,8 @@ import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfLightning;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Blazing;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Grim;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Shocking;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.ChainsawHand;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicEnchantments.Bloodlust;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.MissileWeapon;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.darts.ShockingDart;
 import com.shatteredpixel.cursedpixeldungeon.levels.Terrain;
@@ -83,6 +85,7 @@ import com.watabou.noosa.Camera;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
+import com.watabou.utils.Callback;
 import com.watabou.utils.GameMath;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
@@ -194,7 +197,7 @@ public abstract class Char extends Actor {
 		return attack(enemy,false);
 	}
 	
-	public boolean attack( Char enemy, boolean guaranteed ) {
+	public boolean attack(final Char enemy, boolean guaranteed ) {
 
 		if (enemy == null) return false;
 		
@@ -268,6 +271,23 @@ public abstract class Char extends Actor {
 					GLog.i( Messages.capitalize(Messages.get(Char.class, "defeat", enemy.name)) );
 				}
 			}
+
+			if (this instanceof Hero & enemy.isAlive() && ((Hero)this).belongings.weapon instanceof ChainsawHand) {
+				final Hero hero = ((Hero)this);
+				ChainsawHand saw = ((ChainsawHand)hero.belongings.weapon);
+				if (saw.charge > 0 & saw.isTurnedOn() & hero.canAttack(enemy)) {
+					saw.use(1);
+					hero.sprite.attack(enemy.pos, new Callback() {
+						@Override
+						public void call() {
+							hero.actuallyAttack(enemy);
+						}
+					});
+				} else {
+					GLog.n(Messages.get(Bloodlust.class,"no_charge"));
+				}
+
+			}
 			
 			return true;
 			
@@ -288,9 +308,9 @@ public abstract class Char extends Actor {
 	public static boolean hit( Char attacker, Char defender, boolean magic ) {
 		float acuRoll = Random.Float( attacker.attackSkill( defender ) );
 		float defRoll = Random.Float( defender.defenseSkill( attacker ) );
-		if (attacker.buff(Bless.class) != null) acuRoll *= 1.20f;
-		if (defender.buff(Bless.class) != null) defRoll *= 1.20f;
-		return (magic ? acuRoll * 2 : acuRoll) >= defRoll;
+		if (attacker.buff(Bless.class) != null) acuRoll *= 1.5f;
+		if (defender.buff(Bless.class) != null) defRoll *= 1.5f;
+		return (magic ? acuRoll * 3 : acuRoll) >= defRoll;
 	}
 	
 	public int attackSkill( Char target ) {

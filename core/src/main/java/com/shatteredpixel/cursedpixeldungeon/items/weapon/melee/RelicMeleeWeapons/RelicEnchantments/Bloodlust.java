@@ -27,7 +27,7 @@ public class Bloodlust extends RelicEnchantment {
     @Override
     public int relicProc(RelicMeleeWeapon weapon, Char attacker, final Char defender, final int damage) {
 
-        if (attacker instanceof Hero & defender.isAlive()) {
+        /*if (attacker instanceof Hero & defender.isAlive()) {
             final Hero hero = (Hero) attacker;
             if (!defender.isAlive()) {
                 hero.spendAndNext(hero.attackDelay());
@@ -48,7 +48,7 @@ public class Bloodlust extends RelicEnchantment {
             attacker.next();
             return damage;//TODO: allow proccing from Statues and Ghost
         }
-        attacker.next();
+        attacker.next();*/
         return damage;
     }
 }

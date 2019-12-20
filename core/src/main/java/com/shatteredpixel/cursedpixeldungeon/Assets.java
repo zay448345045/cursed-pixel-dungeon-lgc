@@ -113,15 +113,16 @@ public class Assets {
 	public static final String ITEMS	        = "items.png";
 	public static final String TERRAIN_FEATURES	= "terrain_features.png";
 
-	public static final String TILES_SURFACE	= "tiles_surface.png";
-	public static final String TILES_WATER_CHALLENGE	= "tiles_beach.png";
-	public static final String TILES_BOSS	= "tiles_boss.png";
-	public static final String TILES_SEWERS	= "tiles_sewers.png";
-	public static final String TILES_PRISON	= "tiles_prison.png";
-	public static final String TILES_CAVES	= "tiles_caves.png";
-	public static final String TILES_CITY	= "tiles_city.png";
-	public static final String TILES_HALLS	= "tiles_halls.png";
-	public static final String TILES_EARTH  = "tiles_dolyahaven_new.png";
+	public static final String TILES_SURFACE = "tiles_surface.png";
+	public static final String TILES_WATER   = "tiles_beach.png";
+	public static final String TILES_AIR	 = "tiles_temple.png";
+	public static final String TILES_BOSS	 = "tiles_boss.png";
+	public static final String TILES_SEWERS	 = "tiles_sewers.png";
+	public static final String TILES_PRISON	 = "tiles_prison.png";
+	public static final String TILES_CAVES	 = "tiles_caves.png";
+	public static final String TILES_CITY	 = "tiles_city.png";
+	public static final String TILES_HALLS	 = "tiles_halls.png";
+	public static final String TILES_EARTH   = "tiles_dolyahaven_new.png";
 	
 	public static final String WATER_SEWERS	= "water0.png";
 	public static final String WATER_PRISON	= "water1.png";
