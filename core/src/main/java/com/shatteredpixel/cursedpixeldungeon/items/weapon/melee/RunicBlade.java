@@ -33,7 +33,6 @@ public class RunicBlade extends MeleeWeapon {
 		tier = 2;
 	}
 
-	//Does 1 - 10 base damage, scales exponentially max dmg (+2, +3, +4...) and not at all min damage
 	@Override
 	public int min(int lvl) {
 		return  1;
@@ -41,8 +40,8 @@ public class RunicBlade extends MeleeWeapon {
 	}
 	@Override
 	public int max(int lvl) {
-		return  6*(tier) +                	//15 base
-				Math.round((level()+1)*(level()+1)/2);	//+level() +1 scaling
+		return  15 +                	//15 base (equal to Shortsword)
+				Math.round(level()*level());	//Exponential scaling, made up for by the 1 minimum damage and lack of normal distribution.
 
 	}
 

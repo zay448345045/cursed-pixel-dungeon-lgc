@@ -71,13 +71,13 @@ public class Item implements Bundlable {
 		int levelLimit = 2+(int)(Dungeon.hero.lvl/2f);
 		levelLimit = Math.min(Constants.upgradeLimit,levelLimit);
 		if (Dungeon.hero.subClass == bonusSubClass) {
-			levelLimit = (int) (levelLimit * 1.3334f);
+			levelLimit = (int) (levelLimit * 1.3333f);
 		}
 		return levelLimit;
 	}
 
     public boolean isUpgradable() {
-		return level() <= upgradeLimit() - 1;
+		return level() < upgradeLimit();
 	}
 	protected String name = Messages.get(this, "name");
 	public int image = 0;
@@ -115,39 +115,9 @@ public class Item implements Bundlable {
 		return false;
 	}
 
-	public boolean isBroken() {
-		return durability <= 0;
-	}
-
-	public void getBroken() {
-	}
-
 	public boolean hasEnchant(Class<?extends Weapon.Enchantment> type, Char owner) {
 		return false;
 	}
-
-	public void fix() {
-		durability = maxDurability();
-	}
-
-	public void polish() {
-		if (durability < maxDurability()) {
-			durability++;
-		}
-
-	}
-
-	public void breakThis() {
-		getBroken();
-		this.degrade(1);
-		this.fix();
-	}
-
-	/*public void use() {
-		if (level >= 1 && !isBroken()) {
-			durability -= 2;
-		}
-	}*/
 	
 	private static Comparator<Item> itemComparator = new Comparator<Item>() {
 		@Override
