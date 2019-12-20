@@ -198,6 +198,8 @@ public class Bestiary {
 			case 41: case 42: case 43: case 44:
 				return new ArrayList<Class<? extends Mob>>(Arrays.asList(
 					AdultFireElemental.class, AdultFireElemental.class, AdultFireElemental.class, AdultFireElemental.class, AdultFireElemental.class));
+			case 46: case 47: case 48: case 49:
+				return new ArrayList<Class<? extends Mob>>(Arrays.asList(SonicBat.class));
 		}
 		
 	}
