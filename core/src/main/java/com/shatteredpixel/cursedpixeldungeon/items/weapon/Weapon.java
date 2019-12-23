@@ -260,13 +260,14 @@ abstract public class Weapon extends KindOfWeapon {
 		}
 		level(n);
 		
-		//30% chance to be cursed
-		//10% chance to be enchanted
+		//30% chance to be cursed, 70% at night
+		//10% chance to be enchanted, 30% at night
 		float effectRoll = Random.Float();
-		if (effectRoll < 0.3f) {
+		if (effectRoll < 0.3f | (Dungeon.checkNight() & Random.Float() < 0.7f)) {
 			enchant(Enchantment.randomCurse());
+			upgrade();
 			cursed = true;
-		} else if (effectRoll >= 0.9f){
+		} else if (effectRoll >= 0.9f | Dungeon.checkNight()){
 			enchant();
 		}
 

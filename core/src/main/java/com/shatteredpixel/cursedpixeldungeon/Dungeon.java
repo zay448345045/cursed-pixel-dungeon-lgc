@@ -84,6 +84,7 @@ import com.watabou.utils.SparseArray;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashSet;
 
 public class Dungeon {
@@ -1078,6 +1079,16 @@ public class Dungeon {
 
 		return PathFinder.getStepBack( cur, from, passable );
 
+	}
+
+	public static boolean checkNight(){
+		int hour= Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+		return (hour > 19 || hour < 7);
+	}
+
+	public static int getMonth(){
+		int month=Calendar.getInstance().get(Calendar.MONTH);
+		return month;
 	}
 
 }

@@ -134,10 +134,6 @@ public class Armor extends EquipableItem {
 	public void storeUpgrades(int number) {
 		storedUpgrades = number;
 	}
-	@Override
-	public boolean isFixable() {
-		return durability() < maxDurability(level());
-	}
 
 	@Override
 	public void storeInBundle( Bundle bundle ) {
@@ -500,13 +496,14 @@ public class Armor extends EquipableItem {
 		}
 		level(n);
 		
-		//30% chance to be cursed
-		//15% chance to be inscribed
+		//30% chance to be cursed, 70% at night
+		//15% chance to be inscribed, 30% at night
 		float effectRoll = Random.Float();
-		if (effectRoll < 0.3f) {
+		if (effectRoll < 0.3f | (Dungeon.checkNight() & Random.Float() < 0.7f)) {
 			inscribe(Glyph.randomCurse());
+			upgrade();
 			cursed = true;
-		} else if (effectRoll >= 0.85f){
+		} else if (effectRoll >= 0.85f | (Dungeon.checkNight())){
 			inscribe();
 		}
 

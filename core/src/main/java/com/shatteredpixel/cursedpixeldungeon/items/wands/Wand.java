@@ -105,11 +105,6 @@ public abstract class Wand extends KindofMisc {
 		}
 		return limit;
 	}
-
-	@Override
-	public boolean isFixable() {
-		return durability() < maxDurability(level());
-	}
 	@Override
 	public void execute( Hero hero, String action ) {
 
@@ -365,9 +360,10 @@ public abstract class Wand extends KindofMisc {
 		}
 		level(n);
 		
-		//30% chance to be cursed
-		if (Random.Float() < 0.3f) {
+		//30% chance to be cursed, 70% at night
+		if (Random.Float() < 0.3f | (Dungeon.checkNight() & Random.Float() < 0.7f)) {
 			cursed = true;
+			upgrade();
 		}
 
 		return this;

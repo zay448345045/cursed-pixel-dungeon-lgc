@@ -26,6 +26,7 @@ import com.shatteredpixel.cursedpixeldungeon.Badges;
 import com.shatteredpixel.cursedpixeldungeon.Challenges;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.items.BrokenSeal;
+import com.shatteredpixel.cursedpixeldungeon.items.Generator;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.TomeOfMastery;
 import com.shatteredpixel.cursedpixeldungeon.items.allies.PoisonDragon;
@@ -40,6 +41,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.bags.ScrollHolder;
 import com.shatteredpixel.cursedpixeldungeon.items.bags.VelvetPouch;
 import com.shatteredpixel.cursedpixeldungeon.items.food.Food;
 import com.shatteredpixel.cursedpixeldungeon.items.food.SmallRation;
+import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfExperience;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfHealing;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfInvisibility;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfLiquidFlame;
@@ -58,6 +60,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfCorrosion;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfCorruption;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfMagicMissile;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.SpiritBow;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Lucky;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Dirk;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Gloves;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.InscribedKnife;
@@ -76,6 +79,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.ThrowingStone
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.DeviceCompat;
+import com.watabou.utils.Random;
 
 public enum HeroClass {
 
@@ -151,17 +155,35 @@ public enum HeroClass {
 		//Extra stuff
 		if (Dungeon.testing) {
 			new PotionOfStrength().quantity(10).identify().collect();
-			new MaracarsBlades().identify().collect();
-			new ThonothsAxe().identify().collect();
-			new LorsionsGreataxe().identify().collect();
-			new NeptunesTrident().identify().collect();
-			new RaRothsNunchucks().identify().collect();
-			new LoturgosCrystal().identify().collect();
-			new ChainsawHand().identify().collect();
-			//new WandOfCorruption().upgrade(99).identify().collect();
-			new PlateArmor().identify().collect();
+			new MaracarsBlades().identify().upgrade(15).collect();
+			new ThonothsAxe().identify().upgrade(15).collect();
+			new LorsionsGreataxe().identify().upgrade(15).collect();
+			new NeptunesTrident().identify().upgrade(15).collect();
+			new RaRothsNunchucks().identify().upgrade(15).collect();
+			new LoturgosCrystal().identify().upgrade(15).collect();
+			new ChainsawHand().identify().upgrade(15).collect();
+			new PotionOfExperience().quantity(30).identify().collect();
+			new PlateArmor().identify().upgrade(15).collect();
 			new ScrollOfUpgrade().identify().quantity(999).collect();
-
+			for (int j = 0; j < 50; j ++) {
+				int r = Random.Int(3);
+				Item item;
+				if (r == 0) {
+					item = Generator.random(Generator.Category.RING);
+				} else if (r == 1) {
+					item = Generator.random(Generator.Category.ARTIFACT);
+				} else {
+					item = Generator.random(Generator.Category.WAND);
+				}
+				if (item != null) {
+					item.identify().collect();
+					item.cursed = false;
+					if (item.isUpgradable()) {
+						item.level(15);
+					}
+				}
+			}
+			//new WandOfCorruption().upgrade(99).identify().collect();
 		}
 		new LuckyBadge().collect();
 	}

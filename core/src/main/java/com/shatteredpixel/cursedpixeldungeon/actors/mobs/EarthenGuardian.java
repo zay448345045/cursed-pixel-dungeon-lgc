@@ -2,35 +2,37 @@ package com.shatteredpixel.cursedpixeldungeon.actors.mobs;
 
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Bleeding;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
-import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Cripple;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Light;
-import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Poison;
-import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Roots;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Slow;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.food.MysteryMeat;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfHealing;
-import com.shatteredpixel.cursedpixeldungeon.levels.traps.GuardianTrap;
+import com.shatteredpixel.cursedpixeldungeon.items.wands.Wand;
 import com.shatteredpixel.cursedpixeldungeon.mechanics.Ballistica;
 import com.shatteredpixel.cursedpixeldungeon.sprites.GuardianSprite;
-import com.shatteredpixel.cursedpixeldungeon.sprites.ScorpioSprite;
 import com.watabou.utils.Random;
 
 public class EarthenGuardian extends Mob {
     {
         spriteClass = GuardianSprite.class;
 
-        HP = HT = 220;
+        HP = HT = 180;
         defenseSkill = 24;
         viewDistance = Light.DISTANCE;
 
         EXP = 14;
         maxLvl = 26;
 
+        baseSpeed = 0.8f;
+
         loot = new PotionOfHealing();
         lootChance = 0.2f;
 
         properties.add(Property.DEMONIC);
+
+        resistances.add(Wand.class);
     }
 
     @Override
@@ -57,10 +59,20 @@ public class EarthenGuardian extends Mob {
     @Override
     public int attackProc( Char enemy, int damage ) {
         damage = super.attackProc( enemy, damage );
+        return proc(enemy,damage);
+    }
+
+    @Override
+    public int defenseProc(Char enemy, int damage) {
+        damage = super.defenseProc(enemy,damage);
+        return proc(enemy,damage);
+    }
+
+    private int proc(Char enemy, int damage) {
         if (Random.Int( 2 ) == 0) {
-            Buff.prolong( enemy, Roots.class, Cripple.DURATION );
-        } else {
-            Buff.affect( enemy, Poison.class ).set( enemy.HT / 10 );
+            Buff.prolong( enemy, Slow.class, Slow.DURATION );
+        } else if (Random.Int(2) == 0) {
+            Buff.affect( enemy, Bleeding.class ).set( enemy.HT / 6 );
         }
 
         return damage;

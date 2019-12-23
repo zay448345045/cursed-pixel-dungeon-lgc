@@ -12,6 +12,7 @@ import com.shatteredpixel.cursedpixeldungeon.effects.Pushing;
 import com.shatteredpixel.cursedpixeldungeon.items.Generator;
 import com.shatteredpixel.cursedpixeldungeon.items.Gold;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MeleeWeapon;
 import com.shatteredpixel.cursedpixeldungeon.levels.features.Chasm;
 import com.shatteredpixel.cursedpixeldungeon.mechanics.Ballistica;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
@@ -27,9 +28,8 @@ import com.watabou.utils.Random;
 import java.util.ArrayList;
 
 public class FossilSkeleton extends Mob {
-    public boolean rocksUsed = false;
     {
-        spriteClass = SkeletonSprite.class;
+        spriteClass = FossilSkeletonSprite.class;
 
         HP = HT = 200;
         defenseSkill = 20;
@@ -38,44 +38,16 @@ public class FossilSkeleton extends Mob {
         maxLvl = 30;
 
         loot = Generator.Category.WEAPON;
-        lootChance = 0.125f;
+        lootChance = 0.5f;
 
         properties.add(Property.UNDEAD);
         properties.add(Property.INORGANIC);
-        //HUNTING = new Hunting();
-    }
-
-    private boolean useRocks(int target) {
-        if (rocksUsed || enemy.properties().contains(Property.IMMOVABLE))
-            return false;
-
-        Ballistica LOS = new Ballistica(pos, target, Ballistica.PROJECTILE);
-
-        if (LOS.collisionPos != enemy.pos
-                || LOS.path.size() < 2
-                || Dungeon.level.pit[LOS.path.get(1)])
-            return false;
-        else {
-            if (enemy != null && enemy.isAlive()){
-                int damage = Random.NormalIntRange(5+Dungeon.depth, 10+Dungeon.depth*2);
-                damage -= enemy.drRoll();
-                enemy.damage( Math.max(damage, 0) , this);
-
-                Buff.prolong( enemy, Paralysis.class, Paralysis.DURATION );
-
-                if (!enemy.isAlive() && enemy == Dungeon.hero){
-                    Dungeon.fail( getClass() );
-                    GLog.n( Messages.get(this, "ondeath") );
-                }
-
-            }
-        }
-        return true;
+        resistances.add(MeleeWeapon.class);
     }
 
     @Override
     public int damageRoll() {
-        return Random.NormalIntRange(50, 110);
+        return Random.NormalIntRange(50, 100);
     }
 
     @Override
@@ -89,7 +61,7 @@ public class FossilSkeleton extends Mob {
         for (int i = 0; i < PathFinder.NEIGHBOURS8.length; i++) {
             Char ch = findChar(pos + PathFinder.NEIGHBOURS8[i]);
             if (ch != null && ch.isAlive()) {
-                int damage = Random.NormalIntRange(60, 120);
+                int damage = (int) (damageRoll()*1.5f);
                 damage = Math.max(0, damage - (ch.drRoll() + ch.drRoll()));
                 ch.damage(damage, this);
                 if (ch == Dungeon.hero && !ch.isAlive()) {
@@ -109,40 +81,25 @@ public class FossilSkeleton extends Mob {
     }
 
     @Override
-    protected Item createLoot() {
-        Item result = new Gold().random();
-        result.quantity(Math.round(result.quantity() * Random.NormalFloat(0.33f, 1f)));
-        return result;
-    }
-
-    @Override
     public int attackSkill(Char target) {
         return 40;
     }
 
     @Override
     public int drRoll() {
-        return Random.NormalIntRange(0, 5);
+        return Random.NormalIntRange(10, 25);
     }
 
-    private class Hunting extends Mob.Hunting{
+    public static class FossilSkeletonSprite extends SkeletonSprite {
+        public FossilSkeletonSprite(){
+            super();
+            tint(0, 0, 0, 0.2f);
+        }
+
         @Override
-        public boolean act( boolean enemyInFOV, boolean justAlerted ) {
-            enemySeen = enemyInFOV;
-
-            if (!rocksUsed
-                    && enemyInFOV
-                    && !isCharmedBy( enemy )
-                    && !canAttack( enemy )
-                    && Dungeon.level.distance( pos, enemy.pos ) < 5
-                    && Random.Int(3) == 0
-
-                    && useRocks(enemy.pos)){
-                return false;
-            } else {
-                return super.act( enemyInFOV, justAlerted );
-            }
-
+        public void resetColor() {
+            super.resetColor();
+            tint(0, 0, 0, 0.2f);
         }
     }
 

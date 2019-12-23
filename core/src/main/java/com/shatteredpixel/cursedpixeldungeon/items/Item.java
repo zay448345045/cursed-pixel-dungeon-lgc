@@ -52,17 +52,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import javax.microedition.khronos.opengles.GL;
+
 public class Item implements Bundlable {
 
-	protected static final String TXT_TO_STRING_LVL		= "%s %+d";
-	protected static final String TXT_TO_STRING_X		= "%s x%d";
+	private static final String TXT_TO_STRING_LVL		= "%s %+d";
+	private static final String TXT_TO_STRING_X		= "%s x%d";
 	
-	protected static final float TIME_TO_THROW		= 1.0f;
+	private static final float TIME_TO_THROW		= 1.0f;
 	protected static final float TIME_TO_PICK_UP	= 1.0f;
-	protected static final float TIME_TO_DROP		= 1.0f;
+	private static final float TIME_TO_DROP		= 1.0f;
 	
-	public static final String AC_DROP		= "DROP";
-	public static final String AC_THROW		= "THROW";
+	private static final String AC_DROP		= "DROP";
+	protected static final String AC_THROW		= "THROW";
 	
 	public String defaultAction;
 	public boolean usesTargeting;
@@ -91,29 +93,12 @@ public class Item implements Bundlable {
 	
 	public boolean cursed;
 	public boolean cursedKnown;
-	private float durability = maxDurability(level());
 	
 	// Unique items persist through revival
 	public boolean unique = false;
 
 	// whether an item can be included in heroes remains
 	public boolean bones = false;
-
-	public float durability() {
-		return durability;
-	}
-
-	public float maxDurability( int lvl ) {
-		return 20f;
-	}
-
-	final public float maxDurability() {
-		return maxDurability( level );
-	}
-
-	public boolean isFixable() {
-		return false;
-	}
 
 	public boolean hasEnchant(Class<?extends Weapon.Enchantment> type, Char owner) {
 		return false;
@@ -335,12 +320,13 @@ public class Item implements Bundlable {
 	}
 	
 	public Item upgrade() {
-		
-		this.level++;
-		this.durability = Math.max(durability,this.maxDurability()/3);//partially repair an item
+		if (Dungeon.hero == null || level() <= upgradeLimit()) {
+			this.level++;
 
-		updateQuickslot();
-		
+			updateQuickslot();
+		} else {
+			GLog.n(Messages.get(this,"upgrade_limit",name()));
+		}
 		return this;
 	}
 	
@@ -499,7 +485,6 @@ public class Item implements Bundlable {
 		bundle.put( LEVEL_KNOWN, levelKnown );
 		bundle.put( CURSED, cursed );
 		bundle.put( CURSED_KNOWN, cursedKnown );
-		bundle.put( DURABILITY, durability );
 		if (Dungeon.quickslot.contains(this)) {
 			bundle.put( QUICKSLOT, Dungeon.quickslot.getSlot(this) );
 		}
@@ -517,7 +502,6 @@ public class Item implements Bundlable {
 		} else if (level < 0) {
 			degrade( -level );
 		}
-		durability = bundle.getInt( DURABILITY );
 		cursed	= bundle.getBoolean( CURSED );
 
 		//only want to populate slot on first load.

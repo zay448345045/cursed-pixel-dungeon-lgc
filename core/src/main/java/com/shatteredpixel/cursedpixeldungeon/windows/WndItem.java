@@ -75,9 +75,6 @@ public class WndItem extends Window {
 		}
 
 		IconTitle titlebar = new IconTitle( item );
-		HealthBar health = new HealthBar();
-		health.level((float) item.durability()/item.maxDurability());
-		titlebar.add( health );
 		titlebar.setRect( 0, 0, width, 0 );
 		add( titlebar );
 
