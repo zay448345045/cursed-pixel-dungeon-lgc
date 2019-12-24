@@ -44,6 +44,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.scrolls.Scroll;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.SpiritBow;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Lucky;
 import com.shatteredpixel.cursedpixeldungeon.journal.Notes;
+import com.shatteredpixel.cursedpixeldungeon.levels.AirChallengeBossLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.AirChallengeLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.CavesBossLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.CavesLevel;
@@ -347,7 +348,10 @@ public class Dungeon {
 			case 47:
 			case 48:
 			case 49:
-				level = new AirChallengeLevel();
+				//level = new AirChallengeLevel();
+				//break;
+			case 50:
+				level = new AirChallengeBossLevel();
 				break;
 			default:
 				level = new DeadEndLevel();
