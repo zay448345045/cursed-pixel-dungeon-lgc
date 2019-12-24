@@ -14,6 +14,8 @@ public class AirChallengeBossLevel extends Level {
         color2 = 0x88924c;
     }
 
+    private final int KeyPos = 23 + width * 15;
+
     @Override
     public String waterTex() {
         return Assets.WATER_PRISON;
@@ -21,7 +23,7 @@ public class AirChallengeBossLevel extends Level {
 
     @Override
     public String tilesTex() {
-        return Assets.TILES_PRISON;
+        return Assets.TILES_AIR;
     }
 
     @Override
@@ -43,14 +45,13 @@ public class AirChallengeBossLevel extends Level {
     @Override
     protected void createMobs() {
         Shinobi guard = (Shinobi) createMob();
-        guard.pos = 23 + width * 15;
+        guard.pos = KeyPos;
         mobs.add(guard);
     }
 
     @Override
     protected void createItems() {
-        int cell = 23 + width * 15;
-        drop(new IronKey(Dungeon.depth), cell);
+        drop(new IronKey(Dungeon.depth), KeyPos);
     }
 
     @Override

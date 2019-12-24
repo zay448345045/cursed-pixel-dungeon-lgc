@@ -193,7 +193,8 @@ public class Bestiary {
 			case 36: case 37: case 38: case 39:
 				return new ArrayList<>(Arrays.asList(
 						FossilSkeleton.class, FossilSkeleton.class,
-						EarthenGuardian.class, EarthenGuardian.class));
+						EarthenGuardian.class, EarthenGuardian.class,
+						GnollBattlemage.class, GnollBattlemage.class));
 			case 41: case 42: case 43: case 44:
 				return new ArrayList<>(Arrays.asList(
 						AdultFireElemental.class,

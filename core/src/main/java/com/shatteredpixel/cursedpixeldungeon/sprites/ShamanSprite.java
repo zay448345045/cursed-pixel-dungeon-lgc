@@ -22,9 +22,12 @@
 package com.shatteredpixel.cursedpixeldungeon.sprites;
 
 import com.shatteredpixel.cursedpixeldungeon.Assets;
+import com.shatteredpixel.cursedpixeldungeon.actors.mobs.GnollBattlemage;
+import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Shaman;
 import com.shatteredpixel.cursedpixeldungeon.effects.Lightning;
 import com.watabou.noosa.TextureFilm;
+import com.watabou.utils.Callback;
 
 public class ShamanSprite extends MobSprite {
 	
@@ -51,10 +54,14 @@ public class ShamanSprite extends MobSprite {
 		
 		play( idle );
 	}
-	
-	public void zap( int pos ) {
 
-		parent.add( new Lightning( ch.pos, pos, (Shaman)ch ) );
+	@Override
+	public void zap( int pos ) {
+		if (ch instanceof Shaman) {
+			parent.add(new Lightning(ch.pos, pos, (Shaman) ch));
+		} else if (ch instanceof GnollBattlemage) {
+			parent.add(new Lightning(ch.pos, pos, (GnollBattlemage) ch));
+		}
 		
 		turnTo( ch.pos, pos );
 		play( zap );

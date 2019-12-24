@@ -348,8 +348,8 @@ public class Dungeon {
 			case 47:
 			case 48:
 			case 49:
-				//level = new AirChallengeLevel();
-				//break;
+				level = new AirChallengeLevel();
+				break;
 			case 50:
 				level = new AirChallengeBossLevel();
 				break;
