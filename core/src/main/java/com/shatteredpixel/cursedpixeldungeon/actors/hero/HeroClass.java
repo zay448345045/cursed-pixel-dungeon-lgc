@@ -152,8 +152,10 @@ public enum HeroClass {
 
 		new MagicalHolster().collect();
 		Dungeon.LimitedDrops.MAGICAL_HOLSTER.drop();
+
+		new LuckyBadge().collect();
 		//Extra stuff
-		if (Dungeon.testing) {
+		/*if (Dungeon.testing) {
 			new PotionOfStrength().quantity(10).identify().collect();
 			new MaracarsBlades().identify().upgrade(15).collect();
 			new ThonothsAxe().identify().upgrade(15).collect();
@@ -184,8 +186,7 @@ public enum HeroClass {
 				}
 			}
 			//new WandOfCorruption().upgrade(99).identify().collect();
-		}
-		new LuckyBadge().collect();
+		}*/
 	}
 
 	public Badges.Badge masteryBadge() {
@@ -221,15 +222,13 @@ public enum HeroClass {
 	private static void initWarrior( Hero hero ) {
 		(hero.belongings.weapon = new WornShortsword()/*.enchant(new Precise())*/).identify().upgrade();
 		(hero.belongings.armor = new LeatherArmor()).identify().upgrade();
-		hero.HP = hero.HT = 24;
+		hero.HP = hero.HT = 48;
 		ThrowingStone stones = new ThrowingStone();
 		stones.quantity(3).collect();
 		Dungeon.quickslot.setSlot(0, stones);
 		if (hero.belongings.armor != null){
 			hero.belongings.armor.affixSeal(new BrokenSeal());
 		}
-		
-
 		
 		new PotionOfStrength().identify();
 		new ScrollOfRage().identify();

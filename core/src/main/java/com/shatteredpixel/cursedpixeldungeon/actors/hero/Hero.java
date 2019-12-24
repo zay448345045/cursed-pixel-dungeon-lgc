@@ -483,14 +483,9 @@ public class Hero extends Char {
 	
 	public float attackDelay() {
 		KindOfWeapon wep = belongings.weapon;
-
-		if (wep instanceof Weapon && (((Weapon) wep).hasEnchant(Swift.class, this)) && Swift.activate(wep)){
-			return 0;
-
-		}
-		if (belongings.weapon != null) {
+		if (wep != null) {
 			
-			return belongings.weapon.speedFactor( this );
+			return wep.speedFactor( this );
 			
 		} else {
 			//Normally putting furor speed on unarmed attacks would be unnecessary

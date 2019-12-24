@@ -43,7 +43,7 @@ public class WaterDragon extends DragonCrystal {
             if (Dungeon.level.water[pos] && HP < HT) {
                 sprite.emitter().burst( Speck.factory( Speck.STEAM ), 1 );
 
-                HP+= Math.min(HT/5,missingHP());
+                HP+= Math.min(HT/10,missingHP());
             }
 
             return super.act();
@@ -51,7 +51,7 @@ public class WaterDragon extends DragonCrystal {
 
         @Override
         public int HPCalc() {
-            return 24 + 8 * Crystal.level();
+            return 24 + 16 * Crystal.level();
         }
 
         @Override

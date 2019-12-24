@@ -77,8 +77,6 @@ public class DragonCrystal extends KindofMisc {
 		return 75*level();
 	}
 
-	int levelCap = 10;
-
 	private int charge = 100;
 	private int chargeCap;
 	private float partialCharge = 0;
@@ -401,7 +399,7 @@ public class DragonCrystal extends KindofMisc {
 		}
 
 		public int HPCalc() {
-			return  30 + 10* Crystal.level();
+			return  30 + 20* Crystal.level();
 		}
 
 		public void sayDefeated(){
@@ -463,12 +461,12 @@ public class DragonCrystal extends KindofMisc {
 		@Override
 		public int defenseSkill(Char enemy) {
 			return 5 + Dungeon.hero.lvl;
-		}//2 Evasion, scaling at 2/level
+		}//5 evasion, +1 per hero lvl
 
 		@Override
 		public int drRoll() {
-			return Random.NormalIntRange(1 + Crystal.level() * 2, 2 + Crystal.level() * 5);
-		}//base of 1-2 (Cloth Armour), scales by 2-5 (Plate Armour)
+			return Random.NormalIntRange(1 + Crystal.level(), 2 + Crystal.level() * 4);
+		}//base of 1-2 (Cloth Armour), scales by 1-4(Scale Armour)
 
 		@Override
 		public boolean interact() {

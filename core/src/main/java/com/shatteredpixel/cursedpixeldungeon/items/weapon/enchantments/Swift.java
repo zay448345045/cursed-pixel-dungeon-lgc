@@ -1,9 +1,11 @@
 package com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments;
 
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.KindOfWeapon;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.Weapon;
+import com.shatteredpixel.cursedpixeldungeon.plants.Swiftthistle;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
 import com.watabou.utils.Random;
 
@@ -12,7 +14,9 @@ public class Swift extends Weapon.Enchantment {
 
     @Override
     public int proc(Item weapon, Char attacker, Char defender, int damage) {
-        //no proc effect, see Hero.attackDelay
+        if (Random.Int(4) == 0) {
+            Buff.affect(attacker, Swiftthistle.TimeBubble.class).reset();
+        }
         return damage;
     }
 
