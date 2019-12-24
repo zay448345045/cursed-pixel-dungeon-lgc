@@ -243,6 +243,9 @@ public abstract class Level implements Bundlable {
 					viewDistance = Math.round(viewDistance/2f);
 					break;
 				}
+				if (Dungeon.depth > 40 & Dungeon.depth < 51) {
+					feeling = Feeling.CHASM;
+				}
 			}
 		}
 		

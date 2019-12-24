@@ -615,7 +615,7 @@ public abstract class Mob extends Char {
 		if (state != HUNTING) {
 			alerted = true;
 		}
-		if (Dungeon.isChallenged(Challenges.EVIL_GAS)) {
+		if (Dungeon.isChallenged(Challenges.EVIL_GAS) | this instanceof Kupua) {
 			int amount = Math.min( (int) (50*((float)dmg/(float)HT)), 50);
 			GameScene.add(Blob.seed(this.pos, amount, EvilGas.class).setStrength(1+Dungeon.depth/4));
 		}

@@ -192,14 +192,17 @@ public class Bestiary {
 
 			case 36: case 37: case 38: case 39:
 				return new ArrayList<>(Arrays.asList(
-						FossilSkeleton.class,
-						FossilSkeleton.class,
+						FossilSkeleton.class, FossilSkeleton.class,
 						EarthenGuardian.class, EarthenGuardian.class));
 			case 41: case 42: case 43: case 44:
-				return new ArrayList<Class<? extends Mob>>(Arrays.asList(
-					AdultFireElemental.class, AdultFireElemental.class, AdultFireElemental.class, AdultFireElemental.class, AdultFireElemental.class));
+				return new ArrayList<>(Arrays.asList(
+						AdultFireElemental.class,
+						Kupua.class));
 			case 46: case 47: case 48: case 49:
-				return new ArrayList<>(Arrays.asList(SonicBat.class, AirElemental.class, Shinobi.class));
+				return new ArrayList<>(Arrays.asList(
+						SonicBat.class,
+						AirElemental.class,
+						Shinobi.class));
 		}
 		
 	}
@@ -264,6 +267,8 @@ public class Bestiary {
 					cl = GrindingLevel.PurpleGuardian.class;
 				}else if (cl == GrindingLevel.RedGuardian.class) {
 					cl = GrindingLevel.OrangeGuardian.class;
+				} else if (cl == Kupua.class) {
+					cl = Gullin.class;
 				}
 				rotation.set(i, cl);
 			}

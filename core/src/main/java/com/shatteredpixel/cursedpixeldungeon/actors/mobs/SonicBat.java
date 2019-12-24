@@ -1,15 +1,17 @@
 package com.shatteredpixel.cursedpixeldungeon.actors.mobs;
 
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
+import com.shatteredpixel.cursedpixeldungeon.sprites.BatSprite;
 import com.watabou.utils.Random;
 
-public class SonicBat extends Bat {
+public class SonicBat extends Mob {
     {
+        spriteClass = BatSprite.class;
         EXP = 25;
         maxLvl = 30;
         HP = HT = 200;
         defenseSkill = 30;
-        baseSpeed = 3f;
+        baseSpeed = 4f;
     }
 
     @Override

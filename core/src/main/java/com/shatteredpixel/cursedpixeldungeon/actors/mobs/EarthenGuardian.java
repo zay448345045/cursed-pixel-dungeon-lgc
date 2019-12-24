@@ -71,8 +71,8 @@ public class EarthenGuardian extends Mob {
     private int proc(Char enemy, int damage) {
         if (Random.Int( 2 ) == 0) {
             Buff.prolong( enemy, Slow.class, Slow.DURATION );
-        } else if (Random.Int(2) == 0) {
-            Buff.affect( enemy, Bleeding.class ).set( enemy.HT / 6 );
+        } else if (Random.Int(5) == 0) {
+            Buff.affect( enemy, Bleeding.class ).set( damage / 3 );
         }
 
         return damage;
