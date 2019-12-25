@@ -36,16 +36,13 @@ public class Precise extends Weapon.Enchantment {
         float accuracy = attacker.attackSkill(defender);
 
         float hitChance;
-        /*if (evasion >= accuracy){
+        if (evasion >= accuracy){
             hitChance = (accuracy/evasion);
         } else {
             hitChance = 1f - (evasion/accuracy);
-        }*/
-        hitChance = (accuracy/evasion);
+        }
 
-        //75% of dodge chance is applied as damage reduction
-
-        damage = (int)Math.ceil(damage * hitChance * 1.25f);
+        damage = (int)Math.ceil(damage * hitChance);
 
         return damage;
     }
