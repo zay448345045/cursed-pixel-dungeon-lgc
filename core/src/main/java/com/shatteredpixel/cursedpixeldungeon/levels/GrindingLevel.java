@@ -86,12 +86,12 @@ public class GrindingLevel extends SewerLevel {
         }
 
         int getScaleFactor() {
-            return Math.min(30,Math.max(0,Dungeon.hero.lvl-2));
+            return Math.min(30,Math.max(0,Dungeon.hero.lvl-1));
         }
 
         public Guardian() {
             super();
-            HP = HT = 12 + 7 * getScaleFactor();
+            HP = HT = 15 + 7 * getScaleFactor();
             aggro(Dungeon.hero);
         }
 
@@ -107,8 +107,14 @@ public class GrindingLevel extends SewerLevel {
         }
 
         @Override
+        protected boolean act() {
+            aggro(Dungeon.hero);
+            return super.act();
+        }
+
+        @Override
         public int damageRoll() {
-            return (int) (Random.IntRange(1 + getScaleFactor(), 5 + getScaleFactor()*3) * damageFactor);
+            return (int) (Random.IntRange(1 + getScaleFactor(), 3 + getScaleFactor()*3) * damageFactor);
         }
 
         @Override
@@ -368,13 +374,13 @@ public class GrindingLevel extends SewerLevel {
         public OrangeGuardianSprite() {
             super();
             zap = attack.clone();
-            tint(2, 1, 0, 0.2f);
+            tint(3, 1, 0, 0.2f);
         }
 
         @Override
         public void resetColor() {
             super.resetColor();
-            tint(2, 1, 0, 0.2f);
+            tint(3, 1, 0, 0.2f);
         }
         @Override
         public void zap( int cell ) {

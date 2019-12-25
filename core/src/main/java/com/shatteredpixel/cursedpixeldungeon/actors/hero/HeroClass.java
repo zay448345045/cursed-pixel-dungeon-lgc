@@ -292,7 +292,7 @@ public enum HeroClass {
 	private static void initHuntress( Hero hero ) {
 
 		(hero.belongings.weapon = new Gloves()).identify().upgrade();
-		SpiritBow bow = (SpiritBow) new SpiritBow().enchant(new Precise());
+		SpiritBow bow = new SpiritBow();//.enchant(new Precise());//I used this for testing it
 		bow.identify().upgrade().collect();
 		hero.HT = hero.HP = 32;
 

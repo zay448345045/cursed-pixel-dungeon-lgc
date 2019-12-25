@@ -26,7 +26,10 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Bleeding;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.Weapon;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Grim;
+import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
+import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
 import com.watabou.utils.Random;
 
 public class Sacrificial extends Weapon.Enchantment {
@@ -36,12 +39,23 @@ public class Sacrificial extends Weapon.Enchantment {
 	@Override
 	public int proc(Item weapon, Char attacker, Char defender, int damage ) {
 
-		if (Random.Int(12) == 0){
+		/*if (Random.Int(12) == 0){
 			int duration = Math.max(1, attacker.HP/6);
 			Buff.affect(attacker, Bleeding.class).set(duration);
 			damage = Math.round((duration*2/attacker.HT)*damage);//Increases damage based on HP taken
 		}
-
+		*/
+		if (Random.Int(5) == 0) {
+			int procDMG = defender.HP;
+			if (Math.round(procDMG/2f) >= attacker.HP) {//Use Math.round rather than integer division so that odd damage doesn't have a small chance of killing the player
+				procDMG = (attacker.HP - 1)*2;
+			}
+			if (procDMG > 0) {
+				GLog.n(Messages.get(this,"proc"));
+				attacker.damage(procDMG / 2, this);
+				defender.damage(procDMG, new Grim());
+			}
+		}
 		return damage;
 	}
 
