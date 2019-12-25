@@ -28,29 +28,24 @@ import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite.Glowing;
 
 public class Precise extends Weapon.Enchantment {
-    {
-        testing = false;
-    }
 
     private static ItemSprite.Glowing WHITE = new ItemSprite.Glowing( 0xFFFFFF );
     @Override
     public int proc(Item weapon, Char attacker, Char defender, int damage) {
-        testing = true;
         float evasion = defender.defenseSkill(attacker);
         float accuracy = attacker.attackSkill(defender);
-        testing = false;
 
         float hitChance;
-        if (evasion >= accuracy){
-            hitChance = (accuracy/evasion)/2f;
+        /*if (evasion >= accuracy){
+            hitChance = (accuracy/evasion);
         } else {
-            hitChance = 1f - (evasion/accuracy)/2f;
-        }
+            hitChance = 1f - (evasion/accuracy);
+        }*/
+        hitChance = (accuracy/evasion);
 
         //75% of dodge chance is applied as damage reduction
-        hitChance = (1f + 3f*hitChance)/4f;
 
-        damage = (int)Math.ceil(damage * hitChance);
+        damage = (int)Math.ceil(damage * hitChance * 1.25f);
 
         return damage;
     }

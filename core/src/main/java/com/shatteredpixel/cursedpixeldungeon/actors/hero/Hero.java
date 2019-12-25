@@ -344,12 +344,6 @@ public class Hero extends Char {
 	@Override
 	public int attackSkill( Char target ) {
 		KindOfWeapon wep = belongings.weapon;
-
-		if (wep instanceof Weapon
-				&& (((Weapon) wep).hasEnchant(Precise.class, this) && !((Weapon) wep).enchantment.testing
-				|| (((Weapon) wep).hasEnchant(Unstable.class, this) && Random.Int(11) == 0))){
-				return Integer.MAX_VALUE;
-			}
 		
 		float accuracy = 1;
 		accuracy *= RingOfAccuracy.accuracyMultiplier( this );

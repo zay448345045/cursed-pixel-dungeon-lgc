@@ -61,6 +61,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfCorruption;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfMagicMissile;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.SpiritBow;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Lucky;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Precise;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Dirk;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Gloves;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.InscribedKnife;
@@ -291,13 +292,11 @@ public enum HeroClass {
 	private static void initHuntress( Hero hero ) {
 
 		(hero.belongings.weapon = new Gloves()).identify().upgrade();
-		SpiritBow bow = new SpiritBow();
+		SpiritBow bow = (SpiritBow) new SpiritBow().enchant(new Precise());
 		bow.identify().upgrade().collect();
 		hero.HT = hero.HP = 32;
 
 		Dungeon.quickslot.setSlot(0, bow);
-
-
 		
 		new PotionOfMindVision().identify();
 		new ScrollOfLullaby().identify();
