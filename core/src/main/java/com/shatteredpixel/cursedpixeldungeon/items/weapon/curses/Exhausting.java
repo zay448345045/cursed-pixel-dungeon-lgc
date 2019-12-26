@@ -23,10 +23,8 @@ package com.shatteredpixel.cursedpixeldungeon.items.weapon.curses;
 
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
-import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Barrier;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Paralysis;
-import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Weakness;
 import com.shatteredpixel.cursedpixeldungeon.effects.Speck;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.Weapon;
