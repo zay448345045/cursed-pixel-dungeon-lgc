@@ -23,10 +23,10 @@
 		android:resizeableActivity="true"
 		android:allowBackup="true"
 		android:fullBackupOnly="true"
-		android:backupAgent="com.smujamesb.cursedpixeldungeon.BackupHandler">
+		android:backupAgent="com.shatteredpixel.cursedpixeldungeon.BackupHandler">
 		<activity
 			android:label="@string/app_name"
-			android:name="com.smujamesb.cursedpixeldungeon.ShatteredPixelDungeon"
+			android:name="com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon"
 			android:screenOrientation="nosensor">
 			<intent-filter >
 				<action android:name="android.intent.action.MAIN" />
