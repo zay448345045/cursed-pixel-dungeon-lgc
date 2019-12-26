@@ -50,6 +50,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.Heap;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.Stylus;
 import com.shatteredpixel.cursedpixeldungeon.items.Torch;
+import com.shatteredpixel.cursedpixeldungeon.items.allies.DragonCrystal;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.DriedRose;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.TimekeepersHourglass;
 import com.shatteredpixel.cursedpixeldungeon.items.food.SmallRation;
@@ -94,7 +95,8 @@ public abstract class Level implements Bundlable {
 		CHASM,
 		WATER,
 		GRASS,
-		DARK
+		DARK,
+		EMBER
 	}
 
 	protected int width;
@@ -236,9 +238,15 @@ public abstract class Level implements Bundlable {
 					addItemToSpawn(new Torch());
 					viewDistance = Math.round(viewDistance/2f);
 					break;
+				case 4:
+					feeling = Feeling.EMBER;
+					break;
 				}
-				if (Dungeon.depth > 40 & Dungeon.depth < 51) {
+				if (Dungeon.depth > 40 & Dungeon.depth < 46) {
 					feeling = Feeling.CHASM;
+				}
+				if (Dungeon.depth > 45 & Dungeon.depth < 51) {
+					feeling = Feeling.EMBER;
 				}
 			}
 		}

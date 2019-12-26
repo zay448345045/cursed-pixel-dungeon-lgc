@@ -355,12 +355,20 @@ public class DragonCrystal extends KindofMisc {
 			super();
 		}
 
+		public int crystalLevel() {
+			if (Crystal == null) {
+				return 0;
+			} else {
+				return Crystal.level();
+			}
+		}
+
 		public int min() {
-			return  1 + Crystal.level();    //level scaling
+			return  1 + crystalLevel();    //level scaling
 		}
 
 		public int max() {
-			return  8 + Crystal.level() * 3;   //level scaling
+			return  8 + crystalLevel() * 3;   //level scaling
 		}
 
 		@Override
@@ -395,7 +403,7 @@ public class DragonCrystal extends KindofMisc {
 		}
 
 		public int HPCalc() {
-			return  30 + 20* Crystal.level();
+			return  30 + 20* crystalLevel();
 		}
 
 		public void sayDefeated(){
@@ -461,7 +469,7 @@ public class DragonCrystal extends KindofMisc {
 
 		@Override
 		public int drRoll() {
-			return Random.NormalIntRange(1 + Crystal.level(), 2 + Crystal.level() * 4);
+			return Random.NormalIntRange(1 + crystalLevel(), 2 + crystalLevel() * 4);
 		}//base of 1-2 (Cloth Armour), scales by 1-4(Scale Armour)
 
 		@Override

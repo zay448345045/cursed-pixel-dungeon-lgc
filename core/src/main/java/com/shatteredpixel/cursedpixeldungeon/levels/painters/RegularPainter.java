@@ -324,7 +324,12 @@ public abstract class RegularPainter extends Painter {
 					count++;
 				}
 			}
-			l.map[i] = (Random.Float() < count / 12f) ? Terrain.HIGH_GRASS : Terrain.GRASS;
+			//Set Embers on embers levels
+			if (l.feeling == Level.Feeling.EMBER) {
+				l.map[i] = Terrain.EMBERS;
+			} else {
+				l.map[i] = (Random.Float() < count / 12f) ? Terrain.HIGH_GRASS : Terrain.GRASS;
+			}
 		}
 	}
 	
