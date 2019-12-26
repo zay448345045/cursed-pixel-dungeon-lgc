@@ -59,9 +59,11 @@ import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroSubClass;
 import com.shatteredpixel.cursedpixeldungeon.items.BrokenSeal;
 import com.shatteredpixel.cursedpixeldungeon.items.KindOfWeapon;
+import com.shatteredpixel.cursedpixeldungeon.items.armor.Armor;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.glyphs.AntiMagic;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.glyphs.Brimstone;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.glyphs.Potential;
+import com.shatteredpixel.cursedpixeldungeon.items.armor.glyphs.Stone;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfElements;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfRetribution;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.exotic.ScrollOfPsionicBlast;
@@ -69,6 +71,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.stones.StoneOfAggression;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfFireblast;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfLightning;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.Weapon;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.curses.Wayward;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Blazing;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Grim;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Precise;
@@ -314,14 +317,24 @@ public abstract class Char extends Actor {
 		float defRoll = Random.Float( defender.defenseSkill( attacker ) );
 		if (attacker.buff(Bless.class) != null) acuRoll *= 1.5f;
 		if (defender.buff(Bless.class) != null) defRoll *= 1.5f;
-		if (attacker instanceof Hero) {
+		if (attacker instanceof Hero) {//If hero has a precise weapon, "hit()" returns true
 			Hero hero = (Hero) attacker;
 			KindOfWeapon wep = hero.belongings.weapon;
-			if (wep instanceof Weapon
-					&& (wep.hasEnchant(Precise.class, attacker)
-					|| (wep.hasEnchant(Unstable.class, attacker) && Random.Int(11) == 0))){
+			if (wep instanceof Weapon) {
+					if (wep.hasEnchant(Precise.class, attacker)
+					|| (wep.hasEnchant(Unstable.class, attacker) && Random.Int(11) == 0)) {
+					return true;
+				} else if (wep.hasEnchant(Wayward.class, attacker)) {
+						return Wayward.canHit(attacker, defender);
+					}
+			}
+		} else if (defender instanceof Hero) {//And if they have Stone armour, hit when they are defender returns true.
+			Hero hero = (Hero) defender;
+			Armor armor = hero.belongings.armor;
+			if (armor.hasGlyph(Stone.class,hero)) {
 				return true;
 			}
+
 		}
 		return (magic ? acuRoll * 3 : acuRoll) >= defRoll;
 	}

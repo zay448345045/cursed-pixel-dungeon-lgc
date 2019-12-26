@@ -22,6 +22,8 @@
 package com.shatteredpixel.cursedpixeldungeon.items.armor.curses;
 
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
+import com.shatteredpixel.cursedpixeldungeon.actors.blobs.Blob;
+import com.shatteredpixel.cursedpixeldungeon.actors.blobs.Regrowth;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroSubClass;
 import com.shatteredpixel.cursedpixeldungeon.effects.CellEmitter;
@@ -31,6 +33,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.armor.Armor;
 import com.shatteredpixel.cursedpixeldungeon.plants.BlandfruitBush;
 import com.shatteredpixel.cursedpixeldungeon.plants.Plant;
 import com.shatteredpixel.cursedpixeldungeon.plants.Starflower;
+import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
 import com.watabou.utils.Random;
 
@@ -41,27 +44,11 @@ public class Overgrowth extends Armor.Glyph {
 	@Override
 	public int proc(Armor armor, Char attacker, Char defender, int damage) {
 		
-		if ( Random.Int( 20 ) == 0) {
-			
-			Plant.Seed s;
-			do{
-				s = (Plant.Seed) Generator.random(Generator.Category.SEED);
-			} while (s instanceof BlandfruitBush.Seed || s instanceof Starflower.Seed);
-			
-			Plant p = s.couch(defender.pos, null);
-			
-			//momentarily revoke warden benefits, otherwise this curse would be incredibly powerful
-			if (defender instanceof Hero && ((Hero) defender).subClass == HeroSubClass.WARDEN){
-				((Hero) defender).subClass = HeroSubClass.NONE;
-				p.activate( defender );
-				((Hero) defender).subClass = HeroSubClass.WARDEN;
-			} else {
-				p.activate( defender );
-			}
-			
-			
-			CellEmitter.get( defender.pos ).burst( LeafParticle.LEVEL_SPECIFIC, 10 );
-			
+		if ( Random.Int( 5 ) == 0) {
+
+			GameScene.add( Blob.seed(defender.pos, 100 + armor.level() * 5, Regrowth.class));
+
+			CellEmitter.get( defender.pos ).burst( LeafParticle.LEVEL_SPECIFIC, 10 + armor.level() * 5 );
 		}
 		
 		return damage;

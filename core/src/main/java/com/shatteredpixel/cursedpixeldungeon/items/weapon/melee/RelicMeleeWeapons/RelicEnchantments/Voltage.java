@@ -31,7 +31,7 @@ public class Voltage extends RelicEnchantment {
                     // int dmg = 20;
                     attacker.sprite.parent.addToFront(new Lightning(attacker.pos, mob.pos, null));
 
-                    mob.sprite.centerEmitter().burst(SparkParticle.FACTORY, 3);
+                    mob.sprite.centerEmitter().burst(SparkParticle.FACTORY, 10 + 5 * level);
                     mob.sprite.flash();
 
                     if (mob.isAlive() & mob != defender) {

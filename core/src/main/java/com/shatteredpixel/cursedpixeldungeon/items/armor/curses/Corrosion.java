@@ -38,12 +38,18 @@ public class Corrosion extends Armor.Glyph {
 	@Override
 	public int proc(Armor armor, Char attacker, Char defender, int damage) {
 
-		if (Random.Int(2) == 0){//procs more often
+		if (Random.Int(4) == 0){//procs more often
 			int pos = defender.pos;
 			for (int i : PathFinder.NEIGHBOURS9){
 				Splash.at(pos+i, 0x000000, 5);
-				if (Actor.findChar(pos+i) != null)
-					Buff.affect(Actor.findChar(pos+i), Ooze.class).set( 100f );
+				Char enemy = Actor.findChar(pos+i);
+				if ( enemy!= null) {
+					Buff.affect(enemy, Ooze.class).set(20f);
+					if (enemy == attacker) {
+						enemy.damage(Random.Int(damage/2), this);
+					}
+				}
+
 			}
 		}
 

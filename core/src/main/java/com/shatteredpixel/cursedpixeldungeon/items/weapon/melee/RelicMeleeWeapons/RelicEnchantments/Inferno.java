@@ -1,6 +1,5 @@
 package com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicEnchantments;
 
-import com.cursedpixel.curseddungeon.R;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
@@ -8,15 +7,8 @@ import com.shatteredpixel.cursedpixeldungeon.actors.blobs.Blob;
 import com.shatteredpixel.cursedpixeldungeon.actors.blobs.Fire;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Burning;
-import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
-import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroAction;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.FlameParticle;
-import com.shatteredpixel.cursedpixeldungeon.items.Item;
-import com.shatteredpixel.cursedpixeldungeon.items.weapon.Weapon;
-import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Blazing;
-import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Grim;
-import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MeleeWeapon;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicMeleeWeapon;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
@@ -56,7 +48,7 @@ public class Inferno extends RelicEnchantment {
         }
 
 
-        defender.sprite.emitter().burst(FlameParticle.FACTORY, (weapon.level()+3)*3);
+        defender.sprite.emitter().burst(FlameParticle.FACTORY, (weapon.level()+3)*5);
         return damage;
 
     }
@@ -70,7 +62,7 @@ public class Inferno extends RelicEnchantment {
                 damage /=4;
             }
             if (mob.isEnemy()) {
-                mob.damage(damage, Fire.class);
+                mob.damage(damage, new Fire());
                 GameScene.add(Blob.seed(mob.pos, 3, Fire.class));
             }
         }

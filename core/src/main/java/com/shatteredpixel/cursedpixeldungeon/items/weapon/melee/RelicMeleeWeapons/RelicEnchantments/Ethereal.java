@@ -18,7 +18,7 @@ public class Ethereal extends RelicEnchantment {
 
     @Override
     public int relicProc(RelicMeleeWeapon weapon, Char attacker, Char defender, int damage) {
-        defender.sprite.emitter().start( Speck.factory( Speck.DISCOVER ), 0.05f, 5 * weapon.level() + 1 );
+        defender.sprite.emitter().start( Speck.factory( Speck.DISCOVER ), 0.01f, 5 * (weapon.level() + 1) );
         if (Random.Int( 100-weapon.level()) < 30) {
             Buff.prolong(defender, Blindness.class, 1 + Random.Int(weapon.level()/2+3));
             Buff.prolong(defender, Cripple.class, Cripple.DURATION);

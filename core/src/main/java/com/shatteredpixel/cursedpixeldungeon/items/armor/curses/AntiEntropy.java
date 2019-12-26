@@ -26,6 +26,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Burning;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Frost;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Paralysis;
 import com.shatteredpixel.cursedpixeldungeon.effects.CellEmitter;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.FlameParticle;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.SnowParticle;
@@ -45,11 +46,11 @@ public class AntiEntropy extends Glyph {
 		if (Random.Int( 8 ) == 0) {
 
 			if (Dungeon.level.adjacent( attacker.pos, defender.pos )) {
-				Buff.prolong(attacker, Frost.class, Frost.duration(attacker) * Random.Float(2f, 4f));//Freezing lasts longer
+				Buff.prolong(attacker, Paralysis.class, 5f);//Paralyze defender
 				CellEmitter.get(attacker.pos).start(SnowParticle.FACTORY, 0.2f, 6);
 			}
 			
-			Buff.affect( defender, Burning.class ).reignite( defender );
+			Buff.affect( defender, Burning.class ).reignite( defender );//Burn attacker
 			defender.sprite.emitter().burst( FlameParticle.FACTORY, 5 );
 
 		}

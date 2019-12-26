@@ -22,6 +22,7 @@
 package com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments;
 
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
+import com.shatteredpixel.cursedpixeldungeon.effects.Speck;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
@@ -32,6 +33,7 @@ public class Precise extends Weapon.Enchantment {
     private static ItemSprite.Glowing WHITE = new ItemSprite.Glowing( 0xFFFFFF );
     @Override
     public int proc(Item weapon, Char attacker, Char defender, int damage) {
+        defender.sprite.emitter().start( Speck.factory( Speck.DISCOVER ), 0.01f, 5 * (weapon.level() + 1) );
         float evasion = defender.defenseSkill(attacker);
         float accuracy = attacker.attackSkill(defender);
 

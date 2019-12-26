@@ -23,6 +23,7 @@ package com.shatteredpixel.cursedpixeldungeon.items.weapon.curses;
 
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Frost;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Paralysis;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.Weapon;
@@ -42,7 +43,7 @@ public class Fragile extends Weapon.Enchantment {
 		damage *= (damageMultiplier);
 		float activateChance = 0.25f + .75f*damageMultiplier;
 		if (Random.Float() < activateChance){
-			Buff.affect( defender, Paralysis.class, hits );
+			Buff.affect( defender, Frost.class, hits );
 		}
 		if (hits < 150) hits++;
 		return damage;

@@ -196,7 +196,7 @@ public class Hero extends Char {
 		HP = HT = 40;
 		if (heroClass == HeroClass.WARRIOR) {
 			HP = HT = 48;
-		} else if (heroClass == HeroClass.HUNTRESS) {
+		} else if (heroClass == HeroClass.PRIESTESS) {
 			HP = HT = 32;
 		}
 
@@ -213,7 +213,7 @@ public class Hero extends Char {
 		HT = 40 + 10*(lvl-1) + HTBoost;
 		if (heroClass == HeroClass.WARRIOR) {
 			HT = 12*(lvl+3) + HTBoost;
-		} else if (heroClass == HeroClass.HUNTRESS) {
+		} else if (heroClass == HeroClass.PRIESTESS) {
 			HT = 8*(lvl+3) + HTBoost;
 		}
 

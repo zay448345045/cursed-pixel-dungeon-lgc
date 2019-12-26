@@ -21,6 +21,7 @@
 
 package com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments;
 
+import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Burning;
@@ -46,12 +47,12 @@ public class Blazing extends Weapon.Enchantment {
 			
 			if (defender.buff(Burning.class) != null){
 				Buff.affect(defender, Burning.class).reignite(defender, 8f);
-				defender.damage( Random.NormalIntRange( 1, 3 ), this );
+				defender.damage( Random.NormalIntRange( 1, 3 + Dungeon.scaleWithDepth()/2), this );
 			} else {
 				Buff.affect(defender, Burning.class).reignite(defender, 8f);
 			}
 			
-			defender.sprite.emitter().burst( FlameParticle.FACTORY, level + 1 );
+			defender.sprite.emitter().burst( FlameParticle.FACTORY, level*5 + 10 );
 			
 		}
 

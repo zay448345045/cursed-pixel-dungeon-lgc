@@ -45,7 +45,7 @@ public class Sacrificial extends Weapon.Enchantment {
 			damage = Math.round((duration*2/attacker.HT)*damage);//Increases damage based on HP taken
 		}
 		*/
-		if (Random.Int(5) == 0) {
+		if (Random.Int(3) == 0) {
 			int procDMG = defender.HP;
 			if (Math.round(procDMG/2f) >= attacker.HP) {//Use Math.round rather than integer division so that odd damage doesn't have a small chance of killing the player
 				procDMG = (attacker.HP - 1)*2;
@@ -53,7 +53,10 @@ public class Sacrificial extends Weapon.Enchantment {
 			if (procDMG > 0) {
 				GLog.n(Messages.get(this,"proc"));
 				attacker.damage(procDMG / 2, this);
-				defender.damage(procDMG, new Grim());
+				if (defender.properties().contains(Char.Property.BOSS)) {
+					procDMG /= 2;//Doesn't one shot bosses
+				}
+				defender.damage(procDMG, this);
 			}
 		}
 		return damage;

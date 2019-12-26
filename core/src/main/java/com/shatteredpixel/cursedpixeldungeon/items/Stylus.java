@@ -22,10 +22,15 @@
 package com.shatteredpixel.cursedpixeldungeon.items;
 
 import com.shatteredpixel.cursedpixeldungeon.Assets;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Weakness;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.effects.Enchanting;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.PurpleParticle;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.Armor;
+import com.shatteredpixel.cursedpixeldungeon.items.wands.Wand;
+import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfMagicMissile;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.Weapon;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MeleeWeapon;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
@@ -34,6 +39,7 @@ import com.shatteredpixel.cursedpixeldungeon.windows.WndBag;
 import com.watabou.noosa.audio.Sample;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Stylus extends Item {
 	
@@ -64,7 +70,7 @@ public class Stylus extends Item {
 		if (action.equals(AC_INSCRIBE)) {
 
 			curUser = hero;
-			GameScene.selectItem( itemSelector, WndBag.Mode.ARMOR, Messages.get(this, "prompt") );
+			GameScene.selectItem( itemSelector, WndBag.Mode.ENCHANTABLE, Messages.get(this, "prompt") );
 			
 		}
 	}
@@ -79,25 +85,28 @@ public class Stylus extends Item {
 		return true;
 	}
 	
-	private void inscribe( Armor armor ) {
+	private void inscribe( Item item ) {
 
-		if (!armor.isIdentified() ){
+		if (!item.isIdentified() ){
 			GLog.w( Messages.get(this, "identify"));
-			return;
-		} else if (armor.cursed || armor.hasCurseGlyph()){
-			GLog.w( Messages.get(this, "cursed"));
 			return;
 		}
 		
 		detach(curUser.belongings.backpack);
 
 		GLog.w( Messages.get(this, "inscribed"));
+		if (item instanceof Armor) {
+			((Armor)item).inscribe(Armor.Glyph.randomCurse());
+		} else if (item instanceof Weapon) {
+			((Weapon)item).enchant(Weapon.Enchantment.randomCurse());
+		} else {
+			((WandOfMagicMissile)item).enchant(Weapon.Enchantment.randomCurse());
+		}
 
-		armor.inscribe();
 		
 		curUser.sprite.operate(curUser.pos);
-		curUser.sprite.centerEmitter().start(PurpleParticle.BURST, 0.05f, 10);
-		Enchanting.show(curUser, armor);
+		curUser.sprite.centerEmitter().start(PurpleParticle.BURST, 0.05f, 60);
+		Enchanting.show(curUser, item);
 		Sample.INSTANCE.play(Assets.SND_BURNING);
 		
 		curUser.spend(TIME_TO_INSCRIBE);
@@ -113,7 +122,7 @@ public class Stylus extends Item {
 		@Override
 		public void onSelect( Item item ) {
 			if (item != null) {
-				Stylus.this.inscribe( (Armor)item );
+				Stylus.this.inscribe( item );
 			}
 		}
 	};

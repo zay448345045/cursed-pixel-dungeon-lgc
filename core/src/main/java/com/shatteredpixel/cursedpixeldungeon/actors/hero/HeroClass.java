@@ -28,6 +28,7 @@ import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.items.BrokenSeal;
 import com.shatteredpixel.cursedpixeldungeon.items.Generator;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
+import com.shatteredpixel.cursedpixeldungeon.items.Stylus;
 import com.shatteredpixel.cursedpixeldungeon.items.TomeOfMastery;
 import com.shatteredpixel.cursedpixeldungeon.items.allies.PoisonDragon;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.ClothArmor;
@@ -60,6 +61,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfCorrosion;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfCorruption;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfMagicMissile;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.SpiritBow;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.curses.Sacrificial;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Lucky;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Precise;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Dirk;
@@ -156,6 +158,7 @@ public enum HeroClass {
 
 		new LuckyBadge().collect();
 		//Extra stuff
+		new Stylus().quantity(100).collect();
 		/*if (Dungeon.testing) {
 			new PotionOfStrength().quantity(10).identify().collect();
 			new MaracarsBlades().identify().upgrade(15).collect();
@@ -211,7 +214,7 @@ public enum HeroClass {
 		(hero.belongings.armor = new ClothArmor()).identify();
 		(hero.belongings.misc1 = new PoisonDragon()).identify().upgrade();
 		hero.belongings.misc1.activate(hero);
-		hero.HP = hero.HT = 20;
+		hero.HP = hero.HT = 32;
 		Dungeon.quickslot.setSlot(0,hero.belongings.misc1);
 		new PotionOfHealing().identify();
 		new ScrollOfMirrorImage().identify();
@@ -221,7 +224,7 @@ public enum HeroClass {
 	}
 
 	private static void initWarrior( Hero hero ) {
-		(hero.belongings.weapon = new WornShortsword()/*.enchant(new Precise())*/).identify().upgrade();
+		(hero.belongings.weapon = new WornShortsword().enchant(new Sacrificial())).identify().upgrade();
 		(hero.belongings.armor = new LeatherArmor()).identify().upgrade();
 		hero.HP = hero.HT = 48;
 		ThrowingStone stones = new ThrowingStone();
@@ -294,7 +297,6 @@ public enum HeroClass {
 		(hero.belongings.weapon = new Gloves()).identify().upgrade();
 		SpiritBow bow = new SpiritBow();//.enchant(new Precise());//I used this for testing it
 		bow.identify().upgrade().collect();
-		hero.HT = hero.HP = 32;
 
 		Dungeon.quickslot.setSlot(0, bow);
 		
