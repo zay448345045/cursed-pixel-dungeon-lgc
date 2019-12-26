@@ -23,10 +23,14 @@ package com.shatteredpixel.cursedpixeldungeon.items.weapon.curses;
 
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Barrier;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Paralysis;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Weakness;
+import com.shatteredpixel.cursedpixeldungeon.effects.Speck;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.Weapon;
+import com.shatteredpixel.cursedpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
 import com.watabou.utils.Random;
 
@@ -37,10 +41,20 @@ public class Exhausting extends Weapon.Enchantment {
 	@Override
 	public int proc(Item weapon, Char attacker, Char defender, int damage ) {
 
-		if (attacker == Dungeon.hero && Random.Int(15) == 0) {
-			Buff.affect(attacker, Weakness.class, Random.NormalIntRange(5, 20));
-			Buff.affect(defender, Weakness.class, Random.NormalIntRange(5, 20));//weakens defender as well
+		if (attacker == Dungeon.hero && Random.Int(5) == 0) {
+			Buff.affect(attacker, Paralysis.class, Random.NormalIntRange(5, 10));
+			//heals for 100% of damage dealt
+			int healAmt = damage;
+			healAmt = Math.min( healAmt, attacker.HT - attacker.HP );
+
+			if (healAmt > 0 && attacker.isAlive()) {
+
+				attacker.HP += healAmt;
+				attacker.sprite.emitter().start( Speck.factory( Speck.DISCOVER ), 0.4f, 1 );
+				attacker.sprite.showStatus( CharSprite.POSITIVE, Integer.toString( healAmt ) );
+			}
 		}
+
 
 		return damage;
 	}

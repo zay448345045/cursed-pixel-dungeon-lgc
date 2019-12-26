@@ -38,24 +38,17 @@ public class Shielding extends Weapon.Enchantment {
 	
 	@Override
 	public int proc(Item weapon, Char attacker, Char defender, int damage ) {
-		
-		//chance to heal scales from 50%-100% based on missing HP
-		float missingPercent = (attacker.HT - attacker.HP) / (float)attacker.HT;
-		float healChance = 0.50f + .75f*missingPercent;
-		
-		if (Random.Float() < healChance){
+		//Now guaranteed to proc, but less powerful
 			
-			//heals for 25% of damage dealt
-			int healAmt = Math.round(damage * 0.35f);
-			healAmt = Math.min( healAmt, attacker.HT - attacker.HP );
+		//heals for 25% of damage dealt
+		int healAmt = Math.round(damage * 0.25f);
+		int curShielding = attacker.buff(Barrier.class).shielding();
 
-			if (healAmt > 0 && attacker.isAlive()) {
+		if (healAmt > curShielding && attacker.isAlive()) {
 
-				Buff.affect(attacker, Barrier.class).setShield(healAmt);;
-				attacker.sprite.emitter().start( Speck.factory( Speck.DISCOVER ), 0.4f, 1 );
-				attacker.sprite.showStatus( CharSprite.POSITIVE, Integer.toString( healAmt ) );
-				
-			}
+			Buff.affect(attacker, Barrier.class).setShield(healAmt);;
+			attacker.sprite.emitter().start( Speck.factory( Speck.DISCOVER ), 0.4f, 1 );
+			attacker.sprite.showStatus( CharSprite.POSITIVE, Integer.toString( healAmt ) );
 		}
 
 		return damage;

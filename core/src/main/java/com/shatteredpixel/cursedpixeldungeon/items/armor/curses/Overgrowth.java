@@ -21,6 +21,7 @@
 
 package com.shatteredpixel.cursedpixeldungeon.items.armor.curses;
 
+import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.blobs.Blob;
 import com.shatteredpixel.cursedpixeldungeon.actors.blobs.Regrowth;
@@ -43,12 +44,13 @@ public class Overgrowth extends Armor.Glyph {
 	
 	@Override
 	public int proc(Armor armor, Char attacker, Char defender, int damage) {
-		
+
 		if ( Random.Int( 5 ) == 0) {
 
 			GameScene.add( Blob.seed(defender.pos, 100 + armor.level() * 5, Regrowth.class));
 
 			CellEmitter.get( defender.pos ).burst( LeafParticle.LEVEL_SPECIFIC, 10 + armor.level() * 5 );
+			Dungeon.level.plant((Plant.Seed)Generator.random(Generator.Category.SEED), attacker.pos );
 		}
 		
 		return damage;
