@@ -17,6 +17,7 @@ import com.shatteredpixel.cursedpixeldungeon.levels.features.Chasm;
 import com.shatteredpixel.cursedpixeldungeon.mechanics.Ballistica;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
+import com.shatteredpixel.cursedpixeldungeon.sprites.FossilSkeletonSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.SkeletonSprite;
 import com.shatteredpixel.cursedpixeldungeon.utils.BArray;
 import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
@@ -90,7 +91,7 @@ public class FossilSkeleton extends Mob {
         return Random.NormalIntRange(10, 25);
     }
 
-    public static class FossilSkeletonSprite extends SkeletonSprite {
+    /*public static class FossilSkeletonSprite extends SkeletonSprite {
         public FossilSkeletonSprite(){
             super();
             tint(0, 0, 0, 0.2f);
@@ -101,7 +102,7 @@ public class FossilSkeleton extends Mob {
             super.resetColor();
             tint(0, 0, 0, 0.2f);
         }
-    }
+    }*/
 
 }
 

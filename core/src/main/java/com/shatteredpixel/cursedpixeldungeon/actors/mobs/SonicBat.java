@@ -2,11 +2,12 @@ package com.shatteredpixel.cursedpixeldungeon.actors.mobs;
 
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.sprites.BatSprite;
+import com.shatteredpixel.cursedpixeldungeon.sprites.SonicBatSprite;
 import com.watabou.utils.Random;
 
 public class SonicBat extends Mob {
     {
-        spriteClass = BatSprite.class;
+        spriteClass = SonicBatSprite.class;
         EXP = 25;
         maxLvl = 30;
         HP = HT = 200;

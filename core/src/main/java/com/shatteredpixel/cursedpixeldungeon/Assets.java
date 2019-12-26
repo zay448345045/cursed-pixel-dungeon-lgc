@@ -59,13 +59,15 @@ public class Assets {
 
 
 	public static final String MAGECRAB = "Magic_Crab.png";
+	public static final String FOSSILSKELETON = "fossil_skeleton.png";
+	public static final String SONICBAT = "sonic_bat.png";
+	public static final String ADULTELEMENTAL = "elemental_adult.png";
 	public static final String KUPUA    = "kupua.png";
 	public static final String SHINOBI  = "assassin.png";
 	public static final String WATERELEMENTAL = "waterelemental.png";
 	public static final String WATERCHALLENGEGOO = "waterchallengegoo.png";
 	public static final String WARDS = "wards.png";
 	public static final String GUARDIAN = "guardian.png";
-	public static final String FOSSILSKELETON = "fossilskeleton.png";
 	public static final String WATERLARVA = "snowslug.png";
 	public static final String PETDRAGON = "petreddragon.png";
 	public static final String PETDRAGON_EXTRA = "dragon1.png";

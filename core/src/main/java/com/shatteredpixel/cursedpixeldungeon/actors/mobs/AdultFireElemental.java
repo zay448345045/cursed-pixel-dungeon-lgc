@@ -1,19 +1,15 @@
 package com.shatteredpixel.cursedpixeldungeon.actors.mobs;
 
-import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.blobs.Blob;
 import com.shatteredpixel.cursedpixeldungeon.actors.blobs.Inferno;
-import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
-import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Burning;
-import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Chill;
-import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Frost;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
+import com.shatteredpixel.cursedpixeldungeon.sprites.AdultElementalSprite;
 import com.watabou.utils.Random;
 
 public class AdultFireElemental extends Elemental {
     {
-
+        spriteClass = AdultElementalSprite.class;
         HP = HT = 250;
         defenseSkill = 30;
 
