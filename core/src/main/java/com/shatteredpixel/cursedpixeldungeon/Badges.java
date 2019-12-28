@@ -421,19 +421,19 @@ public class Badges {
 		}
 		
 		Badge badge = null;
-		if (!local.contains( Badge.ITEM_LEVEL_1 ) && item.level() >= 3) {
+		if (!local.contains( Badge.ITEM_LEVEL_1 ) && item.level() >= 15) {
 			badge = Badge.ITEM_LEVEL_1;
 			local.add( badge );
 		}
-		if (!local.contains( Badge.ITEM_LEVEL_2 ) && item.level() >= 6) {
+		if (!local.contains( Badge.ITEM_LEVEL_2 ) && item.level() >= 18) {
 			badge = Badge.ITEM_LEVEL_2;
 			local.add( badge );
 		}
-		if (!local.contains( Badge.ITEM_LEVEL_3 ) && item.level() >= 9) {
+		if (!local.contains( Badge.ITEM_LEVEL_3 ) && item.level() >= 20) {
 			badge = Badge.ITEM_LEVEL_3;
 			local.add( badge );
 		}
-		if (!local.contains( Badge.ITEM_LEVEL_4 ) && item.level() >= 12) {
+		if (!local.contains( Badge.ITEM_LEVEL_4 ) && item.level() >= 23) {
 			badge = Badge.ITEM_LEVEL_4;
 			local.add( badge );
 		}

@@ -40,7 +40,7 @@ public class Exhausting extends Weapon.Enchantment {
 	public int proc(Item weapon, Char attacker, Char defender, int damage ) {
 
 		if (attacker == Dungeon.hero && Random.Int(5) == 0) {
-			Buff.affect(attacker, Paralysis.class, Random.NormalIntRange(5, 10));
+			Buff.affect(attacker, Paralysis.class, Random.NormalIntRange(2, 5));
 			//heals for 100% of damage dealt
 			int healAmt = damage;
 			healAmt = Math.min( healAmt, attacker.HT - attacker.HP );

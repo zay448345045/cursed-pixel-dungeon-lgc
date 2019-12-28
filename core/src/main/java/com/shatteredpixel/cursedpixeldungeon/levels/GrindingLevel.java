@@ -9,6 +9,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Burning;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Paralysis;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.cursedpixeldungeon.effects.MagicMissile;
+import com.shatteredpixel.cursedpixeldungeon.effects.Speck;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.LuckyBadge;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfTeleportation;
@@ -108,7 +109,7 @@ public class GrindingLevel extends SewerLevel {
 
         @Override
         protected boolean act() {
-            aggro(Dungeon.hero);
+            beckon( Dungeon.hero.pos );
             return super.act();
         }
 
@@ -183,7 +184,7 @@ public class GrindingLevel extends SewerLevel {
 
         @Override
         public int attackProc(Char enemy, int damage) {
-            enemy.damage(Math.max(15,enemy.HP)/15,this);
+            enemy.damage(Math.max(30,enemy.HP)/30,this);
             return super.attackProc(enemy, damage);
         }
     }
@@ -193,7 +194,6 @@ public class GrindingLevel extends SewerLevel {
             spriteClass = BlueGuardianSprite.class;
             baseSpeed = 0.5f;
             evaFactor = 0.5f;
-            damageFactor = 1.3f;
             DRFactor = 2f;
             lootAmt = 2;//Tankier, so provides more reward.
             HP = HT = (int)(super.HT*2f);
@@ -209,7 +209,14 @@ public class GrindingLevel extends SewerLevel {
 
         @Override
         public int attackProc(Char enemy, int damage) {
-            new Shielding().proc(new MeleeWeapon(),this, enemy, damage);
+            int healAmt = Math.min(4,damage)/4;
+            healAmt = Math.min(healAmt, this.HT - this.HP);
+
+            if (healAmt > 0 && this.isAlive()) {
+                this.HP += healAmt;
+                this.sprite.emitter().start(Speck.factory(Speck.DISCOVER), 0.4f, 1);
+                this.sprite.showStatus(CharSprite.POSITIVE, Integer.toString(healAmt));
+            }
             return super.attackProc(enemy, damage);
         }
     }

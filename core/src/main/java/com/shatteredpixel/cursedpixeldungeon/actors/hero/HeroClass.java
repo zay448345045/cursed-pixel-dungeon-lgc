@@ -52,6 +52,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfMagicMapping;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfMirrorImage;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfRage;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfUpgrade;
+import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfCorruption;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfMagicMissile;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.SpiritBow;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.curses.Sacrificial;
@@ -141,6 +142,7 @@ public enum HeroClass {
 		new LuckyBadge().collect();
 		//Extra stuff
 		new Stylus().quantity(100).collect();
+		new WandOfCorruption().level(15).identify().collect();
 		/*if (Dungeon.testing) {
 			new PotionOfStrength().quantity(10).identify().collect();
 			new MaracarsBlades().identify().upgrade(15).collect();
