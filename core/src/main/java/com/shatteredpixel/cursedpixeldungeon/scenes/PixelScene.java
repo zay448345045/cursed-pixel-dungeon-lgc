@@ -23,7 +23,7 @@ package com.shatteredpixel.cursedpixeldungeon.scenes;
 
 import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.Badges;
-import com.shatteredpixel.cursedpixeldungeon.SPDSettings;
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.effects.BadgeBanner;
 import com.shatteredpixel.cursedpixeldungeon.ui.RenderedTextMultiline;
 import com.shatteredpixel.cursedpixeldungeon.ui.Window;
@@ -76,7 +76,7 @@ public class PixelScene extends Scene {
 		GameScene.scene = null;
 
 		float minWidth, minHeight;
-		if (SPDSettings.landscape()) {
+		if (CPDSettings.landscape()) {
 			minWidth = MIN_WIDTH_L;
 			minHeight = MIN_HEIGHT_L;
 		} else {
@@ -86,7 +86,7 @@ public class PixelScene extends Scene {
 
 		maxDefaultZoom = (int)Math.min(Game.width/minWidth, Game.height/minHeight);
 		maxScreenZoom = (int)Math.min(Game.dispWidth/minWidth, Game.dispHeight/minHeight);
-		defaultZoom = SPDSettings.scale();
+		defaultZoom = CPDSettings.scale();
 
 		if (defaultZoom < Math.ceil( Game.density * 2 ) || defaultZoom > maxDefaultZoom){
 			defaultZoom = (int)Math.ceil( Game.density * 2.5 );

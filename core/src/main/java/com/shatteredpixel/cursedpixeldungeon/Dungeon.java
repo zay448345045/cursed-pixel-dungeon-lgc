@@ -185,7 +185,7 @@ public class Dungeon {
 
 	public static void init(boolean testing) {
 		version = Game.versionCode;
-		challenges = SPDSettings.challenges();
+		challenges = CPDSettings.challenges();
 
 		seed = DungeonSeed.randomSeed();
 

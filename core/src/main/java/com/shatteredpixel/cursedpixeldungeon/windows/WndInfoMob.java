@@ -22,7 +22,7 @@
 package com.shatteredpixel.cursedpixeldungeon.windows;
 
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
-import com.shatteredpixel.cursedpixeldungeon.SPDSettings;
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroClass;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
@@ -45,7 +45,7 @@ public class WndInfoMob extends Window {
 	private static final int WIDTH = 120;
 	private static final int BTN_HEIGHT = 20;
 	public WndInfoMob( final Mob mob ) {
-		int width = SPDSettings.landscape() ? WIDTH_L : WIDTH_P;
+		int width = CPDSettings.landscape() ? WIDTH_L : WIDTH_P;
 		Component titlebar = new MobTitle( mob );
 		titlebar.setRect( 0, 0, width, 0 );
 		add(titlebar);

@@ -21,7 +21,7 @@
 
 package com.shatteredpixel.cursedpixeldungeon.windows;
 
-import com.shatteredpixel.cursedpixeldungeon.SPDSettings;
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.scenes.PixelScene;
 import com.shatteredpixel.cursedpixeldungeon.ui.RenderedTextMultiline;
 import com.shatteredpixel.cursedpixeldungeon.ui.Window;
@@ -44,7 +44,7 @@ public class WndTitledMessage extends Window {
 
 		super();
 
-		int width = SPDSettings.landscape() ? WIDTH_L : WIDTH_P;
+		int width = CPDSettings.landscape() ? WIDTH_L : WIDTH_P;
 
 		titlebar.setRect( 0, 0, width, 0 );
 		add(titlebar);

@@ -22,7 +22,7 @@
 package com.shatteredpixel.cursedpixeldungeon.windows;
 
 import com.shatteredpixel.cursedpixeldungeon.Challenges;
-import com.shatteredpixel.cursedpixeldungeon.SPDSettings;
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.PixelScene;
@@ -104,7 +104,7 @@ public class WndChallenges extends Window {
 					value |= Challenges.MASKS[i];
 				}
 			}
-			SPDSettings.challenges( value );
+			CPDSettings.challenges( value );
 		}
 
 		super.onBackPressed();

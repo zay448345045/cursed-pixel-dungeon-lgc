@@ -23,7 +23,7 @@ package com.shatteredpixel.cursedpixeldungeon.windows;
 
 import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
-import com.shatteredpixel.cursedpixeldungeon.SPDSettings;
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Belongings;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.items.AmuletSectorWater;
@@ -140,7 +140,7 @@ public class WndBag extends WndTabbed {
 		lastMode = mode;
 		lastBag = bag;
 
-		nCols = SPDSettings.landscape() ? COLS_L : COLS_P;
+		nCols = CPDSettings.landscape() ? COLS_L : COLS_P;
 		nRows = (int)Math.ceil((Belongings.BACKPACK_SIZE + 4) / (float)nCols);
 
 		int slotsWidth = SLOT_WIDTH * nCols + SLOT_MARGIN * (nCols - 1);

@@ -22,7 +22,7 @@
 package com.shatteredpixel.cursedpixeldungeon.scenes;
 
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
-import com.shatteredpixel.cursedpixeldungeon.SPDSettings;
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
@@ -82,7 +82,7 @@ public class CellSelector extends TouchArea {
 	private float zoom( float value ) {
 
 		value = GameMath.gate( PixelScene.minZoom, value, PixelScene.maxZoom );
-		SPDSettings.zoom((int) (value - PixelScene.defaultZoom));
+		CPDSettings.zoom((int) (value - PixelScene.defaultZoom));
 		camera.zoom( value );
 
 		//Resets character sprite positions with the new camera zoom

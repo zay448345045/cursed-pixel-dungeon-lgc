@@ -21,7 +21,7 @@
 
 package com.shatteredpixel.cursedpixeldungeon.windows;
 
-import com.shatteredpixel.cursedpixeldungeon.SPDSettings;
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.scenes.PixelScene;
 import com.shatteredpixel.cursedpixeldungeon.ui.RenderedTextMultiline;
 import com.shatteredpixel.cursedpixeldungeon.ui.Window;
@@ -37,7 +37,7 @@ public class WndMessage extends Window {
 		super();
 		
 		RenderedTextMultiline info = PixelScene.renderMultiline( text, 6 );
-		info.maxWidth((SPDSettings.landscape() ? WIDTH_L : WIDTH_P) - MARGIN * 2);
+		info.maxWidth((CPDSettings.landscape() ? WIDTH_L : WIDTH_P) - MARGIN * 2);
 		info.setPos(MARGIN, MARGIN);
 		add( info );
 

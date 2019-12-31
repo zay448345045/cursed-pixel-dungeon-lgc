@@ -101,12 +101,12 @@ public class ShatteredPixelDungeon extends Game {
 		super.onCreate(savedInstanceState);
 
 		updateSystemUI();
-		SPDSettings.landscape ( SPDSettings.landscape() );
+		CPDSettings.landscape ( CPDSettings.landscape() );
 		
-		Music.INSTANCE.enable( SPDSettings.music() );
-		Music.INSTANCE.volume( SPDSettings.musicVol()/10f );
-		Sample.INSTANCE.enable( SPDSettings.soundFx() );
-		Sample.INSTANCE.volume( SPDSettings.SFXVol()/10f );
+		Music.INSTANCE.enable( CPDSettings.music() );
+		Music.INSTANCE.volume( CPDSettings.musicVol()/10f );
+		Sample.INSTANCE.enable( CPDSettings.soundFx() );
+		Sample.INSTANCE.volume( CPDSettings.SFXVol()/10f );
 		
 		Music.setMuteListener();
 
@@ -160,7 +160,7 @@ public class ShatteredPixelDungeon extends Game {
 				Assets.SND_DEGRADE,
 				Assets.SND_MIMIC );
 
-		if (!SPDSettings.systemFont()) {
+		if (!CPDSettings.systemFont()) {
 			RenderedText.setFont("pixelfont.ttf");
 		} else {
 			RenderedText.setFont( null );
@@ -234,7 +234,7 @@ public class ShatteredPixelDungeon extends Game {
 	}
 
 	public void updateDisplaySize(){
-		boolean landscape = SPDSettings.landscape();
+		boolean landscape = CPDSettings.landscape();
 		
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
 			instance.setRequestedOrientation(landscape ?
@@ -259,9 +259,9 @@ public class ShatteredPixelDungeon extends Game {
 
 		//force power saver in this case as all devices must run at at least 2x scale.
 		if (dispWidth < renderWidth*2 || dispHeight < renderHeight*2)
-			SPDSettings.put( SPDSettings.KEY_POWER_SAVER, true );
+			CPDSettings.put( CPDSettings.KEY_POWER_SAVER, true );
 
-		if (SPDSettings.powerSaver()){
+		if (CPDSettings.powerSaver()){
 
 			int maxZoom = (int)Math.min(dispWidth/renderWidth, dispHeight/renderHeight);
 
@@ -310,7 +310,7 @@ public class ShatteredPixelDungeon extends Game {
 		}
 
 		if (DeviceCompat.supportsFullScreen()){
-			if (fullscreen && SPDSettings.fullscreen()) {
+			if (fullscreen && CPDSettings.fullscreen()) {
 				instance.getWindow().getDecorView().setSystemUiVisibility(
 						View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
 						View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |

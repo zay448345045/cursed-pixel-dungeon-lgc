@@ -285,19 +285,19 @@ public class Badges {
 	public static void validateGoldCollected() {
 		Badge badge = null;
 		
-		if (!local.contains( Badge.GOLD_COLLECTED_1 ) && Statistics.goldCollected >= 100) {
+		if (!local.contains( Badge.GOLD_COLLECTED_1 ) && Statistics.goldCollected >= 1000) {
 			badge = Badge.GOLD_COLLECTED_1;
 			local.add( badge );
 		}
-		if (!local.contains( Badge.GOLD_COLLECTED_2 ) && Statistics.goldCollected >= 500) {
+		if (!local.contains( Badge.GOLD_COLLECTED_2 ) && Statistics.goldCollected >= 5000) {
 			badge = Badge.GOLD_COLLECTED_2;
 			local.add( badge );
 		}
-		if (!local.contains( Badge.GOLD_COLLECTED_3 ) && Statistics.goldCollected >= 2500) {
+		if (!local.contains( Badge.GOLD_COLLECTED_3 ) && Statistics.goldCollected >= 25000) {
 			badge = Badge.GOLD_COLLECTED_3;
 			local.add( badge );
 		}
-		if (!local.contains( Badge.GOLD_COLLECTED_4 ) && Statistics.goldCollected >= 7500) {
+		if (!local.contains( Badge.GOLD_COLLECTED_4 ) && Statistics.goldCollected >= 75000) {
 			badge = Badge.GOLD_COLLECTED_4;
 			local.add( badge );
 		}
@@ -308,19 +308,19 @@ public class Badges {
 	public static void validateLevelReached() {
 		Badge badge = null;
 		
-		if (!local.contains( Badge.LEVEL_REACHED_1 ) && Dungeon.hero.lvl >= 6) {
+		if (!local.contains( Badge.LEVEL_REACHED_1 ) && Dungeon.hero.lvl >= 15) {
 			badge = Badge.LEVEL_REACHED_1;
 			local.add( badge );
 		}
-		if (!local.contains( Badge.LEVEL_REACHED_2 ) && Dungeon.hero.lvl >= 12) {
+		if (!local.contains( Badge.LEVEL_REACHED_2 ) && Dungeon.hero.lvl >= 30) {
 			badge = Badge.LEVEL_REACHED_2;
 			local.add( badge );
 		}
-		if (!local.contains( Badge.LEVEL_REACHED_3 ) && Dungeon.hero.lvl >= 18) {
+		if (!local.contains( Badge.LEVEL_REACHED_3 ) && Dungeon.hero.lvl >= 40) {
 			badge = Badge.LEVEL_REACHED_3;
 			local.add( badge );
 		}
-		if (!local.contains( Badge.LEVEL_REACHED_4 ) && Dungeon.hero.lvl >= 24) {
+		if (!local.contains( Badge.LEVEL_REACHED_4 ) && Dungeon.hero.lvl >= 50) {
 			badge = Badge.LEVEL_REACHED_4;
 			local.add( badge );
 		}
@@ -354,19 +354,19 @@ public class Badges {
 	public static void validateFoodEaten() {
 		Badge badge = null;
 		
-		if (!local.contains( Badge.FOOD_EATEN_1 ) && Statistics.foodEaten >= 10) {
+		if (!local.contains( Badge.FOOD_EATEN_1 ) && Statistics.foodEaten >= 20) {
 			badge = Badge.FOOD_EATEN_1;
 			local.add( badge );
 		}
-		if (!local.contains( Badge.FOOD_EATEN_2 ) && Statistics.foodEaten >= 20) {
+		if (!local.contains( Badge.FOOD_EATEN_2 ) && Statistics.foodEaten >= 40) {
 			badge = Badge.FOOD_EATEN_2;
 			local.add( badge );
 		}
-		if (!local.contains( Badge.FOOD_EATEN_3 ) && Statistics.foodEaten >= 30) {
+		if (!local.contains( Badge.FOOD_EATEN_3 ) && Statistics.foodEaten >= 60) {
 			badge = Badge.FOOD_EATEN_3;
 			local.add( badge );
 		}
-		if (!local.contains( Badge.FOOD_EATEN_4 ) && Statistics.foodEaten >= 40) {
+		if (!local.contains( Badge.FOOD_EATEN_4 ) && Statistics.foodEaten >= 80) {
 			badge = Badge.FOOD_EATEN_4;
 			local.add( badge );
 		}
@@ -412,7 +412,7 @@ public class Badges {
 		
 		// This method should be called:
 		// 1) When an item is obtained (Item.collect)
-		// 2) When an item is upgraded (ScrollOfUpgrade, ScrollOfWeaponUpgrade, ShortSword, WandOfMagicMissile)
+		// 2) When an item is upgraded (ScrollOfUpgrade)
 		// 3) When an item is identified
 
 		// Note that artifacts should never trigger this badge as they are alternatively upgraded

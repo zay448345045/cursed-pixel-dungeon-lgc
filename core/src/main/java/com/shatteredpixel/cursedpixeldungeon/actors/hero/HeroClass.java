@@ -23,15 +23,18 @@ package com.shatteredpixel.cursedpixeldungeon.actors.hero;
 
 import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.Badges;
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.Challenges;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.items.BrokenSeal;
+import com.shatteredpixel.cursedpixeldungeon.items.Generator;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.Stylus;
 import com.shatteredpixel.cursedpixeldungeon.items.TomeOfMastery;
 import com.shatteredpixel.cursedpixeldungeon.items.allies.PoisonDragon;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.ClothArmor;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.LeatherArmor;
+import com.shatteredpixel.cursedpixeldungeon.items.armor.PlateArmor;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.CloakOfShadows;
 import com.shatteredpixel.cursedpixeldungeon.items.bags.FoodHolder;
 import com.shatteredpixel.cursedpixeldungeon.items.bags.MagicalHolster;
@@ -40,6 +43,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.bags.ScrollHolder;
 import com.shatteredpixel.cursedpixeldungeon.items.bags.VelvetPouch;
 import com.shatteredpixel.cursedpixeldungeon.items.food.Food;
 import com.shatteredpixel.cursedpixeldungeon.items.food.SmallRation;
+import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfExperience;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfHealing;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfInvisibility;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfLiquidFlame;
@@ -60,12 +64,20 @@ import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Dirk;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Gloves;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.InscribedKnife;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MagesStaff;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.ChainsawHand;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.LorsionsGreataxe;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.LoturgosCrystal;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.MaracarsBlades;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.NeptunesTrident;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RaRothsNunchucks;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.ThonothsAxe;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.WornShortsword;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.ThrowingKnife;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.ThrowingStone;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.DeviceCompat;
+import com.watabou.utils.Random;
 
 public enum HeroClass {
 
@@ -143,18 +155,18 @@ public enum HeroClass {
 		//Extra stuff
 		new Stylus().quantity(100).collect();
 		new WandOfCorruption().level(15).identify().collect();
-		/*if (Dungeon.testing) {
+		if (CPDSettings.testing()) {
 			new PotionOfStrength().quantity(10).identify().collect();
-			new MaracarsBlades().identify().upgrade(15).collect();
-			new ThonothsAxe().identify().upgrade(15).collect();
-			new LorsionsGreataxe().identify().upgrade(15).collect();
-			new NeptunesTrident().identify().upgrade(15).collect();
-			new RaRothsNunchucks().identify().upgrade(15).collect();
-			new LoturgosCrystal().identify().upgrade(15).collect();
-			new ChainsawHand().identify().upgrade(15).collect();
+			new MaracarsBlades().identify().level(15).collect();
+			new ThonothsAxe().identify().level(15).collect();
+			new LorsionsGreataxe().identify().level(15).collect();
+			new NeptunesTrident().identify().level(15).collect();
+			new RaRothsNunchucks().identify().level(15).collect();
+			new LoturgosCrystal().identify().level(15).collect();
+			new ChainsawHand().identify().level(15).collect();
 			new PotionOfExperience().quantity(30).identify().collect();
-			new PlateArmor().identify().upgrade(15).collect();
-			new ScrollOfUpgrade().identify().quantity(999).collect();
+			new PlateArmor().identify().level(15).collect();
+			new ScrollOfUpgrade().identify().level(999).collect();
 			for (int j = 0; j < 50; j ++) {
 				int r = Random.Int(3);
 				Item item;
@@ -174,7 +186,7 @@ public enum HeroClass {
 				}
 			}
 			//new WandOfCorruption().upgrade(99).identify().collect();
-		}*/
+		}
 	}
 
 	public Badges.Badge masteryBadge() {

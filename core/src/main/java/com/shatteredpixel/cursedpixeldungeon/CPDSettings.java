@@ -31,7 +31,7 @@ import com.watabou.utils.GameSettings;
 
 import java.util.Locale;
 
-public class SPDSettings extends GameSettings {
+public class CPDSettings extends GameSettings {
 	
 	//Version info
 	
@@ -152,7 +152,7 @@ public class SPDSettings extends GameSettings {
 	}
 	
 	public static String toolbarMode() {
-		return getString(KEY_BARMODE, !SPDSettings.landscape() ? "SPLIT" : "GROUP");
+		return getString(KEY_BARMODE, !CPDSettings.landscape() ? "SPLIT" : "GROUP");
 	}
 	
 	//Game State
@@ -232,6 +232,15 @@ public class SPDSettings extends GameSettings {
 	
 	public static final String KEY_LANG         = "language";
 	public static final String KEY_SYSTEMFONT	= "system_font";
+	public static final String KEY_TESTING	    = "testing";
+
+	public static void testing(boolean test) {
+		put(KEY_TESTING, test);
+	}
+
+	public static boolean testing() {
+		return getBoolean(KEY_TESTING, false);
+	}
 	
 	public static void language(Languages lang) {
 		put( KEY_LANG, lang.code());

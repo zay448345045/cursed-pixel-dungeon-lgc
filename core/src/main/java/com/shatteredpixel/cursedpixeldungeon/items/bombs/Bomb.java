@@ -23,7 +23,7 @@ package com.shatteredpixel.cursedpixeldungeon.items.bombs;
 
 import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
-import com.shatteredpixel.cursedpixeldungeon.SPDSettings;
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
@@ -304,7 +304,7 @@ public class Bomb extends Item {
 			bomb.quantity(2);
 			if (bomb.doPickUp(hero)) {
 				//isaaaaac.... (don't bother doing this when not in english)
-				if (SPDSettings.language() == Languages.ENGLISH)
+				if (CPDSettings.language() == Languages.ENGLISH)
 					hero.sprite.showStatus(CharSprite.NEUTRAL, "1+1 free!");
 				return true;
 			}

@@ -29,7 +29,7 @@ import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 public class LorsionsGreataxe extends RelicMeleeWeapon {
 
 	{
-		image = ItemSpriteSheet.GREATAXE;
+		image = ItemSpriteSheet.LORSIONSGREATAXE;
 
 		tier = 6;
 		ACC = 1.33f;

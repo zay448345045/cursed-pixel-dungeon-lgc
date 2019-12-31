@@ -25,18 +25,20 @@ import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.Badges;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.GamesInProgress;
-import com.shatteredpixel.cursedpixeldungeon.SPDSettings;
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroClass;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroSubClass;
 import com.shatteredpixel.cursedpixeldungeon.journal.Journal;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
+import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.scenes.InterlevelScene;
 import com.shatteredpixel.cursedpixeldungeon.scenes.IntroScene;
 import com.shatteredpixel.cursedpixeldungeon.scenes.PixelScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.cursedpixeldungeon.ui.ActionIndicator;
+import com.shatteredpixel.cursedpixeldungeon.ui.CheckBox;
 import com.shatteredpixel.cursedpixeldungeon.ui.IconButton;
 import com.shatteredpixel.cursedpixeldungeon.ui.Icons;
 import com.shatteredpixel.cursedpixeldungeon.ui.RedButton;
@@ -101,8 +103,8 @@ public class WndStartGame extends Window {
 				ActionIndicator.action = null;
 				InterlevelScene.mode = InterlevelScene.Mode.DESCEND_GAMEINIT;
 				InterlevelScene.testing = testing;
-				if (SPDSettings.intro()) {
-					SPDSettings.intro( false );
+				if (CPDSettings.intro()) {
+					CPDSettings.intro( false );
 					Game.switchScene( IntroScene.class );
 				} else {
 					Game.switchScene( InterlevelScene.class );
@@ -123,13 +125,13 @@ public class WndStartGame extends Window {
 		
 		if (DeviceCompat.isDebug() || Badges.isUnlocked(Badges.Badge.VICTORY)){
 			IconButton challengeButton = new IconButton(
-					Icons.get( SPDSettings.challenges() > 0 ? Icons.CHALLENGE_ON :Icons.CHALLENGE_OFF)){
+					Icons.get( CPDSettings.challenges() > 0 ? Icons.CHALLENGE_ON :Icons.CHALLENGE_OFF)){
 				@Override
 				protected void onClick() {
-					ShatteredPixelDungeon.scene().add(new WndChallenges(SPDSettings.challenges(), true) {
+					ShatteredPixelDungeon.scene().add(new WndChallenges(CPDSettings.challenges(), true) {
 						public void onBackPressed() {
 							super.onBackPressed();
-							icon( Icons.get( SPDSettings.challenges() > 0 ?
+							icon( Icons.get( CPDSettings.challenges() > 0 ?
 									Icons.CHALLENGE_ON :Icons.CHALLENGE_OFF ) );
 						}
 					} );
@@ -149,10 +151,26 @@ public class WndStartGame extends Window {
 			
 		} else {
 			Dungeon.challenges = 0;
-			SPDSettings.challenges(0);
+			CPDSettings.challenges(0);
+		}
+		int bonus = 0;
+
+		if (DeviceCompat.isDebug()) {
+			bonus = 20;
+			final CheckBox BoxTesting = new CheckBox(Messages.get(this, "flip_indicators")){
+				@Override
+				protected void onClick() {
+					super.onClick();
+					CPDSettings.testing(checked());
+					GameScene.layoutTags();
+				}
+			};
+			BoxTesting.setRect(0, HEIGHT , WIDTH, 20);
+			BoxTesting.checked(CPDSettings.testing());
+			add(BoxTesting);
 		}
 		
-		resize(WIDTH, HEIGHT);
+		resize(WIDTH, HEIGHT + bonus);
 		
 	}
 	

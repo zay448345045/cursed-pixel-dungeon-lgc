@@ -25,7 +25,7 @@ import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.Badges;
 import com.shatteredpixel.cursedpixeldungeon.Chrome;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
-import com.shatteredpixel.cursedpixeldungeon.SPDSettings;
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Belongings;
 import com.shatteredpixel.cursedpixeldungeon.effects.Speck;
@@ -257,7 +257,7 @@ public class AlchemyScene extends PixelScene {
 					{
 						WndJournal.AlchemyTab t = new WndJournal.AlchemyTab();
 						int w, h;
-						if (SPDSettings.landscape()) {
+						if (CPDSettings.landscape()) {
 							w = WndJournal.WIDTH_L; h = WndJournal.HEIGHT_L;
 						} else {
 							w = WndJournal.WIDTH_P; h = WndJournal.HEIGHT_P;

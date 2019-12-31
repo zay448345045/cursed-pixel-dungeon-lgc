@@ -23,7 +23,7 @@ package com.shatteredpixel.cursedpixeldungeon.scenes;
 
 import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.Badges;
-import com.shatteredpixel.cursedpixeldungeon.SPDSettings;
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.cursedpixeldungeon.effects.BadgeBanner;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
@@ -81,8 +81,8 @@ public class BadgesScene extends PixelScene {
 		blankBadges = Math.max(0, blankBadges);
 
 		//guarantees a max of 5 rows in landscape, and 8 in portrait, assuming a max of 40 buttons
-		int nCols = SPDSettings.landscape() ? 7 : 4;
-		if (badges.size() + blankBadges > 32 && !SPDSettings.landscape())	nCols++;
+		int nCols = CPDSettings.landscape() ? 7 : 4;
+		if (badges.size() + blankBadges > 32 && !CPDSettings.landscape())	nCols++;
 
 		int nRows = 1 + (blankBadges + badges.size())/nCols;
 

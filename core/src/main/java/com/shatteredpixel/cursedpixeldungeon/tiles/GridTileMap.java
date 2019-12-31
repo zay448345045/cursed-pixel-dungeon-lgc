@@ -22,7 +22,7 @@
 package com.shatteredpixel.cursedpixeldungeon.tiles;
 
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
-import com.shatteredpixel.cursedpixeldungeon.SPDSettings;
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.levels.Terrain;
 
 public class GridTileMap extends DungeonTilemap {
@@ -37,7 +37,7 @@ public class GridTileMap extends DungeonTilemap {
 
 	@Override
 	public synchronized void updateMap() {
-		gridSetting = SPDSettings.visualGrid();
+		gridSetting = CPDSettings.visualGrid();
 		super.updateMap();
 	}
 

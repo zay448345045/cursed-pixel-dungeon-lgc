@@ -142,7 +142,7 @@ public class Speck extends Image {
 		
 		switch (type) {
 			
-		case HEALING:
+		case HEALING: case UP:
 			speed.set( 0, -20 );
 			lifespan = 1f;
 			break;
@@ -187,8 +187,16 @@ public class Speck extends Image {
 			break;
 
 		case RED_LIGHT:
-		case EVIL_GAS:
 			tint(0xFFCC0000);
+			break;
+
+		case EVIL_GAS:
+			hardlight( 0xFF0000 );
+			angularSpeed = 30;
+			angle = Random.Float( 360 );
+			lifespan = Random.Float( 1f, 3f );
+			break;
+
 		case LIGHT:
 			angle = Random.Float( 360 );
 			angularSpeed = 90;
@@ -205,13 +213,8 @@ public class Speck extends Image {
 		case QUESTION:
 			lifespan = 0.8f;
 			break;
-			
-		case UP:
-			speed.set( 0, -20 );
-			lifespan = 1f;
-			break;
-			
-		case CALM:
+
+			case CALM:
 			color(0, 1, 1);
 		case SCREAM:
 			lifespan = 0.9f;
@@ -458,6 +461,7 @@ public class Speck extends Image {
 				
 			case STEAM:
 			case TOXIC:
+			case EVIL_GAS:
 			case PARALYSIS:
 			case CONFUSION:
 			case STORM:

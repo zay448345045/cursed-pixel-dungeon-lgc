@@ -22,7 +22,7 @@
 package com.shatteredpixel.cursedpixeldungeon.actors.blobs;
 
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
-import com.shatteredpixel.cursedpixeldungeon.SPDSettings;
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
@@ -78,7 +78,7 @@ public class Electricity extends Blob {
 							if (!ch.isAlive() && ch == Dungeon.hero){
 								Dungeon.fail( getClass() );
 								//FIXME add other languages in next update
-								if (SPDSettings.language() == Languages.ENGLISH) GLog.n( Messages.get(this, "ondeath") );
+								if (CPDSettings.language() == Languages.ENGLISH) GLog.n( Messages.get(this, "ondeath") );
 							}
 						}
 					}

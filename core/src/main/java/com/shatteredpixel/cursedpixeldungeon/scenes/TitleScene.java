@@ -23,7 +23,7 @@ package com.shatteredpixel.cursedpixeldungeon.scenes;
 
 import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.GamesInProgress;
-import com.shatteredpixel.cursedpixeldungeon.SPDSettings;
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.cursedpixeldungeon.effects.BannerSprites;
 import com.shatteredpixel.cursedpixeldungeon.effects.Fireball;
@@ -69,7 +69,7 @@ public class TitleScene extends PixelScene {
 		float topRegion = Math.max(95f, h*0.45f);
 
 		title.x = (w - title.width()) / 2f;
-		if (SPDSettings.landscape())
+		if (CPDSettings.landscape())
 			title.y = (topRegion - title.height()) / 2f;
 		else
 			title.y = 16 + (topRegion - title.height() - 16) / 2f;
@@ -144,7 +144,7 @@ public class TitleScene extends PixelScene {
 		};
 		add( btnRankings );
 
-		if (SPDSettings.landscape()) {
+		if (CPDSettings.landscape()) {
 			btnRankings     .setPos( w / 2 - btnRankings.width(), topRegion );
 			btnBadges       .setPos( w / 2, topRegion );
 			btnPlay         .setPos( btnRankings.left() - btnPlay.width(), topRegion );

@@ -22,7 +22,7 @@
 package com.shatteredpixel.cursedpixeldungeon.windows;
 
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
-import com.shatteredpixel.cursedpixeldungeon.SPDSettings;
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.PixelScene;
@@ -66,7 +66,7 @@ public class WndItem extends Window {
 		info.maxWidth(width);
 		
 		//info box can go out of the screen on landscape, so widen it
-		while (SPDSettings.landscape()
+		while (CPDSettings.landscape()
 				&& info.height() > 100
 				&& width < WIDTH_MAX){
 			width += 20;

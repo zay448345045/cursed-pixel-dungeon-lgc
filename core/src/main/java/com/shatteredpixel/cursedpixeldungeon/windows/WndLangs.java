@@ -21,7 +21,7 @@
 
 package com.shatteredpixel.cursedpixeldungeon.windows;
 
-import com.shatteredpixel.cursedpixeldungeon.SPDSettings;
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.cursedpixeldungeon.messages.Languages;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
@@ -71,7 +71,7 @@ public class WndLangs extends Window {
 					ShatteredPixelDungeon.seamlessResetScene(new Game.SceneChangeCallback() {
 						@Override
 						public void beforeCreate() {
-							SPDSettings.language(langs.get(langIndex));
+							CPDSettings.language(langs.get(langIndex));
 							RenderedText.clearCache();
 						}
 						@Override
@@ -94,18 +94,18 @@ public class WndLangs extends Window {
 				}
 			}
 			btn.setSize(BTN_WIDTH, BTN_HEIGHT);
-			if (SPDSettings.landscape() && i % 2 == 1){
+			if (CPDSettings.landscape() && i % 2 == 1){
 				btn.setPos(BTN_WIDTH+1, y-(BTN_HEIGHT + 1));
 			} else {
 				btn.setPos(0, y);
 				y += BTN_HEIGHT;
-				if (SPDSettings.landscape()) y++;
+				if (CPDSettings.landscape()) y++;
 			}
 
 			add(btn);
 		}
 		y = Math.max(MIN_HEIGHT, y);
-		resize(SPDSettings.landscape() ? WIDTH_L : WIDTH_P, y);
+		resize(CPDSettings.landscape() ? WIDTH_L : WIDTH_P, y);
 
 		int textLeft = width - 65;
 		int textWidth = width - textLeft;
@@ -156,7 +156,7 @@ public class WndLangs extends Window {
 					String[] translators = currLang.translators();
 					
 					boolean wide = false;
-					if (SPDSettings.landscape() && (reviewers.length + translators.length) > 10){
+					if (CPDSettings.landscape() && (reviewers.length + translators.length) > 10){
 						wide = true;
 					}
 					

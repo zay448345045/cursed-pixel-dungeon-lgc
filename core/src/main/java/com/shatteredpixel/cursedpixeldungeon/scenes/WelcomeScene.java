@@ -24,7 +24,7 @@ package com.shatteredpixel.cursedpixeldungeon.scenes;
 import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.Badges;
 import com.shatteredpixel.cursedpixeldungeon.Rankings;
-import com.shatteredpixel.cursedpixeldungeon.SPDSettings;
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.cursedpixeldungeon.effects.BannerSprites;
 import com.shatteredpixel.cursedpixeldungeon.effects.Fireball;
@@ -49,7 +49,7 @@ public class WelcomeScene extends PixelScene {
 	public void create() {
 		super.create();
 
-		final int previousVersion = SPDSettings.version();
+		final int previousVersion = CPDSettings.version();
 
 		if (ShatteredPixelDungeon.versionCode == previousVersion) {
 			ShatteredPixelDungeon.switchNoFade(TitleScene.class);
@@ -68,7 +68,7 @@ public class WelcomeScene extends PixelScene {
 		float topRegion = Math.max(95f, h*0.45f);
 
 		title.x = (w - title.width()) / 2f;
-		if (SPDSettings.landscape())
+		if (CPDSettings.landscape())
 			title.y = (topRegion - title.height()) / 2f;
 		else
 			title.y = 16 + (topRegion - title.height() - 16) / 2f;
@@ -99,7 +99,7 @@ public class WelcomeScene extends PixelScene {
 			protected void onClick() {
 				super.onClick();
 				if (previousVersion == 0){
-					SPDSettings.version(ShatteredPixelDungeon.versionCode);
+					CPDSettings.version(ShatteredPixelDungeon.versionCode);
 					WelcomeScene.this.add(new WndStartGame(1, false));
 				} else {
 					updateVersion(previousVersion);
@@ -189,7 +189,7 @@ public class WelcomeScene extends PixelScene {
 			Journal.saveGlobal();
 		}
 		
-		SPDSettings.version(ShatteredPixelDungeon.versionCode);
+		CPDSettings.version(ShatteredPixelDungeon.versionCode);
 	}
 
 	private void placeTorch( float x, float y ) {

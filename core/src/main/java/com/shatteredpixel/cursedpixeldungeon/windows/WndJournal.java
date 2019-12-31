@@ -22,7 +22,7 @@
 package com.shatteredpixel.cursedpixeldungeon.windows;
 
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
-import com.shatteredpixel.cursedpixeldungeon.SPDSettings;
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.ClassArmor;
@@ -71,8 +71,8 @@ public class WndJournal extends WndTabbed {
 	
 	public WndJournal(){
 		
-		int width = SPDSettings.landscape() ? WIDTH_L : WIDTH_P;
-		int height = SPDSettings.landscape() ? HEIGHT_L : HEIGHT_P;
+		int width = CPDSettings.landscape() ? WIDTH_L : WIDTH_P;
+		int height = CPDSettings.landscape() ? HEIGHT_L : HEIGHT_P;
 		
 		resize(width, height);
 		
@@ -342,7 +342,7 @@ public class WndJournal extends WndTabbed {
 		protected void layout() {
 			super.layout();
 			
-			if (SPDSettings.landscape()){
+			if (CPDSettings.landscape()){
 				float buttonWidth = width()/pageButtons.length;
 				for (int i = 0; i < NUM_BUTTONS; i++) {
 					pageButtons[i].setRect(i*buttonWidth, 0, buttonWidth, ITEM_HEIGHT);

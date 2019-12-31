@@ -21,7 +21,7 @@
 
 package com.shatteredpixel.cursedpixeldungeon.windows;
 
-import com.shatteredpixel.cursedpixeldungeon.SPDSettings;
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.items.Heap;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
@@ -77,7 +77,7 @@ public class WndInfoItem extends Window {
 	
 	private void fillFields( int image, ItemSprite.Glowing glowing, int titleColor, String title, String info ) {
 
-		int width = SPDSettings.landscape() ? WIDTH_L : WIDTH_P;
+		int width = CPDSettings.landscape() ? WIDTH_L : WIDTH_P;
 
 		IconTitle titlebar = new IconTitle();
 		titlebar.icon( new ItemSprite( image, glowing ) );

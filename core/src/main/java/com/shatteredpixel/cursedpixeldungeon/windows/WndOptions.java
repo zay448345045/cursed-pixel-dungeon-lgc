@@ -21,7 +21,7 @@
 
 package com.shatteredpixel.cursedpixeldungeon.windows;
 
-import com.shatteredpixel.cursedpixeldungeon.SPDSettings;
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.scenes.PixelScene;
 import com.shatteredpixel.cursedpixeldungeon.ui.RedButton;
 import com.shatteredpixel.cursedpixeldungeon.ui.RenderedTextMultiline;
@@ -38,7 +38,7 @@ public class WndOptions extends Window {
 	public WndOptions( String title, String message, String... options ) {
 		super();
 
-		int width = SPDSettings.landscape() ? WIDTH_L : WIDTH_P;
+		int width = CPDSettings.landscape() ? WIDTH_L : WIDTH_P;
 
 		RenderedTextMultiline tfTitle = PixelScene.renderMultiline( title, 9 );
 		tfTitle.hardlight( TITLE_COLOR );

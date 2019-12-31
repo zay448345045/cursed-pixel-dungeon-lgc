@@ -21,7 +21,7 @@
 
 package com.shatteredpixel.cursedpixeldungeon.messages;
 
-import com.shatteredpixel.cursedpixeldungeon.SPDSettings;
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
 import com.watabou.utils.DeviceCompat;
 
@@ -75,7 +75,7 @@ public class Messages {
 	};
 
 	static{
-		setup(SPDSettings.language());
+		setup(CPDSettings.language());
 	}
 
 	public static void setup( Languages lang ){

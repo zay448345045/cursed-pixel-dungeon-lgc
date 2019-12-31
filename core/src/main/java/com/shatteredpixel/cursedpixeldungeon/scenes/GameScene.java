@@ -24,7 +24,7 @@ package com.shatteredpixel.cursedpixeldungeon.scenes;
 import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.Badges;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
-import com.shatteredpixel.cursedpixeldungeon.SPDSettings;
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.cursedpixeldungeon.Statistics;
 import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
@@ -170,10 +170,10 @@ public class GameScene extends PixelScene {
 		
 		Music.INSTANCE.play( Assets.TUNE, true );
 
-		SPDSettings.lastClass(Dungeon.hero.heroClass.ordinal());
+		CPDSettings.lastClass(Dungeon.hero.heroClass.ordinal());
 		
 		super.create();
-		Camera.main.zoom( GameMath.gate(minZoom, defaultZoom + SPDSettings.zoom(), maxZoom));
+		Camera.main.zoom( GameMath.gate(minZoom, defaultZoom + CPDSettings.zoom(), maxZoom));
 
 		scene = this;
 
@@ -566,9 +566,9 @@ public class GameScene extends PixelScene {
 
 		if (scene == null) return;
 
-		float tagLeft = SPDSettings.flipTags() ? 0 : uiCamera.width - scene.attack.width();
+		float tagLeft = CPDSettings.flipTags() ? 0 : uiCamera.width - scene.attack.width();
 
-		if (SPDSettings.flipTags()) {
+		if (CPDSettings.flipTags()) {
 			scene.log.setRect(scene.attack.width(), scene.toolbar.top(), uiCamera.width - scene.attack.width(), 0);
 		} else {
 			scene.log.setRect(0, scene.toolbar.top(), uiCamera.width - scene.attack.width(),  0 );

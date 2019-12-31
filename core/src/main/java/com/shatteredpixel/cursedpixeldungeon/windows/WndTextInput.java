@@ -34,7 +34,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.shatteredpixel.cursedpixeldungeon.SPDSettings;
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.cursedpixeldungeon.scenes.PixelScene;
 import com.shatteredpixel.cursedpixeldungeon.ui.RedButton;
@@ -67,14 +67,14 @@ public class WndTextInput extends Window {
 		super();
 
 		//need to offset to give space for the soft keyboard
-		if (SPDSettings.landscape()) {
+		if (CPDSettings.landscape()) {
 			offset( multiLine ? -45 : -45 );
 		} else {
 			offset( multiLine ? -60 : -45 );
 		}
 
 		final int width;
-		if (SPDSettings.landscape() && multiLine){
+		if (CPDSettings.landscape() && multiLine){
 			width = W_LAND_MULTI; //more editing space for landscape users
 		} else {
 			width = WIDTH;

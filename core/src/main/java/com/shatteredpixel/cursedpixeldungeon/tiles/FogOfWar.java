@@ -22,7 +22,7 @@
 package com.shatteredpixel.cursedpixeldungeon.tiles;
 
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
-import com.shatteredpixel.cursedpixeldungeon.SPDSettings;
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.watabou.gltextures.BufferTexture;
 import com.watabou.gltextures.TextureCache;
 import com.watabou.noosa.Image;
@@ -170,7 +170,7 @@ public class FogOfWar extends Image {
 		this.visible = visible;
 		this.visited = visited;
 		this.mapped = mapped;
-		this.brightness = SPDSettings.brightness() + 2;
+		this.brightness = CPDSettings.brightness() + 2;
 
 		moveToUpdating();
 		

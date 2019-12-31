@@ -24,7 +24,7 @@ package com.shatteredpixel.cursedpixeldungeon.scenes;
 import com.shatteredpixel.cursedpixeldungeon.Badges;
 import com.shatteredpixel.cursedpixeldungeon.Chrome;
 import com.shatteredpixel.cursedpixeldungeon.GamesInProgress;
-import com.shatteredpixel.cursedpixeldungeon.SPDSettings;
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroSubClass;
 import com.shatteredpixel.cursedpixeldungeon.journal.Journal;
@@ -78,12 +78,12 @@ public class StartScene extends PixelScene {
 		
 		ArrayList<GamesInProgress.Info> games = GamesInProgress.checkAll();
 		
-		int slotGap = SPDSettings.landscape() ? 5 : 10;
+		int slotGap = CPDSettings.landscape() ? 5 : 10;
 		int slotCount = Math.min(GamesInProgress.MAX_SLOTS, games.size()+1);
 		int slotsHeight = slotCount*SLOT_HEIGHT + (slotCount-1)* slotGap;
 		
 		float yPos = (h - slotsHeight)/2f;
-		if (SPDSettings.landscape()) yPos += 8;
+		if (CPDSettings.landscape()) yPos += 8;
 		
 		for (GamesInProgress.Info game : games) {
 			SaveSlotButton existingGame = new SaveSlotButton();

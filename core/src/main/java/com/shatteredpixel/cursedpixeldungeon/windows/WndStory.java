@@ -23,7 +23,7 @@ package com.shatteredpixel.cursedpixeldungeon.windows;
 
 import com.shatteredpixel.cursedpixeldungeon.Chrome;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
-import com.shatteredpixel.cursedpixeldungeon.SPDSettings;
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.PixelScene;
 import com.shatteredpixel.cursedpixeldungeon.ui.RenderedTextMultiline;
@@ -67,7 +67,7 @@ public class WndStory extends Window {
 		super( 0, 0, Chrome.get( Chrome.Type.SCROLL ) );
 		
 		tf = PixelScene.renderMultiline( text, 6 );
-		tf.maxWidth(SPDSettings.landscape() ?
+		tf.maxWidth(CPDSettings.landscape() ?
 					WIDTH_L - MARGIN * 2:
 					WIDTH_P - MARGIN *2);
 		tf.invert();
