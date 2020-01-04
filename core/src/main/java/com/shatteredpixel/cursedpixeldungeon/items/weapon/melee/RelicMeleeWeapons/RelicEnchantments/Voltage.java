@@ -25,7 +25,7 @@ public class Voltage extends RelicEnchantment {
         int distance = 5 + level;
         try {
 
-            for (Mob mob : Dungeon.level.mobs) {
+            for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 
                 if (Dungeon.level.distance(attacker.pos, mob.pos) < distance && mob.isAlive() && mob.isEnemy()) {
                     // int dmg = 20;

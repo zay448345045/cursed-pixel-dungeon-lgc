@@ -243,10 +243,10 @@ public abstract class Level implements Bundlable {
 					break;
 				}
 				if (Dungeon.depth > 40 & Dungeon.depth < 46) {
-					feeling = Feeling.CHASM;
+					feeling = Feeling.EMBER;
 				}
 				if (Dungeon.depth > 45 & Dungeon.depth < 51) {
-					feeling = Feeling.EMBER;
+					feeling = Feeling.CHASM;
 				}
 			}
 		}

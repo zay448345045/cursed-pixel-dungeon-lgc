@@ -38,8 +38,11 @@ public class GrassyGraveRoom extends StandardRoom {
 		for (Door door : connected.values()) {
 			door.set( Door.Type.REGULAR );
 		}
-		
-		Painter.fill( level, this, 1 , Terrain.GRASS );
+		if (level.feeling == Level.Feeling.EMBER) {
+			Painter.fill(level, this, 1, Terrain.EMBERS);
+		} else {
+			Painter.fill(level, this, 1, Terrain.GRASS);
+		}
 		
 		int w = width() - 2;
 		int h = height() - 2;

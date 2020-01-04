@@ -614,7 +614,7 @@ public abstract class Mob extends Char {
 			alerted = true;
 		}
 		if (Dungeon.isChallenged(Challenges.EVIL_GAS) | this instanceof Kupua) {
-			int amount = Math.min( (int) (50*((float)dmg/(float)HT)), 50);
+			int amount = Math.min( (int) (100*((float)dmg/(float)HT)), 100);
 			GameScene.add(Blob.seed(this.pos, amount, EvilGas.class).setStrength(1+Dungeon.depth/4));
 		}
 		super.damage( dmg, src );
@@ -788,7 +788,7 @@ public abstract class Mob extends Char {
 				target = enemy.pos;
 
 				if (Dungeon.isChallenged( Challenges.SWARM_INTELLIGENCE )) {
-					for (Mob mob : Dungeon.level.mobs) {
+					for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 						if (Dungeon.level.distance(pos, mob.pos) <= 8 && mob.state != mob.HUNTING) {
 							mob.beckon( target );
 						}
@@ -861,7 +861,7 @@ public abstract class Mob extends Char {
 				target = enemy.pos;
 
 				if (Dungeon.isChallenged( Challenges.SWARM_INTELLIGENCE )) {
-					for (Mob mob : Dungeon.level.mobs) {
+					for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 						if (Dungeon.level.distance(pos, mob.pos) <= 8 && mob.state != mob.HUNTING) {
 							mob.beckon( target );
 						}

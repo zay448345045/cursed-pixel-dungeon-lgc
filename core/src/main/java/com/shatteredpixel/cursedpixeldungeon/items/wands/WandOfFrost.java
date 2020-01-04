@@ -50,7 +50,7 @@ public class WandOfFrost extends DamageWand {
 	}
 
 	public int max(int lvl){
-		return 8+3*lvl;
+		return 6+3*lvl;
 	}
 
 	@Override

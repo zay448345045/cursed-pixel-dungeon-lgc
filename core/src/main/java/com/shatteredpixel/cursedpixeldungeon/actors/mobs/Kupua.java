@@ -1,5 +1,6 @@
 package com.shatteredpixel.cursedpixeldungeon.actors.mobs;
 
+import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.blobs.EvilGas;
 import com.shatteredpixel.cursedpixeldungeon.actors.blobs.ToxicGas;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Grim;
@@ -23,12 +24,12 @@ public class Kupua extends Mob {
     }
 
     @Override
-    public int drRoll() {
-        return Random.IntRange(30,50);
+    public int attackSkill(Char target) {
+        return 40;
     }
 
     @Override
-    public void damage(int dmg, Object src) {
-        super.damage(dmg, src);
+    public int drRoll() {
+        return Random.IntRange(30,50);
     }
 }

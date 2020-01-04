@@ -68,6 +68,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapon
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.LorsionsGreataxe;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.LoturgosCrystal;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.MaracarsBlades;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.NahusSword;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.NeptunesTrident;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RaRothsNunchucks;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.ThonothsAxe;
@@ -163,11 +164,12 @@ public enum HeroClass {
 			new NeptunesTrident().identify().level(15).collect();
 			new RaRothsNunchucks().identify().level(15).collect();
 			new LoturgosCrystal().identify().level(15).collect();
+			new NahusSword().identify().level(15).collect();
 			new ChainsawHand().identify().level(15).collect();
 			new PotionOfExperience().quantity(30).identify().collect();
 			new PlateArmor().identify().level(15).collect();
-			new ScrollOfUpgrade().identify().level(999).collect();
-			for (int j = 0; j < 50; j ++) {
+			new ScrollOfUpgrade().identify().quantity(999).collect();
+			for (int j = 0; j < 25; j ++) {
 				int r = Random.Int(3);
 				Item item;
 				if (r == 0) {

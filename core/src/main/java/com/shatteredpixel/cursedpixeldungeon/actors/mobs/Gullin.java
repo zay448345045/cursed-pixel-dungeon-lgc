@@ -30,10 +30,10 @@ public class Gullin extends Kupua {
         if (src instanceof Hero) {
             KindOfWeapon wep = ((Hero)src).belongings.weapon;
             if (wep instanceof MeleeWeapon & !(wep instanceof RelicMeleeWeapon)) {
-                dmg = Random.Int(dmg/2);
+                dmg = Random.Int(dmg);
             }
         } else if (src instanceof Item & !(src instanceof RelicMeleeWeapon)) {
-            dmg = Random.Int(dmg/2);
+            dmg = Random.Int(dmg);
         }
         super.damage(dmg, src);
     }

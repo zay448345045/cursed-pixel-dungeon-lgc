@@ -240,7 +240,7 @@ public class GameScene extends PixelScene {
 		mobs = new Group();
 		add( mobs );
 		
-		for (Mob mob : Dungeon.level.mobs) {
+		for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 			addMobSprite( mob );
 		}
 		
@@ -864,7 +864,7 @@ public class GameScene extends PixelScene {
 	
 	public static void afterObserve() {
 		if (scene != null) {
-			for (Mob mob : Dungeon.level.mobs) {
+			for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 				if (mob.sprite != null)
 					mob.sprite.visible = Dungeon.level.heroFOV[mob.pos];
 			}

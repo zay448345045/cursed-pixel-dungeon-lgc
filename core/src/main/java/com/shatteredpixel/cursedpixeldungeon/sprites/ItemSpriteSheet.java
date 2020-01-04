@@ -703,6 +703,7 @@ public class ItemSpriteSheet {
 	                                                                                    //16 free slots
 	private static final int RELICWEPS       =                                   xy(1, 32);  //16 slots
 	public static final int LORSIONSGREATAXE = RELICWEPS+0;
+	public static final int NAHUSSWORD       = RELICWEPS+4;
 
 
 	private static void assignItemRect( int item, int width, int height){

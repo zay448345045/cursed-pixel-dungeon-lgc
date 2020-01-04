@@ -64,7 +64,11 @@ public class WndStartGame extends Window {
 		
 		Badges.loadGlobal();
 		Journal.loadGlobal();
-		
+
+		if (!testing) {
+			CPDSettings.testing(false);
+		}
+
 		RenderedText title = PixelScene.renderText(Messages.get(this, "title"), 12 );
 		title.hardlight(Window.TITLE_COLOR);
 		title.x = (WIDTH - title.width())/2f;
@@ -155,9 +159,9 @@ public class WndStartGame extends Window {
 		}
 		int bonus = 0;
 
-		if (DeviceCompat.isDebug()) {
+		if (testing) {
 			bonus = 20;
-			final CheckBox BoxTesting = new CheckBox(Messages.get(this, "flip_indicators")){
+			final CheckBox BoxTesting = new CheckBox("TEST MODE"){
 				@Override
 				protected void onClick() {
 					super.onClick();
