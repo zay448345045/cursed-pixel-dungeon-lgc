@@ -586,7 +586,7 @@ public class Generator {
 					RingOfTenacity.class,
 					//RingOfWealth.class
 					RingOfLuck.class };
-			RING.probs = new float[]{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+			RING.probs = new float[]{ 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1 };
 			
 			ARTIFACT.classes = new Class<?>[]{
 					CapeOfThorns.class,

@@ -24,6 +24,7 @@ package com.shatteredpixel.cursedpixeldungeon.levels;
 import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.npcs.Imp;
+import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfLuck;
 import com.shatteredpixel.cursedpixeldungeon.levels.painters.CityPainter;
 import com.shatteredpixel.cursedpixeldungeon.levels.painters.Painter;
 import com.shatteredpixel.cursedpixeldungeon.levels.traps.BlazingTrap;
@@ -55,17 +56,17 @@ public class CityLevel extends RegularLevel {
 		color1 = 0x4b6636;
 		color2 = 0xf2f2f2;
 	}
-	
+
 	@Override
 	protected int standardRooms() {
 		//7 to 10, average 7.9
-		return 7+Random.chances(new float[]{4, 3, 2, 1});
+		return 7 + RingOfLuck.randomChances(new float[]{4, 3, 2, 1}, 10);
 	}
-	
+
 	@Override
 	protected int specialRooms() {
 		//2 to 3, average 2.33
-		return 2 + Random.chances(new float[]{2, 1});
+		return 2 + RingOfLuck.randomChances(new float[]{2, 1}, 3);
 	}
 	
 	@Override

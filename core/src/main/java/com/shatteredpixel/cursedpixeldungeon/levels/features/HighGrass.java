@@ -33,6 +33,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.Dewdrop;
 import com.shatteredpixel.cursedpixeldungeon.items.Generator;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.glyphs.Camouflage;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.SandalsOfNature;
+import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfLuck;
 import com.shatteredpixel.cursedpixeldungeon.levels.Level;
 import com.shatteredpixel.cursedpixeldungeon.levels.Terrain;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
@@ -80,16 +81,16 @@ public class HighGrass {
 			
 			if (naturalismLevel >= 0) {
 				// Seed, scales from 1/20 to 1/4
-				if (Random.Int(20 - (naturalismLevel * 4)) == 0) {
+				if (RingOfLuck.randomInt(20 - (naturalismLevel * 4), 0) == 0) {
 					level.drop(Generator.random(Generator.Category.SEED), pos).sprite.drop();
 				}
 
-				if (Random.Int(20 - (naturalismLevel * 4)) == 0) {
+				if (RingOfLuck.randomInt(20 - (naturalismLevel * 4), 0) == 0) {
 					level.drop(Generator.random(Generator.Category.STONE), pos).sprite.drop();
 				}
 				
 				// Dew, scales from 1/6 to 1/3
-				if (Random.Int(24 - naturalismLevel*3) <= 3) {
+				if (RingOfLuck.randomInt(24 - (naturalismLevel * 3), 0) <= 3) {
 					level.drop(new Dewdrop(), pos).sprite.drop();
 				}
 			}

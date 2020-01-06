@@ -43,6 +43,7 @@ public enum HeroSubClass {
 	BRAWLER("brawler"),
 	CULTIST("cultist"),
 	ENCHANTER("enchanter"),
+	PALADIN("paladin"),
 
 	NECROMANCER("necromancer"),
 	MEDIC("medic");

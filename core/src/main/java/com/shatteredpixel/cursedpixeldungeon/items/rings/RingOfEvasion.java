@@ -43,7 +43,7 @@ public class RingOfEvasion extends Ring {
 	
 	public static float evasionMultiplier( Char target ){
 		float bonus = (float) Math.min(16, getBonus(target, Evasion.class));
-		return (float) (1 + (0.1*bonus));
+		return (float) (1 + (0.05*bonus));
 	}
 
 	public class Evasion extends RingBuff {

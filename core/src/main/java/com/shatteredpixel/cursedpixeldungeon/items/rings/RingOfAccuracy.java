@@ -43,7 +43,7 @@ public class RingOfAccuracy extends Ring {
 	
 	public static float accuracyMultiplier( Char target ){
 		float bonus = (float) Math.min(16, getBonus(target, Accuracy.class));
-		return (float) (1 + (0.2*bonus));
+		return (float) (1 + (0.15*bonus));
 	}
 	
 	public class Accuracy extends RingBuff {

@@ -384,7 +384,7 @@ public class Hero extends Char {
 		int dr = 0;
 
 		if (belongings.armor != null) {
-			int armDr = Random.NormalIntRange( belongings.armor.DRMin(), belongings.armor.DRMax());
+			int armDr = belongings.armor.DRRoll(this);
 			if (STR() < belongings.armor.STRReq()){
 				armDr -= 2*(belongings.armor.STRReq() - STR());
 			}

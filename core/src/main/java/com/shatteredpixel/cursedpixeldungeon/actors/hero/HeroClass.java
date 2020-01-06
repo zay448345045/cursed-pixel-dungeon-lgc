@@ -52,6 +52,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfLiquidFlame;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfMindVision;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfStrength;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.LuckyBadge;
+import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfLuck;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfIdentify;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfLullaby;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfMagicMapping;
@@ -216,6 +217,7 @@ public enum HeroClass {
 		new ScrollOfUpgrade().identify().quantity(999).collect();
 		new Stylus().quantity(100).collect();
 		new WandOfCorruption().level(15).identify().collect();
+		new RingOfLuck().level(15).identify().collect();
 		for (int j = 0; j < 25; j++) {
 			int r = Random.Int(3);
 			Item item;

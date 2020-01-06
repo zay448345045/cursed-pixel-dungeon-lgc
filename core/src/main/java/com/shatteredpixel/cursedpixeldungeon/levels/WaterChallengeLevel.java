@@ -24,6 +24,7 @@ package com.shatteredpixel.cursedpixeldungeon.levels;
 import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.effects.Ripple;
+import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfLuck;
 import com.shatteredpixel.cursedpixeldungeon.levels.painters.Painter;
 import com.shatteredpixel.cursedpixeldungeon.levels.painters.SewerPainter;
 import com.shatteredpixel.cursedpixeldungeon.levels.traps.AlarmTrap;
@@ -57,13 +58,13 @@ public class WaterChallengeLevel extends RegularLevel {
     @Override
     protected int standardRooms() {
         //5 to 7, average 5.57
-        return 5+Random.chances(new float[]{4, 2, 1});
+        return 5+RingOfLuck.randomChances(new float[]{4, 2, 1}, 7);
     }
 
     @Override
     protected int specialRooms() {
         //1 to 3, average 1.67
-        return 1+Random.chances(new float[]{4, 4, 2});
+        return 1+ RingOfLuck.randomChances(new float[]{4, 4, 2}, 3);
     }
 
     @Override

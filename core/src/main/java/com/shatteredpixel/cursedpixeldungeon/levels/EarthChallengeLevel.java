@@ -23,6 +23,7 @@ package com.shatteredpixel.cursedpixeldungeon.levels;
 
 import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
+import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfLuck;
 import com.shatteredpixel.cursedpixeldungeon.levels.painters.CavesPainter;
 import com.shatteredpixel.cursedpixeldungeon.levels.painters.Painter;
 import com.shatteredpixel.cursedpixeldungeon.levels.traps.BurningTrap;
@@ -57,13 +58,13 @@ public class EarthChallengeLevel extends RegularLevel {
     @Override
     protected int standardRooms() {
         //6 to 9, average 7.333
-        return 6+Random.chances(new float[]{2, 3, 3, 1});
+        return 6+ RingOfLuck.randomChances(new float[]{2, 3, 3, 1}, 9);
     }
 
     @Override
     protected int specialRooms() {
         //1 to 3, average 2.2
-        return 1+Random.chances(new float[]{2, 4, 4});
+        return 1+RingOfLuck.randomChances(new float[]{2, 4, 4}, 3);
     }
 
     @Override

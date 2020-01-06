@@ -24,6 +24,7 @@ package com.shatteredpixel.cursedpixeldungeon.levels;
 import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.npcs.Wandmaker;
+import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfLuck;
 import com.watabou.noosa.Halo;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.FlameParticle;
 import com.shatteredpixel.cursedpixeldungeon.levels.painters.Painter;
@@ -65,13 +66,13 @@ public class PrisonLevel extends RegularLevel {
 	@Override
 	protected int standardRooms() {
 		//6 to 8, average 6.66
-		return 6+Random.chances(new float[]{4, 2, 2});
+		return 6+RingOfLuck.randomChances(new float[]{4, 2, 2}, 8);
 	}
 	
 	@Override
 	protected int specialRooms() {
 		//1 to 3, average 1.83
-		return 1+Random.chances(new float[]{3, 4, 3});
+		return 1+ RingOfLuck.randomChances(new float[]{3, 4, 3}, 3);
 	}
 	
 	@Override

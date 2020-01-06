@@ -56,6 +56,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.armor.glyphs.Stone;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.glyphs.Swiftness;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.glyphs.Thorns;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.glyphs.Viscosity;
+import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfLuck;
 import com.shatteredpixel.cursedpixeldungeon.levels.Terrain;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.sprites.HeroSprite;
@@ -292,14 +293,15 @@ public class Armor extends EquipableItem {
 
 	public int DRMax(int lvl){
 		int max = tier * (2 + lvl) + augment.defenseFactor(lvl);
-		/*float reduction = max * ((this.maxDurability()-this.durability())/this.maxDurability()*2);
-		max -= (int) reduction;
-		max = Math.max(max,DRMin());*/
 		if (lvl > max){
 			return ((lvl - max)+1)/2;
 		} else {
 			return max;
 		}
+	}
+
+	public int DRRoll( Char owner ) {
+		return RingOfLuck.randomNormalIntRange( DRMin(), DRMax(), DRMax() );//Finds closest to max
 	}
 
 	public final int DRMin(){
