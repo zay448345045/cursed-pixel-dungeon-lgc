@@ -97,6 +97,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfEvasion;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfForce;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfFuror;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfHaste;
+import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfLuck;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfMight;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfSharpshooting;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfTenacity;
@@ -583,8 +584,9 @@ public class Generator {
 					RingOfMight.class,
 					RingOfSharpshooting.class,
 					RingOfTenacity.class,
-					RingOfWealth.class};
-			RING.probs = new float[]{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0 };//Ring of Wealth can no longer generate naturally. Ring of Tenacity is temporarily removed.
+					//RingOfWealth.class
+					RingOfLuck.class };
+			RING.probs = new float[]{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 			
 			ARTIFACT.classes = new Class<?>[]{
 					CapeOfThorns.class,

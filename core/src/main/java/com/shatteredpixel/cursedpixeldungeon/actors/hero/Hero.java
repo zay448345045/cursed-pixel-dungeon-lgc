@@ -37,6 +37,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Awareness;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Barkskin;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Berserk;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Bless;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Bloodlust;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Combo;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Drowsy;
@@ -420,6 +421,9 @@ public class Hero extends Char {
 		
 		Berserk berserk = buff(Berserk.class);
 		if (berserk != null) dmg = berserk.damageFactor(dmg);
+
+		Bloodlust bloodlust = buff(Bloodlust.class);
+		if (bloodlust != null) { dmg *= bloodlust.bonusDamage(); bloodlust.attack();}
 		
 		return buff( Fury.class ) != null ? (int)(dmg * 1.5f) : dmg;
 	}

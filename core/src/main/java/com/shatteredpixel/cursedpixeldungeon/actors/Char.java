@@ -276,6 +276,9 @@ public abstract class Char extends Actor {
 					
 				} else if (this == Dungeon.hero) {
 					GLog.i( Messages.capitalize(Messages.get(Char.class, "defeat", enemy.name)) );
+					if (this instanceof Hero && ((Hero)this).subClass == HeroSubClass.BRAWLER) {
+						Buff.prolong(this, com.shatteredpixel.cursedpixeldungeon.actors.buffs.Bloodlust.class, 30f);
+					}
 				}
 			}
 

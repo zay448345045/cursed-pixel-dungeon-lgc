@@ -198,8 +198,6 @@ public enum HeroClass {
 
 		new LuckyBadge().collect();
 		//Extra stuff
-		new Stylus().quantity(100).collect();
-		new WandOfCorruption().level(15).identify().collect();
 
 	}
 
@@ -216,6 +214,8 @@ public enum HeroClass {
 		new MegaExperiencePotion().identify().collect();
 		new PlateArmor().identify().level(15).collect();
 		new ScrollOfUpgrade().identify().quantity(999).collect();
+		new Stylus().quantity(100).collect();
+		new WandOfCorruption().level(15).identify().collect();
 		for (int j = 0; j < 25; j++) {
 			int r = Random.Int(3);
 			Item item;
@@ -269,7 +269,7 @@ public enum HeroClass {
 	}
 
 	private static void initWarrior( Hero hero ) {
-		(hero.belongings.weapon = new WornShortsword().enchant(new Sacrificial())).identify().upgrade();
+		(hero.belongings.weapon = new WornShortsword()).identify().upgrade();
 		(hero.belongings.armor = new LeatherArmor()).identify().upgrade();
 		hero.HP = hero.HT = 48;
 		ThrowingStone stones = new ThrowingStone();

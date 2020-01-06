@@ -28,6 +28,7 @@ import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.MagicImmune;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
+import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroSubClass;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.KindOfWeapon;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfFuror;
@@ -178,15 +179,26 @@ abstract public class Weapon extends KindOfWeapon {
 	public float accuracyFactor( Char owner ) {
 		
 		int encumbrance = 0;
+		int armorEnc = 0;//Brawler gains extra accuracy when fighting with low level armor
 		
 		if( owner instanceof Hero ){
-			encumbrance = STRReq() - ((Hero)owner).STR();
+			Hero hero = (Hero) owner;
+			encumbrance = STRReq() - hero.STR();
+			if (hero.belongings.armor == null){
+				armorEnc = 8 - hero.STR();
+			} else {
+				armorEnc = hero.belongings.armor.STRReq() - hero.STR();
+			}
 		}
 
 		if (hasEnchant(Wayward.class, owner))
 			encumbrance = Math.max(2, encumbrance+2);
 
 		float ACC = this.ACC;
+
+		if (hero.subClass == HeroSubClass.BRAWLER) {
+			ACC *= Math.pow(1.2, -armorEnc);
+		}
 
 		return encumbrance > 0 ? (float)(ACC / Math.pow( 1.5, encumbrance )) : ACC;
 	}

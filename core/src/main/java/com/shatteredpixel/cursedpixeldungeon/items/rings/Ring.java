@@ -55,7 +55,8 @@ public class Ring extends KindofMisc {
 		RingOfMight.class,
 		RingOfSharpshooting.class,
 		RingOfTenacity.class,
-		RingOfWealth.class,
+		RingOfLuck.class,
+		//RingOfWealth.class,
 	};
 
 	private static final HashMap<String, Integer> gems = new HashMap<String, Integer>() {
