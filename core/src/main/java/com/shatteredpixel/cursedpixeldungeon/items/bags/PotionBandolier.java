@@ -22,6 +22,8 @@
 package com.shatteredpixel.cursedpixeldungeon.items.bags;
 
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
+import com.shatteredpixel.cursedpixeldungeon.items.potions.MegaExperiencePotion;
+import com.shatteredpixel.cursedpixeldungeon.items.potions.MegaStrengthPotion;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.Potion;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 
@@ -35,7 +37,7 @@ public class PotionBandolier extends Bag {
 
 	@Override
 	public boolean grab( Item item ) {
-		return item instanceof Potion;
+		return item instanceof Potion || item instanceof MegaExperiencePotion || item instanceof MegaStrengthPotion;
 	}
 
 	@Override

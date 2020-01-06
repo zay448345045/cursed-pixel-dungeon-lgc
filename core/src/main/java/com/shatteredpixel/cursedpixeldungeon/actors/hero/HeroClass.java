@@ -43,6 +43,8 @@ import com.shatteredpixel.cursedpixeldungeon.items.bags.ScrollHolder;
 import com.shatteredpixel.cursedpixeldungeon.items.bags.VelvetPouch;
 import com.shatteredpixel.cursedpixeldungeon.items.food.Food;
 import com.shatteredpixel.cursedpixeldungeon.items.food.SmallRation;
+import com.shatteredpixel.cursedpixeldungeon.items.potions.MegaExperiencePotion;
+import com.shatteredpixel.cursedpixeldungeon.items.potions.MegaStrengthPotion;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfExperience;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfHealing;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfInvisibility;
@@ -158,8 +160,12 @@ public enum HeroClass {
 				initHuntress( hero );
 				break;
 			case PRIESTESS:
-				initPriestess(hero);
+				initPriestess( hero );
 				break;
+		}
+
+		if (CPDSettings.testing()) {
+			initTest(hero);
 		}
 		
 	}
@@ -194,39 +200,42 @@ public enum HeroClass {
 		//Extra stuff
 		new Stylus().quantity(100).collect();
 		new WandOfCorruption().level(15).identify().collect();
-		if (CPDSettings.testing()) {
-			new PotionOfStrength().quantity(10).identify().collect();
-			new MaracarsBlades().identify().level(15).collect();
-			new ThonothsAxe().identify().level(15).collect();
-			new LorsionsGreataxe().identify().level(15).collect();
-			new NeptunesTrident().identify().level(15).collect();
-			new RaRothsNunchucks().identify().level(15).collect();
-			new LoturgosCrystal().identify().level(15).collect();
-			new NahusSword().identify().level(15).collect();
-			new ChainsawHand().identify().level(15).collect();
-			new PotionOfExperience().quantity(30).identify().collect();
-			new PlateArmor().identify().level(15).collect();
-			new ScrollOfUpgrade().identify().quantity(999).collect();
-			for (int j = 0; j < 25; j ++) {
-				int r = Random.Int(3);
-				Item item;
-				if (r == 0) {
-					item = Generator.random(Generator.Category.RING);
-				} else if (r == 1) {
-					item = Generator.random(Generator.Category.ARTIFACT);
-				} else {
-					item = Generator.random(Generator.Category.WAND);
-				}
-				if (item != null) {
-					item.identify().collect();
-					item.cursed = false;
-					if (item.isUpgradable()) {
-						item.level(15);
-					}
+
+	}
+
+	public static void initTest(Hero hero) {
+		new MegaStrengthPotion().identify().collect();
+		new MaracarsBlades().identify().level(15).collect();
+		new ThonothsAxe().identify().level(15).collect();
+		new LorsionsGreataxe().identify().level(15).collect();
+		new NeptunesTrident().identify().level(15).collect();
+		new RaRothsNunchucks().identify().level(15).collect();
+		new LoturgosCrystal().identify().level(15).collect();
+		new NahusSword().identify().level(15).collect();
+		new ChainsawHand().identify().level(15).collect();
+		new MegaExperiencePotion().identify().collect();
+		new PlateArmor().identify().level(15).collect();
+		new ScrollOfUpgrade().identify().quantity(999).collect();
+		for (int j = 0; j < 25; j++) {
+			int r = Random.Int(3);
+			Item item;
+			if (r == 0) {
+				item = Generator.random(Generator.Category.RING);
+			} else if (r == 1) {
+				item = Generator.random(Generator.Category.ARTIFACT);
+			} else {
+				item = Generator.random(Generator.Category.WAND);
+			}
+			if (item != null) {
+				item.identify().collect();
+				item.cursed = false;
+				if (item.isUpgradable()) {
+					item.level(15);
 				}
 			}
-			//new WandOfCorruption().upgrade(99).identify().collect();
 		}
+		//new WandOfCorruption().upgrade(99).identify().collect();
+
 	}
 
 	public Badges.Badge masteryBadge() {
