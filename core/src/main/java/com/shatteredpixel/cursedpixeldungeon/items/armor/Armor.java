@@ -31,6 +31,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.MagicImmune;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Momentum;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
+import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroSubClass;
 import com.shatteredpixel.cursedpixeldungeon.effects.Speck;
 import com.shatteredpixel.cursedpixeldungeon.items.BrokenSeal;
 import com.shatteredpixel.cursedpixeldungeon.items.EquipableItem;
@@ -321,12 +322,16 @@ public class Armor extends EquipableItem {
 		}
 		
 		if (owner instanceof Hero){
+			Hero hero = (Hero) owner;
 			int aEnc = STRReq() - ((Hero) owner).STR();
 			if (aEnc > 0) evasion /= Math.pow(1.5, aEnc);
 			
 			Momentum momentum = owner.buff(Momentum.class);
 			if (momentum != null){
-				evasion += momentum.evasionBonus(Math.max(0, -aEnc));
+				evasion += momentum.evasionBonus();
+			}
+			if (hero.subClass == HeroSubClass.BRAWLER) {
+				evasion += Math.max(0, -aEnc)*1.5f;
 			}
 		}
 		

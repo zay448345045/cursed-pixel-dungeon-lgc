@@ -28,7 +28,7 @@ public class MegaExperiencePotion extends Item {
     public static final String AC_DRINK = "DRINK";
     public void apply(Hero hero) {
         for (int i = 0; i < 50; i++) {
-            hero.earnExp(hero.maxExp() - hero.exp, Potion.class);
+            hero.earnExp(hero.maxExp() - hero.exp, PotionOfExperience.class);
         }
         detach(hero.belongings.backpack);
     }

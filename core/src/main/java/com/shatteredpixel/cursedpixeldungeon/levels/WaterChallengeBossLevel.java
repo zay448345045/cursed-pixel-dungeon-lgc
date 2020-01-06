@@ -201,15 +201,14 @@ public class WaterChallengeBossLevel extends Level {
         }
     }
 
-    @Override
     public int randomRespawnCell() {
-        int cell = entrance + PathFinder.NEIGHBOURS8[Random.Int(8)];
-        while (!passable[cell]){
-            cell = entrance + PathFinder.NEIGHBOURS8[Random.Int(8)];
-        }
+        int cell;
+        do {
+            cell = Random.Int(width*height);
+        } while (!passable[cell] || Dungeon.hero.fieldOfView[cell] || !outsideEntraceRoom(cell)
+                || Actor.findChar(cell) != null);
         return cell;
     }
-
     @Override
     public void press( int cell, Char hero ) {
 
