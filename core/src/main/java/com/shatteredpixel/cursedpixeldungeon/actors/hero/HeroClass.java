@@ -80,6 +80,8 @@ import com.watabou.utils.Bundle;
 import com.watabou.utils.DeviceCompat;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public enum HeroClass {
 
 	WARRIOR( "warrior", HeroSubClass.BERSERKER, HeroSubClass.GLADIATOR ),
@@ -95,6 +97,42 @@ public enum HeroClass {
 	HeroClass( String title, HeroSubClass...subClasses ) {
 		this.title = title;
 		this.subClasses = subClasses;
+	}
+
+	public static ArrayList<HeroSubClass> avalibleSubClasses(HeroClass cl) {
+		ArrayList<HeroSubClass> subClasses = new ArrayList<>();
+		if (cl == MAGE) {
+			subClasses.add(HeroSubClass.BATTLEMAGE);//NORMAL
+			subClasses.add(HeroSubClass.WARLOCK);//MAGE + WARRIOR
+			subClasses.add(HeroSubClass.NECROMACER);//MAGE + PRIESTESS
+			subClasses.add(HeroSubClass.WARDEN);//MAGE + HUNTRESS
+			//MAGE + ROGUE
+		} else if (cl == WARRIOR) {
+			subClasses.add(HeroSubClass.BERSERKER);
+			subClasses.add(HeroSubClass.GLADIATOR);
+			subClasses.add(HeroSubClass.WARLOCK);
+			//WARRIOR + ROGUE (Brawler?)
+			//WARRIOR + PRIESTESS
+		} else if (cl == ROGUE) {
+			subClasses.add(HeroSubClass.ASSASSIN);//NORMAL
+			subClasses.add(HeroSubClass.FREERUNNER);//ROGUE + HUNTRESS
+			//ROGUE + WARRIOR (Brawler?)
+			//ROGUE + MAGE
+			//ROGUE + PRIESTESS
+		} else if (cl == HUNTRESS) {
+			subClasses.add(HeroSubClass.SNIPER);//NORMAL
+			subClasses.add(HeroSubClass.GLADIATOR);//HUNTRESS + WARRIOR
+			subClasses.add(HeroSubClass.WARDEN);//HUNTRESS + MAGE
+			subClasses.add(HeroSubClass.FREERUNNER);//HUNTRESS + ROGUE
+			//HUNTRESS + PRIESTESS
+		} else if (cl == PRIESTESS) {
+			subClasses.add(HeroSubClass.MEDIC);//NORMAL
+			subClasses.add(HeroSubClass.NECROMACER);//PRIESTESS + MAGE
+			//PRIESTESS + HUNTRESS
+			//PRIESTESS + WARRIOR
+			//PRIESTESS + ROGUE
+		}
+		return subClasses;
 	}
 
 	public void initHero( Hero hero ) {
