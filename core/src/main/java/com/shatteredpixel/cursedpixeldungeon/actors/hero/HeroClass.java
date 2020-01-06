@@ -108,9 +108,9 @@ public enum HeroClass {
 			subClasses.add(HeroSubClass.WARDEN);//MAGE + HUNTRESS
 			subClasses.add(HeroSubClass.ENCHANTER);//MAGE + ROGUE
 		} else if (cl == WARRIOR) {
-			subClasses.add(HeroSubClass.BERSERKER);
-			subClasses.add(HeroSubClass.GLADIATOR);
-			subClasses.add(HeroSubClass.WARLOCK);
+			subClasses.add(HeroSubClass.BERSERKER);//NORMAL
+			subClasses.add(HeroSubClass.GLADIATOR);//WARRIOR + HUNTRESS
+			subClasses.add(HeroSubClass.WARLOCK);//WARRIOR + MAGE
 			subClasses.add(HeroSubClass.BRAWLER);//WARRIOR + ROGUE
 			subClasses.add(HeroSubClass.MONK);//WARRIOR + PRIESTESS
 		} else if (cl == ROGUE) {
