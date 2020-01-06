@@ -115,7 +115,7 @@ public enum HeroClass {
 			subClasses.add(HeroSubClass.GLADIATOR);//WARRIOR + HUNTRESS
 			subClasses.add(HeroSubClass.WARLOCK);//WARRIOR + MAGE
 			subClasses.add(HeroSubClass.BRAWLER);//WARRIOR + ROGUE
-			//WARRIOR + PRIESTESS
+			subClasses.add(HeroSubClass.PALADIN);//WARRIOR + PRIESTESS
 		} else if (cl == ROGUE) {
 			subClasses.add(HeroSubClass.ASSASSIN);//NORMAL
 			subClasses.add(HeroSubClass.FREERUNNER);//ROGUE + HUNTRESS
@@ -127,12 +127,12 @@ public enum HeroClass {
 			subClasses.add(HeroSubClass.GLADIATOR);//HUNTRESS + WARRIOR
 			subClasses.add(HeroSubClass.WARDEN);//HUNTRESS + MAGE
 			subClasses.add(HeroSubClass.FREERUNNER);//HUNTRESS + ROGUE
-			//HUNTRESS + PRIESTESS
+			subClasses.add(HeroSubClass.VALKYRIE);//HUNTRESS + PRIESTESS
 		} else if (cl == PRIESTESS) {
 			subClasses.add(HeroSubClass.MEDIC);//NORMAL
 			subClasses.add(HeroSubClass.NECROMANCER);//PRIESTESS + MAGE
-			//PRIESTESS + HUNTRESS
-			//PRIESTESS + WARRIOR
+			subClasses.add(HeroSubClass.VALKYRIE);//PRIESTESS + HUNTRESS
+			subClasses.add(HeroSubClass.PALADIN);//PRIESTESS + WARRIOR
 			subClasses.add(HeroSubClass.CULTIST);//PRIESTESS + ROGUE
 		}
 		return subClasses;

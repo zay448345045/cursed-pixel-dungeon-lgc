@@ -43,6 +43,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.artifacts.Artifact;
 import com.shatteredpixel.cursedpixeldungeon.items.bags.Bag;
 import com.shatteredpixel.cursedpixeldungeon.items.bags.MagicalHolster;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfEnergy;
+import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfLuck;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MagesStaff;
 import com.shatteredpixel.cursedpixeldungeon.mechanics.Ballistica;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
@@ -353,16 +354,16 @@ public abstract class Wand extends KindofMisc {
 		//+1: 26.67% (4/15)
 		//+2: 6.67%  (1/15)
 		int n = 0;
-		if (Random.Int(3) == 0) {
+		if (RingOfLuck.randomInt(3, 0) == 0) {
 			n++;
-			if (Random.Int(5) == 0){
+			if (RingOfLuck.randomInt(5, 0) == 0){
 				n++;
 			}
 		}
 		level(n);
 		
 		//30% chance to be cursed, 70% at night
-		if (Random.Float() < 0.3f | (Dungeon.checkNight() & Random.Float() < 0.7f)) {
+		if (RingOfLuck.randomFloat(0f) < 0.3f | (Dungeon.checkNight() & RingOfLuck.randomFloat(0f) < 0.7f)) {
 			cursed = true;
 			upgrade();
 		}

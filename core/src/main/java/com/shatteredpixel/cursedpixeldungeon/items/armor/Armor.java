@@ -494,9 +494,9 @@ public class Armor extends EquipableItem {
 		//+1: 20% (4/20)
 		//+2: 5%  (1/20)
 		int n = 0;
-		if (Random.Int(4) == 0) {
+		if (RingOfLuck.randomInt(4, 0) == 0) {
 			n++;
-			if (Random.Int(5) == 0) {
+			if (RingOfLuck.randomInt(5, 0) == 0) {
 				n++;
 			}
 		}
@@ -504,8 +504,8 @@ public class Armor extends EquipableItem {
 		
 		//30% chance to be cursed, 70% at night
 		//15% chance to be inscribed, 30% at night
-		float effectRoll = Random.Float();
-		if (effectRoll < 0.3f | (Dungeon.checkNight() & Random.Float() < 0.7f)) {
+		float effectRoll = RingOfLuck.randomFloat(0f);
+		if (effectRoll < 0.3f | (Dungeon.checkNight() & RingOfLuck.randomFloat(0f) < 0.7f)) {
 			inscribe(Glyph.randomCurse());
 			upgrade();
 			cursed = true;

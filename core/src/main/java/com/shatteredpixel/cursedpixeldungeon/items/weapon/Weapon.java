@@ -32,6 +32,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroSubClass;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.KindOfWeapon;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfFuror;
+import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfLuck;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.curses.Annoying;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.curses.Displacing;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.curses.Exhausting;
@@ -263,9 +264,9 @@ abstract public class Weapon extends KindOfWeapon {
 		//+1: 20% (4/20)
 		//+2: 5%  (1/20)
 		int n = 0;
-		if (Random.Int(4) == 0) {
+		if (RingOfLuck.randomInt(4, 0) == 0) {
 			n++;
-			if (Random.Int(5) == 0) {
+			if (RingOfLuck.randomInt(5, 0) == 0) {
 				n++;
 			}
 		}
@@ -273,7 +274,7 @@ abstract public class Weapon extends KindOfWeapon {
 		
 		//30% chance to be cursed, 70% at night
 		//10% chance to be enchanted, 30% at night
-		float effectRoll = Random.Float();
+		float effectRoll = RingOfLuck.randomFloat(0f);//Lowest possible (decreases chance of curse)
 		if (effectRoll < 0.3f | (Dungeon.checkNight() & Random.Float() < 0.7f)) {
 			enchant(Enchantment.randomCurse());
 			upgrade();

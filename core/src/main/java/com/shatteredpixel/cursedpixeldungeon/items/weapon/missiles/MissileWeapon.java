@@ -31,6 +31,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroClass;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.bags.Bag;
 import com.shatteredpixel.cursedpixeldungeon.items.bags.MagicalHolster;
+import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfLuck;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfSharpshooting;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Projecting;
@@ -181,9 +182,9 @@ abstract public class MissileWeapon extends Weapon {
 		//3: 26.67% (4/15)
 		//4: 6.67%  (1/15)
 		quantity = 2;
-		if (Random.Int(3) == 0) {
+		if (RingOfLuck.randomInt(3, 0) == 0) {
 			quantity++;
-			if (Random.Int(5) == 0) {
+			if (RingOfLuck.randomInt(5, 0) == 0) {
 				quantity++;
 			}
 		}
