@@ -30,6 +30,7 @@ public class MegaExperiencePotion extends Item {
         for (int i = 0; i < 50; i++) {
             hero.earnExp(hero.maxExp() - hero.exp, Potion.class);
         }
+        detach(hero.belongings.backpack);
     }
 
     @Override

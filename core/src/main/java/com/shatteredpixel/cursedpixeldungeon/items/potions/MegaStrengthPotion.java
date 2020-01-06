@@ -3,7 +3,6 @@ package com.shatteredpixel.cursedpixeldungeon.items.potions;
 import com.shatteredpixel.cursedpixeldungeon.Badges;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
-import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
@@ -37,6 +36,7 @@ public class MegaStrengthPotion extends Item {
         GLog.p( "You feel a rush of strength in your body..." );
 
         Badges.validateStrengthAttained();
+        detach(hero.belongings.backpack);
     }
 
     @Override
