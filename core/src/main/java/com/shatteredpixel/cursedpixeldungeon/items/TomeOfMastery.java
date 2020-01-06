@@ -86,7 +86,7 @@ public class TomeOfMastery extends Item {
 				break;
 			case PRIESTESS:
 				way1 = HeroSubClass.MEDIC;
-				way2 = HeroSubClass.NECROMACER;
+				way2 = HeroSubClass.NECROMANCER;
 				break;
 
 			}*/

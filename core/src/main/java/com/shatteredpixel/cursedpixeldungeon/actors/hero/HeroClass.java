@@ -88,7 +88,7 @@ public enum HeroClass {
 	MAGE( "mage", HeroSubClass.BATTLEMAGE, HeroSubClass.WARLOCK ),
 	ROGUE( "rogue", HeroSubClass.ASSASSIN, HeroSubClass.FREERUNNER ),
 	HUNTRESS( "huntress", HeroSubClass.SNIPER, HeroSubClass.WARDEN ),
-	PRIESTESS("priestess", HeroSubClass.NECROMACER, HeroSubClass.MEDIC);
+	PRIESTESS("priestess", HeroSubClass.NECROMANCER, HeroSubClass.MEDIC);
 
 
 	private String title;
@@ -104,20 +104,20 @@ public enum HeroClass {
 		if (cl == MAGE) {
 			subClasses.add(HeroSubClass.BATTLEMAGE);//NORMAL
 			subClasses.add(HeroSubClass.WARLOCK);//MAGE + WARRIOR
-			subClasses.add(HeroSubClass.NECROMACER);//MAGE + PRIESTESS
+			subClasses.add(HeroSubClass.NECROMANCER);//MAGE + PRIESTESS
 			subClasses.add(HeroSubClass.WARDEN);//MAGE + HUNTRESS
-			//MAGE + ROGUE
+			subClasses.add(HeroSubClass.ENCHANTER);//MAGE + ROGUE
 		} else if (cl == WARRIOR) {
 			subClasses.add(HeroSubClass.BERSERKER);
 			subClasses.add(HeroSubClass.GLADIATOR);
 			subClasses.add(HeroSubClass.WARLOCK);
-			//WARRIOR + ROGUE (Brawler?)
-			//WARRIOR + PRIESTESS
+			subClasses.add(HeroSubClass.BRAWLER);//WARRIOR + ROGUE
+			subClasses.add(HeroSubClass.MONK);//WARRIOR + PRIESTESS
 		} else if (cl == ROGUE) {
 			subClasses.add(HeroSubClass.ASSASSIN);//NORMAL
 			subClasses.add(HeroSubClass.FREERUNNER);//ROGUE + HUNTRESS
-			//ROGUE + WARRIOR (Brawler?)
-			//ROGUE + MAGE
+			subClasses.add(HeroSubClass.BRAWLER);//ROGUE + WARRIOR
+			subClasses.add(HeroSubClass.ENCHANTER);//ROGUE + MAGE
 			//ROGUE + PRIESTESS
 		} else if (cl == HUNTRESS) {
 			subClasses.add(HeroSubClass.SNIPER);//NORMAL
@@ -127,9 +127,9 @@ public enum HeroClass {
 			//HUNTRESS + PRIESTESS
 		} else if (cl == PRIESTESS) {
 			subClasses.add(HeroSubClass.MEDIC);//NORMAL
-			subClasses.add(HeroSubClass.NECROMACER);//PRIESTESS + MAGE
+			subClasses.add(HeroSubClass.NECROMANCER);//PRIESTESS + MAGE
 			//PRIESTESS + HUNTRESS
-			//PRIESTESS + WARRIOR
+			subClasses.add(HeroSubClass.MONK);//PRIESTESS + WARRIOR
 			//PRIESTESS + ROGUE
 		}
 		return subClasses;

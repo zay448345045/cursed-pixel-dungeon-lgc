@@ -162,7 +162,7 @@ public class WndClass extends WndTabbed {
 					message = HeroSubClass.SNIPER.desc() + "\n\n" + HeroSubClass.WARDEN.desc();
 					break;
 				case PRIESTESS:
-					message = HeroSubClass.MEDIC.desc() + "\n\n" + HeroSubClass.NECROMACER.desc();
+					message = HeroSubClass.MEDIC.desc() + "\n\n" + HeroSubClass.NECROMANCER.desc();
 					break;
 			}
 

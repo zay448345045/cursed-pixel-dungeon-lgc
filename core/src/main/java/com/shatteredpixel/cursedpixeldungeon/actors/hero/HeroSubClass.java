@@ -40,7 +40,11 @@ public enum HeroSubClass {
 	SNIPER( "sniper" ),
 	WARDEN( "warden" ),
 
-	NECROMACER("necromacer"),
+	BRAWLER("brawler"),
+	MONK("monk"),
+	ENCHANTER("enchanter"),
+
+	NECROMANCER("necromancer"),
 	MEDIC("medic");
 
 

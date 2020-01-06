@@ -299,7 +299,7 @@ public abstract class Mob extends Char {
 
 			} else if (alignment == Alignment.WRAITH) {
 				for (Mob mob : Dungeon.level.mobs){
-					if (Dungeon.hero.subClass == HeroSubClass.NECROMACER) {
+					if (Dungeon.hero.subClass == HeroSubClass.NECROMANCER) {
 						this.alignment = Alignment.ALLY;//Switch to Ally if the hero is a Necromancer
 					}
 					if (!(mob instanceof Wraith)) {
@@ -670,7 +670,7 @@ public abstract class Mob extends Char {
 			Badges.validatePriestessUnlock();
 		}
 		super.die( cause );
-		if (Dungeon.hero.subClass == HeroSubClass.NECROMACER && Random.Float() >= 0.5f && (cause instanceof Item | cause instanceof Hero)) {//Must be killed by the hero (by an item)
+		if (Dungeon.hero.subClass == HeroSubClass.NECROMANCER && Random.Float() >= 0.5f && (cause instanceof Item | cause instanceof Hero)) {//Must be killed by the hero (by an item)
 			if (Wraith.spawnAt( pos ) != null) {
 				Dungeon.hero.sprite.emitter().burst(ShadowParticle.CURSE, 6);
 			}

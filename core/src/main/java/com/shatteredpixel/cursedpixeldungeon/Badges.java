@@ -642,7 +642,7 @@ public class Badges {
 				case WARDEN:
 					badge = Badge.BOSS_SLAIN_3_WARDEN;
 					break;
-				case NECROMACER:
+				case NECROMANCER:
 					badge = Badge.BOSS_SLAIN_3_NECROMANCER;
 					break;
 				case MEDIC:
