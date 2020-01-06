@@ -65,7 +65,7 @@ public class TomeOfMastery extends Item {
 			
 			curUser = hero;
 			
-			HeroSubClass way1 = null;
+			/*HeroSubClass way1 = null;
 			HeroSubClass way2 = null;
 			switch (hero.heroClass) {
 			case WARRIOR:
@@ -89,8 +89,9 @@ public class TomeOfMastery extends Item {
 				way2 = HeroSubClass.NECROMACER;
 				break;
 
-			}
-			GameScene.show( new WndChooseWay( this, way1, way2 ) );
+			}*/
+
+			GameScene.show( new WndChooseWay( this, hero.heroClass) );
 			
 		}
 	}

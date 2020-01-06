@@ -21,14 +21,19 @@
 
 package com.shatteredpixel.cursedpixeldungeon.windows;
 
+import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroClass;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroSubClass;
 import com.shatteredpixel.cursedpixeldungeon.items.TomeOfMastery;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
+import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.scenes.PixelScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.cursedpixeldungeon.ui.RedButton;
 import com.shatteredpixel.cursedpixeldungeon.ui.RenderedTextMultiline;
 import com.shatteredpixel.cursedpixeldungeon.ui.Window;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class WndChooseWay extends Window {
 	
@@ -36,10 +41,14 @@ public class WndChooseWay extends Window {
 	private static final int BTN_HEIGHT	= 18;
 	private static final float GAP		= 2;
 	
-	public WndChooseWay( final TomeOfMastery tome, final HeroSubClass way1, final HeroSubClass way2 ) {
+	public WndChooseWay(final TomeOfMastery tome, final HeroClass cl) {
 		
 		super();
-
+		final ArrayList<HeroSubClass> subClasses = HeroClass.avalibleSubClasses(cl);
+		ArrayList<RedButton> subClassButtons = new ArrayList<>();
+		if (subClasses.size() < 1) {
+			return;
+		}
 		IconTitle titlebar = new IconTitle();
 		titlebar.icon( new ItemSprite( tome.image(), null ) );
 		titlebar.label( tome.name() );
@@ -47,11 +56,36 @@ public class WndChooseWay extends Window {
 		add( titlebar );
 
 		RenderedTextMultiline hl = PixelScene.renderMultiline( 6 );
-		hl.text( way1.desc() + "\n\n" + way2.desc() + "\n\n" + Messages.get(this, "message"), WIDTH );
+		hl.text( /*way1.desc() + "\n\n" + way2.desc() + "\n\n" +*/ Messages.get(this, "message"), WIDTH );
 		hl.setPos( titlebar.left(), titlebar.bottom() + GAP );
 		add( hl );
-		
-		RedButton btnWay1 = new RedButton( way1.title().toUpperCase() ) {
+		int extra = 0;
+		for (HeroSubClass subClass : subClasses) {
+			final HeroSubClass SubClass = subClass;
+			RedButton btnWay = new RedButton( SubClass.title().toUpperCase() ) {
+				@Override
+				protected void onClick() {
+					hide();
+					tome.choose( SubClass );
+				}
+			};
+			RedButton btnDesc = new RedButton(Messages.get(this, "info")) {
+				@Override
+				protected void onClick() {
+					hide();
+					GameScene.show(new WndTitledMessage( new ItemSprite( tome.image(), null ), SubClass.title(), SubClass.desc()));
+				}
+			};
+			subClassButtons.add(btnWay);
+
+			btnWay.setRect( 0, hl.bottom() + GAP + extra, (WIDTH - GAP)*0.67f, BTN_HEIGHT );
+			add( btnWay );
+			btnDesc.setRect( (WIDTH - GAP)*0.67f, hl.bottom() + GAP + extra, (WIDTH - GAP)*0.33f, BTN_HEIGHT );
+			add( btnDesc );
+			extra += BTN_HEIGHT;
+		}
+
+		/*RedButton btnWay1 = new RedButton( way1.title().toUpperCase() ) {
 			@Override
 			protected void onClick() {
 				hide();
@@ -69,15 +103,15 @@ public class WndChooseWay extends Window {
 			}
 		};
 		btnWay2.setRect( btnWay1.right() + GAP, btnWay1.top(), btnWay1.width(), BTN_HEIGHT );
-		add( btnWay2 );
-		
+		add( btnWay2 );*/
+
 		RedButton btnCancel = new RedButton( Messages.get(this, "cancel") ) {
 			@Override
 			protected void onClick() {
 				hide();
 			}
 		};
-		btnCancel.setRect( 0, btnWay2.bottom() + GAP, WIDTH, BTN_HEIGHT );
+		btnCancel.setRect( 0, subClassButtons.get(subClassButtons.size()-1).bottom() + GAP, WIDTH, BTN_HEIGHT );
 		add( btnCancel );
 		
 		resize( WIDTH, (int)btnCancel.bottom() );

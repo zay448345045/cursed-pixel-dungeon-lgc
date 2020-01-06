@@ -71,7 +71,7 @@ public class Item implements Bundlable {
 		int levelLimit = 2+(int)(Dungeon.hero.lvl/2f);
 		levelLimit = Math.min(Constants.upgradeLimit,levelLimit);
 		if (Dungeon.hero.subClass == bonusSubClass) {
-			levelLimit = (int) (levelLimit * 1.3333f);
+			levelLimit = (int) (levelLimit * 1.3333f) + 1;
 		}
 		return levelLimit;
 	}

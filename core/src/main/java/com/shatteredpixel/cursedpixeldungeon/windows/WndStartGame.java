@@ -29,6 +29,7 @@ import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroClass;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroSubClass;
+import com.shatteredpixel.cursedpixeldungeon.items.TomeOfMastery;
 import com.shatteredpixel.cursedpixeldungeon.journal.Journal;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
@@ -301,7 +302,7 @@ public class WndStartGame extends Window {
 				protected void onClick() {
 					if (cl == null) return;
 					String msg = Messages.get(cl, cl.name() + "_desc_subclasses");
-					for (HeroSubClass sub : cl.subClasses()){
+					for (HeroSubClass sub : HeroClass.avalibleSubClasses(cl)){
 						msg += "\n\n" + sub.desc();
 					}
 					ShatteredPixelDungeon.scene().add(new WndMessage(msg));
