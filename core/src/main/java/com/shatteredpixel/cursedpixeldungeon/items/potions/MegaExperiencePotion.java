@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class MegaExperiencePotion extends Item {
     {
-        name = "Mega Potion of Experience";
+        name = "MEGA Potion of Experience";
 
         bones = false;
 

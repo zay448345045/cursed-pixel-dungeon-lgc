@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class MegaStrengthPotion extends Item {
     {
-        name = "Mega Potion of Experience";
+        name = "MEGA Potion of Strength";
 
         bones = false;
 
@@ -41,7 +41,7 @@ public class MegaStrengthPotion extends Item {
 
     @Override
     public String desc() {
-        return "Drink this for cool stuff like much experience. It is good.";
+        return "Drink this for cool stuff like much strength. It is good.";
     }
 
     @Override
