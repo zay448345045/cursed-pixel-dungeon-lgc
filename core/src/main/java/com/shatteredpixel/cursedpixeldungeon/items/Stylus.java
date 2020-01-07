@@ -103,7 +103,7 @@ public class Stylus extends Item {
 
 		
 		curUser.sprite.operate(curUser.pos);
-		curUser.sprite.centerEmitter().start(PurpleParticle.BURST, 0.05f, 60);
+		curUser.sprite.centerEmitter().start(PurpleParticle.BURST, 0.05f, 10);
 		Enchanting.show(curUser, item);
 		Sample.INSTANCE.play(Assets.SND_BURNING);
 		
