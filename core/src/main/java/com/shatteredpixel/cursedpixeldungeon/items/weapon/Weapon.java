@@ -274,7 +274,7 @@ abstract public class Weapon extends KindOfWeapon {
 		
 		//30% chance to be cursed, 70% at night
 		//10% chance to be enchanted, 30% at night
-		float effectRoll = RingOfLuck.randomFloat(0f);//Lowest possible (decreases chance of curse)
+		float effectRoll = RingOfLuck.randomFloat(1f);
 		if (effectRoll < 0.3f | (Dungeon.checkNight() & Random.Float() < 0.7f)) {
 			enchant(Enchantment.randomCurse());
 			upgrade();

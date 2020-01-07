@@ -29,6 +29,7 @@ import com.shatteredpixel.cursedpixeldungeon.Statistics;
 import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.blobs.Blob;
+import com.shatteredpixel.cursedpixeldungeon.actors.blobs.Regrowth;
 import com.shatteredpixel.cursedpixeldungeon.actors.blobs.SmokeScreen;
 import com.shatteredpixel.cursedpixeldungeon.actors.blobs.WellWater;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Awareness;
@@ -43,7 +44,9 @@ import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroClass;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroSubClass;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Bestiary;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
+import com.shatteredpixel.cursedpixeldungeon.effects.BlobEmitter;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.FlowParticle;
+import com.shatteredpixel.cursedpixeldungeon.effects.particles.LeafParticle;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.WindParticle;
 import com.shatteredpixel.cursedpixeldungeon.items.Generator;
 import com.shatteredpixel.cursedpixeldungeon.items.Heap;
@@ -55,6 +58,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.artifacts.DriedRose;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.TimekeepersHourglass;
 import com.shatteredpixel.cursedpixeldungeon.items.food.SmallRation;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfStrength;
+import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfLuck;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.cursedpixeldungeon.items.stones.StoneOfEnchantment;
 import com.shatteredpixel.cursedpixeldungeon.items.stones.StoneOfIntuition;
@@ -221,26 +225,26 @@ public abstract class Level implements Bundlable {
 			}
 			
 			if (Dungeon.depth > 1) {
-				switch (Random.Int( 10 )) {
-				case 0:
-					if (!Dungeon.bossLevel( Dungeon.depth )) {
-						feeling = Feeling.CHASM;
-					}
-					break;
-				case 1:
-					feeling = Feeling.WATER;
-					break;
-				case 2:
-					feeling = Feeling.GRASS;
-					break;
-				case 3:
-					feeling = Feeling.DARK;
-					addItemToSpawn(new Torch());
-					viewDistance = Math.round(viewDistance/2f);
-					break;
-				case 4:
-					feeling = Feeling.EMBER;
-					break;
+				switch (RingOfLuck.randomInt( 10, 0 )) {
+					case 0:
+						if (!Dungeon.bossLevel(Dungeon.depth)) {
+							feeling = Feeling.CHASM;
+						}
+						break;
+					case 1:
+						feeling = Feeling.WATER;
+						break;
+					case 2:
+						feeling = Feeling.GRASS;
+						break;
+					case 8:
+						feeling = Feeling.EMBER;
+						break;
+					case 9:
+						feeling = Feeling.DARK;
+						addItemToSpawn(new Torch());
+						viewDistance = Math.round(viewDistance / 2f);
+						break;
 				}
 				if (Dungeon.depth > 40 & Dungeon.depth < 46) {
 					feeling = Feeling.EMBER;
@@ -489,6 +493,8 @@ public abstract class Level implements Bundlable {
 				if (i >= width() && water[i-width()]) {
 					visuals.add( new FlowParticle.Flow( i - width() ) );
 				}
+			} else if (feeling == Feeling.EMBER && map[i] == Terrain.EMBERS) {
+				visuals.add( new CityLevel.Smoke( i ) );
 			}
 		}
 		return visuals;

@@ -504,8 +504,8 @@ public class Armor extends EquipableItem {
 		
 		//30% chance to be cursed, 70% at night
 		//15% chance to be inscribed, 30% at night
-		float effectRoll = RingOfLuck.randomFloat(0f);
-		if (effectRoll < 0.3f | (Dungeon.checkNight() & RingOfLuck.randomFloat(0f) < 0.7f)) {
+		float effectRoll = RingOfLuck.randomFloat(1f);
+		if (effectRoll < 0.3f | (Dungeon.checkNight() & RingOfLuck.randomFloat(1f) < 0.7f)) {
 			inscribe(Glyph.randomCurse());
 			upgrade();
 			cursed = true;

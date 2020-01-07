@@ -363,7 +363,7 @@ public abstract class Wand extends KindofMisc {
 		level(n);
 		
 		//30% chance to be cursed, 70% at night
-		if (RingOfLuck.randomFloat(0f) < 0.3f | (Dungeon.checkNight() & RingOfLuck.randomFloat(0f) < 0.7f)) {
+		if (RingOfLuck.randomFloat(1f) < 0.3f | (Dungeon.checkNight() & RingOfLuck.randomFloat(1f) < 0.7f)) {
 			cursed = true;
 			upgrade();
 		}

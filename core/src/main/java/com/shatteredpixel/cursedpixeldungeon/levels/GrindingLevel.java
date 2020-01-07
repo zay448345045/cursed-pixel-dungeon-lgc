@@ -34,8 +34,14 @@ import java.util.ArrayList;
 public class GrindingLevel extends SewerLevel {
 
     @Override
-    public float respawnTime() {
-        return super.respawnTime()/6f;
+    public float respawnTime() {//Respawn time depends on current number of mobs.
+        if (mobs.size() > 7) {
+            return super.respawnTime() / 2f;
+        } else if  (mobs.size() > 5) {
+            return super.respawnTime() / 5f;
+        } else {
+            return super.respawnTime() / 10f;
+        }
     }
 
     @Override
@@ -184,7 +190,9 @@ public class GrindingLevel extends SewerLevel {
 
         @Override
         public int attackProc(Char enemy, int damage) {
-            enemy.damage(Math.max(30,enemy.HP)/30,this);
+            if (Random.Int(3) == 0) {
+                enemy.damage(Math.max(10, enemy.HP) / 10, this);
+            }
             return super.attackProc(enemy, damage);
         }
     }
@@ -288,7 +296,7 @@ public class GrindingLevel extends SewerLevel {
             spriteClass = OrangeGuardianSprite.class;
             baseSpeed = 1f;
             resistances.add(Wand.class);
-            lootAmt = 2;//
+            lootAmt = 2;//Rare variant
         }
 
         @Override
@@ -317,6 +325,11 @@ public class GrindingLevel extends SewerLevel {
 
         static class FireBolt {}
 
+        @Override
+        protected float attackDelay() {
+            return 1f;
+        }
+
         void onZapComplete() {
             zap();
             next();
@@ -330,7 +343,7 @@ public class GrindingLevel extends SewerLevel {
                     Buff.affect( enemy, Burning.class ).reignite(enemy);
                 }
 
-                int dmg = damageRoll()/2;
+                int dmg = damageRoll();
                 enemy.damage( dmg, new FireBolt() );
 
                 if (!enemy.isAlive() && enemy == Dungeon.hero) {
@@ -381,13 +394,13 @@ public class GrindingLevel extends SewerLevel {
         public OrangeGuardianSprite() {
             super();
             zap = attack.clone();
-            tint(3, 1, 0, 0.2f);
+            tint(4, 1, 0, 0.2f);
         }
 
         @Override
         public void resetColor() {
             super.resetColor();
-            tint(3, 1, 0, 0.2f);
+            tint(4, 1, 0, 0.2f);
         }
         @Override
         public void zap( int cell ) {

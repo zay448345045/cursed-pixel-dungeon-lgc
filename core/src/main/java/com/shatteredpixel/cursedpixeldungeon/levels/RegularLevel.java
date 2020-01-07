@@ -31,6 +31,9 @@ import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.Artifact;
 import com.shatteredpixel.cursedpixeldungeon.items.journal.GuidePage;
 import com.shatteredpixel.cursedpixeldungeon.items.keys.GoldenKey;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.LuckyBadge;
+import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfLuck;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicMeleeWeapon;
 import com.shatteredpixel.cursedpixeldungeon.journal.Document;
 import com.shatteredpixel.cursedpixeldungeon.levels.builders.Builder;
 import com.shatteredpixel.cursedpixeldungeon.levels.builders.LoopBuilder;
@@ -296,25 +299,25 @@ public abstract class RegularLevel extends Level {
 	protected void createItems() {
 		
 		// drops 3/4/5 items 60%/30%/10% of the time
-		int nItems = 3 + Random.chances(new float[]{6, 3, 1});
+		int nItems = (3 + RingOfLuck.randomChances(new float[]{6, 3, 1}, 5)) * RingOfLuck.randomInt(1, 3, 3);
 		
 		for (int i=0; i < nItems; i++) {
 			Heap.Type type = null;
-			switch (Random.Int( 20 )) {
-			case 0:
-				type = Heap.Type.SKELETON;
-				break;
-			case 1:
-			case 2:
-			case 3:
-			case 4:
-				type = Heap.Type.CHEST;
-				break;
-			case 5:
-				type = Dungeon.canSpawnMimic() ? Heap.Type.MIMIC : Heap.Type.CHEST;
-				break;
-			default:
-				type = Heap.Type.HEAP;
+			switch (RingOfLuck.randomInt( 20, 20 )) {//Because of the Ring of Luck, I have changed some of the numbers. >20 for good heaps, <20 for bad ones
+				case 0:
+					type = Dungeon.canSpawnMimic() ? Heap.Type.MIMIC : Heap.Type.CHEST;
+					break;
+				case 17:
+				case 18:
+				case 19:
+				case 20:
+					type = Heap.Type.CHEST;
+					break;
+				case 16:
+					type = Heap.Type.SKELETON;
+					break;
+				default:
+					type = Heap.Type.HEAP;
 			}
 			int cell = randomDropCell();
 			if (map[cell] == Terrain.HIGH_GRASS || map[cell] == Terrain.FURROWED_GRASS) {
@@ -326,7 +329,13 @@ public abstract class RegularLevel extends Level {
 
 			if (toDrop == null) continue;
 
-			if ((toDrop instanceof Artifact && Random.Int(2) == 0) ||
+			if ((toDrop.level() > 1 & RingOfLuck.randomInt(2,0 ) == 0)  || toDrop instanceof RelicMeleeWeapon) {
+				toDrop.upgrade(Dungeon.scaleWithDepth()/4);
+				Heap dropped = drop( toDrop, cell );
+				if (heaps.get(cell) == dropped) {
+					dropped.type = Heap.Type.EBONY_CHEST;
+				}
+			} else if ((toDrop instanceof Artifact && Random.Int(2) == 0) ||
 					(toDrop.isUpgradable() && Random.Int(4 - toDrop.level()) == 0)){
 				Heap dropped = drop( toDrop, cell );
 				if (heaps.get(cell) == dropped) {
@@ -337,7 +346,7 @@ public abstract class RegularLevel extends Level {
 				Heap dropped = drop( toDrop, cell );
 				dropped.type = type;
 				if (type == Heap.Type.SKELETON){
-					dropped.setHauntedIfCursed(0.75f);
+					dropped.setHauntedIfCursed(1f);
 				}
 			}
 			

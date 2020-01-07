@@ -27,6 +27,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.KindofMisc;
+import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfLuck;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
 import com.watabou.utils.Bundle;
@@ -181,7 +182,7 @@ public class Artifact extends KindofMisc {
 		//always +0
 		
 		//30% chance to be cursed
-		if (Random.Float() < 0.3f) {
+		if (RingOfLuck.randomFloat(1f) < 0.3f) {
 			cursed = true;
 		}
 		return this;

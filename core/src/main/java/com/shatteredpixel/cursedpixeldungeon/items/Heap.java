@@ -73,7 +73,8 @@ public class Heap implements Bundlable {
 		TOMB,
 		SKELETON,
 		REMAINS,
-		MIMIC
+		MIMIC,
+		EBONY_CHEST
 	}
 	public Type type = Type.HEAP;
 	
@@ -103,12 +104,17 @@ public class Heap implements Bundlable {
 			return ItemSpriteSheet.BONES;
 		case REMAINS:
 			return ItemSpriteSheet.REMAINS;
+		case EBONY_CHEST:
+			return ItemSpriteSheet.EBONY_CHEST;
 		default:
 			return 0;
 		}
 	}
 	
 	public ItemSprite.Glowing glowing() {
+		if (type == Type.EBONY_CHEST) {
+			return new ItemSprite.Glowing( 0x000000 );
+		}
 		return (type == Type.HEAP || type == Type.FOR_SALE) && items.size() > 0 ? items.peek().glowing() : null;
 	}
 	
@@ -122,6 +128,7 @@ public class Heap implements Bundlable {
 			}
 			break;
 		case TOMB:
+		case EBONY_CHEST:
 			Wraith.spawnAround( hero.pos );
 			break;
 		case REMAINS:
@@ -399,6 +406,7 @@ public class Heap implements Bundlable {
 		switch(type){
 			case CHEST:
 			case MIMIC:
+			case EBONY_CHEST:
 				return Messages.get(this, "chest");
 			case LOCKED_CHEST:
 				return Messages.get(this, "locked_chest");
@@ -419,6 +427,7 @@ public class Heap implements Bundlable {
 		switch(type){
 			case CHEST:
 			case MIMIC:
+			case EBONY_CHEST:
 				return Messages.get(this, "chest_desc");
 			case LOCKED_CHEST:
 				return Messages.get(this, "locked_chest_desc");

@@ -23,6 +23,7 @@ package com.shatteredpixel.cursedpixeldungeon.levels.painters;
 
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
+import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfLuck;
 import com.shatteredpixel.cursedpixeldungeon.levels.Level;
 import com.shatteredpixel.cursedpixeldungeon.levels.Patch;
 import com.shatteredpixel.cursedpixeldungeon.levels.Terrain;
@@ -267,20 +268,23 @@ public abstract class RegularPainter extends Painter {
 	
 	protected void paintWater( Level l, ArrayList<Room> rooms ){
 		boolean[] lake = Patch.generate( l.width(), l.height(), waterFill, waterSmoothness, true );
-		
+		int targetTerrain = Terrain.WATER;
+		if (l.feeling == Level.Feeling.EMBER & RingOfLuck.randomInt(3, 3) == 0) {//Water is rarer on ember floors
+			targetTerrain = Terrain.EMBERS;
+		}
 		if (!rooms.isEmpty()){
 			for (Room r : rooms){
 				for (Point p : r.waterPlaceablePoints()){
 					int i = l.pointToCell(p);
 					if (lake[i] && l.map[i] == Terrain.EMPTY){
-						l.map[i] = Terrain.WATER;
+						l.map[i] = targetTerrain;
 					}
 				}
 			}
 		} else {
 			for (int i = 0; i < l.length(); i ++) {
 				if (lake[i] && l.map[i] == Terrain.EMPTY){
-					l.map[i] = Terrain.WATER;
+					l.map[i] = targetTerrain;
 				}
 			}
 		}
