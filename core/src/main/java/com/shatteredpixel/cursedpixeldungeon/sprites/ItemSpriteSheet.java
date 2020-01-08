@@ -659,7 +659,7 @@ public class ItemSpriteSheet {
 		assignItemRect(BLAND_CHUNKS,14, 6);
 	}
 
-	private static final int QUEST  =                                       xy(1, 29);  //32 slots
+	private static final int QUEST  =                                       xy(1, 29);  //16 slots
 	public static final int SKULL   = QUEST+0;
 	public static final int DUST    = QUEST+1;
 	public static final int CANDLE  = QUEST+2;
@@ -679,6 +679,12 @@ public class ItemSpriteSheet {
 		assignItemRect(TOKEN,   12, 12);
 		assignItemRect(BLOB,    10,  9);
 		assignItemRect(SHARD,    8, 10);
+	}
+
+	private static final int CLASS      =                                   xy(1, 30);  //16 slots
+	public static final int SOUL        = CLASS+0;
+	static {
+		assignItemRect(SOUL, 12, 11);
 	}
 
 	private static final int BAGS       =                                   xy(1, 31);  //16 slots

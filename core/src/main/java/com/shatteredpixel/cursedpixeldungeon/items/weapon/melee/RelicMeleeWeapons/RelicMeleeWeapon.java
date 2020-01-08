@@ -13,7 +13,7 @@ import com.watabou.utils.Bundle;
 
 import java.util.ArrayList;
 
-public class RelicMeleeWeapon extends MeleeWeapon {
+public abstract class RelicMeleeWeapon extends MeleeWeapon {
     {
         tier = 6;
         defaultAction = AC_ACTIVATE;
@@ -94,9 +94,7 @@ public class RelicMeleeWeapon extends MeleeWeapon {
         return new RelicMeleeWeaponBuff();
     }
 
-    public RelicEnchantment enchantment() {//Ensures that it can only hold it's special enchantment
-        return null;
-    }
+    public abstract RelicEnchantment enchantment();
 
     @Override
     public Weapon enchant(Enchantment ench) {

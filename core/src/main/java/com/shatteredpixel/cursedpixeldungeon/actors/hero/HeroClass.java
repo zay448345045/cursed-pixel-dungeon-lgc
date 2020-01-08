@@ -102,7 +102,7 @@ public enum HeroClass {
 		this.subClasses = subClasses;
 	}
 
-	public static ArrayList<HeroSubClass> avalibleSubClasses(HeroClass cl) {
+	public static ArrayList<HeroSubClass> availableSubClasses(HeroClass cl) {
 		ArrayList<HeroSubClass> subClasses = new ArrayList<>();
 		switch (cl) {
 			case MAGE:

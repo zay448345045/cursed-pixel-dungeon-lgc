@@ -43,7 +43,7 @@ public class WndChooseWay extends Window {
 	public WndChooseWay(final TomeOfMastery tome, final HeroClass cl) {
 		
 		super();
-		final ArrayList<HeroSubClass> subClasses = HeroClass.avalibleSubClasses(cl);
+		final ArrayList<HeroSubClass> subClasses = HeroClass.availableSubClasses(cl);
 		ArrayList<RedButton> subClassButtons = new ArrayList<>();
 		if (subClasses.size() < 1) {
 			return;

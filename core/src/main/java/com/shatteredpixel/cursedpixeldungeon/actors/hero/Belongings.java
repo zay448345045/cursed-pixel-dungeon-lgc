@@ -208,7 +208,7 @@ public class Belongings implements Iterable<Item> {
 		}
 
 		for (Item item : backpack) {
-			if (item instanceof EquipableItem || item instanceof Wand) {
+			if (item instanceof EquipableItem) {
 				item.cursedKnown = true;
 			}
 		}

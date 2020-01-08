@@ -64,6 +64,7 @@ public class InterlevelScene extends PixelScene {
 	public static final String DESCEND_NAME = "DESCEND_NAME";
 	public static final String ASCEND_NAME = "ASCEND_NAME";
 	public static final String RESET_NAME = "RESET_NAME";
+	public static final String RESURRECT_NAME = "RESURRECT_NAME";
 	public static final String RETURNTO_NAME = "returnto_name";
 	
 	private static float fadeTime;
@@ -233,7 +234,7 @@ public class InterlevelScene extends PixelScene {
 								restore();
 								break;
 							case RESURRECT:
-								resurrect();
+								goToDepth(Dungeon.depth, RESURRECT_NAME);
 								break;
 							case RETURN:
 								goToDepth(returnDepth, DESCEND_NAME);
@@ -379,6 +380,12 @@ public class InterlevelScene extends PixelScene {
 		Dungeon.switchLevel( level, level.entrance );
 	}
 
+	private void init() throws IOException {
+		Dungeon.init(testing);
+		GameLog.wipe();
+		createNewLevel(0);
+	}
+
 	private static void goToDepth(int depthToAccess, final String typeOfDescend) throws IOException {
 		if (typeOfDescend.equals(FALL_NAME)) {
 			Buff.affect( Dungeon.hero, Chasm.Falling.class );
@@ -396,18 +403,26 @@ public class InterlevelScene extends PixelScene {
 			Dungeon.saveAll();
 		}
 		Dungeon.depth = depthToAccess;
+		if (typeOfDescend.equals(RESURRECT_NAME)) {
+			if (Dungeon.level.locked) {
+				Dungeon.hero.resurrect( Dungeon.depth );
+			} else {
+				Dungeon.hero.resurrect( -1 );
+				Dungeon.resetLevel();
+				return;
+			}
+		}
 		if (Dungeon.hero == null) {
 			Dungeon.depth = 1;
 		}
 		Level level;
 		try {
-			level = Dungeon.loadLevel( GamesInProgress.curSlot );
+			level = Dungeon.loadLevel(GamesInProgress.curSlot);
 
-		} catch(Exception e) {
+		} catch (Exception e) {
 
 			level = Dungeon.createNewLevelWithDepth(Dungeon.depth);
 		}
-
 
 		switch (typeOfDescend) {
 			default:
@@ -425,58 +440,6 @@ public class InterlevelScene extends PixelScene {
 		}
 
 	}
-
-	private void init() throws IOException {
-		Dungeon.init(testing);
-		GameLog.wipe();
-		createNewLevel(0);
-	}
-
-
-	//Depricated 3 outdated functions. Will remove if everything stays alright.
-	/*private void fall() throws IOException {
-
-		Mob.holdAllies( Dungeon.level );
-
-		Buff.affect( Dungeon.hero, Chasm.Falling.class );
-		Dungeon.saveAll();
-
-		Level level;
-		Dungeon.depth++;
-		try {
-			level = Dungeon.loadLevel( GamesInProgress.curSlot );
-
-		} catch(Exception e) {
-
-			level = Dungeon.createNewLevelWithDepth(Dungeon.depth);
-		}
-		Dungeon.switchLevel( level, level.fallCell( fallIntoPit ));
-	}
-	
-	private void ascend() throws IOException {
-
-		Mob.holdAllies( Dungeon.level );
-
-		Dungeon.saveAll();
-		Level level;
-		Dungeon.depth--;
-		try {
-			level = Dungeon.loadLevel( GamesInProgress.curSlot );
-
-		} catch(Exception e) {
-
-			level = Dungeon.createNewLevelWithDepth(Dungeon.depth);
-		}
-		Dungeon.switchLevel( level, level.exit );
-	}
-	
-	private void returnTo() throws IOException {
-
-		Dungeon.saveAll();
-		Dungeon.depth = returnDepth;
-		Level level = Dungeon.loadLevel( GamesInProgress.curSlot );
-		Dungeon.switchLevel( level, returnPos );
-	}*/
 	
 	private void restore() throws IOException {
 		
@@ -501,9 +464,7 @@ public class InterlevelScene extends PixelScene {
 		}
 	}
 	
-	private void resurrect() throws IOException {
-		
-		DriedRose.holdGhostHero( Dungeon.level );
+	/*private void resurrect() throws IOException {
 		
 		if (Dungeon.level.locked) {
 			Dungeon.hero.resurrect( Dungeon.depth );
@@ -514,7 +475,7 @@ public class InterlevelScene extends PixelScene {
 			Dungeon.hero.resurrect( -1 );
 			Dungeon.resetLevel();
 		}
-	}
+	}*/
 
 	/*private void reset() throws IOException {
 
