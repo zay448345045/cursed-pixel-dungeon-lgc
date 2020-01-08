@@ -428,6 +428,7 @@ public class InterlevelScene extends PixelScene {
 
 	private void init() throws IOException {
 		Dungeon.init(testing);
+		GameLog.wipe();
 		createNewLevel(0);
 	}
 

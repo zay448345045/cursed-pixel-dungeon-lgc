@@ -72,9 +72,9 @@ public class RingOfMight extends Ring {
 	
 	public String statsInfo() {
 		if (isIdentified()){
-			return Messages.get(this, "stats", soloBonus(), new DecimalFormat("#.##").format(100f * (0.03125 * soloBonus())));
+			return Messages.get(this, "stats", soloBonus()/3, new DecimalFormat("#.##").format(100f * (0.03125 * soloBonus())));
 		} else {
-			return Messages.get(this, "typical_stats", 1, new DecimalFormat("#.##").format(3.5f));
+			return Messages.get(this, "typical_stats", 0, new DecimalFormat("#.##").format(3.125f));
 		}
 	}
 
@@ -84,7 +84,7 @@ public class RingOfMight extends Ring {
 	}
 	
 	public static int strengthBonus( Char target ){
-		return getBonus( target, Might.class );
+		return Math.min(16, getBonus(target, RingOfMight.Might.class))/3;
 	}
 	
 	public static float HTMultiplier( Char target ){

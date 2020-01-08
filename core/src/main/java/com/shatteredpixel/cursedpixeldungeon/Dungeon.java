@@ -239,8 +239,8 @@ public class Dungeon {
 		/*for (int i = 0; i < Constants.numDepths; i++) {
 			depth = i;//This line is needed because of an absolutely stupid problem with PD levelgen. I will fix it someday.
 			Levels.add(newLevelWithDepth(i));
-		}
-		depth = 0;*/
+		}*/
+		depth = 0;
 
 	}
 
@@ -702,6 +702,7 @@ public class Dungeon {
 			bundle.put( HERO, hero );
 			bundle.put( GOLD, gold );
 			bundle.put( DEPTH, depth );
+			//bundle.put( LEVELS, Levels );
 
 			for (int d : droppedItems.keyArray()) {
 				bundle.put(Messages.format(DROPPED, d), droppedItems.get(d));
@@ -790,6 +791,8 @@ public class Dungeon {
 		version = bundle.getInt( VERSION );
 
 		seed = bundle.contains( SEED ) ? bundle.getLong( SEED ) : DungeonSeed.randomSeed();
+
+		//Levels = (ArrayList<Level>) bundle.get(LEVELS);
 
 		Actor.restoreNextID( bundle );
 

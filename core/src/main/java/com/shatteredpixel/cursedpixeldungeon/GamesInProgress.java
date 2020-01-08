@@ -106,6 +106,7 @@ public class GamesInProgress {
 				//saves from before 0.6.5c are not supported
 				if (info.version < ShatteredPixelDungeon.v0_6_5c) {
 					info = null;
+					delete(slot);
 				}
 
 			} catch (IOException e) {
@@ -114,6 +115,7 @@ public class GamesInProgress {
 			} catch (Exception e){
 				ShatteredPixelDungeon.reportException( e );
 				info = null;
+				delete(slot);
 			}
 			
 			slotStates.put( slot, info );

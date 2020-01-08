@@ -404,6 +404,9 @@ public abstract class Level implements Bundlable {
 	
 	@Override
 	public void storeInBundle( Bundle bundle ) {
+		//Set Dungeon.level to this so that saving does not cause errors
+		Level oldLvl = Dungeon.level;
+		Dungeon.level = this;
 		bundle.put( VERSION, Game.versionCode );
 		bundle.put( WIDTH, width );
 		bundle.put( HEIGHT, height );
@@ -422,6 +425,7 @@ public abstract class Level implements Bundlable {
 		bundle.put( BLOBS, blobs.values() );
 		bundle.put( FEELING, feeling );
 		bundle.put( "mobs_to_spawn", mobsToSpawn.toArray(new Class[0]));
+		Dungeon.level = oldLvl;
 	}
 	
 	public int tunnelTile() {

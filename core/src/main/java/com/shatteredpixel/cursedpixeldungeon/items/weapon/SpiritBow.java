@@ -85,6 +85,7 @@ public class SpiritBow extends Weapon {
 		String info = desc();
 		
 		info += "\n\n" + Messages.get( SpiritBow.class, "stats",
+				tier(),
 				Math.round(augment.damageFactor(min())),
 				Math.round(augment.damageFactor(max())),
 				STRReq());
@@ -125,22 +126,21 @@ public class SpiritBow extends Weapon {
 	
 	@Override
 	public int STRReq(int lvl) {
-		lvl = Math.max(0, lvl);
-		//strength req decreases at +1,+3,+6,+10,etc.
 		return 8;
+	}
+
+	public int tier() {
+		return Math.min(3, 1 + Dungeon.hero.lvl/10);
 	}
 	
 	@Override
 	public int min(int lvl) {
-		int tier = Math.max(1, Dungeon.hero.lvl/5);
-		return 1 + (tier) + lvl;
+		return tier() + lvl;
 	}
 	
 	@Override
 	public int max(int lvl) {
-		int level = Math.min(25, Dungeon.hero.lvl);
-		int tier = Math.max(1, (level/5) + 1);
-		return 4*(tier+1) + ((tier)*lvl);//Scaling depends on hero level
+		return 5*(tier()+1) + ((tier()+1)*lvl);//Scaling depends on hero level
 	}
 	
 	private int targetPos;
@@ -190,10 +190,10 @@ public class SpiritBow extends Weapon {
 		}
 	}
 	
-	//for fetching upgrades from a boomerang from pre-0.7.1
-	public int spentUpgrades() {
+	//for fetching upgrades from a boomerang from pre-0.7.1 (unneeded in Cursed as it's based of V0.7.3 therefore can never have 0.7.1 saves)
+	/*public int spentUpgrades() {
 		return super.level() - (curseInfusionBonus ? 3 : 0);
-	}
+	}*/
 
 	
 	public SpiritArrow knockArrow(){
