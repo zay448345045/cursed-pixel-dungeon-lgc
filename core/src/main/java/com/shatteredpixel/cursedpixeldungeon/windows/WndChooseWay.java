@@ -31,6 +31,7 @@ import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.cursedpixeldungeon.ui.RedButton;
 import com.shatteredpixel.cursedpixeldungeon.ui.RenderedTextMultiline;
 import com.shatteredpixel.cursedpixeldungeon.ui.Window;
+import com.watabou.noosa.Game;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ public class WndChooseWay extends Window {
 		add( titlebar );
 
 		RenderedTextMultiline hl = PixelScene.renderMultiline( 6 );
-		hl.text( /*way1.desc() + "\n\n" + way2.desc() + "\n\n" +*/ Messages.get(this, "message"), WIDTH );
+		hl.text(  Messages.get(this, "message"), WIDTH );
 		hl.setPos( titlebar.left(), titlebar.bottom() + GAP );
 		add( hl );
 		int extra = 0;
@@ -72,8 +73,7 @@ public class WndChooseWay extends Window {
 			RedButton btnDesc = new RedButton(Messages.get(this, "info")) {
 				@Override
 				protected void onClick() {
-					hide();
-					GameScene.show(new WndTitledMessage( new ItemSprite( tome.image(), null ), SubClass.title(), SubClass.desc()));
+					Game.scene().addToFront(new WndTitledMessage( new ItemSprite( tome.image(), null ), SubClass.title().toUpperCase(), SubClass.desc()));
 				}
 			};
 			subClassButtons.add(btnWay);
