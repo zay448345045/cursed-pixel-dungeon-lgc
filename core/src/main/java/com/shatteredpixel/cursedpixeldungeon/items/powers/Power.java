@@ -36,16 +36,14 @@ public abstract class Power extends Item {
         return true;
     }
 
-    @Override
+    /*@Override
     public boolean collect() {
-        if (passiveBuff() != null) {
+        if (passiveBuff != null) {
             passiveBuff = passiveBuff();
             passiveBuff.attachTo(curUser);
         }
         return super.collect();
-    }
-
-
+    }*/
 
     private static final String CHARGE = "charge";
     private static final String PARTIALCHARGE = "partialcharge";
@@ -64,7 +62,9 @@ public abstract class Power extends Item {
         partialCharge = bundle.getFloat( PARTIALCHARGE );
     }
 
-    protected abstract PowerBuff passiveBuff();
+    protected PowerBuff passiveBuff(){
+        return null;
+    }
 
     @Override
     protected void onDetach() {
@@ -73,13 +73,10 @@ public abstract class Power extends Item {
             passiveBuff = null;
         }
 
-
         if (activeBuff != null) {
             activeBuff.detach();
             activeBuff = null;
         }
-
-
     }
 
     public abstract static class PowerBuff extends Buff {

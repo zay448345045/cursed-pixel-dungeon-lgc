@@ -29,6 +29,7 @@ import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.items.BrokenSeal;
 import com.shatteredpixel.cursedpixeldungeon.items.Generator;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
+import com.shatteredpixel.cursedpixeldungeon.items.Soul;
 import com.shatteredpixel.cursedpixeldungeon.items.Stylus;
 import com.shatteredpixel.cursedpixeldungeon.items.TomeOfMastery;
 import com.shatteredpixel.cursedpixeldungeon.items.allies.PoisonDragon;
@@ -209,6 +210,7 @@ public enum HeroClass {
 	}
 
 	public static void initTest(Hero hero) {
+		new Soul().collect();
 		new MegaStrengthPotion().identify().collect();
 		new MaracarsBlades().identify().level(15).collect();
 		new ThonothsAxe().identify().level(15).collect();

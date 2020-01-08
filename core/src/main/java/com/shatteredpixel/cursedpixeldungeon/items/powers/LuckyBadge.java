@@ -34,6 +34,7 @@ public class LuckyBadge extends Power {
     {
         image = ItemSpriteSheet.LUCKYBADGE;
         defaultAction = AC_INFO;
+        passiveBuff = passiveBuff();
     }
     public static final String AC_INFO = "INFO_WINDOW";
     public static final String AC_GRIND = "grind";
@@ -304,7 +305,7 @@ public class LuckyBadge extends Power {
         }
     }
 
-    class LuckyBuff extends PowerBuff {
+    private class LuckyBuff extends PowerBuff {
 
     }
 }

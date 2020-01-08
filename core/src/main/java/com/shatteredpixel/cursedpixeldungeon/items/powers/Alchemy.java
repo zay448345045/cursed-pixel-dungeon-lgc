@@ -128,7 +128,7 @@ public class Alchemy extends Power {
 		updateQuickslot();
 	}
 
-	public class Energy extends Buff implements AlchemyScene.AlchemyProvider {
+	public class Energy extends PowerBuff implements AlchemyScene.AlchemyProvider {
 		Alchemy Toolkit = null;
 
 		public void setToolkit(Alchemy toolkit) {
