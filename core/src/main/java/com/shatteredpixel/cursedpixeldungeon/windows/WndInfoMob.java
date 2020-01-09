@@ -98,7 +98,7 @@ public class WndInfoMob extends Window {
 					onBackPressed();
 				}
 			};
-			btnResurrect.setRect(0, bottom + GAP, width, BTN_HEIGHT);
+			btnResurrect.setRect(0, bottom, width, BTN_HEIGHT);
 			add(btnResurrect);
 			bottom = (int) btnResurrect.bottom();
 		}
