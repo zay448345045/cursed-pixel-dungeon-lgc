@@ -25,8 +25,10 @@ import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Terror;
+import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroSubClass;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.ShadowParticle;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Grim;
+import com.shatteredpixel.cursedpixeldungeon.levels.PrisonLevel;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.WraithSprite;
 import com.watabou.noosa.tweeners.AlphaTweener;
@@ -51,6 +53,7 @@ public class Wraith extends Mob {
 		flying = true;
 
 		properties.add(Property.UNDEAD);
+		properties.add(Property.BLOB_IMMUNE);//Immune to all blobs
 		alignment = Alignment.WRAITH;
 	}
 	
@@ -68,7 +71,19 @@ public class Wraith extends Mob {
 		level = bundle.getInt( LEVEL );
 		adjustStats( level );
 	}
-	
+
+	public void convert() {
+		this.alignment = Alignment.ALLY;
+	}
+
+	@Override
+	protected boolean act() {
+		if (Dungeon.hero.subClass == HeroSubClass.NECROMANCER && Random.Int(3) == 0) {
+			convert();//Switch to Ally if the hero is a Necromancer. This may take a few turns or it may be instant.
+		}
+		return super.act();
+	}
+
 	@Override
 	public int damageRoll() {
 		return Random.NormalIntRange( 1 + level, 2 + level*4 );

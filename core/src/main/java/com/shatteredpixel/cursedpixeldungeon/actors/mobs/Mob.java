@@ -38,6 +38,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Corruption;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.DeferredDeath;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Hunger;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Preparation;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Resurrection;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Sleep;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.SoulMark;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Terror;
@@ -303,9 +304,6 @@ public abstract class Mob extends Char {
 
 			} else if (alignment == Alignment.WRAITH) {
 				for (Mob mob : Dungeon.level.mobs){
-					if (Dungeon.hero.subClass == HeroSubClass.NECROMANCER) {
-						this.alignment = Alignment.ALLY;//Switch to Ally if the hero is a Necromancer
-					}
 					if (!(mob instanceof Wraith)) {
 						enemies.add(mob);
 					}
@@ -650,6 +648,14 @@ public abstract class Mob extends Char {
 	
 	@Override
 	public void die( Object cause ) {
+
+		if (buff(Resurrection.class) != null && Dungeon.hero.HP > this.HT/2 && Dungeon.hero.subClass == HeroSubClass.NECROMANCER) {
+			HP = HT;
+			this.sprite.emitter().burst(ShadowParticle.CURSE, 6);
+			new Flare(8, 16).color(0xFFFF66, true).show(sprite, 2f);
+			Dungeon.hero.damage(this.HT/2, this);
+			return;
+		}
 		
 		if (hitWithRanged){
 			Statistics.thrownAssists++;

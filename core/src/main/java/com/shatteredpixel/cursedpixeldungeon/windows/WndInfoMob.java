@@ -24,7 +24,10 @@ package com.shatteredpixel.cursedpixeldungeon.windows;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Resurrection;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroClass;
+import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroSubClass;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.DriedRose;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
@@ -42,8 +45,7 @@ public class WndInfoMob extends Window {
 	protected static final int WIDTH_P    = 120;
 	protected static final int WIDTH_L    = 200;
 	protected static final int GAP	= 2;
-	private static final int WIDTH = 120;
-	private static final int BTN_HEIGHT = 20;
+	private static final int BTN_HEIGHT = 15;
 	public WndInfoMob( final Mob mob ) {
 		int width = CPDSettings.landscape() ? WIDTH_L : WIDTH_P;
 		Component titlebar = new MobTitle( mob );
@@ -55,6 +57,7 @@ public class WndInfoMob extends Window {
 		message.maxWidth(width);
 		message.setPos(0, titlebar.bottom() + GAP);
 		add(message);
+		int bottom = (int) message.bottom();
 		if (mob.alignment == Char.Alignment.ALLY && Dungeon.hero.heroClass == HeroClass.PRIESTESS || mob instanceof DriedRose.GhostHero) {//Only Priestess can see these buttons, but the Sad Ghost always has them.
 			RedButton btnWander = new RedButton(Messages.get(mob, "wander")) {
 				@Override
@@ -63,7 +66,7 @@ public class WndInfoMob extends Window {
 					onBackPressed();
 				}
 			};
-			btnWander.setRect(0, message.top() + message.height() + GAP, WIDTH, BTN_HEIGHT);
+			btnWander.setRect(0, message.top() + message.height() + GAP, width, BTN_HEIGHT);
 			add(btnWander);
 
 			RedButton btnFollow = new RedButton(Messages.get(mob, "follow")) {
@@ -73,13 +76,33 @@ public class WndInfoMob extends Window {
 					onBackPressed();
 				}
 			};
-			btnFollow.setRect(0, message.top() + message.height() + GAP + BTN_HEIGHT, WIDTH, BTN_HEIGHT);
+			btnFollow.setRect(0, message.top() + message.height() + GAP + BTN_HEIGHT, width, BTN_HEIGHT);
 			add(btnFollow);
-
-			resize(width, (int) btnFollow.bottom());
-		} else {
-			resize(width, (int) message.bottom());
+			bottom = (int) btnFollow.bottom();
 		}
+		if (mob.alignment == Char.Alignment.ALLY && Dungeon.hero.subClass == HeroSubClass.NECROMANCER) {
+			String title = Messages.get(mob, "enable_resurrection");
+			final Buff resurrection = mob.buff(Resurrection.class);
+			final boolean canResurrect =  resurrection != null;
+			if (canResurrect) {
+				title = Messages.get(mob, "disable_resurrection");
+			}
+			RedButton btnResurrect = new RedButton(title) {
+				@Override
+				protected void onClick() {
+					if (!canResurrect) {
+						Buff.affect(mob, Resurrection.class);
+					} else {
+						resurrection.detach();
+					}
+					onBackPressed();
+				}
+			};
+			btnResurrect.setRect(0, bottom + GAP, width, BTN_HEIGHT);
+			add(btnResurrect);
+			bottom = (int) btnResurrect.bottom();
+		}
+		resize(width, bottom);
 		//super( new MobTitle( mob ), mob.description()  );
 		
 	}

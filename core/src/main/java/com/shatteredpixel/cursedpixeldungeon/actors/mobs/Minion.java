@@ -24,4 +24,7 @@ public class Minion extends Wraith {
         return super.attackProc(enemy, damage);
     }
 
+    @Override
+    public void convert() {//Necromancer can't tame them
+    }
 }
