@@ -1,30 +1,52 @@
 package com.shatteredpixel.cursedpixeldungeon.items;
 
+import com.shatteredpixel.cursedpixeldungeon.Dungeon;
+import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Adrenaline;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Bless;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Corruption;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.DeferredDeath;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Weakness;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
+import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Rat;
 import com.shatteredpixel.cursedpixeldungeon.effects.Speck;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfLuck;
+import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 import com.watabou.utils.Bundle;
+import com.watabou.utils.PathFinder;
+import com.watabou.utils.Random;
 
 import java.util.ArrayList;
 
 public class Soul extends Item {
     {
         image = ItemSpriteSheet.SOUL;
-        stackable = true;
         unique = true;
         cursed = false;
     }
-    private Mob mob = null;
+    private Class<? extends Mob> mob = Rat.class;
+
+    private static final float TIME_TO_CONSUME = 3f;
+    private static final float TIME_TO_SUMMON = 1f;
+    private static final float TIME_TO_SACRIFICE = 1f;
+    private static final float MINION_LIFETIME = 15f;
 
     private static final String AC_CONSUME = "consume";
     private static final String AC_SACRIFICE = "sacrifice";
     private static final String AC_SUMMON = "summon";
     private static final String MOB = "mob";
+
+    @Override
+    public ItemSprite.Glowing glowing() {
+        try {
+            return new ItemSprite.Glowing(mob.newInstance().sprite.blood());
+        } catch (Exception e) {
+            return new ItemSprite.Glowing(0x000000);
+        }
+    }
 
     @Override
     public ArrayList<String> actions(Hero hero) {
@@ -35,6 +57,15 @@ public class Soul extends Item {
         return actions;
     }
 
+    public Soul setMob(Class<? extends Mob> type) {
+        mob = type;
+        return this;
+    }
+
+    public Soul setMob(Mob type) {
+        return setMob(type.getClass());
+    }
+
     @Override
     public void storeInBundle(Bundle bundle) {
         bundle.put(MOB, mob);
@@ -43,27 +74,63 @@ public class Soul extends Item {
 
     @Override
     public void restoreFromBundle(Bundle bundle) {
-        mob = (Mob) bundle.get(MOB);
+        mob = bundle.getClass(MOB);
         super.restoreFromBundle(bundle);
     }
 
     private void ACConsume(Hero hero) {
         detach(hero.belongings.backpack);
-        hero.spendAndNext(1f);
+        hero.spend(TIME_TO_CONSUME);
+        hero.busy();
+        hero.sprite.operate( hero.pos );
+        hero.next();
         if (hero.HP < hero.HT) {
-            hero.HP = Math.min( hero.HP + hero.HT/10, hero.HT );
+            hero.HP = Math.min( hero.HP + hero.HT/5, hero.HT );
             hero.sprite.emitter().burst( Speck.factory( Speck.HEALING ), 1 );
         }
         Buff.affect(hero, Weakness.class, Weakness.DURATION);
     }
+
     private void ACSacrifice(Hero hero) {
-        hero.spendAndNext(1f);
-        hero.damage(hero.HT/20, this);
-        Buff.prolong(hero, Adrenaline.class, 1 + RingOfLuck.randomInt((int)Adrenaline.DURATION-1, (int)Adrenaline.DURATION));
+        hero.spend(TIME_TO_SACRIFICE);
+        hero.busy();
+        hero.sprite.operate( hero.pos );
+        hero.next();
+        hero.damage(hero.HT/RingOfLuck.randomNormalIntRange(5, 20, 20), this);
+        Buff.prolong(hero, Adrenaline.class, 1 + 2*RingOfLuck.randomInt((int)Adrenaline.DURATION-1, (int)Adrenaline.DURATION));
+        Buff.prolong(hero, Bless.class, Bless.DURATION);
     }
+
     private void ACSummon(Hero hero) {
         if (mob != null) {
+            int pos = hero.pos;
+            int newPos = -1;
+            if (Actor.findChar( pos ) != null) {
+                ArrayList<Integer> candidates = new ArrayList<Integer>();
+                boolean[] passable = Dungeon.level.passable;
 
+                for (int n : PathFinder.NEIGHBOURS8) {
+                    int c = pos + n;
+                    if (passable[c] && Actor.findChar( c ) == null) {
+                        candidates.add( c );
+                    }
+                }
+
+                newPos = candidates.size() > 0 ? Random.element( candidates ) : -1;
+                if (newPos != -1) {
+                    Mob toSpawn = Mob.spawnAt(mob, newPos);
+                    if (toSpawn != null) {
+                        Buff.affect(toSpawn, Corruption.class);
+                        Buff.affect(toSpawn, DeferredDeath.class, MINION_LIFETIME);//Minion lasts 15 turns only
+                        toSpawn.followHero();
+                        detach(hero.belongings.backpack);
+                        hero.spend(TIME_TO_SUMMON);
+                        hero.busy();
+                        hero.sprite.operate( hero.pos );
+                        hero.next();
+                    }
+                }
+            }
         }
     }
 

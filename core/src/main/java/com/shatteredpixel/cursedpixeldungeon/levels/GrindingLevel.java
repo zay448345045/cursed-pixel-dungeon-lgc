@@ -35,9 +35,9 @@ public class GrindingLevel extends SewerLevel {
 
     @Override
     public float respawnTime() {//Respawn time depends on current number of mobs.
-        if (mobs.size() > 7) {
+        if (mobs.size() > 6) {
             return super.respawnTime() / 2f;
-        } else if  (mobs.size() > 5) {
+        } else if  (mobs.size() > 3) {
             return super.respawnTime() / 5f;
         } else {
             return super.respawnTime() / 10f;

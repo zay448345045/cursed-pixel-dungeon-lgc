@@ -43,10 +43,10 @@ public class Wraith extends Mob {
 	{
 		spriteClass = WraithSprite.class;
 		
-		HP = HT = 1;
+		HP = HT = 7 + Dungeon.scaleWithDepth()*3;
 		EXP = 0;
 
-		maxLvl = -2;
+		maxLvl = -1;
 		
 		flying = true;
 
@@ -84,7 +84,7 @@ public class Wraith extends Mob {
 		if (Dungeon.depth == 27) {
 			this.level = Dungeon.hero.lvl;//Makes Wraiths scale with hero level on grinding depth
 		}
-		defenseSkill = attackSkill( null ) * 5;
+		defenseSkill = attackSkill( null );
 		enemySeen = true;
 	}
 

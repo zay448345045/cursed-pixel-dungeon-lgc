@@ -318,8 +318,8 @@ public abstract class Char extends Actor {
 	public static boolean hit( Char attacker, Char defender, boolean magic ) {
 		float acuRoll = Random.Float( attacker.attackSkill( defender ) );
 		float defRoll = Random.Float( defender.defenseSkill( attacker ) );
-		if (attacker.buff(Bless.class) != null) acuRoll *= 1.5f;
-		if (defender.buff(Bless.class) != null) defRoll *= 1.5f;
+		if (attacker.buff(Bless.class) != null) acuRoll *= 1.25f;
+		if (defender.buff(Bless.class) != null) defRoll *= 1.25f;
 		if (attacker instanceof Hero) {//If hero has a precise weapon, "hit()" returns true
 			Hero hero = (Hero) attacker;
 			KindOfWeapon wep = hero.belongings.weapon;

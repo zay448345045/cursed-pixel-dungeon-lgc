@@ -34,7 +34,9 @@ import com.shatteredpixel.cursedpixeldungeon.effects.Speck;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.SparkParticle;
 import com.shatteredpixel.cursedpixeldungeon.items.AmuletSectorWater;
 import com.shatteredpixel.cursedpixeldungeon.items.Generator;
+import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfRetribution;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfUpgrade;
+import com.shatteredpixel.cursedpixeldungeon.items.scrolls.exotic.ScrollOfPsionicBlast;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.Wand;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfPrismaticLight;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Grim;
@@ -66,6 +68,8 @@ public class SewerGolem extends Mob implements Callback  {
         baseSpeed = 1.5f;//Faster than the hero
         properties.add(Property.BOSS);
         properties.add(Property.DEMONIC);
+        resistances.add(ScrollOfRetribution.class);
+        immunities.add(ScrollOfPsionicBlast.class);
         immunities.add(Grim.class);
     }
 

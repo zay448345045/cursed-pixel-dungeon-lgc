@@ -35,6 +35,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Amok;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Charm;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Corruption;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.DeferredDeath;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Hunger;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Preparation;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Sleep;
@@ -50,6 +51,7 @@ import com.shatteredpixel.cursedpixeldungeon.effects.Wound;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.ShadowParticle;
 import com.shatteredpixel.cursedpixeldungeon.items.Generator;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
+import com.shatteredpixel.cursedpixeldungeon.items.Soul;
 import com.shatteredpixel.cursedpixeldungeon.items.allies.DragonCrystal;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.DriedRose;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.TimekeepersHourglass;
@@ -59,6 +61,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfWealth;
 import com.shatteredpixel.cursedpixeldungeon.items.stones.StoneOfAggression;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Lucky;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.MissileWeapon;
+import com.shatteredpixel.cursedpixeldungeon.levels.GrindingLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.Level;
 import com.shatteredpixel.cursedpixeldungeon.levels.features.Chasm;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
@@ -66,6 +69,7 @@ import com.shatteredpixel.cursedpixeldungeon.plants.Swiftthistle;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
+import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.GameMath;
 import com.watabou.utils.PathFinder;
@@ -670,13 +674,34 @@ public abstract class Mob extends Char {
 			Badges.validatePriestessUnlock();
 		}
 		super.die( cause );
-		if (Dungeon.hero.subClass == HeroSubClass.NECROMANCER && Random.Float() >= 0.5f && (cause instanceof Item | cause instanceof Hero)) {//Must be killed by the hero (by an item)
+		if (Dungeon.hero.subClass == HeroSubClass.NECROMANCER && Random.Int(4) == 0 && (cause instanceof Item | cause instanceof Hero)) {//Must be killed by the hero (by an item)
 			if (Wraith.spawnAt( pos ) != null) {
 				Dungeon.hero.sprite.emitter().burst(ShadowParticle.CURSE, 6);
 			}
 		}
+	}
 
+	public static Mob spawnAt(Class<? extends Mob> type, int pos) {
+		if (Dungeon.level.passable[pos] && Actor.findChar( pos ) == null) {
 
+			Mob mob = null;
+			do {
+				try {
+					mob = type.newInstance();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					e.printStackTrace();
+				}
+			} while (mob == null);
+			mob.pos = pos;
+			mob.state = mob.HUNTING;
+			GameScene.add( mob, 1f );
+
+			return mob;
+		} else {
+			return null;
+		}
 	}
 	
 	public void rollToDropLoot(){
@@ -713,6 +738,9 @@ public abstract class Mob extends Char {
 		if (Dungeon.hero.lvl <= maxLvl && buff(Lucky.LuckProc.class) != null){
 			new Flare(8, 24).color(0x00FF00, true).show(sprite, 3f);
 			Dungeon.level.drop(LuckyBadge.genStandardDrop(), pos).sprite.drop();
+		}
+		if (Dungeon.hero.subClass == HeroSubClass.CULTIST && Random.Int(5) == 0 && !(this.properties().contains(Property.BOSS) || this instanceof GrindingLevel.Guardian)) {
+			Dungeon.level.drop(new Soul().setMob(this), pos).sprite.drop();
 		}
 	}
 	
