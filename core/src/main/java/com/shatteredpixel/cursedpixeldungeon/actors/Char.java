@@ -277,7 +277,7 @@ public abstract class Char extends Actor {
 				} else if (this == Dungeon.hero) {
 					GLog.i( Messages.capitalize(Messages.get(Char.class, "defeat", enemy.name)) );
 					if (this instanceof Hero && ((Hero)this).subClass == HeroSubClass.BRAWLER) {
-						Buff.prolong(this, com.shatteredpixel.cursedpixeldungeon.actors.buffs.Bloodlust.class, 30f);
+						Buff.prolong(this, com.shatteredpixel.cursedpixeldungeon.actors.buffs.Bloodlust.class, 20f);
 					}
 				}
 			}
@@ -290,7 +290,7 @@ public abstract class Char extends Actor {
 					hero.sprite.attack(enemy.pos, new Callback() {
 						@Override
 						public void call() {
-							hero.actuallyAttack(enemy);
+							hero.attack(enemy);
 						}
 					});
 				} else {

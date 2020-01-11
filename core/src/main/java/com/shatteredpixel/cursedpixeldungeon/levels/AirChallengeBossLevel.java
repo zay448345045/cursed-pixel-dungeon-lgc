@@ -23,7 +23,7 @@ public class AirChallengeBossLevel extends Level {
 
     @Override
     public String tilesTex() {
-        return Assets.TILES_AIR;
+        return Assets.TILES_PRISON;
     }
 
     @Override

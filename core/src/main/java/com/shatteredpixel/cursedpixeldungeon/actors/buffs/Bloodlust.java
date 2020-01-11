@@ -17,7 +17,7 @@ public class Bloodlust extends FlavourBuff {
     }
 
     public float bonusDamage(){
-        return 1f + Math.max(0.25f, 1 - cooldown()*0.05f);
+        return 1f + Math.min(0.3f, cooldown()*0.01f);
     }
 
     public void attack() {

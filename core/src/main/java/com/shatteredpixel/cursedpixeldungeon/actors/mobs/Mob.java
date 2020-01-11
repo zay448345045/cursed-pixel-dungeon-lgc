@@ -79,6 +79,7 @@ import com.watabou.utils.Random;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Locale;
 
 public abstract class Mob extends Char {
 
@@ -654,6 +655,7 @@ public abstract class Mob extends Char {
 			this.sprite.emitter().burst(ShadowParticle.CURSE, 6);
 			new Flare(8, 16).color(0xFFFF66, true).show(sprite, 2f);
 			Dungeon.hero.damage(this.HT/2, this);
+			GLog.p(Messages.get(this, "resurrect", name));
 			return;
 		}
 		
