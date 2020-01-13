@@ -23,6 +23,7 @@ package com.shatteredpixel.cursedpixeldungeon.items.potions;
 
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.LuckyBadgeBuff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.MindVision;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
@@ -37,6 +38,10 @@ public class PotionOfMindVision extends Potion {
 	@Override
 	public void apply( Hero hero ) {
 		setKnown();
+		if (hero.buff(LuckyBadgeBuff.class) != null) {
+			GLog.i(Messages.get(this, "blocked"));
+			return;
+		}
 		Buff.affect( hero, MindVision.class, MindVision.DURATION );
 		Dungeon.observe();
 		

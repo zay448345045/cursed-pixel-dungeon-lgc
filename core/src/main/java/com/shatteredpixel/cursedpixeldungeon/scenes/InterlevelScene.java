@@ -419,6 +419,7 @@ public class InterlevelScene extends PixelScene {
 		}
 		Level level;
 		try {
+
 			level = Dungeon.loadLevel(GamesInProgress.curSlot);
 
 		} catch (Exception e) {
@@ -427,7 +428,7 @@ public class InterlevelScene extends PixelScene {
 			if (Dungeon.hero != null) {
 				LuckyBadge badge = Dungeon.hero.belongings.getItem(LuckyBadge.class);
 				if (typeOfDescend.equals(DESCEND_NAME) & badge != null && badge.type == LuckyBadge.SPEED & Dungeon.depth != LuckyBadge.HomeDepth & !Dungeon.bossLevel() & Dungeon.depth != 21) {
-					Buff.affect(Dungeon.hero, LuckyBadgeBuff.class, 200f);
+					Buff.affect(Dungeon.hero, LuckyBadgeBuff.class, 99f);
 				}
 			}
 		}
