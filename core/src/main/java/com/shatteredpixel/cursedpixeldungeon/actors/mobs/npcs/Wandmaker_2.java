@@ -111,6 +111,7 @@ public class Wandmaker_2 extends NPC {
                 @Override
                 protected void onClick() {
                     badge.type = LuckyBadge.GRIND;
+                    hide();
                     try {
                         Dungeon.saveAll();
                     } catch (IOException e) {
@@ -126,6 +127,7 @@ public class Wandmaker_2 extends NPC {
                 @Override
                 protected void onClick() {
                     badge.type = LuckyBadge.SPEED;
+                    hide();
                     try {
                         Dungeon.saveAll();
                     } catch (IOException e) {

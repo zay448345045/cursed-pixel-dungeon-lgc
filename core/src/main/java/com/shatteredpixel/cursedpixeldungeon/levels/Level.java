@@ -111,6 +111,8 @@ public abstract class Level implements Bundlable {
 	protected boolean hasEntrance = true;
 	public static float TIME_TO_RESPAWN	= 50;
 
+	public boolean firstVisit = true;
+
 	public int version;
 	
 	public int[] map;

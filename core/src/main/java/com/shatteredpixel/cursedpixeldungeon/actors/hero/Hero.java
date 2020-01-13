@@ -46,6 +46,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Foresight;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Fury;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Hunger;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Invisibility;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.LuckyBadgeBuff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.MindVision;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Momentum;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Paralysis;
@@ -878,7 +879,7 @@ public class Hero extends Char {
 	
 	private boolean actDescend( HeroAction.Descend action ) {
 		int stairs = action.dst;
-		if (pos == stairs && pos == Dungeon.level.exit & !(Dungeon.depth == 27)) {
+		if (pos == stairs && pos == Dungeon.level.exit & !(Dungeon.depth == LuckyBadge.GrindDepth || Dungeon.depth == LuckyBadge.HomeDepth) && buff(LuckyBadgeBuff.class) == null) {
 			
 			curAction = null;
 
@@ -910,8 +911,9 @@ public class Hero extends Char {
 				InterlevelScene.mode = InterlevelScene.Mode.START;
 				Game.switchScene( InterlevelScene.class );
 				return true;
-			} else if (Dungeon.depth == LuckyBadge.GrindDepth | Dungeon.depth == LuckyBadge.HomeDepth) {
-				return false;
+			} else if (Dungeon.depth == LuckyBadge.GrindDepth | Dungeon.depth == LuckyBadge.HomeDepth | buff(LuckyBadgeBuff.class) != null) {
+				ready();
+				return true;
 			}
 			
 			if (Dungeon.depth == 0) {

@@ -37,6 +37,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Charm;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Corruption;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.DeferredDeath;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Hunger;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.LuckyBadgeBuff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Preparation;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Resurrection;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Sleep;
@@ -52,6 +53,7 @@ import com.shatteredpixel.cursedpixeldungeon.effects.Surprise;
 import com.shatteredpixel.cursedpixeldungeon.effects.Wound;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.ShadowParticle;
 import com.shatteredpixel.cursedpixeldungeon.items.Generator;
+import com.shatteredpixel.cursedpixeldungeon.items.Gold;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.Soul;
 import com.shatteredpixel.cursedpixeldungeon.items.allies.DragonCrystal;
@@ -765,8 +767,20 @@ public abstract class Mob extends Char {
 		//lucky enchant logic
 		if (Dungeon.hero.lvl <= maxLvl && buff(Lucky.LuckProc.class) != null){
 			new Flare(8, 24).color(0x00FF00, true).show(sprite, 3f);
-			Dungeon.level.drop(LuckyBadge.genStandardDrop(), pos).sprite.drop();
+			Dungeon.level.drop(LuckyBadge.tryForBonusDrop(Dungeon.hero, 1), pos).sprite.drop();
 		}
+
+		//
+		LuckyBadgeBuff buff = Dungeon.hero.buff(LuckyBadgeBuff.class);
+		if (buff != null) {
+			for (int i = 0; i < buff.lootPerMob(); i++) {
+				Item luckybadgedrop = LuckyBadge.tryForBonusDrop(Dungeon.hero, 1);
+				if (luckybadgedrop != null) {
+					Dungeon.level.drop(luckybadgedrop, Dungeon.hero.pos).sprite.drop();
+				}
+			}
+		}
+		//Cultist subclass logic
 		if (Dungeon.hero.subClass == HeroSubClass.CULTIST && Random.Int(3) == 0 && !(this.properties().contains(Property.BOSS) || this.properties().contains(Property.INORGANIC))) {
 			Dungeon.level.drop(new Soul().setMob(this), pos).sprite.drop();
 		}

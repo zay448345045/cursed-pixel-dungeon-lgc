@@ -28,9 +28,11 @@ import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.cursedpixeldungeon.Statistics;
 import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.LuckyBadgeBuff;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.DriedRose;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.LuckyBadge;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Lucky;
 import com.shatteredpixel.cursedpixeldungeon.levels.Level;
 import com.shatteredpixel.cursedpixeldungeon.levels.features.Chasm;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
@@ -422,6 +424,12 @@ public class InterlevelScene extends PixelScene {
 		} catch (Exception e) {
 
 			level = Dungeon.createNewLevelWithDepth(Dungeon.depth);
+			if (Dungeon.hero != null) {
+				LuckyBadge badge = Dungeon.hero.belongings.getItem(LuckyBadge.class);
+				if (typeOfDescend.equals(DESCEND_NAME) & badge != null && badge.type == LuckyBadge.SPEED & Dungeon.depth != LuckyBadge.HomeDepth & !Dungeon.bossLevel() & Dungeon.depth != 21) {
+					Buff.affect(Dungeon.hero, LuckyBadgeBuff.class, 200f);
+				}
+			}
 		}
 
 		switch (typeOfDescend) {
