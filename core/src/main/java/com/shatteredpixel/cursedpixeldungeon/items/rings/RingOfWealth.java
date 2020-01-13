@@ -221,9 +221,9 @@ public class RingOfWealth extends Ring {
 			Item result = new Gold().random();
 			result.quantity(Math.round(result.quantity() * Random.NormalFloat(3f, 6f)));
 			return result;
-		} else if (roll < 0.6f){ //30% chance
+		} else if (roll < 0.5f){ //30% chance
 			return genHighValueConsumable();
-		} else if (roll < 0.9f){ //30% chance
+		} else if (roll < 0.7f){ //30% chance
 			Item result;
 			int random = Random.Int(3);
 			switch (random){
@@ -244,14 +244,14 @@ public class RingOfWealth extends Ring {
 			return result;
 		} else { //10% chance
 			if (Random.Int(3) != 0){
-				Weapon weapon = Generator.randomWeapon((Dungeon.depth / 5) + 1);
+				Weapon weapon = Generator.randomWeapon((Dungeon.scaleWithDepth() / 5) + 1);
 				weapon.upgrade(1);
 				weapon.enchant(Weapon.Enchantment.random());
 				weapon.cursed = false;
 				weapon.cursedKnown = true;
 				return weapon;
 			} else {
-				Armor armor = Generator.randomArmor((Dungeon.depth / 5) + 1);
+				Armor armor = Generator.randomArmor((Dungeon.scaleWithDepth() / 5) + 1);
 				armor.upgrade();
 				armor.inscribe(Armor.Glyph.random());
 				armor.cursed = false;

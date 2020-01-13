@@ -21,7 +21,7 @@ public class Gullin extends Kupua {
 
     @Override
     public int attackProc(Char enemy, int damage) {
-        Buff.affect(enemy, Bleeding.class).set(Dungeon.depth*2);//Heavy bleeding
+        Buff.affect(enemy, Bleeding.class).set(Dungeon.scaleWithDepth()*2);//Heavy bleeding
         return super.attackProc(enemy, damage);
     }
 

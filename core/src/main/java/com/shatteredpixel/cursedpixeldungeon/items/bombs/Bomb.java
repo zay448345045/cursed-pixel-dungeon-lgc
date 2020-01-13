@@ -173,8 +173,8 @@ public class Bomb extends Item {
 			
 			for (Char ch : affected){
 				//those not at the center of the blast take damage less consistently.
-				int minDamage = ch.pos == cell ? Dungeon.scaleWithDepth() + 5 : 1;
-				int maxDamage = 10 + Dungeon.scaleWithDepth() * 2;
+				int minDamage = ch.pos == cell ? Dungeon.scaleWithDepth()*2 + 5 : 1;
+				int maxDamage = 10 + Dungeon.scaleWithDepth() * 4;
 				
 				int dmg = Random.NormalIntRange(minDamage, maxDamage) - ch.drRoll();
 				if (dmg > 0) {

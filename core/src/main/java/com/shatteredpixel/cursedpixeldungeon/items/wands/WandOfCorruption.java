@@ -63,6 +63,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Wraith;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Yog;
 import com.shatteredpixel.cursedpixeldungeon.effects.MagicMissile;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MagesStaff;
+import com.shatteredpixel.cursedpixeldungeon.levels.GrindingLevel;
 import com.shatteredpixel.cursedpixeldungeon.mechanics.Ballistica;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.sprites.CharSprite;
@@ -133,13 +134,13 @@ public class WandOfCorruption extends Wand {
 			
 			//base enemy resistance is usually based on their exp, but in special cases it is based on other criteria
 			float enemyResist = 1 + enemy.EXP;
-			if (ch instanceof Mimic || ch instanceof Statue){
-				enemyResist = 1 + Dungeon.depth;
+			if (ch instanceof Mimic || ch instanceof Statue || ch instanceof GrindingLevel.Guardian){
+				enemyResist = 1 + Dungeon.scaleWithDepth();
 			} else if (ch instanceof Piranha || ch instanceof Bee) {
-				enemyResist = 1 + Dungeon.depth/2f;
+				enemyResist = 1 + Dungeon.scaleWithDepth()/2f;
 			} else if (ch instanceof Wraith) {
 				//this is so low because wraiths are always at max hp
-				enemyResist = 0.5f + Dungeon.depth/8f;
+				enemyResist = 0.5f + Dungeon.scaleWithDepth()/8f;
 			} else if (ch instanceof Yog.BurningFist || ch instanceof Yog.RottingFist) {
 				enemyResist = 1 + 30;
 			} else if (ch instanceof Yog.Larva || ch instanceof King.Undead){

@@ -21,6 +21,7 @@
 
 package com.shatteredpixel.cursedpixeldungeon.levels.rooms.standard;
 
+import com.shatteredpixel.cursedpixeldungeon.Constants;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.cursedpixeldungeon.levels.rooms.Room;
@@ -144,8 +145,11 @@ public abstract class StandardRoom extends Room {
 		rooms.add(MinefieldRoom.class);
 	}
 	
-	private static float[][] chances = new float[50][];
+	private static float[][] chances = new float[Constants.numDepths+1][];
 	static {
+		for (int i = 0; i < Constants.numDepths; i++) {
+			chances[i] = new float[]{20,  0,0, 0,0, 0,0, 0,0, 15,5,    1,1,1,1,1,1,1,1,1,1};
+		}
 		chances[1] =  new float[]{20,  15,5, 0,0, 0,0, 0,0, 0,0,    1,0,1,0,1,0,1,1,0,0};
 		chances[2] =  new float[]{20,  15,5, 0,0, 0,0, 0,0, 0,0,    1,1,1,1,1,1,1,1,1,1};
 		chances[4] =  chances[3] = chances[2];

@@ -363,12 +363,6 @@ public class GameScene extends PixelScene {
 				case 22:
 					WndStory.showChapter(WndStory.ID_HALLS);
 					break;
-
-				case 31:
-					WndStory.showChapter(WndStory.ID_HALLS);
-					break;
-
-
 		}
 			if (Dungeon.hero.isAlive() && Dungeon.depth != 22) {
 				Badges.validateNoKilling();
