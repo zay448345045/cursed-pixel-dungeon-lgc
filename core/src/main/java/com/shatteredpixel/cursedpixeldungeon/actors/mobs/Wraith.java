@@ -27,6 +27,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Terror;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroSubClass;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.ShadowParticle;
+import com.shatteredpixel.cursedpixeldungeon.items.KindOfWeapon;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Grim;
 import com.shatteredpixel.cursedpixeldungeon.levels.PrisonLevel;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
@@ -45,7 +46,7 @@ public class Wraith extends Mob {
 	{
 		spriteClass = WraithSprite.class;
 		
-		HP = HT = 7 + Dungeon.scaleWithDepth()*3;
+		HP = HT = 6 + Dungeon.scaleWithDepth()*5;
 		EXP = 0;
 
 		maxLvl = -1;
@@ -55,6 +56,8 @@ public class Wraith extends Mob {
 		properties.add(Property.UNDEAD);
 		properties.add(Property.BLOB_IMMUNE);//Immune to all blobs
 		alignment = Alignment.WRAITH;
+		resistances.add(Char.class);
+		resistances.add(KindOfWeapon.class);
 	}
 	
 	private static final String LEVEL = "level";

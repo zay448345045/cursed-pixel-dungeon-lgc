@@ -10,6 +10,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Paralysis;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.cursedpixeldungeon.effects.MagicMissile;
 import com.shatteredpixel.cursedpixeldungeon.effects.Speck;
+import com.shatteredpixel.cursedpixeldungeon.items.Gold;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.LuckyBadge;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfTeleportation;
@@ -107,7 +108,9 @@ public class GrindingLevel extends SewerLevel {
             for (int i = 0; i < lootAmt; i++) {
                 Item luckybadgedrop = LuckyBadge.tryForBonusDrop(Dungeon.hero, 1);
                 if (luckybadgedrop != null) {
-                    Dungeon.level.drop(luckybadgedrop, pos).sprite.drop();
+                    if (luckybadgedrop instanceof Gold || !luckybadgedrop.collect()) {
+                        Dungeon.level.drop(luckybadgedrop, Dungeon.hero.pos).sprite.drop();
+                    }
                 }
             }
             super.die(cause);

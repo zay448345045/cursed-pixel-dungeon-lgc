@@ -169,7 +169,11 @@ public abstract class Char extends Actor {
 	}
 
 	public float missingHPPercent() {
-		return 1f - HP/(float)HT;
+		return 1f - HPPercent();
+	}
+
+	public float HPPercent() {
+		return HP/(float)HT;
 	}
 	
 	@Override

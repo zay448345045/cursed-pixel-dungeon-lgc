@@ -269,7 +269,7 @@ public abstract class RegularPainter extends Painter {
 	protected void paintWater( Level l, ArrayList<Room> rooms ){
 		boolean[] lake = Patch.generate( l.width(), l.height(), waterFill, waterSmoothness, true );
 		int targetTerrain = Terrain.WATER;
-		if (l.feeling == Level.Feeling.EMBER & RingOfLuck.randomInt(3, 3) == 0) {//Water is rarer on ember floors
+		if (l.feeling == Level.Feeling.EMBER) {//Water is absent on ember floors
 			targetTerrain = Terrain.EMBERS;
 		}
 		if (!rooms.isEmpty()){

@@ -45,6 +45,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Terror;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Weakness;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroSubClass;
+import com.shatteredpixel.cursedpixeldungeon.effects.Chains;
 import com.shatteredpixel.cursedpixeldungeon.effects.Flare;
 import com.shatteredpixel.cursedpixeldungeon.effects.Speck;
 import com.shatteredpixel.cursedpixeldungeon.effects.Surprise;
@@ -60,7 +61,9 @@ import com.shatteredpixel.cursedpixeldungeon.items.powers.LuckyBadge;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.Ring;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfWealth;
 import com.shatteredpixel.cursedpixeldungeon.items.stones.StoneOfAggression;
+import com.shatteredpixel.cursedpixeldungeon.items.wands.Wand;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Lucky;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.Bolas;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.MissileWeapon;
 import com.shatteredpixel.cursedpixeldungeon.levels.GrindingLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.Level;
@@ -80,6 +83,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Locale;
+
+import static com.shatteredpixel.cursedpixeldungeon.actors.Char.Alignment.ALLY;
 
 public abstract class Mob extends Char {
 
@@ -248,7 +253,7 @@ public abstract class Mob extends Char {
 		if ( enemy == null || !enemy.isAlive() || state == WANDERING)
 			newEnemy = true;
 		//We are an ally, and current enemy is another ally.
-		else if (alignment == Alignment.ALLY && enemy.alignment == Alignment.ALLY)
+		else if (alignment == ALLY && enemy.alignment == ALLY)
 			newEnemy = true;
 		//We are amoked and current enemy is the hero
 		else if (buff( Amok.class ) != null && enemy == Dungeon.hero)
@@ -271,7 +276,7 @@ public abstract class Mob extends Char {
 				if (enemies.isEmpty()) {
 					//try to find ally mobs to attack second.
 					for (Mob mob : Dungeon.level.mobs)
-						if (mob.alignment == Alignment.ALLY && mob != this && fieldOfView[mob.pos])
+						if (mob.alignment == ALLY && mob != this && fieldOfView[mob.pos])
 							enemies.add(mob);
 					
 					if (enemies.isEmpty()) {
@@ -283,7 +288,7 @@ public abstract class Mob extends Char {
 				}
 				
 			//if the mob is an ally...
-			} else if ( alignment == Alignment.ALLY ) {
+			} else if ( alignment == ALLY ) {
 				//look for hostile mobs that are not passive to attack
 				for (Mob mob : Dungeon.level.mobs)
 					if (mob.alignment == Alignment.ENEMY
@@ -295,7 +300,7 @@ public abstract class Mob extends Char {
 			} else if (alignment == Alignment.ENEMY) {
 				//look for ally mobs to attack
 				for (Mob mob : Dungeon.level.mobs)
-					if (mob.alignment == Alignment.ALLY && fieldOfView[mob.pos])
+					if (mob.alignment == ALLY && fieldOfView[mob.pos])
 						enemies.add(mob);
 
 				//and look for the hero
@@ -374,6 +379,15 @@ public abstract class Mob extends Char {
 			sprite.showStatus( CharSprite.NEGATIVE, Messages.get(this, "rage") );
 			state = HUNTING;
 		}
+	}
+
+	public boolean following(Char follow) {
+		if (alignment == follow.alignment) {
+			Char targetChar = Actor.findChar(this.target);
+			return targetChar == follow;
+		}
+		return false;
+
 	}
 	
 	protected boolean canAttack( Char enemy ) {
@@ -548,7 +562,7 @@ public abstract class Mob extends Char {
 		if (enemy == Dungeon.hero && !Dungeon.hero.canSurpriseAttack()) seen = true;
 		if ( seen
 				&& paralysed == 0
-				&& !(alignment == Alignment.ALLY && enemy == Dungeon.hero)) {
+				&& !(alignment == ALLY && enemy == Dungeon.hero)) {
 			return this.defenseSkill;
 		} else {
 			return 0;
@@ -682,7 +696,13 @@ public abstract class Mob extends Char {
 			Badges.validatePriestessUnlock();
 		}
 		super.die( cause );
-		if (Dungeon.hero.subClass == HeroSubClass.NECROMANCER && Random.Int(4) == 0 && (cause instanceof Item | cause instanceof Hero)) {//Must be killed by the hero (by an item)
+		boolean chance;
+		if (cause instanceof Wand) {
+			chance = Random.Int(3) == 0;
+		} else {
+			chance = Random.Int(5) == 0;
+		}
+		if (Dungeon.hero.subClass == HeroSubClass.NECROMANCER && chance && (cause instanceof Item | cause instanceof Hero)) {//Must be killed by the hero (by an item)
 			if (Wraith.spawnAt( pos ) != null) {
 				Dungeon.hero.sprite.emitter().burst(ShadowParticle.CURSE, 6);
 			}
@@ -747,7 +767,7 @@ public abstract class Mob extends Char {
 			new Flare(8, 24).color(0x00FF00, true).show(sprite, 3f);
 			Dungeon.level.drop(LuckyBadge.genStandardDrop(), pos).sprite.drop();
 		}
-		if (Dungeon.hero.subClass == HeroSubClass.CULTIST && Random.Int(5) == 0 && !(this.properties().contains(Property.BOSS) || this instanceof GrindingLevel.Guardian)) {
+		if (Dungeon.hero.subClass == HeroSubClass.CULTIST && Random.Int(3) == 0 && !(this.properties().contains(Property.BOSS) || this.properties().contains(Property.INORGANIC))) {
 			Dungeon.level.drop(new Soul().setMob(this), pos).sprite.drop();
 		}
 	}
@@ -847,6 +867,18 @@ public abstract class Mob extends Char {
 
 	public class Following extends Wandering implements AiState {
 
+		private Char toFollow(Char start) {
+			Char toFollow = start;
+			boolean[] passable = Dungeon.level.passable.clone();
+			PathFinder.buildDistanceMap(pos, passable, Integer.MAX_VALUE);//No limit on distance
+			for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
+				if (mob.alignment == alignment && PathFinder.distance[toFollow.pos] > PathFinder.distance[mob.pos] && mob.following(toFollow)) {
+					toFollow = toFollow(mob);//If we find a mob already following the target, ensure there is not a mob already following them. This allows even massive chains of allies to traverse corridors correctly.
+				}
+			}
+			return toFollow;
+		}
+
 		@Override
 		public boolean act( boolean enemyInFOV, boolean justAlerted ) {
 			if ( enemyInFOV ) {
@@ -861,13 +893,12 @@ public abstract class Mob extends Char {
 			} else {
 
 				enemySeen = false;
-
+				Char toFollow = toFollow(Dungeon.hero);
 				int oldPos = pos;
-				//always move towards the hero when wandering
-				if (getCloser( target = Dungeon.hero.pos )) {
-					//moves 2 tiles at a time when returning to the hero from a distance
-					if (!Dungeon.level.adjacent(Dungeon.hero.pos, pos)){
-						getCloser( target = Dungeon.hero.pos );
+				//always move towards the target when wandering
+				if (getCloser( target = toFollow.pos )) {
+					if (!Dungeon.level.adjacent(toFollow.pos, pos)) {
+						getCloser( target = toFollow.pos );
 					}
 					spend( 1 / speed() );
 					return moveSprite( oldPos, pos );
@@ -1007,7 +1038,7 @@ public abstract class Mob extends Char {
 				heldAllies.add(mob);
 
 				//preserve intelligent allies if they are near the hero
-			} else if (mob.alignment == Alignment.ALLY
+			} else if (mob.alignment == ALLY
 					&& Dungeon.level.distance(Dungeon.hero.pos, mob.pos) <= 3){
 				level.mobs.remove( mob );
 				heldAllies.add(mob);

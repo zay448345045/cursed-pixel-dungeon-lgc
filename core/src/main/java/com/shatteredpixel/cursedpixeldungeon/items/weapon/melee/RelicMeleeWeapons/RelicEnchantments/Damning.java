@@ -52,11 +52,10 @@ public class Damning extends RelicEnchantment {
                     QuickSlotButton.target(Actor.findChar(cell));
                 enemy = Actor.findChar(cell);
                 if (enemy != null) {
-                    if (Dungeon.level.trueDistance(Dungeon.hero.pos,enemy.pos) <= Greataxe.RCH + 1) {
+                    if (Dungeon.hero.canAttack(enemy)) {
                         Greataxe.prepare();
-                        Dungeon.hero.attack(enemy);
                         Dungeon.hero.sprite.attack(enemy.pos);
-                        Dungeon.hero.spendAndNext(Greataxe.speedFactor(Dungeon.hero));//This is enforced here so that augments make a difference
+                        //Dungeon.hero.spendAndNext(Greataxe.speedFactor(Dungeon.hero));//This is enforced here so that augments make a difference
                         Damning.super.activate(Greataxe,Dungeon.hero);
                     } else {
                         GLog.n( Messages.get(Damning.class, "short_reach") );

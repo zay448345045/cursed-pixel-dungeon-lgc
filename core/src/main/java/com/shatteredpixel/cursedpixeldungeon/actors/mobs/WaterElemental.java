@@ -29,9 +29,11 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Burning;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Chill;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Corruption;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.DeferredDeath;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Poison;
 import com.shatteredpixel.cursedpixeldungeon.effects.Pushing;
 import com.shatteredpixel.cursedpixeldungeon.effects.Speck;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Grim;
 import com.shatteredpixel.cursedpixeldungeon.levels.Terrain;
 import com.shatteredpixel.cursedpixeldungeon.levels.features.Door;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
@@ -136,6 +138,9 @@ public class WaterElemental extends Mob {
         }
         if (buff(Corruption.class ) != null) {
             Buff.affect( clone, Corruption.class);
+        }
+        if (buff(DeferredDeath.class) != null) {
+            clone.die(new Grim());
         }
         return clone;
     }

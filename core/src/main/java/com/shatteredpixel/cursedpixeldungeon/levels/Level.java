@@ -38,6 +38,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.LockedFloor;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.MagicalSight;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.MindVision;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Resurrection;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Shadows;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroClass;
@@ -962,48 +963,48 @@ public abstract class Level implements Bundlable {
 		//Currently only the hero can get mind vision or awareness
 		if (c.isAlive() && c == Dungeon.hero) {
 			Dungeon.hero.mindVisionEnemies.clear();
-			if (c.buff( MindVision.class ) != null) {
+			if (c.buff(MindVision.class) != null) {
 				for (Mob mob : mobs) {
 					int p = mob.pos;
 
-					if (!fieldOfView[p]){
+					if (!fieldOfView[p]) {
 						Dungeon.hero.mindVisionEnemies.add(mob);
 					}
 
 				}
-			} else if (((Hero)c).heroClass == HeroClass.HUNTRESS) {
+			} else if (((Hero) c).heroClass == HeroClass.HUNTRESS) {
 				for (Mob mob : mobs) {
 					int p = mob.pos;
-					if (distance( c.pos, p) <= 5) {
+					if (distance(c.pos, p) <= 5) {
 
-						if (!fieldOfView[p]){
-							Dungeon.hero.mindVisionEnemies.add(mob);
-						}
-					}
-				}
-			} else if (((Hero)c).heroClass == HeroClass.PRIESTESS) {
-				for (Mob mob : mobs) {
-					Char.Alignment a = mob.alignment;
-					int p = mob.pos;
-					if (a == Char.Alignment.ALLY) {
-						if (!fieldOfView[p]){
+						if (!fieldOfView[p]) {
 							Dungeon.hero.mindVisionEnemies.add(mob);
 						}
 					}
 				}
 			}
-			
+			for (Mob mob : mobs) {
+				Char.Alignment a = mob.alignment;
+				int p = mob.pos;
+				if (a == Char.Alignment.ALLY && mob.buff(Resurrection.class) != null) {
+					if (!fieldOfView[p]) {
+						Dungeon.hero.mindVisionEnemies.add(mob);
+					}
+				}
+
+			}
+
 			for (Mob m : Dungeon.hero.mindVisionEnemies) {
 				for (int i : PathFinder.NEIGHBOURS9) {
 					fieldOfView[m.pos + i] = true;
 				}
 			}
-			
-			if (c.buff( Awareness.class ) != null) {
+
+			if (c.buff(Awareness.class) != null) {
 				for (Heap heap : heaps.values()) {
 					int p = heap.pos;
 					for (int i : PathFinder.NEIGHBOURS9)
-						fieldOfView[p+i] = true;
+						fieldOfView[p + i] = true;
 				}
 			}
 		}

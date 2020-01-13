@@ -32,7 +32,10 @@ import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.Soul;
 import com.shatteredpixel.cursedpixeldungeon.items.Stylus;
 import com.shatteredpixel.cursedpixeldungeon.items.TomeOfMastery;
+import com.shatteredpixel.cursedpixeldungeon.items.allies.EarthenDragon;
+import com.shatteredpixel.cursedpixeldungeon.items.allies.FireDragon;
 import com.shatteredpixel.cursedpixeldungeon.items.allies.PoisonDragon;
+import com.shatteredpixel.cursedpixeldungeon.items.allies.WaterDragon;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.ClothArmor;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.LeatherArmor;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.PlateArmor;
@@ -268,7 +271,13 @@ public enum HeroClass {
 		(hero.belongings.weapon = new InscribedKnife()).identify().upgrade();
 		(hero.belongings.armor = new ClothArmor()).identify();
 		(hero.belongings.misc1 = new PoisonDragon()).identify().upgrade();
+		//(hero.belongings.misc2 = new FireDragon()).identify().upgrade();
+		//(hero.belongings.misc3 = new EarthenDragon()).identify().upgrade();
+		//(hero.belongings.misc4 = new WaterDragon()).identify().upgrade();
 		hero.belongings.misc1.activate(hero);
+		//hero.belongings.misc2.activate(hero);
+		//hero.belongings.misc3.activate(hero);
+		//hero.belongings.misc4.activate(hero);
 		hero.HP = hero.HT = 32;
 		Dungeon.quickslot.setSlot(0,hero.belongings.misc1);
 		new PotionOfHealing().identify();
@@ -316,8 +325,6 @@ public enum HeroClass {
 
 		Dungeon.quickslot.setSlot(0, staff);
 
-
-		
 		new ScrollOfUpgrade().identify();
 		new PotionOfLiquidFlame().identify();
 		if (Badges.isUnlocked(Badges.Badge.VICTORY_MAGE) | DeviceCompat.isDebug()) {
