@@ -24,12 +24,15 @@ package com.shatteredpixel.cursedpixeldungeon.actors.mobs.npcs;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.DeferredDeath;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.LuckyBadge;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfRemoveCurse;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.scenes.InterlevelScene;
 import com.shatteredpixel.cursedpixeldungeon.scenes.PixelScene;
+import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.WandmakerSprite;
 import com.shatteredpixel.cursedpixeldungeon.ui.RedButton;
 import com.shatteredpixel.cursedpixeldungeon.ui.RenderedTextMultiline;
@@ -38,6 +41,8 @@ import com.shatteredpixel.cursedpixeldungeon.windows.IconTitle;
 import com.shatteredpixel.cursedpixeldungeon.windows.WndBag;
 import com.watabou.noosa.Game;
 import com.watabou.utils.DeviceCompat;
+
+import java.io.IOException;
 
 public class Wandmaker_2 extends NPC {
 
@@ -54,7 +59,12 @@ public class Wandmaker_2 extends NPC {
 
     @Override
     public boolean interact() {
-        GameScene.show( new WndWandmaker_2( this ) );
+        LuckyBadge badge = Dungeon.hero.belongings.getItem(LuckyBadge.class);
+        if (badge != null && badge.type == LuckyBadge.NONE) {
+            GameScene.show(new WndChooseBadge(badge));
+        } else {
+            GameScene.show(new WndWandmaker_2(this));
+        }
         return false;
     }
 
@@ -74,6 +84,60 @@ public class Wandmaker_2 extends NPC {
     @Override
     public boolean reset() {
         return true;
+    }
+
+    public class WndChooseBadge extends Window {
+        private static final int WIDTH = 120;
+        private static final int BTN_HEIGHT = 20;
+        private static final float GAP = 2;
+
+        public WndChooseBadge(final LuckyBadge badge) {
+            super();
+            IconTitle titlebar = new IconTitle();
+            titlebar.icon(new ItemSprite(badge.image));
+            titlebar.label(Messages.titleCase(badge.name()));
+            titlebar.setRect(0, 0, WIDTH, 0);
+            add(titlebar);
+
+            String msg = "";
+            msg = Messages.get(Wandmaker_2.class, "chat_2");
+
+            RenderedTextMultiline message = PixelScene.renderMultiline(msg, 6);
+            message.maxWidth(WIDTH);
+            message.setPos(0, titlebar.bottom() + GAP);
+            add(message);
+
+            RedButton btnGrind = new RedButton(Messages.get(Wandmaker_2.class, "grind")) {
+                @Override
+                protected void onClick() {
+                    badge.type = LuckyBadge.GRIND;
+                    try {
+                        Dungeon.saveAll();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+            btnGrind.setRect(0, message.top() + message.height() + GAP, WIDTH, BTN_HEIGHT);
+            add(btnGrind);
+
+
+            RedButton btnSpeed = new RedButton(Messages.get(Wandmaker_2.class, "speed")) {
+                @Override
+                protected void onClick() {
+                    badge.type = LuckyBadge.SPEED;
+                    try {
+                        Dungeon.saveAll();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+            btnSpeed.setRect(0, message.top() + message.height() + GAP + BTN_HEIGHT, WIDTH, BTN_HEIGHT);
+
+            add(btnSpeed);
+            resize(WIDTH, (int) btnSpeed.bottom());
+        }
     }
 
     public class WndWandmaker_2 extends Window {

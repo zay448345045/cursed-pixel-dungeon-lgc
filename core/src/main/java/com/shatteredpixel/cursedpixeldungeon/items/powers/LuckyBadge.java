@@ -47,6 +47,12 @@ public class LuckyBadge extends Power {
     public boolean isUpgradable() {
         return false;
     }
+
+    public static final int GRIND = 1;
+    public static final int SPEED = 2;
+    public static final int NONE = 0;
+
+    public int type = NONE;
     private float triesToDrop = Float.MIN_VALUE;
     private int dropsToRare = Integer.MIN_VALUE;
     private static float dropsToUpgrade = 20;
@@ -105,7 +111,9 @@ public class LuckyBadge extends Power {
     public ArrayList<String> actions(Hero hero) {
         ArrayList<String> actions = super.actions(hero);
         if (!(Dungeon.depth==GrindDepth | Dungeon.depth == HomeDepth)) {
-            actions.add(AC_GRIND);
+            if (type == GRIND) {
+                actions.add(AC_GRIND);
+            }
             actions.add(AC_HOME);
         } else {
             actions.add(AC_RETURN);
@@ -138,6 +146,7 @@ public class LuckyBadge extends Power {
     private static final String DROPS_TO_UPGRADE = "drops_to_upgrade";
     private static final String RETURN_DEPTH = "return_depth";
     private static final String RETURN_POS = "return_pos";
+    private static final String TYPE = "type";
 
     @Override
     public void storeInBundle(Bundle bundle) {
@@ -147,6 +156,7 @@ public class LuckyBadge extends Power {
         bundle.put(DROPS_TO_UPGRADE, dropsToUpgrade);
         bundle.put( RETURN_DEPTH, returnDepth );
         bundle.put( RETURN_POS, returnPos );
+        bundle.put( TYPE, type );
     }
 
     @Override
@@ -157,6 +167,7 @@ public class LuckyBadge extends Power {
         dropsToUpgrade = bundle.getInt(DROPS_TO_UPGRADE);
         returnDepth = bundle.getInt( RETURN_DEPTH );
         returnPos = bundle.getInt( RETURN_POS );
+        type = bundle.getInt(TYPE);
     }
 
     @Override

@@ -57,12 +57,12 @@ public class GrindingLevel extends SewerLevel {
 
     @Override
     public String tilesTex() {
-        return Assets.TILES_BOSS;
+        return Assets.TILES_HEAVEN;
     }
 
     @Override
     public String waterTex() {
-        return Assets.WATER_SEWERS;
+        return Assets.WATER_HEAVEN;
     }
 
     @Override
@@ -99,7 +99,7 @@ public class GrindingLevel extends SewerLevel {
 
         public Guardian() {
             super();
-            HP = HT = 15 + 7 * getScaleFactor();
+            HP = HT = 20 + 6 * getScaleFactor();
             aggro(Dungeon.hero);
         }
 
@@ -207,7 +207,7 @@ public class GrindingLevel extends SewerLevel {
             evaFactor = 0.5f;
             DRFactor = 2f;
             lootAmt = 2;//Tankier, so provides more reward.
-            HP = HT = (int)(super.HT*2f);
+            HP = HT = (int)(super.HT*1.5f);
             resistances.add(Grim.class);
         }
     }
