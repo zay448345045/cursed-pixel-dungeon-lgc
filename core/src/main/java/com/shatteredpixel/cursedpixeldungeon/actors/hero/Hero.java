@@ -115,13 +115,18 @@ import com.shatteredpixel.cursedpixeldungeon.plants.Swiftthistle;
 import com.shatteredpixel.cursedpixeldungeon.scenes.AlchemyScene;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.scenes.InterlevelScene;
+import com.shatteredpixel.cursedpixeldungeon.scenes.PixelScene;
 import com.shatteredpixel.cursedpixeldungeon.scenes.SurfaceScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.HeroSprite;
 import com.shatteredpixel.cursedpixeldungeon.ui.AttackIndicator;
 import com.shatteredpixel.cursedpixeldungeon.ui.BuffIndicator;
 import com.shatteredpixel.cursedpixeldungeon.ui.QuickSlotButton;
+import com.shatteredpixel.cursedpixeldungeon.ui.RedButton;
+import com.shatteredpixel.cursedpixeldungeon.ui.RenderedTextMultiline;
+import com.shatteredpixel.cursedpixeldungeon.ui.Window;
 import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
+import com.shatteredpixel.cursedpixeldungeon.windows.IconTitle;
 import com.shatteredpixel.cursedpixeldungeon.windows.WndMessage;
 import com.shatteredpixel.cursedpixeldungeon.windows.WndResurrect;
 import com.shatteredpixel.cursedpixeldungeon.windows.WndTradeItem;
@@ -876,20 +881,98 @@ public class Hero extends Char {
 			return false;
 		}
 	}
+
+	private void descend() {
+		curAction = null;
+
+		Buff buff = buff(TimekeepersHourglass.timeFreeze.class);
+		if (buff != null) buff.detach();
+		buff = Dungeon.hero.buff(Swiftthistle.TimeBubble.class);
+		if (buff != null) buff.detach();
+
+		InterlevelScene.mode = InterlevelScene.Mode.DESCEND;
+		Game.switchScene( InterlevelScene.class );
+	}
+
+	private void ascend() {
+		curAction = null;
+
+		Buff buff = buff(TimekeepersHourglass.timeFreeze.class);
+		if (buff != null) buff.detach();
+		buff = Dungeon.hero.buff(Swiftthistle.TimeBubble.class);
+		if (buff != null) buff.detach();
+
+		InterlevelScene.mode = InterlevelScene.Mode.ASCEND;
+		Game.switchScene( InterlevelScene.class );
+	}
+
+	public class WndConfirmMove extends Window {
+		private static final int WIDTH = 120;
+		private static final int BTN_HEIGHT = 20;
+		private static final float GAP = 2;
+
+		WndConfirmMove(final boolean descend) {
+			super();
+			IconTitle titlebar = new IconTitle();
+			Hero hero = Dungeon.hero;
+
+			IconTitle title = new IconTitle();
+			title.icon( HeroSprite.avatar(hero.heroClass, hero.tier()) );
+			titlebar.label( Messages.get(InterlevelScene.class, "warning_title"));
+			titlebar.setRect(0, 0, WIDTH, 0);
+			add(titlebar);
+
+			String msg;
+			msg = Messages.get(InterlevelScene.class, "warning");
+
+			RenderedTextMultiline message = PixelScene.renderMultiline(msg, 6);
+			message.maxWidth(WIDTH);
+			message.setPos(0, titlebar.bottom() + GAP);
+			add(message);
+
+			RedButton descendYes = new RedButton(Messages.get(InterlevelScene.class, "descend_yes")) {
+				@Override
+				protected void onClick() {
+					hide();
+					if (descend) {
+						descend();
+					} else {
+						ascend();
+					}
+				}
+			};
+			descendYes.setRect(0, message.top() + message.height() + GAP, WIDTH, BTN_HEIGHT);
+			add(descendYes);
+
+
+			RedButton descendNo = new RedButton(Messages.get(InterlevelScene.class, "descend_no")) {
+				@Override
+				protected void onClick() {
+					hide();
+				}
+			};
+			descendNo.setRect(0, message.top() + message.height() + GAP + BTN_HEIGHT, WIDTH, BTN_HEIGHT);
+
+			add(descendNo);
+			resize(WIDTH, (int) descendNo.bottom());
+		}
+
+		@Override
+		public void onBackPressed() {
+		}
+	}
 	
 	private boolean actDescend( HeroAction.Descend action ) {
 		int stairs = action.dst;
-		if (pos == stairs && pos == Dungeon.level.exit & !(Dungeon.depth == LuckyBadge.GrindDepth || Dungeon.depth == LuckyBadge.HomeDepth) && buff(LuckyBadgeBuff.class) == null) {
-			
-			curAction = null;
+		LuckyBadge badge = Dungeon.hero.belongings.getItem(LuckyBadge.class);
+		if (pos == stairs && pos == Dungeon.level.exit & !(Dungeon.depth == LuckyBadge.GrindDepth || Dungeon.depth == LuckyBadge.HomeDepth) && (badge != null && badge.type != LuckyBadge.NONE)) {
 
-			Buff buff = buff(TimekeepersHourglass.timeFreeze.class);
-			if (buff != null) buff.detach();
-			buff = Dungeon.hero.buff(Swiftthistle.TimeBubble.class);
-			if (buff != null) buff.detach();
-			
-			InterlevelScene.mode = InterlevelScene.Mode.DESCEND;
-			Game.switchScene( InterlevelScene.class );
+			if (buff(LuckyBadgeBuff.class) != null) {
+				GameScene.show(new WndConfirmMove(true));
+				ready();
+			} else {
+				descend();
+			}
 
 			return false;
 
@@ -911,9 +994,13 @@ public class Hero extends Char {
 				InterlevelScene.mode = InterlevelScene.Mode.START;
 				Game.switchScene( InterlevelScene.class );
 				return true;
-			} else if (Dungeon.depth == LuckyBadge.GrindDepth | Dungeon.depth == LuckyBadge.HomeDepth | buff(LuckyBadgeBuff.class) != null) {
+			} else if (Dungeon.depth == LuckyBadge.GrindDepth | Dungeon.depth == LuckyBadge.HomeDepth) {
 				ready();
 				return true;
+			} else if (buff(LuckyBadgeBuff.class) != null) {
+				GameScene.show(new WndConfirmMove(false));
+				ready();
+				return false;
 			}
 			
 			if (Dungeon.depth == 0) {
@@ -935,15 +1022,8 @@ public class Hero extends Char {
 				
 			} else {
 				
-				curAction = null;
+				ascend();
 
-				Buff buff = buff(TimekeepersHourglass.timeFreeze.class);
-				if (buff != null) buff.detach();
-				buff = Dungeon.hero.buff(Swiftthistle.TimeBubble.class);
-				if (buff != null) buff.detach();
-
-				InterlevelScene.mode = InterlevelScene.Mode.ASCEND;
-				Game.switchScene( InterlevelScene.class );
 			}
 
 			return false;
