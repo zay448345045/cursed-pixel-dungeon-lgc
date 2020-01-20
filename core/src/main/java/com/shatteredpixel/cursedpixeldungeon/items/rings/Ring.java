@@ -59,6 +59,7 @@ public class Ring extends KindofMisc {
 		//RingOfWealth.class,
 	};
 
+
 	private static final HashMap<String, Integer> gems = new HashMap<String, Integer>() {
 		{
 			put("garnet",ItemSpriteSheet.RING_GARNET);

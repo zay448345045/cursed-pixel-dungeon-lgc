@@ -248,17 +248,6 @@ public class Dungeon {
 		return (challenges & mask) != 0;
 	}
 
-	public static Level createStartLevel() {
-		Dungeon.level = null;
-		Actor.clear();
-		depth = 0;
-		Level level;
-		level = new StartLevel();
-		level.create();
-
-		return level;
-	}
-
 	public static Level newLevelWithDepth(int depthToAccess) {
 		Level level;
 		switch (depth) {
@@ -347,8 +336,8 @@ public class Dungeon {
 			case 47:
 			case 48:
 			case 49:
-				level = new AirChallengeLevel();
-				break;
+				//level = new AirChallengeLevel();
+				//break;
 			case 50:
 				level = new AirChallengeBossLevel();
 				break;
@@ -380,7 +369,7 @@ public class Dungeon {
 		return level;
 	}
 
-	public static Level newLevel() {//Depricated for now
+	/*public static Level newLevel() {
 
 		Dungeon.level = null;
 		Actor.clear();
@@ -477,7 +466,7 @@ public class Dungeon {
 		Statistics.qualifiedForNoKilling = !bossLevel();
 
 		return level;
-	}
+	}*/
 
 	public static void resetLevel() {
 

@@ -403,7 +403,7 @@ public class GameScene extends PixelScene {
 				Dungeon.level.drop( item, pos ).type = Heap.Type.CHEST;
 			}
 			Dungeon.level.heaps.get(pos).type = Heap.Type.CHEST;
-			Dungeon.level.heaps.get(pos).sprite.link(); //sprite reset to show chest
+			Dungeon.level.heaps.get(pos).sprite.link(); //sprite set to show chest
 			Dungeon.portedItems.remove( Dungeon.depth );
 		}
 

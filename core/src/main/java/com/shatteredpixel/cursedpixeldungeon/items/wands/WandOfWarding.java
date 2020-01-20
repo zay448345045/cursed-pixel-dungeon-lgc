@@ -286,7 +286,7 @@ public class WandOfWarding extends Wand {
             enemy.damage( dmg, WandOfWarding.class );
             if (enemy.isAlive()){
 
-               // Wand.processSoulMark(enemy, wandLevel, 1);
+               //Wand.processSoulMark(enemy, wandLevel, 1);
             }
 
             if (!enemy.isAlive() && enemy == Dungeon.hero) {

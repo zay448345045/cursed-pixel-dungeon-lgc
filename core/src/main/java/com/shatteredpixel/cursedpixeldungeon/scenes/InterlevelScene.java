@@ -329,7 +329,7 @@ public class InterlevelScene extends PixelScene {
 			if (error != null) {
 				String errorMsg = Messages.get(this, "file_not_found");
 				if (error instanceof FileNotFoundException) {
-					try {//Attempt to reset if error when descending
+					try {//Attempt to set if error when descending
 						createNewLevel(Dungeon.depth);
 						error = null;
 					} catch (Exception e) {
@@ -486,7 +486,7 @@ public class InterlevelScene extends PixelScene {
 		}
 	}*/
 
-	/*private void reset() throws IOException {
+	/*private void set() throws IOException {
 
 		DriedRose.holdGhostHero( Dungeon.level );
 

@@ -192,8 +192,8 @@ public class MagesStaff extends MeleeWeapon {
 
 		name = Messages.get(wand, "staff_name");
 
-		//This is necessary to reset any particles.
-		//FIXME this is gross, should implement a better way to fully reset quickslot visuals
+		//This is necessary to set any particles.
+		//FIXME this is gross, should implement a better way to fully set quickslot visuals
 		int slot = Dungeon.quickslot.getSlot(this);
 		if (slot != -1){
 			Dungeon.quickslot.clearSlot(slot);

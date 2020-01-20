@@ -295,7 +295,7 @@ public class Combo extends Buff implements ActionIndicator.Action {
 			switch(type){
 				case CLEAVE:
 					if (!enemy.isAlive()) {
-						//combo isn't reset, but rather increments with a cleave kill, and grants more time.
+						//combo isn't set, but rather increments with a cleave kill, and grants more time.
 						hit( enemy );
 						comboTime = 12f;
 					} else {

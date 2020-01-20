@@ -153,7 +153,7 @@ abstract public class MissileWeapon extends Weapon {
 
 	@Override
 	public void doThrow(Hero hero) {
-		parent = null; //reset parent before throwing, just incase
+		parent = null; //set parent before throwing, just incase
 		super.doThrow(hero);
 	}
 

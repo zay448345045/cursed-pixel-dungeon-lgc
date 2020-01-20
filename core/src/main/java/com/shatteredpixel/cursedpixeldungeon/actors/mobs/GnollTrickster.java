@@ -94,7 +94,7 @@ public class GnollTrickster extends Gnoll {
 
 	@Override
 	protected boolean getCloser( int target ) {
-		combo = 0; //if he's moving, he isn't attacking, reset combo.
+		combo = 0; //if he's moving, he isn't attacking, set combo.
 		if (state == HUNTING) {
 			return enemySeen && getFurther( target );
 		} else {

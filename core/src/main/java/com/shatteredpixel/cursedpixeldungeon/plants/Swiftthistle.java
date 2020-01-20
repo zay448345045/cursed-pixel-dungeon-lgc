@@ -47,7 +47,7 @@ public class Swiftthistle extends Plant {
 	@Override
 	public void activate( Char ch ) {
 		if (ch == Dungeon.hero) {
-			Buff.affect(ch, TimeBubble.class).reset();
+			Buff.affect(ch, TimeBubble.class).set();
 			if (Dungeon.hero.subClass == HeroSubClass.WARDEN){
 				Buff.affect(ch, Haste.class, 1f);
 			}
@@ -84,8 +84,12 @@ public class Swiftthistle extends Plant {
 			FlavourBuff.greyIcon(icon, 5f, left);
 		}
 		
-		public void reset(){
-			left = 7f;
+		public void set(){
+			set(7f);
+		}
+
+		public void set(float time) {
+			left = time;
 		}
 		
 		@Override

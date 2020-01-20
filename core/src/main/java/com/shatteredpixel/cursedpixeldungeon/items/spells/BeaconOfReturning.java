@@ -76,7 +76,7 @@ public class BeaconOfReturning extends Spell {
 		}
 	}
 	
-	//we reset return depth when beacons are dropped to prevent
+	//we set return depth when beacons are dropped to prevent
 	//having two stacks of beacons with different return locations
 	
 	@Override

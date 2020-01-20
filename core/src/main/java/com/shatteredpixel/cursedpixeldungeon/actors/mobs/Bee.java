@@ -108,7 +108,7 @@ public class Bee extends Mob {
 	
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange( HT / 5, HT / 3 );
+		return Random.NormalIntRange( HT / 3, HT / 2 );
 	}
 	
 	@Override

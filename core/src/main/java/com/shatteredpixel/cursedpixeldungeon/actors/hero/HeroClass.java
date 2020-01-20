@@ -67,6 +67,8 @@ import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfCorruption;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfMagicMissile;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.SpiritBow;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.curses.Sacrificial;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Precise;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Swift;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Dirk;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Gloves;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.InscribedKnife;
@@ -313,7 +315,7 @@ public enum HeroClass {
 		//new WandOfLightning().identify().upgrade(2).collect();
 		//new Amulet().collect();
 		//new AmuletSectorWater().collect();
-		staff = new MagesStaff(new WandOfMagicMissile());
+		staff = (MagesStaff) new MagesStaff(new WandOfMagicMissile()).enchant(new Swift());
 		/*new WandOfMagicMissile().enchant(Weapon.Enchantment.random()).identify().upgrade(5).collect();
 		new WandOfMagicMissile().identify().collect();
 		new ScrollOfEnchantment().quantity(5).identify().collect();
@@ -357,7 +359,7 @@ public enum HeroClass {
 	private static void initHuntress( Hero hero ) {
 
 		(hero.belongings.weapon = new Gloves()).identify().upgrade();
-		SpiritBow bow = new SpiritBow();//.enchant(new Precise());//I used this for testing it
+		SpiritBow bow = new SpiritBow();
 		bow.identify().upgrade().collect();
 
 		Dungeon.quickslot.setSlot(0, bow);

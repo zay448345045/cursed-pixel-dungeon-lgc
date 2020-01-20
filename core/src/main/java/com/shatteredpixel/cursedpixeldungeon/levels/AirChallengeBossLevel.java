@@ -2,10 +2,15 @@ package com.shatteredpixel.cursedpixeldungeon.levels;
 
 import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
+import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Shinobi;
+import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Tengu;
+import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Tengu2;
 import com.shatteredpixel.cursedpixeldungeon.items.keys.IronKey;
+import com.shatteredpixel.cursedpixeldungeon.levels.rooms.standard.EmptyRoom;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
+import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.watabou.noosa.Group;
 
 public class AirChallengeBossLevel extends Level {
@@ -14,7 +19,11 @@ public class AirChallengeBossLevel extends Level {
         color2 = 0x88924c;
     }
 
-    private final int KeyPos = 23 + width * 15;
+    private final int KEY_POS = 23 + width * 15;
+    private final int ROOM_LEFT_POS = 9 + width * 19;
+    private final int ROOM_RIGHT_POS = 39 + width * 19;
+
+    public Tengu2 tengu;
 
     @Override
     public String waterTex() {
@@ -45,13 +54,27 @@ public class AirChallengeBossLevel extends Level {
     @Override
     protected void createMobs() {
         Shinobi guard = (Shinobi) createMob();
-        guard.pos = KeyPos;
+        guard.pos = KEY_POS;
         mobs.add(guard);
+        tengu = new Tengu2();
+    }
+
+    @Override
+    public void press(int cell, Char ch) {
+        super.press(cell, ch);
+        if (ch == Dungeon.hero) {
+            //hero enters tengu's chamber
+            if ((new EmptyRoom().set(5, 19, 10, 24)).inside(cellToPoint(cell))) {
+                tengu.pos = ROOM_LEFT_POS;
+                GameScene.add(tengu);
+                tengu.notice();
+            }
+        }
     }
 
     @Override
     protected void createItems() {
-        drop(new IronKey(Dungeon.depth), KeyPos);
+        drop(new IronKey(Dungeon.depth), KEY_POS);
     }
 
     @Override

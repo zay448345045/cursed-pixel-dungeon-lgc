@@ -120,7 +120,7 @@ public class RingOfWealth extends Ring {
 			}
 		}
 
-		//reset (if needed), decrement, and store counts
+		//set (if needed), decrement, and store counts
 		if (triesToDrop == Float.MIN_VALUE) {
 			triesToDrop = Random.NormalIntRange(0, 60);
 			dropsToRare = Random.NormalIntRange(0, 20);

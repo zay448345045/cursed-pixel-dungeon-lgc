@@ -91,7 +91,7 @@ class Layouts {
             W, 	W, 	W, 	W, 	W, 	Q, 	Q, 	Q, 	Q, 	Q, 	Q, 	Q, 	W, 	W, 	W, 	W, 	Q, 	Q, 	Q,  Q, 	Q,  Q, 	Q, 	P,  Q,  Q, 	Q, 	Q, 	Q,  Q, 	Q, 	W, 	W, 	W, 	W, 	Q, 	Q, 	Q,  Q, 	Q, 	Q, 	Q, 	W, 	W, 	W, 	W, 	W, 	W,
             W, 	W, 	W, 	W, 	W, 	Q, 	Q, 	Q, 	Q,  Q, 	Q, 	Q, 	W, 	W, 	W, 	W,  Q, 	Q, 	Q,  Q, 	Q,  Q, 	Q, 	Q, 	Q,  Q, 	Q, 	Q, 	Q,  Q, 	Q, 	W, 	W, 	W, 	W, 	Q, 	Q, 	Q,  Q, 	Q, 	Q, 	Q, 	W, 	W, 	W, 	W, 	W, 	W,
             W, 	W, 	W, 	W, 	W, 	Q, 	Q, 	Q, 	Q, 	Q, 	Q,  Q, 	W, 	W, 	W, 	W, 	Q, 	Q, 	Q,  Q, 	Q,  Q,  Q,  Q,  Q,  Q, 	Q, 	Q, 	Q,  Q, 	Q, 	W, 	W, 	W, 	W, 	Q, 	Q, 	Q,  Q, 	Q, 	Q, 	Q, 	W, 	W, 	W, 	W, 	W,  W,
-            W, 	W, 	W, 	W, 	W, 	Q, 	Q, 	Q, 	Q, 	Q, 	Q, 	Q, 	L, 	Q, 	Q, 	D,  Q, 	Q, 	Q,  Q, 	Q, 	Q, 	Q, 	Q, 	Q, 	Q,  Q, 	Q, 	Q,  Q, 	Q, 	D, 	Q, 	Q,  L, 	Q, 	Q, 	Q,  Q, 	Q, 	Q, 	Q, 	W, 	W, 	W, 	W, 	W,  W,
+            W, 	W, 	W, 	W, 	W, 	Q, 	Q, 	Q, 	Q, 	Q, 	Q, 	Q, 	D, 	Q, 	Q, 	D,  Q, 	Q, 	Q,  Q, 	Q, 	Q, 	Q, 	Q, 	Q, 	Q,  Q, 	Q, 	Q,  Q, 	Q, 	D, 	Q, 	Q,  D, 	Q, 	Q, 	Q,  Q, 	Q, 	Q, 	Q, 	W, 	W, 	W, 	W, 	W,  W,
             W, 	W, 	W, 	W, 	W, 	Q, 	Q, 	Q, 	Q, 	Q, 	Q, 	Q, 	W, 	W, 	W, 	W, 	Q, 	Q, 	Q,  Q, 	Q, 	Q, 	Q, 	Q, 	Q, 	Q, 	Q, 	Q, 	Q,  Q, 	Q, 	W, 	W, 	W, 	W, 	Q, 	Q, 	Q,  Q, 	Q,  Q, 	Q, 	W, 	W, 	W, 	W, 	W, 	W,
             W, 	W, 	W, 	W, 	W,  Q, 	Q, 	Q, 	Q, 	Q, 	Q, 	Q, 	W, 	W, 	W, 	W, 	Q, 	Q, 	Q,  Q, 	Q, 	Q, 	Q, 	Q, 	Q, 	Q, 	Q, 	Q, 	Q,  Q, 	Q, 	W, 	W, 	W, 	W,  Q, 	Q, 	Q,  Q, 	Q, 	Q, 	Q, 	W, 	W, 	W, 	W, 	W, 	W,
             W, 	W, 	W, 	W, 	W, 	Q, 	Q, 	Q, 	Q, 	Q, 	Q, 	Q, 	W, 	W, 	W, 	W, 	Q, 	Q, 	Q,  Q, 	Q, 	Q, 	Q, 	Q, 	Q, 	Q,  Q, 	Q, 	Q,  Q, 	Q,	W, 	W, 	W, 	W, 	Q, 	Q, 	Q,  Q, 	Q, 	Q, 	Q, 	W, 	W, 	W, 	W, 	W, 	W,

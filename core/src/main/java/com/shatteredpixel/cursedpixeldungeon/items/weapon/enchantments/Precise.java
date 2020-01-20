@@ -44,7 +44,7 @@ public class Precise extends Weapon.Enchantment {
             hitChance = 1f - (evasion/accuracy);
         }
 
-        damage = (int)Math.ceil(damage * hitChance);
+        damage = (int)Math.ceil(damage * (hitChance * 1.5f));
 
         return damage;
     }
