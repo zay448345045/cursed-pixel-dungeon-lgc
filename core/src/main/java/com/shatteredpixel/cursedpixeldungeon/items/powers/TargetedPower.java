@@ -19,6 +19,11 @@ import java.util.ArrayList;
 
 public abstract class TargetedPower extends Power {
 
+    {
+        usesTargeting = true;
+        defaultAction = AC_ZAP;
+    }
+
     public static final String AC_ZAP = "CAST";
     private static final float TIME_TO_ZAP = 1.0f;
 
