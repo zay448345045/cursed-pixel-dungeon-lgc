@@ -137,6 +137,8 @@ public class GamesInProgress {
 		info.exp = hero.exp;
 		info.hp = hero.HP;
 		info.ht = hero.HT;
+		info.mp = hero.MP;
+		info.MP_MAX = hero.MAX_MP;
 		info.shld = hero.shielding();
 		info.heroClass = hero.heroClass;
 		info.subClass = hero.subClass;
@@ -168,6 +170,8 @@ public class GamesInProgress {
 		public int exp;
 		public int hp;
 		public int ht;
+		public int mp;
+		public int MP_MAX;
 		public int shld;
 		public HeroClass heroClass;
 		public HeroSubClass subClass;

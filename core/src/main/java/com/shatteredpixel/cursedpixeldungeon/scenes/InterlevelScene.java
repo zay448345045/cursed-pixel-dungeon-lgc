@@ -342,6 +342,8 @@ public class InterlevelScene extends PixelScene {
 						error.getMessage().equals("old save")) errorMsg = Messages.get(this, "io_error");
 
 				else errorMsg = Messages.get(this, "io_error");
+
+
 				errorMsg += "\n\n" + error;
 				if (error != null) {//In case resetting the floor fixed it
 					thread = null;
@@ -358,6 +360,8 @@ public class InterlevelScene extends PixelScene {
 
 
 				error = null;
+				throw new RuntimeException("fatal error occured while moving between floors. " +
+						"Seed:" + Dungeon.seed + " depth:" + Dungeon.depth, error);
 			} else if (thread != null && (int)waitingTime == 10){
 				waitingTime = 11f;
 				String s = "";

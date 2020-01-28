@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="com.cursedpixel.curseddungeon"
-	android:versionCode="349"
-	android:versionName="0.7.3b"
+	android:versionCode="350"
+	android:versionName="0.3.0-beta"
 	android:installLocation="auto">
 	
 	<uses-feature

@@ -326,7 +326,7 @@ public enum HeroClass {
 		hero.belongings.weapon.activate(hero);
 
 		Dungeon.quickslot.setSlot(0, staff);
-
+		hero.MAX_MP = hero.MP = 10;
 		new ScrollOfUpgrade().identify();
 		new PotionOfLiquidFlame().identify();
 		if (Badges.isUnlocked(Badges.Badge.VICTORY_MAGE) | DeviceCompat.isDebug()) {

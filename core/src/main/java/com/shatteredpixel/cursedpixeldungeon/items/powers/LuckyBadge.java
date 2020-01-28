@@ -21,6 +21,7 @@ import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.scenes.InterlevelScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
+import com.shatteredpixel.cursedpixeldungeon.ui.BuffIndicator;
 import com.shatteredpixel.cursedpixeldungeon.windows.WndItem;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Bundle;
@@ -40,17 +41,10 @@ public class LuckyBadge extends Power {
     public static final String AC_GRIND = "grind";
     public static final String AC_HOME = "home";
     public static final String AC_RETURN = "return";
-    @Override
-    public int price() {
-        return 82;
-    }
-    public boolean isUpgradable() {
-        return false;
-    }
 
+    public static final int NONE = 0;
     public static final int GRIND = 1;
     public static final int SPEED = 2;
-    public static final int NONE = 0;
 
     public int type = NONE;
     private float triesToDrop = Float.MIN_VALUE;
@@ -62,6 +56,16 @@ public class LuckyBadge extends Power {
     private int returnDepth = -1;
     private int returnPos   = -1;
     private static boolean latestDropWasRare = false;
+
+
+    @Override
+    public int price() {
+        return 82;
+    }
+
+    public boolean isUpgradable() {
+        return false;
+    }
 
     public LuckyBadge() {
         super();
@@ -181,16 +185,12 @@ public class LuckyBadge extends Power {
         if (buffs == null) {
             return null;
         }
-        //find the largest count (if they aren't synced yet)
-
-
-        //now handle reward logic
         Item item;
         if ((dropsToUpgrade < 2) || (Random.Int( (int) dropsToUpgrade) == 1) & !Dungeon.isChallenged(Challenges.NO_SCROLLS)) {
                 item = new ScrollOfUpgrade();
                 dropsToUpgrade += dropsIncreases;
             } else {
-            if (Random.Int(9) == 0 & !latestDropWasRare) {// 1/10 chance
+            if (Random.Int(10) == 0 & !latestDropWasRare) {// 1/10 chance
                 Item i;
                 do {
                     i = genRareDrop();
@@ -317,6 +317,9 @@ public class LuckyBadge extends Power {
     }
 
     private class LuckyBuff extends PowerBuff {
-
+        @Override
+        public int icon() {
+            return BuffIndicator.CORRUPT;
+        }
     }
 }

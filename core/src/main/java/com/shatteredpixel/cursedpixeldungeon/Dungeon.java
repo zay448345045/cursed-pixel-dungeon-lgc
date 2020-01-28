@@ -201,6 +201,7 @@ public class Dungeon {
 			SpecialRoom.initForRun();
 			SecretRoom.initForRun();
 
+
 		Random.seed();
 
 		Statistics.reset();

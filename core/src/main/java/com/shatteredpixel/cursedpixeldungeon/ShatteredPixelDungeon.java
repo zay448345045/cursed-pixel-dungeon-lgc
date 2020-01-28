@@ -27,6 +27,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.rohitss.uceh.UCEHandler;
 import com.shatteredpixel.cursedpixeldungeon.scenes.PixelScene;
 import com.shatteredpixel.cursedpixeldungeon.scenes.WelcomeScene;
 import com.watabou.noosa.Game;
@@ -98,7 +99,10 @@ public class ShatteredPixelDungeon extends Game {
 	
 	@Override
 	protected void onCreate( Bundle savedInstanceState ) {
+
 		super.onCreate(savedInstanceState);
+
+		new UCEHandler.Builder(this).build();
 
 		updateSystemUI();
 		CPDSettings.landscape ( CPDSettings.landscape() );

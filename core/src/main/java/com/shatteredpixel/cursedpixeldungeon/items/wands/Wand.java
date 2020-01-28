@@ -59,6 +59,8 @@ import com.watabou.utils.Random;
 
 import java.util.ArrayList;
 
+import javax.microedition.khronos.opengles.GL;
+
 public abstract class Wand extends KindofMisc {
 
 	public static final String AC_ZAP	= "ZAP";
@@ -471,8 +473,18 @@ public abstract class Wand extends KindofMisc {
 					
 					curUser.busy();
 					Invisibility.dispel();
+
+					if (Random.Int( curWand.level()/3 + 5 ) == 0) {
+						int loss = curUser.MAX_MP/5;
+						if (curWand.cursed) {
+							curUser.damage(loss*10, curWand);
+						} else {
+							curUser.loseMP(loss, curWand);
+						}
+						GLog.n(Messages.get(Wand.class, "backfire"), curWand.name());
+					}
 					
-					if (curWand.cursed){
+					if (curWand.cursed && Random.Int(10) == 0){
 						CursedWand.cursedZap(curWand,
 								curUser,
 								new Ballistica(curUser.pos, target, Ballistica.MAGIC_BOLT),

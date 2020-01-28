@@ -21,6 +21,7 @@
 
 package com.shatteredpixel.cursedpixeldungeon.items.powers;
 
+import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
@@ -39,9 +40,6 @@ public class Alchemy extends Power {
 		image = ItemSpriteSheet.ARTIFACT_TOOLKIT;
 		defaultAction = AC_BREW;
 	}
-
-
-
 
 	int exp = 0;
 
@@ -84,18 +82,6 @@ public class Alchemy extends Power {
 		return result;
 	}
 
-	
-	@Override
-	public void storeInBundle(Bundle bundle) {
-		super.storeInBundle(bundle);
-	}
-	
-	@Override
-	public void restoreFromBundle(Bundle bundle) {
-		energy.setToolkit(this);
-		super.restoreFromBundle(bundle);
-	}
-
 	@Override
 	public String status() {
 
@@ -124,32 +110,19 @@ public class Alchemy extends Power {
 	public void onHeroGainExp(float levelPercent, Hero hero) {
 		this.charge += 1;
 		this.charge = Math.min(this.charge,this.chargeCap);
-		energy.setToolkit(this);
 		updateQuickslot();
 	}
 
 	public class Energy extends PowerBuff implements AlchemyScene.AlchemyProvider {
-		Alchemy Toolkit = null;
-
-		public void setToolkit(Alchemy toolkit) {
-			Toolkit = toolkit;
-		}
 
 		@Override
 		public int getEnergy() {
-			if (Toolkit == null) {
-				return 0;
-			} else {
-				return charge;
-			}
+			return Dungeon.hero.MP;
 		}
 
 		@Override
 		public void spendEnergy(int reduction) {
-			if (Toolkit != null) {
-				charge = Math.max(0, charge - reduction);
-			}
-
+			Dungeon.hero.loseMP(reduction, Alchemy.class);
 		}
 	}
 }

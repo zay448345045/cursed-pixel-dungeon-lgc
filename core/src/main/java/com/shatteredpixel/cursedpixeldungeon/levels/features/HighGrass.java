@@ -84,7 +84,7 @@ public class HighGrass {
 				if (RingOfLuck.randomInt(20 - (naturalismLevel * 4), 0) == 0) {
 					level.drop(Generator.random(Generator.Category.SEED), pos).sprite.drop();
 				}
-
+				// Stone, scales from 1/20 to 1/4
 				if (RingOfLuck.randomInt(20 - (naturalismLevel * 4), 0) == 0) {
 					level.drop(Generator.random(Generator.Category.STONE), pos).sprite.drop();
 				}

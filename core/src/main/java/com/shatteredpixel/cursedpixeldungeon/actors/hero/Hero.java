@@ -49,6 +49,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Invisibility;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.LuckyBadgeBuff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.MindVision;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Momentum;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.MpRegen;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Paralysis;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Regeneration;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.SnipersMark;
@@ -164,6 +165,9 @@ public class Hero extends Char {
 	
 	public HeroClass heroClass = HeroClass.ROGUE;
 	public HeroSubClass subClass = HeroSubClass.NONE;
+
+	public int MAX_MP = 8;
+	public int MP = MAX_MP;
 	
 	private int attackSkill = 10;
 	private int defenseSkill = 5;
@@ -221,6 +225,12 @@ public class Hero extends Char {
 			HT = 8*(lvl+3) + HTBoost;
 		}
 
+		if (heroClass == HeroClass.MAGE) {
+			MAX_MP = Math.round(9 + lvl * 1.25f);
+		} else {
+			MAX_MP = 7 + lvl;
+		}
+
 		float multiplier = RingOfMight.HTMultiplier(this);
 		HT = Math.round(multiplier * HT);
 		
@@ -253,6 +263,9 @@ public class Hero extends Char {
 	private static final String LEVEL		= "lvl";
 	private static final String EXPERIENCE	= "exp";
 	private static final String HTBOOST     = "htboost";
+	private static final String MANA        = "mp";
+	private static final String MANA_MAX    = "mp_max";
+
 	
 	@Override
 	public void storeInBundle( Bundle bundle ) {
@@ -264,6 +277,9 @@ public class Hero extends Char {
 		
 		bundle.put( ATTACK, attackSkill );
 		bundle.put( DEFENSE, defenseSkill );
+
+		bundle.put( MANA, MP);
+		bundle.put( MANA_MAX, MAX_MP);
 		
 		bundle.put( STRENGTH, STR );
 		
@@ -284,6 +300,14 @@ public class Hero extends Char {
 		
 		attackSkill = bundle.getInt( ATTACK );
 		defenseSkill = bundle.getInt( DEFENSE );
+
+		if (bundle.contains(MANA)) {
+			MP = bundle.getInt(MANA);
+			MAX_MP = bundle.getInt(MANA_MAX);
+		} else {
+			MAX_MP = 10;
+			MP = MAX_MP;
+		}
 		
 		STR = bundle.getInt( STRENGTH );
 		
@@ -301,6 +325,8 @@ public class Hero extends Char {
 		info.exp = bundle.getInt( EXPERIENCE );
 		info.hp = bundle.getInt( Char.TAG_HP );
 		info.ht = bundle.getInt( Char.TAG_HT );
+		info.mp = bundle.getInt( MANA );
+		info.MP_MAX = bundle.getInt( MANA_MAX );
 		info.shld = bundle.getInt( Char.TAG_SHLD );
 		info.heroClass = HeroClass.restoreInBundle( bundle );
 		info.subClass = HeroSubClass.restoreInBundle( bundle );
@@ -314,10 +340,20 @@ public class Hero extends Char {
 	public String givenName(){
 		return name.equals(Messages.get(this, "name")) ? className() : name;
 	}
+
+	public void loseMP(int amount, Object src) {
+		MP -= amount;
+		if (MP < 0) {
+			int damage = -MP;
+			MP = 0;
+			damage(damage*10, src);
+		}
+	}
 	
 	public void live() {
 		Buff.affect( this, Regeneration.class );
 		Buff.affect( this, Hunger.class );
+		Buff.affect( this, MpRegen.class);
 	}
 	
 	public int tier() {

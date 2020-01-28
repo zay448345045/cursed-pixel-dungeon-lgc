@@ -98,14 +98,7 @@ public abstract class RegularLevel extends Level {
 		ArrayList<Room> initRooms = new ArrayList<>();
 
 		initRooms.add ( roomEntrance = new EntranceRoom());
-
-		if (!hasExit) {
-			initRooms.add( roomExit = new FakeExitRoom());
-			initRooms.add( new WeakFloorRoom());
-
-		} else {
-			initRooms.add( roomExit = new ExitRoom());
-		}
+		initRooms.add( roomExit = new ExitRoom());
 		
 		int standards = standardRooms();
 		for (int i = 0; i < standards; i++) {
