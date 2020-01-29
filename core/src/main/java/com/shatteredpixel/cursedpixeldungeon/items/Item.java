@@ -221,8 +221,7 @@ public class Item implements Bundlable {
 			return true;
 			
 		} else {
-			
-			GLog.n( Messages.get(Item.class, "pack_full", name()) );
+			GLog.n( Messages.get(this, "pack_full", name()) );
 			return false;
 			
 		}

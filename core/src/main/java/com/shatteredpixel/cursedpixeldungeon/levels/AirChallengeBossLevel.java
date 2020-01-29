@@ -5,6 +5,7 @@ import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Shinobi;
+import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Tengu;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Tengu2;
 import com.shatteredpixel.cursedpixeldungeon.items.keys.IronKey;
 import com.shatteredpixel.cursedpixeldungeon.levels.rooms.standard.EmptyRoom;
@@ -59,7 +60,7 @@ public class AirChallengeBossLevel extends Level {
     }
 
     private boolean insideRoomLeft(int cell) {
-        return (new EmptyRoom().set(5, 14, 12, 22)).inside(cellToPoint(cell));
+        return (new EmptyRoom().set(4, 14, 12, 22)).inside(cellToPoint(cell));
     }
 
     private boolean insideRoomRight(int cell) {
@@ -70,6 +71,7 @@ public class AirChallengeBossLevel extends Level {
     public void press(int cell, Char ch) {
         super.press(cell, ch);
         if (ch == Dungeon.hero) {
+            tengu = new Tengu2();
             //hero enters tengu's chamber
             if (insideRoomLeft(cell)) {
                 tengu.pos = ROOM_LEFT_POS;

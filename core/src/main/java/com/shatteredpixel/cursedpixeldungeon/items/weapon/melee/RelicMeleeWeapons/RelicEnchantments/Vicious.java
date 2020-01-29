@@ -18,9 +18,9 @@ public class Vicious extends RelicEnchantment {
 
     @Override
     public int relicProc(RelicMeleeWeapon weapon, Char attacker, Char defender, int damage) {
-        Buff.affect(defender, Poison.class).set( 3 + Dungeon.depth / 2 );
+        Buff.affect( defender, Poison.class ).set( 3 + Dungeon.depth / 2 );
         Buff.affect( defender, Bleeding.class ).set( damage );
-        Buff.affect( defender, Cripple.class, Cripple.DURATION);
+        Buff.affect( defender, Cripple.class, Cripple.DURATION );
         return damage;
     }
 

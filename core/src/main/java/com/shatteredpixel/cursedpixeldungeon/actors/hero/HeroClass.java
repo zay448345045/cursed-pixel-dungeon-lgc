@@ -43,6 +43,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.artifacts.CloakOfShadows;
 import com.shatteredpixel.cursedpixeldungeon.items.bags.FoodHolder;
 import com.shatteredpixel.cursedpixeldungeon.items.bags.MagicalHolster;
 import com.shatteredpixel.cursedpixeldungeon.items.bags.PotionBandolier;
+import com.shatteredpixel.cursedpixeldungeon.items.bags.PowerHolder;
 import com.shatteredpixel.cursedpixeldungeon.items.bags.ScrollHolder;
 import com.shatteredpixel.cursedpixeldungeon.items.bags.VelvetPouch;
 import com.shatteredpixel.cursedpixeldungeon.items.food.Food;
@@ -56,6 +57,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfLiquidFlame;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfMindVision;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfStrength;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.Blocker;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.Greed;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.LuckyBadge;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfLuck;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfIdentify;
@@ -210,15 +212,15 @@ public enum HeroClass {
 		new MagicalHolster().collect();
 		Dungeon.LimitedDrops.MAGICAL_HOLSTER.drop();
 
+		new PowerHolder().collect();
+
 		new LuckyBadge().collect();
-		//Extra stuff
 
 	}
 
 	public static void initTest(Hero hero) {
-		new Soul().collect();
 		new MegaStrengthPotion().identify().collect();
-		new Blocker().collect();
+		new Greed().collect();
 		new MaracarsBlades().identify().level(15).collect();
 		new ThonothsAxe().identify().level(15).collect();
 		new LorsionsGreataxe().identify().level(15).collect();
