@@ -5,6 +5,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Vertigo;
+import com.shatteredpixel.cursedpixeldungeon.actors.mobs.npcs.Sheep;
 import com.shatteredpixel.cursedpixeldungeon.items.Heap;
 import com.shatteredpixel.cursedpixeldungeon.levels.Level;
 import com.shatteredpixel.cursedpixeldungeon.levels.Terrain;
@@ -41,13 +42,10 @@ public class Telekinesis extends ActivatedPower {
 
         for (Integer affectedCell : shot.path) {
             Char ch = Actor.findChar(affectedCell);
-            if (ch != null) {
+            if (ch != null && ch != curUser) {
                 Buff.affect(ch, Vertigo.class, Vertigo.DURATION/2f);
             }
-            if (Dungeon.level.map[cell] == Terrain.DOOR) {
-                Level.set(cell, Terrain.OPEN_DOOR);
-                Dungeon.observe(cell);
-            }
+            Dungeon.level.press(cell, new Sheep());
             Heap heap = Dungeon.level.heaps.get(cell);
             if (heap != null) {
                 heap.pickUp();

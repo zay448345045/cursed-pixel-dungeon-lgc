@@ -63,6 +63,7 @@ public class MagicMissile extends Emitter {
 
 	public static final int FIRE_CONE       = 100;
 	public static final int FOLIAGE_CONE    = 101;
+	public static final int COIN            = 102;
 	
 	public void reset( int type, int from, int to, Callback callback ) {
 		reset( type,
@@ -151,6 +152,10 @@ public class MagicMissile extends Emitter {
 			case FOLIAGE_CONE:
 				size( 10 );
 				pour( LeafParticle.GENERAL, 0.03f );
+				break;
+			case COIN:
+				size( 10 );
+				pour( Speck.factory( Speck.COIN ), 0.05f);
 				break;
 		}
 	}

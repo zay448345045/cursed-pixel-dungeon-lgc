@@ -1,14 +1,19 @@
 package com.shatteredpixel.cursedpixeldungeon.items.powers;
 
+import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
+import com.shatteredpixel.cursedpixeldungeon.effects.MagicMissile;
 import com.shatteredpixel.cursedpixeldungeon.items.Gold;
+import com.shatteredpixel.cursedpixeldungeon.mechanics.Ballistica;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.cursedpixeldungeon.ui.BuffIndicator;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
+import com.watabou.utils.Callback;
 
 public class Greed extends ActivatedPower {
     {
@@ -29,6 +34,16 @@ public class Greed extends ActivatedPower {
         }
         Buff.affect(ch, GreedBuff.class).set(10);
     }
+
+    public void fx(Ballistica shot, Callback callback) {
+        MagicMissile.boltFromChar( curUser.sprite.parent,
+                MagicMissile.COIN,
+                curUser.sprite,
+                shot.collisionPos,
+                callback);
+        Sample.INSTANCE.play( Assets.SND_GOLD );
+    }
+
 
     public static class GreedBuff extends Buff {
         protected float left;
