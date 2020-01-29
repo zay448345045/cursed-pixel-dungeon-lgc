@@ -5,6 +5,8 @@ import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.items.Gold;
+import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
+import com.shatteredpixel.cursedpixeldungeon.ui.BuffIndicator;
 import com.watabou.utils.Bundle;
 
 public class Greed extends ActivatedPower {
@@ -47,6 +49,16 @@ public class Greed extends ActivatedPower {
             left = bundle.getFloat( LEFT );
         }
 
+        @Override
+        public String toString() {
+            return Messages.get(this, "name");
+        }
+
+        @Override
+        public int icon() {
+            return BuffIndicator.RAGE;
+        }
+
         public void set( float duration ) {
             this.left = Math.max(duration, left);
         }
@@ -58,6 +70,9 @@ public class Greed extends ActivatedPower {
         @Override
         public boolean act() {
             Dungeon.level.drop( new Gold().random(), target.pos ).sprite.drop( target.pos );
+            if ((left -= TICK) <= 0) {
+                detach();
+            }
             spend( TICK );
             return true;
         }

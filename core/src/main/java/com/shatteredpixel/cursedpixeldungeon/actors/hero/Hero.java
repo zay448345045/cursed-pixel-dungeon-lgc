@@ -98,6 +98,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfTenacity;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.Scroll;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfMagicMapping;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfUpgrade;
+import com.shatteredpixel.cursedpixeldungeon.items.wands.Wand;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.SpiritBow;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Blocking;
@@ -347,6 +348,10 @@ public class Hero extends Char {
 			int damage = -MP;
 			MP = 0;
 			damage(damage*10, src);
+			if (!isAlive()){
+				Dungeon.fail( getClass() );
+				GLog.n( Messages.get( this, "death_mp") );
+			}
 		}
 	}
 	
@@ -1593,6 +1598,8 @@ public class Hero extends Char {
 		int[] map = Dungeon.level.map;
 		boolean[] visited = Dungeon.level.visited;
 		boolean[] discoverable = Dungeon.level.discoverable;
+
+		ShatteredPixelDungeon.switchNoFade(GameScene.class);
 		
 		for (int i=0; i < length; i++) {
 			

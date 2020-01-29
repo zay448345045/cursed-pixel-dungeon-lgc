@@ -57,6 +57,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfLiquidFlame;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfMindVision;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfStrength;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.Blocker;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.BubbleShield;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.Greed;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.LuckyBadge;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfLuck;
@@ -221,6 +222,7 @@ public enum HeroClass {
 	public static void initTest(Hero hero) {
 		new MegaStrengthPotion().identify().collect();
 		new Greed().collect();
+		new BubbleShield().collect();
 		new MaracarsBlades().identify().level(15).collect();
 		new ThonothsAxe().identify().level(15).collect();
 		new LorsionsGreataxe().identify().level(15).collect();
@@ -238,6 +240,10 @@ public enum HeroClass {
 		for (int j = 0; j < 25; j++) {
 			int r = Random.Int(3);
 			Item item;
+			Item item2 = Generator.random(Generator.Category.SCROLL);
+			if (item2 != null) {
+				item2.quantity(5).collect();
+			}
 			if (r == 0) {
 				item = Generator.random(Generator.Category.RING);
 			} else if (r == 1) {

@@ -117,7 +117,7 @@ public class Alchemy extends Power {
 
 		@Override
 		public int getEnergy() {
-			return Dungeon.hero.MP;
+			return -1;
 		}
 
 		@Override

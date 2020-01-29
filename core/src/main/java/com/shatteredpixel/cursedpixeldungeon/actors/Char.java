@@ -64,6 +64,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.armor.glyphs.AntiMagic;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.glyphs.Brimstone;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.glyphs.Potential;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.glyphs.Stone;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.BubbleShield;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfElements;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfRetribution;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.exotic.ScrollOfPsionicBlast;
@@ -401,6 +402,14 @@ public abstract class Char extends Actor {
 	}
 	
 	public void damage( int dmg, Object src ) {
+
+
+		BubbleShield.BubbleShieldBuff shield;
+		shield = this.buff(BubbleShield.BubbleShieldBuff.class);
+		if (shield != null) {
+			shield.detach();//No damage, but shield is detatched
+			return;
+		}
 		
 		if (!isAlive() || dmg < 0) {
 			return;

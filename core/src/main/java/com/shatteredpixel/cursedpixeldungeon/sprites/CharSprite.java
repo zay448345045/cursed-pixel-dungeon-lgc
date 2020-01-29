@@ -79,7 +79,7 @@ public class CharSprite extends MovieClip implements Tweener.Listener, MovieClip
 	protected float shadowOffset    = 0.25f;
 
 	public enum State {
-		BURNING, LEVITATING, INVISIBLE, PARALYSED, FROZEN, ILLUMINATED, CHILLED, DARKENED, MARKED, HEALING, SHIELDED
+		BURNING, LEVITATING, INVISIBLE, PARALYSED, FROZEN, ILLUMINATED, CHILLED, DARKENED, MARKED, HEALING, SHIELDED, BUBBLED
 	}
 	
 	protected Animation idle;
@@ -103,6 +103,7 @@ public class CharSprite extends MovieClip implements Tweener.Listener, MovieClip
 	protected DarkBlock darkBlock;
 	protected TorchHalo light;
 	protected ShieldHalo shield;
+	protected ShieldHalo bubble;
 	protected AlphaTweener invisible;
 	
 	protected EmoIcon emo;
@@ -364,6 +365,9 @@ public class CharSprite extends MovieClip implements Tweener.Listener, MovieClip
 			case SHIELDED:
 				GameScene.effect( shield = new ShieldHalo( this ));
 				break;
+			case BUBBLED:
+				GameScene.effect( bubble = new ShieldHalo( this ));
+				break;
 		}
 	}
 	
@@ -430,6 +434,11 @@ public class CharSprite extends MovieClip implements Tweener.Listener, MovieClip
 			case SHIELDED:
 				if (shield != null){
 					shield.putOut();
+				}
+				break;
+			case BUBBLED:
+				if (bubble != null){
+					bubble.putOut();
 				}
 				break;
 		}

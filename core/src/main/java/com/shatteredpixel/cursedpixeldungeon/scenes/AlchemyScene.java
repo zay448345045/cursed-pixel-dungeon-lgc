@@ -272,11 +272,12 @@ public class AlchemyScene extends PixelScene {
 		};
 		btnGuide.setRect(0, 0, 16, 16);
 		add(btnGuide);
-		
-		energyLeft = PixelScene.renderText(Messages.get(AlchemyScene.class, "energy", availableEnergy()), 9);
-		energyLeft.y = Camera.main.height - 5 - energyLeft.baseLine();
-		energyLeft.x = (Camera.main.width - energyLeft.width())/2;
-		add(energyLeft);
+		if (availableEnergy() >= 0) {
+			energyLeft = PixelScene.renderText(Messages.get(AlchemyScene.class, "energy", availableEnergy()), 9);
+			energyLeft.y = Camera.main.height - 5 - energyLeft.baseLine();
+			energyLeft.x = (Camera.main.width - energyLeft.width()) / 2;
+			add(energyLeft);
+		}
 		
 		energyCost = PixelScene.renderText(6);
 		add(energyCost);
@@ -355,7 +356,7 @@ public class AlchemyScene extends PixelScene {
 			
 			energyCost.visible = (cost > 0);
 			
-			if (cost <= availableEnergy()) {
+			if (cost <= availableEnergy() || availableEnergy() == -1) {
 				btnCombine.enable(true);
 				energyCost.resetColor();
 			} else {
@@ -380,9 +381,11 @@ public class AlchemyScene extends PixelScene {
 		
 		if (recipe != null){
 			provider.spendEnergy(recipe.cost(ingredients));
-			energyLeft.text(Messages.get(AlchemyScene.class, "energy", availableEnergy()));
-			energyLeft.y = Camera.main.height - 5 - energyLeft.baseLine();
-			energyLeft.x = (Camera.main.width - energyLeft.width())/2;
+			if (energyLeft != null) {
+				energyLeft.text(Messages.get(AlchemyScene.class, "energy", availableEnergy()));
+				energyLeft.y = Camera.main.height - 5 - energyLeft.baseLine();
+				energyLeft.x = (Camera.main.width - energyLeft.width()) / 2;
+			}
 			
 			result = recipe.brew(ingredients);
 		}
