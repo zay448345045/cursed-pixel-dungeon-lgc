@@ -6,13 +6,16 @@ import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.items.Gold;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
+import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.cursedpixeldungeon.ui.BuffIndicator;
 import com.watabou.utils.Bundle;
 
 public class Greed extends ActivatedPower {
     {
         mp_cost = 10;
+        image = ItemSpriteSheet.GREED;
     }
+
     @Override
     public boolean usesTargeting() {
         return true;

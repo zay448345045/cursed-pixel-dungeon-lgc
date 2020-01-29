@@ -712,8 +712,16 @@ public class ItemSpriteSheet {
 
 
 
-	private static final int POWERS          =                             xy(1, 34);
+	private static final int POWERS          =                             xy(1, 35);
 	public static int SPELLBOOK    = POWERS+0;
+	public static int BLINK        = POWERS+3;
+
+	private static final int POWERS2         =                             xy(1, 36);
+	public static final int GREED        = POWERS2+1;
+	public static final int BUBBLESHIELD = POWERS2+10;
+
+	private static final int POWERS3         =                             xy(1, 37);
+
 
 
 	private static void assignItemRect( int item, int width, int height){

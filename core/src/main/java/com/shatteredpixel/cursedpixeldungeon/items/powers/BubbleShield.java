@@ -5,11 +5,13 @@ import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.sprites.CharSprite;
+import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.cursedpixeldungeon.ui.BuffIndicator;
 
 public class BubbleShield extends ActivatedPower {
     {
          mp_cost = 5;
+         image = ItemSpriteSheet.BUBBLESHIELD;
     }
 
     @Override
