@@ -721,7 +721,7 @@ public class ItemSpriteSheet {
 	public static final int BUBBLESHIELD = POWERS2+10;
 
 	private static final int POWERS3         =                             xy(1, 37);
-
+	public static final int TELEKINESIS  = POWERS3+1;
 
 
 	private static void assignItemRect( int item, int width, int height){
