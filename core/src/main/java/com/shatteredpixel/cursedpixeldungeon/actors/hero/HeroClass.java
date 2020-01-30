@@ -59,6 +59,8 @@ import com.shatteredpixel.cursedpixeldungeon.items.powers.HeroicLeap;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.LuckyBadge;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.MoltenEarth;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.RaiseDead;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.SmokeBomb;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.SpectralBlades;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.Telekinesis;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfLuck;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfIdentify;
@@ -87,6 +89,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapon
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.WornShortsword;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.ThrowingKnife;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.ThrowingStone;
+import com.shatteredpixel.cursedpixeldungeon.levels.CityLevel;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.DeviceCompat;
@@ -230,6 +233,8 @@ public enum HeroClass {
 		new RaiseDead().collect();
 		new HeroicLeap().collect();
 		new MoltenEarth().collect();
+		new SpectralBlades().collect();
+		new SmokeBomb().collect();
 		new CurseInfusion().quantity(10).collect();
 		new MaracarsBlades().identify().level(15).collect();
 		new ThonothsAxe().identify().level(15).collect();

@@ -713,8 +713,9 @@ public class ItemSpriteSheet {
 
 
 	private static final int POWERS          =                             xy(1, 35);
-	public static int SPELLBOOK    = POWERS+0;
-	public static int BLINK        = POWERS+3;
+	public static int SPELLBOOK            = POWERS+0;
+	public static int BLINK        	       = POWERS+3;
+	public static final int SPECTRALBLADES = POWERS+10;
 
 	private static final int POWERS2         =                             xy(1, 36);
 	public static final int MOLTENEARTH  = POWERS2+0;
@@ -725,6 +726,7 @@ public class ItemSpriteSheet {
 	private static final int POWERS3         =                             xy(1, 37);
 	public static final int TELEKINESIS  = POWERS3+1;
 	public static final int RAISEDEAD    = POWERS3+6;
+	public static final int SMOKEBOMB    = POWERS3+7;
 
 
 	private static void assignItemRect( int item, int width, int height){
