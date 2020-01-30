@@ -35,16 +35,24 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.LockedFloor;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Paralysis;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Terror;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Vertigo;
+import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.effects.Flare;
 import com.shatteredpixel.cursedpixeldungeon.effects.Speck;
 import com.shatteredpixel.cursedpixeldungeon.items.ArmorKit;
+import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.LloydsBeacon;
 import com.shatteredpixel.cursedpixeldungeon.items.keys.SkeletonKey;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.HeroicLeap;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.MoltenEarth;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.RaiseDead;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.SmokeBomb;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.SpectralBlades;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfTeleportation;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfDisintegration;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Grim;
 import com.shatteredpixel.cursedpixeldungeon.levels.CityBossLevel;
+import com.shatteredpixel.cursedpixeldungeon.levels.CityLevel;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.KingSprite;
@@ -159,6 +167,25 @@ public class King extends Mob {
 	public void die( Object cause ) {
 
 		GameScene.bossSlain();
+		Item item;
+		switch (Dungeon.hero.heroClass) {
+			case MAGE:
+				item = new MoltenEarth();
+				break;
+			case ROGUE:
+				item = new SmokeBomb();
+				break;
+			case WARRIOR: default:
+				item = new HeroicLeap();
+				break;
+			case HUNTRESS:
+				item = new SpectralBlades();
+				break;
+			case PRIESTESS:
+				item = new RaiseDead();
+				break;
+		}
+		Dungeon.level.drop( item, pos ).sprite.drop();
 		Dungeon.level.drop( new SkeletonKey( Dungeon.depth ), pos ).sprite.drop();
 		
 		super.die( cause );

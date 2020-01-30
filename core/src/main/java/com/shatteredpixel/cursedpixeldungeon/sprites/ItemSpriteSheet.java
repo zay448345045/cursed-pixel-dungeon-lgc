@@ -726,6 +726,7 @@ public class ItemSpriteSheet {
 
 	private static final int POWERS3         =                             xy(1, 37);
 	public static final int TELEKINESIS  = POWERS3+1;
+	public static final int WATERPUMP    = POWERS3+5;
 	public static final int RAISEDEAD    = POWERS3+6;
 	public static final int SMOKEBOMB    = POWERS3+7;
 

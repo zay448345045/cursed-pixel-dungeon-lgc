@@ -190,6 +190,17 @@ public class WaterChallengeLevel extends RegularLevel {
 
     public static final class WaterParticle extends PixelParticle {
 
+        public static final Emitter.Factory FACTORY = new Emitter.Factory() {
+            @Override
+            public void emit( Emitter emitter, int index, float x, float y ) {
+                ((WaterParticle)emitter.recycle( WaterParticle.class )).reset( x, y );
+            }
+            @Override
+            public boolean lightMode() {
+                return true;
+            }
+        };
+
         public WaterParticle() {
             super();
 

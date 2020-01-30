@@ -63,6 +63,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.powers.RaiseDead;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.SmokeBomb;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.SpectralBlades;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.Telekinesis;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.WaterPump;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfLuck;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfIdentify;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfLullaby;
@@ -237,6 +238,7 @@ public enum HeroClass {
 		new SpectralBlades().collect();
 		new SmokeBomb().collect();
 		new PoisonBurst().collect();
+		new WaterPump().collect();
 		new CurseInfusion().quantity(10).collect();
 		new MaracarsBlades().identify().level(15).collect();
 		new ThonothsAxe().identify().level(15).collect();
