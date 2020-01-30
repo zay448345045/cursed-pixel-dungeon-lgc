@@ -34,6 +34,8 @@ public class ScrollOfAffection extends ExoticScroll {
 	
 	{
 		initials = 1;
+
+		mp_cost = 8;
 	}
 	
 	@Override

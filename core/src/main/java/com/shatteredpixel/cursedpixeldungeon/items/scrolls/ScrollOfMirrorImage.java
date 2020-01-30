@@ -41,6 +41,7 @@ public class ScrollOfMirrorImage extends Scroll {
 
 	{
 		initials = 3;
+		mp_cost = 3;
 	}
 
 	private static final int NIMAGES	= 2;

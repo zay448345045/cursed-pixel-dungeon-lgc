@@ -32,6 +32,8 @@ public class ScrollOfForesight extends ExoticScroll {
 	
 	{
 		initials = 2;
+
+		mp_cost = 3;
 	}
 	
 	@Override

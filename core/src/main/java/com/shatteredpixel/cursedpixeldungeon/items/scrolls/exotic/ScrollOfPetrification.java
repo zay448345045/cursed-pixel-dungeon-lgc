@@ -34,6 +34,8 @@ public class ScrollOfPetrification extends ExoticScroll {
 	
 	{
 		initials = 9;
+
+		mp_cost = 8;
 	}
 	
 	@Override

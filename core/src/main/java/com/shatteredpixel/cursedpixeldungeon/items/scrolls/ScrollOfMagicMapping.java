@@ -40,6 +40,7 @@ public class ScrollOfMagicMapping extends Scroll {
 
 	{
 		initials = 2;
+		mp_cost = 8;
 	}
 
 	@Override

@@ -57,6 +57,8 @@ public class ScrollOfTransmutation extends InventoryScroll {
 	{
 		initials = 10;
 		mode = WndBag.Mode.TRANMSUTABLE;
+
+		mp_cost = 8;
 		
 		bones = true;
 	}

@@ -62,6 +62,8 @@ public abstract class Scroll extends Item {
 	
 	protected static final float TIME_TO_READ	= 1f;
 
+	protected int mp_cost = -1;
+
 	protected Integer initials;
 
 	private static final Class<?>[] scrolls = {
@@ -172,6 +174,10 @@ public abstract class Scroll extends Item {
 		super.execute( hero, action );
 
 		if (action.equals( AC_READ )) {
+
+			if (mp_cost > 0) {
+				hero.loseMP(mp_cost, this);
+			}
 			
 			if (hero.buff(MagicImmune.class) != null){
 				GLog.w( Messages.get(this, "no_magic") );

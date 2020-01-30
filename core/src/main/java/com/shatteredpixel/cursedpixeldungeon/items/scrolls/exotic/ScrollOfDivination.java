@@ -47,6 +47,8 @@ public class ScrollOfDivination extends ExoticScroll {
 	
 	{
 		initials = 0;
+
+		mp_cost = 10;
 	}
 	
 	@Override

@@ -37,6 +37,8 @@ public class ScrollOfTerror extends Scroll {
 
 	{
 		initials = 9;
+
+		mp_cost = 6;
 	}
 
 	@Override

@@ -37,6 +37,8 @@ public class ScrollOfPsionicBlast extends ExoticScroll {
 	
 	{
 		initials = 4;
+
+		mp_cost = 15;
 	}
 	
 	@Override

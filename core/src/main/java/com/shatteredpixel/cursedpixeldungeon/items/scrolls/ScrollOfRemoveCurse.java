@@ -42,6 +42,7 @@ public class ScrollOfRemoveCurse extends InventoryScroll {
 	{
 		initials = 7;
 		mode = WndBag.Mode.UNCURSABLE;
+		mp_cost = 5;
 	}
 	
 	@Override

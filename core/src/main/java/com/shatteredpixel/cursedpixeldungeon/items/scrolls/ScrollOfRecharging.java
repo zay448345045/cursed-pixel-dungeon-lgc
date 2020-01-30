@@ -34,10 +34,11 @@ import com.watabou.noosa.audio.Sample;
 
 public class ScrollOfRecharging extends Scroll {
 
-	public static final float BUFF_DURATION = 30f;
+	public static final float BUFF_DURATION = 40f;
 
 	{
 		initials = 6;
+		mp_cost = 10;
 	}
 
 	@Override

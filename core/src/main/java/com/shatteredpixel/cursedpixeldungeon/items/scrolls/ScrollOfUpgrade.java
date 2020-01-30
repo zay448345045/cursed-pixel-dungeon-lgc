@@ -41,6 +41,8 @@ public class ScrollOfUpgrade extends InventoryScroll {
 	{
 		initials = 11;
 		mode = WndBag.Mode.UPGRADEABLE;
+
+		mp_cost = 5;
 	}
 	
 	@Override

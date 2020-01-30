@@ -33,6 +33,8 @@ public class ScrollOfMysticalEnergy extends ExoticScroll {
 	
 	{
 		initials = 6;
+
+		mp_cost = 12;
 	}
 	
 	@Override

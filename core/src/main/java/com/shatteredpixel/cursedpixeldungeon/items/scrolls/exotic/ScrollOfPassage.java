@@ -35,6 +35,8 @@ public class ScrollOfPassage extends ExoticScroll {
 	
 	{
 		initials = 8;
+
+		mp_cost = 5;
 	}
 	
 	@Override
