@@ -55,7 +55,9 @@ import com.shatteredpixel.cursedpixeldungeon.items.powers.Alchemy;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.Blink;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.BubbleShield;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.Greed;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.HeroicLeap;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.LuckyBadge;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.MoltenEarth;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.RaiseDead;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.Telekinesis;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfLuck;
@@ -226,6 +228,8 @@ public enum HeroClass {
 			new Blink().collect();
 		}
 		new RaiseDead().collect();
+		new HeroicLeap().collect();
+		new MoltenEarth().collect();
 		new CurseInfusion().quantity(10).collect();
 		new MaracarsBlades().identify().level(15).collect();
 		new ThonothsAxe().identify().level(15).collect();

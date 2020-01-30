@@ -1,13 +1,10 @@
 package com.shatteredpixel.cursedpixeldungeon.items.powers;
 
-import com.shatteredpixel.cursedpixeldungeon.Dungeon;
-import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.FlavourBuff;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Wraith;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
-import com.watabou.utils.PathFinder;
 
 public class RaiseDead extends ActivatedPower {
 
@@ -23,7 +20,7 @@ public class RaiseDead extends ActivatedPower {
 
     @Override
     public void affectCell(int pos) {
-        Mob.spawnAround(Dead.class, pos);
+        Mob.spawnAround4(Dead.class, pos);
     }
 
     public static class Dead extends Wraith {

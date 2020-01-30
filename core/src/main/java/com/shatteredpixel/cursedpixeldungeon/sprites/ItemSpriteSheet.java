@@ -717,7 +717,9 @@ public class ItemSpriteSheet {
 	public static int BLINK        = POWERS+3;
 
 	private static final int POWERS2         =                             xy(1, 36);
+	public static final int MOLTENEARTH  = POWERS2+0;
 	public static final int GREED        = POWERS2+1;
+	public static final int HEROICLEAP   = POWERS2+5;
 	public static final int BUBBLESHIELD = POWERS2+10;
 
 	private static final int POWERS3         =                             xy(1, 37);

@@ -711,8 +711,20 @@ public abstract class Mob extends Char {
 		}
 	}
 
-	public static void spawnAround(Class<? extends Mob> type, int pos) {
-		for (int n : PathFinder.NEIGHBOURS4) {
+	public static void spawnAround4(Class<? extends Mob> type, int pos) {
+		spawnAtList(type, pos, PathFinder.NEIGHBOURS4);
+	}
+
+	public static void spawnAround8(Class<? extends Mob> type, int pos) {
+		spawnAtList(type, pos, PathFinder.NEIGHBOURS8);
+	}
+
+	public static void spawnAround9(Class<? extends Mob> type, int pos) {
+		spawnAtList(type, pos, PathFinder.NEIGHBOURS9);
+	}
+
+	public static void spawnAtList(Class<? extends Mob> type, int pos, int[] relativePositions) {
+		for (int n : relativePositions) {
 			int cell = pos + n;
 			if (Dungeon.level.passable[cell] && Actor.findChar(cell) == null) {
 				Mob.spawnAt(type, cell);
@@ -728,9 +740,9 @@ public abstract class Mob extends Char {
 				try {
 					mob = type.newInstance();
 				} catch (IllegalAccessException e) {
-					e.printStackTrace();
+					ShatteredPixelDungeon.reportException(e);
 				} catch (InstantiationException e) {
-					e.printStackTrace();
+					ShatteredPixelDungeon.reportException(e);
 				}
 			} while (mob == null);
 			mob.pos = pos;
