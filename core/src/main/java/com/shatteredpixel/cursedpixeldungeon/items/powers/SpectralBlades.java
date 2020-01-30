@@ -16,6 +16,7 @@ public class SpectralBlades extends ActivatedPower {
 
     {
         image = ItemSpriteSheet.SPECTRALBLADES;
+        mp_cost = 8;
     }
 
     @Override

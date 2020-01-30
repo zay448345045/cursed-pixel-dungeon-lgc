@@ -58,6 +58,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.powers.Greed;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.HeroicLeap;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.LuckyBadge;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.MoltenEarth;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.PoisonBurst;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.RaiseDead;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.SmokeBomb;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.SpectralBlades;
@@ -235,6 +236,7 @@ public enum HeroClass {
 		new MoltenEarth().collect();
 		new SpectralBlades().collect();
 		new SmokeBomb().collect();
+		new PoisonBurst().collect();
 		new CurseInfusion().quantity(10).collect();
 		new MaracarsBlades().identify().level(15).collect();
 		new ThonothsAxe().identify().level(15).collect();

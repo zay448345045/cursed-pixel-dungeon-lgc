@@ -25,6 +25,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.CorrosionParticle;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.FlameParticle;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.LeafParticle;
+import com.shatteredpixel.cursedpixeldungeon.effects.particles.PoisonParticle;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.RainbowParticle;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.ShadowParticle;
 import com.shatteredpixel.cursedpixeldungeon.tiles.DungeonTilemap;
@@ -60,6 +61,7 @@ public class MagicMissile extends Emitter {
 	public static final int RAINBOW         = 8;
 	public static final int EARTH           = 9;
 	public static final int WARD            = 10;
+	public static final int POISON          = 11;
 
 	public static final int FIRE_CONE       = 100;
 	public static final int FOLIAGE_CONE    = 101;
@@ -154,8 +156,12 @@ public class MagicMissile extends Emitter {
 				pour( LeafParticle.GENERAL, 0.03f );
 				break;
 			case COIN:
-				size( 10 );
+				size( 4 );
 				pour( Speck.factory( Speck.COIN ), 0.01f);
+				break;
+			case POISON:
+				size( 3 );
+				pour( PoisonParticle.MISSILE, 0.01f );
 				break;
 		}
 	}

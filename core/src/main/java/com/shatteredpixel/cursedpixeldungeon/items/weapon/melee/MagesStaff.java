@@ -125,8 +125,7 @@ public class MagesStaff extends MeleeWeapon {
 				return;
 			}
 
-			if (cursed) wand.cursed = true;
-			else                             wand.cursed = false;
+			wand.cursed = cursed || hasCurseEnchant();
 			wand.execute(hero, AC_ZAP_OVERRIDE);
 		}
 	}
@@ -136,8 +135,9 @@ public class MagesStaff extends MeleeWeapon {
 		if (wand != null &&
 				attacker instanceof Hero && ((Hero)attacker).subClass == HeroSubClass.BATTLEMAGE) {
 			if (wand.curCharges < wand.maxCharges) wand.curCharges += 1;
+			((Hero)attacker).MP = Math.min(((Hero)attacker).MAX_MP, ((Hero)attacker).MP+1);
 			updateQuickslot();
-			ScrollOfRecharging.charge((Hero)attacker);
+			ScrollOfRecharging.charge(attacker);
 			wand.onHit(this, attacker, defender, damage);
 		}
 		return super.proc(attacker, defender, damage);

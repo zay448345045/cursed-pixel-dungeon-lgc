@@ -722,6 +722,7 @@ public class ItemSpriteSheet {
 	public static final int GREED        = POWERS2+1;
 	public static final int HEROICLEAP   = POWERS2+5;
 	public static final int BUBBLESHIELD = POWERS2+10;
+	public static final int POISONBURST  = POWERS2+13;
 
 	private static final int POWERS3         =                             xy(1, 37);
 	public static final int TELEKINESIS  = POWERS3+1;

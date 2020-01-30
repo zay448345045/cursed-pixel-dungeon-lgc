@@ -14,6 +14,7 @@ public class MoltenEarth extends ActivatedPower {
 
     {
         image = ItemSpriteSheet.MOLTENEARTH;
+        mp_cost = 3;
     }
 
     @Override

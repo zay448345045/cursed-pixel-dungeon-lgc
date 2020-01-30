@@ -18,9 +18,9 @@ public class HeroicLeap extends ActivatedPower {
 
     {
         image = ItemSpriteSheet.HEROICLEAP;
+        mp_cost = 5;
     }
 
-    private static int LEAP_TIME	= 1;
     private static int SHOCK_TIME	= 3;
 
     @Override
@@ -49,8 +49,6 @@ public class HeroicLeap extends ActivatedPower {
 
                 CellEmitter.center(dest).burst(Speck.factory(Speck.DUST), 10);
                 Camera.main.shake(2, 0.5f);
-
-                curUser.spendAndNext(LEAP_TIME);
             }
         });
     }

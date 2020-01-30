@@ -473,15 +473,14 @@ public abstract class Wand extends KindofMisc {
 					
 					curUser.busy();
 					Invisibility.dispel();
-					boolean cursedZap = false;
+					boolean backfired = false;
 
-					if (Random.Int( curWand.level()/3 + 5 ) == 0) {
-						//TODO: Improve this to actually depend on something other than Wand level.
+					if (Random.Int( curUser.magicSkill + 3 ) == 0) {
 						int loss = curUser.MAX_MP/5;
+						backfired = true;
 						GLog.n(Messages.get(Wand.class, "backfire"), curWand.name());
 						if (curWand.cursed) {
 							curUser.damage(loss*10, curWand);
-							cursedZap = true;
 							if (curUser == Dungeon.hero && !curUser.isAlive()){
 								Dungeon.fail( getClass() );
 								GLog.n( Messages.get( Wand.class, "ondeath"), curWand.name() );
@@ -491,7 +490,7 @@ public abstract class Wand extends KindofMisc {
 						}
 					}
 					
-					if (curWand.cursed && cursedZap){
+					if (curWand.cursed && backfired){
 						CursedWand.cursedZap(curWand,
 								curUser,
 								new Ballistica(curUser.pos, target, Ballistica.MAGIC_BOLT),

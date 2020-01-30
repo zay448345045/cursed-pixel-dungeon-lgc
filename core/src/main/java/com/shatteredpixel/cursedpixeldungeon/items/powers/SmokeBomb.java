@@ -5,6 +5,7 @@ import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Blindness;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
+import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.cursedpixeldungeon.effects.CellEmitter;
 import com.shatteredpixel.cursedpixeldungeon.effects.Speck;
@@ -22,6 +23,7 @@ public class SmokeBomb extends ActivatedPower {
 
     {
         image = ItemSpriteSheet.SMOKEBOMB;
+        mp_cost = 4;
     }
 
     @Override
@@ -30,7 +32,10 @@ public class SmokeBomb extends ActivatedPower {
     }
 
     @Override
-    public void affectCell(int pos) {
+    public void affectCell(int pos) {}
+
+    @Override
+    public void activatePower(Hero hero) {
         GameScene.selectCell( teleporter );
     }
 
@@ -47,11 +52,9 @@ public class SmokeBomb extends ActivatedPower {
                         !(Dungeon.level.passable[target] || Dungeon.level.avoid[target]) ||
                         Actor.findChar( target ) != null) {
 
-                    GLog.w( Messages.get(RogueArmor.class, "fov") );
+                    GLog.w( Messages.get(SmokeBomb.class, "fov") );
                     return;
                 }
-
-                curUser.HP -= (curUser.HP / 3);
 
                 for (Mob mob : Dungeon.level.mobs.toArray(new Mob[Dungeon.level.mobs.size()])) {
                     if (Dungeon.level.heroFOV[mob.pos]) {
@@ -67,8 +70,6 @@ public class SmokeBomb extends ActivatedPower {
                 Dungeon.level.press( target, curUser );
                 Dungeon.observe();
                 GameScene.updateFog();
-
-                curUser.spendAndNext( Actor.TICK );
             }
         }
 

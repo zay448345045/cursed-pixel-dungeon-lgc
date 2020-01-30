@@ -46,12 +46,16 @@ public abstract class ActivatedPower extends Power {
     public void execute(Hero hero, String action) {
         super.execute(hero, action);
         if (action.equals(AC_CAST)) {
-            if (usesTargeting()) {
-                GameScene.selectCell(zapper);
-            } else {
-                onUse();
-                affectCell(hero.pos);
-            }
+            activatePower(hero);
+        }
+    }
+
+    public void activatePower(Hero hero) {
+        if (usesTargeting()) {
+            GameScene.selectCell(zapper);
+        } else {
+            onUse();
+            affectCell(hero.pos);
         }
     }
 
