@@ -16,7 +16,7 @@ public class MpRegen extends Buff {
             Hero hero = ((Hero)target);
             if (hero.MP < hero.MAX_MP && !hero.isStarving()) {
                 LockedFloor lock = hero.buff(LockedFloor.class);
-                if (lock == null || lock.regenOn() || hero.buff(MagicImmune.class) != null) {
+                if ((lock == null || lock.regenOn()) && hero.buff(MagicImmune.class) == null) {
                     hero.MP += 1;
                 }
             }
