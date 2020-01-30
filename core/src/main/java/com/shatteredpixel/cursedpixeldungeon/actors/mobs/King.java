@@ -47,6 +47,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.powers.MoltenEarth;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.RaiseDead;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.SmokeBomb;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.SpectralBlades;
+import com.shatteredpixel.cursedpixeldungeon.items.quest.MetalShard;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfTeleportation;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfDisintegration;
@@ -184,6 +185,9 @@ public class King extends Mob {
 			case PRIESTESS:
 				item = new RaiseDead();
 				break;
+		}
+		if (Dungeon.hero.belongings.getItem(item.getClass()) != null) {
+			item = new MetalShard();
 		}
 		Dungeon.level.drop( item, pos ).sprite.drop();
 		Dungeon.level.drop( new SkeletonKey( Dungeon.depth ), pos ).sprite.drop();

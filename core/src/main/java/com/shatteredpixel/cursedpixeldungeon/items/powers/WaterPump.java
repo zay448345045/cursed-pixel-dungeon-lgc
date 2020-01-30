@@ -4,6 +4,7 @@ import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.cursedpixeldungeon.levels.WaterChallengeLevel;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
+import com.watabou.noosa.Camera;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 
@@ -29,5 +30,6 @@ public class WaterPump extends ActivatedPower {
                 mob.sprite.emitter().burst(WaterChallengeLevel.WaterParticle.FACTORY, 30);
             }
         }
+        Camera.main.shake(3, 1f);
     }
 }
