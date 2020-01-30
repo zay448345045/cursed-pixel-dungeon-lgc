@@ -59,6 +59,15 @@ public class Wraith extends Mob {
 		resistances.add(Char.class);
 		resistances.add(KindOfWeapon.class);
 	}
+
+	public Wraith() {
+		this(Dungeon.depth);
+	}
+
+	public Wraith(int level) {
+		this.level = level;
+		adjustStats(level);
+	}
 	
 	private static final String LEVEL = "level";
 	

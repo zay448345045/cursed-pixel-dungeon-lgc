@@ -711,6 +711,15 @@ public abstract class Mob extends Char {
 		}
 	}
 
+	public static void spawnAround(Class<? extends Mob> type, int pos) {
+		for (int n : PathFinder.NEIGHBOURS4) {
+			int cell = pos + n;
+			if (Dungeon.level.passable[cell] && Actor.findChar(cell) == null) {
+				Mob.spawnAt(type, cell);
+			}
+		}
+	}
+
 	public static Mob spawnAt(Class<? extends Mob> type, int pos) {
 		if (Dungeon.level.passable[pos] && Actor.findChar( pos ) == null) {
 

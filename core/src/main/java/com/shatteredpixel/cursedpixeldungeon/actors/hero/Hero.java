@@ -77,6 +77,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.artifacts.EtherealChains;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.HornOfPlenty;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.TalismanOfForesight;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.TimekeepersHourglass;
+import com.shatteredpixel.cursedpixeldungeon.items.bags.PowerHolder;
 import com.shatteredpixel.cursedpixeldungeon.items.keys.CrystalKey;
 import com.shatteredpixel.cursedpixeldungeon.items.keys.GoldenKey;
 import com.shatteredpixel.cursedpixeldungeon.items.keys.IronKey;
@@ -87,7 +88,9 @@ import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfExperience;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfHealing;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfStrength;
 import com.shatteredpixel.cursedpixeldungeon.items.potions.elixirs.ElixirOfMight;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.ActivatedPower;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.LuckyBadge;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.Power;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfAccuracy;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfEvasion;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfForce;
@@ -167,7 +170,9 @@ public class Hero extends Char {
 	public HeroClass heroClass = HeroClass.ROGUE;
 	public HeroSubClass subClass = HeroSubClass.NONE;
 
-	public int MAX_MP = 8;
+
+	public int magicSkill = 5;
+	public int MAX_MP = 5 + magicSkill;
 	public int MP = MAX_MP;
 	
 	private int attackSkill = 10;
@@ -215,6 +220,20 @@ public class Hero extends Char {
 		
 		visibleEnemies = new ArrayList<Mob>();
 	}
+
+	public void increaseMagicSkill(int amount) {
+		updateMagicSkill(magicSkill+amount);
+	}
+
+	public int updateMagicSkill(int value) {
+		magicSkill = value;
+		PowerHolder holder = belongings.getItem(PowerHolder.class);
+		if (holder != null) {
+			holder.updateSize(this);
+		}
+		MAX_MP = 5 + magicSkill;
+		return magicSkill;
+	}
 	
 	public void updateHT( boolean boostHP ){
 		int curHT = HT;
@@ -224,12 +243,6 @@ public class Hero extends Char {
 			HT = 12*(lvl+3) + HTBoost;
 		} else if (heroClass == HeroClass.PRIESTESS) {
 			HT = 8*(lvl+3) + HTBoost;
-		}
-
-		if (heroClass == HeroClass.MAGE) {
-			MAX_MP = Math.round(9 + lvl * 1.25f);
-		} else {
-			MAX_MP = 7 + lvl;
 		}
 
 		float multiplier = RingOfMight.HTMultiplier(this);
@@ -266,6 +279,7 @@ public class Hero extends Char {
 	private static final String HTBOOST     = "htboost";
 	private static final String MANA        = "mp";
 	private static final String MANA_MAX    = "mp_max";
+	private static final String MAGIC_SKILl = "magic_skill";
 
 	
 	@Override
@@ -281,6 +295,7 @@ public class Hero extends Char {
 
 		bundle.put( MANA, MP);
 		bundle.put( MANA_MAX, MAX_MP);
+		bundle.put( MAGIC_SKILl, magicSkill);
 		
 		bundle.put( STRENGTH, STR );
 		
@@ -305,6 +320,7 @@ public class Hero extends Char {
 		if (bundle.contains(MANA)) {
 			MP = bundle.getInt(MANA);
 			MAX_MP = bundle.getInt(MANA_MAX);
+			magicSkill = bundle.getInt(MAGIC_SKILl);
 		} else {
 			MAX_MP = 10;
 			MP = MAX_MP;
@@ -806,7 +822,8 @@ public class Hero extends Char {
 
 						boolean important =
 								(item instanceof ScrollOfUpgrade && ((Scroll)item).isKnown()) ||
-								(item instanceof PotionOfStrength && ((Potion)item).isKnown());
+								(item instanceof PotionOfStrength && ((Potion)item).isKnown()) ||
+								(item instanceof Power);
 						if (important) {
 							GLog.p( Messages.get(this, "you_now_have", item.name()) );
 						} else {

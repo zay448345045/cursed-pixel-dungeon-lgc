@@ -155,7 +155,7 @@ public class MagicMissile extends Emitter {
 				break;
 			case COIN:
 				size( 10 );
-				pour( Speck.factory( Speck.COIN ), 0.05f);
+				pour( Speck.factory( Speck.COIN ), 0.01f);
 				break;
 		}
 	}

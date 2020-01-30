@@ -1,5 +1,6 @@
 package com.shatteredpixel.cursedpixeldungeon.actors.buffs;
 
+import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.blobs.Blob;
 import com.shatteredpixel.cursedpixeldungeon.actors.blobs.Miasma;
 import com.shatteredpixel.cursedpixeldungeon.effects.CellEmitter;
@@ -52,7 +53,11 @@ public class DeferredDeath extends FlavourBuff {
     @Override
     public void detach() {
         super.detach();
-        target.damage(target.HP, new Grim());
+        if (target.properties().contains(Char.Property.BOSS)) {
+            target.damage(target.HP, new Grim());
+        } else {
+            target.die(this);
+        }
         GameScene.add(Blob.seed(target.pos, 100, Miasma.class));
         CellEmitter.get(target.pos).burst(ShadowParticle.UP, 20);
     }

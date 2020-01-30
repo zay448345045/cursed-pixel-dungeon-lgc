@@ -1,5 +1,9 @@
 package com.shatteredpixel.cursedpixeldungeon.items.bags;
 
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
+import com.shatteredpixel.cursedpixeldungeon.Dungeon;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.DeferredDeath;
+import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.Power;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
@@ -28,6 +32,20 @@ public class PowerHolder extends Bag {
     public void restoreFromBundle(Bundle bundle) {
         super.restoreFromBundle(bundle);
         size = bundle.getInt( SIZE );
+    }
+
+    @Override
+    public boolean collect(Bag container) {
+        updateSize(Dungeon.hero);
+        return super.collect(container);
+    }
+
+    public void updateSize(Hero hero) {
+        if (CPDSettings.testing()) {
+            size = 35;
+        } else {
+            size = hero.magicSkill;
+        }
     }
 
     @Override

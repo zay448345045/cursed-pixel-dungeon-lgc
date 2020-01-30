@@ -32,8 +32,10 @@ public class MegaStrengthPotion extends Item {
     public void apply(Hero hero) {
 
         hero.STR += 10;
+        hero.increaseMagicSkill(10);
         hero.sprite.showStatus( CharSprite.POSITIVE, "+10 STR" );
-        GLog.p( "You feel a rush of strength in your body..." );
+        hero.sprite.showStatus( CharSprite.POSITIVE, "+10 Magic Skill" );
+        GLog.p( "You feel a rush of power in your body..." );
 
         Badges.validateStrengthAttained();
         detach(hero.belongings.backpack);

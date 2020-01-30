@@ -722,6 +722,7 @@ public class ItemSpriteSheet {
 
 	private static final int POWERS3         =                             xy(1, 37);
 	public static final int TELEKINESIS  = POWERS3+1;
+	public static final int RAISEDEAD    = POWERS3+6;
 
 
 	private static void assignItemRect( int item, int width, int height){
