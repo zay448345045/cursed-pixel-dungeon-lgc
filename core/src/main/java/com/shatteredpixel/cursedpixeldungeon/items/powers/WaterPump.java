@@ -25,8 +25,8 @@ public class WaterPump extends ActivatedPower {
         PathFinder.buildDistanceMap(pos, passable, 3);
         for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
             if (PathFinder.distance[mob.pos] < Integer.MAX_VALUE) {
-                mob.damage(Random.IntRange(1 + Dungeon.scaleWithDepth(), 3 + Dungeon.scaleWithDepth()*3), this);
-                mob.sprite.emitter().burst(WaterChallengeLevel.WaterParticle.FACTORY, 10);
+                mob.damage(Random.IntRange(4 + Dungeon.scaleWithDepth()*2, 10 + Dungeon.scaleWithDepth()*6), this);
+                mob.sprite.emitter().burst(WaterChallengeLevel.WaterParticle.FACTORY, 30);
             }
         }
     }
