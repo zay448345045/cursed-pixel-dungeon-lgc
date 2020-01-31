@@ -58,7 +58,7 @@ public class Assets {
 	public static final String SPECKS		= "specks.png";
 	public static final String EFFECTS		= "effects.png";
 
-
+	public static final String HUMAN    = "human.png";
 	public static final String MAGECRAB = "Magic_Crab.png";
 	public static final String FOSSILSKELETON = "fossil_skeleton.png";
 	public static final String SONICBAT = "sonic_bat.png";

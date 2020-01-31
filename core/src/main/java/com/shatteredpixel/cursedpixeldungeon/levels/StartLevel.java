@@ -119,6 +119,8 @@ public class StartLevel extends Level {
     private static final int m = Terrain.EMPTY_SP;
     private static final int g = Terrain.GRASS;
 
+    private static final int B = Terrain.BOOKSHELF;
+
     private static final int S = Terrain.STATUE;
 
     private static final int E = Terrain.ENTRANCE;
@@ -127,29 +129,28 @@ public class StartLevel extends Level {
     private static final int M = Terrain.WALL_DECO;
     private static final int P = Terrain.PEDESTAL;
 
-    //TODO if I ever need to store more static maps I should externalize them instead of hard-coding
-    //Especially as I means I won't be limited to legal identifiers
     private static final int[] MAP_START =
-            {       W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W,
-                    W, m, m, m, W, e, W, m, m, m, m, m, m, W, e, e, e, e, W, m, m, m, m, m, m, m, D, e, e, e, W, W,
-                    W, m, m, m, W, e, W, m, m, m, m, m, m, W, e, e, e, e, W, m, m, m, m, m, m, m, W, e, e, e, W, W,
-                    W, W, D, W, W, e, W, W, W, W, W, D, W, W, e, e, e, e, W, m, m, m, m, m, m, m, W, e, e, e, W, W,
-                    W, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, D, m, m, m, m, m, m, m, W, e, W, W, W, W,
-                    W, W, e, e, W, W, W, W, W, W, W, W, W, W, e, e, e, e, W, m, m, m, m, m, m, m, W, e, e, e, e, W,
-                    W, W, e, e, W, m, m, m, m, W, m, m, m, W, e, e, e, e, W, m, m, m, W, W, W, W, W, W, W, W, W, W,
-                    W, W, e, e, W, m, m, m, m, W, m, m, m, W, e, e, e, e, W, m, m, m, W, W, W, W, W, W, W, W, W, W,
-                    W, W, e, e, W, m, m, m, m, W, m, m, m, W, e, e, e, e, W, m, m, m, W, m, m, m, m, m, m, m, m, W,
-                    W, W, e, e, W, m, m, m, m, W, W, W, D, W, e, e, e, e, W, W, W, W, W, m, m, m, m, m, m, m, m, W,
-                    W, W, e, e, W, m, m, m, m, W, e, e, e, e, e, e, e, e, e, e, e, e, W, m, m, m, m, m, m, m, m, W,
-                    W, W, e, e, W, m, m, m, m, W, e, e, e, e, e, S, S, e, e, e, e, e, W, m, m, m, m, m, m, m, m, W,
-                    W, W, e, e, D, m, m, m, m, D, e, e, e, e, e, e, e, e, e, e, e, e, D, m, m, m, m, m, m, m, m, W,
-                    W, W, e, e, W, W, W, W, W, W, e, e, e, e, e, e, e, X, e, e, e, e, W, W, D, W, W, W, W, D, W, W,
-                    W, e, e, e, e, e, e, e, e, e, e, e, e, e, m, m, m, m, e, e, e, e, e, e, e, e, e, e, e, e, e, W,
-                    W, e, e, e, e, e, e, e, e, e, e, S, e, e, m, A, A, m, e, e, S, e, e, e, e, e, e, e, e, e, e, W,
-                    W, e, e, e, e, e, e, e, e, e, e, S, e, e, m, A, A, m, e, e, S, e, e, e, e, e, e, e, e, e, e, W,
-                    W, e, e, e, e, e, e, e, e, e, e, e, e, e, m, m, m, m, e, e, e, e, e, e, e, e, e, e, e, e, e, W,
-                    W, W, W, D, W, W, W, W, W, W, e, e, e, e, e, e, e, e, e, e, e, e, W, W, W, W, W, W, W, W, W, W,
-                    W, e, e, e, W, m, m, m, m, W, e, e, e, e, e, e, e, e, e, e, e, e, W, m, m, m, m, m, m, m, m, W,
+            {
+                    W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W,
+                    W, m, m, m, W, m, W, m, m, m, m, m, m, W, e, e, e, e, W, m, m, m, m, m, m, m, D, e, e, e, W, W,
+                    W, m, m, m, W, m, W, m, m, m, m, m, m, W, e, e, e, e, W, m, m, m, m, m, m, m, W, e, e, e, W, W,
+                    W, W, D, W, W, m, W, W, W, W, W, D, W, W, e, e, e, e, W, m, m, m, m, m, m, m, W, e, e, e, W, W,
+                    W, m, m, m, m, m, W, e, e, e, e, e, e, e, e, e, e, e, D, m, m, m, m, m, m, m, W, e, W, W, W, W,
+                    W, W, m, m, W, W, W, W, W, W, W, W, W, W, e, e, e, e, W, m, m, m, m, m, m, m, W, e, e, e, e, W,
+                    W, W, m, m, W, B, B, B, B, W, m, m, m, W, e, e, e, e, W, m, m, m, W, W, W, W, W, W, W, W, W, W,
+                    W, W, m, m, W, B, P, P, B, W, m, m, m, W, e, e, e, e, W, m, m, m, W, W, W, W, W, W, W, W, W, W,
+                    W, W, m, m, W, B, P, P, B, W, m, m, m, W, e, e, e, e, W, m, m, m, W, m, m, m, m, m, m, m, m, W,
+                    W, W, m, m, M, m, m, m, m, W, W, W, D, W, e, e, e, e, W, W, W, W, W, m, m, m, m, m, m, m, m, W,
+                    W, W, m, m, W, m, m, m, m, W, e, e, e, e, e, e, e, e, e, e, e, e, W, m, m, m, m, m, m, m, m, W,
+                    W, W, m, m, W, m, m, m, m, W, e, e, e, e, e, S, S, e, e, e, e, e, W, m, m, m, m, m, m, m, m, W,
+                    W, W, m, m, L, m, m, m, m, D, e, e, e, e, m, m, m, m, e, e, e, e, D, m, m, m, m, m, m, m, m, W,
+                    W, W, W, W, W, W, W, W, W, W, e, e, e, e, m, A, A, X, e, e, e, e, W, W, D, W, W, W, W, D, W, W,
+                    W, e, e, e, e, e, e, e, e, e, e, e, m, m, m, A, A, m, m, m, e, e, e, e, e, e, e, e, e, e, e, W,
+                    W, e, e, e, e, e, e, e, e, e, e, S, m, A, A, A, A, A, A, m, S, e, e, e, e, e, e, e, e, e, e, W,
+                    W, e, e, e, e, e, e, e, e, e, e, S, m, A, A, A, A, A, A, m, S, e, e, e, e, e, e, e, e, e, e, W,
+                    W, e, e, e, e, e, e, e, e, e, e, e, m, m, m, A, A, m, m, m, e, e, e, e, e, e, e, e, e, e, e, W,
+                    W, W, W, D, W, W, W, W, W, W, e, e, e, e, m, A, A, m, e, e, e, e, W, W, W, W, W, W, W, W, W, W,
+                    W, e, e, e, W, m, m, m, m, W, e, e, e, e, m, m, m, m, e, e, e, e, W, m, m, m, m, m, m, m, m, W,
                     W, e, e, e, W, m, m, m, m, W, e, e, e, e, e, S, S, e, e, e, e, e, D, m, m, m, m, m, m, m, m, W,
                     W, e, e, e, W, m, m, m, m, W, e, e, e, e, e, e, e, e, e, e, e, e, W, m, m, m, m, m, m, m, m, W,
                     W, W, D, W, W, m, m, m, m, W, W, W, D, W, e, e, e, e, W, D, W, W, W, W, W, W, W, m, m, m, m, W,
@@ -161,6 +162,7 @@ public class StartLevel extends Level {
                     W, m, m, m, W, W, W, W, W, W, W, W, W, W, e, e, e, e, W, W, W, W, W, W, W, W, W, g, g, g, g, W,
                     W, m, m, m, D, e, e, e, W, W, W, W, W, W, e, e, e, e, W, W, W, W, W, W, W, W, W, e, e, e, e, W,
                     W, m, m, m, W, e, e, e, e, e, e, e, e, e, e, e, e, e, W, W, W, W, W, W, W, W, W, g, g, g, g, W,
-                    W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W};
+                    W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W
+            };
 
 }

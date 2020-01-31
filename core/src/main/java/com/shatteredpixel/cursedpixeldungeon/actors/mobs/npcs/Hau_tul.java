@@ -8,9 +8,9 @@ import com.shatteredpixel.cursedpixeldungeon.effects.particles.ShadowParticle;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.scenes.PixelScene;
+import com.shatteredpixel.cursedpixeldungeon.sprites.Hau_tulSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
-import com.shatteredpixel.cursedpixeldungeon.sprites.WandmakerSprite;
 import com.shatteredpixel.cursedpixeldungeon.ui.RedButton;
 import com.shatteredpixel.cursedpixeldungeon.ui.RenderedTextMultiline;
 import com.shatteredpixel.cursedpixeldungeon.ui.Window;
@@ -25,7 +25,7 @@ public class Hau_tul extends NPC {
      */
 
     {
-        spriteClass = WandmakerSprite.class;
+        spriteClass = Hau_tulSprite.class;
 
         properties.add(Property.IMMOVABLE);
     }
@@ -41,7 +41,7 @@ public class Hau_tul extends NPC {
 
     public static class WndHau_tul extends Window {
 
-        private static final int WIDTH = 120;
+        private static final int WIDTH = 125;
         private static final int BTN_HEIGHT = 20;
         private static final float GAP = 2;
 
@@ -76,6 +76,7 @@ public class Hau_tul extends NPC {
             btnRitual.enable(Dungeon.gold >= cost && hero.HT > 15+hero.lvl*5);
             btnRitual.setRect(0, message.top() + message.height() + GAP, WIDTH, BTN_HEIGHT);
             add(btnRitual);
+
             RedButton btnGormel = new RedButton(Messages.get(Hau_tul.class, "ritual_of_gormel")) {
                 @Override
                 protected void onClick() {
@@ -84,6 +85,7 @@ public class Hau_tul extends NPC {
             };
             btnGormel.setRect(0, btnRitual.bottom(), WIDTH, BTN_HEIGHT);
             add(btnGormel);
+
             RedButton btnHell = new RedButton(Messages.get(Hau_tul.class, "hell")) {
                 @Override
                 protected void onClick() {
