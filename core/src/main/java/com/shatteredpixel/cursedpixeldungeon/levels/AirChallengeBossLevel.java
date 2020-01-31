@@ -55,7 +55,7 @@ public class AirChallengeBossLevel extends Level {
     protected void createMobs() {
         Shinobi guard = (Shinobi) createMob();
         guard.pos = KEY_POS;
-        mobs.add(guard);
+        mobs.add( guard );
         tengu = new Tengu2();
     }
 

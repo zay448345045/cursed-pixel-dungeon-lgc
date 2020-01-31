@@ -5,11 +5,15 @@ import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Recharging;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfRecharging;
+import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 
 public class Energize extends ActivatedPower {
+
     {
+        image = ItemSpriteSheet.ENERGIZE;
         mp_cost = 5;
     }
+
     @Override
     public boolean usesTargeting() {
         return false;

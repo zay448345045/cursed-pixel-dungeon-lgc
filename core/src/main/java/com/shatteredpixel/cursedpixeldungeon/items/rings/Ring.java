@@ -175,7 +175,7 @@ public class Ring extends KindofMisc {
 		if (cursed && isEquipped( Dungeon.hero )) {
 			desc += "\n\n" + Messages.get(Ring.class, "cursed_worn");
 			
-		} else if (cursed && cursedKnown) {
+		} else if (visiblyCursed()) {
 			desc += "\n\n" + Messages.get(Ring.class, "curse_known");
 			
 		} else if (!isIdentified() && cursedKnown){
@@ -254,7 +254,7 @@ public class Ring extends KindofMisc {
 	@Override
 	public int price() {
 		int price = 75;
-		if (cursed && cursedKnown) {
+		if (visiblyCursed()) {
 			price /= 2;
 		}
 		if (levelKnown) {

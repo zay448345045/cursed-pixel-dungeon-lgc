@@ -32,6 +32,7 @@ public class Statistics {
 	public static int potionsCooked;
 	public static int piranhasKilled;
 	public static int ankhsUsed;
+	public static int rituals;
 
 	public static int challengesCompleted;
 	
@@ -57,6 +58,7 @@ public class Statistics {
 		potionsCooked	= 0;
 		piranhasKilled	= 0;
 		ankhsUsed		= 0;
+		rituals         = 0;
 		
 		upgradesUsed    = 0;
 		sneakAttacks    = 0;
@@ -79,6 +81,7 @@ public class Statistics {
 	private static final String ALCHEMY		= "potionsCooked";
 	private static final String PIRANHAS	= "priranhas";
 	private static final String ANKHS		= "ankhsUsed";
+	private static final String RITUALS     = "rituals";
 	
 	private static final String UPGRADES	= "upgradesUsed";
 	private static final String SNEAKS		= "sneakAttacks";
@@ -98,6 +101,7 @@ public class Statistics {
 		bundle.put( ALCHEMY,	potionsCooked );
 		bundle.put( PIRANHAS,	piranhasKilled );
 		bundle.put( ANKHS,		ankhsUsed );
+		bundle.put( RITUALS,    rituals );
 		
 		bundle.put( UPGRADES,   upgradesUsed );
 		bundle.put( SNEAKS,		sneakAttacks );
@@ -118,6 +122,7 @@ public class Statistics {
 		potionsCooked	= bundle.getInt( ALCHEMY );
 		piranhasKilled	= bundle.getInt( PIRANHAS );
 		ankhsUsed		= bundle.getInt( ANKHS );
+		rituals = bundle.getInt( RITUALS );
 		
 		upgradesUsed    = bundle.getInt( UPGRADES );
 		sneakAttacks    = bundle.getInt( SNEAKS );

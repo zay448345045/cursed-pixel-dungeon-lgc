@@ -251,6 +251,8 @@ public class Hero extends Char {
 		if (buff(ElixirOfMight.HTBoost.class) != null){
 			HT += buff(ElixirOfMight.HTBoost.class).boost();
 		}
+
+		HT -= Statistics.rituals*3;
 		
 		if (boostHP){
 			HP += Math.max(HT - curHT, 0);

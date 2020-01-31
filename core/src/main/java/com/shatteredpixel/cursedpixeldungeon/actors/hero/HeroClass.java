@@ -222,6 +222,8 @@ public enum HeroClass {
 
 		new LuckyBadge().collect();
 
+		new MegaStrengthPotion().collect();
+
 	}
 
 	public static void initTest(Hero hero) {
@@ -256,12 +258,14 @@ public enum HeroClass {
 		new Stylus().quantity(100).collect();
 		new WandOfCorruption().level(15).identify().collect();
 		new RingOfLuck().level(15).identify().collect();
+
+		Dungeon.gold = Integer.MAX_VALUE/2;//MAX_VALUE/2 as if it was the actual max value increasing it's amount would break the game
 		for (int j = 0; j < 25; j++) {
 			int r = Random.Int(3);
 			Item item;
 			Item item2 = Generator.random(Generator.Category.SCROLL);
 			if (item2 != null) {
-				item2.quantity(5).collect();
+				item2.quantity(5).identify().collect();
 			}
 			if (r == 0) {
 				item = Generator.random(Generator.Category.RING);

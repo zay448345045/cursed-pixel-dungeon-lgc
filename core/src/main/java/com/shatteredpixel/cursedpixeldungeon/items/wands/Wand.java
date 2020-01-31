@@ -239,7 +239,7 @@ public abstract class Wand extends KindofMisc {
 
 		desc += "\n\n" + statsDesc();
 
-		if (cursed && cursedKnown) {
+		if (visiblyCursed()) {
 			desc += "\n\n" + Messages.get(Wand.class, "cursed");
 		} else if (!isIdentified() && cursedKnown){
 			desc += "\n\n" + Messages.get(Wand.class, "not_cursed");
@@ -376,7 +376,7 @@ public abstract class Wand extends KindofMisc {
 	@Override
 	public int price() {
 		int price = 75;
-		if (cursed && cursedKnown) {
+		if (visiblyCursed()) {
 			price /= 2;
 		}
 		if (levelKnown) {

@@ -6,6 +6,7 @@ import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.Bones;
 import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
+import com.shatteredpixel.cursedpixeldungeon.actors.mobs.npcs.Hau_tul;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.npcs.Wandmaker_2;
 import com.shatteredpixel.cursedpixeldungeon.items.Heap;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
@@ -54,6 +55,10 @@ public class StartLevel extends Level {
         Mob shopkeeper = new Wandmaker_2();
         shopkeeper.pos = 10 + 11 * 32;
         mobs.add( shopkeeper );
+
+        Mob hau_tul = new Hau_tul();
+        hau_tul.pos = 6 + 9 * 32;
+        mobs.add( hau_tul );
     }
 
     @Override

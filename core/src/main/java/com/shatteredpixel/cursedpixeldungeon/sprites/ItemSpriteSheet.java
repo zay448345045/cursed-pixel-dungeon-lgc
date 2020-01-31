@@ -716,6 +716,7 @@ public class ItemSpriteSheet {
 	public static int SPELLBOOK            = POWERS+0;
 	public static int BLINK        	       = POWERS+3;
 	public static final int SPECTRALBLADES = POWERS+10;
+	public static final int ENERGIZE       = POWERS+6;
 
 	private static final int POWERS2         =                             xy(1, 36);
 	public static final int MOLTENEARTH  = POWERS2+0;

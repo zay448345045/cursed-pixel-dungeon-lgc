@@ -13,7 +13,7 @@ public class PowerHolder extends Bag {
     {
         image = ItemSpriteSheet.SPELLBOOK;
 
-        size = 5;
+        size = 35;
 
         unique = true;
 
@@ -35,9 +35,9 @@ public class PowerHolder extends Bag {
     }
 
     @Override
-    public boolean collect(Bag container) {
+    public boolean collect() {
         updateSize(Dungeon.hero);
-        return super.collect(container);
+        return super.collect();
     }
 
     public void updateSize(Hero hero) {
@@ -51,11 +51,6 @@ public class PowerHolder extends Bag {
     @Override
     public boolean grab( Item item ) {
         return item instanceof Power;
-    }
-
-    @Override
-    public int price() {
-        return 30;
     }
 
 }

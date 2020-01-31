@@ -55,7 +55,7 @@ public class UnstableSpellbook extends Artifact {
 	{
 		image = ItemSpriteSheet.ARTIFACT_SPELLBOOK;
 
-		levelCap = 10;
+		levelCap = 12;
 
 		charge = (int)(level()*0.6f)+2;
 		partialCharge = 0;
@@ -84,7 +84,6 @@ public class UnstableSpellbook extends Artifact {
 
 			i = Random.chances(probs);
 		}
-		scrolls.remove(ScrollOfTransmutation.class);
 	}
 
 	@Override
@@ -120,8 +119,7 @@ public class UnstableSpellbook extends Artifact {
 							scroll instanceof ScrollOfRemoveCurse ||
 							scroll instanceof ScrollOfMagicMapping) && Random.Int(2) == 0)
 						//don't roll teleportation scrolls on boss floors
-						|| (scroll instanceof ScrollOfTeleportation && Dungeon.bossLevel())
-						|| (scroll instanceof ScrollOfTransmutation));
+						|| (scroll instanceof ScrollOfTeleportation && Dungeon.bossLevel()));
 				
 				scroll.anonymize();
 				curItem = scroll;
@@ -261,7 +259,7 @@ public class UnstableSpellbook extends Artifact {
 	protected WndBag.Listener itemSelector = new WndBag.Listener() {
 		@Override
 		public void onSelect(Item item) {
-			if (item != null && item instanceof Scroll && item.isIdentified()){
+			if (item instanceof Scroll && item.isIdentified()){
 				Hero hero = Dungeon.hero;
 				for (int i = 0; ( i <= 1 && i < scrolls.size() ); i++){
 					if (scrolls.get(i).equals(item.getClass())){

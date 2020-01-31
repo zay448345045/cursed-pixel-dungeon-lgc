@@ -323,7 +323,7 @@ public class Item implements Bundlable {
 
 			updateQuickslot();
 		} else {
-			GLog.n(Messages.get(this,"upgrade_limit",name()));
+			GLog.n(Messages.get(this, "upgrade_limit", name()));
 		}
 		return this;
 	}
@@ -358,7 +358,6 @@ public class Item implements Bundlable {
 	public boolean visiblyCursed() {
 		return cursed && cursedKnown;
 	}
-
 	
 	public boolean isIdentified() {
 		return levelKnown && cursedKnown;
