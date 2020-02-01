@@ -4,12 +4,22 @@ import java.util.ArrayList;
 
 import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.Bones;
+import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Actor;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Levitation;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.npcs.Hau_tul;
+import com.shatteredpixel.cursedpixeldungeon.actors.mobs.npcs.Shopkeeper;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.npcs.Wandmaker_2;
 import com.shatteredpixel.cursedpixeldungeon.items.Heap;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
+import com.shatteredpixel.cursedpixeldungeon.items.keys.IronKey;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.BubbleShield;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.Energize;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.Greed;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.PoisonBurst;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.Telekinesis;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.WaterPump;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.watabou.noosa.Group;
 
@@ -43,8 +53,8 @@ public class StartLevel extends Level {
         buildFlagMaps();
         cleanWalls();
 
-        entrance = 25+23*32;
-        exit = 17+13*32;
+        entrance = 25+23*width;
+        exit = 17+13*width;
 
 
         placeNpc();
@@ -52,13 +62,17 @@ public class StartLevel extends Level {
     }
 
     private void placeNpc() {
-        Mob shopkeeper = new Wandmaker_2();
-        shopkeeper.pos = 10 + 11 * 32;
-        mobs.add( shopkeeper );
+        Mob wandmaker = new Wandmaker_2();
+        wandmaker.pos = 11 + 12 * width;
+        mobs.add( wandmaker );
 
         Mob hau_tul = new Hau_tul();
-        hau_tul.pos = 6 + 9 * 32;
+        hau_tul.pos = 6 + 9 * width;
         mobs.add( hau_tul );
+
+        Mob shopkeeper = new Shopkeeper();
+        shopkeeper.pos = 24 + 10 * width;
+        mobs.add( shopkeeper );
     }
 
     @Override
@@ -76,10 +90,12 @@ public class StartLevel extends Level {
 
     @Override
     protected void createItems() {
-        Item item = Bones.get();
-        if (item != null) {
-            drop( item, exit - 1 ).type = Heap.Type.REMAINS;
-        }
+        drop( new Energize(), 23 + 8 * width ).type = Heap.Type.FOR_SALE;
+        drop( new WaterPump(), 24 + 8 * width ).type = Heap.Type.FOR_SALE;
+        drop( new PoisonBurst(), 25 + 8 * width ).type = Heap.Type.FOR_SALE;
+        drop( new BubbleShield(), 26 + 8 * width ).type = Heap.Type.FOR_SALE;
+        drop( new Telekinesis(), 27 + 8 * width ).type = Heap.Type.FOR_SALE;
+        drop( new Greed(), 28 + 8 * width ).type = Heap.Type.FOR_SALE;
     }
 
     @Override

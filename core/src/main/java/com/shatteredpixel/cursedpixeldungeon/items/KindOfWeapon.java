@@ -107,11 +107,12 @@ abstract public class KindOfWeapon extends EquipableItem {
 	}
 
 	public int reachFactor( Char owner ){
-		return 1;
+		return 1 + (owner.attackType == Char.AttackType.RANGE ? 1 : 0);
 	}
 	
 	public boolean canReach( Char owner, int target){
-		if (Dungeon.level.distance( owner.pos, target ) > reachFactor(owner)){
+		int reach = reachFactor(owner);
+		if (Dungeon.level.distance( owner.pos, target ) > reach){
 			return false;
 		} else {
 			boolean[] passable = BArray.not(Dungeon.level.solid, null);
@@ -119,9 +120,9 @@ abstract public class KindOfWeapon extends EquipableItem {
 				if (ch != owner) passable[ch.pos] = false;
 			}
 			
-			PathFinder.buildDistanceMap(target, passable, reachFactor(owner));
+			PathFinder.buildDistanceMap(target, passable, reach);
 			
-			return PathFinder.distance[owner.pos] <= reachFactor(owner);
+			return PathFinder.distance[owner.pos] <= reach;
 		}
 	}
 

@@ -1,5 +1,6 @@
 package com.shatteredpixel.cursedpixeldungeon.items.powers;
 
+import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
@@ -73,6 +74,11 @@ public abstract class Power extends Item {
             activeBuff = null;
         }
     }*/
+
+    @Override
+    public int price() {
+        return 60 + 20 * Dungeon.hero.lvl;
+    }
 
     abstract static class PowerBuff extends Buff {
 

@@ -117,6 +117,17 @@ public enum HeroClass {
 		this.subClasses = subClasses;
 	}
 
+	public int HTOnLevelUp() {
+		switch (this) {
+			default:
+				return 10;
+			case WARRIOR:
+				return 12;
+			case PRIESTESS:
+				return 8;
+		}
+	}
+
 	public static ArrayList<HeroSubClass> availableSubClasses(HeroClass cl) {
 		ArrayList<HeroSubClass> subClasses = new ArrayList<>();
 		switch (cl) {

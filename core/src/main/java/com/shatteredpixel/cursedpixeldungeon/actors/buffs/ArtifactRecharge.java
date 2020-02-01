@@ -29,7 +29,6 @@ import com.shatteredpixel.cursedpixeldungeon.ui.BuffIndicator;
 import com.watabou.noosa.Image;
 import com.watabou.utils.Bundle;
 
-//TODO this may be very powerful, consider balancing
 public class ArtifactRecharge extends Buff {
 	
 	{

@@ -22,8 +22,10 @@
 package com.shatteredpixel.cursedpixeldungeon.ui;
 
 import com.shatteredpixel.cursedpixeldungeon.Assets;
+import com.shatteredpixel.cursedpixeldungeon.Constants;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
+import com.shatteredpixel.cursedpixeldungeon.QuickSlot;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.CellSelector;
@@ -107,17 +109,21 @@ public class Toolbar extends Component {
 			}
 		});
 
-		btnQuick = new QuickslotTool[4];
+		btnQuick = new QuickslotTool[QuickSlot.SIZE];
+		for(int i = 0; i < QuickSlot.SIZE; i++) {
+			add(btnQuick[i] = new QuickslotTool(64, 0, 22, 24, i));
 
-		add( btnQuick[3] = new QuickslotTool( 64, 0, 22, 24, 3) );
+			/*add(btnQuick[3] = new QuickslotTool(64, 0, 22, 24, 3));
 
-		add( btnQuick[2] = new QuickslotTool( 64, 0, 22, 24, 2) );
+			add(btnQuick[2] = new QuickslotTool(64, 0, 22, 24, 2));
 
-		add(btnQuick[1] = new QuickslotTool(64, 0, 22, 24, 1));
+			add(btnQuick[1] = new QuickslotTool(64, 0, 22, 24, 1));
 
-		add(btnQuick[0] = new QuickslotTool(64, 0, 22, 24, 0));
+			add(btnQuick[0] = new QuickslotTool(64, 0, 22, 24, 0));*/
+		}
+
 		
-		add(btnInventory = new Tool(0, 0, 24, 26) {
+		add( btnInventory = new Tool( 0, 0, 24, 26 ) {
 			private GoldIndicator gold;
 
 			@Override
@@ -139,15 +145,11 @@ public class Toolbar extends Component {
 				add(gold);
 			}
 
-			;
-
 			@Override
 			protected void layout() {
 				super.layout();
 				gold.fill(this);
 			}
-
-			;
 		});
 
 		add(pickedUp = new PickedUpItem());
@@ -156,16 +158,31 @@ public class Toolbar extends Component {
 	@Override
 	protected void layout() {
 
-		int[] visible = new int[4];
+		int[] visible = new int[QuickSlot.SIZE];
+		boolean[] isVisible = new boolean[QuickSlot.SIZE];
 		int slots = CPDSettings.quickSlots();
 
-		for(int i = 0; i <= 3; i++)
-			visible[i] = (int)((slots > i) ? y+2 : y+25);
+		int horizontal;
+		int vertical;
+		if (CPDSettings.landscape()) {
+			horizontal = 8;
+			vertical   = 4;
+		} else {
+			horizontal = 4;
+			vertical   = 8;
+		}
 
-		for(int i = 0; i <= 3; i++) {
+		if ((horizontal + vertical) != QuickSlot.SIZE) throw new AssertionError("Horizontal and vertical quickslot values must add to total");
+
+		for(int i = 0; i < QuickSlot.SIZE; i++) {
+			//visible[i] = (int) ((slots > i) ? y + 2 : y + 25);
+			isVisible[i] = (slots > i);
+		}
+
+		for(int i = 0; i < QuickSlot.SIZE; i++) {
 			btnQuick[i].visible = btnQuick[i].active = slots > i;
 			//decides on quickslot layout, depending on available screen size.
-			if (slots == 4 && width < 152){
+			if (slots >= 4 && width < 152){
 				if (width < 138){
 					if ((CPDSettings.flipToolbar() && i == 3) ||
 							(!CPDSettings.flipToolbar() && i == 0)) {
@@ -203,11 +220,22 @@ public class Toolbar extends Component {
 				btnSearch.setPos(btnWait.right(), y);
 
 				btnInventory.setPos(right - btnInventory.width(), y);
+				btnQuick[0].setPos(btnInventory.left() - btnQuick[0].width(), isVisible[0] ? y + 2 : y + 25);
+				for(int i = 1; i < horizontal; i++) {
+					int visiblePos = (int) (isVisible[i] ? y + 2 : y + 25);
+					btnQuick[i].setPos(btnQuick[i-1].left() - btnQuick[i].width(), visiblePos );
+					/*btnQuick[1].setPos(btnQuick[0].left() - btnQuick[1].width(), visible[1]);
+					btnQuick[2].setPos(btnQuick[1].left() - btnQuick[2].width(), visible[2]);
+					btnQuick[3].setPos(btnQuick[2].left() - btnQuick[3].width(), visible[3]);
 
-				btnQuick[0].setPos(btnInventory.left() - btnQuick[0].width(), visible[0]);
-				btnQuick[1].setPos(btnQuick[0].left() - btnQuick[1].width(), visible[1]);
-				btnQuick[2].setPos(btnQuick[1].left() - btnQuick[2].width(), visible[2]);
-				btnQuick[3].setPos(btnQuick[2].left() - btnQuick[3].width(), visible[3]);
+					btnQuick[4].setPos(btnQuick[3].left() - btnQuick[4].width(), visible[4]);*/
+				}
+				btnQuick[horizontal].setPos(width-btnQuick[horizontal].width(), 0+btnQuick[horizontal].height());
+				for(int i = horizontal+1; i < QuickSlot.SIZE; i++) {
+					btnQuick[i].border(2, 2);
+					btnQuick[i].frame(64, 0, 22, 24);
+					btnQuick[i].setPos(width-btnQuick[i].width(), btnQuick[i-1].bottom());
+				}
 				break;
 
 			//center = group but.. well.. centered, so all we need to do is pre-emptively set the right side further in.
@@ -222,11 +250,20 @@ public class Toolbar extends Component {
 				btnWait.setPos(right - btnWait.width(), y);
 				btnSearch.setPos(btnWait.left() - btnSearch.width(), y);
 				btnInventory.setPos(btnSearch.left() - btnInventory.width(), y);
-
-				btnQuick[0].setPos(btnInventory.left() - btnQuick[0].width(), visible[0]);
-				btnQuick[1].setPos(btnQuick[0].left() - btnQuick[1].width(), visible[1]);
-				btnQuick[2].setPos(btnQuick[1].left() - btnQuick[2].width(), visible[2]);
-				btnQuick[3].setPos(btnQuick[2].left() - btnQuick[3].width(), visible[3]);
+				btnQuick[0].setPos(btnInventory.left() - btnQuick[0].width(), isVisible[0] ? y + 2 : y + 25);
+				for(int i = 1; i < horizontal; i++) {
+					int visiblePos = (int) (isVisible[i] ? y + 2 : y + 25);
+					btnQuick[i].setPos(btnQuick[i-1].left() - btnQuick[i].width(), visiblePos);
+					/*btnQuick[2].setPos(btnQuick[1].left() - btnQuick[2].width(), visible[2]);
+					btnQuick[3].setPos(btnQuick[2].left() - btnQuick[3].width(), visible[3]);
+					btnQuick[4].setPos(btnQuick[3].left() - btnQuick[4].width(), visible[4]);*/
+				}
+				btnQuick[horizontal].setPos(width-btnQuick[horizontal].width(), 0+btnQuick[horizontal].height());
+				for(int i = horizontal+1; i < QuickSlot.SIZE; i++) {
+					btnQuick[i].border(2, 2);
+					btnQuick[i].frame(64, 0, 22, 24);
+					btnQuick[i].setPos(width-btnQuick[i].width(), btnQuick[i-1].bottom());
+				}
 				break;
 		}
 		right = width;
@@ -237,8 +274,8 @@ public class Toolbar extends Component {
 			btnSearch.setPos( (right - btnSearch.right()), y);
 			btnInventory.setPos( (right - btnInventory.right()), y);
 
-			for(int i = 0; i <= 3; i++) {
-				btnQuick[i].setPos( right - btnQuick[i].right(), visible[i]);
+			for(int i = 0; i < QuickSlot.SIZE; i++) {
+				btnQuick[i].setPos( right - btnQuick[i].right(), isVisible[i] ? y + 2 : height + 40);
 			}
 
 		}

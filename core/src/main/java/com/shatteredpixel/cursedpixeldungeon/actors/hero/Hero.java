@@ -107,6 +107,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Blocking;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Grim;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Flail;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MeleeWeapon;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RaRothsNunchucks;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicEnchantments.Barrier;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.MissileWeapon;
@@ -238,12 +239,7 @@ public class Hero extends Char {
 	public void updateHT( boolean boostHP ){
 		int curHT = HT;
 		
-		HT = 40 + 10*(lvl-1) + HTBoost;
-		if (heroClass == HeroClass.WARRIOR) {
-			HT = 12*(lvl+3) + HTBoost;
-		} else if (heroClass == HeroClass.PRIESTESS) {
-			HT = 8*(lvl+3) + HTBoost;
-		}
+		HT = 40 + heroClass.HTOnLevelUp()*(lvl-1) + HTBoost;
 
 		float multiplier = RingOfMight.HTMultiplier(this);
 		HT = Math.round(multiplier * HT);
@@ -252,7 +248,7 @@ public class Hero extends Char {
 			HT += buff(ElixirOfMight.HTBoost.class).boost();
 		}
 
-		HT -= Statistics.rituals*3;
+		HT -= Statistics.rituals*(heroClass.HTOnLevelUp()/2);
 		
 		if (boostHP){
 			HP += Math.max(HT - curHT, 0);
@@ -363,9 +359,9 @@ public class Hero extends Char {
 	public void loseMP(int amount, Object src) {
 		MP -= amount;
 		if (MP < 0) {
-			int damage = -MP;
+			int damage = -MP*5;
 			MP = 0;
-			damage(damage*10, src);
+			damage(damage, src);
 			if (!isAlive()){
 				Dungeon.fail( getClass() );
 				GLog.n( Messages.get( this, "death_mp") );
@@ -1138,7 +1134,12 @@ public class Hero extends Char {
 	public int attackProc( final Char enemy, int damage ) {
 		KindOfWeapon wep = belongings.weapon;
 
-		if (wep != null) damage = wep.proc( this, enemy, damage );
+		if (wep != null) {
+			damage = wep.proc(this, enemy, damage);
+			if (wep instanceof MeleeWeapon) {
+				damage = attackType.proc(((MeleeWeapon)wep), this, enemy, damage);
+			}
+		}
 		
 		switch (subClass) {
 		case SNIPER:

@@ -256,7 +256,7 @@ public class WndSettings extends WndTabbed {
 			chkFlipTags.checked(CPDSettings.flipTags());
 			add(chkFlipTags);
 
-			OptionSlider slots = new OptionSlider(Messages.get(this, "quickslots"), "0", "4", 0, 4) {
+			OptionSlider slots = new OptionSlider(Messages.get(this, "quickslots"), "4", "12", 4, 12) {
 				@Override
 				protected void onChange() {
 					CPDSettings.quickSlots(getSelectedValue());

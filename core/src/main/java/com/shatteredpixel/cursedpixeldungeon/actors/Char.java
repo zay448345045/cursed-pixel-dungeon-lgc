@@ -58,6 +58,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Vertigo;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroSubClass;
 import com.shatteredpixel.cursedpixeldungeon.items.BrokenSeal;
+import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.KindOfWeapon;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.Armor;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.glyphs.AntiMagic;
@@ -78,6 +79,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Grim;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Precise;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Shocking;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Unstable;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MeleeWeapon;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.ChainsawHand;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicEnchantments.Bloodlust;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.MissileWeapon;
@@ -127,6 +129,29 @@ public abstract class Char extends Actor {
 		ALLY,
 		WRAITH
 	}
+
+	public enum AttackType {
+		NORMAL,
+		DEFENSIVE,
+		OFFENSIVE,
+		RANGE;
+
+		public int proc(MeleeWeapon weapon, Char attacker, Char defender, int damage) {
+			switch (this) {
+				case NORMAL: default:
+					return damage;
+				case DEFENSIVE:
+					return (int) (damage * 0.75f);
+				case OFFENSIVE:
+					return (int) (damage * 1.25f);
+				case RANGE:
+					return (int) (damage * 0.67);
+			}
+		}
+	}
+
+	public AttackType attackType = AttackType.NORMAL;
+
 	public Alignment alignment;
 	
 	public int viewDistance	= 8;

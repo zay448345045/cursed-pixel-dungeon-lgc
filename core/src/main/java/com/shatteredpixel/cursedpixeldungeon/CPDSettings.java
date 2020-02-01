@@ -133,7 +133,7 @@ public class CPDSettings extends GameSettings {
 	
 	public static void quickSlots( int value ){ put( KEY_QUICKSLOTS, value ); }
 	
-	public static int quickSlots(){ return getInt( KEY_QUICKSLOTS, 4, 0, 4); }
+	public static int quickSlots(){ return getInt( KEY_QUICKSLOTS, 8, 4, 12); }
 	
 	public static void flipToolbar( boolean value) {
 		put(KEY_FLIPTOOLBAR, value );

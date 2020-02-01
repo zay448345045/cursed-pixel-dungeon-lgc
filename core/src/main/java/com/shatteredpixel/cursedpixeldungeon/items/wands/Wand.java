@@ -476,11 +476,11 @@ public abstract class Wand extends KindofMisc {
 					boolean backfired = false;
 
 					if (Random.Int( curUser.magicSkill + 3 ) == 0) {
-						int loss = curUser.MAX_MP/5;
+						int loss = 4;
 						backfired = true;
 						GLog.n(Messages.get(Wand.class, "backfire"), curWand.name());
 						if (curWand.cursed) {
-							curUser.damage(loss*10, curWand);
+							curUser.damage(loss*5, curWand);
 							if (curUser == Dungeon.hero && !curUser.isAlive()){
 								Dungeon.fail( getClass() );
 								GLog.n( Messages.get( Wand.class, "ondeath"), curWand.name() );
