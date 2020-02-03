@@ -278,12 +278,14 @@ public class Toolbar extends Component {
 			for(int i = 0; i < horizontal; i++) {
 				btnQuick[i].setPos( right - btnQuick[i].right(), isVisible[i] ? y + 2 : height + 40);
 			}
-		}
 
-		if (!CPDSettings.flipTags()) {
 			for(int i = horizontal; i < QuickSlot.SIZE; i++) {
 				btnQuick[i].setPos( 0, isVisible[i] ? btnQuick[i].bottom() : height + 40);
 			}
+		}
+
+		if (!CPDSettings.flipTags()) {
+
 		}
 	}
 

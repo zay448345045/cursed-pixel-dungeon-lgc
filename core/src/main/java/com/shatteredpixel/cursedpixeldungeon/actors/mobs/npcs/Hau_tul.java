@@ -8,6 +8,7 @@ import com.shatteredpixel.cursedpixeldungeon.effects.particles.ShadowParticle;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.scenes.PixelScene;
+import com.shatteredpixel.cursedpixeldungeon.sprites.DarkShopkeeperSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.Hau_tulSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
@@ -25,7 +26,7 @@ public class Hau_tul extends NPC {
      */
 
     {
-        spriteClass = Hau_tulSprite.class;
+        spriteClass = DarkShopkeeperSprite.class;
 
         properties.add(Property.IMMOVABLE);
     }

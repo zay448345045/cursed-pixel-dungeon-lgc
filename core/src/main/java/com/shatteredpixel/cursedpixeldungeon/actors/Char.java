@@ -60,6 +60,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroSubClass;
 import com.shatteredpixel.cursedpixeldungeon.items.BrokenSeal;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.KindOfWeapon;
+import com.shatteredpixel.cursedpixeldungeon.items.KindofMisc;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.Armor;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.glyphs.AntiMagic;
 import com.shatteredpixel.cursedpixeldungeon.items.armor.glyphs.Brimstone;
@@ -91,6 +92,7 @@ import com.shatteredpixel.cursedpixeldungeon.levels.traps.GrimTrap;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
+import com.shatteredpixel.cursedpixeldungeon.windows.WndOptions;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundlable;
@@ -146,6 +148,46 @@ public abstract class Char extends Actor {
 					return (int) (damage * 1.25f);
 				case RANGE:
 					return (int) (damage * 0.67);
+			}
+		}
+		public int defenseBoost(MeleeWeapon weapon) {
+			if (this == DEFENSIVE) {
+				return weapon.level();
+			} else if (this == OFFENSIVE) {
+				return -weapon.level();
+			} else {
+				return 0;
+			}
+		}
+	}
+
+	public static class WNDChooseFightingStyle extends WndOptions {
+		private Char ch;
+		public WNDChooseFightingStyle(Char ch) {
+			super(Messages.get(Char.class, "fighting_style"),
+					Messages.get(Char.class, "cur_fighting_style", ch.attackType.name()),
+					Messages.titleCase(Messages.get(Char.AttackType.class, "normal")),
+					Messages.titleCase(Messages.get(Char.AttackType.class, "range")),
+					Messages.titleCase(Messages.get(Char.AttackType.class, "offensive")),
+					Messages.titleCase(Messages.get(Char.AttackType.class, "defensive"))
+			);
+			this.ch = ch;
+		}
+		@Override
+		protected void onSelect(int index) {
+			switch (index) {
+				case 0:
+					ch.attackType = AttackType.NORMAL;
+					break;
+				case 1:
+					ch.attackType = AttackType.RANGE;
+					break;
+				case 2:
+					ch.attackType = AttackType.OFFENSIVE;
+					break;
+				default:
+					ch.attackType = AttackType.DEFENSIVE;
+					break;
 			}
 		}
 	}

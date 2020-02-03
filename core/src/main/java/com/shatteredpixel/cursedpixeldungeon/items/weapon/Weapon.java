@@ -221,7 +221,10 @@ abstract public class Weapon extends KindOfWeapon {
 
 	@Override
 	public int reachFactor(Char owner) {
-		return hasEnchant(Projecting.class, owner) ? RCH+1 : RCH;
+		int reach = RCH;
+		if (hasEnchant(Projecting.class, owner)) reach++;
+		if (owner.attackType == Char.AttackType.RANGE) reach++;
+		return reach;
 	}
 
 	public int STRReq(){
