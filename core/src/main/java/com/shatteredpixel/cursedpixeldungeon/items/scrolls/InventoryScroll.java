@@ -83,6 +83,7 @@ public abstract class InventoryScroll extends Scroll {
 			if (item != null) {
 				
 				((InventoryScroll)curItem).onItemSelected( item );
+				curUser.loseMP(((InventoryScroll) curItem).mp_cost, curItem);
 				((InventoryScroll)curItem).readAnimation();
 				
 				Sample.INSTANCE.play( Assets.SND_READ );

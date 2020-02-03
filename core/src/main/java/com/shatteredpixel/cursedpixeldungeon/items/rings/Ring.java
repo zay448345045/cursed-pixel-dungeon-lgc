@@ -195,17 +195,6 @@ public class Ring extends KindofMisc {
 	}
 	
 	@Override
-	public Item upgrade() {
-		super.upgrade();
-		
-		if (Random.Int(3) == 0) {
-			cursed = false;
-		}
-		
-		return this;
-	}
-	
-	@Override
 	public boolean isIdentified() {
 		return super.isIdentified() && isKnown();
 	}

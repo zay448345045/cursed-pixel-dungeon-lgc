@@ -227,9 +227,10 @@ public class Toolbar extends Component {
 					/*btnQuick[1].setPos(btnQuick[0].left() - btnQuick[1].width(), visible[1]);
 					btnQuick[2].setPos(btnQuick[1].left() - btnQuick[2].width(), visible[2]);
 					btnQuick[3].setPos(btnQuick[2].left() - btnQuick[3].width(), visible[3]);
-
 					btnQuick[4].setPos(btnQuick[3].left() - btnQuick[4].width(), visible[4]);*/
 				}
+				btnQuick[horizontal].border(2, 2);
+				btnQuick[horizontal].frame(64, 0, 22, 24);
 				btnQuick[horizontal].setPos(width-btnQuick[horizontal].width(), 0+btnQuick[horizontal].height());
 				for(int i = horizontal+1; i < QuickSlot.SIZE; i++) {
 					btnQuick[i].border(2, 2);
@@ -258,6 +259,8 @@ public class Toolbar extends Component {
 					btnQuick[3].setPos(btnQuick[2].left() - btnQuick[3].width(), visible[3]);
 					btnQuick[4].setPos(btnQuick[3].left() - btnQuick[4].width(), visible[4]);*/
 				}
+				btnQuick[horizontal].border(2, 2);
+				btnQuick[horizontal].frame(64, 0, 22, 24);
 				btnQuick[horizontal].setPos(width-btnQuick[horizontal].width(), 0+btnQuick[horizontal].height());
 				for(int i = horizontal+1; i < QuickSlot.SIZE; i++) {
 					btnQuick[i].border(2, 2);
@@ -274,8 +277,12 @@ public class Toolbar extends Component {
 			btnSearch.setPos( (right - btnSearch.right()), y);
 			btnInventory.setPos( (right - btnInventory.right()), y);
 
-			for(int i = 0; i < QuickSlot.SIZE; i++) {
+			for(int i = 0; i < horizontal; i++) {
 				btnQuick[i].setPos( right - btnQuick[i].right(), isVisible[i] ? y + 2 : height + 40);
+			}
+
+			for(int i = horizontal; i < QuickSlot.SIZE; i++) {
+				btnQuick[i].setPos( 0, isVisible[i] ? btnQuick[i].bottom() : height + 40);
 			}
 
 		}

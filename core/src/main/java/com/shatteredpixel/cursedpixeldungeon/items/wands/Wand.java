@@ -280,10 +280,6 @@ public abstract class Wand extends KindofMisc {
 
 		super.upgrade();
 
-		if (Random.Int(3) == 0) {
-			cursed = false;
-		}
-
 		updateLevel();
 		curCharges = Math.min( curCharges + 1, maxCharges );
 		updateQuickslot();

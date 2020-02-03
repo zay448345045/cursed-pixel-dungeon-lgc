@@ -551,6 +551,10 @@ public class Hero extends Char {
 		}
 	}
 
+	public void defend() {
+
+	}
+
 	@Override
 	public void spend( float time ) {
 		justMoved = false;

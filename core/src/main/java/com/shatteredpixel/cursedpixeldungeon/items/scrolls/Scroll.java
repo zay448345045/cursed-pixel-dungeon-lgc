@@ -175,7 +175,7 @@ public abstract class Scroll extends Item {
 
 		if (action.equals( AC_READ )) {
 
-			if (mp_cost > 0) {
+			if (mp_cost > 0 && !(this instanceof InventoryScroll)) {
 				hero.loseMP(mp_cost, this);
 			}
 			
@@ -198,8 +198,9 @@ public abstract class Scroll extends Item {
 	
 	public abstract void doRead();
 	
-	//currently unused. Used to be used for unstable spellbook prior to 0.7.0
-	public void empoweredRead(){};
+	//[Evan]: currently unused. Used to be used for unstable spellbook prior to 0.7.0.
+	public abstract void empoweredRead();
+	//I'll probably use these for a subclass
 
 	protected void readAnimation() {
 		curUser.spend( TIME_TO_READ );
@@ -287,7 +288,10 @@ public abstract class Scroll extends Item {
 		
 		@Override
 		public void doRead() {}
-		
+
+		@Override
+		public void empoweredRead() {}
+
 		@Override
 		public String info() {
 			return "";

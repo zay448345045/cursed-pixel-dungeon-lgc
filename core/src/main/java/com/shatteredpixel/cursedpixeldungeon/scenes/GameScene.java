@@ -71,6 +71,7 @@ import com.shatteredpixel.cursedpixeldungeon.ui.AttackIndicator;
 import com.shatteredpixel.cursedpixeldungeon.ui.Banner;
 import com.shatteredpixel.cursedpixeldungeon.ui.BusyIndicator;
 import com.shatteredpixel.cursedpixeldungeon.ui.CharHealthIndicator;
+import com.shatteredpixel.cursedpixeldungeon.ui.DefendIndicator;
 import com.shatteredpixel.cursedpixeldungeon.ui.GameLog;
 import com.shatteredpixel.cursedpixeldungeon.ui.LootIndicator;
 import com.shatteredpixel.cursedpixeldungeon.ui.QuickSlotButton;
@@ -159,6 +160,7 @@ public class GameScene extends PixelScene {
 	private LootIndicator loot;
 	private ActionIndicator action;
 	private ResumeIndicator resume;
+	private DefendIndicator defend;
 	
 	@Override
 	public void create() {
@@ -319,6 +321,10 @@ public class GameScene extends PixelScene {
 		resume = new ResumeIndicator();
 		resume.camera = uiCamera;
 		add( resume );
+
+		defend = new DefendIndicator();
+		defend.camera = uiCamera;
+		add( defend );
 
 		log = new GameLog();
 		log.camera = uiCamera;
@@ -534,18 +540,21 @@ public class GameScene extends PixelScene {
 		if (tagAttack != attack.active ||
 				tagLoot != loot.visible ||
 				tagAction != action.visible ||
-				tagResume != resume.visible) {
+				tagResume != resume.visible ||
+				tagDefend != defend.visible) {
 
 			//we only want to change the layout when new tags pop in, not when existing ones leave.
 			boolean tagAppearing = (attack.active && !tagAttack) ||
 									(loot.visible && !tagLoot) ||
 									(action.visible && !tagAction) ||
-									(resume.visible && !tagResume);
+									(resume.visible && !tagResume) ||
+									(defend.visible && !tagDefend);
 
 			tagAttack = attack.active;
 			tagLoot = loot.visible;
 			tagAction = action.visible;
 			tagResume = resume.visible;
+			tagDefend = defend.visible;
 
 			if (tagAppearing) layoutTags();
 		}
@@ -557,6 +566,7 @@ public class GameScene extends PixelScene {
 	private boolean tagLoot      = false;
 	private boolean tagAction    = false;
 	private boolean tagResume    = false;
+	private boolean tagDefend    = false;
 
 	public static void layoutTags() {
 
@@ -571,6 +581,12 @@ public class GameScene extends PixelScene {
 		}
 
 		float pos = scene.toolbar.top();
+
+		if (scene.tagDefend){
+			scene.defend.setPos( tagLeft, pos - scene.defend.height());
+			scene.defend.flip(tagLeft == 0);
+			pos = scene.defend.top();
+		}
 
 		if (scene.tagAttack){
 			scene.attack.setPos( tagLeft, pos - scene.attack.height());
