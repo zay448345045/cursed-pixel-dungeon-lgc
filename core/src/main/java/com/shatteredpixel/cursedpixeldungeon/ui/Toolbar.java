@@ -157,8 +157,6 @@ public class Toolbar extends Component {
 	
 	@Override
 	protected void layout() {
-
-		int[] visible = new int[QuickSlot.SIZE];
 		boolean[] isVisible = new boolean[QuickSlot.SIZE];
 		int slots = CPDSettings.quickSlots();
 
@@ -280,13 +278,13 @@ public class Toolbar extends Component {
 			for(int i = 0; i < horizontal; i++) {
 				btnQuick[i].setPos( right - btnQuick[i].right(), isVisible[i] ? y + 2 : height + 40);
 			}
+		}
 
+		if (!CPDSettings.flipTags()) {
 			for(int i = horizontal; i < QuickSlot.SIZE; i++) {
 				btnQuick[i].setPos( 0, isVisible[i] ? btnQuick[i].bottom() : height + 40);
 			}
-
 		}
-
 	}
 
 	public static void updateLayout(){

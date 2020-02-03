@@ -231,10 +231,10 @@ public abstract class Char extends Actor {
 	}
 
 	public boolean attack( Char enemy ) {
-		return attack(enemy,false);
+		return attack(enemy,false, 1f);
 	}
 	
-	public boolean attack(final Char enemy, boolean guaranteed ) {
+	public boolean attack(final Char enemy, boolean guaranteed, float multiplier ) {
 
 		if (enemy == null) return false;
 		
@@ -259,7 +259,7 @@ public abstract class Char extends Actor {
 			} else {
 				dmg = damageRoll();
 			}
-
+			dmg *= multiplier;
 			int effectiveDamage = enemy.defenseProc( this, dmg );
 			effectiveDamage = Math.max( effectiveDamage - dr, 0 );
 			effectiveDamage = attackProc( enemy, effectiveDamage );

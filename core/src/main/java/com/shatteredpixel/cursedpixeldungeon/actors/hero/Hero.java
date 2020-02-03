@@ -40,6 +40,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Bless;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Bloodlust;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Combo;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Defense;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Drowsy;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.FlavourBuff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Foresight;
@@ -552,7 +553,9 @@ public class Hero extends Char {
 	}
 
 	public void defend() {
-
+		spendAndNext( TIME_TO_REST );
+		Buff.affect(this, Defense.class).setDefensivePower(this);
+		Camera.main.shake(1f, 0.2f);
 	}
 
 	@Override
@@ -581,15 +584,6 @@ public class Hero extends Char {
 	
 	@Override
 	public boolean act() {
-		/*if (!(curAction instanceof HeroAction.Attack)) {
-			if (belongings.weapon != null) {
-				belongings.weapon.polish();
-			}
-
-		}
-		if (belongings.armor != null) {
-			belongings.armor.polish();
-		}*/
 
 		//calls to dungeon.observe will also update hero's local FOV.
 		fieldOfView = Dungeon.level.heroFOV;
@@ -662,9 +656,7 @@ public class Hero extends Char {
 				
 			} else if (curAction instanceof HeroAction.Attack) {
 				actResult = actAttack( (HeroAction.Attack)curAction );
-				/*if (belongings.weapon != null) {
-					belongings.weapon.use();
-				}*/
+
 			} else if (curAction instanceof HeroAction.Alchemy) {
 				actResult = actAlchemy( (HeroAction.Alchemy)curAction );
 				
@@ -1174,6 +1166,12 @@ public class Hero extends Char {
 	
 	@Override
 	public int defenseProc( Char enemy, int damage ) {
+		Defense defense = buff(Defense.class);
+		if (defense != null) {
+			if (defense.proc(this, enemy, damage)) {
+				return 0;
+			}
+		}
 		
 		if (damage > 0 && subClass == HeroSubClass.BERSERKER){
 			Berserk berserk = Buff.affect(this, Berserk.class);
@@ -1710,7 +1708,7 @@ public class Hero extends Char {
 
 	public void actuallyAttack(Char enemy) {
 		AttackIndicator.target(enemy);
-		boolean hit = attack( enemy, false );
+		boolean hit = attack( enemy );
 
 		if (subClass == HeroSubClass.GLADIATOR){
 			if (hit) {

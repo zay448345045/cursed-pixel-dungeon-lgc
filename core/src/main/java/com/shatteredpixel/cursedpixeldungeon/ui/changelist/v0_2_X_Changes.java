@@ -71,7 +71,7 @@ public class v0_2_X_Changes {
 				"_-_ Badge syncing not implemented.\n\n" +
 				"_-_ Scroll of Weapon Upgrade renamed to Magical Infusion, works on armor.\n\n" +
 				"_-_ Scroll of Enchantment not implemented, Arcane stylus has not been removed.\n\n" +
-				"_-_ Honey pots now shatter in a new item: shattered honeypot. A bee will defend its shattered pot to the death against anything that gets near.\n\n" +
+				"_-_ Honey pots now shatter in a new item: shattered honeypot. A bee will proc its shattered pot to the death against anything that gets near.\n\n" +
 				"_-_ Bombs have been reworked/nerfed: they explode after a delay, no longer stun, deal more damage at the center of the blast, affect the world (destroy items, blow up other bombs)."));
 		
 		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.BANDOLIER, null), "New Content",
