@@ -193,8 +193,10 @@ public abstract class Mob extends Char {
 		CharSprite sprite = null;
 		try {
 			sprite = spriteClass.newInstance();
-		} catch (Exception e) {
-			ShatteredPixelDungeon.reportException(e);
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
 		}
 		return sprite;
 	}

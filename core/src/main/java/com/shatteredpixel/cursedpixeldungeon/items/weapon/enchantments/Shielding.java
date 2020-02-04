@@ -24,6 +24,7 @@ package com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Barrier;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.ShieldBuff;
 import com.shatteredpixel.cursedpixeldungeon.effects.Speck;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.Weapon;
@@ -38,14 +39,20 @@ public class Shielding extends Weapon.Enchantment {
 	@Override
 	public int proc(Item weapon, Char attacker, Char defender, int damage ) {
 		//Now guaranteed to proc, but less powerful
-			
 		//heals for 25% of damage dealt
 		int healAmt = Math.round(damage * 0.25f);
-		int curShielding = attacker.buff(Barrier.class).shielding();
+		int curShielding;
+		Barrier barrier = attacker.buff(Barrier.class);
+
+		if (barrier != null) {
+			curShielding = barrier.shielding();
+		} else {
+			curShielding = 0;
+		}
 
 		if (healAmt > curShielding && attacker.isAlive()) {
 
-			Buff.affect(attacker, Barrier.class).setShield(healAmt);;
+			Buff.affect(attacker, Barrier.class).setShield(healAmt);
 			attacker.sprite.emitter().start( Speck.factory( Speck.DISCOVER ), 0.4f, 1 );
 			attacker.sprite.showStatus( CharSprite.POSITIVE, Integer.toString( healAmt ) );
 		}

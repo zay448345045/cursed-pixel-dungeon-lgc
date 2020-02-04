@@ -134,14 +134,14 @@ public class WandOfCorruption extends Wand {
 			
 			//base enemy resistance is usually based on their exp, but in special cases it is based on other criteria
 			float enemyResist = 1 + enemy.EXP;
-			if (ch instanceof Mimic || ch instanceof Statue || ch instanceof GrindingLevel.Guardian){
+			if (ch instanceof Mimic || ch instanceof Statue || ch instanceof GrindingLevel.Guardian || ch instanceof Wraith){
 				enemyResist = 1 + Dungeon.scaleWithDepth();
 			} else if (ch instanceof Piranha || ch instanceof Bee) {
 				enemyResist = 1 + Dungeon.scaleWithDepth()/2f;
-			} else if (ch instanceof Wraith) {
+			} /*else if (ch instanceof Wraith) {
 				//this is so low because wraiths are always at max hp
 				enemyResist = 0.5f + Dungeon.scaleWithDepth()/8f;
-			} else if (ch instanceof Yog.BurningFist || ch instanceof Yog.RottingFist) {
+			}*/ else if (ch instanceof Yog.BurningFist || ch instanceof Yog.RottingFist) {
 				enemyResist = 1 + 30;
 			} else if (ch instanceof Yog.Larva || ch instanceof King.Undead){
 				enemyResist = 1 + 5;
