@@ -63,9 +63,12 @@ public class MagicMissile extends Emitter {
 	public static final int WARD            = 10;
 	public static final int POISON          = 11;
 
-	public static final int FIRE_CONE       = 100;
+	public static final int FIRE_CONE       = 103;
+	public static final int SPIRAL          = 100;
 	public static final int FOLIAGE_CONE    = 101;
 	public static final int COIN            = 102;
+	public static final int BONE            = 104;
+	public static final int SLICE = 105;
 	
 	public void reset( int type, int from, int to, Callback callback ) {
 		reset( type,
@@ -162,6 +165,19 @@ public class MagicMissile extends Emitter {
 			case POISON:
 				size( 3 );
 				pour( PoisonParticle.MISSILE, 0.01f );
+				break;
+			case SPIRAL:
+				size( 10 );
+				pour( Speck.factory( Speck.KIT ), 0.002f );
+				break;
+			case BONE:
+				size( 10 );
+				pour( Speck.factory( Speck.BONE ), 0.01f );
+				break;
+			case SLICE:
+				size( 10 );
+				pour( SlowParticle.FACTORY, 0.01f );
+				pour( Speck.factory( Speck.SCREAM ), 0.02f );
 				break;
 		}
 	}

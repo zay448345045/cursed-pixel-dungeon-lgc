@@ -18,6 +18,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.powers.BubbleShield;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.Energize;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.Greed;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.PoisonBurst;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.Surprise;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.Telekinesis;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.WaterPump;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
@@ -96,6 +97,7 @@ public class StartLevel extends Level {
         drop( new BubbleShield(), 26 + 8 * width ).type = Heap.Type.FOR_SALE;
         drop( new Telekinesis(), 27 + 8 * width ).type = Heap.Type.FOR_SALE;
         drop( new Greed(), 28 + 8 * width ).type = Heap.Type.FOR_SALE;
+        drop( new Surprise(), 29 + 8 * width ).type = Heap.Type.FOR_SALE;
     }
 
     @Override

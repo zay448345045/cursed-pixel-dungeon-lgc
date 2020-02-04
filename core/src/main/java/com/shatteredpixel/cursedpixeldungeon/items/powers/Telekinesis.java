@@ -6,12 +6,15 @@ import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Vertigo;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.npcs.Sheep;
+import com.shatteredpixel.cursedpixeldungeon.effects.MagicMissile;
 import com.shatteredpixel.cursedpixeldungeon.items.Heap;
-import com.shatteredpixel.cursedpixeldungeon.levels.Level;
-import com.shatteredpixel.cursedpixeldungeon.levels.Terrain;
-import com.shatteredpixel.cursedpixeldungeon.levels.rooms.Room;
+import com.shatteredpixel.cursedpixeldungeon.items.Item;
+import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfBlastWave;
 import com.shatteredpixel.cursedpixeldungeon.mechanics.Ballistica;
+import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
+import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
+import com.watabou.utils.Callback;
 
 public class Telekinesis extends ActivatedPower {
     {
@@ -36,7 +39,7 @@ public class Telekinesis extends ActivatedPower {
         int dist = shot.dist;
         if (shot.dist > level/5 + 4) {
             dist = level + 4;
-        } else if (Actor.findChar(cell) != null && shot.dist > 1) {
+        } else if (Actor.findChar(cell) != null) {
             dist--;
         }
         shot = new Ballistica(shot.sourcePos, shot.path.get(dist), Ballistica.PROJECTILE);
@@ -44,13 +47,28 @@ public class Telekinesis extends ActivatedPower {
         for (Integer affectedCell : shot.path) {
             Char ch = Actor.findChar(affectedCell);
             if (ch != null && ch != curUser) {
-                Buff.affect(ch, Vertigo.class, Vertigo.DURATION/2f);
+                WandOfBlastWave.throwChar(ch, shot, 3 );
             }
-            Dungeon.level.press(affectedCell, new Sheep());
+            Dungeon.level.press(affectedCell, null, true);
             Heap heap = Dungeon.level.heaps.get(affectedCell);
             if (heap != null && heap.type == Heap.Type.HEAP) {
+                for (Item item : heap.items) {
+                    if (!item.collect()) {
+                        Dungeon.level.drop(item, heap.pos).sprite.drop();
+                    }
+                }
                 heap.pickUp();
             }
         }
+    }
+
+    @Override
+    public void fx(Ballistica shot, Callback callback) {
+        MagicMissile.boltFromChar(
+                curUser.sprite.parent,
+                MagicMissile.SPIRAL,
+                curUser.sprite,
+                shot.collisionPos,
+                callback);
     }
 }

@@ -87,6 +87,7 @@ public class WandOfBlastWave extends DamageWand {
 					Ballistica trajectory = new Ballistica(ch.pos, ch.pos + i, Ballistica.MAGIC_BOLT);
 					int strength = 1 + Math.round(level() / 2f);
 					throwChar(ch, trajectory, strength);
+					Buff.prolong(ch, Vertigo.class, Random.NormalIntRange(2, 6));
 				} else if (ch == Dungeon.hero){
 					Dungeon.fail( getClass() );
 					GLog.n( Messages.get( this, "ondeath") );
@@ -127,7 +128,6 @@ public class WandOfBlastWave extends DamageWand {
 
 		final int finalDist = dist;
 		final int initialpos = ch.pos;
-		Buff.prolong(ch, Vertigo.class, Random.NormalIntRange(2, 6));
 		Actor.addDelayed(new Pushing(ch, ch.pos, newPos, new Callback() {
 			public void call() {
 				if (initialpos != ch.pos) {

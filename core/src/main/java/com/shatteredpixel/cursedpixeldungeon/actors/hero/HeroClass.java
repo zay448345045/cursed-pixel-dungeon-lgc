@@ -63,6 +63,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.powers.PoisonBurst;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.RaiseDead;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.SmokeBomb;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.SpectralBlades;
+import com.shatteredpixel.cursedpixeldungeon.items.powers.Surprise;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.Telekinesis;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.WaterPump;
 import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfLuck;
@@ -243,6 +244,7 @@ public enum HeroClass {
 		new BubbleShield().collect();
 		new Telekinesis().collect();
 		new Alchemy().collect();
+		new Surprise().collect();
 		if (hero.belongings.getItem(Blink.class) == null) {
 			new Blink().collect();
 		}

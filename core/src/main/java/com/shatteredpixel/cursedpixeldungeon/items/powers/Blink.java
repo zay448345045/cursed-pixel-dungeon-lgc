@@ -36,7 +36,7 @@ public class Blink extends ActivatedPower {
         int dist = shot.dist;
         if (shot.dist > level/5 + 4) {
             dist = level + 4;
-        } else if (Actor.findChar(cell) != null && shot.dist > 1) {
+        } else if (Actor.findChar(cell) != null) {
             dist--;
         }
         shot = new Ballistica(shot.sourcePos, shot.path.get(dist), Ballistica.PROJECTILE);

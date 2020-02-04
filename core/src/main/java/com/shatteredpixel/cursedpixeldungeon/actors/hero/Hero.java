@@ -1620,8 +1620,9 @@ public class Hero extends Char {
 		int[] map = Dungeon.level.map;
 		boolean[] visited = Dungeon.level.visited;
 		boolean[] discoverable = Dungeon.level.discoverable;
-
-		ShatteredPixelDungeon.switchNoFade(GameScene.class);
+		if (!(ShatteredPixelDungeon.scene() instanceof GameScene)) {
+			ShatteredPixelDungeon.switchNoFade(GameScene.class);
+		}
 		
 		for (int i=0; i < length; i++) {
 			
