@@ -127,6 +127,5 @@ public class TomeOfMastery extends Item {
 		SpellSprite.show( curUser, SpellSprite.MASTERY );
 		curUser.sprite.emitter().burst( Speck.factory( Speck.MASTERY ), 12 );
 		GLog.w( Messages.get(this, "way", way.title()) );
-		
 	}
 }

@@ -23,6 +23,8 @@ package com.shatteredpixel.cursedpixeldungeon.items;
 
 import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.Badges;
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
+import com.shatteredpixel.cursedpixeldungeon.Challenges;
 import com.shatteredpixel.cursedpixeldungeon.Constants;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
@@ -67,13 +69,20 @@ public class Item implements Bundlable {
 	public String defaultAction;
 	public boolean usesTargeting;
 	protected HeroSubClass bonusSubClass = null;
+	//TODO: Clean up this mess! (Edit: thankfully I can just yeet this code in the trash bin and start again off 0.8.0)
 	public int upgradeLimit() {
-		int levelLimit = 2+(int)(Dungeon.hero.lvl/2f);
-		levelLimit = Math.min(Constants.upgradeLimit,levelLimit);
+		float levelsPerFloor = 0.5f;
+		int maxLimit = Constants.upgradeLimit;
+		if (Dungeon.isChallenged(Challenges.NO_SCROLLS)) {
+			levelsPerFloor = 0.33f;
+			maxLimit = 10;
+		}
+		int levelLimit = 2+(int)(Dungeon.hero.lvl/levelsPerFloor);
+		levelLimit = Math.min(maxLimit,levelLimit);
 		if (Dungeon.hero.subClass == bonusSubClass) {
 			levelLimit = (int) (levelLimit * 1.3333f) + 1;
 		}
-		return levelLimit;
+		return CPDSettings.testing() ? Integer.MAX_VALUE : levelLimit;
 	}
 
     public boolean isUpgradable() {

@@ -176,7 +176,6 @@ public class MagicMissile extends Emitter {
 				break;
 			case SLICE:
 				size( 10 );
-				pour( SlowParticle.FACTORY, 0.01f );
 				pour( Speck.factory( Speck.SCREAM ), 0.02f );
 				break;
 		}

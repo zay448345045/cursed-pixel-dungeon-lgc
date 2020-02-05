@@ -295,8 +295,6 @@ public enum HeroClass {
 				}
 			}
 		}
-		//new WandOfCorruption().upgrade(99).identify().collect();
-
 	}
 
 	public Badges.Badge masteryBadge() {
@@ -361,7 +359,16 @@ public enum HeroClass {
 		//new WandOfLightning().identify().upgrade(2).collect();
 		//new Amulet().collect();
 		//new AmuletSectorWater().collect();
-		new Blink().collect();
+		int slot = 1;
+		if (CPDSettings.quickSlots() > 8 && CPDSettings.landscape()) {
+			slot = 9;
+		}
+		if (CPDSettings.quickSlots() > 4 && !CPDSettings.landscape()) {
+			slot = 5;
+		}
+		Blink blink = new Blink();
+		blink.collect();
+		Dungeon.quickslot.setSlot(slot, blink);
 		staff = (MagesStaff) new MagesStaff(new WandOfMagicMissile()).enchant(new Swift());
 		/*new WandOfMagicMissile().enchant(Weapon.Enchantment.random()).identify().upgrade(5).collect();
 		new WandOfMagicMissile().identify().collect();

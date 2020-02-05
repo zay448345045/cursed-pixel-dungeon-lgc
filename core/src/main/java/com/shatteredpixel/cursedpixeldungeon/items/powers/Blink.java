@@ -45,6 +45,7 @@ public class Blink extends ActivatedPower {
 
         curUser.sprite.visible = true;
         appear(Dungeon.hero, cell);
+        Dungeon.level.press(cell, curUser, true);
         Dungeon.observe();
     }
 

@@ -40,7 +40,7 @@ public class Surprise extends ActivatedPower {
     @Override
     public void fx(Ballistica shot, Callback callback) {
         MagicMissile.boltFromChar( curUser.sprite.parent,
-                MagicMissile.SLICE,
+                MagicMissile.BONE,
                 curUser.sprite,
                 shot.collisionPos,
                 callback);

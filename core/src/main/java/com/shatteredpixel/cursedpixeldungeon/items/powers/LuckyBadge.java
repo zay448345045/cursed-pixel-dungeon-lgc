@@ -133,9 +133,6 @@ public class LuckyBadge extends Power {
     public String statsInfo() {
         if (isIdentified()){
             float dropChance = 100f*(1/dropsToUpgrade);
-            if (Dungeon.isChallenged(Challenges.NO_SCROLLS)) {//Show 0% on Forbidden Runes
-                dropChance = 0f;
-            }
             if (dropsToUpgrade <= 0) {//Display 100% chance if the value goes negative, as a scroll is guaranteed
                 dropChance = 100f;
             }
@@ -186,7 +183,7 @@ public class LuckyBadge extends Power {
             return null;
         }
         Item item;
-        if ((dropsToUpgrade < 2) || (Random.Int( (int) dropsToUpgrade) == 1) & !Dungeon.isChallenged(Challenges.NO_SCROLLS)) {
+        if ((dropsToUpgrade < 2) || (Random.Int( (int) dropsToUpgrade) == 1)) {
                 item = new ScrollOfUpgrade();
                 dropsToUpgrade += dropsIncreases;
             } else {
