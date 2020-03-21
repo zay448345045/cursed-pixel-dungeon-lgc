@@ -51,6 +51,7 @@ import com.shatteredpixel.cursedpixeldungeon.levels.CityBossLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.CityLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.DeadEndLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.EarthChallengeLevel;
+import com.shatteredpixel.cursedpixeldungeon.levels.EarthChallengeLoreLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.FireChallengeBossLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.FireChallengeLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.GrindingLevel;
@@ -326,7 +327,7 @@ public class Dungeon {
 			case 37:
 			case 38:
 			case 39:
-				level = new EarthChallengeLevel();
+				level = new EarthChallengeLoreLevel();
 				break;
 			case 41:
 			case 42:

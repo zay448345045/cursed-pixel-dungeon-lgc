@@ -59,11 +59,6 @@ public class Amulet extends Item {
 		return actions;
 	}
 
-	@Override
-	public ItemSprite getSprite() {
-		return new AmuletSprite(WATER_IMBEDDED, false, false, false);
-	}
-
 	public void imbed(String ImbedType) {
 		if (ImbedType.equals(WATERSECTOR)) {
 			WATER_IMBEDDED = true;
@@ -125,73 +120,4 @@ public class Amulet extends Item {
 	public boolean isUpgradable() {
 		return false;
 	}
-
-	public static class AmuletSprite extends ItemSprite {
-
-		private Image fullAmulet() {
-			return new ItemSprite(ItemSpriteSheet.AMULET);
-		}
-		private Image emptyAmulet() {
-			return new ItemSprite(ItemSpriteSheet.AMULET_EMPTY);
-		}
-
-		private Image topLeftSprite;
-		private Image bottomLeftSprite;
-		private Image topRightSprite;
-		private Image bottomRightSprite;
-
-		AmuletSprite(boolean topLeft, boolean bottomLeft, boolean topRight, boolean bottomRight) {
-			if (topLeft) {
-				topLeftSprite = fullAmulet();
-			} else {
-				topLeftSprite = emptyAmulet();
-			}
-			topLeftSprite.frame(0, 0, 8, 8);
-
-			if (bottomLeft) {
-				bottomLeftSprite = fullAmulet();
-			} else {
-				bottomLeftSprite = emptyAmulet();
-			}
-			bottomLeftSprite.frame(0, 8, 8, 8);
-
-			if (topRight) {
-				topRightSprite = fullAmulet();
-			} else {
-				topRightSprite = emptyAmulet();
-			}
-			topRightSprite.frame(8, 0, 8, 8);
-
-			if (bottomRight) {
-				bottomRightSprite = fullAmulet();
-			} else {
-				bottomRightSprite = emptyAmulet();
-			}
-			bottomRightSprite.frame(8, 8, 8, 8);
-		}
-
-		@Override
-		public synchronized void update() {
-			super.update();
-			topLeftSprite.x = 0;
-			topLeftSprite.y = 16;
-			topLeftSprite.visible = true;
-
-			bottomLeftSprite.x = 0;
-			bottomLeftSprite.y = 8;
-			bottomLeftSprite.visible = true;
-
-			topRightSprite.x = 8;
-			topRightSprite.y = 16;
-			topRightSprite.visible = true;
-
-			bottomRightSprite.x = 8;
-			bottomRightSprite.y = 8;
-			bottomRightSprite.visible = true;
-		}
-
-		@Override
-		public void link() {}
-	}
-
 }

@@ -48,7 +48,7 @@ public class IconTitle extends Component {
 	}
 
 	public IconTitle( Item item ) {
-		ItemSprite icon = new ItemSprite();
+		ItemSprite icon = new ItemSprite(item);
 		icon( icon );
 		label( Messages.titleCase( item.toString() ) );
 		icon.view( item );

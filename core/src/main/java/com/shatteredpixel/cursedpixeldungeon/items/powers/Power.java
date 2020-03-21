@@ -4,6 +4,7 @@ import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
+import com.shatteredpixel.cursedpixeldungeon.items.bags.Bag;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
 import com.watabou.utils.Bundle;
@@ -22,8 +23,6 @@ public abstract class Power extends Item {
 
     PowerBuff passiveBuff = null;
 
-    PowerBuff activeBuff = null;
-
     @Override
     public ArrayList<String> actions(Hero hero) {
         return new ArrayList<>();
@@ -38,8 +37,6 @@ public abstract class Power extends Item {
     public boolean isIdentified() {
         return true;
     }
-
-
 
     private static final String CHARGE = "charge";
     private static final String PARTIALCHARGE = "partialcharge";
@@ -63,15 +60,19 @@ public abstract class Power extends Item {
     }
 
     /*@Override
+    public boolean collect(Bag container) {
+        if (passiveBuff() != null) {
+            passiveBuff = passiveBuff();
+            passiveBuff.attachTo(container.owner);
+        }
+        return super.collect(container);
+    }
+
+    @Override
     protected void onDetach() {
         if (curUser.buff(passiveBuff().getClass()) != null) {
             curUser.buff(passiveBuff().getClass()).detach();
             passiveBuff = null;
-        }
-
-        if (activeBuff != null) {
-            activeBuff.detach();
-            activeBuff = null;
         }
     }*/
 

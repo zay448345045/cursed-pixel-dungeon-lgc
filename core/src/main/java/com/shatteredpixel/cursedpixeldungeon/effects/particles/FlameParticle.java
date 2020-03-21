@@ -24,6 +24,8 @@ package com.shatteredpixel.cursedpixeldungeon.effects.particles;
 import com.watabou.noosa.particles.Emitter;
 import com.watabou.noosa.particles.Emitter.Factory;
 import com.watabou.noosa.particles.PixelParticle;
+import com.watabou.utils.PointF;
+import com.watabou.utils.Random;
 
 public class FlameParticle extends PixelParticle.Shrinking {
 	
@@ -37,14 +39,36 @@ public class FlameParticle extends PixelParticle.Shrinking {
 			return true;
 		};
 	};
-	
+
+	public static final Emitter.Factory STORM = new Factory() {
+		@Override
+		public void emit( Emitter emitter, int index, float x, float y ) {
+			((FlameParticle)emitter.recycle( FlameParticle.class )).resetStorm( x, y );
+		}
+		@Override
+		public boolean lightMode() {
+			return true;
+		}
+	};
+
 	public FlameParticle() {
 		super();
-		
+
 		color( 0xEE7722 );
 		lifespan = 0.6f;
-		
+
 		acc.set( 0, -80 );
+	}
+
+	public void resetStorm( float x, float y ) {
+		revive();
+
+		size = 8;
+		left = lifespan = 1f;
+
+		speed.polar( Random.Float( PointF.PI2 ), Random.Float( 16, 32 ) );
+		this.x = x - speed.x * lifespan;
+		this.y = y - speed.y * lifespan;
 	}
 	
 	public void reset( float x, float y ) {
