@@ -316,7 +316,7 @@ public class Generator {
 			ALLIES.probs = new float[]{1,1,1,1,1};//All Allies are equally likely
 
 			POTION.classes = new Class<?>[]{
-					PotionOfStrength.class, //2 drop every chapter, see Dungeon.posNeeded()
+					PotionOfStrength.class,
 					PotionOfHealing.class,
 					PotionOfMindVision.class,
 					PotionOfFrost.class,
@@ -328,7 +328,7 @@ public class Generator {
 					PotionOfParalyticGas.class,
 					PotionOfPurity.class,
 					PotionOfExperience.class};
-			POTION.probs = new float[]{ 0, 6, 4, 3, 3, 3, 2, 2, 2, 2, 2, 1 };
+			POTION.probs = new float[]{ 2, 6, 4, 3, 3, 3, 2, 2, 2, 2, 2, 1 };
 
 			POTION_EXOTIC.classes = new Class<?>[]{
 					PotionOfAdrenalineSurge.class, //2 drop every chapter, see Dungeon.posNeeded()
@@ -343,7 +343,7 @@ public class Generator {
 					PotionOfEarthenArmor.class,
 					PotionOfCleansing.class,
 					PotionOfHolyFuror.class};
-			POTION_EXOTIC.probs = new float[]{ 0, 6, 4, 3, 3, 3, 2, 2, 2, 2, 2, 1 };
+			POTION_EXOTIC.probs = new float[]{ 2, 6, 4, 3, 3, 3, 2, 2, 2, 2, 2, 1 };
 
 			ELXIR.classes = new Class<?>[] {
 					BlizzardBrew.class,

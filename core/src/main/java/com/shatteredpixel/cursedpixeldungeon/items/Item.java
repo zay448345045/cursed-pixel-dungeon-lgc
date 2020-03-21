@@ -82,7 +82,7 @@ public class Item implements Bundlable {
 		if (Dungeon.hero.subClass == bonusSubClass) {
 			levelLimit = (int) (levelLimit * 1.3333f) + 1;
 		}
-		return CPDSettings.testing() ? Integer.MAX_VALUE : levelLimit;
+		return levelLimit;
 	}
 
     public boolean isUpgradable() {
@@ -117,6 +117,11 @@ public class Item implements Bundlable {
 			return Generator.Category.order( lhs ) - Generator.Category.order( rhs );
 		}
 	};
+
+
+	public ItemSprite getSprite() {
+		return new ItemSprite(image(), glowing());
+	}
 	
 	public ArrayList<String> actions( Hero hero ) {
 		ArrayList<String> actions = new ArrayList<String>();

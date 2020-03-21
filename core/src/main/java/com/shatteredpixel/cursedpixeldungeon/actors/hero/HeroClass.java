@@ -26,6 +26,7 @@ import com.shatteredpixel.cursedpixeldungeon.Badges;
 import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.Challenges;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
+import com.shatteredpixel.cursedpixeldungeon.items.Amulet;
 import com.shatteredpixel.cursedpixeldungeon.items.BrokenSeal;
 import com.shatteredpixel.cursedpixeldungeon.items.Generator;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
@@ -271,6 +272,7 @@ public enum HeroClass {
 		new Stylus().quantity(100).collect();
 		new WandOfCorruption().level(15).identify().collect();
 		new RingOfLuck().level(15).identify().collect();
+		new Amulet().collect();
 
 		Dungeon.gold = Integer.MAX_VALUE/2;//MAX_VALUE/2 as if it was the actual max value increasing it's amount would break the game
 		for (int j = 0; j < 25; j++) {

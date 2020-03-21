@@ -36,6 +36,7 @@ import com.watabou.gltextures.TextureCache;
 import com.watabou.glwrap.Matrix;
 import com.watabou.glwrap.Vertexbuffer;
 import com.watabou.noosa.Game;
+import com.watabou.noosa.Image;
 import com.watabou.noosa.MovieClip;
 import com.watabou.noosa.NoosaScript;
 import com.watabou.noosa.audio.Sample;
@@ -200,6 +201,7 @@ public class ItemSprite extends MovieClip {
 		glow( glowing );
 		return this;
 	}
+
 
 	public void frame( int image ){
 		frame( ItemSpriteSheet.film.get( image ));

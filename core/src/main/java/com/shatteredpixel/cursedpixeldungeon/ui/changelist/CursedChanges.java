@@ -139,7 +139,7 @@ public class CursedChanges {
 
 		changes.addButton( new ChangeButton(new RatSprite(), "Exp Limits reduced", "Enemies have had their exp limits reduced to prevent overleveling."));
 	}
-	public static void add_v0_1_0_Changes(ArrayList<ChangeInfo> changeInfos){
+	private static void add_v0_1_0_Changes(ArrayList<ChangeInfo> changeInfos){
 		ChangeInfo changes = new ChangeInfo( "0.1.0 - release", true, "");
 		changes.hardlight(Window.TITLE_COLOR);
 		changeInfos.add(changes);
@@ -151,11 +151,11 @@ public class CursedChanges {
 		changes.addButton( new ChangeButton(new Image(Assets.SPINNER, 144, 0, 16, 16), "Bug Fixes",
 				"Fixed many instances of 'Save File not Found'"));
 
-		changes.addButton(new ChangeButton(new MagicalInfusion(),
-				"Magical Infusion reworked:\n" +
-						"_-_ Now increases the tier of an item rather than upgrading it\n" +
-						"_-_ Enchantments are no longer lost from upgrades\n" +
-						"_-_ Tier 6 is the highest tier"));
+			changes.addButton(new ChangeButton(new MagicalInfusion(),
+					"Magical Infusion reworked:\n" +
+							"_-_ Now increases the tier of an item rather than upgrading it\n" +
+							"_-_ Enchantments are no longer lost from upgrades\n" +
+							"_-_ Tier 6 is the highest tier"));
 
 		changes.addButton(new ChangeButton(new StatueSprite(), "Animated Statues",
 				"Animated Statues buffed:\n" +

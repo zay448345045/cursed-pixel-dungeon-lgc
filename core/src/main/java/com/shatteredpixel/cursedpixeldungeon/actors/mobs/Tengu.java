@@ -31,6 +31,7 @@ import com.shatteredpixel.cursedpixeldungeon.effects.CellEmitter;
 import com.shatteredpixel.cursedpixeldungeon.effects.Speck;
 import com.shatteredpixel.cursedpixeldungeon.items.TomeOfMastery;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.LloydsBeacon;
+import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfStrength;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfMagicMapping;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.cursedpixeldungeon.levels.Level;
@@ -160,6 +161,8 @@ public class Tengu extends Mob {
 			} while (!Dungeon.level.passable[pos + ofs]);
 			Dungeon.level.drop( new ScrollOfUpgrade(), pos + ofs ).sprite.drop( pos );
 		}
+
+		Dungeon.level.drop(new PotionOfStrength(), pos);
 
 		LloydsBeacon beacon = Dungeon.hero.belongings.getItem(LloydsBeacon.class);
 		if (beacon != null) {

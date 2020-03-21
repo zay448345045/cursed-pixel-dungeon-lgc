@@ -176,14 +176,14 @@ public class LuckyBadge extends Power {
         return new LuckyBuff();
     }
 
-    public static Item tryForBonusDrop(Char target, int tries ){
+    public static Item tryForBonusDrop(Char target){
 
         HashSet<LuckyBadge.LuckyBuff> buffs = target.buffs(LuckyBadge.LuckyBuff.class);
         if (buffs == null) {
             return null;
         }
         Item item;
-        if ((dropsToUpgrade < 2) || (Random.Int( (int) dropsToUpgrade) == 1)) {
+        if ((dropsToUpgrade < 1) || (Random.Int( (int) dropsToUpgrade) == 0)) {
                 item = new ScrollOfUpgrade();
                 dropsToUpgrade += dropsIncreases;
             } else {
@@ -230,7 +230,7 @@ public class LuckyBadge extends Power {
             Scroll scroll;
             do {
                 scroll = (Scroll) Generator.random(Generator.Category.SCROLL);
-            } while (scroll == null || ((scroll instanceof ScrollOfUpgrade) & !Dungeon.isChallenged(Challenges.NO_SCROLLS)));
+            } while (scroll == null || scroll instanceof ScrollOfUpgrade);
             return scroll;
         } else if (roll < 0.6f){ //20% chance to drop a minor food item
             return Random.Int(2) == 0 ? new SmallRation() : new MysteryMeat();
@@ -247,7 +247,7 @@ public class LuckyBadge extends Power {
             Scroll scroll;
             do {
                 scroll = (Scroll) Generator.random(Generator.Category.SCROLL_EXOTIC);
-            } while (scroll == null || ((scroll instanceof ScrollOfEnchantment) & !Dungeon.isChallenged(Challenges.NO_SCROLLS)));
+            } while (scroll == null);
             return scroll;
         } else { //50% chance
             return Random.Int(2) == 0 ? new SmallRation() : new MysteryMeat();

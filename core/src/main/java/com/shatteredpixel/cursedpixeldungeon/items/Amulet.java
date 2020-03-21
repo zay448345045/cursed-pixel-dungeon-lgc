@@ -28,9 +28,11 @@ import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.AmuletScene;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.scenes.InterlevelScene;
+import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.cursedpixeldungeon.windows.WndBag;
 import com.watabou.noosa.Game;
+import com.watabou.noosa.Image;
 import com.watabou.utils.Bundle;
 
 import java.io.IOException;
@@ -53,12 +55,17 @@ public class Amulet extends Item {
 	public ArrayList<String> actions( Hero hero ) {
 		ArrayList<String> actions = super.actions( hero );
 		actions.add( AC_END );
-		actions.add(AC_EMBED);
+		actions.add( AC_EMBED );
 		return actions;
 	}
 
+	@Override
+	public ItemSprite getSprite() {
+		return new AmuletSprite(WATER_IMBEDDED, false, false, false);
+	}
+
 	public void imbed(String ImbedType) {
-		if (ImbedType == WATERSECTOR) {
+		if (ImbedType.equals(WATERSECTOR)) {
 			WATER_IMBEDDED = true;
 		}
 	}
@@ -92,7 +99,7 @@ public class Amulet extends Item {
 	protected static WndBag.Listener amuletSelector = new WndBag.Listener() {
 		@Override
 		public void onSelect( Item item ) {
-			if (item != null && item instanceof AmuletSectorWater) {
+			if (item instanceof AmuletSectorWater) {
 				item.detach(Dungeon.hero.belongings.backpack);
 				((Amulet)curItem).imbed(((Amulet)curItem).WATERSECTOR);
 			}
@@ -117,6 +124,74 @@ public class Amulet extends Item {
 	@Override
 	public boolean isUpgradable() {
 		return false;
+	}
+
+	public static class AmuletSprite extends ItemSprite {
+
+		private Image fullAmulet() {
+			return new ItemSprite(ItemSpriteSheet.AMULET);
+		}
+		private Image emptyAmulet() {
+			return new ItemSprite(ItemSpriteSheet.AMULET_EMPTY);
+		}
+
+		private Image topLeftSprite;
+		private Image bottomLeftSprite;
+		private Image topRightSprite;
+		private Image bottomRightSprite;
+
+		AmuletSprite(boolean topLeft, boolean bottomLeft, boolean topRight, boolean bottomRight) {
+			if (topLeft) {
+				topLeftSprite = fullAmulet();
+			} else {
+				topLeftSprite = emptyAmulet();
+			}
+			topLeftSprite.frame(0, 0, 8, 8);
+
+			if (bottomLeft) {
+				bottomLeftSprite = fullAmulet();
+			} else {
+				bottomLeftSprite = emptyAmulet();
+			}
+			bottomLeftSprite.frame(0, 8, 8, 8);
+
+			if (topRight) {
+				topRightSprite = fullAmulet();
+			} else {
+				topRightSprite = emptyAmulet();
+			}
+			topRightSprite.frame(8, 0, 8, 8);
+
+			if (bottomRight) {
+				bottomRightSprite = fullAmulet();
+			} else {
+				bottomRightSprite = emptyAmulet();
+			}
+			bottomRightSprite.frame(8, 8, 8, 8);
+		}
+
+		@Override
+		public synchronized void update() {
+			super.update();
+			topLeftSprite.x = 0;
+			topLeftSprite.y = 16;
+			topLeftSprite.visible = true;
+
+			bottomLeftSprite.x = 0;
+			bottomLeftSprite.y = 8;
+			bottomLeftSprite.visible = true;
+
+			topRightSprite.x = 8;
+			topRightSprite.y = 16;
+			topRightSprite.visible = true;
+
+			bottomRightSprite.x = 8;
+			bottomRightSprite.y = 8;
+			bottomRightSprite.visible = true;
+		}
+
+		@Override
+		public void link() {}
 	}
 
 }

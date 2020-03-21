@@ -1,9 +1,9 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
 
-    task ndkBuild(type: Exec){
+    /*task ndkBuild(type: Exec){
         description "builds JNI libs from source. " +
                 "This requires the Android NDK and is optional as precompiled libs are provided."
 
@@ -27,7 +27,7 @@ android {
                     "NDK_LIBS_OUT=$root/src/main/jniLibs"
 
         }
-    }
+    }*/
 
     defaultConfig {
         //noinspection MinSdkTooLow

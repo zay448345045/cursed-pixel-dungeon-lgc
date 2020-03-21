@@ -187,10 +187,10 @@ public abstract class Level implements Bundlable {
 				addItemToSpawn( new Torch() );
 			}
 
-			if (Dungeon.posNeeded()) {
+			/*if (Dungeon.posNeeded()) {
 				addItemToSpawn( new PotionOfStrength() );
 				Dungeon.LimitedDrops.STRENGTH_POTIONS.count++;
-			}
+			}*/
 			if (Dungeon.souNeeded()) {
 				addItemToSpawn( new ScrollOfUpgrade() );
 				Dungeon.LimitedDrops.UPGRADE_SCROLLS.count++;

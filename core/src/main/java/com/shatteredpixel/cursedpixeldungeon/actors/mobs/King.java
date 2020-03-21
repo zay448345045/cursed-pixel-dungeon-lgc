@@ -42,6 +42,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.ArmorKit;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.artifacts.LloydsBeacon;
 import com.shatteredpixel.cursedpixeldungeon.items.keys.SkeletonKey;
+import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfStrength;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.HeroicLeap;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.MoltenEarth;
 import com.shatteredpixel.cursedpixeldungeon.items.powers.RaiseDead;
@@ -186,6 +187,8 @@ public class King extends Mob {
 				item = new RaiseDead();
 				break;
 		}
+
+		Dungeon.level.drop(new PotionOfStrength(), pos);
 		if (Dungeon.hero.belongings.getItem(item.getClass()) != null) {
 			item = new MetalShard();
 		}

@@ -60,7 +60,7 @@ public class LorsionsGreataxe extends RelicMeleeWeapon {
 
 	@Override
 	public int STRReq(int lvl) {
-		return 20;
+		return super.STRReq(lvl) + 5;
 	}
 
 }

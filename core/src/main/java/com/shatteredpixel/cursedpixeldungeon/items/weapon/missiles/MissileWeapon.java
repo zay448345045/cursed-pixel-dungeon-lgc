@@ -87,11 +87,11 @@ abstract public class MissileWeapon extends Weapon {
 		return  5 * tier +                      //base
 				(tier == 1 ? 2*lvl : tier*lvl); //level scaling
 	}
-	
+
 	public int STRReq(int lvl){
 		lvl = Math.max(0, lvl);
 		//strength req decreases at +1,+3,+6,+10,etc.
-		return (7 + tier * 2);
+		return ((tier + 1) * 5) - (int)(Math.sqrt(8 * lvl + 1) - 1)/2;
 	}
 	
 	@Override

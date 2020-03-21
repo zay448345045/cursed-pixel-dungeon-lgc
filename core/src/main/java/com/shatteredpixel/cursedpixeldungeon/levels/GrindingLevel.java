@@ -16,8 +16,6 @@ import com.shatteredpixel.cursedpixeldungeon.items.powers.LuckyBadge;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfTeleportation;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.Wand;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Grim;
-import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Shielding;
-import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MeleeWeapon;
 import com.shatteredpixel.cursedpixeldungeon.levels.traps.WornDartTrap;
 import com.shatteredpixel.cursedpixeldungeon.mechanics.Ballistica;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
@@ -106,7 +104,7 @@ public class GrindingLevel extends SewerLevel {
         @Override
         public void die(Object cause) {
             for (int i = 0; i < lootAmt; i++) {
-                Item luckybadgedrop = LuckyBadge.tryForBonusDrop(Dungeon.hero, 1);
+                Item luckybadgedrop = LuckyBadge.tryForBonusDrop(Dungeon.hero);
                 if (luckybadgedrop != null) {
                     if (luckybadgedrop instanceof Gold || !luckybadgedrop.collect()) {
                         Dungeon.level.drop(luckybadgedrop, Dungeon.hero.pos).sprite.drop();

@@ -129,6 +129,7 @@ public class ItemSpriteSheet {
 	public static final int MASTERY         = SINGLE_USE+13;
 	public static final int KIT             = SINGLE_USE+14;
 	public static final int AMULET          = SINGLE_USE+15;
+	public static final int AMULET_EMPTY    = SINGLE_USE+WIDTH+15;//Below regular Amulet
 	static{
 		assignItemRect(ANKH,            10, 16);
 		assignItemRect(STYLUS,          12, 13);

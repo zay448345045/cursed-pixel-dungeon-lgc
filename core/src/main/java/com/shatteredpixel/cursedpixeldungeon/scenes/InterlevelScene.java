@@ -35,6 +35,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.powers.LuckyBadge;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Lucky;
 import com.shatteredpixel.cursedpixeldungeon.levels.Level;
 import com.shatteredpixel.cursedpixeldungeon.levels.features.Chasm;
+import com.shatteredpixel.cursedpixeldungeon.levels.rooms.special.SpecialRoom;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.ui.GameLog;
 import com.shatteredpixel.cursedpixeldungeon.windows.WndError;
@@ -417,6 +418,9 @@ public class InterlevelScene extends PixelScene {
 				Dungeon.resetLevel();
 				return;
 			}
+		} else if (typeOfDescend.equals(RESET_NAME)) {
+			SpecialRoom.resetPitRoom(Dungeon.depth+1);
+			Dungeon.level.reset();
 		}
 		if (Dungeon.hero == null) {
 			Dungeon.depth = 1;
@@ -432,7 +436,7 @@ public class InterlevelScene extends PixelScene {
 			if (Dungeon.hero != null) {
 				LuckyBadge badge = Dungeon.hero.belongings.getItem(LuckyBadge.class);
 				if (typeOfDescend.equals(DESCEND_NAME) & badge != null && badge.type == LuckyBadge.SPEED & Dungeon.depth != LuckyBadge.HomeDepth & !Dungeon.bossLevel() & Dungeon.depth != 21) {
-					Buff.affect(Dungeon.hero, LuckyBadgeBuff.class, 99f);
+					Buff.affect(Dungeon.hero, LuckyBadgeBuff.class, 120f);
 				}
 			}
 		}

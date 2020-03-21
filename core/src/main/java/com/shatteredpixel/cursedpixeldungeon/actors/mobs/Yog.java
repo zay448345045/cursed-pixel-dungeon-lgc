@@ -41,6 +41,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Vertigo;
 import com.shatteredpixel.cursedpixeldungeon.effects.Pushing;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.ShadowParticle;
 import com.shatteredpixel.cursedpixeldungeon.items.keys.SkeletonKey;
+import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfStrength;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfRetribution;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.exotic.ScrollOfPsionicBlast;
@@ -170,6 +171,8 @@ public class Yog extends Mob {
 			} while (!Dungeon.level.passable[pos + ofs]);
 			Dungeon.level.drop( new ScrollOfUpgrade(), pos + ofs ).sprite.drop( pos );
 		}
+
+		Dungeon.level.drop(new PotionOfStrength(), pos);
 		Dungeon.level.drop( new SkeletonKey( Dungeon.depth ), pos ).sprite.drop();
 		super.die( cause );
 		

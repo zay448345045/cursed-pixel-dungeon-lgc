@@ -59,6 +59,7 @@ public class Assets {
 	public static final String EFFECTS		= "effects.png";
 
 	public static final String DARK_MAGE = "dark_wizard.png";
+	public static final String LITTOWER = "littower.png";
 	public static final String HUMAN    = "human.png";
 	public static final String MAGECRAB = "Magic_Crab.png";
 	public static final String FOSSILSKELETON = "fossil_skeleton.png";

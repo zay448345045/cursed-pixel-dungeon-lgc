@@ -71,7 +71,7 @@ public class AirChallengeBossLevel extends Level {
     public void press(int cell, Char ch) {
         super.press(cell, ch);
         if (ch == Dungeon.hero) {
-            tengu = new Tengu2();
+            //tengu = new Tengu2();
             //hero enters tengu's chamber
             if (insideRoomLeft(cell)) {
                 tengu.pos = ROOM_LEFT_POS;

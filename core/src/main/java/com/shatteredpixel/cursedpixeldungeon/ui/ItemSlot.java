@@ -101,8 +101,11 @@ public class ItemSlot extends Button {
 	protected void createChildren() {
 		
 		super.createChildren();
-		
-		icon = new ItemSprite();
+		if (item != null) {
+			icon = item.getSprite();
+		} else {
+			icon = new ItemSprite();
+		}
 		add( icon );
 		
 		topLeft = new BitmapText( PixelScene.pixelFont);

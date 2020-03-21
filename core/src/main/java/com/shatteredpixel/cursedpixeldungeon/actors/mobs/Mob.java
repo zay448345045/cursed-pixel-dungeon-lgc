@@ -35,7 +35,6 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Amok;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Charm;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Corruption;
-import com.shatteredpixel.cursedpixeldungeon.actors.buffs.DeferredDeath;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Hunger;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.LuckyBadgeBuff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Preparation;
@@ -46,14 +45,12 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Terror;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Weakness;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.HeroSubClass;
-import com.shatteredpixel.cursedpixeldungeon.effects.Chains;
 import com.shatteredpixel.cursedpixeldungeon.effects.Flare;
 import com.shatteredpixel.cursedpixeldungeon.effects.Speck;
 import com.shatteredpixel.cursedpixeldungeon.effects.Surprise;
 import com.shatteredpixel.cursedpixeldungeon.effects.Wound;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.ShadowParticle;
 import com.shatteredpixel.cursedpixeldungeon.items.Generator;
-import com.shatteredpixel.cursedpixeldungeon.items.Gold;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
 import com.shatteredpixel.cursedpixeldungeon.items.Soul;
 import com.shatteredpixel.cursedpixeldungeon.items.allies.DragonCrystal;
@@ -65,9 +62,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.rings.RingOfWealth;
 import com.shatteredpixel.cursedpixeldungeon.items.stones.StoneOfAggression;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.Wand;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Lucky;
-import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.Bolas;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.MissileWeapon;
-import com.shatteredpixel.cursedpixeldungeon.levels.GrindingLevel;
 import com.shatteredpixel.cursedpixeldungeon.levels.Level;
 import com.shatteredpixel.cursedpixeldungeon.levels.features.Chasm;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
@@ -75,7 +70,6 @@ import com.shatteredpixel.cursedpixeldungeon.plants.Swiftthistle;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
-import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.GameMath;
 import com.watabou.utils.PathFinder;
@@ -84,7 +78,6 @@ import com.watabou.utils.Random;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Locale;
 
 import static com.shatteredpixel.cursedpixeldungeon.actors.Char.Alignment.ALLY;
 
@@ -391,7 +384,6 @@ public abstract class Mob extends Char {
 			return targetChar == follow;
 		}
 		return false;
-
 	}
 	
 	protected boolean canAttack( Char enemy ) {
@@ -790,14 +782,14 @@ public abstract class Mob extends Char {
 		//lucky enchant logic
 		if (Dungeon.hero.lvl <= maxLvl && buff(Lucky.LuckProc.class) != null){
 			new Flare(8, 24).color(0x00FF00, true).show(sprite, 3f);
-			Dungeon.level.drop(LuckyBadge.tryForBonusDrop(Dungeon.hero, 1), pos).sprite.drop();
+			Dungeon.level.drop(LuckyBadge.tryForBonusDrop(Dungeon.hero), pos).sprite.drop();
 		}
 
 		//
 		LuckyBadgeBuff buff = Dungeon.hero.buff(LuckyBadgeBuff.class);
 		if (buff != null) {
 			for (int i = 0; i < buff.lootPerMob(); i++) {
-				Item luckybadgedrop = LuckyBadge.tryForBonusDrop(Dungeon.hero, 1);
+				Item luckybadgedrop = LuckyBadge.tryForBonusDrop(Dungeon.hero);
 				if (luckybadgedrop != null) {
 					Dungeon.level.drop(luckybadgedrop, Dungeon.hero.pos).sprite.drop();
 				}
@@ -934,7 +926,7 @@ public abstract class Mob extends Char {
 				int oldPos = pos;
 				//always move towards the target when wandering
 				if (getCloser( target = toFollow.pos )) {
-					if (!Dungeon.level.adjacent(toFollow.pos, pos)) {
+					if (!Dungeon.level.adjacent(toFollow.pos, pos) && Actor.findChar(pos) == null) {
 						getCloser( target = toFollow.pos );
 					}
 					spend( 1 / speed() );

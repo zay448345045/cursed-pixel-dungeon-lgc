@@ -34,6 +34,7 @@ import com.shatteredpixel.cursedpixeldungeon.effects.CellEmitter;
 import com.shatteredpixel.cursedpixeldungeon.effects.Speck;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.ElmoParticle;
 import com.shatteredpixel.cursedpixeldungeon.items.keys.SkeletonKey;
+import com.shatteredpixel.cursedpixeldungeon.items.potions.PotionOfStrength;
 import com.shatteredpixel.cursedpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
@@ -242,6 +243,8 @@ public class Goo extends Mob {
 			} while (!Dungeon.level.passable[pos + ofs]);
 			Dungeon.level.drop( new ScrollOfUpgrade(), pos + ofs ).sprite.drop( pos );
 		}
+
+		Dungeon.level.drop(new PotionOfStrength(), pos);
 		
 		Badges.validateBossSlain();
 		
