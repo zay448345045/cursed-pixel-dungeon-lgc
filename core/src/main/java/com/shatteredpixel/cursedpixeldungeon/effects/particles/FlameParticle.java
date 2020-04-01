@@ -37,7 +37,7 @@ public class FlameParticle extends PixelParticle.Shrinking {
 		@Override
 		public boolean lightMode() {
 			return true;
-		};
+		}
 	};
 
 	public static final Emitter.Factory STORM = new Factory() {

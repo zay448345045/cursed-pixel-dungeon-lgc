@@ -4,6 +4,9 @@ import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
 
 public class EarthChallengeLoreLevel extends Level {
+	{
+		viewDistance = 4;
+	}
 
 	@Override
 	public String tilesTex() {

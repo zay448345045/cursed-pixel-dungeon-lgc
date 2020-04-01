@@ -79,6 +79,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfCorruption;
 import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfMagicMissile;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.SpiritBow;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Swift;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Chainsaw;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Dirk;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Gloves;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.InscribedKnife;
@@ -265,7 +266,7 @@ public enum HeroClass {
 		new RaRothsNunchucks().identify().level(15).collect();
 		new LoturgosCrystal().identify().level(15).collect();
 		new NahusSword().identify().level(15).collect();
-		new ChainsawHand().identify().level(15).collect();
+		new Chainsaw().identify().level(15).collect();
 		new MegaExperiencePotion().identify().collect();
 		new PlateArmor().identify().level(15).collect();
 		new ScrollOfUpgrade().identify().quantity(999).collect();
