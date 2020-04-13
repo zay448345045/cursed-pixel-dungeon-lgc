@@ -1,12 +1,19 @@
 package com.shatteredpixel.cursedpixeldungeon.items.instruments;
 
+import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
+import com.shatteredpixel.cursedpixeldungeon.actors.Char;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
+import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Drowsy;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
+import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
+import com.shatteredpixel.cursedpixeldungeon.effects.Flare;
+import com.shatteredpixel.cursedpixeldungeon.effects.particles.ShadowParticle;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Grim;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.shatteredpixel.cursedpixeldungeon.scenes.PixelScene;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSprite;
-import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.cursedpixeldungeon.ui.RedButton;
 import com.shatteredpixel.cursedpixeldungeon.ui.RenderedTextMultiline;
 import com.shatteredpixel.cursedpixeldungeon.ui.Window;
@@ -20,7 +27,9 @@ import java.util.ArrayList;
 
 public abstract class Instrument extends Item {
 	{
-		image = ItemSpriteSheet.SANDBAG;
+		//image = ItemSpriteSheet.SANDBAG;
+
+		defaultAction = AC_PLAY;
 	}
 
 	protected int maxNotes = 5;
@@ -29,10 +38,10 @@ public abstract class Instrument extends Item {
 	private static final String AC_SONGS = "songs";
 
 	//Max song length
-	private static final int LIMIT		= 12;
+	private static final int LIMIT		= 10;
 
 	public enum Song {
-		TEST {
+		SONG_OF_DELIVERANCE {
 			@Override
 			public Integer[] melody() {
 				return new Integer[] {1, 2, 1, 3};
@@ -42,11 +51,46 @@ public abstract class Instrument extends Item {
 			public String getName() {
 				return "Song of Deliverance";
 			}
+
+			@Override
+			public void onPlay() {
+				boolean procced = false;
+				for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0])) {
+					if (mob.properties().contains(Char.Property.UNDEAD)) {
+						mob.damage(mob.HT, new Grim());
+						procced = true;
+						mob.sprite.emitter().start( ShadowParticle.UP, 0.05f, 10 );
+						new Flare( 6, 32 ).show( mob.sprite, 2f ) ;
+					}
+				}
+				if (procced) {
+					GLog.p("The spirits of the dead thank you silently as they are released into the afterlife...");
+				}
+			}
+		},
+		SONG_OF_PEACE {
+			@Override
+			public Integer[] melody() {
+				return new Integer[] {1, 3, 4, 1, 2};
+			}
+
+			@Override
+			public String getName() {
+				return "Song of Peace";
+			}
+
+			@Override
+			public void onPlay() {
+				Buff.affect(Dungeon.hero, Drowsy.class);
+				GLog.p("You drift into a magical sleep...");
+			}
 		};
 
 		public abstract Integer[] melody();
 
 		public abstract String getName();
+
+		public abstract void onPlay();
 
 		@Nullable
 		@Contract(pure = true)
@@ -108,10 +152,15 @@ public abstract class Instrument extends Item {
 			titlebar.setRect(0, 0, WIDTH, 0);
 			add( titlebar );
 
-			RenderedTextMultiline message = getMessage(Song.TEST);
+			RenderedTextMultiline message = getMessage(Song.SONG_OF_DELIVERANCE);
 			message.maxWidth(WIDTH);
 			message.setPos(0, titlebar.bottom() + GAP);
 			add( message );
+
+			RenderedTextMultiline message2 = getMessage(Song.SONG_OF_PEACE);
+			message2.maxWidth(WIDTH);
+			message2.setPos(0, message.bottom() + GAP);
+			add( message2 );
 
 			resize(WIDTH, (int) message.bottom());
 		}
@@ -144,7 +193,7 @@ public abstract class Instrument extends Item {
 
 			int y = (int) message.bottom() + BTN_SIZE;
 			for (int i = 0; i < instrument.maxNotes; i++) {
-				int x = (int) ((WIDTH) * (i/(float)instrument.maxNotes))-BTN_SIZE;
+				int x = (int) ((WIDTH) * (i/(float)instrument.maxNotes));
 				Key key = new Key(x, y, i+1);
 				add(key);
 			}
@@ -161,6 +210,8 @@ public abstract class Instrument extends Item {
 			for (Song s : Song.values()) {
 				if (curSong.toArray(new Integer[0]) == s.melody()) {
 					GLog.p("Played " + s.getName() + ".");
+					s.onPlay();
+					hide();
 				}
 			}
 		}
