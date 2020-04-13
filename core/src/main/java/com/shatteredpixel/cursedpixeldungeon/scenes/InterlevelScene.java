@@ -440,7 +440,7 @@ public class InterlevelScene extends PixelScene {
 				}
 			}
 		}
-
+		Actor.clear();
 		switch (typeOfDescend) {
 			default:
 				Dungeon.switchLevel(level, level.entrance);

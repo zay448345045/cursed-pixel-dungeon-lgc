@@ -32,6 +32,8 @@ android {
 dependencies {
     implementation project(':SPD-classes')
     implementation 'com.github.RohitSurwase.UCE-Handler:uce_handler:1.4'
+    implementation 'org.jetbrains:annotations-java5:15.0'
+    implementation 'org.jetbrains:annotations-java5:15.0'
     repositories {
         google()
         jcenter()

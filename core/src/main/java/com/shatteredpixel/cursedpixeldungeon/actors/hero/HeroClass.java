@@ -26,6 +26,8 @@ import com.shatteredpixel.cursedpixeldungeon.Badges;
 import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.Challenges;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
+import com.shatteredpixel.cursedpixeldungeon.items.instruments.Harp;
+import com.shatteredpixel.cursedpixeldungeon.items.instruments.Instrument;
 import com.shatteredpixel.cursedpixeldungeon.items.Amulet;
 import com.shatteredpixel.cursedpixeldungeon.items.BrokenSeal;
 import com.shatteredpixel.cursedpixeldungeon.items.Generator;
@@ -84,7 +86,6 @@ import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Dirk;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Gloves;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.InscribedKnife;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.MagesStaff;
-import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.ChainsawHand;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.LorsionsGreataxe;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.LoturgosCrystal;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.MaracarsBlades;
@@ -95,7 +96,6 @@ import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapon
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.WornShortsword;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.ThrowingKnife;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.missiles.ThrowingStone;
-import com.shatteredpixel.cursedpixeldungeon.levels.CityLevel;
 import com.shatteredpixel.cursedpixeldungeon.messages.Messages;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.DeviceCompat;
@@ -241,6 +241,7 @@ public enum HeroClass {
 	}
 
 	public static void initTest(Hero hero) {
+		new Harp().collect();
 		new MegaStrengthPotion().identify().collect();
 		new Greed().collect();
 		new BubbleShield().collect();

@@ -5,6 +5,7 @@ import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Bleeding;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.sprites.ItemSpriteSheet;
+import com.watabou.utils.Random;
 
 import java.util.ArrayList;
 
@@ -27,6 +28,16 @@ public class Chainsaw extends MeleeWeapon {
 			actions.remove(AC_EQUIP);
 		}
 		return actions;
+	}
+
+	@Override
+	public int damageRoll(Char owner) {
+		return Random.Int(max());
+	}
+
+	@Override
+	public int min(int lvl) {
+		return 1;
 	}
 
 	@Override
