@@ -167,7 +167,7 @@ public abstract class Instrument extends Item {
 		}
 
 		private RenderedTextMultiline getMessage(Song song) {
-			return PixelScene.renderMultiline(song.name() + ":" + "\n" + Song.createSheet(song.melody()), 10 );
+			return PixelScene.renderMultiline("_" + song.getName() + "_:" + "\n" + Song.createSheet(song.melody()), 10 );
 		}
 
 	}

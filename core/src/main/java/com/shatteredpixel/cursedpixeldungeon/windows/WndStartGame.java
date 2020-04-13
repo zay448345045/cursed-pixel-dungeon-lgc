@@ -161,7 +161,7 @@ public class WndStartGame extends Window {
 
 		if (testing) {
 			bonus = 20;
-			final CheckBox BoxTesting = new CheckBox("SONG_OF_DELIVERANCE MODE"){
+			final CheckBox BoxTesting = new CheckBox("TEST MODE"){
 				@Override
 				protected void onClick() {
 					super.onClick();
