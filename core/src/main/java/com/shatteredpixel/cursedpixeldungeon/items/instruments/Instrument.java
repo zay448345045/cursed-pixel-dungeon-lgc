@@ -163,7 +163,7 @@ public abstract class Instrument extends Item {
 			message2.setPos(0, message.bottom() + GAP);
 			add( message2 );
 
-			resize(WIDTH, (int) message.bottom());
+			resize(WIDTH, (int) message2.bottom());
 		}
 
 		private RenderedTextMultiline getMessage(Song song) {
@@ -215,6 +215,12 @@ public abstract class Instrument extends Item {
 					hide();
 				}
 			}
+		}
+
+		@Override
+		public void hide() {
+			super.hide();
+			curSong = new ArrayList<>();
 		}
 
 		private class Key extends RedButton {
