@@ -24,6 +24,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public abstract class Instrument extends Item {
 	{
@@ -208,7 +209,7 @@ public abstract class Instrument extends Item {
 			message.text(Song.createSheet(curSong.toArray(new Integer[0])));
 			message.update();
 			for (Song s : Song.values()) {
-				if (curSong.toArray(new Integer[0]) == s.melody()) {
+				if (Arrays.equals(curSong.toArray(new Integer[0]), s.melody())) {
 					GLog.p("Played " + s.getName() + ".");
 					s.onPlay();
 					hide();
