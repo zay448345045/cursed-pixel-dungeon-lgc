@@ -28,7 +28,7 @@ public enum Song {
 	SONG_OF_DELIVERANCE {
 		@Override
 		public Integer[] melody() {
-			return new Integer[] {1, 2, 1, 3};
+			return new Integer[] {1, 2, 1, 3, 1, 2, 1, 3};
 		}
 
 		@Override
@@ -59,7 +59,7 @@ public enum Song {
 	SONG_OF_PEACE {
 		@Override
 		public Integer[] melody() {
-			return new Integer[] {1, 3, 4, 1, 2};
+			return new Integer[] {1, 3, 4, 1, 2, 1, 3};
 		}
 
 		@Override
@@ -75,7 +75,7 @@ public enum Song {
 
 		@Override
 		public float[] noteLengths() {
-			return new float[] {0.5f, 0.5f, 0.5f, 0.5f, 1f};
+			return new float[] {0.5f, 0.5f, 0.5f, 0.5f, 1f, 0.5f, 0.5f};
 		}
 	};
 
