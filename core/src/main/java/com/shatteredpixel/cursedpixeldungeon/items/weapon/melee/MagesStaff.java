@@ -280,7 +280,7 @@ public class MagesStaff extends MeleeWeapon {
 	@Override
 	public Emitter emitter() {
 		if (wand == null) return null;
-		Emitter emitter = new Emitter();
+		Emitter emitter = new com.shatteredpixel.cursedpixeldungeon.effects.Emitter();
 		emitter.pos(12.5f, 3);
 		emitter.fillTarget = false;
 		emitter.pour(StaffParticleFactory, 0.1f);

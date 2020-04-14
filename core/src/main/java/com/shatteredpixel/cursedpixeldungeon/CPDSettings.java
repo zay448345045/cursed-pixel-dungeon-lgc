@@ -54,6 +54,7 @@ public class CPDSettings extends GameSettings {
 	public static final String KEY_ZOOM			= "zoom";
 	public static final String KEY_BRIGHTNESS	= "brightness";
 	public static final String KEY_GRID 	    = "visual_grid";
+	public static final String KEY_PARTICLES 	    = "fewer_particles";
 	
 	public static void fullscreen( boolean value ) {
 		put( KEY_FULLSCREEN, value );
@@ -122,6 +123,14 @@ public class CPDSettings extends GameSettings {
 	
 	public static int visualGrid() {
 		return getInt( KEY_GRID, 0, -1, 3 );
+	}
+
+	public static void particles(boolean value) {
+		put(KEY_PARTICLES, value);
+	}
+
+	public static boolean particles() {
+		return getBoolean(KEY_PARTICLES, false);
 	}
 	
 	//Interface

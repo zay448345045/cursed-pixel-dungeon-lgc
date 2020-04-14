@@ -188,7 +188,16 @@ public class WndSettings extends WndTabbed {
 			tileGrid.setRect(0, brightness.bottom() + GAP_TINY, WIDTH, SLIDER_HEIGHT);
 			add(tileGrid);
 
-
+			CheckBox chkParticles = new CheckBox(Messages.get(this, "particles")){
+				@Override
+				protected void onClick() {
+					super.onClick();
+					CPDSettings.particles(checked());
+				}
+			};
+			chkParticles.setRect(0, tileGrid.bottom() + GAP_TINY, WIDTH, BTN_HEIGHT);
+			chkParticles.checked(CPDSettings.particles());
+			add(chkParticles);
 		}
 	}
 

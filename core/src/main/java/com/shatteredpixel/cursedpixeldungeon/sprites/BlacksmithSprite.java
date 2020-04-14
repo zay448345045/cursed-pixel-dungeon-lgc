@@ -56,7 +56,7 @@ public class BlacksmithSprite extends MobSprite {
 	public void link( Char ch ) {
 		super.link( ch );
 		
-		emitter = new Emitter();
+		emitter = new com.shatteredpixel.cursedpixeldungeon.effects.Emitter();
 		emitter.autoKill = false;
 		emitter.pos( x + 7, y + 12 );
 		parent.add( emitter );

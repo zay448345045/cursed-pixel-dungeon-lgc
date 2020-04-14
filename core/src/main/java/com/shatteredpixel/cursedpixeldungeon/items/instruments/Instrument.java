@@ -12,6 +12,7 @@ import com.shatteredpixel.cursedpixeldungeon.ui.RenderedTextMultiline;
 import com.shatteredpixel.cursedpixeldungeon.ui.Window;
 import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
 import com.shatteredpixel.cursedpixeldungeon.windows.IconTitle;
+import com.watabou.noosa.Group;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,7 +30,7 @@ public abstract class Instrument extends Item {
 	private static final String AC_SONGS = "songs";
 
 	//Max song length
-	private static final int LIMIT		= 10;
+	private static final int LIMIT		= 8;
 
 	@Override
 	public ArrayList<String> actions(Hero hero) {
@@ -52,6 +53,8 @@ public abstract class Instrument extends Item {
 
 	private static class WndSongList extends Window {
 		private static final int WIDTH		= 120;
+		private static final int HEIGHT		= 50;
+		private static final int FONT_SIZE		= 10;
 		private static final float GAP		= 2;
 		WndSongList(Instrument instrument) {
 			IconTitle titlebar = new IconTitle();
@@ -62,29 +65,30 @@ public abstract class Instrument extends Item {
 			int bottom = (int) titlebar.bottom();
 			for (Song song : Song.values()) {
 				if (song.unlocked()) {
-					RenderedTextMultiline message = getMessage(song);
+					/*RenderedTextMultiline message = getMessage(song);
 					message.maxWidth(WIDTH);
 					message.setPos(0, bottom + GAP);
-					add(message);
-					bottom += message.height();
+					add(message);*/
+					RenderedTextMultiline text = PixelScene.renderMultiline("_" + song.getName() + "_", FONT_SIZE);
+					text.setPos(0, bottom);
+					add(text);
+					add(Song.createSheet(0, bottom + FONT_SIZE, WIDTH, HEIGHT, song.melody().length, song.melody()));
+					bottom += HEIGHT + GAP + FONT_SIZE;
 				}
 			}
 			resize(WIDTH, bottom);
-		}
-
-		private RenderedTextMultiline getMessage(Song song) {
-			return PixelScene.renderMultiline("_" + song.getName() + "_ :" + "\n" + Song.createSheet(song.melody()), 10 );
 		}
 
 	}
 
 	private static class WndPlay extends Window {
 		private static final int WIDTH		= 120;
+		private static final int HEIGHT		= 50;
 		private static final int BTN_SIZE = 20;
 
 		public static ArrayList<Integer> curSong = new ArrayList<>();
 
-		RenderedTextMultiline message;
+		Song.Sheet sheet;
 
 		WndPlay(Instrument instrument) {
 			IconTitle titlebar = new IconTitle();
@@ -93,27 +97,31 @@ public abstract class Instrument extends Item {
 			titlebar.setRect(0, 0, WIDTH, 0);
 			add( titlebar );
 
-			message = PixelScene.renderMultiline(Song.createSheet(curSong.toArray(new Integer[0])), 10 );
-			message.maxWidth(WIDTH);
-			message.setPos(0, titlebar.bottom() + 2);
-			add( message );
+			//message = PixelScene.renderMultiline(Song.createSheet(curSong.toArray(new Integer[0])), 10 );
+			//message.maxWidth(WIDTH);
+			//message.setPos(0, titlebar.bottom() + 2);
+			sheet = Song.createSheet(0, (int) (titlebar.bottom() + 2), WIDTH, HEIGHT, LIMIT, curSong.toArray(new Integer[0]));
+			add( sheet );
 
-			int y = (int) message.bottom() + BTN_SIZE;
+			int y = (int) titlebar.bottom() + HEIGHT + BTN_SIZE;
 			for (int i = 0; i < instrument.maxNotes; i++) {
 				int x = (int) ((WIDTH) * (i/(float)instrument.maxNotes));
 				Key key = new Key(x, y, i+1);
 				add(key);
 			}
-			resize(WIDTH, (int) (message.bottom() + BTN_SIZE*2));
+			resize(WIDTH, (int) (titlebar.bottom() + HEIGHT + BTN_SIZE*2));
 		}
 
 		@Override
 		public synchronized void update() {
 			if (curSong.size() > LIMIT) {
 				curSong = new ArrayList<>();
+				sheet.update(null);
+			} else {
+				sheet.update(curSong.toArray(new Integer[0]));
 			}
-			message.text(Song.createSheet(curSong.toArray(new Integer[0])));
-			message.update();
+			//message.text(Song.createSheet(curSong.toArray(new Integer[0])));
+			//message.update();
 			for (Song s : Song.values()) {
 				if (Arrays.equals(curSong.toArray(new Integer[0]), s.melody()) && s.unlocked()) {
 					GLog.p("Played " + s.getName() + ".");

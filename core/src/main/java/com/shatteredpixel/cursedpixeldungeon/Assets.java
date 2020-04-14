@@ -33,6 +33,7 @@ public class Assets {
 	public static final String AMULET	= "amulet.png";
 	
 	public static final String CHROME	= "chrome.png";
+	public static final String NOTES	= "Notes.png";
 	public static final String ICONS	= "icons.png";
 	public static final String STATUS	= "status_pane_2.png";
 	public static final String MENU		= "menu_button.png";

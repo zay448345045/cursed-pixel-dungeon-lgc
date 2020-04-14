@@ -1,5 +1,6 @@
 package com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.RelicMeleeWeapons.RelicEnchantments;
 
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.blobs.Blob;
@@ -30,8 +31,9 @@ public class Voltage extends RelicEnchantment {
                 if (Dungeon.level.distance(attacker.pos, mob.pos) < distance && mob.isAlive() && mob.isEnemy()) {
                     // int dmg = 20;
                     attacker.sprite.parent.addToFront(new Lightning(attacker.pos, mob.pos, null));
-
-                    mob.sprite.centerEmitter().burst(SparkParticle.FACTORY, 10 + 5 * level);
+                    if (!CPDSettings.particles()) {
+                        mob.sprite.centerEmitter().burst(SparkParticle.FACTORY, 10 + 5 * level);
+                    }
                     mob.sprite.flash();
 
                     if (mob.isAlive() & mob != defender) {

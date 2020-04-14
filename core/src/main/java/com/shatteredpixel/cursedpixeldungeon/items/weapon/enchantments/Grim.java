@@ -22,6 +22,7 @@
 package com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments;
 
 import com.shatteredpixel.cursedpixeldungeon.Badges;
+import com.shatteredpixel.cursedpixeldungeon.CPDSettings;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.ShadowParticle;
@@ -46,7 +47,11 @@ public class Grim extends Weapon.Enchantment {
 		if (Random.Float() < chance) {
 			
 			defender.damage( defender.HP, this );
-			defender.sprite.emitter().burst( ShadowParticle.UP, 10 + 5 * weapon.level() );
+			int level = 0;
+			if (!CPDSettings.particles()) {
+				level = weapon.level()*5;
+			}
+			defender.sprite.emitter().burst( ShadowParticle.UP, 5 + level );
 			
 			if (!defender.isAlive() && attacker instanceof Hero
 				//this prevents unstable from triggering grim achievement

@@ -481,7 +481,7 @@ public class Armor extends EquipableItem {
 	@Override
 	public Emitter emitter() {
 		if (seal == null) return super.emitter();
-		Emitter emitter = new Emitter();
+		Emitter emitter = new com.shatteredpixel.cursedpixeldungeon.effects.Emitter();
 		emitter.pos(ItemSpriteSheet.film.width(image)/2f + 2f, ItemSpriteSheet.film.height(image)/3f);
 		emitter.fillTarget = false;
 		emitter.pour(Speck.factory( Speck.RED_LIGHT ), 0.6f);

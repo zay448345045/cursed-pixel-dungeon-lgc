@@ -64,7 +64,7 @@ public class BossHealthBar extends Component {
 		skull = new Image(asset, 5, 18, 6, 6);
 		add(skull);
 
-		blood = new Emitter();
+		blood = new com.shatteredpixel.cursedpixeldungeon.effects.Emitter();
 		blood.pos(skull);
 		blood.pour(BloodParticle.FACTORY, 0.3f);
 		blood.autoKill = false;
