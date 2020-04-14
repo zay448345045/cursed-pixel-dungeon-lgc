@@ -31,7 +31,7 @@ public abstract class Instrument extends Item {
 	private static final String AC_SONGS = "songs";
 
 	//Max song length
-	private static final int LIMIT		= 8;
+	private static final int LIMIT		= 16;
 
 	@Override
 	public ArrayList<String> actions(Hero hero) {
@@ -57,7 +57,7 @@ public abstract class Instrument extends Item {
 	private static class WndSongList extends Window {
 		private static final int WIDTH		= 120;
 		private static final int HEIGHT		= 50;
-		private static final int FONT_SIZE		= 10;
+		private static final int FONT_SIZE	= 10;
 		private static final float GAP		= 2;
 		WndSongList(Instrument instrument) {
 			IconTitle titlebar = new IconTitle();
@@ -111,7 +111,17 @@ public abstract class Instrument extends Item {
 				Sample.INSTANCE.load(soundFile);
 				add(key);
 			}
-			resize(WIDTH, (int) (titlebar.bottom() + HEIGHT + BTN_SIZE*2));
+			y += BTN_SIZE;
+			RedButton btnClear = new RedButton("Clear") {
+				@Override
+				protected void onClick() {
+					curSong = new ArrayList<>();
+					sheet.update(null);
+				}
+			};
+			btnClear.setRect(0, y, WIDTH, BTN_SIZE);
+			y+= BTN_SIZE;
+			resize(WIDTH, y);
 		}
 
 		@Override

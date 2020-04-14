@@ -72,6 +72,11 @@ public enum Song {
 			Buff.affect(Dungeon.hero, Drowsy.class);
 			GLog.p("You drift into a magical sleep...");
 		}
+
+		@Override
+		public float[] noteLengths() {
+			return new float[] {0.5f, 0.5f, 0.5f, 0.5f, 1f};
+		}
 	};
 
 	public abstract Integer[] melody();
@@ -110,18 +115,6 @@ public enum Song {
 		return null;
 	}
 
-	public static String createSheet(Integer[] melody) {
-		StringBuilder string = new StringBuilder();
-		for (int i = 0; i < melody.length; i++) {
-			int note = melody[i];
-			string.append(getNote(note));
-			if (i != melody.length-1) {
-				string.append(" - ");
-			}
-		}
-		return string.toString();
-	}
-
 	@android.support.annotation.NonNull
 	@Contract("_, _, _, _, _, _ -> new")
 	public static Sheet createSheet(int x, int y, int width, int height, int songLength, Integer[] melody) {
@@ -157,7 +150,7 @@ public enum Song {
 		private int songLength;
 		private Integer[] melody;
 
-		public Sheet(int x, int y, int width, int height, int songLength, Integer[] melody) {
+		Sheet(int x, int y, int width, int height, int songLength, Integer[] melody) {
 			update(x, y, width, height, songLength, melody);
 		}
 
