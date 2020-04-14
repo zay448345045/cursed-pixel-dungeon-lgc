@@ -13,6 +13,7 @@ import com.shatteredpixel.cursedpixeldungeon.ui.Window;
 import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
 import com.shatteredpixel.cursedpixeldungeon.windows.IconTitle;
 import com.watabou.noosa.Group;
+import com.watabou.noosa.audio.Sample;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,6 +40,8 @@ public abstract class Instrument extends Item {
 		actions.add(AC_PLAY);
 		return actions;
 	}
+
+	public abstract String noteSFX(int note);
 
 	@Override
 	public void execute(Hero hero, String action) {
@@ -105,8 +108,11 @@ public abstract class Instrument extends Item {
 
 			int y = (int) titlebar.bottom() + HEIGHT + BTN_SIZE;
 			for (int i = 0; i < instrument.maxNotes; i++) {
+				int note = i + 1;
 				int x = (int) ((WIDTH) * (i/(float)instrument.maxNotes));
-				Key key = new Key(x, y, i+1);
+				Key key = new Key(x, y, note, instrument);
+				String soundFile = instrument.noteSFX(note);
+				Sample.INSTANCE.load(soundFile);
 				add(key);
 			}
 			resize(WIDTH, (int) (titlebar.bottom() + HEIGHT + BTN_SIZE*2));
@@ -139,11 +145,13 @@ public abstract class Instrument extends Item {
 
 		private class Key extends RedButton {
 			private int number;
-			public Key(int x, int y, int number) {
+			private String soundFile;
+
+			public Key(int x, int y, int number, Instrument instrument) {
 				super(Song.getNote(number));
 				this.number = number;
 				setSize(BTN_SIZE, BTN_SIZE);
-
+				soundFile = instrument.noteSFX(number);
 				setPos(x, y);
 			}
 
@@ -151,6 +159,7 @@ public abstract class Instrument extends Item {
 			protected void onClick() {
 				curSong.add(number);
 				WndPlay.this.update();
+				Sample.INSTANCE.play(soundFile);
 			}
 		}
 	}
