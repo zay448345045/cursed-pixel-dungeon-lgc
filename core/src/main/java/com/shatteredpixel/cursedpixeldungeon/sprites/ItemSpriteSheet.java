@@ -356,6 +356,7 @@ public class ItemSpriteSheet {
 	}
 
 	public static final int LUCKYBADGE = xy(1, 13);
+	public static final int HARP = LUCKYBADGE + 1;
 
 	private static final int WANDS              =                           xy(1, 14);  //16 slots
 	public static final int WAND_MAGIC_MISSILE  = WANDS+0;
