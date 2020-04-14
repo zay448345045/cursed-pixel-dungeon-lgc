@@ -360,7 +360,7 @@ public class Hero extends Char {
 	public void loseMP(int amount, Object src) {
 		MP -= amount;
 		if (MP < 0) {
-			int damage = -MP*5;
+			int damage = -MP*(HT/20);
 			MP = 0;
 			damage(damage, src);
 			if (!isAlive()){
@@ -373,7 +373,7 @@ public class Hero extends Char {
 	public void live() {
 		Buff.affect( this, Regeneration.class );
 		Buff.affect( this, Hunger.class );
-		Buff.affect( this, MpRegen.class);
+		Buff.affect( this, MpRegen.class );
 	}
 	
 	public int tier() {
