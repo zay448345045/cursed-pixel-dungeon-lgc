@@ -1,5 +1,6 @@
 package com.shatteredpixel.cursedpixeldungeon.items.instruments;
 
+import com.shatteredpixel.cursedpixeldungeon.Dungeon;
 import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.items.Item;
@@ -12,7 +13,6 @@ import com.shatteredpixel.cursedpixeldungeon.ui.RenderedTextMultiline;
 import com.shatteredpixel.cursedpixeldungeon.ui.Window;
 import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
 import com.shatteredpixel.cursedpixeldungeon.windows.IconTitle;
-import com.watabou.noosa.Group;
 import com.watabou.noosa.audio.Sample;
 
 import java.util.ArrayList;
@@ -68,10 +68,6 @@ public abstract class Instrument extends Item {
 			int bottom = (int) titlebar.bottom();
 			for (Song song : Song.values()) {
 				if (song.unlocked()) {
-					/*RenderedTextMultiline message = getMessage(song);
-					message.maxWidth(WIDTH);
-					message.setPos(0, bottom + GAP);
-					add(message);*/
 					RenderedTextMultiline text = PixelScene.renderMultiline("_" + song.getName() + "_", FONT_SIZE);
 					text.setPos(0, bottom);
 					add(text);
@@ -93,16 +89,16 @@ public abstract class Instrument extends Item {
 
 		Song.Sheet sheet;
 
+		Instrument instrument;
+
 		WndPlay(Instrument instrument) {
+			this.instrument = instrument;
 			IconTitle titlebar = new IconTitle();
 			titlebar.icon(new ItemSprite(instrument.image(), null));
 			titlebar.label(Messages.titleCase(instrument.name()));
 			titlebar.setRect(0, 0, WIDTH, 0);
 			add( titlebar );
 
-			//message = PixelScene.renderMultiline(Song.createSheet(curSong.toArray(new Integer[0])), 10 );
-			//message.maxWidth(WIDTH);
-			//message.setPos(0, titlebar.bottom() + 2);
 			sheet = Song.createSheet(0, (int) (titlebar.bottom() + 2), WIDTH, HEIGHT, LIMIT, curSong.toArray(new Integer[0]));
 			add( sheet );
 
@@ -126,11 +122,12 @@ public abstract class Instrument extends Item {
 			} else {
 				sheet.update(curSong.toArray(new Integer[0]));
 			}
-			//message.text(Song.createSheet(curSong.toArray(new Integer[0])));
-			//message.update();
 			for (Song s : Song.values()) {
 				if (Arrays.equals(curSong.toArray(new Integer[0]), s.melody()) && s.unlocked()) {
 					GLog.p("Played " + s.getName() + ".");
+					Dungeon.hero.spend(1f);
+					Dungeon.hero.busy();
+					s.play(instrument, Dungeon.hero);
 					s.onPlay();
 					hide();
 				}

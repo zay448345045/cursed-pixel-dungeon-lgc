@@ -2,20 +2,24 @@ package com.shatteredpixel.cursedpixeldungeon.items.instruments;
 
 import com.shatteredpixel.cursedpixeldungeon.Assets;
 import com.shatteredpixel.cursedpixeldungeon.Dungeon;
+import com.shatteredpixel.cursedpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.cursedpixeldungeon.actors.Char;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.cursedpixeldungeon.actors.buffs.Drowsy;
+import com.shatteredpixel.cursedpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.cursedpixeldungeon.actors.mobs.Wraith;
 import com.shatteredpixel.cursedpixeldungeon.effects.Flare;
+import com.shatteredpixel.cursedpixeldungeon.effects.Speck;
 import com.shatteredpixel.cursedpixeldungeon.effects.particles.ShadowParticle;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Grim;
 import com.shatteredpixel.cursedpixeldungeon.scenes.GameScene;
-import com.shatteredpixel.cursedpixeldungeon.ui.RenderedTextMultiline;
 import com.shatteredpixel.cursedpixeldungeon.utils.GLog;
 import com.watabou.noosa.Group;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.RenderedText;
+import com.watabou.noosa.audio.Sample;
+import com.watabou.noosa.tweeners.Delayer;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
@@ -72,6 +76,14 @@ public enum Song {
 
 	public abstract Integer[] melody();
 
+	public float[] noteLengths() {
+		float[] lengths = new float[melody().length];
+		for (int i = 0; i < lengths.length; i++) {
+			lengths[i] = 0.5f;
+		}
+		return lengths;
+	}
+
 	public abstract String getName();
 
 	public abstract void onPlay();
@@ -116,8 +128,28 @@ public enum Song {
 		return new Sheet(x, y, width, height, songLength, melody);
 	}
 
-	public static class Sheet extends Group {
+	public void play(Instrument instrument, Hero hero) {
+		play(instrument, 0, hero);
+	}
 
+	private void play(final Instrument instrument, final int index, final Hero hero) {
+		final Integer[] melody = melody();
+		if (index < melody.length) {
+			ShatteredPixelDungeon.scene().add(new Delayer(noteLengths()[index]) {
+				@Override
+				protected void onComplete() {
+					Sample.INSTANCE.play(instrument.noteSFX(melody[index]));
+					play(instrument, index+1, hero);
+					hero.sprite.emitter().burst(Speck.factory(Speck.NOTE), 1);
+				}
+			});
+		} else {
+			hero.ready = true;
+			hero.ready();
+		}
+	}
+
+	public static class Sheet extends Group {
 		private int x;
 		private int y;
 		private int width;
