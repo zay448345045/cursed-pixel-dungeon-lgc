@@ -120,6 +120,7 @@ public abstract class Instrument extends Item {
 				}
 			};
 			btnClear.setRect(0, y, WIDTH, BTN_SIZE);
+			add(btnClear);
 			y+= BTN_SIZE;
 			resize(WIDTH, y);
 		}
