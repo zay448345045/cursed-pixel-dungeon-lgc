@@ -82,6 +82,7 @@ import com.shatteredpixel.cursedpixeldungeon.items.wands.WandOfMagicMissile;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.SpiritBow;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.enchantments.Swift;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Chainsaw;
+import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Dagger;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Dirk;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.Gloves;
 import com.shatteredpixel.cursedpixeldungeon.items.weapon.melee.InscribedKnife;
@@ -236,12 +237,11 @@ public enum HeroClass {
 
 		new LuckyBadge().collect();
 
-		new MegaStrengthPotion().collect();
+		new Harp().collect();
 
 	}
 
 	public static void initTest(Hero hero) {
-		new Harp().collect();
 		new MegaStrengthPotion().identify().collect();
 		new Greed().collect();
 		new BubbleShield().collect();
@@ -339,7 +339,7 @@ public enum HeroClass {
 
 	private static void initWarrior( Hero hero ) {
 		(hero.belongings.weapon = new WornShortsword()).identify().upgrade();
-		(hero.belongings.armor = new LeatherArmor()).identify().upgrade();
+		(hero.belongings.armor = new ClothArmor()).identify().upgrade();
 		hero.HP = hero.HT = 48;
 		ThrowingStone stones = new ThrowingStone();
 		stones.quantity(3).collect();
@@ -393,7 +393,7 @@ public enum HeroClass {
 	}
 
 	private static void initRogue( Hero hero ) {
-		(hero.belongings.weapon = new Dirk()).identify().upgrade();
+		(hero.belongings.weapon = new Dagger()).identify().upgrade();
 
 		CloakOfShadows cloak = new CloakOfShadows();
 		(hero.belongings.misc1 = cloak).identify();

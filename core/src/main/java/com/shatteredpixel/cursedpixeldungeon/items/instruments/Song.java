@@ -46,7 +46,9 @@ public enum Song {
 					} else {
 						mob.damage(mob.HT/2, new Grim());
 					}
-					procced = true;
+					if (!mob.isAlive()) {
+						procced = true;
+					}
 					mob.sprite.emitter().start( ShadowParticle.UP, 0.05f, 10 );
 					new Flare( 6, 32 ).show( mob.sprite, 2f ) ;
 				}
@@ -76,6 +78,25 @@ public enum Song {
 		@Override
 		public float[] noteLengths() {
 			return new float[] {0.5f, 0.5f, 0.5f, 0.5f, 1f, 0.5f, 0.5f};
+		}
+	},
+	SONG_OF_HEALING {
+		@Override
+		public Integer[] melody() {
+			return new Integer[] {1, 2, 4, 1, 2, 4};
+		}
+
+		@Override
+		public String getName() {
+			return "Song of Healing";
+		}
+
+		@Override
+		public void onPlay() {}
+
+		@Override
+		public boolean unlocked() {
+			return false;
 		}
 	};
 
