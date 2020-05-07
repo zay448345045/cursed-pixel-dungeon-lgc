@@ -1,6 +1,6 @@
 # Cursed Pixel Dungeon (Legacy)
 
-Important: This repository is now deprecated!
+Important: This repository is now deprecated! Here is the new version: https://github.com/Smujb/cursed-pixel-dungeon
 
 This is the old repository for Cursed Pixel Dungeon. I will put the link here for the new one when I get it. The new version will be based off another mod of mine, Yet Another Shattered Dungeon/YASD.
 
